@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Livewire\Website;
+
+use Livewire\Component;
+use App\Models\WebsitePage;
+
+class CmsHowItWorks extends Component
+{
+    public ?WebsitePage $page = null;
+    public $steps = [];
+    public $title = '';
+    public $subtitle = '';
+    public $highlight = '';
+
+    public function mount(WebsitePage $page)
+    {
+        $this->page = $page;
+        $this->loadSettings();
+    }
+
+    public function loadSettings()
+    {
+        $howitworks = $this->page->data['how_it_works'] ?? [];
+        $this->steps = $howitworks['steps'] ?? [];
+        $this->title = $howitworks['title'] ?? '';
+        $this->subtitle = $howitworks['subtitle'] ?? '';
+        $this->highlight = $howitworks['highlight'] ?? '';
+    }
+
+    public function addStep()
+    {
+        $this->steps[] = [
+            'title' => '',
+            'number' => count($this->steps) + 1,
+            'badge_bg' => 'bg-blue-100',
+            'badge_text' => 'text-blue-700',
+            'description' => ''
+        ];
+    }
+
+    public function removeStep($index)
+    {
+        unset($this->steps[$index]);
+        $this->steps = array_values(array_map(function($step, $index) {
+            $step['number'] = $index + 1;
+            return $step;
+        }, $this->steps, array_keys($this->steps)));
+    }
+
+    public function save()
+    {
+        $validated = $this->validate([
+            'title' => ['required', 'string'],
+            'subtitle' => ['required', 'string'],
+            'highlight' => ['required', 'string'],
+            'steps' => ['required', 'array', 'min:1'],
+            'steps.*.title' => ['required', 'string'],
+            'steps.*.number' => ['required', 'integer'],
+            'steps.*.badge_bg' => ['required', 'string'],
+            'steps.*.badge_text' => ['required', 'string'],
+            'steps.*.description' => ['required', 'string'],
+        ]);
+
+        $data = $this->page->data ?? [];
+        $data['how_it_works'] = [
+            'steps' => $validated['steps'],
+            'title' => $validated['title'],
+            'subtitle' => $validated['subtitle'],
+            'highlight' => $validated['highlight'],
+            'suffix' => '',
+        ];
+
+        $this->page->update(['data' => $data]);
+
+        $this->dispatch('notify',
+            type: 'success',
+            message: 'How It Works section saved successfully!'
+        );
+    }
+
+    public function render()
+    {
+        return view('livewire.website.cms-how-it-works');
+    }
+}

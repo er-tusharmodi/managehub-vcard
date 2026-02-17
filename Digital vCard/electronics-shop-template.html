@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>TechNova Electronics</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#1565c0;--blue2:#42a5f5;--dark:#0a0f1e;--navy:#0d1b3e;
+  --accent:#00c2ff;--accent2:#0077ff;--text:#0a0f1e;--muted:#5a6a85;
+  --white:#fff;--card:#fff;--bg:#f0f4fa;--border:#e0e8f5;--radius:16px;
+  --teal:#00bcd4;--green:#00c853;--orange:#ff6d00;--red:#f44336;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);max-width:480px;margin:0 auto;position:relative;min-height:100vh;overflow-x:hidden;padding-bottom:80px}
+
+svg.ic{width:18px;height:18px;stroke-width:2;display:inline-block;vertical-align:middle}
+svg.ic-sm{width:15px;height:15px;stroke-width:2;display:inline-block;vertical-align:middle}
+svg.ic-lg{width:22px;height:22px;stroke-width:1.8;display:inline-block;vertical-align:middle}
+svg.ic-xl{width:26px;height:26px;stroke-width:1.8;display:inline-block;vertical-align:middle}
+
+/* BANNER */
+.banner{position:relative;width:100%;height:230px;overflow:hidden;background:linear-gradient(135deg,#0a0f1e 0%,#0d1b3e 40%,#1565c0 100%)}
+.banner-circuit{position:absolute;inset:0;opacity:.18}
+.banner-circuit svg{width:100%;height:100%}
+.banner-glow{position:absolute;top:-40px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,194,255,.35) 0%,transparent 70%)}
+.banner-glow2{position:absolute;bottom:-50px;left:-20px;width:180px;height:180px;background:radial-gradient(circle,rgba(0,119,255,.3) 0%,transparent 70%)}
+.banner-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(10,15,30,0.65) 100%)}
+.banner-top-bar{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;z-index:5}
+.banner-label{background:rgba(0,194,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(0,194,255,0.3);color:var(--accent);padding:.32rem .8rem;border-radius:20px;font-size:.68rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.share-btn{background:rgba(255,255,255,0.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.25);color:#fff;padding:.38rem .9rem;border-radius:20px;font-size:.76rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:.35rem}
+.banner-tagline{position:absolute;bottom:1rem;left:1rem;right:1rem;z-index:5}
+.banner-tagline .btag{font-size:.67rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:.2rem}
+.banner-tagline .bsub{font-size:.8rem;color:rgba(255,255,255,.75);font-weight:400}
+
+/* PROFILE CARD */
+.profile-card{background:var(--card);margin:0 .8rem;border-radius:var(--radius);padding:0 1.2rem 1.4rem;box-shadow:0 4px 24px rgba(21,101,192,0.12);position:relative;margin-top:-50px;z-index:10}
+.profile-avatar-wrap{display:flex;justify-content:center;margin-top:-44px;margin-bottom:.8rem}
+.profile-avatar{width:88px;height:88px;border-radius:50%;border:3px solid var(--accent);background:var(--navy);box-shadow:0 0 0 3px rgba(0,194,255,.2),0 6px 18px rgba(0,0,0,0.2);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.profile-avatar svg{stroke:var(--accent);fill:none;width:44px;height:44px;stroke-width:1.4}
+.profile-name{text-align:center;font-size:1.22rem;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.profile-role{text-align:center;color:var(--accent);font-size:.78rem;margin:.18rem 0 .5rem;font-weight:600;letter-spacing:.4px;text-transform:uppercase}
+.profile-badges{display:flex;justify-content:center;gap:.4rem;margin-bottom:.65rem;flex-wrap:wrap}
+.badge{background:#e3f2fd;color:var(--blue);font-size:.62rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;letter-spacing:.3px;border:1px solid rgba(21,101,192,.15)}
+.badge.green{background:#e8f5e9;color:#2e7d32;border-color:rgba(46,125,50,.15)}
+.badge.orange{background:#fff3e0;color:#e65100;border-color:rgba(230,81,0,.15)}
+.profile-bio{text-align:center;color:var(--muted);font-size:.79rem;line-height:1.6;margin-bottom:1rem;padding:0 .3rem}
+.profile-action-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.pab{border:none;border-radius:12px;padding:.65rem .3rem;font-size:.71rem;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:.28rem;transition:.18s;letter-spacing:.2px}
+.pab:active{transform:scale(.95)}
+.pab.call{background:#e3f2fd;color:#1565c0}
+.pab.call svg{stroke:#1565c0;fill:none}
+.pab.whatsapp{background:#e0f7e9;color:#1b5e20}
+.pab.whatsapp svg{stroke:#1b5e20;fill:none}
+.pab.save{background:#e8eaf6;color:#283593}
+.pab.save svg{stroke:#283593;fill:none}
+.pab.email{background:#e1f5fe;color:#0277bd}
+.pab.email svg{stroke:#0277bd;fill:none}
+.pab.direction{background:#fce4ec;color:#880e4f}
+.pab.direction svg{stroke:#880e4f;fill:none}
+.pab.enquiry{background:#f3e5f5;color:#6a1b9a}
+.pab.enquiry svg{stroke:#6a1b9a;fill:none}
+
+/* STATS STRIP */
+.stats-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin:.55rem .8rem}
+.stat-card{background:var(--card);border-radius:12px;padding:.75rem .5rem;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid var(--border)}
+.stat-num{font-size:1.15rem;font-weight:800;color:var(--blue);line-height:1}
+.stat-label{font-size:.63rem;color:var(--muted);margin-top:.2rem;font-weight:500}
+
+/* SECTION */
+.sec{margin:.55rem .8rem;background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid var(--border)}
+.sec-header{display:flex;align-items:center;gap:.65rem;padding:.9rem 1.1rem .75rem;border-bottom:1px solid var(--border)}
+.sec-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--blue),var(--accent));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sec-icon svg{stroke:#fff;fill:none}
+.sec-title{font-size:.93rem;font-weight:700;color:var(--text)}
+.sec-badge{margin-left:auto;background:#e3f2fd;color:var(--blue);font-size:.63rem;font-weight:700;padding:.2rem .55rem;border-radius:8px}
+.sec-body{padding:.9rem 1.1rem}
+
+/* CATEGORIES / SERVICES */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+.cat-card{border-radius:12px;background:var(--bg);border:1.5px solid var(--border);padding:.75rem .5rem;text-align:center;cursor:pointer;transition:.18s}
+.cat-card:active{transform:scale(.97)}
+.cat-icon{width:42px;height:42px;border-radius:10px;margin:0 auto .5rem;display:flex;align-items:center;justify-content:center}
+.cat-icon svg{fill:none;stroke-width:1.6}
+.cat-name{font-size:.7rem;font-weight:700;color:var(--text);line-height:1.3}
+.cat-count{font-size:.63rem;color:var(--muted);margin-top:.15rem}
+
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.prod-card{border-radius:12px;overflow:hidden;border:1px solid var(--border);background:#fff;transition:.18s}
+.prod-card:hover{box-shadow:0 4px 16px rgba(21,101,192,.12)}
+.prod-img{height:110px;overflow:hidden;position:relative}
+.prod-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.prod-tag{position:absolute;top:.4rem;left:.4rem;font-size:.6rem;font-weight:700;padding:.18rem .5rem;border-radius:5px;color:#fff}
+.prod-tag.hot{background:var(--red)}
+.prod-tag.new{background:var(--green)}
+.prod-tag.sale{background:var(--orange)}
+.prod-tag.trending{background:var(--blue)}
+.prod-body{padding:.65rem .75rem}
+.prod-brand{font-size:.62rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.12rem}
+.prod-name{font-size:.79rem;font-weight:700;color:var(--text);margin-bottom:.18rem;line-height:1.3}
+.prod-spec{font-size:.68rem;color:var(--muted);line-height:1.4;margin-bottom:.4rem}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.3rem}
+.prod-price{font-size:.92rem;font-weight:800;color:var(--blue);line-height:1}
+.prod-old{font-size:.66rem;color:var(--muted);text-decoration:line-through}
+.prod-discount{font-size:.63rem;font-weight:700;color:var(--green);margin-top:.05rem}
+.qty-ctrl{display:flex;align-items:center;gap:.3rem}
+.qty-btn{width:24px;height:24px;border-radius:6px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.qty-btn:active{background:var(--accent)}
+.qty-btn svg{stroke:var(--blue);fill:none;width:13px;height:13px;stroke-width:2.5}
+.qty-num{min-width:18px;text-align:center;font-size:.82rem;font-weight:700;color:var(--text)}
+
+/* WARRANTY / INFO PILLS */
+.info-pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.pill{display:flex;align-items:center;gap:.3rem;background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:.35rem .7rem;font-size:.72rem;font-weight:600;color:var(--text)}
+.pill svg{fill:none;stroke-width:2}
+.pill.green{background:#e8f5e9;border-color:rgba(46,125,50,.2);color:#2e7d32}
+.pill.green svg{stroke:#2e7d32}
+.pill.blue{background:#e3f2fd;border-color:rgba(21,101,192,.2);color:#1565c0}
+.pill.blue svg{stroke:#1565c0}
+.pill.orange{background:#fff3e0;border-color:rgba(230,81,0,.2);color:#e65100}
+.pill.orange svg{stroke:#e65100}
+
+/* REPAIR SERVICES */
+.repair-list{display:flex;flex-direction:column;gap:.5rem}
+.repair-item{display:flex;align-items:center;gap:.75rem;padding:.75rem .85rem;border-radius:12px;background:var(--bg);border:1px solid var(--border)}
+.repair-ico{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.repair-ico svg{fill:none;stroke-width:1.8}
+.repair-info{flex:1}
+.repair-name{font-size:.84rem;font-weight:700;color:var(--text)}
+.repair-sub{font-size:.71rem;color:var(--muted);margin-top:.1rem}
+.repair-price{font-size:.82rem;font-weight:700;color:var(--blue);white-space:nowrap}
+.repair-wa{background:none;border:none;cursor:pointer;padding:.3rem;display:flex;align-items:center;justify-content:center}
+.repair-wa svg{stroke:#25d366;fill:none}
+
+/* ADDRESS */
+.address-link{display:flex;align-items:flex-start;gap:.75rem;text-decoration:none;color:var(--text)}
+.addr-icon-wrap{width:38px;height:38px;background:#fce4ec;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+.addr-icon-wrap svg{stroke:#c0392b;fill:none}
+.addr-text{font-size:.84rem;color:var(--muted);line-height:1.55}
+.addr-text strong{color:var(--text);font-size:.88rem;display:block;margin-bottom:.15rem}
+.map-btn{display:inline-flex;align-items:center;gap:.3rem;margin-top:.55rem;background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;padding:.38rem .9rem;border-radius:20px;font-size:.73rem;font-weight:700;text-decoration:none}
+.map-btn svg{stroke:#fff;fill:none}
+
+/* HOURS */
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table tr{border-bottom:1px solid var(--border)}
+.hours-table tr:last-child{border:none}
+.hours-table td{padding:.55rem .2rem;font-size:.82rem}
+.hours-table .day{color:var(--text);font-weight:500;width:48%}
+.hours-table .time{color:var(--muted);text-align:right}
+.hours-table .closed{color:#e53935;font-weight:600}
+.hours-table .open-row .day{color:var(--blue);font-weight:700}
+.hours-table .open-row .time{color:#2e7d32;font-weight:600}
+.today-badge{display:inline-flex;align-items:center;gap:.3rem;background:#e8f5e9;color:#2e7d32;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:10px;margin-bottom:.7rem}
+.today-badge svg{stroke:#2e7d32;fill:none;width:13px;height:13px}
+
+/* SOCIAL */
+.social-list{display:flex;flex-direction:column;gap:.55rem}
+.social-item{display:flex;align-items:center;gap:.75rem;padding:.65rem .85rem;border-radius:12px;border:1px solid var(--border);text-decoration:none;transition:.18s;cursor:pointer;background:var(--bg)}
+.social-item:active{transform:scale(.98)}
+.s-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.s-ico svg{fill:none}
+.s-name{font-size:.86rem;font-weight:600;color:var(--text)}
+.s-val{font-size:.73rem;color:var(--muted)}
+.s-arrow{margin-left:auto;color:#ccc}
+.s-arrow svg{stroke:#bbb;fill:none}
+.ic-wa{background:#e0f7e9}.ic-wa svg{stroke:#128c7e}
+.ic-fb{background:#e8f0fe}.ic-fb svg{stroke:#1877f2}
+.ic-ig{background:#fce4ec}.ic-ig svg{stroke:#e1306c}
+.ic-yt{background:#ffebee}.ic-yt svg{stroke:#ff0000}
+
+/* PAYMENT */
+.payment-list{display:flex;flex-direction:column;gap:.6rem}
+.pay-item{display:flex;align-items:center;gap:.75rem;padding:.8rem;background:var(--bg);border-radius:12px;border:1px solid var(--border)}
+.pay-icon-wrap{width:38px;height:38px;border-radius:10px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pay-icon-wrap svg{fill:none}
+.pay-name{font-size:.86rem;font-weight:700;color:var(--text)}
+.pay-detail{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+.pay-badge{margin-left:auto;background:#e8f5e9;color:#2e7d32;font-size:.63rem;font-weight:700;padding:.2rem .55rem;border-radius:8px}
+
+/* BRANDS WE CARRY */
+.brands-grid{display:flex;flex-wrap:wrap;gap:.5rem}
+.brand-chip{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.45rem .85rem;font-size:.75rem;font-weight:700;color:var(--text);letter-spacing:.2px}
+
+/* GALLERY */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem}
+.gal-item{aspect-ratio:1;border-radius:10px;overflow:hidden;position:relative}
+.gal-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+
+/* FORM */
+.bf-group{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.7rem}
+.bf-label{font-size:.71rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.bf-input{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:.65rem .85rem;font-size:.84rem;color:var(--text);font-family:inherit;transition:.3s;width:100%}
+.bf-input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,.1)}
+.bf-input::placeholder{color:#b0bec5}
+textarea.bf-input{resize:vertical;min-height:72px}
+.bf-row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.bf-submit{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;border:none;border-radius:12px;padding:.82rem;font-size:.88rem;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:.4rem;transition:.2s}
+.bf-submit svg{stroke:#fff;fill:none}
+.bf-submit:active{transform:scale(.98)}
+
+/* QR */
+.qr-card-inner{text-align:center;padding:.4rem 0}
+#vcardQR{display:flex;justify-content:center;margin:1rem 0}
+#vcardQR canvas,#vcardQR img{border-radius:12px!important;border:5px solid var(--bg)!important;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
+.qr-actions{display:flex;gap:.6rem;justify-content:center}
+.qr-btn{width:auto;padding:.45rem .95rem;border-radius:10px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-size:.75rem;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.32rem;transition:.2s;white-space:nowrap}
+.qr-btn svg{stroke:var(--text);fill:none;width:14px;height:14px;flex-shrink:0}
+
+/* FLOAT BOTTOM BAR */
+.float-bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr 1fr 1fr;z-index:999;box-shadow:0 -4px 20px rgba(0,0,0,0.1)}
+.fab{display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.62rem .3rem;border:none;background:transparent;cursor:pointer;font-size:.67rem;font-weight:700;transition:.18s;color:var(--muted)}
+.fab:active{background:var(--bg)}
+.fab svg{fill:none;stroke-width:1.9}
+.fab.call-fab svg{stroke:#1565c0}.fab.call-fab{color:#1565c0}
+.fab.wa-fab svg{stroke:#128c7e}.fab.wa-fab{color:#128c7e}
+.fab.save-fab{background:linear-gradient(to bottom,#f0f4fa,#fff);border-left:1px solid var(--border);border-right:1px solid var(--border)}
+.fab.save-fab svg{stroke:var(--accent)}.fab.save-fab{color:var(--blue)}
+.fab.cart-fab{color:var(--red)}.fab.cart-fab svg{stroke:var(--red)}
+.cart-badge{position:absolute;top:6px;right:calc(50% - 18px);background:var(--red);color:#fff;font-size:.55rem;font-weight:800;width:16px;height:16px;border-radius:50%;display:none;align-items:center;justify-content:center}
+.cart-badge.show{display:flex}
+.fab-wrap{position:relative;display:flex;flex-direction:column;align-items:center;gap:.2rem;padding:.62rem .3rem;cursor:pointer}
+
+/* CART */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:8500;align-items:flex-end;justify-content:center;max-width:480px;left:50%;transform:translateX(-50%)}
+.cart-overlay.show{display:flex}
+.cart-box{background:#fff;border-radius:20px 20px 0 0;padding:1.4rem 1.2rem;width:100%;max-height:75vh;overflow-y:auto;animation:slideUp .35s ease}
+@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.cart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.cart-title{font-size:1rem;font-weight:800;color:var(--text);display:flex;align-items:center;gap:.4rem}
+.cart-title svg{stroke:var(--blue);fill:none}
+.cart-close{background:var(--bg);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cart-close svg{stroke:var(--muted);fill:none}
+.cart-empty{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:.85rem}
+.cart-empty svg{stroke:var(--border);fill:none;width:40px;height:40px;margin-bottom:.7rem;display:block;margin-left:auto;margin-right:auto}
+.cart-item{display:flex;align-items:center;gap:.75rem;padding:.7rem 0;border-bottom:1px solid var(--border)}
+.ci-name{font-size:.83rem;font-weight:600;color:var(--text);flex:1;line-height:1.3}
+.ci-price{font-size:.82rem;color:var(--blue);font-weight:700;min-width:62px;text-align:right}
+.ci-qty{display:flex;align-items:center;gap:.3rem}
+.ci-qty-btn{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ci-qty-btn svg{stroke:var(--blue);fill:none;width:12px;height:12px;stroke-width:2.5}
+.ci-qty-num{min-width:16px;text-align:center;font-size:.8rem;font-weight:700}
+.cart-total{display:flex;justify-content:space-between;align-items:center;padding:.9rem 0 .5rem;font-weight:700;font-size:.92rem}
+.cart-total-amt{color:var(--blue);font-size:1.05rem}
+.cart-order-btn{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;border:none;border-radius:12px;padding:.85rem;width:100%;font-size:.9rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem;margin-top:.4rem}
+.cart-order-btn svg{stroke:#fff;fill:none}
+
+/* PROMO */
+.promo-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9000;align-items:flex-end;justify-content:center;max-width:480px;left:50%;transform:translateX(-50%)}
+.promo-overlay.show{display:flex}
+.promo-box{background:#fff;border-radius:20px 20px 0 0;padding:2rem 1.5rem;width:100%;text-align:center;animation:slideUp .4s ease;position:relative}
+.promo-close{position:absolute;top:.9rem;right:1rem;background:rgba(0,0,0,0.08);border:none;width:30px;height:30px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.promo-close svg{stroke:#666;fill:none}
+.promo-icon{width:56px;height:56px;background:linear-gradient(135deg,var(--blue),var(--accent));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .9rem}
+.promo-icon svg{stroke:#fff;fill:none;width:26px;height:26px}
+.promo-box h3{font-size:1.1rem;font-weight:800;color:var(--text);margin-bottom:.5rem}
+.promo-box p{font-size:.83rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem}
+.promo-cta{background:linear-gradient(135deg,var(--blue),var(--accent));color:#fff;border:none;border-radius:12px;padding:.88rem 2rem;font-size:.9rem;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.promo-cta svg{stroke:#fff;fill:none}
+
+/* SHARE MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:8000;align-items:center;justify-content:center;max-width:480px;left:50%;transform:translateX(-50%)}
+.modal-overlay.show{display:flex}
+.modal-box{background:#fff;border-radius:20px;padding:1.4rem;width:calc(100% - 3rem);max-width:340px}
+.modal-title{font-size:.98rem;font-weight:800;color:var(--text);margin-bottom:1rem;text-align:center}
+.share-options{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}
+.share-opt{display:flex;flex-direction:column;align-items:center;gap:.35rem;cursor:pointer;padding:.5rem;border-radius:12px;background:var(--bg);border:1px solid var(--border);min-width:72px}
+.share-opt svg{fill:none;width:22px;height:22px;stroke-width:1.8}
+.share-opt span{font-size:.68rem;font-weight:600;color:var(--muted)}
+.modal-close{display:block;margin:1rem auto 0;background:none;border:none;color:var(--muted);font-size:.8rem;cursor:pointer;font-weight:600}
+
+/* TOAST */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark);color:#fff;padding:.6rem 1.2rem;border-radius:20px;font-size:.8rem;font-weight:600;white-space:nowrap;opacity:0;transition:.3s;z-index:9999;display:flex;align-items:center;gap:.5rem;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{stroke:#00c2ff;fill:none}
+
+/* CONTACT SUCCESS */
+.contact-success{text-align:center;padding:1.5rem 1rem;display:none}
+.contact-success svg{stroke:var(--green);fill:none;width:44px;height:44px;margin-bottom:.8rem}
+.contact-success h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+.contact-success p{font-size:.8rem;color:var(--muted)}
+.cf-reset{background:none;border:none;color:var(--blue);font-size:.78rem;font-weight:600;cursor:pointer;margin-top:.7rem}
+
+/* EMI BADGE */
+.emi-note{background:linear-gradient(90deg,#e3f2fd,#e8f5e9);border-radius:10px;padding:.65rem .9rem;font-size:.75rem;color:var(--text);border:1px solid var(--border);display:flex;align-items:center;gap:.6rem;margin-bottom:.75rem}
+.emi-note svg{stroke:var(--blue);fill:none;flex-shrink:0}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:#c0cfe8;border-radius:10px}
+</style>
+</head>
+<body>
+
+<!-- ============ BANNER ============ -->
+<div class="banner">
+  <!-- Circuit pattern background -->
+  <div class="banner-circuit">
+    <svg viewBox="0 0 480 230" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="50" x2="120" y2="50" stroke="#00c2ff" stroke-width=".8"/>
+      <circle cx="120" cy="50" r="4" stroke="#00c2ff" stroke-width=".8" fill="none"/>
+      <line x1="120" y1="50" x2="120" y2="100" stroke="#00c2ff" stroke-width=".8"/>
+      <line x1="120" y1="100" x2="220" y2="100" stroke="#00c2ff" stroke-width=".8"/>
+      <circle cx="220" cy="100" r="3" stroke="#00c2ff" stroke-width=".8" fill="rgba(0,194,255,.3)"/>
+      <line x1="220" y1="100" x2="220" y2="150" stroke="#00c2ff" stroke-width=".8"/>
+      <line x1="220" y1="150" x2="340" y2="150" stroke="#00c2ff" stroke-width=".8"/>
+      <circle cx="340" cy="150" r="4" stroke="#00c2ff" stroke-width=".8" fill="none"/>
+      <line x1="340" y1="150" x2="340" y2="80" stroke="#00c2ff" stroke-width=".8"/>
+      <line x1="340" y1="80" x2="480" y2="80" stroke="#00c2ff" stroke-width=".8"/>
+      <line x1="60" y1="0" x2="60" y2="170" stroke="#0077ff" stroke-width=".6"/>
+      <circle cx="60" cy="170" r="3" stroke="#0077ff" stroke-width=".6" fill="none"/>
+      <line x1="60" y1="170" x2="180" y2="170" stroke="#0077ff" stroke-width=".6"/>
+      <line x1="180" y1="170" x2="180" y2="120" stroke="#0077ff" stroke-width=".6"/>
+      <rect x="175" y="115" width="10" height="10" stroke="#0077ff" stroke-width=".6" fill="none"/>
+      <line x1="390" y1="0" x2="390" y2="50" stroke="#00c2ff" stroke-width=".8"/>
+      <rect x="380" y="50" width="20" height="14" rx="2" stroke="#00c2ff" stroke-width=".8" fill="none"/>
+      <line x1="390" y1="64" x2="390" y2="110" stroke="#00c2ff" stroke-width=".8"/>
+      <circle cx="390" cy="110" r="5" stroke="#00c2ff" stroke-width=".8" fill="none"/>
+      <line x1="270" y1="0" x2="270" y2="60" stroke="#0077ff" stroke-width=".5"/>
+      <rect x="260" y="60" width="8" height="8" rx="1" stroke="#0077ff" stroke-width=".5" fill="none"/>
+      <line x1="268" y1="64" x2="310" y2="64" stroke="#0077ff" stroke-width=".5"/>
+      <line x1="310" y1="64" x2="310" y2="130" stroke="#0077ff" stroke-width=".5"/>
+      <circle cx="310" cy="130" r="2.5" fill="#0077ff"/>
+      <line x1="140" y1="200" x2="280" y2="200" stroke="#00c2ff" stroke-width=".7"/>
+      <circle cx="140" cy="200" r="3.5" stroke="#00c2ff" stroke-width=".7" fill="none"/>
+      <circle cx="280" cy="200" r="3.5" stroke="#00c2ff" stroke-width=".7" fill="none"/>
+      <line x1="420" y1="120" x2="480" y2="120" stroke="#0077ff" stroke-width=".6"/>
+      <rect x="415" y="115" width="5" height="10" stroke="#0077ff" stroke-width=".6" fill="none"/>
+    </svg>
+  </div>
+  <div class="banner-glow"></div>
+  <div class="banner-glow2"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-top-bar">
+    <span class="banner-label">⚡ Electronics</span>
+    <button class="share-btn" onclick="openShare()">
+      <svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Share
+    </button>
+  </div>
+  <div class="banner-tagline">
+    <div class="btag">Your Trusted Tech Partner</div>
+    <div class="bsub">Selling · Servicing · Supporting</div>
+  </div>
+</div>
+
+<!-- ============ PROFILE CARD ============ -->
+<div class="profile-card">
+  <div class="profile-avatar-wrap">
+    <div class="profile-avatar">
+      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    </div>
+  </div>
+  <div class="profile-name">TechNova Electronics</div>
+  <div class="profile-role">🏪 Premium Electronics Store</div>
+  <div class="profile-badges">
+    <span class="badge">✓ GST Registered</span>
+    <span class="badge green">ISI Certified</span>
+    <span class="badge orange">Since 2010</span>
+  </div>
+  <div class="profile-bio">Your one-stop destination for mobiles, laptops, home appliances, accessories & expert repair services. Genuine products. Best prices. Trusted by 10,000+ customers.</div>
+  <div class="profile-action-btns">
+    <button class="pab call" onclick="callShop()">
+      <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Call Us
+    </button>
+    <button class="pab whatsapp" onclick="openWA()">
+      <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      WhatsApp
+    </button>
+    <button class="pab save" onclick="saveContact()">
+      <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Save
+    </button>
+    <button class="pab email" onclick="emailShop()">
+      <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email
+    </button>
+    <button class="pab direction" onclick="openMaps()">
+      <svg class="ic" viewBox="0 0 24 24" fill="none"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+      Direction
+    </button>
+    <button class="pab enquiry" onclick="openEnquiry()">
+      <svg class="ic" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Enquire
+    </button>
+  </div>
+</div>
+
+<!-- ============ STATS STRIP ============ -->
+<div class="stats-strip">
+  <div class="stat-card">
+    <div class="stat-num">10K+</div>
+    <div class="stat-label">Happy Customers</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Products in Stock</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">15 Yrs</div>
+    <div class="stat-label">Experience</div>
+  </div>
+</div>
+
+<!-- ============ TRUST PILLS ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+    <div class="sec-title">Why Choose Us</div>
+  </div>
+  <div class="sec-body">
+    <div class="info-pills">
+      <span class="pill green"><svg class="ic-sm" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>100% Genuine Products</span>
+      <span class="pill blue"><svg class="ic-sm" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Free Doorstep Delivery</span>
+      <span class="pill green"><svg class="ic-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1-Year Warranty</span>
+      <span class="pill orange"><svg class="ic-sm" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Best Price Guarantee</span>
+      <span class="pill blue"><svg class="ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Expert Consultation</span>
+      <span class="pill green"><svg class="ic-sm" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>Easy EMI Available</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PRODUCT CATEGORIES ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+    <div class="sec-title">Product Categories</div>
+  </div>
+  <div class="sec-body">
+    <div class="cat-grid">
+      <div class="cat-card" onclick="enquireWA('Smartphones')">
+        <div class="cat-icon" style="background:linear-gradient(135deg,#e3f2fd,#90caf9)"><svg width="22" height="22" viewBox="0 0 24 24" stroke="#1565c0" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div>
+        <div class="cat-name">Smartphones</div>
+        <div class="cat-count">50+ models</div>
+      </div>
+      <div class="cat-card" onclick="enquireWA('Laptops & Computers')">
+        <div class="cat-icon" style="background:linear-gradient(135deg,#f3e5f5,#ce93d8)"><svg width="22" height="22" viewBox="0 0 24 24" stroke="#7b1fa2" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="cat-name">Laptops & PC</div>
+        <div class="cat-count">30+ models</div>
+      </div>
+      <div class="cat-card" onclick="enquireWA('Home Appliances')">
+        <div class="cat-icon" style="background:linear-gradient(135deg,#e0f7fa,#80deea)"><svg width="22" height="22" viewBox="0 0 24 24" stroke="#00838f" stroke-width="1.8"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="7" y1="6" x2="17" y2="6"/><line x1="7" y1="10" x2="17" y2="10"/><circle cx="10" cy="16" r="2"/></svg></div>
+        <div class="cat-name">Home Appliances</div>
+        <div class="cat-count">80+ items</div>
+      </div>
+      <div class="cat-card" onclick="enquireWA('Smart TV & Audio')">
+        <div class="cat-icon" style="background:linear-gradient(135deg,#fce4ec,#f48fb1)"><svg width="22" height="22" viewBox="0 0 24 24" stroke="#c2185b" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M2 8h20"/></svg></div>
+        <div class="cat-name">Smart TV</div>
+        <div class="cat-count">25+ models</div>
+      </div>
+      <div class="cat-card" onclick="enquireWA('Accessories')">
+        <div class="cat-icon" style="background:linear-gradient(135deg,#fff3e0,#ffcc80)"><svg width="22" height="22" viewBox="0 0 24 24" stroke="#e65100" stroke-width="1.8"><path d="M6.5 6.5h.01M6.5 17.5h.01M17.5 6.5h.01M17.5 17.5h.01M12 12h.01"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg></div>
+        <div class="cat-name">Accessories</div>
+        <div class="cat-count">200+ items</div>
+      </div>
+      <div class="cat-card" onclick="enquireWA('Gaming & Wearables')">
+        <div class="cat-icon" style="background:linear-gradient(135deg,#e8f5e9,#a5d6a7)"><svg width="22" height="22" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="1.8"><path d="M6 12h12M12 6v12"/><rect x="2" y="7" width="20" height="10" rx="2"/></svg></div>
+        <div class="cat-name">Gaming</div>
+        <div class="cat-count">40+ items</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ FEATURED PRODUCTS ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div>
+    <div class="sec-title">Featured Products</div>
+    <div class="sec-badge">Add to Cart</div>
+  </div>
+  <div class="sec-body">
+    <div class="emi-note">
+      <svg class="ic" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <span>Easy EMI starting ₹799/month · 0% interest · Instant approval</span>
+    </div>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+</div>
+
+<!-- ============ REPAIR SERVICES ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+    <div class="sec-title">Repair Services</div>
+    <div class="sec-badge">Expert Techs</div>
+  </div>
+  <div class="sec-body">
+    <div class="repair-list">
+      <div class="repair-item">
+        <div class="repair-ico" style="background:#e3f2fd"><svg width="20" height="20" viewBox="0 0 24 24" stroke="#1565c0" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div>
+        <div class="repair-info">
+          <div class="repair-name">Mobile Screen Replacement</div>
+          <div class="repair-sub">OEM quality · 90-day warranty</div>
+        </div>
+        <div class="repair-price">₹799+</div>
+        <button class="repair-wa" onclick="enquireWA('Mobile Screen Replacement')"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+      </div>
+      <div class="repair-item">
+        <div class="repair-ico" style="background:#f3e5f5"><svg width="20" height="20" viewBox="0 0 24 24" stroke="#7b1fa2" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+        <div class="repair-info">
+          <div class="repair-name">Laptop Repair & Service</div>
+          <div class="repair-sub">Software & hardware · All brands</div>
+        </div>
+        <div class="repair-price">₹499+</div>
+        <button class="repair-wa" onclick="enquireWA('Laptop Repair & Service')"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+      </div>
+      <div class="repair-item">
+        <div class="repair-ico" style="background:#e0f7fa"><svg width="20" height="20" viewBox="0 0 24 24" stroke="#00838f" stroke-width="1.8"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="7" y1="6" x2="17" y2="6"/></svg></div>
+        <div class="repair-info">
+          <div class="repair-name">AC / Fridge Servicing</div>
+          <div class="repair-sub">Gas refill · Cleaning · Parts</div>
+        </div>
+        <div class="repair-price">₹399+</div>
+        <button class="repair-wa" onclick="enquireWA('AC/Fridge Servicing')"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+      </div>
+      <div class="repair-item">
+        <div class="repair-ico" style="background:#fff3e0"><svg width="20" height="20" viewBox="0 0 24 24" stroke="#e65100" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M21 12h-3M6 12H3M12 21v-3M12 6V3"/></svg></div>
+        <div class="repair-info">
+          <div class="repair-name">Battery Replacement</div>
+          <div class="repair-sub">Mobile & laptop batteries</div>
+        </div>
+        <div class="repair-price">₹299+</div>
+        <button class="repair-wa" onclick="enquireWA('Battery Replacement')"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ BRANDS WE CARRY ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+    <div class="sec-title">Brands We Carry</div>
+  </div>
+  <div class="sec-body">
+    <div class="brands-grid">
+      <span class="brand-chip">Samsung</span>
+      <span class="brand-chip">Apple</span>
+      <span class="brand-chip">OnePlus</span>
+      <span class="brand-chip">Xiaomi</span>
+      <span class="brand-chip">Sony</span>
+      <span class="brand-chip">LG</span>
+      <span class="brand-chip">Lenovo</span>
+      <span class="brand-chip">HP</span>
+      <span class="brand-chip">Dell</span>
+      <span class="brand-chip">Realme</span>
+      <span class="brand-chip">Bosch</span>
+      <span class="brand-chip">Philips</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ GALLERY ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+    <div class="sec-title">Our Store Gallery</div>
+  </div>
+  <div class="sec-body">
+    <div class="gallery-grid">
+      <div class="gal-item"><div class="gal-placeholder" style="background:linear-gradient(145deg,#1a237e,#283593)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#90caf9" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg></div></div>
+      <div class="gal-item"><div class="gal-placeholder" style="background:linear-gradient(145deg,#4a148c,#6a1b9a)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e1bee7" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div></div>
+      <div class="gal-item"><div class="gal-placeholder" style="background:linear-gradient(145deg,#004d40,#00695c)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#b2dfdb" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div></div>
+      <div class="gal-item"><div class="gal-placeholder" style="background:linear-gradient(145deg,#bf360c,#d84315)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ffccbc" stroke-width="1.5"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="7" y1="6" x2="17" y2="6"/></svg></div></div>
+      <div class="gal-item"><div class="gal-placeholder" style="background:linear-gradient(145deg,#0d47a1,#1565c0)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#bbdefb" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77"/></svg></div></div>
+      <div class="gal-item"><div class="gal-placeholder" style="background:linear-gradient(145deg,#1b5e20,#2e7d32)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c8e6c9" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ STORE HOURS ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+    <div class="sec-title">Store Hours</div>
+  </div>
+  <div class="sec-body">
+    <div class="today-badge">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Open Now
+    </div>
+    <table class="hours-table">
+      <tr class="open-row"><td class="day">Monday</td><td class="time">10:00 AM – 9:00 PM</td></tr>
+      <tr class="open-row"><td class="day">Tuesday</td><td class="time">10:00 AM – 9:00 PM</td></tr>
+      <tr><td class="day">Wednesday</td><td class="time">10:00 AM – 9:00 PM</td></tr>
+      <tr><td class="day">Thursday</td><td class="time">10:00 AM – 9:00 PM</td></tr>
+      <tr><td class="day">Friday</td><td class="time">10:00 AM – 9:00 PM</td></tr>
+      <tr><td class="day">Saturday</td><td class="time">09:00 AM – 10:00 PM</td></tr>
+      <tr><td class="day">Sunday</td><td class="time closed">Closed</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ============ ADDRESS ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+    <div class="sec-title">Our Location</div>
+  </div>
+  <div class="sec-body">
+    <a class="address-link" href="#" onclick="openMaps();return false">
+      <div class="addr-icon-wrap"><svg class="ic" viewBox="0 0 24 24" stroke="#c0392b" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <div class="addr-text">
+        <strong>42, Tech Market, Nehru Place</strong>
+        New Delhi, Delhi – 110019, India
+        <span class="map-btn">
+          <svg class="ic-sm" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Open in Maps
+        </span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ============ SOCIAL LINKS ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+    <div class="sec-title">Follow & Connect</div>
+  </div>
+  <div class="sec-body">
+    <div class="social-list">
+      <div class="social-item" onclick="openWA()">
+        <div class="s-ico ic-wa"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+        <div><div class="s-name">WhatsApp</div><div class="s-val">+91 98765 43210</div></div>
+        <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="social-item">
+        <div class="s-ico ic-fb"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+        <div><div class="s-name">Facebook</div><div class="s-val">facebook.com/technovaelec</div></div>
+        <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="social-item">
+        <div class="s-ico ic-ig"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div><div class="s-name">Instagram</div><div class="s-val">@technova_electronics</div></div>
+        <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+      <div class="social-item">
+        <div class="s-ico ic-yt"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+        <div><div class="s-name">YouTube</div><div class="s-val">TechNova Electronics</div></div>
+        <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PAYMENT METHODS ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+    <div class="sec-title">Payment Options</div>
+  </div>
+  <div class="sec-body">
+    <div class="payment-list">
+      <div class="pay-item">
+        <div class="pay-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div><div class="pay-name">UPI / QR Scan</div><div class="pay-detail">GPay · PhonePe · Paytm · BHIM</div></div>
+        <div class="pay-badge">Instant</div>
+      </div>
+      <div class="pay-item">
+        <div class="pay-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e65100" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/><path d="M7 15h3M14 15h.01"/></svg></div>
+        <div><div class="pay-name">Debit / Credit Card</div><div class="pay-detail">Visa · Mastercard · RuPay</div></div>
+        <div class="pay-badge">EMI OK</div>
+      </div>
+      <div class="pay-item">
+        <div class="pay-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="8" cy="15" r="1"/></svg></div>
+        <div><div class="pay-name">Net Banking</div><div class="pay-detail">All major banks supported</div></div>
+        <div class="pay-badge">Secure</div>
+      </div>
+      <div class="pay-item">
+        <div class="pay-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1565c0" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div><div class="pay-name">Cash on Delivery</div><div class="pay-detail">Available for local orders</div></div>
+        <div class="pay-badge">COD</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ENQUIRY FORM ============ -->
+<div class="sec" id="enquirySection">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+    <div class="sec-title">Send Enquiry</div>
+  </div>
+  <div class="sec-body">
+    <div id="contactForm">
+      <div class="bf-row">
+        <div class="bf-group"><label class="bf-label">Your Name *</label><input class="bf-input" id="cName" placeholder="Full Name" type="text"></div>
+        <div class="bf-group"><label class="bf-label">Phone *</label><input class="bf-input" id="cPhone" placeholder="+91 XXXXX XXXXX" type="tel"></div>
+      </div>
+      <div class="bf-group"><label class="bf-label">Email (optional)</label><input class="bf-input" id="cEmail" placeholder="you@email.com" type="email"></div>
+      <div class="bf-group">
+        <label class="bf-label">Category</label>
+        <select class="bf-input" id="cCat">
+          <option value="">Select Category</option>
+          <option>Smartphones</option>
+          <option>Laptops & Computers</option>
+          <option>Home Appliances</option>
+          <option>Smart TV & Audio</option>
+          <option>Repair Service</option>
+          <option>Accessories</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="bf-group"><label class="bf-label">Message / Requirements</label><textarea class="bf-input" id="cMsg" placeholder="Tell us what you're looking for — model, budget, or repair issue..."></textarea></div>
+      <button class="bf-submit" onclick="submitContact()">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        Send via WhatsApp
+      </button>
+    </div>
+    <div class="contact-success" id="contactSuccess">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <h4>Enquiry Sent!</h4>
+      <p>We'll get back to you shortly.</p>
+      <button class="cf-reset" onclick="resetContact()">Send another enquiry</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ QR CODE ============ -->
+<div class="sec">
+  <div class="sec-header">
+    <div class="sec-icon"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="9" y="9" width="2" height="2"/><rect x="13" y="13" width="2" height="2"/><rect x="17" y="13" width="4" height="2"/><rect x="15" y="17" width="6" height="4"/></svg></div>
+    <div class="sec-title">QR Code & Contact</div>
+  </div>
+  <div class="sec-body">
+    <div class="qr-card-inner">
+      <p style="font-size:.77rem;color:var(--muted);margin-bottom:.25rem">Scan to visit our website or save contact</p>
+      <div id="vcardQR"></div>
+      <div class="qr-actions">
+        <button class="qr-btn" onclick="downloadQR()">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download QR
+        </button>
+        <button class="qr-btn" onclick="saveContact()">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Save Contact
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PADDING BOTTOM -->
+<div style="height:.5rem"></div>
+
+<!-- ============ FLOAT BOTTOM BAR ============ -->
+<div class="float-bar">
+  <button class="fab call-fab" onclick="callShop()">
+    <svg class="ic-lg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.59a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Call
+  </button>
+  <button class="fab wa-fab" onclick="openWA()">
+    <svg class="ic-lg" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+    WhatsApp
+  </button>
+  <button class="fab save-fab" onclick="saveContact()">
+    <svg class="ic-lg" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+    Save
+  </button>
+  <div class="fab-wrap" onclick="openCart()">
+    <button class="fab cart-fab" style="padding:0;background:transparent;border:none;cursor:pointer">
+      <svg class="ic-lg" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Cart
+    </button>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </div>
+</div>
+
+<!-- ============ CART OVERLAY ============ -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+  <div class="cart-box">
+    <div class="cart-header">
+      <div class="cart-title">
+        <svg class="ic" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Your Cart
+      </div>
+      <button class="cart-close" onclick="closeCart()"><svg viewBox="0 0 24 24" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18" stroke-width="2"/><line x1="6" y1="6" x2="18" y2="18" stroke-width="2"/></svg></button>
+    </div>
+    <div id="cartBody"></div>
+  </div>
+</div>
+
+<!-- ============ PROMO OVERLAY ============ -->
+<div class="promo-overlay" id="promoOverlay">
+  <div class="promo-box">
+    <button class="promo-close" onclick="closePromo()"><svg viewBox="0 0 24 24" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18" stroke-width="2"/><line x1="6" y1="6" x2="18" y2="18" stroke-width="2"/></svg></button>
+    <div class="promo-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+    <h3>🎉 Grand Sale is Live!</h3>
+    <p>Up to <strong>40% OFF</strong> on Smartphones, Laptops & Appliances! Limited stock. Shop before it runs out!</p>
+    <button class="promo-cta" onclick="closePromo();openWA()">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="#fff" fill="none" stroke-width="2"/></svg>
+      Chat to Avail Offer
+    </button>
+  </div>
+</div>
+
+<!-- ============ SHARE MODAL ============ -->
+<div class="modal-overlay" id="shareModal" onclick="closeShare(event)">
+  <div class="modal-box">
+    <div class="modal-title">Share TechNova Electronics</div>
+    <div class="share-options">
+      <div class="share-opt" onclick="shareWA()">
+        <svg viewBox="0 0 24 24" stroke="#128c7e" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>WhatsApp</span>
+      </div>
+      <div class="share-opt" onclick="shareFB()">
+        <svg viewBox="0 0 24 24" stroke="#1877f2" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        <span>Facebook</span>
+      </div>
+      <div class="share-opt" onclick="copyLink()">
+        <svg viewBox="0 0 24 24" stroke="#1565c0" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <span>Copy Link</span>
+      </div>
+      <div class="share-opt" onclick="shareNative()">
+        <svg viewBox="0 0 24 24" stroke="#6a1b9a" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span>More</span>
+      </div>
+    </div>
+    <button class="modal-close" onclick="document.getElementById('shareModal').classList.remove('show')">Cancel</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" width="15" height="15"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span id="toastMsg">Done!</span>
+</div>
+
+<!-- ============ JAVASCRIPT ============ -->
+<script>
+const SHOP = {
+  name: 'TechNova Electronics',
+  phone: '+919876543210',
+  whatsapp: '919876543210',
+  email: 'info@technovaelectronics.com',
+  address: '42, Tech Market, Nehru Place, New Delhi 110019',
+  maps: 'https://maps.google.com/?q=Nehru+Place+New+Delhi',
+  website: 'https://technovaelectronics.com',
+  tagline: 'Your Trusted Tech Partner – Selling · Servicing · Supporting'
+};
+
+const PRODUCTS = [
+  {id:1, name:'Samsung Galaxy S24 5G', brand:'Samsung', spec:'6.2" · 8GB RAM · 256GB · AI Camera', price:74999, oldPrice:84999, bg:'linear-gradient(145deg,#1a237e,#3949ab)', tag:'HOT', tagColor:'#f44336'},
+  {id:2, name:'OnePlus Nord CE4 5G', brand:'OnePlus', spec:'6.7" · 8GB · 128GB · 100W Charge', price:24999, oldPrice:29999, bg:'linear-gradient(145deg,#b71c1c,#e53935)', tag:'SALE', tagColor:'#ff6d00'},
+  {id:3, name:'HP Victus 15 Gaming Laptop', brand:'HP', spec:'i5-13th · 16GB · 512GB SSD · RTX 3050', price:69999, oldPrice:79999, bg:'linear-gradient(145deg,#1b5e20,#388e3c)', tag:'NEW', tagColor:'#00c853'},
+  {id:4, name:'boAt Rockerz 550 Headphones', brand:'boAt', spec:'70Hr Battery · Deep Bass · Foldable', price:1499, oldPrice:2999, bg:'linear-gradient(145deg,#4a148c,#7b1fa2)', tag:'TRENDING', tagColor:'#1565c0'},
+  {id:5, name:'Xiaomi 43" Smart TV', brand:'Xiaomi', spec:'4K · Android TV · Dolby Audio', price:26999, oldPrice:32999, bg:'linear-gradient(145deg,#e65100,#f57c00)', tag:'HOT', tagColor:'#f44336'},
+  {id:6, name:'Apple AirPods Pro (2nd Gen)', brand:'Apple', spec:'Active Noise Cancellation · H2 Chip', price:24900, oldPrice:26900, bg:'linear-gradient(145deg,#263238,#37474f)', tag:'NEW', tagColor:'#00c853'},
+];
+
+let cart = {};
+
+function renderProducts(){
+  const g = document.getElementById('productsGrid');
+  g.innerHTML = PRODUCTS.map(p => `
+    <div class="prod-card">
+      <div class="prod-img">
+        <div class="prod-img-placeholder" style="background:${p.bg};height:100%">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.4">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+          </svg>
+        </div>
+        ${p.tag ? `<span class="prod-tag ${p.tag.toLowerCase()}" style="background:${p.tagColor}">${p.tag}</span>` : ''}
+      </div>
+      <div class="prod-body">
+        <div class="prod-brand">${p.brand}</div>
+        <div class="prod-name">${p.name}</div>
+        <div class="prod-spec">${p.spec}</div>
+        <div class="prod-footer">
+          <div>
+            <div class="prod-price">₹${p.price.toLocaleString()}</div>
+            ${p.oldPrice ? `<span class="prod-old">₹${p.oldPrice.toLocaleString()}</span>` : ''}
+            ${p.oldPrice ? `<div class="prod-discount">${Math.round((p.oldPrice-p.price)/p.oldPrice*100)}% OFF</div>` : ''}
+          </div>
+          <div class="qty-ctrl">
+            <button class="qty-btn" onclick="changeQty(${p.id},-1)">
+              <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <span class="qty-num" id="qty-${p.id}">${cart[p.id]||0}</span>
+            <button class="qty-btn" onclick="changeQty(${p.id},1)">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function changeQty(id, delta){
+  cart[id] = (cart[id]||0) + delta;
+  if(cart[id]<0) cart[id] = 0;
+  const el = document.getElementById('qty-'+id);
+  if(el) el.textContent = cart[id];
+  updateCartBadge();
+}
+
+function updateCartBadge(){
+  const total = Object.values(cart).reduce((a,b)=>a+b,0);
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = total;
+  badge.classList.toggle('show', total>0);
+}
+
+function openCart(){
+  const items = PRODUCTS.filter(p=>cart[p.id]>0);
+  const body = document.getElementById('cartBody');
+  if(!items.length){
+    body.innerHTML = `<div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Your cart is empty.<br>Add products to enquire or order!
+    </div>`;
+  } else {
+    let total = 0;
+    let html = items.map(p=>{
+      const sub = p.price * cart[p.id]; total += sub;
+      return `<div class="cart-item">
+        <div class="ci-name">${p.name}<br><small style="color:var(--muted);font-weight:400">${p.brand} · ₹${p.price.toLocaleString()}</small></div>
+        <div class="ci-qty">
+          <button class="ci-qty-btn" onclick="changeQty(${p.id},-1);openCart()"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+          <span class="ci-qty-num">${cart[p.id]}</span>
+          <button class="ci-qty-btn" onclick="changeQty(${p.id},1);openCart()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        </div>
+        <div class="ci-price">₹${sub.toLocaleString()}</div>
+      </div>`;
+    }).join('');
+    html += `<div class="cart-total"><span>Total</span><span class="cart-total-amt">₹${total.toLocaleString()}</span></div>`;
+    html += `<button class="cart-order-btn" onclick="sendCartWA()">
+      <svg class="ic" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      Enquire via WhatsApp
+    </button>`;
+    body.innerHTML = html;
+  }
+  document.getElementById('cartOverlay').classList.add('show');
+}
+
+function sendCartWA(){
+  const items = PRODUCTS.filter(p=>cart[p.id]>0);
+  let total = 0;
+  let msg = `🛒 *Product Enquiry – ${SHOP.name}*\n\n`;
+  items.forEach(p=>{
+    const s = p.price*cart[p.id]; total += s;
+    msg += `• ${p.brand} ${p.name} x${cart[p.id]} = ₹${s.toLocaleString()}\n`;
+  });
+  msg += `\n💰 *Total: ₹${total.toLocaleString()}*\n\nPlease confirm availability & best offer!`;
+  window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+  closeCart();
+}
+
+function closeCart(){ document.getElementById('cartOverlay').classList.remove('show'); }
+function closeCartOutside(e){ if(e.target===document.getElementById('cartOverlay')) closeCart(); }
+
+function genQR(){
+  const el = document.getElementById('vcardQR');
+  el.innerHTML = '';
+  new QRCode(el, {text:SHOP.website, width:165, height:165, colorDark:'#0a0f1e', colorLight:'#f0f4fa', correctLevel:QRCode.CorrectLevel.H});
+}
+
+function saveContact(){
+  const v = `BEGIN:VCARD\nVERSION:3.0\nFN:${SHOP.name}\nORG:${SHOP.name}\nTEL;TYPE=CELL:${SHOP.phone}\nEMAIL:${SHOP.email}\nADR:;;${SHOP.address};;;;\nURL:${SHOP.website}\nNOTE:${SHOP.tagline}\nEND:VCARD`;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([v],{type:'text/vcard'}));
+  a.download = 'TechNovaElectronics.vcf';
+  a.click();
+  showToast('Contact saved to your phone!');
+}
+
+function callShop(){ window.location.href = `tel:${SHOP.phone}`; }
+function openWA(){ window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent('Hi! I want to enquire about your products.')}`, '_blank'); }
+function emailShop(){ window.location.href = `mailto:${SHOP.email}`; }
+function openMaps(){ window.open(SHOP.maps, '_blank'); }
+function openEnquiry(){ document.getElementById('enquirySection').scrollIntoView({behavior:'smooth', block:'start'}); }
+function enquireWA(item){ window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent('Hi! I\'m interested in: *'+item+'*. Please share details & price.')}`, '_blank'); }
+
+function downloadQR(){
+  const c = document.querySelector('#vcardQR canvas');
+  if(!c){ showToast('QR not ready'); return; }
+  const a = document.createElement('a');
+  a.href = c.toDataURL('image/png');
+  a.download = 'technova_qr.png';
+  a.click();
+  showToast('QR Code downloaded!');
+}
+
+function copyLink(){ navigator.clipboard.writeText(SHOP.website).then(()=>showToast('Link copied to clipboard!')); document.getElementById('shareModal').classList.remove('show'); }
+function openShare(){ document.getElementById('shareModal').classList.add('show'); }
+function closeShare(e){ if(e.target===document.getElementById('shareModal')) document.getElementById('shareModal').classList.remove('show'); }
+function shareWA(){ window.open(`https://wa.me/?text=${encodeURIComponent('Check out '+SHOP.name+': '+SHOP.website)}`, '_blank'); document.getElementById('shareModal').classList.remove('show'); }
+function shareFB(){ window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(SHOP.website), '_blank'); document.getElementById('shareModal').classList.remove('show'); }
+function shareNative(){ if(navigator.share){ navigator.share({title:SHOP.name, url:SHOP.website}); } else copyLink(); }
+function closePromo(){ document.getElementById('promoOverlay').classList.remove('show'); }
+
+function submitContact(){
+  const n = document.getElementById('cName').value.trim();
+  const p = document.getElementById('cPhone').value.trim();
+  if(!n||!p){ showToast('Name and phone are required'); return; }
+  const cat = document.getElementById('cCat').value || '—';
+  const msg = `📱 *Enquiry – ${SHOP.name}*\n👤 ${n}\n📞 ${p}\n📧 ${document.getElementById('cEmail').value||'—'}\n🗂 Category: ${cat}\n💬 ${document.getElementById('cMsg').value||'No message'}`;
+  window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('contactSuccess').style.display = 'block';
+}
+
+function resetContact(){
+  document.getElementById('contactForm').style.display = 'block';
+  document.getElementById('contactSuccess').style.display = 'none';
+  ['cName','cPhone','cEmail','cCat','cMsg'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+}
+
+function showToast(m){
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = m;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+window.addEventListener('load', ()=>{
+  renderProducts();
+  genQR();
+  setTimeout(()=>document.getElementById('promoOverlay').classList.add('show'), 2200);
+});
+</script>
+</body>
+</html>
