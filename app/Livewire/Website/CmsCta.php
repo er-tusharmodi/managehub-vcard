@@ -4,9 +4,12 @@ namespace App\Livewire\Website;
 
 use Livewire\Component;
 use App\Models\WebsitePage;
+use App\Livewire\Concerns\HandlesToastValidation;
 
 class CmsCta extends Component
 {
+    use HandlesToastValidation;
+
     public ?WebsitePage $page = null;
     public $title = '';
     public $subtitle = '';
@@ -34,7 +37,7 @@ class CmsCta extends Component
 
     public function save()
     {
-        $validated = $this->validate([
+        $validated = $this->validateWithToast([
             'title' => ['required', 'string'],
             'subtitle' => ['required', 'string'],
             'primary_label' => ['required', 'string'],

@@ -4,10 +4,13 @@ namespace App\Livewire\Website;
 
 use App\Models\WebsitePage;
 use App\Models\WebsiteSetting;
+use App\Livewire\Concerns\HandlesToastValidation;
 use Livewire\Component;
 
 class CmsGeneral extends Component
 {
+    use HandlesToastValidation;
+
     public $page;
     public $settings;
     
@@ -39,7 +42,7 @@ class CmsGeneral extends Component
 
     public function save()
     {
-        $this->validate([
+        $this->validateWithToast([
             'site_name' => 'required|string|max:255',
             'site_tagline' => 'nullable|string|max:255',
             'site_url' => 'nullable|url|max:255',
@@ -66,7 +69,10 @@ class CmsGeneral extends Component
             'meta_description' => $this->meta_description,
         ]);
 
-        $this->dispatch('notify', message: 'General information updated successfully!');
+        $this->dispatch('notify',
+            type: 'success',
+            message: 'General information updated successfully!'
+        );
     }
 
     private function loadSettings(): array

@@ -1,9 +1,16 @@
 <!doctype html>
 <html lang="en">
+    @php
+        // Get branding colors early for CSS
+        $primaryColor = \App\Helpers\BrandingHelper::getPrimaryColor();
+        $secondaryColor = \App\Helpers\BrandingHelper::getSecondaryColor();
+    @endphp
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ $page->meta_title ?: 'ManageHub — Smart vCards, Seamlessly Shared' }}</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="{{ \App\Helpers\BrandingHelper::getFaviconUrl() }}">
         <script src="https://cdn.tailwindcss.com"></script>
         <link
             rel="stylesheet"
@@ -14,8 +21,8 @@
                 theme: {
                     extend: {
                         colors: {
-                            primary: "{{ $settings['primary_color'] ?? '#4F46E5' }}",
-                            "primary-dark": "{{ $settings['secondary_color'] ?? '#4338CA' }}",
+                            primary: "{{ $primaryColor }}",
+                            "primary-dark": "{{ $secondaryColor }}",
                             "bg-light": "#F9FAFB",
                             "card-bg": "#FFFFFF",
                             "border-light": "#E5E7EB",
@@ -35,7 +42,7 @@
                     sans-serif;
             }
             .gradient-text {
-                background: linear-gradient(90deg, #4f46e5, #10b981);
+                background: linear-gradient(90deg, {{ $primaryColor }}, {{ $secondaryColor }});
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
@@ -44,103 +51,24 @@
     </head>
     <body class="bg-gray-50 text-gray-800">
         @php
-            $headerCta = $page->header_cta ?? [];
-            $heroButtons = $page->hero_buttons ?? [];
+            // Extract CMS data from page->data
+            $data = $page->data ?? [];
+            
+            $headerCta = $data['header_cta'] ?? [];
+            $heroButtons = $data['hero_buttons'] ?? [];
             $heroPrimary = $heroButtons[0] ?? [];
             $heroSecondary = $heroButtons[1] ?? [];
-            $categories = $page->categories ?? [];
+            $heroImagePath = $data['hero_image_path'] ?? '';
+            $categories = $data['categories'] ?? [];
             $categoryItems = $categories['items'] ?? [];
-            $vcard = $page->vcard_preview ?? [];
-            $how = $page->how_it_works ?? [];
+            $vcard = $data['vcard_preview'] ?? [];
+            $how = $data['how_it_works'] ?? [];
             $howSteps = $how['steps'] ?? [];
-            $cta = $page->cta_section ?? [];
-            $footerLinks = $page->footer_links ?? [];
+            $cta = $data['cta_section'] ?? [];
+            $footerLinks = $data['footer_links'] ?? [];
             $productLinks = $footerLinks['product'] ?? [];
             $resourceLinks = $footerLinks['resources'] ?? [];
-
-            if (!count($categoryItems)) {
-                $categoryItems = [
-                    [
-                        'title' => 'Business',
-                        'description' => 'For companies, teams & departments — embed logos, team members, locations & more.',
-                        'icon' => 'fas fa-building',
-                        'icon_bg' => 'bg-blue-100',
-                        'icon_color' => 'text-blue-600',
-                    ],
-                    [
-                        'title' => 'Professional',
-                        'description' => 'Lawyers, doctors, consultants — highlight credentials, certifications & contact workflows.',
-                        'icon' => 'fas fa-user-tie',
-                        'icon_bg' => 'bg-emerald-100',
-                        'icon_color' => 'text-emerald-600',
-                    ],
-                    [
-                        'title' => 'Creative',
-                        'description' => 'Designers, photographers, musicians — showcase portfolios, social links & booking buttons.',
-                        'icon' => 'fas fa-paint-brush',
-                        'icon_bg' => 'bg-purple-100',
-                        'icon_color' => 'text-purple-600',
-                    ],
-                    [
-                        'title' => 'Personal',
-                        'description' => 'Friends, family, networking — simple, warm, privacy-aware sharing for life moments.',
-                        'icon' => 'fas fa-users',
-                        'icon_bg' => 'bg-amber-100',
-                        'icon_color' => 'text-amber-600',
-                    ],
-                    [
-                        'title' => 'Event',
-                        'description' => 'Conferences, weddings, meetups — include RSVP, maps, schedules & guest lists.',
-                        'icon' => 'fas fa-calendar-day',
-                        'icon_bg' => 'bg-cyan-100',
-                        'icon_color' => 'text-cyan-600',
-                    ],
-                ];
-            }
-
-            if (!count($howSteps)) {
-                $howSteps = [
-                    [
-                        'number' => '1',
-                        'title' => 'Create',
-                        'description' => 'Pick a category, customize design, add contact info, links & CTAs.',
-                        'badge_bg' => 'bg-blue-100',
-                        'badge_text' => 'text-blue-700',
-                    ],
-                    [
-                        'number' => '2',
-                        'title' => 'Share',
-                        'description' => 'Get a unique short link (e.g. managehub.io/v/yourname) — share anywhere.',
-                        'badge_bg' => 'bg-emerald-100',
-                        'badge_text' => 'text-emerald-700',
-                    ],
-                    [
-                        'number' => '3',
-                        'title' => 'Track & Update',
-                        'description' => 'See who viewed your card, when & where — update info anytime. No re-sharing!',
-                        'badge_bg' => 'bg-purple-100',
-                        'badge_text' => 'text-purple-700',
-                    ],
-                ];
-            }
-
-            if (!count($productLinks)) {
-                $productLinks = [
-                    ['label' => 'Features', 'url' => '#'],
-                    ['label' => 'Templates', 'url' => '#'],
-                    ['label' => 'Analytics', 'url' => '#'],
-                    ['label' => 'Integrations', 'url' => '#'],
-                ];
-            }
-
-            if (!count($resourceLinks)) {
-                $resourceLinks = [
-                    ['label' => 'Blog', 'url' => '#'],
-                    ['label' => 'Help Center', 'url' => '#'],
-                    ['label' => 'API Docs', 'url' => '#'],
-                    ['label' => 'Status', 'url' => '#'],
-                ];
-            }
+            $socialLinks = $data['social_links'] ?? [];
         @endphp
         <!-- Navigation -->
         <header
@@ -149,15 +77,10 @@
             <div
                 class="container mx-auto px-4 py-4 flex justify-between items-center"
             >
-                <div class="flex items-center space-x-2">
-                    <div
-                        class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center"
-                    >
-                        <span class="text-white font-bold text-xl">MH</span>
+                <div class="flex items-center">
+                    <div class="h-10 rounded-lg flex items-center justify-center">
+                        <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" class="h-full w-full object-contain rounded-lg" />
                     </div>
-                    <span class="text-xl font-bold text-gray-900"
-                        >Manage<span class="gradient-text">Hub</span></span
-                    >
                 </div>
                 <nav class="hidden md:flex space-x-8">
                     <a
@@ -192,45 +115,56 @@
 
         <!-- Hero Section -->
         <section
-            class="py-16 md:py-24 bg-gradient-to-br from-blue-50 to-emerald-50"
+            class="py-16 md:py-24 bg-gradient-to-br from-blue-50 to-emerald-50 bg-cover bg-center bg-no-repeat relative" 
+            @if($heroImagePath) style="background-image: url('{{ $heroImagePath }}');" @endif
         >
-            <div class="container mx-auto px-4 text-center max-w-3xl">
+            @if($heroImagePath)
+            <div class="absolute inset-0 bg-black/30"></div>
+            @endif
+            <div class="container mx-auto px-4 text-center max-w-3xl relative z-10">
                 <h1
-                    class="text-4xl md:text-6xl font-extrabold leading-tight mb-6"
+                    class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 {{ $heroImagePath ? 'text-white' : '' }}"
                 >
-                    {{ $page->hero_title ?: 'vCards,' }}
-                    <span class="gradient-text">{{ $page->hero_title_highlight ?: 'Reimagined' }}</span>.
+                    {{ $data['hero_title'] ?? 'vCards,' }}
+                    <span class="gradient-text">{{ $data['hero_title_highlight'] ?? 'Reimagined' }}</span>.
                 </h1>
-                <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                    {{ $page->hero_subtitle ?: 'ManageHub helps businesses, creators, and professionals share rich, interactive digital business cards — instantly, beautifully, and with purpose.' }}
+                <p class="text-xl {{ $heroImagePath ? 'text-gray-100' : 'text-gray-600' }} mb-10 max-w-2xl mx-auto">
+                    {{ $data['hero_subtitle'] ?? 'ManageHub helps businesses, creators, and professionals share rich, interactive digital business cards — instantly, beautifully, and with purpose.' }}
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    @if(isset($heroPrimary['url']) && isset($heroPrimary['label']))
                     <a
-                        href="{{ $heroPrimary['url'] ?? '#' }}"
-                        class="px-8 py-3 bg-primary text-white font-semibold rounded-lg shadow-lg hover:bg-primary-dark transition transform hover:-translate-y-0.5"
+                        href="{{ $heroPrimary['url'] }}"
+                        style="background-color: {{ $primaryColor }};"
+                        class="px-8 py-3 text-white font-semibold rounded-lg shadow-lg hover:opacity-90 transition transform hover:-translate-y-0.5"
                     >
-                        {{ $heroPrimary['label'] ?? 'Create Your vCard →' }}
+                        {{ $heroPrimary['label'] }}
                     </a>
+                    @endif
+                    @if(isset($heroSecondary['url']) && isset($heroSecondary['label']))
                     <a
-                        href="{{ $heroSecondary['url'] ?? '#' }}"
-                        class="px-8 py-3 bg-white text-primary font-semibold rounded-lg border border-primary hover:bg-gray-50 transition"
+                        href="{{ $heroSecondary['url'] }}"
+                        style="border-color: {{ $primaryColor }};color: {{ $primaryColor }};"
+                        class="px-8 py-3 bg-white font-semibold rounded-lg hover:bg-gray-50 transition"
                     >
-                        {{ $heroSecondary['label'] ?? 'View Demo' }}
+                        {{ $heroSecondary['label'] }}
                     </a>
+                    @endif
                 </div>
             </div>
         </section>
 
         <!-- Categories Section -->
+        @if(isset($categoryItems) && count($categoryItems) > 0)
         <section id="categories" class="py-16 bg-white">
             <div class="container mx-auto px-4">
                 <div class="text-center max-w-2xl mx-auto mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        {{ $categories['title'] ?? 'vCards Built for Every' }}
-                        <span class="gradient-text">{{ $categories['highlight'] ?? 'Category' }}</span>{{ $categories['suffix'] ?? '' }}
+                        {{ $categories['title'] ?? '' }}
+                        <span class="gradient-text">{{ $categories['highlight'] ?? '' }}</span>{{ $categories['suffix'] ?? '' }}
                     </h2>
                     <p class="text-gray-600">
-                        {{ $categories['subtitle'] ?? 'Choose the perfect template — optimized for your role, industry, or use case.' }}
+                        {{ $categories['subtitle'] ?? '' }}
                     </p>
                 </div>
 
@@ -264,17 +198,19 @@
                 </div>
             </div>
         </section>
+        @endif
 
         <!-- vCard Preview Mockup -->
+        @if(isset($vcard) && !empty($vcard))
         <section class="py-16 bg-bg-light">
             <div class="container mx-auto px-4 max-w-5xl">
                 <div class="text-center mb-12">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        {{ $vcard['heading'] ?? 'A vCard That' }}
-                        <span class="gradient-text">{{ $vcard['highlight'] ?? 'Does More' }}</span>{{ $vcard['suffix'] ?? '' }}
+                        {{ $vcard['heading'] ?? '' }}
+                        <span class="gradient-text">{{ $vcard['highlight'] ?? '' }}</span>{{ $vcard['suffix'] ?? '' }}
                     </h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">
-                        {{ $vcard['subheading'] ?? 'Interactive. Trackable. Brand-aligned. One link. Infinite updates.' }}
+                        {{ $vcard['subheading'] ?? '' }}
                     </p>
                 </div>
 
@@ -375,16 +311,18 @@
                 </div>
             </div>
         </section>
+        @endif
 
         <!-- How It Works -->
+        @if(isset($howSteps) && count($howSteps) > 0)
         <section id="how-it-works" class="py-16 bg-white">
             <div class="container mx-auto px-4 max-w-4xl">
                 <div class="text-center mb-16">
                     <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        {{ $how['title'] ?? 'How Manage' }}<span class="gradient-text">{{ $how['highlight'] ?? 'Hub' }}</span>{{ $how['suffix'] ?? ' Works' }}
+                        {{ $how['title'] ?? '' }}<span class="gradient-text">{{ $how['highlight'] ?? '' }}</span>{{ $how['suffix'] ?? '' }}
                     </h2>
                     <p class="text-gray-600">
-                        {{ $how['subtitle'] ?? 'Three simple steps — no tech skills needed.' }}
+                        {{ $how['subtitle'] ?? '' }}\n
                     </p>
                 </div>
 
@@ -407,65 +345,86 @@
                 </div>
             </div>
         </section>
+        @endif
 
         <!-- CTA Section -->
+        @if(isset($cta) && !empty($cta))
         <section
             class="py-16 bg-gradient-to-r from-primary to-emerald-500 text-white"
         >
             <div class="container mx-auto px-4 text-center max-w-3xl">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                    {{ $cta['title'] ?? 'Ready to Elevate Your Digital Presence?' }}
+                    {{ $cta['title'] ?? '' }}
                 </h2>
                 <p class="text-blue-100 text-xl mb-10 max-w-2xl mx-auto">
-                    {{ $cta['subtitle'] ?? 'Join thousands of professionals already using ManageHub to make every connection count.' }}
+                    {{ $cta['subtitle'] ?? '' }}
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    @if(isset($cta['primary_url']) && isset($cta['primary_label']))
                     <a
-                        href="{{ $cta['primary_url'] ?? '#' }}"
+                        href="{{ $cta['primary_url'] }}"
                         class="px-8 py-3 bg-white text-primary font-bold rounded-lg shadow-lg hover:bg-gray-100 transition"
                     >
-                        {{ $cta['primary_label'] ?? 'Start Free Trial' }}
+                        {{ $cta['primary_label'] }}
                     </a>
+                    @endif
+                    @if(isset($cta['secondary_url']) && isset($cta['secondary_label']))
                     <a
-                        href="{{ $cta['secondary_url'] ?? '#' }}"
+                        href="{{ $cta['secondary_url'] }}"
                         class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-black/10 transition"
                     >
-                        {{ $cta['secondary_label'] ?? 'Schedule a Demo' }}
+                        {{ $cta['secondary_label'] }}
                     </a>
+                    @endif
                 </div>
             </div>
         </section>
+        @endif
 
         <!-- Footer -->
         <footer id="contact" class="py-12 bg-gray-900 text-gray-400">
             <div class="container mx-auto px-4">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                     <div>
-                        <div class="flex items-center space-x-2 mb-4">
-                            <div
-                                class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center"
-                            >
-                                <span class="text-white font-bold">MH</span>
-                            </div>
-                            <span class="text-white font-bold text-lg"
-                                >Manage<span class="gradient-text"
-                                    >Hub</span
-                                ></span
-                            >
+                        <div class="flex items-center mb-4">
+                            <img src="{{ \App\Helpers\BrandingHelper::getFooterLogoUrl() }}" alt="Footer Logo" class="h-8 object-contain rounded-lg" />
                         </div>
                         <p class="mb-4">
-                            {{ $page->footer_about ?: 'The smartest way to share, track, and grow your professional network — one vCard at a time.' }}
+                            {{ $data['footer_about'] ?? '' }}
                         </p>
                         <div class="flex space-x-4">
-                            <a href="{{ $settings['social_twitter'] ?? '#' }}" class="text-gray-400 hover:text-white"
-                                ><i class="fab fa-twitter"></i
-                            ></a>
-                            <a href="{{ $settings['social_linkedin'] ?? '#' }}" class="text-gray-400 hover:text-white"
-                                ><i class="fab fa-linkedin-in"></i
-                            ></a>
-                            <a href="{{ $settings['social_instagram'] ?? '#' }}" class="text-gray-400 hover:text-white"
-                                ><i class="fab fa-instagram"></i
-                            ></a>
+                            @forelse ($socialLinks as $social)
+                                @php
+                                    $platformLower = strtolower($social['platform'] ?? '');
+                                    $icons = [
+                                        'facebook' => 'fab fa-facebook-f',
+                                        'twitter' => 'fab fa-twitter',
+                                        'instagram' => 'fab fa-instagram',
+                                        'linkedin' => 'fab fa-linkedin-in',
+                                        'youtube' => 'fab fa-youtube',
+                                        'tiktok' => 'fab fa-tiktok',
+                                        'pinterest' => 'fab fa-pinterest-p',
+                                        'snapchat' => 'fab fa-snapchat-ghost',
+                                        'whatsapp' => 'fab fa-whatsapp',
+                                        'telegram' => 'fab fa-telegram',
+                                        'discord' => 'fab fa-discord',
+                                        'github' => 'fab fa-github',
+                                        'gitlab' => 'fab fa-gitlab',
+                                        'medium' => 'fab fa-medium',
+                                        'behance' => 'fab fa-behance',
+                                        'dribbble' => 'fab fa-dribbble',
+                                        'figma' => 'fab fa-figma',
+                                        'twitch' => 'fab fa-twitch',
+                                        'wechat' => 'fab fa-weixin',
+                                    ];
+                                    $icon = $icons[$platformLower] ?? 'fab fa-globe';
+                                @endphp
+                                <a href="{{ $social['url'] ?? '#' }}" class="text-gray-400 hover:text-white" title="{{ $social['platform'] }}"
+                                    ><i class="{{ $icon }}"></i
+                                ></a>
+                            @empty
+                                {{-- No social links configured --}}
+                            @endforelse
                         </div>
                     </div>
 

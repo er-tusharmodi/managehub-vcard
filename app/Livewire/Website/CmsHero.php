@@ -4,9 +4,12 @@ namespace App\Livewire\Website;
 
 use Livewire\Component;
 use App\Models\WebsitePage;
+use App\Livewire\Concerns\HandlesToastValidation;
 
 class CmsHero extends Component
 {
+    use HandlesToastValidation;
+
     public ?WebsitePage $page = null;
     public $hero_title = '';
     public $hero_title_highlight = '';
@@ -42,7 +45,7 @@ class CmsHero extends Component
 
     public function save()
     {
-        $validated = $this->validate([
+        $validated = $this->validateWithToast([
             'hero_title' => ['required', 'string'],
             'hero_title_highlight' => ['required', 'string'],
             'hero_subtitle' => ['required', 'string'],

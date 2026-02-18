@@ -8,12 +8,19 @@
         <meta name="author" content="ManageHub" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="{{ asset('backendtheme/assets/images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ \App\Helpers\BrandingHelper::getFaviconUrl() }}">
 
         <link href="{{ asset('backendtheme/assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
         <link href="{{ asset('backendtheme/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" type="text/css" />
 
+        <style>
+            .toast-container {
+                position: static;
+            }
+        </style>
+
+        @livewireStyles
         @stack('styles')
     </head>
 
@@ -81,19 +88,13 @@
                     <div id="sidebar-menu">
                         <div class="logo-box">
                             <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
-                                <span class="logo-sm">
-                                    <img src="{{ asset('backendtheme/assets/images/logo-sm.png') }}" alt="" height="22">
-                                </span>
                                 <span class="logo-lg">
-                                    <img src="{{ asset('backendtheme/assets/images/logo-light.png') }}" alt="" height="24">
+                                    <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" height="24" style="object-fit: contain;">
                                 </span>
                             </a>
                             <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="{{ asset('backendtheme/assets/images/logo-sm.png') }}" alt="" height="22">
-                                </span>
                                 <span class="logo-lg">
-                                    <img src="{{ asset('backendtheme/assets/images/logo-dark.png') }}" alt="" height="24">
+                                    <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" height="24" style="object-fit: contain;">
                                 </span>
                             </a>
                         </div>
@@ -134,11 +135,15 @@
                 </div>
             </div>
 
-            <div class="content-page">
+            <div class="content-page position-relative">
                 <div class="content">
                     <div class="container-xxl">
                         @yield('content')
                     </div>
+                </div>
+
+                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1090; max-width: calc(100vw - 24px);">
+                    <div id="admin-toast-container" class="toast-container"></div>
                 </div>
 
                 <footer class="footer">
@@ -163,6 +168,150 @@
 
         <script src="{{ asset('backendtheme/assets/js/app.js') }}"></script>
 
+        <script>
+            (function () {
+                var toastListenerRegistered = false;
+                var lastToastKey = null;
+                var lastToastAt = 0;
+
+                function toastClasses(type) {
+                    switch (type) {
+                        case 'success':
+                            return 'text-bg-success';
+                        case 'error':
+                            return 'text-bg-danger';
+                        case 'warning':
+                            return 'text-bg-warning';
+                        default:
+                            return 'text-bg-info';
+                    }
+                }
+
+                function showToast(type, message) {
+                    var container = document.getElementById('admin-toast-container');
+                    if (!container || !message) {
+                        return;
+                    }
+
+                    var now = Date.now();
+                    var toastKey = String(type) + '|' + String(message);
+                    if (toastKey === lastToastKey && now - lastToastAt < 800) {
+                        return;
+                    }
+                    lastToastKey = toastKey;
+                    lastToastAt = now;
+
+                    var toastEl = document.createElement('div');
+                    toastEl.className = 'toast align-items-center ' + toastClasses(type) + ' border-0 mb-2 fade';
+                    toastEl.setAttribute('role', 'alert');
+                    toastEl.setAttribute('aria-live', 'assertive');
+                    toastEl.setAttribute('aria-atomic', 'true');
+                    toastEl.innerHTML = '' +
+                        '<div class="d-flex">' +
+                            '<div class="toast-body">' + message + '</div>' +
+                            '<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>' +
+                        '</div>';
+
+                    container.appendChild(toastEl);
+                    if (window.bootstrap && typeof bootstrap.Toast === 'function') {
+                        var toast = new bootstrap.Toast(toastEl, { delay: 4000 });
+                        toast.show();
+                        toastEl.addEventListener('hidden.bs.toast', function () {
+                            toastEl.remove();
+                        });
+                    } else {
+                        toastEl.classList.add('show');
+                        setTimeout(function () {
+                            toastEl.classList.remove('show');
+                            toastEl.classList.add('hide');
+                            toastEl.remove();
+                        }, 4000);
+                    }
+                }
+
+                document.addEventListener('DOMContentLoaded', function () {
+                    var successMessage = @json(session('success'));
+                    var errorMessage = @json(session('error'));
+                    if (successMessage) {
+                        showToast('success', successMessage);
+                    }
+                    if (errorMessage) {
+                        showToast('error', errorMessage);
+                    }
+                });
+
+                function normalizePayload(args) {
+                    if (!args || !args.length) {
+                        return null;
+                    }
+
+                    var payload = args[0];
+                    if (Array.isArray(payload)) {
+                        if (payload.length === 1 && payload[0] && payload[0].message) {
+                            return { type: payload[0].type || 'info', message: payload[0].message };
+                        }
+                        if (payload.length >= 2 && typeof payload[1] === 'string') {
+                            return { type: payload[0] || 'info', message: payload[1] };
+                        }
+                    }
+                    if (typeof payload === 'string') {
+                        return { type: 'info', message: payload };
+                    }
+
+                    if (payload && payload.message) {
+                        return { type: payload.type || 'info', message: payload.message };
+                    }
+
+                    if (args.length >= 2 && typeof args[1] === 'string') {
+                        return { type: payload || 'info', message: args[1] };
+                    }
+
+                    if (payload && payload.detail && payload.detail.message) {
+                        return { type: payload.detail.type || 'info', message: payload.detail.message };
+                    }
+
+                    return null;
+                }
+
+                function handleNotifyEvent(event) {
+                    var normalized = normalizePayload([event.detail]);
+                    if (!normalized) {
+                        normalized = normalizePayload([event]);
+                    }
+                    if (normalized) {
+                        showToast(normalized.type, normalized.message);
+                    }
+                }
+
+                document.addEventListener('notify', handleNotifyEvent);
+                window.addEventListener('notify', handleNotifyEvent);
+
+                function registerLivewireListener() {
+                    if (toastListenerRegistered) {
+                        return;
+                    }
+                    if (window.Livewire && Livewire.on) {
+                        toastListenerRegistered = true;
+                        Livewire.on('notify', function () {
+                            var normalized = normalizePayload(arguments);
+                            if (normalized) {
+                                showToast(normalized.type, normalized.message);
+                            }
+                        });
+                    }
+                }
+
+                document.addEventListener('livewire:init', function () {
+                    registerLivewireListener();
+                });
+                document.addEventListener('livewire:initialized', function () {
+                    registerLivewireListener();
+                });
+                setTimeout(registerLivewireListener, 500);
+            })();
+        </script>
+
+        @livewireScripts
         @stack('scripts')
     </body>
 </html>

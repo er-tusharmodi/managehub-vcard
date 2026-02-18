@@ -1,82 +1,32 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Database\Seeders;
 
 use App\Models\WebsitePage;
 use App\Models\WebsiteSetting;
-use Illuminate\Console\Command;
+use Illuminate\Database\Seeder;
 
-class ImportWebsiteDataFromHtml extends Command
+class WebsiteCmsFromHtmlSeeder extends Seeder
 {
-    protected $signature = 'import:website-data {--file=index.html}';
-    protected $description = 'Import website data from index.html into database';
-
-    public function handle()
+    public function run(): void
     {
-        $filePath = $this->option('file');
-        
-        if (!file_exists($filePath)) {
-            $this->error("File not found: {$filePath}");
-            return 1;
-        }
+        $html = '';
 
-        $html = file_get_contents($filePath);
-        
-        $this->info('Extracting data from HTML...');
-        
-        // Get or create homepage
         $page = WebsitePage::firstOrCreate(
             ['slug' => 'home'],
             ['title' => 'Home', 'meta_title' => 'ManageHub — Smart vCards, Seamlessly Shared']
         );
 
-        // Extract Meta Title
-        $metaTitle = $this->extractContent($html, '<title>', '</title>');
-        
-        // Extract Hero Section
-        $heroTitle = 'vCards, <span class="gradient-text">Reimagined</span>';
-        $heroSubtitle = 'ManageHub helps businesses, creators, and professionals share rich, interactive digital business cards — instantly, beautifully, and with purpose.';
-        $heroTitleHighlight = 'Reimagined';
-
-        // Extract Categories
+        $metaTitle = 'ManageHub — Smart vCards, Seamlessly Shared';
         $categories = $this->extractCategories($html);
-
-        // Extract vCard Preview Data
-        $vcardData = [
-            'initials' => 'A',
-            'name' => 'Alex Morgan',
-            'role' => 'Senior Product Designer',
-            'company' => 'TechNova Labs',
-            'location' => 'San Francisco',
-            'email' => 'alex@technova.dev',
-            'phone' => '+1 (415) 555-0199',
-            'linkedin_label' => 'linkedin.com/in/alexmorgan',
-            'linkedin_url' => 'https://linkedin.com/in/alexmorgan',
-            'dribbble_label' => 'dribbble.com/alexmorgan',
-            'dribbble_url' => 'https://dribbble.com/alexmorgan',
-        ];
-
-        // Extract How It Works Steps
         $howSteps = $this->extractSteps($html);
-
-        // Extract CTA Section
-        $ctaData = [
-            'title' => 'Ready to Elevate Your Digital Presence?',
-            'subtitle' => 'Join thousands of professionals already using ManageHub to make every connection count.',
-            'primary_label' => 'Start Free Trial',
-            'primary_url' => '#',
-            'secondary_label' => 'Schedule a Demo',
-            'secondary_url' => '#',
-        ];
-
-        // Extract Footer Links
         $footerLinks = $this->extractFooterLinks($html);
 
         $cmsData = [
             'hero_title' => 'vCards,',
-            'hero_title_highlight' => $heroTitleHighlight,
-            'hero_subtitle' => $heroSubtitle,
-            'hero_image_path' => null,
+            'hero_title_highlight' => 'Reimagined',
+            'hero_subtitle' => 'ManageHub helps businesses, creators, and professionals share rich, interactive digital business cards — instantly, beautifully, and with purpose.',
+            'hero_image_path' => '',
             'hero_buttons' => [
                 [
                     'label' => 'Create Your vCard →',
@@ -93,7 +43,23 @@ class ImportWebsiteDataFromHtml extends Command
                 'subtitle' => 'Choose the perfect template — optimized for your role, industry, or use case.',
                 'items' => $categories,
             ],
-            'vcard_preview' => $vcardData,
+            'vcard_previews' => [
+                [
+                    'title' => 'Alex Morgan',
+                    'category' => 'Designer',
+                    'preview_file' => '',
+                ],
+                [
+                    'title' => 'Jordan Hayes',
+                    'category' => 'Developer',
+                    'preview_file' => '',
+                ],
+                [
+                    'title' => 'Casey Wilson',
+                    'category' => 'Business',
+                    'preview_file' => '',
+                ],
+            ],
             'how_it_works' => [
                 'title' => 'How ManageHub Works',
                 'highlight' => 'Hub',
@@ -101,7 +67,14 @@ class ImportWebsiteDataFromHtml extends Command
                 'subtitle' => 'Three simple steps — no tech skills needed.',
                 'steps' => $howSteps,
             ],
-            'cta_section' => $ctaData,
+            'cta_section' => [
+                'title' => 'Ready to Elevate Your Digital Presence?',
+                'subtitle' => 'Join thousands of professionals already using ManageHub to make every connection count.',
+                'primary_label' => 'Start Free Trial',
+                'primary_url' => '#',
+                'secondary_label' => 'Schedule a Demo',
+                'secondary_url' => '#',
+            ],
             'footer_about' => 'The smartest way to share, track, and grow your professional network — one vCard at a time.',
             'footer_links' => $footerLinks,
             'branding' => [
@@ -121,14 +94,14 @@ class ImportWebsiteDataFromHtml extends Command
             ],
         ];
 
-        // Update page with all data
         $page->update([
             'title' => 'Home',
             'meta_title' => $metaTitle,
             'meta_description' => 'ManageHub — Smart vCards, Seamlessly Shared',
             'hero_title' => 'vCards,',
-            'hero_title_highlight' => $heroTitleHighlight,
-            'hero_subtitle' => $heroSubtitle,
+            'hero_title_highlight' => 'Reimagined',
+            'hero_subtitle' => 'ManageHub helps businesses, creators, and professionals share rich, interactive digital business cards — instantly, beautifully, and with purpose.',
+            'hero_image_path' => '',
             'header_cta' => [
                 'label' => 'Get Started',
                 'url' => '#',
@@ -149,7 +122,23 @@ class ImportWebsiteDataFromHtml extends Command
                 'subtitle' => 'Choose the perfect template — optimized for your role, industry, or use case.',
                 'items' => $categories,
             ],
-            'vcard_preview' => $vcardData,
+            'vcard_previews' => [
+                [
+                    'title' => 'Alex Morgan',
+                    'category' => 'Designer',
+                    'preview_file' => '',
+                ],
+                [
+                    'title' => 'Jordan Hayes',
+                    'category' => 'Developer',
+                    'preview_file' => '',
+                ],
+                [
+                    'title' => 'Casey Wilson',
+                    'category' => 'Business',
+                    'preview_file' => '',
+                ],
+            ],
             'how_it_works' => [
                 'title' => 'How ManageHub Works',
                 'highlight' => 'Hub',
@@ -157,13 +146,19 @@ class ImportWebsiteDataFromHtml extends Command
                 'subtitle' => 'Three simple steps — no tech skills needed.',
                 'steps' => $howSteps,
             ],
-            'cta_section' => $ctaData,
+            'cta_section' => [
+                'title' => 'Ready to Elevate Your Digital Presence?',
+                'subtitle' => 'Join thousands of professionals already using ManageHub to make every connection count.',
+                'primary_label' => 'Start Free Trial',
+                'primary_url' => '#',
+                'secondary_label' => 'Schedule a Demo',
+                'secondary_url' => '#',
+            ],
             'footer_about' => 'The smartest way to share, track, and grow your professional network — one vCard at a time.',
             'footer_links' => $footerLinks,
             'data' => $cmsData,
         ]);
 
-        // Save Settings
         WebsiteSetting::updateOrCreate(['key' => 'site_name'], ['value' => 'ManageHub']);
         WebsiteSetting::updateOrCreate(['key' => 'site_tagline'], ['value' => 'Smart vCards, Seamlessly Shared']);
         WebsiteSetting::updateOrCreate(['key' => 'primary_color'], ['value' => '#4F46E5']);
@@ -172,30 +167,29 @@ class ImportWebsiteDataFromHtml extends Command
         WebsiteSetting::updateOrCreate(['key' => 'social_linkedin'], ['value' => '#']);
         WebsiteSetting::updateOrCreate(['key' => 'social_instagram'], ['value' => '#']);
 
-        $this->info('✅ Data imported successfully!');
-        $this->info('Categories: ' . count($categories) . ' items');
-        $this->info('How It Works: ' . count($howSteps) . ' steps');
-        $this->info('Footer Links: Product: ' . count($footerLinks['product']) . ', Resources: ' . count($footerLinks['resources']));
-        
-        return 0;
+        $this->command?->info('Website CMS data seeded from embedded defaults');
     }
 
-    private function extractContent($html, $start, $end)
+    private function extractContent(string $html, string $start, string $end): string
     {
         $startPos = strpos($html, $start);
-        if ($startPos === false) return '';
-        
+        if ($startPos === false) {
+            return '';
+        }
+
         $startPos += strlen($start);
         $endPos = strpos($html, $end, $startPos);
-        
-        if ($endPos === false) return '';
-        
+
+        if ($endPos === false) {
+            return '';
+        }
+
         return trim(strip_tags(substr($html, $startPos, $endPos - $startPos)));
     }
 
-    private function extractCategories($html)
+    private function extractCategories(string $html): array
     {
-        $categories = [
+        return [
             [
                 'title' => 'Business',
                 'description' => 'For companies, teams & departments — embed logos, team members, locations & more.',
@@ -232,13 +226,11 @@ class ImportWebsiteDataFromHtml extends Command
                 'icon_color' => '#0891b2',
             ],
         ];
-
-        return $categories;
     }
 
-    private function extractSteps($html)
+    private function extractSteps(string $html): array
     {
-        $steps = [
+        return [
             [
                 'number' => '1',
                 'title' => 'Create',
@@ -261,29 +253,23 @@ class ImportWebsiteDataFromHtml extends Command
                 'badge_text' => 'text-purple-700',
             ],
         ];
-
-        return $steps;
     }
 
-    private function extractFooterLinks($html)
+    private function extractFooterLinks(string $html): array
     {
-        $productLinks = [
-            ['label' => 'Features', 'url' => '#'],
-            ['label' => 'Templates', 'url' => '#'],
-            ['label' => 'Analytics', 'url' => '#'],
-            ['label' => 'Integrations', 'url' => '#'],
-        ];
-
-        $resourceLinks = [
-            ['label' => 'Blog', 'url' => '#'],
-            ['label' => 'Help Center', 'url' => '#'],
-            ['label' => 'API Docs', 'url' => '#'],
-            ['label' => 'Status', 'url' => '#'],
-        ];
-
         return [
-            'product' => $productLinks,
-            'resources' => $resourceLinks,
+            'product' => [
+                ['label' => 'Features', 'url' => '#'],
+                ['label' => 'Templates', 'url' => '#'],
+                ['label' => 'Analytics', 'url' => '#'],
+                ['label' => 'Integrations', 'url' => '#'],
+            ],
+            'resources' => [
+                ['label' => 'Blog', 'url' => '#'],
+                ['label' => 'Help Center', 'url' => '#'],
+                ['label' => 'API Docs', 'url' => '#'],
+                ['label' => 'Status', 'url' => '#'],
+            ],
         ];
     }
 }

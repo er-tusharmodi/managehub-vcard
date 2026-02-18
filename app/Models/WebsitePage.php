@@ -30,6 +30,7 @@ class WebsitePage extends Model
         'footer_text',
         'footer_about',
         'footer_links',
+        'data',
     ];
 
     protected $casts = [
@@ -43,5 +44,6 @@ class WebsitePage extends Model
         'testimonials' => 'array',
         'faqs' => 'array',
         'footer_links' => 'array',
+        'data' => 'array',
     ];
 }

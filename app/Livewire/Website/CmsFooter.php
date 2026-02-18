@@ -4,9 +4,12 @@ namespace App\Livewire\Website;
 
 use Livewire\Component;
 use App\Models\WebsitePage;
+use App\Livewire\Concerns\HandlesToastValidation;
 
 class CmsFooter extends Component
 {
+    use HandlesToastValidation;
+
     public ?WebsitePage $page = null;
     public $footer_about = '';
     public $product_links = [];
@@ -50,7 +53,7 @@ class CmsFooter extends Component
 
     public function save()
     {
-        $validated = $this->validate([
+        $validated = $this->validateWithToast([
             'footer_about' => ['required', 'string'],
             'product_links' => ['required', 'array'],
             'product_links.*.label' => ['required', 'string'],

@@ -1,11 +1,17 @@
-<div class="container mt-5">
+<div class="card">
+    <div class="card-body">
     <form wire:submit="save">
         <div class="mb-3">
             <h5 class="mb-3">Social Media Links</h5>
             @foreach ($links as $index => $link)
                 <div class="row mb-3">
                     <div class="col-md-5">
-                        <input type="text" wire:model="links.{{ $index }}.platform" class="form-control" placeholder="Platform (e.g., Facebook, Twitter)">
+                        <select wire:model="links.{{ $index }}.platform" class="form-select">
+                            <option value="">Select a platform...</option>
+                            @foreach ($this->getSocialPlatforms() as $platform)
+                                <option value="{{ $platform }}">{{ $platform }}</option>
+                            @endforeach
+                        </select>
                         @error("links.{$index}.platform") <span class="text-danger small">{{ $message }}</span> @enderror
                     </div>
                     <div class="col-md-5">
@@ -32,4 +38,5 @@
             <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
+    </div>
 </div>

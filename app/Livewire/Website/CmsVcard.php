@@ -3,18 +3,17 @@
 namespace App\Livewire\Website;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\WebsitePage;
+use App\Livewire\Concerns\HandlesToastValidation;
 
 class CmsVcard extends Component
 {
+    use HandlesToastValidation, WithFileUploads;
+
     public ?WebsitePage $page = null;
-    public $name = '';
-    public $role = '';
-    public $company = '';
-    public $location = '';
-    public $email = '';
-    public $phone = '';
-    public $bio = '';
+    public $vcards = [];
+    public $previewFiles = [];
 
     public function mount(WebsitePage $page)
     {
@@ -24,36 +23,62 @@ class CmsVcard extends Component
 
     public function loadSettings()
     {
-        $vcard = $this->page->data['vcard_preview'] ?? [];
-        $this->name = $vcard['name'] ?? '';
-        $this->role = $vcard['role'] ?? '';
-        $this->company = $vcard['company'] ?? '';
-        $this->location = $vcard['location'] ?? '';
-        $this->email = $vcard['email'] ?? '';
-        $this->phone = $vcard['phone'] ?? '';
-        $this->bio = $vcard['bio'] ?? '';
+        $vcardsData = $this->page->data['vcard_previews'] ?? [];
+        $this->vcards = !empty($vcardsData) ? $vcardsData : [];
+    }
+
+    public function addVcard()
+    {
+        $this->vcards[] = [
+            'title' => '',
+            'category' => '',
+            'preview_file' => '',
+        ];
+    }
+
+    public function removeVcard($index)
+    {
+        unset($this->vcards[$index]);
+        $this->vcards = array_values($this->vcards);
+    }
+
+    public function updatedPreviewFiles($value, $index)
+    {
+        if ($value) {
+            $path = $value->store('vcard-previews', 'public');
+            $this->vcards[$index]['preview_file'] = '/storage/' . $path;
+        }
     }
 
     public function save()
     {
-        $validated = $this->validate([
-            'name' => ['required', 'string', 'max:100'],
-            'role' => ['required', 'string', 'max:100'],
-            'company' => ['required', 'string', 'max:100'],
-            'location' => ['required', 'string', 'max:100'],
-            'email' => ['required', 'email'],
-            'phone' => ['required', 'string', 'max:20'],
-            'bio' => ['nullable', 'string', 'max:500'],
-        ]);
+        $validated = [];
+        foreach ($this->vcards as $index => $vcard) {
+            $validated[] = $this->validateWithToast([
+                'vcards.' . $index . '.title' => ['required', 'string', 'max:100'],
+                'vcards.' . $index . '.category' => ['required', 'string', 'max:100'],
+                'vcards.' . $index . '.preview_file' => ['nullable', 'string'],
+            ]);
+        }
+
+        // Flatten and merge all validations
+        $allValidated = [];
+        foreach ($this->vcards as $index => $vcard) {
+            $allValidated[$index] = [
+                'title' => $vcard['title'],
+                'category' => $vcard['category'],
+                'preview_file' => $vcard['preview_file'] ?? '',
+            ];
+        }
 
         $data = $this->page->data ?? [];
-        $data['vcard_preview'] = $validated;
+        $data['vcard_previews'] = $allValidated;
 
         $this->page->update(['data' => $data]);
 
         $this->dispatch('notify',
             type: 'success',
-            message: 'vCard preview saved successfully!'
+            message: 'vCard previews saved successfully!'
         );
     }
 

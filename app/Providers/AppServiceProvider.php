@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Share branding helper with all views
+        \Illuminate\Support\Facades\View::share('branding', \App\Helpers\BrandingHelper::class);
     }
 }

@@ -4,9 +4,12 @@ namespace App\Livewire\Website;
 
 use Livewire\Component;
 use App\Models\WebsitePage;
+use App\Livewire\Concerns\HandlesToastValidation;
 
 class CmsSeo extends Component
 {
+    use HandlesToastValidation;
+
     public ?WebsitePage $page = null;
     public $meta_title = '';
     public $meta_description = '';
@@ -30,7 +33,7 @@ class CmsSeo extends Component
 
     public function save()
     {
-        $validated = $this->validate([
+        $validated = $this->validateWithToast([
             'meta_title' => ['required', 'string', 'max:160'],
             'meta_description' => ['required', 'string', 'max:160'],
             'meta_keywords' => ['nullable', 'string', 'max:255'],

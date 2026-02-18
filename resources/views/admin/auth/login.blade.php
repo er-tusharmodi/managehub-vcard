@@ -31,7 +31,7 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('admin.login.store') }}">
+                                <form method="POST" action="{{ route('admin.login.store') }}" id="admin-login-form">
                                     @csrf
 
                                     <div class="mb-3">
@@ -52,7 +52,10 @@
                                     </div>
 
                                     <div class="mb-0 text-center">
-                                        <button class="btn btn-primary w-100" type="submit">Log In</button>
+                                        <button class="btn btn-primary w-100" type="submit" id="admin-login-submit">
+                                            <span class="login-label">Log In</span>
+                                            <span class="spinner-border spinner-border-sm ms-2 d-none" role="status" aria-hidden="true"></span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -66,5 +69,26 @@
         <script src="{{ asset('backendtheme/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('backendtheme/assets/libs/feather-icons/feather.min.js') }}"></script>
         <script src="{{ asset('backendtheme/assets/js/app.js') }}"></script>
+        <script>
+            (function () {
+                var form = document.getElementById('admin-login-form');
+                var button = document.getElementById('admin-login-submit');
+                if (!form || !button) {
+                    return;
+                }
+
+                form.addEventListener('submit', function () {
+                    button.disabled = true;
+                    var spinner = button.querySelector('.spinner-border');
+                    var label = button.querySelector('.login-label');
+                    if (label) {
+                        label.textContent = 'Logging in...';
+                    }
+                    if (spinner) {
+                        spinner.classList.remove('d-none');
+                    }
+                });
+            })();
+        </script>
     </body>
 </html>

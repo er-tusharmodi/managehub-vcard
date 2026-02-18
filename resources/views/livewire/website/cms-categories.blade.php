@@ -1,4 +1,5 @@
-<div class="container mt-5">
+<div class="card">
+    <div class="card-body">
     <form wire:submit="save">
         <div class="row mb-3">
             <div class="col-md-6">
@@ -88,4 +89,5 @@
             <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
+    </div>
 </div>

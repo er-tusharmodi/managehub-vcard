@@ -1,4 +1,5 @@
-<div class="container mt-5">
+<div class="card">
+    <div class="card-body">
     <form wire:submit="save">
         <div class="form-group mb-4">
             <label for="footer_about" class="form-label">Footer About Text</label>
@@ -55,4 +56,5 @@
             <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
+    </div>
 </div>

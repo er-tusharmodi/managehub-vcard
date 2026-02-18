@@ -1,18 +1,41 @@
-<div class="container mt-5">
+<div class="card">
+    <div class="card-body">
     <form wire:submit="save">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group mb-3">
-                    <label for="logo_url" class="form-label">Logo URL</label>
-                    <input wire:model="logo_url" type="url" id="logo_url" class="form-control" placeholder="https://example.com/logo.png">
-                    @error('logo_url') <span class="text-danger small">{{ $message }}</span> @enderror
+                    <label for="logo_file" class="form-label">Logo File</label>
+                    <input wire:model="logo_file" type="file" id="logo_file" class="form-control" accept="image/png,image/jpeg,image/svg+xml">
+                    @error('logo_file') <span class="text-danger small">{{ $message }}</span> @enderror
+                    @if ($logo_url)
+                        <div class="mt-2">
+                            <img src="{{ $logo_url }}" alt="Logo preview" style="max-height: 48px;">
+                        </div>
+                    @endif
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group mb-3">
-                    <label for="favicon_url" class="form-label">Favicon URL</label>
-                    <input wire:model="favicon_url" type="url" id="favicon_url" class="form-control" placeholder="https://example.com/favicon.ico">
-                    @error('favicon_url') <span class="text-danger small">{{ $message }}</span> @enderror
+                    <label for="favicon_file" class="form-label">Favicon File</label>
+                    <input wire:model="favicon_file" type="file" id="favicon_file" class="form-control" accept="image/png,image/jpeg,image/svg+xml,image/x-icon">
+                    @error('favicon_file') <span class="text-danger small">{{ $message }}</span> @enderror
+                    @if ($favicon_url)
+                        <div class="mt-2">
+                            <img src="{{ $favicon_url }}" alt="Favicon preview" style="max-height: 32px;">
+                        </div>
+                    @endif
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group mb-3">
+                    <label for="footer_logo_file" class="form-label">Footer Logo File</label>
+                    <input wire:model="footer_logo_file" type="file" id="footer_logo_file" class="form-control" accept="image/png,image/jpeg,image/svg+xml">
+                    @error('footer_logo_file') <span class="text-danger small">{{ $message }}</span> @enderror
+                    @if ($footer_logo_url)
+                        <div class="mt-2">
+                            <img src="{{ $footer_logo_url }}" alt="Footer logo preview" style="max-height: 48px;">
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -49,4 +72,5 @@
             <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
+    </div>
 </div>

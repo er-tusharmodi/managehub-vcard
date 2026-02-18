@@ -4,11 +4,42 @@ namespace App\Livewire\Website;
 
 use Livewire\Component;
 use App\Models\WebsitePage;
+use App\Livewire\Concerns\HandlesToastValidation;
 
 class CmsSocial extends Component
 {
+    use HandlesToastValidation;
+
     public ?WebsitePage $page = null;
     public $links = [];
+
+    protected $socialPlatforms = [
+        'Facebook',
+        'Twitter',
+        'Instagram',
+        'LinkedIn',
+        'YouTube',
+        'TikTok',
+        'Pinterest',
+        'Snapchat',
+        'WhatsApp',
+        'Telegram',
+        'Discord',
+        'Slack',
+        'GitHub',
+        'GitLab',
+        'Medium',
+        'Behance',
+        'Dribbble',
+        'Figma',
+        'Twitch',
+        'WeChat',
+    ];
+
+    public function getSocialPlatforms()
+    {
+        return $this->socialPlatforms;
+    }
 
     public function mount(WebsitePage $page)
     {
@@ -34,9 +65,9 @@ class CmsSocial extends Component
 
     public function save()
     {
-        $validated = $this->validate([
+        $validated = $this->validateWithToast([
             'links' => ['required', 'array'],
-            'links.*.platform' => ['required', 'string'],
+            'links.*.platform' => ['required', 'string', 'in:' . implode(',', $this->socialPlatforms)],
             'links.*.url' => ['required', 'url'],
         ]);
 
