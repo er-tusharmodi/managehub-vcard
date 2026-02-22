@@ -1,0 +1,392 @@
+{
+  "meta": {
+    "title": "Dr. Anil Sharma – Family & General Physician"
+  },
+  "assets": {
+    "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
+    "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+    "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
+    "profileAlt": "Dr. Anil Sharma profile photo",
+    "serviceImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+  },
+  "doctor": {
+    "name": "Dr. Anil Sharma",
+    "role": "Family & General Physician",
+    "qualification": "MBBS · MD (Internal Medicine) · 18 Years Experience",
+    "regTag": "Reg. No. MH-12345",
+    "regNumber": "MH-12345",
+    "clinicName": "Sharma Family Clinic",
+    "phone": "+919876543210",
+    "whatsapp": "919876543210",
+    "email": "dr.anilsharma@gmail.com",
+    "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai – 400058",
+    "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
+    "website": "https://practo.com/dr-anil-sharma",
+    "vcardTitle": "Family & General Physician",
+    "vcardOrg": "Sharma Family Clinic",
+    "vcardNote": "MBBS MD Internal Medicine | Reg. MH-12345"
+  },
+  "banner": {
+    "shareLabel": "Share",
+    "verifiedLabel": "MCI Verified"
+  },
+  "status": {
+    "openLabel": "Clinic Open Now",
+    "nextSlot": "Next slot: 11:30 AM today"
+  },
+  "profile": {
+    "stats": [
+      {
+        "value": "18+",
+        "label": "Yrs Exp."
+      },
+      {
+        "value": "12k+",
+        "label": "Patients"
+      },
+      {
+        "value": "4.9 ⭐",
+        "label": "Rating"
+      }
+    ],
+    "actions": {
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "save": "Save",
+      "email": "Email",
+      "direction": "Directions",
+      "share": "Share"
+    }
+  },
+  "sections": {
+    "specializations": "Specializations",
+    "appointment": "Book Appointment",
+    "conditions": "Conditions Treated",
+    "fees": "Consultation Fees",
+    "hours": "Clinic Hours",
+    "awards": "Achievements & Certifications",
+    "location": "Clinic Location",
+    "social": "Connect Online",
+    "payments": "Payment Modes",
+    "contactSave": "Save Doctor's Contact"
+  },
+  "labels": {
+    "enquire": "Enquire"
+  },
+  "specializations": [
+    {
+      "name": "General Medicine",
+      "tone": "chip-teal",
+      "icon": "pulse"
+    },
+    {
+      "name": "Cardiac Care",
+      "tone": "chip-blue",
+      "icon": "heart"
+    },
+    {
+      "name": "Diabetes Mgmt",
+      "tone": "chip-green",
+      "icon": "info"
+    },
+    {
+      "name": "Respiratory",
+      "tone": "chip-purple",
+      "icon": "respiratory"
+    },
+    {
+      "name": "Child Health",
+      "tone": "chip-amber",
+      "icon": "home"
+    },
+    {
+      "name": "Thyroid",
+      "tone": "chip-red",
+      "icon": "search"
+    },
+    {
+      "name": "Preventive Care",
+      "tone": "chip-teal",
+      "icon": "preventive"
+    }
+  ],
+  "appointment": {
+    "defaultSlot": "Morning: 9–11 AM",
+    "slots": [
+      {
+        "slot": "Morning: 9–11 AM",
+        "session": "Morning",
+        "time": "9:00 – 11:00 AM",
+        "availability": "4 slots left",
+        "selected": true
+      },
+      {
+        "slot": "Evening: 6–8 PM",
+        "session": "Evening",
+        "time": "6:00 – 8:00 PM",
+        "availability": "7 slots left"
+      },
+      {
+        "slot": "noon",
+        "session": "Noon",
+        "time": "1:00 – 2:00 PM",
+        "fullLabel": "Fully booked",
+        "full": true
+      },
+      {
+        "slot": "Saturday: 10 AM–1 PM",
+        "session": "Saturday",
+        "time": "10 AM – 1 PM",
+        "availability": "Walk-in"
+      }
+    ],
+    "form": {
+      "nameLabel": "Your Name *",
+      "namePlaceholder": "Full name",
+      "phoneLabel": "Phone *",
+      "phonePlaceholder": "+91 XXXXX",
+      "ageLabel": "Age",
+      "agePlaceholder": "e.g. 35",
+      "visitTypeLabel": "Visit Type",
+      "visitTypes": [
+        {
+          "value": "New Patient",
+          "label": "New Patient"
+        },
+        {
+          "value": "Follow-up",
+          "label": "Follow-up"
+        },
+        {
+          "value": "Health Check",
+          "label": "Health Check"
+        }
+      ],
+      "complaintLabel": "Chief Complaint (optional)",
+      "complaintPlaceholder": "e.g. fever, cough, checkup…",
+      "submitLabel": "Confirm Appointment via WhatsApp",
+      "defaultAge": "Not specified",
+      "defaultComplaint": "General consultation"
+    },
+    "success": {
+      "title": "Appointment Requested!",
+      "text": "You'll receive a confirmation on WhatsApp shortly. Please arrive 10 mins early.",
+      "buttonLabel": "Book Another"
+    }
+  },
+  "conditions": [
+    {
+      "name": "Fever & Infections",
+      "desc": "Viral, bacterial, typhoid, malaria.",
+      "query": "Fever & Infections"
+    },
+    {
+      "name": "Diabetes & BP",
+      "desc": "Chronic disease management & monitoring.",
+      "query": "Diabetes & BP"
+    },
+    {
+      "name": "Respiratory",
+      "desc": "Asthma, bronchitis, cough & allergies.",
+      "query": "Respiratory Issues"
+    },
+    {
+      "name": "Child Health",
+      "desc": "Pediatric care, vaccination & growth.",
+      "query": "Child & Pediatric Care"
+    }
+  ],
+  "fees": {
+    "items": [
+      {
+        "name": "New Patient",
+        "note": "First consultation",
+        "amount": "₹400",
+        "oldAmount": "₹500",
+        "icon": "patient",
+        "bg": "#e0f2fe",
+        "color": "#0369a1"
+      },
+      {
+        "name": "Follow-up Visit",
+        "note": "Within 15 days",
+        "amount": "₹200",
+        "icon": "home",
+        "bg": "#f0fdf4",
+        "color": "#15803d"
+      },
+      {
+        "name": "Video Consultation",
+        "note": "Online · 15 min",
+        "amount": "₹350",
+        "icon": "video",
+        "bg": "#fce7f3",
+        "color": "#9d174d"
+      },
+      {
+        "name": "Annual Health Package",
+        "note": "Unlimited visits + basic tests",
+        "amount": "₹2,999",
+        "icon": "clock",
+        "bg": "#fffbeb",
+        "color": "#d97706"
+      }
+    ],
+    "insuranceNote": "Insurance accepted: Medi-Assist, Star Health, ESIC & more"
+  },
+  "hours": {
+    "todayLabel": "Today: Saturday — Open till 1:00 PM",
+    "rows": [
+      {
+        "day": "Monday – Friday",
+        "session": "Morning",
+        "time": "9:00 – 11:30 AM",
+        "rowClass": "open-row"
+      },
+      {
+        "day": "Monday – Friday",
+        "session": "Evening",
+        "time": "6:00 – 8:30 PM",
+        "rowClass": "open-row"
+      },
+      {
+        "day": "Saturday",
+        "session": "Morning",
+        "time": "10:00 AM – 1:00 PM",
+        "rowClass": "open-row"
+      },
+      {
+        "day": "Sunday",
+        "session": "",
+        "time": "Emergency only",
+        "timeClass": "closed"
+      }
+    ],
+    "suggestLink": "Ask about home visits / teleconsult hours"
+  },
+  "awards": [
+    {
+      "icon": "medal",
+      "name": "Best GP – Times Health Awards 2023",
+      "desc": "Recognized among Top 10 General Physicians in Maharashtra"
+    },
+    {
+      "icon": "pulse",
+      "name": "ACLS & BLS Certified",
+      "desc": "Advanced Cardiac Life Support — AHA Certified"
+    },
+    {
+      "icon": "book",
+      "name": "Fellowship in Diabetology",
+      "desc": "RSSDI Certified Diabetes Educator, 2018"
+    },
+    {
+      "icon": "patients",
+      "name": "12,000+ Patients Treated",
+      "desc": "18 years of trusted family healthcare in Mumbai"
+    }
+  ],
+  "location": {
+    "clinicName": "Sharma Family Clinic",
+    "line1": "Shop No. 4, Raj Complex, Opposite HDFC Bank,",
+    "line2": "Andheri West, Mumbai – 400058",
+    "mapLabel": "Get Directions"
+  },
+  "social": [
+    {
+      "type": "whatsapp",
+      "name": "WhatsApp",
+      "value": "+91 98765 43210",
+      "action": "openWA"
+    },
+    {
+      "type": "facebook",
+      "name": "Facebook",
+      "value": "fb.com/DrAnilSharmaClinic"
+    },
+    {
+      "type": "youtube",
+      "name": "YouTube",
+      "value": "Health tips & patient education"
+    },
+    {
+      "type": "website",
+      "name": "Practo Profile",
+      "value": "practo.com/dr-anil-sharma"
+    }
+  ],
+  "payments": [
+    {
+      "icon": "cash",
+      "stroke": "#0d9488",
+      "name": "Cash",
+      "detail": "Accepted at reception"
+    },
+    {
+      "icon": "card",
+      "stroke": "#0369a1",
+      "name": "UPI / QR",
+      "detail": "PhonePe, GPay, Paytm accepted"
+    },
+    {
+      "icon": "card",
+      "stroke": "#7c3aed",
+      "name": "Debit / Credit Card",
+      "detail": "All major cards · No extra charge"
+    },
+    {
+      "icon": "shield",
+      "stroke": "#15803d",
+      "name": "Health Insurance",
+      "detail": "Medi-Assist · Star · ESIC · CGHS"
+    }
+  ],
+  "qr": {
+    "note": "Scan QR to save contact or share this profile",
+    "saveLabel": "Save Contact",
+    "downloadLabel": "Download QR"
+  },
+  "footer": {
+    "line1": "This is a verified digital clinic card",
+    "line2": "Dr. Anil Sharma",
+    "line3": "MBBS, MD · Reg. MH-12345",
+    "line4": "For medical emergencies call 112"
+  },
+  "floatBar": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "appointment": "Book Appt.",
+    "save": "Save"
+  },
+  "share": {
+    "title": "Share Doctor's Profile",
+    "whatsappLabel": "WhatsApp",
+    "copyLabel": "Copy Link",
+    "moreLabel": "More…",
+    "facebookLabel": "Facebook",
+    "cancelLabel": "Cancel"
+  },
+  "promo": {
+    "enabled": false,
+    "delayMs": 2200,
+    "title": "Quick Online Consultation",
+    "text": "Need urgent guidance? Chat directly on WhatsApp and get a quick response.",
+    "ctaLabel": "Chat on WhatsApp"
+  },
+  "messages": {
+    "defaultToast": "Done!",
+    "namePhoneRequired": "Name and phone are required",
+    "waGreeting": "Hi Dr. Anil Sharma, I would like to book an appointment.",
+    "quickEnquiryTemplate": "Hi! I need a consultation for: *{{topic}}*. Please guide me.",
+    "appointmentTemplate": "🏥 *Appointment Request – {{doctorName}}*\n\n👤 Patient: {{name}}\n📞 Phone: {{phone}}\n🎂 Age: {{age}}\n📋 Visit Type: {{visitType}}\n⏰ Preferred Slot: {{slot}}\n💬 Complaint: {{complaint}}\n\nPlease confirm my appointment. Thank you!",
+    "contactSaved": "Contact saved to your phone!",
+    "qrNotReady": "QR not ready",
+    "qrDownloaded": "QR Code downloaded!",
+    "linkCopied": "Link copied!",
+    "shareTemplate": "Consult {{doctorName}} – Family Physician: {{website}}"
+  },
+  "files": {
+    "vcard": "DrAnilSharma.vcf",
+    "qr": "DrAnilSharma_QR.png"
+  }
+}

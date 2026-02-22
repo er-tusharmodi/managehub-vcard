@@ -44,6 +44,21 @@ class CmsCategories extends Component
 
     public function removeCategory($index)
     {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            method: 'removeCategoryConfirmed',
+            message: 'Delete this category?'
+        );
+    }
+
+    public function removeCategoryConfirmed($index)
+    {
+        if (!isset($this->categories[$index])) {
+            return;
+        }
+
         unset($this->categories[$index]);
         $this->categories = array_values($this->categories);
     }

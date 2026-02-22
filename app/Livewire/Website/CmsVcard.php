@@ -13,7 +13,18 @@ class CmsVcard extends Component
 
     public ?WebsitePage $page = null;
     public $vcards = [];
-    public $previewFiles = [];
+    public $showModal = false;
+    public $showPreviewModal = false;
+    public $previewFile = '';
+    public $editingIndex = null;
+    public $sectionTitle = '';
+    public $sectionSubtitle = '';
+    
+    // Modal form fields
+    public $modalTitle = '';
+    public $modalCategory = '';
+    public $modalPreviewFile = null;
+    public $existingPreviewFile = '';
 
     public function mount(WebsitePage $page)
     {
@@ -25,61 +36,136 @@ class CmsVcard extends Component
     {
         $vcardsData = $this->page->data['vcard_previews'] ?? [];
         $this->vcards = !empty($vcardsData) ? $vcardsData : [];
+
+        $section = $this->page->data['vcard_previews_section'] ?? [];
+        $this->sectionTitle = $section['title'] ?? 'vCard Previews';
+        $this->sectionSubtitle = $section['subtitle'] ?? 'Explore multiple vCard styles from the CMS. Each preview opens the exact HTML file you uploaded.';
     }
 
-    public function addVcard()
+    public function openModal()
     {
-        $this->vcards[] = [
-            'title' => '',
-            'category' => '',
-            'preview_file' => '',
+        $this->resetModal();
+        $this->editingIndex = null;
+        $this->showModal = true;
+    }
+
+    public function editVcard($index)
+    {
+        $this->editingIndex = $index;
+        if (isset($this->vcards[$index])) {
+            $vcard = $this->vcards[$index];
+            $this->modalTitle = $vcard['title'] ?? '';
+            $this->modalCategory = $vcard['category'] ?? '';
+            $this->existingPreviewFile = $vcard['preview_file'] ?? '';
+            $this->modalPreviewFile = null;
+            $this->showModal = true;
+        }
+    }
+
+    public function closeModal()
+    {
+        $this->resetModal();
+    }
+
+    public function resetModal()
+    {
+        $this->modalTitle = '';
+        $this->modalCategory = '';
+        $this->modalPreviewFile = null;
+        $this->existingPreviewFile = '';
+        $this->editingIndex = null;
+        $this->showModal = false;
+    }
+
+    public function saveVcard()
+    {
+        $this->validateWithToast([
+            'modalTitle' => ['required', 'string', 'max:100'],
+            'modalCategory' => ['required', 'string', 'max:100'],
+        ]);
+
+        $previewFilePath = $this->existingPreviewFile;
+
+        if ($this->modalPreviewFile) {
+            $previewFilePath = '/storage/' . $this->modalPreviewFile->store('vcard-previews', 'public');
+        }
+
+        $vcard = [
+            'title' => $this->modalTitle,
+            'category' => $this->modalCategory,
+            'preview_file' => $previewFilePath,
         ];
+
+        if ($this->editingIndex !== null) {
+            $this->vcards[$this->editingIndex] = $vcard;
+            $message = 'vCard preview updated successfully!';
+        } else {
+            $this->vcards[] = $vcard;
+            $message = 'vCard preview added successfully!';
+        }
+
+        $this->saveToDatabase();
+        $this->dispatch('notify', type: 'success', message: $message);
+        $this->resetModal();
     }
 
-    public function removeVcard($index)
+    public function saveSection()
     {
+        $this->validateWithToast([
+            'sectionTitle' => ['required', 'string', 'max:100'],
+            'sectionSubtitle' => ['required', 'string', 'max:255'],
+        ]);
+
+        $this->saveToDatabase();
+        $this->dispatch('notify', type: 'success', message: 'vCard preview section updated successfully!');
+    }
+
+    public function deleteVcard($index)
+    {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            method: 'deleteVcardConfirmed',
+            message: 'Delete this vCard preview?'
+        );
+    }
+
+    public function deleteVcardConfirmed($index)
+    {
+        if (!isset($this->vcards[$index])) {
+            return;
+        }
+
         unset($this->vcards[$index]);
         $this->vcards = array_values($this->vcards);
+        $this->saveToDatabase();
+        $this->dispatch('notify', type: 'success', message: 'vCard preview deleted successfully!');
     }
 
-    public function updatedPreviewFiles($value, $index)
+    public function openPreview($index)
     {
-        if ($value) {
-            $path = $value->store('vcard-previews', 'public');
-            $this->vcards[$index]['preview_file'] = '/storage/' . $path;
+        if (isset($this->vcards[$index]) && !empty($this->vcards[$index]['preview_file'])) {
+            $this->previewFile = $this->vcards[$index]['preview_file'];
+            $this->showPreviewModal = true;
         }
     }
 
-    public function save()
+    public function closePreview()
     {
-        $validated = [];
-        foreach ($this->vcards as $index => $vcard) {
-            $validated[] = $this->validateWithToast([
-                'vcards.' . $index . '.title' => ['required', 'string', 'max:100'],
-                'vcards.' . $index . '.category' => ['required', 'string', 'max:100'],
-                'vcards.' . $index . '.preview_file' => ['nullable', 'string'],
-            ]);
-        }
+        $this->showPreviewModal = false;
+        $this->previewFile = '';
+    }
 
-        // Flatten and merge all validations
-        $allValidated = [];
-        foreach ($this->vcards as $index => $vcard) {
-            $allValidated[$index] = [
-                'title' => $vcard['title'],
-                'category' => $vcard['category'],
-                'preview_file' => $vcard['preview_file'] ?? '',
-            ];
-        }
-
+    public function saveToDatabase()
+    {
         $data = $this->page->data ?? [];
-        $data['vcard_previews'] = $allValidated;
-
+        $data['vcard_previews'] = $this->vcards;
+        $data['vcard_previews_section'] = [
+            'title' => $this->sectionTitle,
+            'subtitle' => $this->sectionSubtitle,
+        ];
         $this->page->update(['data' => $data]);
-
-        $this->dispatch('notify',
-            type: 'success',
-            message: 'vCard previews saved successfully!'
-        );
     }
 
     public function render()

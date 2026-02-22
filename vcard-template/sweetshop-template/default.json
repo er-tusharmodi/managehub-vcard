@@ -1,0 +1,309 @@
+{
+    "meta": {
+        "title": "Ambay Sweets",
+        "bannerAlt": "Cover",
+        "profileAlt": "Ambay Sweet"
+    },
+    "assets": {
+        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
+        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+        "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    "shop": {
+        "name": "Ambay Sweet",
+        "tagline": "Premium Indian Sweets & Mithai",
+        "phone": "+919876543210",
+        "whatsapp": "919876543210",
+        "email": "mithas@gmail.com",
+        "address": "123 Sweet Lane, Dadar, Mumbai – 400014",
+        "maps": "https://maps.google.com/?q=Dadar+Mumbai",
+        "website": ""
+    },
+    "header": {
+        "shareLabel": "Share",
+        "saveContactLabel": "Save Contact"
+    },
+    "profile": {
+        "name": "Ambay Sweet",
+        "role": "Premium Indian Sweets & Mithai",
+        "bio": "Handcrafted sweets made with 100% pure desi ghee & fresh milk. Serving happiness since 1995 for weddings, festivals & every sweet occasion.",
+        "actions": {
+            "call": "Call",
+            "whatsapp": "WhatsApp",
+            "save": "Save",
+            "email": "Email",
+            "directions": "Directions",
+            "share": "Share"
+        }
+    },
+    "sections": {
+        "locationTitle": "Our Location",
+        "socialTitle": "Social Links",
+        "servicesTitle": "Our Services",
+        "productsTitle": "Our Products",
+        "galleryTitle": "Gallery",
+        "hoursTitle": "Business Hours",
+        "qrTitle": "Scan & Save Our Contact",
+        "paymentTitle": "Payment Methods",
+        "contactTitle": "Contact Us"
+    },
+    "location": {
+        "line1": "123 Sweet Lane, Dadar",
+        "line2": "Mumbai, Maharashtra – 400014, India",
+        "mapButtonLabel": "Open in Maps"
+    },
+    "socialLinks": [
+        {
+            "type": "whatsapp",
+            "name": "WhatsApp",
+            "value": "+91 98765 43210",
+            "action": "openWA"
+        },
+        {
+            "type": "facebook",
+            "name": "Facebook",
+            "value": "facebook.com/mithassweets",
+            "url": "https://facebook.com/mithassweets"
+        },
+        {
+            "type": "instagram",
+            "name": "Instagram",
+            "value": "@mithassweets",
+            "url": "https://instagram.com/mithassweets"
+        },
+        {
+            "type": "youtube",
+            "name": "YouTube",
+            "value": "Ambay Sweet",
+            "url": "https://youtube.com"
+        }
+    ],
+    "services": [
+        {
+            "name": "Wedding & Event Orders",
+            "description": "Custom bulk sweet packages for weddings & celebrations.",
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "name": "Corporate Gift Boxes",
+            "description": "Branded sweet hampers for Diwali, Eid & client gifting.",
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "name": "Home Delivery",
+            "description": "Fresh sweets delivered same day. Order by 6 PM.",
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "name": "Custom Orders",
+            "description": "Sugar-free & premium varieties made to order.",
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Kaju Katli",
+            "desc": "Premium cashew sweet, pure desi ghee.",
+            "price": 800,
+            "per": "/kg",
+            "tag": "Best Seller",
+            "tagColor": "#c8952a",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 2,
+            "name": "Gulab Jamun",
+            "desc": "Soft syrupy milk balls in rose syrup.",
+            "price": 350,
+            "oldPrice": 400,
+            "per": "/kg",
+            "tag": "Popular",
+            "tagColor": "#b5341a",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 3,
+            "name": "Dry Fruit Barfi",
+            "desc": "Almonds, pistachios & saffron loaded.",
+            "price": 1200,
+            "per": "/kg",
+            "tag": "Premium",
+            "tagColor": "#1565c0",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 4,
+            "name": "Sugar Free Barfi",
+            "desc": "Diabetic-friendly, natural sweeteners.",
+            "price": 600,
+            "oldPrice": 700,
+            "per": "/kg",
+            "tag": "Healthy",
+            "tagColor": "#2e7d32",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 5,
+            "name": "Motichoor Ladoo",
+            "desc": "Fine boondi ladoo, festival favourite.",
+            "price": 450,
+            "per": "/kg",
+            "tag": "",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 6,
+            "name": "Besan Ladoo",
+            "desc": "Roasted gram flour, ghee & cardamom.",
+            "price": 400,
+            "per": "/kg",
+            "tag": "",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        }
+    ],
+    "gallery": [
+        {
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        },
+        {
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        }
+    ],
+    "businessHours": {
+        "badge": "Open Now",
+        "suggestLabel": "Suggest new hours",
+        "days": [
+            {
+                "day": "Monday",
+                "time": "9:00 am – 7:00 pm",
+                "open": true
+            },
+            {
+                "day": "Tuesday",
+                "time": "9:00 am – 7:00 pm",
+                "open": true
+            },
+            {
+                "day": "Wednesday",
+                "time": "9:00 am – 7:00 pm",
+                "open": true
+            },
+            {
+                "day": "Thursday",
+                "time": "9:00 am – 7:00 pm",
+                "open": true
+            },
+            {
+                "day": "Friday",
+                "time": "9:00 am – 7:00 pm",
+                "open": true
+            },
+            {
+                "day": "Saturday",
+                "time": "Closed",
+                "open": false
+            },
+            {
+                "day": "Sunday",
+                "time": "Closed",
+                "open": false
+            }
+        ]
+    },
+    "qr": {
+        "description": "Scan QR code to visit this page & save contact",
+        "downloadLabel": "Download QR",
+        "copyLabel": "Copy Link"
+    },
+    "paymentMethods": [
+        {
+            "type": "upi",
+            "name": "UPI / GPay / PhonePe",
+            "detail": "UPI ID: mithas@okaxis"
+        },
+        {
+            "type": "bank",
+            "name": "Bank Transfer",
+            "detail": "SBI A/C: 0000 0000 0000 | IFSC: SBIN0001234"
+        },
+        {
+            "type": "cash",
+            "name": "Cash on Delivery",
+            "detail": "Available for orders within Mumbai"
+        }
+    ],
+    "contactForm": {
+        "labels": {
+            "name": "Name",
+            "mobile": "Mobile",
+            "email": "Email",
+            "message": "Message"
+        },
+        "placeholders": {
+            "name": "Your name",
+            "mobile": "+91 XXXXXXXXXX",
+            "email": "your@email.com",
+            "message": "How can we help you?"
+        },
+        "submitLabel": "Send Message",
+        "successTitle": "Message Sent!",
+        "successDescription": "We'll get back to you on WhatsApp soon.",
+        "successButtonLabel": "Send Another"
+    },
+    "footer": {
+        "copyright": "© 2025",
+        "brand": "Ambay Sweet",
+        "rights": "All Rights Reserved",
+        "poweredBy": "Powered by",
+        "poweredBrand": "managehub.in"
+    },
+    "floatingBar": {
+        "call": "Call",
+        "save": "Save Contact",
+        "whatsapp": "WhatsApp",
+        "cart": "Cart"
+    },
+    "cart": {
+        "title": "Your Cart",
+        "emptyMessage": "Your cart is empty.<br />Add products to start an order!",
+        "totalLabel": "Total",
+        "orderButton": "Order via WhatsApp"
+    },
+    "shareModal": {
+        "title": "Share This Card",
+        "whatsapp": "WhatsApp",
+        "copy": "Copy Link",
+        "facebook": "Facebook",
+        "more": "More Options",
+        "cancel": "Cancel"
+    },
+    "messages": {
+        "waIntro": "Hi! I want to place a sweet order.",
+        "waEnquiryTemplate": "Hi! Interested in: *{{item}}*. Please share details.",
+        "shareTemplate": "Check out {{name}}: {{website}}",
+        "contactRequired": "Name and phone are required",
+        "contactSaved": "Contact saved to your phone!",
+        "qrNotReady": "QR not ready",
+        "qrDownloaded": "QR Code downloaded!",
+        "linkCopied": "Link copied to clipboard!",
+        "cartHeader": "🛒 *New Order – {{name}}*",
+        "cartConfirm": "Please confirm my order!"
+    },
+    "files": {
+        "vcardName": "MithasSweetShop.vcf",
+        "qrName": "mithas_qr.png"
+    }
+}

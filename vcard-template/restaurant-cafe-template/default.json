@@ -1,0 +1,1049 @@
+{
+  "meta": {
+    "title": "La Piazza - Restaurant & Cafe"
+  },
+  "assets": {
+    "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
+    "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+    "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+  },
+  "R": {
+    "name": "La Piazza Restaurant & Cafe",
+    "tagline": "Authentic Italian Food & Artisan Coffee",
+    "phone": "+911123456789",
+    "whatsapp": "911123456789",
+    "email": "hello@lapiazza.in",
+    "address": "12 Connaught Place, Block B, New Delhi 110001",
+    "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhi",
+    "website": ""
+  },
+  "MENU": {
+    "Starters": [
+      {
+        "id": 1,
+        "name": "Bruschetta Classica",
+        "icon": "bread",
+        "desc": "Grilled sourdough, San Marzano tomato, fresh basil, garlic-infused olive oil.",
+        "price": 299,
+        "tag": "Chef Pick",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 2,
+        "name": "Arancini al Forno",
+        "icon": "arancini",
+        "desc": "Crispy baked risotto balls, smoked mozzarella centre, house marinara dip.",
+        "price": 349,
+        "op": 399,
+        "tag": "Popular",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 3,
+        "name": "Calamari Fritti",
+        "icon": "squid",
+        "desc": "Golden fried squid rings, lemon-herb aioli, fresh rocket garnish.",
+        "price": 449,
+        "tag": "",
+        "tc": "",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 4,
+        "name": "Caprese Salad",
+        "icon": "salad",
+        "desc": "Buffalo mozzarella, heirloom tomatoes, fresh basil, aged balsamic reduction.",
+        "price": 379,
+        "tag": "Healthy",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 5,
+        "name": "Mushroom Crostini",
+        "icon": "mushroom",
+        "desc": "Wild mushroom ragu, whipped ricotta, fresh thyme on charred ciabatta.",
+        "price": 329,
+        "tag": "New",
+        "tc": "#6a1b9a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 6,
+        "name": "Minestrone Soup",
+        "icon": "soup",
+        "desc": "Slow-cooked Italian vegetable soup with cannellini beans and parmesan crisp.",
+        "price": 249,
+        "tag": "",
+        "tc": "",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 7,
+        "name": "Prawn Cocktail",
+        "icon": "prawn",
+        "desc": "Chilled tiger prawns, Marie Rose sauce, crisp iceberg lettuce, lemon wedge.",
+        "price": 499,
+        "tag": "Bestseller",
+        "tc": "#1565c0",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 8,
+        "name": "Antipasto Board",
+        "icon": "board",
+        "desc": "Cured meats, olives, marinated veggies, grissini and focaccia. For 2.",
+        "price": 699,
+        "tag": "For 2",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      }
+    ],
+    "Pizza": [
+      {
+        "id": 9,
+        "name": "Margherita",
+        "icon": "pizza",
+        "desc": "San Marzano tomato, fior di latte mozzarella, fresh basil, olive oil.",
+        "price": 549,
+        "tag": "Classic",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 10,
+        "name": "Diavola",
+        "icon": "chilli",
+        "desc": "Spicy Calabrian salami, nduja paste, chilli flakes, smoked mozzarella.",
+        "price": 699,
+        "tag": "Spicy",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 11,
+        "name": "Quattro Formaggi",
+        "icon": "cheese",
+        "desc": "Mozzarella, gorgonzola, provolone, parmesan blend, truffle oil, walnuts.",
+        "price": 749,
+        "tag": "Premium",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 12,
+        "name": "Veg Primavera",
+        "icon": "veggies",
+        "desc": "Courgette, peppers, red onion, cherry tomato, basil pesto, mozzarella.",
+        "price": 599,
+        "tag": "Vegan",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 13,
+        "name": "Prosciutto Rucola",
+        "icon": "steak",
+        "desc": "Parma ham, fresh rocket, shaved parmesan, fig chutney, olive oil base.",
+        "price": 799,
+        "tag": "Bestseller",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 14,
+        "name": "Pollo BBQ",
+        "icon": "chicken",
+        "desc": "Smoky BBQ base, grilled chicken strips, red onion, jalapenos, mozzarella.",
+        "price": 749,
+        "op": 849,
+        "tag": "Hot Deal",
+        "tc": "#e65100",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 15,
+        "name": "Tartufo Bianco",
+        "icon": "pizza",
+        "desc": "White truffle cream, mixed mushrooms, mozzarella, fresh parsley.",
+        "price": 899,
+        "tag": "Luxury",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 16,
+        "name": "Salmone Pizza",
+        "icon": "fish",
+        "desc": "Smoked salmon, cream cheese, capers, red onion, fresh dill on white base.",
+        "price": 849,
+        "tag": "Signature",
+        "tc": "#1565c0",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      }
+    ],
+    "Pasta": [
+      {
+        "id": 17,
+        "name": "Spaghetti Carbonara",
+        "icon": "pasta",
+        "desc": "Guanciale, free-range egg yolk, aged pecorino romano, cracked black pepper.",
+        "price": 599,
+        "tag": "Chef Fav",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 18,
+        "name": "Penne Arrabiata",
+        "icon": "tomato",
+        "desc": "Fiery San Marzano tomato, garlic, fresh red chilli, torn basil. Vegan.",
+        "price": 449,
+        "tag": "Vegan",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 19,
+        "name": "Truffle Tagliatelle",
+        "icon": "mushroom",
+        "desc": "Fresh egg tagliatelle, black truffle shavings, brown butter, parmigiano.",
+        "price": 849,
+        "tag": "Luxury",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 20,
+        "name": "Pesto Primavera",
+        "icon": "herbs",
+        "desc": "Trofie pasta, homemade Genovese pesto, French beans, cherry tomato.",
+        "price": 499,
+        "tag": "Veg",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 21,
+        "name": "Seafood Linguine",
+        "icon": "prawn",
+        "desc": "Tiger prawns, baby clams, squid rings in white wine tomato broth.",
+        "price": 899,
+        "tag": "Must Try",
+        "tc": "#1565c0",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 22,
+        "name": "Lasagne al Forno",
+        "icon": "lasagne",
+        "desc": "Classic layers of bolognese, bechamel sauce, oven-baked mozzarella.",
+        "price": 699,
+        "op": 749,
+        "tag": "Popular",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 23,
+        "name": "Mushroom Risotto",
+        "icon": "risotto",
+        "desc": "Arborio rice, wild porcini mushrooms, white wine, mascarpone, parmesan.",
+        "price": 649,
+        "tag": "Vegetarian",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 24,
+        "name": "Gnocchi Pomodoro",
+        "icon": "gnocchi",
+        "desc": "House-made potato gnocchi, slow-roasted tomato sugo, torn basil, burrata.",
+        "price": 579,
+        "tag": "New",
+        "tc": "#6a1b9a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      }
+    ],
+    "Mains": [
+      {
+        "id": 25,
+        "name": "Chicken Cacciatora",
+        "icon": "chicken",
+        "desc": "Free-range chicken braised with olives, capers, rosemary, white wine.",
+        "price": 749,
+        "tag": "Chef Special",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 26,
+        "name": "Sea Bass Limone",
+        "emoji": "🐟",
+        "desc": "Pan-seared sea bass fillet, lemon caper butter, asparagus, crushed potatoes.",
+        "price": 999,
+        "tag": "Premium",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 27,
+        "name": "Rack of Lamb",
+        "icon": "lamb",
+        "desc": "Herb-crusted rack of lamb, mint jus, roasted root vegetables, creamy polenta.",
+        "price": 1199,
+        "tag": "Signature",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 28,
+        "name": "Grilled Salmon",
+        "icon": "fish",
+        "desc": "Atlantic salmon fillet, salsa verde, roasted cherry tomatoes, wilted spinach.",
+        "price": 949,
+        "op": 1049,
+        "tag": "Hot Deal",
+        "tc": "#e65100",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 29,
+        "name": "Eggplant Parmigiana",
+        "icon": "eggplant",
+        "desc": "Layered fried eggplant, San Marzano tomato, melted mozzarella, fresh basil.",
+        "price": 549,
+        "tag": "Veg",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 30,
+        "name": "Grilled Sirloin",
+        "icon": "steak",
+        "desc": "Grilled 200g sirloin steak, truffle butter, crispy fries, house green salad.",
+        "price": 1299,
+        "tag": "Indulge",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 31,
+        "name": "Osso Buco Milanese",
+        "icon": "lamb",
+        "desc": "Slow-braised veal shank, gremolata, saffron risotto. A Milanese classic.",
+        "price": 1099,
+        "tag": "Must Try",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      },
+      {
+        "id": 32,
+        "name": "Baked Meatballs",
+        "icon": "meatballs",
+        "desc": "Oven-baked beef and pork meatballs in rich tomato sugo, crusty bread.",
+        "price": 649,
+        "tag": "Comfort",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": false
+      }
+    ],
+    "Desserts": [
+      {
+        "id": 33,
+        "name": "Tiramisu Classico",
+        "icon": "cake",
+        "desc": "Savoiardi soaked in espresso, mascarpone cream, fine unsweetened cocoa.",
+        "price": 329,
+        "op": 379,
+        "tag": "Bestseller",
+        "tc": "#b8962e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 34,
+        "name": "Panna Cotta",
+        "icon": "panna",
+        "desc": "Silky vanilla bean custard set cream, seasonal wild berry compote, mint.",
+        "price": 279,
+        "tag": "",
+        "tc": "",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 35,
+        "name": "Cannoli Siciliani",
+        "icon": "cannoli",
+        "desc": "Crispy pastry shells, sweet sheep ricotta, candied orange, pistachios.",
+        "price": 299,
+        "tag": "Popular",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 36,
+        "name": "Chocolate Fondant",
+        "icon": "choc",
+        "desc": "Warm molten dark chocolate fondant, Madagascan vanilla gelato, cocoa dust.",
+        "price": 349,
+        "tag": "Must Try",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 37,
+        "name": "Gelato 3 Scoops",
+        "icon": "gelato",
+        "desc": "House-churned gelato: Pistachio, Stracciatella and Salted Caramel.",
+        "price": 249,
+        "tag": "Kids Love",
+        "tc": "#6a1b9a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 38,
+        "name": "Affogato al Caffe",
+        "icon": "coffee",
+        "desc": "Two scoops fior di latte gelato, double ristretto poured tableside.",
+        "price": 219,
+        "tag": "Cafe Fav",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 39,
+        "name": "Profiteroles",
+        "icon": "profiterole",
+        "desc": "Choux pastry puffs, Chantilly cream filling, warm dark chocolate drizzle.",
+        "price": 319,
+        "tag": "New",
+        "tc": "#6a1b9a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 40,
+        "name": "Cassata Siciliana",
+        "icon": "cake",
+        "desc": "Ricotta-filled sponge, marzipan shell, candied fruits, pistachios.",
+        "price": 299,
+        "tag": "Regional",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      }
+    ],
+    "Drinks": [
+      {
+        "id": 41,
+        "name": "Flat White",
+        "icon": "coffee",
+        "desc": "Double ristretto shot, micro-foamed whole milk. Our barista signature cup.",
+        "price": 199,
+        "tag": "Signature",
+        "tc": "#3a4a2e",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 42,
+        "name": "Cold Brew Coffee",
+        "icon": "coldbrew",
+        "desc": "18-hour steeped single-origin Ethiopian Arabica, served over pure ice.",
+        "price": 229,
+        "tag": "",
+        "tc": "",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 43,
+        "name": "Aperol Spritz",
+        "icon": "spritz",
+        "desc": "Aperol, chilled prosecco, splash of soda water, fresh orange slice.",
+        "price": 499,
+        "tag": "Bestseller",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 44,
+        "name": "Limoncello Fizz",
+        "icon": "lemon",
+        "desc": "House-made limoncello, elderflower cordial, sparkling water, mint.",
+        "price": 349,
+        "tag": "Refreshing",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 45,
+        "name": "Sangria Rossa",
+        "icon": "wine",
+        "desc": "Italian red wine, brandy, fresh peach, orange, cinnamon, chilled.",
+        "price": 449,
+        "op": 499,
+        "tag": "Happy Hrs",
+        "tc": "#880e4f",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 46,
+        "name": "Negroni",
+        "icon": "cocktail",
+        "desc": "Campari, sweet vermouth, London dry gin, stirred over ice, orange peel.",
+        "price": 549,
+        "tag": "Classic",
+        "tc": "#c2562a",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 47,
+        "name": "Virgin Mojito",
+        "icon": "mojito",
+        "desc": "Fresh lime, mint leaves, sugar syrup, soda. Cool, zesty, non-alcoholic.",
+        "price": 179,
+        "tag": "No Alcohol",
+        "tc": "#2e7d32",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      },
+      {
+        "id": 48,
+        "name": "Sparkling Lemonade",
+        "icon": "soda",
+        "desc": "House-pressed lemon juice, honey, fresh rosemary sprig, sparkling water.",
+        "price": 159,
+        "tag": "",
+        "tc": "",
+        "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+        "veg": true
+      }
+    ]
+  },
+  "banner": {
+    "statusLabel": "Open Now",
+    "shareLabel": "Share",
+    "eyebrow": "Est. 2018 · Fine Dining & Café",
+    "title": "La Piazza",
+    "subtitle": "Authentic Italian · Artisan Coffee · Warm Ambiance",
+    "ratings": [
+      {
+        "icon": "star",
+        "label": "4.7 / 5"
+      },
+      {
+        "icon": "users",
+        "label": "1,240+ Reviews"
+      },
+      {
+        "icon": "clock",
+        "label": "Dine-in & Delivery"
+      }
+    ]
+  },
+  "profile": {
+    "cuisineTags": [
+      "Italian",
+      "Café",
+      "Pizza",
+      "Vegan Options",
+      "Bar & Drinks",
+      "Desserts"
+    ],
+    "actions": {
+      "call": "Call Us",
+      "whatsapp": "WhatsApp",
+      "reserve": "Reserve",
+      "email": "Email",
+      "directions": "Directions",
+      "share": "Share"
+    }
+  },
+  "sections": {
+    "story": "Our Story",
+    "menu": "Our Menu",
+    "gallery": "Gallery",
+    "reserve": "Reserve a Table",
+    "offers": "Experiences & Offers",
+    "hours": "Opening Hours",
+    "location": "Location & How to Reach",
+    "follow": "Follow Us",
+    "payments": "Payment Accepted",
+    "qr": "QR Code & Save Contact"
+  },
+  "story": {
+    "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+    "paragraph1": "Born from a passion for authentic Neapolitan cooking, La Piazza brings the soul of Southern Italy to your city. Every dish is crafted with imported ingredients and recipes passed down through generations.",
+    "paragraph2": "Our wood-fired oven burns at 485°C — the secret behind our crispy, airy crusts that guests travel across the city for.",
+    "chefName": "Marco Rosetti",
+    "chefRole": "Head Chef & Founder",
+    "highlights": [
+      {
+        "icon": "oven",
+        "label": "Wood-Fired Oven"
+      },
+      {
+        "icon": "fresh",
+        "label": "Farm Fresh Ingredients"
+      },
+      {
+        "icon": "wine",
+        "label": "Curated Wine List"
+      }
+    ]
+  },
+  "gallery": [
+    {
+      "caption": "Margherita Pizza",
+      "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    {
+      "caption": "Carbonara",
+      "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    {
+      "caption": "Signature Latte",
+      "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    {
+      "caption": "Tiramisu",
+      "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    {
+      "caption": "Brunello di M.",
+      "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    {
+      "caption": "Caprese Salad",
+      "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    }
+  ],
+  "reservation": {
+    "labels": {
+      "name": "Your Name",
+      "phone": "Phone",
+      "date": "Date",
+      "time": "Time",
+      "guests": "Guests",
+      "occasion": "Occasion",
+      "note": "Special Requests"
+    },
+    "placeholders": {
+      "name": "Full name",
+      "phone": "+91 XXXXX",
+      "note": "Allergies, seating, high chair, cake..."
+    },
+    "times": [
+      {
+        "label": "Select Slot",
+        "value": ""
+      },
+      {
+        "label": "12:00 PM",
+        "value": "12:00 PM"
+      },
+      {
+        "label": "12:30 PM",
+        "value": "12:30 PM"
+      },
+      {
+        "label": "1:00 PM",
+        "value": "1:00 PM"
+      },
+      {
+        "label": "1:30 PM",
+        "value": "1:30 PM"
+      },
+      {
+        "label": "7:00 PM",
+        "value": "7:00 PM"
+      },
+      {
+        "label": "7:30 PM",
+        "value": "7:30 PM"
+      },
+      {
+        "label": "8:00 PM",
+        "value": "8:00 PM"
+      },
+      {
+        "label": "8:30 PM",
+        "value": "8:30 PM"
+      },
+      {
+        "label": "9:00 PM",
+        "value": "9:00 PM"
+      }
+    ],
+    "guests": [
+      {
+        "label": "1",
+        "value": "1"
+      },
+      {
+        "label": "2",
+        "value": "2"
+      },
+      {
+        "label": "3",
+        "value": "3"
+      },
+      {
+        "label": "4",
+        "value": "4",
+        "selected": true
+      },
+      {
+        "label": "5",
+        "value": "5"
+      },
+      {
+        "label": "6",
+        "value": "6"
+      },
+      {
+        "label": "7+",
+        "value": "7+"
+      }
+    ],
+    "occasions": [
+      {
+        "label": "None",
+        "value": ""
+      },
+      {
+        "label": "Birthday",
+        "value": "Birthday"
+      },
+      {
+        "label": "Anniversary",
+        "value": "Anniversary"
+      },
+      {
+        "label": "Business Lunch",
+        "value": "Business Lunch"
+      },
+      {
+        "label": "Date Night",
+        "value": "Date Night"
+      },
+      {
+        "label": "Family Gathering",
+        "value": "Family Gathering"
+      }
+    ],
+    "confirmLabel": "Confirm via WhatsApp",
+    "successTitle": "Reservation Requested! 🎉",
+    "successMessage": "We'll confirm your table via WhatsApp shortly. Looking forward to hosting you at La Piazza!",
+    "successButton": "Make Another Reservation"
+  },
+  "offers": [
+    {
+      "icon": "brunch",
+      "bg": "#fff3e0",
+      "title": "Weekend Brunch",
+      "desc": "Sat & Sun · 10 AM – 3 PM. Buffet with live counter, pancakes, eggs & artisan coffee.",
+      "tag": "₹599 per person"
+    },
+    {
+      "icon": "candle",
+      "bg": "#fce4ec",
+      "title": "Candlelight Dinner",
+      "desc": "Private table, 4-course meal, complimentary wine. Book 48 hrs in advance.",
+      "tag": "₹2,999 for 2"
+    },
+    {
+      "icon": "coffee",
+      "bg": "#e8f5e9",
+      "title": "Café Happy Hours",
+      "desc": "Mon–Fri · 3 PM – 6 PM. Buy 1 Get 1 on all hot & cold beverages.",
+      "tag": "BOGO Offer"
+    },
+    {
+      "icon": "cake",
+      "bg": "#e8eaf6",
+      "title": "Birthday Celebration",
+      "desc": "Free dessert platter & table decoration for the birthday person. Just mention while booking!",
+      "tag": "Complimentary"
+    }
+  ],
+  "hours": {
+    "todayLabel": "Open Today until 11:00 PM",
+    "kitchenNote": "🍳 Kitchen closes 45 mins before restaurant closing. Last delivery orders accepted by 10:00 PM.",
+    "rows": [
+      {
+        "day": "Monday",
+        "time": "11:00 AM – 11:00 PM"
+      },
+      {
+        "day": "Tuesday",
+        "time": "11:00 AM – 11:00 PM"
+      },
+      {
+        "day": "Wednesday",
+        "time": "11:00 AM – 11:00 PM"
+      },
+      {
+        "day": "Thursday",
+        "time": "11:00 AM – 11:00 PM"
+      },
+      {
+        "day": "Friday",
+        "time": "11:00 AM – 12:00 AM"
+      },
+      {
+        "day": "Saturday",
+        "time": "10:00 AM – 12:00 AM"
+      },
+      {
+        "day": "Sunday",
+        "time": "10:00 AM – 11:00 PM"
+      }
+    ]
+  },
+  "location": {
+    "name": "La Piazza Restaurant & Café",
+    "address": "12, Connaught Place, Block B, New Delhi – 110001",
+    "mapLabel": "Get Directions",
+    "transport": [
+      {
+        "icon": "metro",
+        "label": "Metro",
+        "value": "Rajiv Chowk · 3 min",
+        "stroke": "#1565c0"
+      },
+      {
+        "icon": "parking",
+        "label": "Parking",
+        "value": "Free valet available",
+        "stroke": "#6a1b9a"
+      },
+      {
+        "icon": "taxi",
+        "label": "Taxi / Auto",
+        "value": "Drop-off zone at gate",
+        "stroke": "#e65100"
+      },
+      {
+        "icon": "delivery",
+        "label": "Delivery",
+        "value": "Swiggy · Zomato · 5km",
+        "stroke": "#2e7d32"
+      }
+    ]
+  },
+  "social": [
+    {
+      "type": "instagram",
+      "name": "@lapiazza_cafe",
+      "value": "Instagram · 18.4K followers",
+      "action": "url",
+      "url": "https://instagram.com"
+    },
+    {
+      "type": "whatsapp",
+      "name": "WhatsApp Orders",
+      "value": "+91 98765 43210 · Quick response",
+      "action": "wa"
+    },
+    {
+      "type": "youtube",
+      "name": "La Piazza Kitchen",
+      "value": "YouTube · Recipes & behind the scenes",
+      "action": "url",
+      "url": "https://youtube.com"
+    },
+    {
+      "type": "facebook",
+      "name": "La Piazza Official",
+      "value": "Facebook · Events & promotions",
+      "action": "url",
+      "url": "https://facebook.com"
+    }
+  ],
+  "payments": [
+    {
+      "icon": "card",
+      "name": "Cards",
+      "sub": "Visa · Master · Amex",
+      "stroke": "#1565c0"
+    },
+    {
+      "icon": "upi",
+      "name": "UPI",
+      "sub": "GPay · PhonePe · Paytm",
+      "stroke": "#2e7d32"
+    },
+    {
+      "icon": "wallet",
+      "name": "Wallets",
+      "sub": "Mobikwik · Freecharge",
+      "stroke": "#e65100"
+    },
+    {
+      "icon": "cash",
+      "name": "Cash",
+      "sub": "Always accepted",
+      "stroke": "#555"
+    }
+  ],
+  "qr": {
+    "helpText": "Scan to visit our digital menu & book a table",
+    "downloadLabel": "Download QR",
+    "saveLabel": "Save Contact"
+  },
+  "footer": {
+    "year": "© 2026",
+    "brand": "La Piazza Restaurant & Café",
+    "rights": "· All Rights Reserved",
+    "poweredBy": "Powered by",
+    "poweredBrand": "managehub.in"
+  },
+  "floatBar": {
+    "call": "Call",
+    "reserve": "Reserve",
+    "whatsapp": "WhatsApp",
+    "order": "Order"
+  },
+  "cart": {
+    "title": "Your Order",
+    "emptyLine1": "Nothing added yet!",
+    "emptyLine2": "Browse our menu above.",
+    "totalLabel": "Total",
+    "notePlaceholder": "Special instructions — less spice, no onion, packing...",
+    "orderButton": "Order via WhatsApp"
+  },
+  "reserveModal": {
+    "title": "Reserve a Table",
+    "labels": {
+      "name": "Name",
+      "phone": "Phone",
+      "date": "Date",
+      "time": "Time",
+      "guests": "Guests"
+    },
+    "placeholders": {
+      "name": "Full name",
+      "phone": "+91"
+    },
+    "times": [
+      {
+        "label": "12:00 PM",
+        "value": "12:00 PM"
+      },
+      {
+        "label": "1:00 PM",
+        "value": "1:00 PM"
+      },
+      {
+        "label": "7:00 PM",
+        "value": "7:00 PM"
+      },
+      {
+        "label": "7:30 PM",
+        "value": "7:30 PM"
+      },
+      {
+        "label": "8:00 PM",
+        "value": "8:00 PM"
+      },
+      {
+        "label": "9:00 PM",
+        "value": "9:00 PM"
+      }
+    ],
+    "guests": [
+      {
+        "label": "1",
+        "value": "1"
+      },
+      {
+        "label": "2",
+        "value": "2"
+      },
+      {
+        "label": "4",
+        "value": "4",
+        "selected": true
+      },
+      {
+        "label": "6",
+        "value": "6"
+      },
+      {
+        "label": "7+",
+        "value": "7+"
+      }
+    ],
+    "confirmLabel": "Confirm via WhatsApp"
+  },
+  "share": {
+    "title": "Share La Piazza",
+    "whatsapp": "WhatsApp",
+    "copy": "Copy Link",
+    "facebook": "Facebook",
+    "more": "More",
+    "cancel": "Cancel"
+  },
+  "messages": {
+    "reservationNeedDateTime": "Please select date and time",
+    "reservationNeedNamePhone": "Name and phone are required",
+    "reservationModalNeedNamePhone": "Name and phone required",
+    "reservationSent": "Reservation request sent!",
+    "waEnquiry": "Hi! I would like to enquire about La Piazza.",
+    "contactSaved": "Contact saved!",
+    "qrDownloaded": "QR downloaded!",
+    "qrNotReady": "QR not ready",
+    "linkCopied": "Link copied!",
+    "defaultDone": "Done!"
+  },
+  "files": {
+    "vcard": "LaPiazza.vcf",
+    "qr": "lapiazza_qr.png"
+  }
+}

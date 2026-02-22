@@ -59,6 +59,21 @@ class CmsSocial extends Component
 
     public function removeLink($index)
     {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            method: 'removeLinkConfirmed',
+            message: 'Delete this social link?'
+        );
+    }
+
+    public function removeLinkConfirmed($index)
+    {
+        if (!isset($this->links[$index])) {
+            return;
+        }
+
         unset($this->links[$index]);
         $this->links = array_values($this->links);
     }

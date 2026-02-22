@@ -8,6 +8,10 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\WebsiteCmsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\Admin\VcardController as AdminVcardController;
+use App\Livewire\Vcards\AdminSectionEditor;
+use App\Livewire\Vcards\ClientSectionEditor;
+use App\Http\Controllers\VcardPublicController;
 
 Route::get('/', [WebsiteController::class, 'show'])->name('home');
 
@@ -58,6 +62,15 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
         ->name('profile.password');
 
     Route::resource('admins', AdminUserController::class)->except('show');
+
+    Route::get('/vcards', [AdminVcardController::class, 'index'])->name('vcards.index');
+    Route::get('/vcards/create', [AdminVcardController::class, 'create'])->name('vcards.create');
+    Route::post('/vcards', [AdminVcardController::class, 'store'])->name('vcards.store');
+    Route::get('/vcards/{vcard}/edit', [AdminVcardController::class, 'edit'])->name('vcards.edit');
+    Route::put('/vcards/{vcard}', [AdminVcardController::class, 'update'])->name('vcards.update');
+    Route::get('/vcards/{vcard}/data/{section?}', AdminSectionEditor::class)->name('vcards.data.section');
+    Route::patch('/vcards/{vcard}/status', [AdminVcardController::class, 'updateStatus'])->name('vcards.updateStatus');
+    Route::delete('/vcards/{vcard}', [AdminVcardController::class, 'destroy'])->name('vcards.destroy');
 });
 
 require __DIR__ . '/auth.php';
@@ -73,3 +86,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/{subdomain}', [VcardPublicController::class, 'show'])
+    ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
+    ->name('vcard.public.path');
+
+Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
+    Route::get('/', [VcardPublicController::class, 'show'])->name('vcard.public');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/vcard/edit/{section?}', ClientSectionEditor::class)->name('vcard.editor.section');
+    });
+});

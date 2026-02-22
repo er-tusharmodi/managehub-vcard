@@ -52,7 +52,7 @@
 
                             <li class="dropdown notification-list topbar-dropdown">
                                 <a class="nav-link dropdown-toggle nav-user me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                    <img src="{{ asset('backendtheme/assets/images/users/user-11.jpg') }}" alt="user-image" class="rounded-circle">
+                                    <img src="{{ auth()->user()?->profile_photo_path ? Storage::url(auth()->user()->profile_photo_path) : asset('backendtheme/assets/images/users/user-11.jpg') }}" alt="user-image" class="rounded-circle">
                                     <span class="pro-user-name ms-1">
                                         {{ auth()->user()->name ?? 'Admin' }} <i class="mdi mdi-chevron-down"></i>
                                     </span>
@@ -89,12 +89,12 @@
                         <div class="logo-box">
                             <a href="{{ route('admin.dashboard') }}" class="logo logo-light">
                                 <span class="logo-lg">
-                                    <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" height="24" style="object-fit: contain;">
+                                    <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" height="40" style="object-fit: contain; width:100%;">
                                 </span>
                             </a>
                             <a href="{{ route('admin.dashboard') }}" class="logo logo-dark">
                                 <span class="logo-lg">
-                                    <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" height="24" style="object-fit: contain;">
+                                    <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="Logo" height="40" style="object-fit: contain; width:100%;">
                                 </span>
                             </a>
                         </div>
@@ -117,16 +117,16 @@
                             </li>
 
                             <li>
-                                <a href="{{ route('admin.profile.edit') }}" class="tp-link">
-                                    <i data-feather="user"></i>
-                                    <span> Edit Profile </span>
+                                <a href="{{ route('admin.website-cms', 'home') }}" class="tp-link">
+                                    <i data-feather="layout"></i>
+                                    <span> Website CMS </span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="{{ route('admin.website-cms', 'home') }}" class="tp-link">
-                                    <i data-feather="layout"></i>
-                                    <span> Website CMS </span>
+                                <a href="{{ route('admin.vcards.index') }}" class="tp-link">
+                                    <i data-feather="credit-card"></i>
+                                    <span> vCards </span>
                                 </a>
                             </li>
                         </ul>
@@ -146,15 +146,6 @@
                     <div id="admin-toast-container" class="toast-container"></div>
                 </div>
 
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col fs-13 text-muted text-center">
-                                &copy; <script>document.write(new Date().getFullYear())</script> - ManageHub
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
 
@@ -229,6 +220,60 @@
                     }
                 }
 
+                function showConfirmToast(message, onConfirm) {
+                    var container = document.getElementById('admin-toast-container');
+                    if (!container || !message) {
+                        return;
+                    }
+
+                    var toastEl = document.createElement('div');
+                    toastEl.className = 'toast align-items-center text-bg-warning border-0 mb-2 fade';
+                    toastEl.setAttribute('role', 'alert');
+                    toastEl.setAttribute('aria-live', 'assertive');
+                    toastEl.setAttribute('aria-atomic', 'true');
+                    toastEl.innerHTML = '' +
+                        '<div class="d-flex">' +
+                            '<div class="toast-body">' + message + '</div>' +
+                            '<div class="d-flex align-items-center gap-2 pe-2">' +
+                                '<button type="button" class="btn btn-sm btn-danger text-white" data-confirm="true" style="background-color: #dc3545; border-color: #dc3545;">Delete</button>' +
+                                '<button type="button" class="btn btn-sm btn-light" data-cancel="true">Cancel</button>' +
+                            '</div>' +
+                        '</div>';
+
+                    container.appendChild(toastEl);
+
+                    var confirmBtn = toastEl.querySelector('[data-confirm]');
+                    var cancelBtn = toastEl.querySelector('[data-cancel]');
+
+                    function cleanup() {
+                        if (toastEl && toastEl.parentNode) {
+                            toastEl.remove();
+                        }
+                    }
+
+                    if (confirmBtn) {
+                        confirmBtn.addEventListener('click', function () {
+                            cleanup();
+                            if (typeof onConfirm === 'function') {
+                                onConfirm();
+                            }
+                        });
+                    }
+
+                    if (cancelBtn) {
+                        cancelBtn.addEventListener('click', function () {
+                            cleanup();
+                        });
+                    }
+
+                    if (window.bootstrap && typeof bootstrap.Toast === 'function') {
+                        var toast = new bootstrap.Toast(toastEl, { autohide: false });
+                        toast.show();
+                    } else {
+                        toastEl.classList.add('show');
+                    }
+                }
+
                 document.addEventListener('DOMContentLoaded', function () {
                     var successMessage = @json(session('success'));
                     var errorMessage = @json(session('error'));
@@ -285,6 +330,28 @@
 
                 document.addEventListener('notify', handleNotifyEvent);
                 window.addEventListener('notify', handleNotifyEvent);
+
+                function handleConfirmDeleteEvent(event) {
+                    var detail = (event && event.detail) ? event.detail : {};
+                    var componentId = detail.id;
+                    var index = detail.index;
+                    var message = detail.message || 'Delete this item?';
+                    var method = detail.method || 'deleteVcardConfirmed';
+                    if (!componentId || typeof index === 'undefined') {
+                        return;
+                    }
+
+                    showConfirmToast(message, function () {
+                        if (window.Livewire && Livewire.find) {
+                            var component = Livewire.find(componentId);
+                            if (component) {
+                                component.call(method, index);
+                            }
+                        }
+                    });
+                }
+
+                document.addEventListener('confirm-delete', handleConfirmDeleteEvent);
 
                 function registerLivewireListener() {
                     if (toastListenerRegistered) {

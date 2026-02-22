@@ -36,6 +36,21 @@ class CmsFooter extends Component
 
     public function removeProductLink($index)
     {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            method: 'removeProductLinkConfirmed',
+            message: 'Delete this product link?'
+        );
+    }
+
+    public function removeProductLinkConfirmed($index)
+    {
+        if (!isset($this->product_links[$index])) {
+            return;
+        }
+
         unset($this->product_links[$index]);
         $this->product_links = array_values($this->product_links);
     }
@@ -47,6 +62,21 @@ class CmsFooter extends Component
 
     public function removeResourceLink($index)
     {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            method: 'removeResourceLinkConfirmed',
+            message: 'Delete this resource link?'
+        );
+    }
+
+    public function removeResourceLinkConfirmed($index)
+    {
+        if (!isset($this->resources_links[$index])) {
+            return;
+        }
+
         unset($this->resources_links[$index]);
         $this->resources_links = array_values($this->resources_links);
     }

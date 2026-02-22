@@ -23,7 +23,7 @@
                     <h5 class="card-title mb-0">Profile Information</h5>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.profile.update') }}">
+                    <form method="POST" action="{{ route('admin.profile.update') }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -35,6 +35,14 @@
                         <div class="mb-3">
                             <label class="form-label" for="email">Email</label>
                             <input type="email" id="email" name="email" class="form-control" value="{{ old('email', $user->email) }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="profile_photo">Profile Photo</label>
+                            <input type="file" id="profile_photo" name="profile_photo" class="form-control" accept="image/png,image/jpeg,image/webp">
+                            @if (!empty($user->profile_photo_path))
+                                <img src="{{ Storage::url($user->profile_photo_path) }}" alt="Profile" class="img-fluid mt-2" style="max-height: 120px;">
+                            @endif
                         </div>
 
                         <button class="btn btn-primary" type="submit">Save Changes</button>

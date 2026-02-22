@@ -1,0 +1,436 @@
+{
+  "meta": {
+    "title": "Sona Jewellers – Fine Jewellery"
+  },
+  "assets": {
+    "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
+    "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+    "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
+    "profileAlt": "Sona Jewellers profile photo"
+  },
+  "shop": {
+    "name": "Sona Jewellers",
+    "tagline": "Crafted for Eternity",
+    "phone": "+919876543210",
+    "whatsapp": "919876543210",
+    "email": "info@sonajewellers.in",
+    "website": "",
+    "maps": "https://maps.google.com",
+    "addressVcard": "Shop No. 12, Laxmi Market, Gold Bazaar, Chandni Chowk, New Delhi – 110006",
+    "vcardTitle": "Fine Jewellery & Diamond Experts",
+    "vcardNote": "Crafted for Eternity · BIS Hallmarked · GIA Certified"
+  },
+  "banner": {
+    "brand": "SONA JEWELLERS",
+    "subtitle": "Crafted for Eternity",
+    "dividerSymbol": "❖",
+    "share": "Share",
+    "saveContact": "Save Contact"
+  },
+  "profile": {
+    "name": "Sona Jewellers",
+    "role": "✦ Fine Jewellery & Diamond Experts ✦",
+    "stars": "★★★★★",
+    "rating": "4.9",
+    "ratingCount": "(680+ reviews)",
+    "bio": "Purveyors of handcrafted gold, diamond & silver jewellery since 1985. BIS Hallmarked | GIA Certified | IGI Certified. Creating heirlooms that last generations.",
+    "actions": {
+      "call": "Call Now",
+      "whatsapp": "WhatsApp",
+      "save": "Save Card",
+      "email": "Email Us",
+      "directions": "Directions",
+      "share": "Share Card"
+    }
+  },
+  "stats": [
+    {
+      "value": "38+",
+      "label": "Years Legacy"
+    },
+    {
+      "value": "25K+",
+      "label": "Happy Families"
+    },
+    {
+      "value": "5000+",
+      "label": "Designs"
+    }
+  ],
+  "sections": {
+    "collections": "Our Collections",
+    "purity": "Gold Purity We Offer",
+    "certifications": "Certifications",
+    "services": "Our Services",
+    "showroom": "Visit Our Showroom",
+    "hours": "Showroom Hours",
+    "follow": "Follow & Connect",
+    "enquiry": "Send an Enquiry",
+    "scan": "Scan & Share"
+  },
+  "labels": {
+    "todayBadge": "TODAY",
+    "enquireButton": "Enquire",
+    "toastDefault": "Done!"
+  },
+  "categories": [
+    {
+      "key": "all",
+      "label": "All",
+      "active": true
+    },
+    {
+      "key": "gold",
+      "label": "Gold"
+    },
+    {
+      "key": "diamond",
+      "label": "Diamond"
+    },
+    {
+      "key": "silver",
+      "label": "Silver"
+    },
+    {
+      "key": "bridal",
+      "label": "Bridal"
+    },
+    {
+      "key": "kids",
+      "label": "Kids"
+    }
+  ],
+  "collections": [
+    {
+      "id": 1,
+      "name": "22K Gold Mangalsutra",
+      "metal": "22K Gold",
+      "desc": "Traditional design with black beads & delicate gold pendant",
+      "price": 18500,
+      "oldPrice": 22000,
+      "tag": "BESTSELLER",
+      "tagColor": "#c9a84c",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "gold"
+    },
+    {
+      "id": 2,
+      "name": "Diamond Solitaire Ring",
+      "metal": "18K White Gold",
+      "desc": "0.5 ct GIA certified natural diamond, brilliant cut",
+      "price": 42000,
+      "oldPrice": 48000,
+      "tag": "GIA CERT",
+      "tagColor": "#1565c0",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "diamond"
+    },
+    {
+      "id": 3,
+      "name": "Bridal Necklace Set",
+      "metal": "22K Gold",
+      "desc": "Handcrafted bridal set with matching earrings & maangtika",
+      "price": 85000,
+      "oldPrice": null,
+      "tag": "BRIDAL",
+      "tagColor": "#b5676a",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "bridal"
+    },
+    {
+      "id": 4,
+      "name": "Silver Anklet Pair",
+      "metal": "Sterling Silver",
+      "desc": "Handcrafted traditional design with ghungroo bells",
+      "price": 2200,
+      "oldPrice": 2800,
+      "tag": "SALE",
+      "tagColor": "#7b1fa2",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "silver"
+    },
+    {
+      "id": 5,
+      "name": "Kids Gold Bracelet",
+      "metal": "22K Gold",
+      "desc": "Lightweight & safe design for babies 3 months+",
+      "price": 8500,
+      "oldPrice": null,
+      "tag": "KIDS",
+      "tagColor": "#2e7d32",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "kids"
+    },
+    {
+      "id": 6,
+      "name": "Diamond Tennis Bracelet",
+      "metal": "18K Gold",
+      "desc": "Channel-set diamonds 1.2 ct total, IGI certified",
+      "price": 65000,
+      "oldPrice": 72000,
+      "tag": "TRENDING",
+      "tagColor": "#e65100",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "diamond"
+    },
+    {
+      "id": 7,
+      "name": "Gold Bangles (Pair)",
+      "metal": "22K Gold",
+      "desc": "Classic plain bangles, available in all sizes",
+      "price": 35000,
+      "oldPrice": null,
+      "tag": null,
+      "tagColor": null,
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "gold"
+    },
+    {
+      "id": 8,
+      "name": "Bridal Choker Set",
+      "metal": "22K Gold + Polki",
+      "desc": "Polki diamonds with gold setting, South Indian style",
+      "price": 120000,
+      "oldPrice": 135000,
+      "tag": "PREMIUM",
+      "tagColor": "#880e4f",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "cat": "bridal"
+    }
+  ],
+  "purity": {
+    "items": [
+      {
+        "karat": "24K",
+        "label": "999 Pure"
+      },
+      {
+        "karat": "22K",
+        "label": "916 Gold"
+      },
+      {
+        "karat": "18K",
+        "label": "750 Gold"
+      },
+      {
+        "karat": "14K",
+        "label": "585 Gold"
+      }
+    ],
+    "hallmark": {
+      "emoji": "🏅",
+      "title": "BIS Hallmarked",
+      "separator": "—",
+      "text": "Every piece comes with an official Bureau of Indian Standards purity certificate for your peace of mind."
+    }
+  },
+  "certifications": [
+    {
+      "emoji": "🏅",
+      "bg": "#fff8e1",
+      "name": "BIS Hallmark",
+      "sub": "Gold purity certified"
+    },
+    {
+      "emoji": "💎",
+      "bg": "#e3f2fd",
+      "name": "GIA Certified",
+      "sub": "Natural diamonds"
+    },
+    {
+      "emoji": "🔬",
+      "bg": "#f3e5f5",
+      "name": "IGI Certified",
+      "sub": "Lab grown diamonds"
+    },
+    {
+      "emoji": "✅",
+      "bg": "#e8f5e9",
+      "name": "ISO 9001",
+      "sub": "Quality management"
+    }
+  ],
+  "services": [
+    {
+      "icon": "star",
+      "name": "Custom Jewellery Design",
+      "desc": "Bring your dream piece to life with our master craftsmen. Personalised & bespoke creations."
+    },
+    {
+      "icon": "map",
+      "name": "Old Gold Exchange",
+      "desc": "Exchange your old gold jewellery for the best value. Transparent valuation, no hidden charges."
+    },
+    {
+      "icon": "wrench",
+      "name": "Jewellery Repair & Restoration",
+      "desc": "Expert repairs, polishing, rhodium plating & stone replacement. Same-day minor repairs."
+    },
+    {
+      "icon": "card",
+      "name": "EMI & Easy Payments",
+      "desc": "0% interest EMI on all purchases above ₹10,000. All major cards, UPI & net banking accepted."
+    },
+    {
+      "icon": "arrow",
+      "name": "Home Try-On Service",
+      "desc": "Try our bridal collections at your home. Available for wedding orders above ₹50,000."
+    },
+    {
+      "icon": "heart",
+      "name": "Bridal Consultation",
+      "desc": "Dedicated bridal stylist to help curate your complete wedding jewellery trousseau."
+    }
+  ],
+  "showroom": {
+    "name": "Sona Jewellers – Main Showroom",
+    "line1": "Shop No. 12, Laxmi Market, Gold Bazaar,",
+    "line2": "Chandni Chowk, New Delhi – 110006",
+    "mapLabel": "Open in Maps"
+  },
+  "hours": [
+    {
+      "day": "Monday",
+      "time": "10:00 AM – 9:00 PM",
+      "today": false
+    },
+    {
+      "day": "Tuesday",
+      "time": "10:00 AM – 9:00 PM",
+      "today": false
+    },
+    {
+      "day": "Wednesday",
+      "time": "10:00 AM – 9:00 PM",
+      "today": false
+    },
+    {
+      "day": "Thursday",
+      "time": "10:00 AM – 9:00 PM",
+      "today": false
+    },
+    {
+      "day": "Friday",
+      "time": "10:00 AM – 9:00 PM",
+      "today": true
+    },
+    {
+      "day": "Saturday",
+      "time": "10:00 AM – 10:00 PM",
+      "today": false
+    },
+    {
+      "day": "Sunday",
+      "time": "11:00 AM – 8:00 PM",
+      "today": false
+    }
+  ],
+  "followLinks": [
+    {
+      "type": "whatsapp",
+      "name": "WhatsApp",
+      "value": "+91 98765 43210",
+      "action": "openWA"
+    },
+    {
+      "type": "instagram",
+      "name": "Instagram",
+      "value": "@sonajewellers · 48K followers",
+      "url": "https://instagram.com"
+    },
+    {
+      "type": "facebook",
+      "name": "Facebook",
+      "value": "Sona Jewellers Official",
+      "url": "https://facebook.com"
+    },
+    {
+      "type": "pinterest",
+      "name": "Pinterest",
+      "value": "Jewellery Inspiration Board",
+      "url": "https://pinterest.com"
+    },
+    {
+      "type": "youtube",
+      "name": "YouTube",
+      "value": "Jewellery care & styling tips",
+      "url": "https://youtube.com"
+    }
+  ],
+  "enquiryForm": {
+    "namePlaceholder": "Your Full Name *",
+    "phonePlaceholder": "Mobile Number *",
+    "emailPlaceholder": "Email Address (Optional)",
+    "categoryPlaceholder": "Select Category of Interest",
+    "categories": [
+      "Gold Jewellery",
+      "Diamond Jewellery",
+      "Silver Jewellery",
+      "Bridal Set / Wedding",
+      "Custom / Bespoke Design",
+      "Old Gold Exchange",
+      "Jewellery Repair",
+      "Kids Jewellery",
+      "Other"
+    ],
+    "budgetPlaceholder": "Approximate Budget (e.g. ₹50,000)",
+    "messagePlaceholder": "Describe what you're looking for...",
+    "defaultEmail": "—",
+    "defaultCategory": "Not specified",
+    "defaultBudget": "Not specified",
+    "defaultMessage": "No additional message",
+    "submitLabel": "Send Enquiry via WhatsApp",
+    "successIcon": "💎",
+    "successTitle": "Thank you for your enquiry!",
+    "successText": "Our jewellery expert will reach out to you within 2 hours.",
+    "successButton": "New Enquiry"
+  },
+  "qr": {
+    "description": "Scan to visit our website or share this card instantly with friends & family.",
+    "downloadLabel": "Download QR Code"
+  },
+  "footer": {
+    "brand": "Sona Jewellers",
+    "line2": "Crafting Memories Since 1985",
+    "line3": "❖ ❖ ❖",
+    "line4": "BIS Hallmarked · GIA Certified · IGI Certified"
+  },
+  "bottomBar": {
+    "call": "Call",
+    "save": "Save Contact",
+    "whatsapp": "WhatsApp"
+  },
+  "cart": {
+    "title": "Your Wishlist / Cart",
+    "empty": "Your wishlist is empty.<br />Tap <b>Enquire</b> on any item to add it!",
+    "totalLabel": "Estimated Total",
+    "sendLabel": "Send Wishlist via WhatsApp",
+    "waHeader": "💎 *Jewellery Enquiry – {{shopName}}*",
+    "waItemsLabel": "*Items of Interest:*",
+    "waLine": "✦ {{name}} ({{metal}}) x{{qty}} = ₹{{total}}",
+    "waTotal": "💰 *Estimated Total: ₹{{total}}*",
+    "waFooter": "Please share availability & exact pricing. Thank you!"
+  },
+  "shareModal": {
+    "title": "Share Sona Jewellers",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
+    "copy": "Copy Link"
+  },
+  "messages": {
+    "namePhoneRequired": "Name & phone number are required",
+    "enquiryTemplate": "💎 *New Enquiry – {{shopName}}*\n\n👤 *Name:* {{name}}\n📞 *Phone:* {{phone}}\n📧 *Email:* {{email}}\n\n🏷️ *Category:* {{category}}\n💰 *Budget:* {{budget}}\n📝 *Message:* {{message}}\n\nPlease assist this customer!",
+    "contactSaved": "Contact saved to your phone! 💎",
+    "qrNotReady": "QR not ready yet",
+    "qrDownloaded": "QR Code downloaded!",
+    "waGreeting": "Hello! I would like to know more about your jewellery collections.",
+    "enquireTemplateQuick": "Hello! I am interested in: *{{item}}*. Could you please share the availability and current price? Thank you!",
+    "enquireOpening": "Opening WhatsApp for enquiry!",
+    "shareTemplate": "✨ Check out {{shopName}} – {{tagline}}! {{website}}",
+    "linkCopied": "Link copied to clipboard! ✓"
+  },
+  "files": {
+    "vcard": "SonaJewellers.vcf",
+    "qr": "sona_jewellers_qr.png"
+  }
+}

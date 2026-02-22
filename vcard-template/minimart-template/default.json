@@ -1,0 +1,447 @@
+{
+    "meta": {
+        "title": "FreshMart – Your Neighbourhood Mini Mart"
+    },
+    "assets": {
+        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
+        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+        "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+    },
+    "shop": {
+        "name": "FreshMart",
+        "tagline": "Your Neighbourhood Mini Mart",
+        "phone": "+919876543210",
+        "whatsapp": "919876543210",
+        "email": "freshmart@gmail.com",
+        "address": "42 Green Park Market, Sector 5, New Delhi – 110016",
+        "maps": "https://maps.google.com/?q=Green+Park+New+Delhi",
+        "website": ""
+    },
+    "banner": {
+        "topBar": {
+            "share": "Share",
+            "saveCard": "Save Card"
+        },
+        "icons": [
+            {
+                "icon": "grocery",
+                "label": "Grocery"
+            },
+            {
+                "icon": "fruits",
+                "label": "Fruits"
+            },
+            {
+                "icon": "essentials",
+                "label": "Essentials"
+            },
+            {
+                "icon": "dairy",
+                "label": "Dairy"
+            },
+            {
+                "icon": "beverages",
+                "label": "Beverages"
+            }
+        ]
+    },
+    "profile": {
+        "name": "FreshMart",
+        "role": "Your Neighbourhood Mini Mart",
+        "bio": "One-stop shop for daily essentials, fresh produce, dairy, snacks & beverages. Serving the community with freshness & great prices since 2010.",
+        "actions": {
+            "call": "Call",
+            "whatsapp": "WhatsApp",
+            "save": "Save",
+            "email": "Email",
+            "directions": "Directions",
+            "share": "Share"
+        }
+    },
+    "badges": [
+        {
+            "icon": "trusted",
+            "text": "Trusted Since 2010"
+        },
+        {
+            "icon": "open",
+            "text": "Open Daily"
+        },
+        {
+            "icon": "delivery",
+            "text": "Home Delivery"
+        },
+        {
+            "icon": "prices",
+            "text": "Best Prices"
+        },
+        {
+            "icon": "fresh",
+            "text": "Fresh Stock Daily"
+        }
+    ],
+    "sections": {
+        "location": {
+            "title": "Our Location",
+            "addressLine1": "42 Green Park Market, Sector 5",
+            "addressLine2": "New Delhi, Delhi – 110016, India",
+            "mapLabel": "Open in Maps"
+        },
+        "social": {
+            "title": "Social & Connect"
+        },
+        "categories": {
+            "title": "Product Categories"
+        },
+        "picks": {
+            "title": "Today's Picks"
+        },
+        "deals": {
+            "title": "Today's Special Deals"
+        },
+        "gallery": {
+            "title": "Store Gallery"
+        },
+        "hours": {
+            "title": "Business Hours",
+            "todayLabel": "Open Now · Closes 10 PM",
+            "suggestLabel": "Suggest new hours",
+            "rows": [
+                {
+                    "day": "Monday",
+                    "time": "7:00 am – 10:00 pm",
+                    "status": "open"
+                },
+                {
+                    "day": "Tuesday",
+                    "time": "7:00 am – 10:00 pm",
+                    "status": "open"
+                },
+                {
+                    "day": "Wednesday",
+                    "time": "7:00 am – 10:00 pm",
+                    "status": "open"
+                },
+                {
+                    "day": "Thursday",
+                    "time": "7:00 am – 10:00 pm",
+                    "status": "open"
+                },
+                {
+                    "day": "Friday",
+                    "time": "7:00 am – 10:00 pm",
+                    "status": "open"
+                },
+                {
+                    "day": "Saturday",
+                    "time": "8:00 am – 10:00 pm",
+                    "status": "open"
+                },
+                {
+                    "day": "Sunday",
+                    "time": "9:00 am – 9:00 pm",
+                    "status": "open"
+                }
+            ]
+        },
+        "qr": {
+            "title": "Scan & Save Our Contact",
+            "helpText": "Scan QR code to visit this page & save contact",
+            "download": "Download QR",
+            "copy": "Copy Link"
+        },
+        "payments": {
+            "title": "Payment Methods"
+        },
+        "contact": {
+            "title": "Contact Us",
+            "form": {
+                "nameLabel": "Name",
+                "namePlaceholder": "Your name",
+                "phoneLabel": "Mobile",
+                "phonePlaceholder": "+91 XXXXXXXXXX",
+                "emailLabel": "Email",
+                "emailPlaceholder": "your@email.com",
+                "messageLabel": "Message / Order Request",
+                "messagePlaceholder": "What do you need? We'll help!",
+                "submit": "Send Message"
+            },
+            "success": {
+                "title": "Message Sent!",
+                "text": "We'll get back to you on WhatsApp soon.",
+                "button": "Send Another"
+            }
+        },
+        "cart": {
+            "title": "Your Cart",
+            "emptyHtml": "Your cart is empty.<br />Add items to start your order!",
+            "totalLabel": "Total",
+            "orderLabel": "Order via WhatsApp"
+        },
+        "share": {
+            "title": "Share This Card",
+            "whatsapp": "WhatsApp",
+            "copy": "Copy Link",
+            "facebook": "Facebook",
+            "more": "More",
+            "cancel": "Cancel"
+        }
+    },
+    "social": [
+        {
+            "type": "whatsapp",
+            "name": "WhatsApp Orders",
+            "value": "+91 98765 43210",
+            "action": "wa"
+        },
+        {
+            "type": "facebook",
+            "name": "Facebook",
+            "value": "facebook.com/freshmartdelhi",
+            "action": "none"
+        },
+        {
+            "type": "instagram",
+            "name": "Instagram",
+            "value": "@freshmart.delhi",
+            "action": "none"
+        },
+        {
+            "type": "youtube",
+            "name": "YouTube",
+            "value": "FreshMart Deals & Tips",
+            "action": "none"
+        }
+    ],
+    "categories": [
+        {
+            "name": "Fruits & Veggies",
+            "query": "Fresh Fruits & Vegetables",
+            "icon": "fruits",
+            "bg": "linear-gradient(135deg,#dcfce7,#bbf7d0)",
+            "stroke": "#15803d"
+        },
+        {
+            "name": "Dairy & Eggs",
+            "query": "Dairy & Eggs",
+            "icon": "dairy",
+            "bg": "linear-gradient(135deg,#fffbeb,#fef3c7)",
+            "stroke": "#d97706"
+        },
+        {
+            "name": "Grains & Pulses",
+            "query": "Grains & Pulses",
+            "icon": "grains",
+            "bg": "linear-gradient(135deg,#fff7ed,#fed7aa)",
+            "stroke": "#ea580c"
+        },
+        {
+            "name": "Snacks",
+            "query": "Snacks & Biscuits",
+            "icon": "snacks",
+            "bg": "linear-gradient(135deg,#fdf2f8,#fbcfe8)",
+            "stroke": "#db2777"
+        },
+        {
+            "name": "Beverages",
+            "query": "Cold Drinks & Juices",
+            "icon": "beverages",
+            "bg": "linear-gradient(135deg,#eff6ff,#bfdbfe)",
+            "stroke": "#2563eb"
+        },
+        {
+            "name": "Personal Care",
+            "query": "Cleaning & Personal Care",
+            "icon": "care",
+            "bg": "linear-gradient(135deg,#f5f0ff,#ede9fe)",
+            "stroke": "#7c3aed"
+        },
+        {
+            "name": "Frozen Foods",
+            "query": "Frozen Foods",
+            "icon": "frozen",
+            "bg": "linear-gradient(135deg,#f0fdfa,#ccfbf1)",
+            "stroke": "#0d9488"
+        },
+        {
+            "name": "Baby & Kids",
+            "query": "Baby & Kids Products",
+            "icon": "baby",
+            "bg": "linear-gradient(135deg,#fff1f2,#fecdd3)",
+            "stroke": "#e11d48"
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Aashirvaad Atta 5kg",
+            "desc": "Whole wheat flour, golden grade.",
+            "price": 240,
+            "oldPrice": 280,
+            "per": "/bag",
+            "tag": "SALE",
+            "tagColor": "#dc2626",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 2,
+            "name": "Amul Full Cream Milk 1L",
+            "desc": "Fresh pasteurised milk, daily supply.",
+            "price": 68,
+            "per": "/litre",
+            "tag": "FRESH",
+            "tagColor": "#15803d",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 3,
+            "name": "Kurkure Masala Munch 3-Pack",
+            "desc": "Crispy corn puffs, party pack.",
+            "price": 75,
+            "oldPrice": 90,
+            "per": "/pack",
+            "tag": "HOT",
+            "tagColor": "#ea580c",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 4,
+            "name": "Tropicana Orange Juice 1L",
+            "desc": "100% real fruit juice, no sugar added.",
+            "price": 130,
+            "per": "/bottle",
+            "tag": "POPULAR",
+            "tagColor": "#7c3aed",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 5,
+            "name": "Dettol Handwash 250ml",
+            "desc": "Antibacterial liquid soap refill.",
+            "price": 95,
+            "per": "/bottle",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        },
+        {
+            "id": 6,
+            "name": "Britannia Bourbon 3-Pack",
+            "desc": "Chocolate cream biscuits combo.",
+            "price": 60,
+            "per": "/pack",
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
+        }
+    ],
+    "deals": [
+        {
+            "badge": "BUY 2<br />GET 1",
+            "name": "Amul Butter 100g",
+            "desc": "Buy 2 packs & get 1 absolutely free!",
+            "action": {
+                "type": "enquire",
+                "value": "Amul Butter B2G1 Offer",
+                "label": "Grab"
+            }
+        },
+        {
+            "badge": "20%<br />OFF",
+            "name": "Fresh Vegetables Combo",
+            "desc": "Seasonal veggies combo ₹100 worth at ₹80",
+            "action": {
+                "type": "enquire",
+                "value": "Vegetable Combo 20% Off",
+                "label": "Grab"
+            }
+        },
+        {
+            "badge": "FREE<br />SHIP",
+            "name": "Free Delivery Today!",
+            "desc": "Order above ₹500 & get free home delivery",
+            "action": {
+                "type": "wa",
+                "label": "Order"
+            }
+        }
+    ],
+    "gallery": [
+        {
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg') center/cover no-repeat"
+        },
+        {
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg') center/cover no-repeat"
+        },
+        {
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg') center/cover no-repeat"
+        },
+        {
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg') center/cover no-repeat"
+        },
+        {
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg') center/cover no-repeat"
+        },
+        {
+            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg') center/cover no-repeat"
+        }
+    ],
+    "payments": [
+        {
+            "icon": "upi",
+            "stroke": "#7c3aed",
+            "name": "UPI / GPay / PhonePe",
+            "detail": "UPI ID: freshmart@okaxis"
+        },
+        {
+            "icon": "card",
+            "stroke": "#1d4ed8",
+            "name": "Debit / Credit Card",
+            "detail": "All major cards accepted"
+        },
+        {
+            "icon": "cash",
+            "stroke": "#15803d",
+            "name": "Cash on Delivery",
+            "detail": "Available within 5km delivery radius"
+        }
+    ],
+    "footer": {
+        "year": "© 2025",
+        "brand": "FreshMart",
+        "rights": "· All Rights Reserved",
+        "poweredBy": "Powered by",
+        "poweredBrand": "managehub.in"
+    },
+    "floatBar": {
+        "call": "Call",
+        "saveCard": "Save Card",
+        "whatsapp": "WhatsApp",
+        "cart": "Cart"
+    },
+    "promo": {
+        "enabled": false,
+        "delayMs": 2200,
+        "title": "Festival Offer",
+        "text": "Get free delivery on orders above ₹500 today.",
+        "button": "Order on WhatsApp"
+    },
+    "labels": {
+        "na": "—",
+        "noMessage": "No message",
+        "done": "Done!"
+    },
+    "messages": {
+        "waGreeting": "Hi FreshMart! I want to place an order.",
+        "enquireTemplate": "Hi! I am interested in: *{{item}}*. Please share details & price.",
+        "orderHeader": "🛒 *New Order – {{shop}}*",
+        "orderLine": "• {{name}} x{{qty}} = ₹{{amount}}",
+        "orderFooter": "💰 *Total: ₹{{total}}*\\n\\nPlease confirm my order & delivery details.",
+        "contactTemplate": "✉️ *Message – {{shop}}*\\n👤 {{name}}\\n📞 {{phone}}\\n📧 {{email}}\\n💬 {{message}}",
+        "missingContact": "Name & phone required",
+        "contactSaved": "Contact saved!",
+        "qrNotReady": "QR not ready",
+        "qrDownloaded": "QR downloaded!",
+        "linkCopied": "Link copied!"
+    },
+    "files": {
+        "vcard": "FreshMart.vcf",
+        "qr": "freshmart_qr.png"
+    }
+}

@@ -44,8 +44,23 @@ class CmsHowItWorks extends Component
 
     public function removeStep($index)
     {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            method: 'removeStepConfirmed',
+            message: 'Delete this step?'
+        );
+    }
+
+    public function removeStepConfirmed($index)
+    {
+        if (!isset($this->steps[$index])) {
+            return;
+        }
+
         unset($this->steps[$index]);
-        $this->steps = array_values(array_map(function($step, $index) {
+        $this->steps = array_values(array_map(function ($step, $index) {
             $step['number'] = $index + 1;
             return $step;
         }, $this->steps, array_keys($this->steps)));

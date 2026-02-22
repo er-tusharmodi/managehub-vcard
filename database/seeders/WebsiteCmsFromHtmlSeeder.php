@@ -43,23 +43,6 @@ class WebsiteCmsFromHtmlSeeder extends Seeder
                 'subtitle' => 'Choose the perfect template — optimized for your role, industry, or use case.',
                 'items' => $categories,
             ],
-            'vcard_previews' => [
-                [
-                    'title' => 'Alex Morgan',
-                    'category' => 'Designer',
-                    'preview_file' => '',
-                ],
-                [
-                    'title' => 'Jordan Hayes',
-                    'category' => 'Developer',
-                    'preview_file' => '',
-                ],
-                [
-                    'title' => 'Casey Wilson',
-                    'category' => 'Business',
-                    'preview_file' => '',
-                ],
-            ],
             'how_it_works' => [
                 'title' => 'How ManageHub Works',
                 'highlight' => 'Hub',
@@ -121,23 +104,6 @@ class WebsiteCmsFromHtmlSeeder extends Seeder
                 'highlight' => 'Category',
                 'subtitle' => 'Choose the perfect template — optimized for your role, industry, or use case.',
                 'items' => $categories,
-            ],
-            'vcard_previews' => [
-                [
-                    'title' => 'Alex Morgan',
-                    'category' => 'Designer',
-                    'preview_file' => '',
-                ],
-                [
-                    'title' => 'Jordan Hayes',
-                    'category' => 'Developer',
-                    'preview_file' => '',
-                ],
-                [
-                    'title' => 'Casey Wilson',
-                    'category' => 'Business',
-                    'preview_file' => '',
-                ],
             ],
             'how_it_works' => [
                 'title' => 'How ManageHub Works',

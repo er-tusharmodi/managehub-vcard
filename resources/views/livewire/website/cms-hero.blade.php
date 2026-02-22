@@ -25,9 +25,15 @@
         </div>
 
         <div class="form-group mb-3">
-            <label for="hero_image_path" class="form-label">Hero Image URL (Optional)</label>
-            <input wire:model="hero_image_path" type="text" id="hero_image_path" class="form-control" placeholder="https://example.com/image.jpg">
-            @error('hero_image_path') <span class="text-danger small">{{ $message }}</span> @enderror
+            <label for="hero_image_file" class="form-label">Hero Image (Optional)</label>
+            <input wire:model="hero_image_file" type="file" id="hero_image_file" class="form-control" accept="image/png,image/jpeg,image/webp">
+            <small class="text-muted d-block mt-1">Upload a JPG, PNG, or WebP file.</small>
+            @error('hero_image_file') <span class="text-danger small">{{ $message }}</span> @enderror
+            @if (!empty($hero_image_path))
+                <div class="mt-2">
+                    <img src="{{ $hero_image_path }}" alt="Hero image" class="img-fluid rounded" style="max-height: 160px;">
+                </div>
+            @endif
         </div>
 
         <div class="mb-3">

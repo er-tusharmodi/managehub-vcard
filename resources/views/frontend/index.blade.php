@@ -8,7 +8,21 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>{{ $page->meta_title ?: 'ManageHub — Smart vCards, Seamlessly Shared' }}</title>
+        @php
+            $seoData = $page->data['seo'] ?? [];
+            $metaTitle = $page->meta_title ?: ($settings['seo_title'] ?? 'ManageHub — Smart vCards, Seamlessly Shared');
+            $metaDescription = $page->meta_description ?: ($settings['seo_description'] ?? 'ManageHub — Smart vCards, Seamlessly Shared');
+            $metaKeywords = $seoData['meta_keywords'] ?? ($settings['seo_keywords'] ?? '');
+            $canonicalUrl = $seoData['canonical_url'] ?? '';
+        @endphp
+        <title>{{ $metaTitle }}</title>
+        <meta name="description" content="{{ $metaDescription }}" />
+        @if (!empty($metaKeywords))
+            <meta name="keywords" content="{{ $metaKeywords }}" />
+        @endif
+        @if (!empty($canonicalUrl))
+            <link rel="canonical" href="{{ $canonicalUrl }}" />
+        @endif
         <!-- Favicon -->
         <link rel="shortcut icon" href="{{ \App\Helpers\BrandingHelper::getFaviconUrl() }}">
         <script src="https://cdn.tailwindcss.com"></script>
@@ -33,6 +47,7 @@
         </script>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+            @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap");
             body {
                 font-family:
                     "Inter",
@@ -40,6 +55,9 @@
                     BlinkMacSystemFont,
                     "Segoe UI",
                     sans-serif;
+            }
+            .vcard-preview-title {
+                font-family: "Space Grotesk", "Inter", sans-serif;
             }
             .gradient-text {
                 background: linear-gradient(90deg, {{ $primaryColor }}, {{ $secondaryColor }});
@@ -61,7 +79,8 @@
             $heroImagePath = $data['hero_image_path'] ?? '';
             $categories = $data['categories'] ?? [];
             $categoryItems = $categories['items'] ?? [];
-            $vcard = $data['vcard_preview'] ?? [];
+            $vcardPreviews = $data['vcard_previews'] ?? [];
+            $vcardPreviewsSection = $data['vcard_previews_section'] ?? [];
             $how = $data['how_it_works'] ?? [];
             $howSteps = $how['steps'] ?? [];
             $cta = $data['cta_section'] ?? [];
@@ -200,114 +219,68 @@
         </section>
         @endif
 
-        <!-- vCard Preview Mockup -->
-        @if(isset($vcard) && !empty($vcard))
-        <section class="py-16 bg-bg-light">
-            <div class="container mx-auto px-4 max-w-5xl">
+        <!-- vCard Previews -->
+        @if(isset($vcardPreviews) && count($vcardPreviews) > 0)
+        <section class="py-20 bg-bg-light relative overflow-hidden">
+            <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full" style="background: radial-gradient(circle at center, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0));"></div>
+            <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full" style="background: radial-gradient(circle at center, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0));"></div>
+
+            <div class="container mx-auto px-4 max-w-8xl relative z-10">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                        {{ $vcard['heading'] ?? '' }}
-                        <span class="gradient-text">{{ $vcard['highlight'] ?? '' }}</span>{{ $vcard['suffix'] ?? '' }}
+                    <h2 class="vcard-preview-title text-3xl md:text-5xl font-bold mb-4">
+                        {{ $vcardPreviewsSection['title'] ?? 'vCard Previews' }}
                     </h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">
-                        {{ $vcard['subheading'] ?? '' }}
+                        {{ $vcardPreviewsSection['subtitle'] ?? 'Explore multiple vCard styles from the CMS. Each preview opens the exact HTML file you uploaded.' }}
                     </p>
                 </div>
 
-                <div
-                    class="bg-white rounded-2xl shadow-xl overflow-hidden border border-border-light max-w-3xl mx-auto"
-                >
-                    <div class="bg-gray-900 px-6 py-4 flex items-center">
-                        <div class="w-3 h-3 rounded-full bg-red-500 mr-2"></div>
-                        <div
-                            class="w-3 h-3 rounded-full bg-yellow-500 mr-2"
-                        ></div>
-                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
-                        <span class="ml-auto text-gray-400 text-sm font-mono"
-                            >managehub.io/v/alex</span
-                        >
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-start space-x-4">
-                            <div
-                                class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-emerald-500 flex items-center justify-center text-white font-bold text-xl"
-                            >
-                                {{ $vcard['initials'] ?? 'A' }}
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                    @foreach ($vcardPreviews as $preview)
+                        <div class="group bg-white rounded-3xl border border-border-light shadow-sm hover:shadow-xl transition transform hover:-translate-y-1">
+                            <div class="px-4 pt-4">
+                                <div class="flex items-start justify-between gap-3">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-900">
+                                            {{ $preview['title'] ?? 'Untitled vCard' }}
+                                        </h3>
+                                    </div>
+                                    <span class="text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded-full" style="background-color: rgba(15, 23, 42, 0.06); color: #0f172a;">{{ $preview['category'] ?? 'General' }}</span>
+                                </div>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold">{{ $vcard['name'] ?? 'Alex Morgan' }}</h3>
-                                <p class="text-primary font-medium">
-                                    {{ $vcard['role'] ?? 'Senior Product Designer' }}
-                                </p>
-                                <p class="text-gray-600 text-sm mt-1">
-                                    {{ $vcard['company'] ?? 'TechNova Labs' }} • {{ $vcard['location'] ?? 'San Francisco' }}
-                                </p>
-                            </div>
-                        </div>
 
-                        <div class="mt-6 space-y-3">
-                            <div class="flex items-center">
-                                <i
-                                    class="fas fa-envelope text-gray-500 mr-3 text-lg"
-                                ></i>
-                                <a
-                                    href="mailto:{{ $vcard['email'] ?? 'alex@technova.dev' }}"
-                                    class="text-gray-700 hover:text-primary transition"
-                                    >{{ $vcard['email'] ?? 'alex@technova.dev' }}</a
-                                >
+                            <div class="px-4 py-4">
+                                <div class="rounded-2xl border border-border-light overflow-hidden bg-gray-50" style="height: 260px;">
+                                    <div class="h-9 bg-gray-900 flex items-center px-3">
+                                        <div class="w-2.5 h-2.5 rounded-full bg-red-500 mr-2"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-400 mr-2"></div>
+                                        <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                                    </div>
+                                    @if (!empty($preview['preview_file']))
+                                        <iframe src="{{ $preview['preview_file'] }}" class="w-full" style="height: calc(100% - 36px); border: none;"></iframe>
+                                    @else
+                                        <div class="h-full flex items-center justify-center text-gray-400" style="height: calc(100% - 36px);">
+                                            <div class="text-center">
+                                                <i class="mdi mdi-file-document mdi-48px"></i>
+                                                <p class="text-sm mt-2">No preview file</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fas fa-phone text-gray-500 mr-3 text-lg"
-                                ></i>
-                                <a
-                                    href="tel:{{ $vcard['phone'] ?? '+14155550199' }}"
-                                    class="text-gray-700 hover:text-primary transition"
-                                    >{{ $vcard['phone'] ?? '+1 (415) 555-0199' }}</a
-                                >
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fab fa-linkedin-in text-gray-500 mr-3 text-lg"
-                                ></i>
-                                <a
-                                    href="{{ $vcard['linkedin_url'] ?? '#' }}"
-                                    class="text-gray-700 hover:text-primary transition"
-                                    >{{ $vcard['linkedin_label'] ?? 'linkedin.com/in/alexmorgan' }}</a
-                                >
-                            </div>
-                            <div class="flex items-center">
-                                <i
-                                    class="fab fa-dribbble text-gray-500 mr-3 text-lg"
-                                ></i>
-                                <a
-                                    href="{{ $vcard['dribbble_url'] ?? '#' }}"
-                                    class="text-gray-700 hover:text-primary transition"
-                                    >{{ $vcard['dribbble_label'] ?? 'dribbble.com/alexmorgan' }}</a
-                                >
-                            </div>
-                        </div>
 
-                        <div class="mt-8 flex flex-wrap gap-2">
-                            <button
-                                class="px-4 py-2 bg-primary text-white text-sm rounded-lg flex items-center"
-                            >
-                                <i class="fas fa-download mr-2"></i> Save
-                                Contact
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg flex items-center"
-                            >
-                                <i class="fas fa-share-alt mr-2"></i> Share Link
-                            </button>
-                            <button
-                                class="px-4 py-2 bg-emerald-100 text-emerald-700 text-sm rounded-lg flex items-center"
-                            >
-                                <i class="fas fa-calendar-check mr-2"></i> Book
-                                Time
-                            </button>
+                            <div class="px-4 pb-4 flex items-center justify-between">
+                                <div class="text-xs text-gray-500">Uploaded preview</div>
+                                @if (!empty($preview['preview_file']))
+                                    <a href="{{ $preview['preview_file'] }}" target="_blank" class="text-sm font-semibold text-primary hover:text-primary-dark transition">
+                                        Open Preview
+                                    </a>
+                                @else
+                                    <span class="text-sm text-gray-400">No file</span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -454,7 +427,41 @@
                         </ul>
                     </div>
 
-                    <div></div>
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Contact</h3>
+                        <ul class="space-y-3 text-sm">
+                            @if (!empty($settings['contact_email']))
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-envelope mt-1 text-gray-500"></i>
+                                    <a href="mailto:{{ $settings['contact_email'] }}" class="hover:text-white transition">
+                                        {{ $settings['contact_email'] }}
+                                    </a>
+                                </li>
+                            @endif
+                            @if (!empty($settings['contact_phone']))
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-phone mt-1 text-gray-500"></i>
+                                    <a href="tel:{{ $settings['contact_phone'] }}" class="hover:text-white transition">
+                                        {{ $settings['contact_phone'] }}
+                                    </a>
+                                </li>
+                            @endif
+                            @if (!empty($settings['contact_address']))
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-location-dot mt-1 text-gray-500"></i>
+                                    <span>{{ $settings['contact_address'] }}</span>
+                                </li>
+                            @endif
+                            @if (!empty($settings['site_url']))
+                                <li class="flex items-start gap-3">
+                                    <i class="fas fa-globe mt-1 text-gray-500"></i>
+                                    <a href="{{ $settings['site_url'] }}" class="hover:text-white transition" target="_blank" rel="noopener">
+                                        {{ $settings['site_url'] }}
+                                    </a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 </div>
             </div>
         </footer>

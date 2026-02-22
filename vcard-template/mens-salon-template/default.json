@@ -1,0 +1,466 @@
+{
+  "meta": {
+    "title": "The Barbershop – Men's Grooming Studio"
+  },
+  "assets": {
+    "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
+    "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+    "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+  },
+  "shop": {
+    "name": "The Barbershop",
+    "subtitle": "Men's Grooming Studio",
+    "tagline": "Premium Men's Grooming Studio – Pune",
+    "phone": "+919876543210",
+    "whatsapp": "919876543210",
+    "email": "thebarbershop@gmail.com",
+    "address": "Shop 7, Plaza Centre, Koregaon Park, Pune – 411001",
+    "maps": "https://maps.google.com/?q=Koregaon+Park+Pune",
+    "website": ""
+  },
+  "banner": {
+    "shareLabel": "Share",
+    "verifiedLabel": "Verified Salon"
+  },
+  "status": {
+    "openLabel": "Open Now · Walk-ins Welcome",
+    "nextSlotLabel": "Next: 11:30 AM"
+  },
+  "profile": {
+    "ownerTag": "Est. 2016",
+    "name": "The Barbershop",
+    "role": "Premium Men's Grooming Studio",
+    "tagline": "Your style, our craft. Classic cuts, modern fades & luxury grooming — where every man leaves looking his best.",
+    "stats": [
+      {
+        "value": "8+",
+        "label": "Yrs Open"
+      },
+      {
+        "value": "15k+",
+        "label": "Clients"
+      },
+      {
+        "value": "4.9⭐",
+        "label": "Rating"
+      }
+    ],
+    "actions": {
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "book": "Book Now",
+      "email": "Email",
+      "direction": "Directions",
+      "share": "Share"
+    }
+  },
+  "sections": {
+    "services": {
+      "title": "Our Services",
+      "sub": "Starting ₹99"
+    },
+    "packages": {
+      "title": "Grooming Packages",
+      "sub": "Save Big"
+    },
+    "booking": {
+      "title": "Book Appointment"
+    },
+    "barbers": {
+      "title": "Meet Our Barbers"
+    },
+    "products": {
+      "title": "Grooming Products",
+      "sub": "In-Store"
+    },
+    "hours": {
+      "title": "Working Hours"
+    },
+    "location": {
+      "title": "Find Us"
+    },
+    "social": {
+      "title": "Follow Us"
+    },
+    "payments": {
+      "title": "Payment Modes"
+    },
+    "qr": {
+      "title": "Scan & Save"
+    }
+  },
+  "labels": {
+    "bookChip": "Book",
+    "bookNow": "Book Now",
+    "buy": "Buy",
+    "walkInOk": "Walk-in ok",
+    "fullyBooked": "Fully booked",
+    "defaultToast": "Done!"
+  },
+  "services": [
+    {
+      "name": "Haircut",
+      "desc": "Regular cut, wash & blow-dry finish.",
+      "price": "₹150",
+      "dur": "25 min",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "icon": "scissor"
+    },
+    {
+      "name": "Fade / Taper Cut",
+      "desc": "Skin fade, taper or burst fade with detail.",
+      "price": "₹250",
+      "dur": "35 min",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "icon": "scissor"
+    },
+    {
+      "name": "Beard Trim & Shape",
+      "desc": "Precision beard sculpting & clean edges.",
+      "price": "₹120",
+      "dur": "20 min",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "icon": "heart"
+    },
+    {
+      "name": "Hot Towel Shave",
+      "desc": "Classic hot towel + straight razor shave.",
+      "price": "₹199",
+      "dur": "30 min",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "icon": "razor"
+    },
+    {
+      "name": "Hair Color",
+      "desc": "Global color, highlights or streaks.",
+      "price": "₹599",
+      "dur": "60 min",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "icon": "sun"
+    },
+    {
+      "name": "Hair Spa",
+      "desc": "Deep conditioning scalp & hair treatment.",
+      "price": "₹349",
+      "dur": "45 min",
+      "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "icon": "leaf"
+    }
+  ],
+  "packages": [
+    {
+      "name": "The Classic",
+      "badge": "Hot Deal",
+      "badgeClass": "hot",
+      "items": [
+        "Regular Haircut",
+        "Beard Trim & Shape",
+        "Head Massage (10 min)",
+        "Face Wash"
+      ],
+      "price": "₹399",
+      "old": "₹570",
+      "save": "Save ₹171"
+    },
+    {
+      "name": "Executive Grooming",
+      "badge": "Best Value",
+      "badgeClass": "value",
+      "items": [
+        "Fade / Taper Haircut",
+        "Beard Shape + Hot Towel Shave",
+        "Face Scrub + Moisturize",
+        "Shoulder Massage (15 min)"
+      ],
+      "price": "₹699",
+      "old": "₹970",
+      "save": "Save ₹271"
+    },
+    {
+      "name": "Groom Ready",
+      "badge": "New",
+      "badgeClass": "new",
+      "items": [
+        "Full Haircut + Style",
+        "Beard Color + Shape",
+        "Manicure (Basic)",
+        "Detan Face Cleanup"
+      ],
+      "price": "₹999",
+      "old": "₹1500",
+      "save": "Save ₹501"
+    }
+  ],
+  "booking": {
+    "defaultSlot": "Morning: 9–12 PM",
+    "slots": [
+      {
+        "slot": "Morning: 9–12 PM",
+        "session": "Morning",
+        "time": "9:00 – 12:00",
+        "availability": "3 slots left",
+        "selected": true
+      },
+      {
+        "slot": "Afternoon: 1–4 PM",
+        "session": "Afternoon",
+        "time": "1:00 – 4:00",
+        "availability": "6 slots left"
+      },
+      {
+        "slot": "noon",
+        "session": "Evening",
+        "time": "5:00 – 7:00",
+        "full": true,
+        "fullLabel": "Fully booked"
+      },
+      {
+        "slot": "Sunday Walk-in",
+        "session": "Sunday",
+        "time": "10 AM – 4 PM",
+        "availability": "Walk-in ok"
+      }
+    ],
+    "form": {
+      "nameLabel": "Your Name *",
+      "namePlaceholder": "Full name",
+      "phoneLabel": "Phone *",
+      "phonePlaceholder": "+91 XXXXX",
+      "serviceLabel": "Service",
+      "servicePlaceholder": "Select Service",
+      "services": [
+        "Haircut (Regular)",
+        "Fade / Taper Cut",
+        "Beard Trim & Shape",
+        "Hair + Beard Combo",
+        "Shave (Hot Towel)",
+        "Hair Color / Highlights",
+        "Keratin / Smoothening",
+        "Hair Spa",
+        "Facial for Men",
+        "Full Grooming Package"
+      ],
+      "barberLabel": "Barber",
+      "barberPlaceholder": "Any Available",
+      "barbers": [
+        "Rajesh – Senior Barber",
+        "Sameer – Fade Expert",
+        "Aakash – Beard Specialist"
+      ],
+      "noteLabel": "Special Instructions (Optional)",
+      "notePlaceholder": "e.g. skin fade, 2-side, keep top long…",
+      "submitLabel": "Confirm Booking via WhatsApp",
+      "defaultService": "To be decided",
+      "defaultBarber": "Any available",
+      "defaultNote": "—"
+    },
+    "success": {
+      "title": "Booking Request Sent! ✂️",
+      "text": "We've received your request. Our team will confirm on WhatsApp within 15 minutes. Please arrive 5 mins early.",
+      "button": "Book Another"
+    }
+  },
+  "barbers": [
+    {
+      "avatar": "R",
+      "gradient": "linear-gradient(135deg,#0f1923,#2e4a62)",
+      "name": "Rajesh Kumar",
+      "role": "Master Barber · 12 Yrs Exp.",
+      "exp": "Classic cuts, pompadours, old-school straight shave",
+      "skills": ["Classic Cuts", "Shave", "Hair Color"]
+    },
+    {
+      "avatar": "S",
+      "gradient": "linear-gradient(135deg,#1c4532,#065f46)",
+      "name": "Sameer Shaikh",
+      "role": "Fade Specialist · 7 Yrs Exp.",
+      "exp": "Skin fades, tapers, modern crew cuts & designs",
+      "skills": ["Skin Fade", "Taper", "Hair Design"]
+    },
+    {
+      "avatar": "A",
+      "gradient": "linear-gradient(135deg,#1e3a5f,#2563eb)",
+      "name": "Aakash Verma",
+      "role": "Beard Architect · 5 Yrs Exp.",
+      "exp": "Beard sculpting, hot towel shave, grooming consults",
+      "skills": ["Beard Shape", "Hot Towel", "Facial"]
+    }
+  ],
+  "products": [
+    {
+      "name": "Hair Wax",
+      "desc": "Medium hold, matte finish. For everyday style.",
+      "price": "₹299",
+      "old": "₹349",
+      "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "tag": "Top Seller",
+      "tagBg": "#c9a84c",
+      "tagColor": "#1c1c1c"
+    },
+    {
+      "name": "Beard Oil",
+      "desc": "Nourishing beard oil with argan & jojoba.",
+      "price": "₹249",
+      "old": "",
+      "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "tag": "Popular",
+      "tagBg": "#15803d",
+      "tagColor": "#fff"
+    },
+    {
+      "name": "Pomade",
+      "desc": "High shine, strong hold. Slick back styles.",
+      "price": "₹349",
+      "old": "₹399",
+      "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "tag": "Premium",
+      "tagBg": "#0369a1",
+      "tagColor": "#fff"
+    },
+    {
+      "name": "Clay Paste",
+      "desc": "Natural matte finish with flexible hold.",
+      "price": "₹279",
+      "old": "",
+      "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+      "tag": "",
+      "tagBg": "",
+      "tagColor": ""
+    }
+  ],
+  "hours": {
+    "today": "Open Now · Closes 9:00 PM",
+    "rows": [
+      {
+        "day": "Monday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Tuesday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Wednesday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Thursday (Today)",
+        "time": "10:00 AM – 9:00 PM",
+        "rowClass": "open-row"
+      },
+      {
+        "day": "Friday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Saturday",
+        "time": "9:00 AM – 10:00 PM"
+      },
+      {
+        "day": "Sunday",
+        "time": "10:00 AM – 8:00 PM"
+      }
+    ]
+  },
+  "location": {
+    "title": "The Barbershop",
+    "line1": "Shop No. 7, Ground Floor, Plaza Centre",
+    "line2": "Koregaon Park, Pune – 411001",
+    "line3": "Maharashtra, India",
+    "mapLabel": "Get Directions"
+  },
+  "social": [
+    {
+      "type": "whatsapp",
+      "name": "WhatsApp",
+      "value": "Chat & book directly",
+      "action": "openWA"
+    },
+    {
+      "type": "instagram",
+      "name": "Instagram",
+      "value": "@thebarbershop.pune"
+    },
+    {
+      "type": "youtube",
+      "name": "YouTube",
+      "value": "Haircut tutorials & styles"
+    },
+    {
+      "type": "facebook",
+      "name": "Facebook",
+      "value": "The Barbershop Pune"
+    }
+  ],
+  "payments": [
+    {
+      "icon": "cash",
+      "stroke": "#15803d",
+      "name": "Cash",
+      "detail": "Always welcome at the counter"
+    },
+    {
+      "icon": "card",
+      "stroke": "#0369a1",
+      "name": "UPI / QR Scan",
+      "detail": "PhonePe · GPay · Paytm · BHIM"
+    },
+    {
+      "icon": "card",
+      "stroke": "#6d28d9",
+      "name": "Debit / Credit Card",
+      "detail": "Visa · Mastercard · RuPay · No surcharge"
+    }
+  ],
+  "qr": {
+    "note": "Scan to open this digital card or share with friends",
+    "saveLabel": "Save Contact",
+    "downloadLabel": "Download QR"
+  },
+  "footer": {
+    "line1": "© 2025 ",
+    "brand": "The Barbershop",
+    "line2": " · All Rights Reserved",
+    "line3": "Powered by ",
+    "powered": "managehub.in"
+  },
+  "floatBar": {
+    "call": "Call",
+    "book": "Book Now",
+    "whatsapp": "WhatsApp",
+    "save": "Save"
+  },
+  "share": {
+    "title": "Share This Card",
+    "whatsapp": "WhatsApp",
+    "copy": "Copy Link",
+    "more": "More…",
+    "facebook": "Facebook",
+    "cancel": "Cancel"
+  },
+  "promo": {
+    "enabled": false,
+    "delayMs": 2200,
+    "title": "First Visit Offer",
+    "text": "Get a special discount on your first grooming package booking.",
+    "cta": "Book on WhatsApp"
+  },
+  "messages": {
+    "namePhoneRequired": "Name and phone required",
+    "waGreeting": "Hi! I want to book an appointment at The Barbershop.",
+    "bookingTemplate": "✂️ *Booking – {{shopName}}*\n\n👤 Name: {{name}}\n📞 Phone: {{phone}}\n💈 Service: {{service}}\n👨‍💼 Barber: {{barber}}\n⏰ Slot: {{slot}}\n📝 Note: {{note}}\n\nPlease confirm my appointment!",
+    "bookServiceTemplate": "Hi! I want to book: *{{service}}*. Please confirm available slots.",
+    "bookBarberTemplate": "Hi! I want to book an appointment with *{{barber}}*. Please share available slots.",
+    "productTemplate": "Hi! I am interested in buying: *{{product}}*. Is it available?",
+    "contactSaved": "Contact saved to your phone!",
+    "qrNotReady": "QR not ready",
+    "qrDownloaded": "QR Code downloaded!",
+    "linkCopied": "Link copied!",
+    "shareTemplate": "Check out The Barbershop – Premium Men's Grooming: {{website}}",
+    "defaultToast": "Done!"
+  },
+  "files": {
+    "vcard": "TheBarbershop.vcf",
+    "qr": "TheBarbershop_QR.png"
+  }
+}
