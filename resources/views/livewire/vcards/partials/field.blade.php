@@ -58,7 +58,7 @@
                     <button type="button" class="btn btn-outline-secondary btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="moveRow('{{ $wirePath }}', {{ $i }}, 1)" title="Move Down">
                         <i class="mdi mdi-arrow-down"></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="removeRow('{{ $wirePath }}', {{ $i }})" title="Remove">
+                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="removeRow('{{ $wirePath }}', {{ $i }})" wire:confirm="Are you sure you want to delete this item?" title="Remove">
                         <i class="mdi mdi-delete"></i>
                     </button>
                 </div>
@@ -72,91 +72,255 @@
     @php
         $columns = array_keys($value[0] ?? []);
         $itemLabel = \Illuminate\Support\Str::singular($label);
+        
+        // Detect image columns
+        $imageColumns = array_filter($columns, function($col) {
+            return preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb|picture)/i', $col);
+        });
+        
+        // Filter out tag and color columns
+        $excludeColumns = array_filter($columns, function($col) {
+            return preg_match('/(tag|color|id)/i', $col);
+        });
+        
+        // Get non-image and non-excluded columns for table
+        $displayColumns = array_diff($columns, $imageColumns, $excludeColumns);
     @endphp
+    
     <div class="col-12 mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <label class="form-label fw-semibold mb-0">
-                <i class="mdi mdi-format-list-bulleted me-1"></i>
-                {{ $label }} ({{ count($value) }} items)
-            </label>
-            <button type="button" class="btn btn-sm btn-primary" wire:click="addRow('{{ $wirePath }}', @js($columns))">
-                <i class="mdi mdi-plus"></i> Add {{ $itemLabel }}
+        <!-- Header Section -->
+        <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+            <div>
+                <h6 class="mb-1 fw-semibold">
+                    <i class="mdi mdi-table me-2"></i>{{ $label }}
+                </h6>
+                <p class="text-muted small mb-0">{{ count($value) }} {{ count($value) === 1 ? $itemLabel : strtolower($label) }} added</p>
+            </div>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal{{ $wirePath }}">
+                <i class="mdi mdi-plus me-1"></i> Add {{ $itemLabel }}
             </button>
         </div>
-        
-        <div class="d-flex flex-column gap-3">
-            @foreach ($value as $i => $row)
-                @php
-                    $firstValue = $row[array_key_first($row)] ?? '';
-                    $displayTitle = is_string($firstValue) ? \Illuminate\Support\Str::limit($firstValue, 30) : "Item #" . ($i + 1);
-                @endphp
-                <div class="card border shadow-sm" wire:key="{{ $wirePath }}-{{ $i }}" style="border-radius: 8px;">
-                    <div class="card-header bg-light d-flex justify-content-between align-items-center py-2" style="cursor: pointer;" data-bs-toggle="collapse" data-bs-target="#item-{{ $wirePath }}-{{ $i }}" aria-expanded="false">
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="badge bg-primary">{{ $i + 1 }}</span>
-                            <strong class="text-truncate" style="max-width: 300px;">{{ $displayTitle }}</strong>
-                        </div>
-                        <div class="d-flex gap-1">
-                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0" style="width: 28px; height: 28px;" wire:click.stop="moveRow('{{ $wirePath }}', {{ $i }}, -1)" title="Move Up" {{ $i === 0 ? 'disabled' : '' }}>
-                                <i class="mdi mdi-arrow-up"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0" style="width: 28px; height: 28px;" wire:click.stop="moveRow('{{ $wirePath }}', {{ $i }}, 1)" title="Move Down" {{ $i === count($value) - 1 ? 'disabled' : '' }}>
-                                <i class="mdi mdi-arrow-down"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger rounded-circle p-0" style="width: 28px; height: 28px;" wire:click.stop="removeRow('{{ $wirePath }}', {{ $i }})" title="Delete" onclick="return confirm('Delete this {{ strtolower($itemLabel) }}?')">
-                                <i class="mdi mdi-delete"></i>
-                            </button>
-                            <i class="mdi mdi-chevron-down ms-2"></i>
-                        </div>
-                    </div>
-                    <div class="collapse" id="item-{{ $wirePath }}-{{ $i }}">
-                        <div class="card-body">
-                            <div class="row g-3">
-                                @foreach ($columns as $col)
+
+        @if (empty($value))
+            <!-- Empty State -->
+            <div class="text-center py-5" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-radius: 12px; border: 2px dashed #cbd5e1;">
+                <div class="mb-3">
+                    <i class="mdi mdi-table-outline" style="font-size: 48px; color: #94a3b8;"></i>
+                </div>
+                <p class="fw-semibold text-muted mb-2">No {{ strtolower($label) }} Added</p>
+                <p class="text-muted small mb-3">Start by adding your first {{ strtolower($itemLabel) }}</p>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addModal{{ $wirePath }}">
+                    <i class="mdi mdi-plus"></i> Add First {{ $itemLabel }}
+                </button>
+            </div>
+        @else
+            <!-- Table -->
+            <div class="table-responsive" style="border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden;">
+                <table class="table table-hover align-middle mb-0">
+                    <thead style="background-color: #f8fafc; border-bottom: 2px solid #e2e8f0;">
+                        <tr>
+                            @foreach ($displayColumns as $col)
+                                @php
+                                    $colLabel = \Illuminate\Support\Str::headline($col);
+                                    $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
+                                @endphp
+                                <th style="font-weight: 600; color: #475569; font-size: 0.85rem; padding: 12px 16px; min-width: {{ $isColTextarea ? '150px' : '120px' }};">
+                                    {{ $colLabel }}
+                                </th>
+                            @endforeach
+                            <th style="width: 120px; font-weight: 600; color: #475569; font-size: 0.85rem; padding: 12px 16px; text-align: center;">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($value as $i => $row)
+                            @php
+                                $displayTitle = "Item #" . ($i + 1);
+                                $namePriority = ['name', 'title', 'product_name', 'service_name', 'category_name', 'item_name', 'label', 'brand'];
+                                
+                                foreach ($namePriority as $nameField) {
+                                    if (isset($row[$nameField]) && is_string($row[$nameField]) && !empty(trim($row[$nameField]))) {
+                                        $displayTitle = trim($row[$nameField]);
+                                        break;
+                                    }
+                                }
+                            @endphp
+                            <tr wire:key="{{ $wirePath }}-{{ $i }}" style="border-bottom: 1px solid #e2e8f0;">
+                                @foreach ($displayColumns as $col)
                                     @php
                                         $colValue = $row[$col] ?? '';
-                                        $isColImage = preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb)/i', $col) || 
-                                                      (is_string($colValue) && (preg_match('/(\.jpg|\.jpeg|\.png|\.gif|\.webp|\.svg)/i', $colValue) || 
-                                                       preg_match('/url\([\'"]?https?:\/\//i', $colValue)));
                                         $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
                                     @endphp
-                                    <div class="col-lg-6">
-                                        <label class="form-label small fw-semibold">{{ \Illuminate\Support\Str::headline($col) }}</label>
-                                        @if ($isColImage)
-                                            @if (!empty($colValue))
-                                                @php
-                                                    $imageUrl = $colValue;
-                                                    if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $colValue, $matches)) {
-                                                        $imageUrl = $matches[1];
-                                                    }
-                                                @endphp
-                                                <div class="mb-2">
-                                                    <img src="{{ $imageUrl }}" alt="" style="max-width: 120px; height: auto;" class="img-thumbnail">
-                                                </div>
-                                            @endif
-                                            <input type="file" class="form-control form-control-sm" wire:model="uploads.{{ $wirePath }}.{{ $i }}.{{ $col }}" accept="image/*">
-                                        @elseif ($isColTextarea)
-                                            <textarea class="form-control form-control-sm" rows="2" wire:model="form.{{ $wirePath }}.{{ $i }}.{{ $col }}"></textarea>
-                                        @else
-                                            <input type="text" class="form-control form-control-sm" wire:model="form.{{ $wirePath }}.{{ $i }}.{{ $col }}">
-                                        @endif
-                                    </div>
+                                    <td style="padding: 12px 16px; max-width: 300px;">
+                                        <span class="form-control-plaintext" style="font-size: 0.85rem;">
+                                            {{ !empty($colValue) ? (strlen($colValue) > 50 ? substr($colValue, 0, 50) . '...' : $colValue) : '—' }}
+                                        </span>
+                                    </td>
                                 @endforeach
+                                <td style="padding: 12px 16px; text-align: center;">
+                                    <div class="d-flex gap-1 justify-content-center">
+                                        <!-- View/Edit Modal Button -->
+                                        <button type="button" class="btn btn-sm btn-outline-info rounded-circle p-0" style="width: 32px; height: 32px;" data-bs-toggle="modal" data-bs-target="#editModal{{ $wirePath }}{{ $i }}" title="Edit All Fields">
+                                            <i class="mdi mdi-pencil" style="font-size: 14px;"></i>
+                                        </button>
+                                        
+                                        <!-- Move Up -->
+                                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0" style="width: 32px; height: 32px;" wire:click.stop="moveRow('{{ $wirePath }}', {{ $i }}, -1)" title="Move Up" {{ $i === 0 ? 'disabled' : '' }}>
+                                            <i class="mdi mdi-arrow-up" style="font-size: 14px;"></i>
+                                        </button>
+                                        
+                                        <!-- Move Down -->
+                                        <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle p-0" style="width: 32px; height: 32px;" wire:click.stop="moveRow('{{ $wirePath }}', {{ $i }}, 1)" title="Move Down" {{ $i === count($value) - 1 ? 'disabled' : '' }}>
+                                            <i class="mdi mdi-arrow-down" style="font-size: 14px;"></i>
+                                        </button>
+                                        
+                                        <!-- Delete -->
+                                        <button type="button" class="btn btn-sm btn-outline-danger rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="removeRowWithConfirm('{{ $wirePath }}', {{ $i }})" wire:confirm="Are you sure you want to delete this item? This action cannot be undone." title="Delete">
+                                            <i class="mdi mdi-delete" style="font-size: 14px;"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Edit Modal for each row -->
+            @foreach ($value as $i => $row)
+                @php
+                    $displayTitle = "Item #" . ($i + 1);
+                    $namePriority = ['name', 'title', 'product_name', 'service_name', 'category_name', 'item_name', 'label', 'brand'];
+                    
+                    foreach ($namePriority as $nameField) {
+                        if (isset($row[$nameField]) && is_string($row[$nameField]) && !empty(trim($row[$nameField]))) {
+                            $displayTitle = trim($row[$nameField]);
+                            break;
+                        }
+                    }
+                @endphp
+                <div class="modal fade" id="editModal{{ $wirePath }}{{ $i }}" tabindex="-1" aria-labelledby="editLabel{{ $wirePath }}{{ $i }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; background-color: #f8fafc;">
+                                <h5 class="modal-title fw-semibold" id="editLabel{{ $wirePath }}{{ $i }}">
+                                    <i class="mdi mdi-pencil me-2"></i>Edit {{ \Illuminate\Support\Str::limit($displayTitle, 35) }}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    @foreach ($columns as $col)
+                                        @php
+                                            // Skip id field
+                                            if (preg_match('/^id$/i', $col)) continue;
+                                            
+                                            $colValue = $row[$col] ?? '';
+                                            $isColImage = preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb|picture)/i', $col) || 
+                                                          (is_string($colValue) && (preg_match('/(\.jpg|\.jpeg|\.png|\.gif|\.webp|\.svg)/i', $colValue) || 
+                                                           preg_match('/url\([\'"]?https?:\/\//i', $colValue)));
+                                            $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
+                                            $isColColor = preg_match('/(tag_color|color|bg_color|background_color)/i', $col);
+                                            $modalModelPath = empty($wirePath) ? "form.{$i}.{$col}" : "form.{$wirePath}.{$i}.{$col}";
+                                            $modalUploadPath = empty($wirePath) ? "uploads.{$i}.{$col}" : "uploads.{$wirePath}.{$i}.{$col}";
+                                        @endphp
+                                        
+                                        <div class="col-12">
+                                            <label class="form-label fw-semibold" style="font-size: 0.9rem;">
+                                                {{ \Illuminate\Support\Str::headline($col) }}
+                                            </label>
+                                            @if ($isColImage)
+                                                @if (!empty($colValue))
+                                                    @php
+                                                        $imageUrl = $colValue;
+                                                        if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $colValue, $matches)) {
+                                                            $imageUrl = $matches[1];
+                                                        }
+                                                    @endphp
+                                                    <div class="mb-2">
+                                                        <img src="{{ $imageUrl }}" alt="" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                                    </div>
+                                                @endif
+                                                <input type="file" class="form-control" wire:model.live="{{ $modalUploadPath }}" accept="image/*">
+                                                <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
+                                            @elseif ($isColColor)
+                                                <div class="d-flex gap-2 align-items-center">
+                                                    <input type="color" class="form-control form-control-color" wire:model="{{ $modalModelPath }}" style="width: 60px; height: 38px;">
+                                                    <input type="text" class="form-control" wire:model="{{ $modalModelPath }}" placeholder="#000000">
+                                                </div>
+                                            @elseif ($isColTextarea)
+                                                <textarea class="form-control" rows="4" wire:model="{{ $modalModelPath }}"></textarea>
+                                            @else
+                                                <input type="text" class="form-control" wire:model="{{ $modalModelPath }}">
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top: 1px solid #e2e8f0;">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                    <i class="mdi mdi-check me-1"></i>Done
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
-            
-            @if (empty($value))
-                <div class="text-center py-4 border rounded" style="background-color: #f8fafc;">
-                    <i class="mdi mdi-inbox-outline" style="font-size: 48px; color: #cbd5e1;"></i>
-                    <p class="text-muted mb-2">No {{ strtolower($label) }} added yet</p>
-                    <button type="button" class="btn btn-sm btn-primary" wire:click="addRow('{{ $wirePath }}', @js($columns))">
-                        <i class="mdi mdi-plus"></i> Add First {{ $itemLabel }}
-                    </button>
+        @endif
+
+        <!-- Add New Item Modal -->
+        <div class="modal fade" id="addModal{{ $wirePath }}" tabindex="-1" aria-labelledby="addLabel{{ $wirePath }}" aria-hidden="true" wire:ignore.self>
+            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; background-color: #f8fafc;">
+                        <h5 class="modal-title fw-semibold" id="addLabel{{ $wirePath }}">
+                            <i class="mdi mdi-plus-circle me-2"></i>Add New {{ $itemLabel }}
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            @foreach ($columns as $col)
+                                @php
+                                    // Skip id field
+                                    if (preg_match('/^id$/i', $col)) continue;
+                                    
+                                    $isColImage = preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb|picture)/i', $col);
+                                    $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
+                                    $isColColor = preg_match('/(tag_color|color|bg_color|background_color)/i', $col);
+                                @endphp
+                                
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" style="font-size: 0.9rem;">
+                                        {{ \Illuminate\Support\Str::headline($col) }}
+                                    </label>
+                                    @if ($isColImage)
+                                        <input type="file" class="form-control" accept="image/*">
+                                        <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
+                                    @elseif ($isColColor)
+                                        <div class="d-flex gap-2 align-items-center">
+                                            <input type="color" class="form-control form-control-color" value="#000000" style="width: 60px; height: 38px;">
+                                            <input type="text" class="form-control" placeholder="#000000">
+                                        </div>
+                                    @elseif ($isColTextarea)
+                                        <textarea class="form-control" rows="4"></textarea>
+                                    @else
+                                        <input type="text" class="form-control">
+                                    @endif
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border-top: 1px solid #e2e8f0;">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" wire:click="addRow('{{ $wirePath }}', @js($columns))" data-bs-dismiss="modal">
+                            <i class="mdi mdi-check me-1"></i>Add {{ $itemLabel }}
+                        </button>
+                    </div>
                 </div>
-            @endif
+            </div>
         </div>
     </div>
 @else

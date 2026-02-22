@@ -37,7 +37,18 @@ class ClientSectionEditor extends Component
             $this->section = $this->sections[0] ?? 'meta';
         }
 
-        $this->form = $data[$this->section] ?? [];
+        $sectionData = $data[$this->section] ?? [];
+        
+        // Reindex numeric-keyed arrays to sequential format
+        if (is_array($sectionData) && !empty($sectionData)) {
+            $keys = array_keys($sectionData);
+            // If keys are numeric strings starting from 0 and sequential, convert to indexed array
+            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+                $sectionData = array_values($sectionData);
+            }
+        }
+        
+        $this->form = $sectionData;
     }
 
     public function save(): void
@@ -54,7 +65,12 @@ class ClientSectionEditor extends Component
 
     public function addRow(string $path, array $columns = []): void
     {
-        $list = data_get($this->form, $path, []);
+        if (empty($path)) {
+            $list = $this->form;
+        } else {
+            $list = data_get($this->form, $path, []);
+        }
+        
         if (!is_array($list)) {
             $list = [];
         }
@@ -65,23 +81,43 @@ class ClientSectionEditor extends Component
             $list[] = '';
         }
 
-        data_set($this->form, $path, $list);
+        if (empty($path)) {
+            $this->form = $list;
+        } else {
+            data_set($this->form, $path, $list);
+        }
     }
 
     public function removeRow(string $path, int $index): void
     {
-        $list = data_get($this->form, $path, []);
+        if (empty($path)) {
+            $list = $this->form;
+        } else {
+            $list = data_get($this->form, $path, []);
+        }
+        
         if (!is_array($list)) {
             return;
         }
 
         unset($list[$index]);
-        data_set($this->form, $path, array_values($list));
+        $reindexed = array_values($list);
+        
+        if (empty($path)) {
+            $this->form = $reindexed;
+        } else {
+            data_set($this->form, $path, $reindexed);
+        }
     }
 
     public function moveRow(string $path, int $index, int $direction): void
     {
-        $list = data_get($this->form, $path, []);
+        if (empty($path)) {
+            $list = $this->form;
+        } else {
+            $list = data_get($this->form, $path, []);
+        }
+        
         if (!is_array($list)) {
             return;
         }
@@ -92,7 +128,19 @@ class ClientSectionEditor extends Component
         }
 
         [$list[$index], $list[$target]] = [$list[$target], $list[$index]];
-        data_set($this->form, $path, array_values($list));
+        
+        if (empty($path)) {
+            $this->form = $list;
+        } else {
+            data_set($this->form, $path, $list);
+        }
+    }
+
+    public function removeRowWithConfirm(string $path, int $index): void
+    {
+        $this->removeRow($path, $index);
+        $this->save();
+        session()->flash('success', 'Item deleted successfully.');
     }
 
     private function loadVcard(string $subdomain): Vcard

@@ -86,13 +86,28 @@
                                 <div class="alert alert-warning">No data found for this section.</div>
                             </div>
                         @else
-                            @foreach ($form as $key => $value)
+                            @php
+                                // Check if the entire form is a list (array of objects)
+                                $isFormList = is_array($form) && !empty($form) && array_values($form) === $form;
+                            @endphp
+                            
+                            @if($isFormList)
+                                <!-- Render as list/table if form itself is a sequential array -->
                                 @include('livewire.vcards.partials.field', [
-                                    'key' => $key,
-                                    'value' => $value,
-                                    'wirePath' => $key,
+                                    'key' => $section,
+                                    'value' => $form,
+                                    'wirePath' => '',
                                 ])
-                            @endforeach
+                            @else
+                                <!-- Render individual fields if form is associative -->
+                                @foreach ($form as $key => $value)
+                                    @include('livewire.vcards.partials.field', [
+                                        'key' => $key,
+                                        'value' => $value,
+                                        'wirePath' => $key,
+                                    ])
+                                @endforeach
+                            @endif
                         @endif
                     </div>
 
