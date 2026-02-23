@@ -86,10 +86,24 @@
             }
         </style>
     @else
+        @php
+            $sectionLabel = \Illuminate\Support\Str::headline($section);
+            $itemLabel = \Illuminate\Support\Str::singular($sectionLabel);
+            $isFormList = is_array($form) && !empty($form) && array_values($form) === $form;
+        @endphp
         <div class="card shadow-sm border-0" style="border-radius: 12px;">
             <div class="card-header bg-white border-bottom py-3">
-                <h5 class="mb-0 fw-semibold">{{ \Illuminate\Support\Str::headline($section) }}</h5>
-                <p class="text-muted small mb-0">Update section content and media</p>
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="mb-0 fw-semibold">{{ $sectionLabel }}</h5>
+                        <p class="text-muted small mb-0">Update section content and media</p>
+                    </div>
+                    @if ($isFormList)
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
+                            <i class="mdi mdi-plus me-1"></i> Add {{ $itemLabel }}
+                        </button>
+                    @endif
+                </div>
             </div>
             <div class="card-body p-4">
                 <form wire:submit.prevent="save">
@@ -102,17 +116,13 @@
                                 </div>
                             </div>
                         @else
-                            @php
-                                // Check if the entire form is a list (array of objects)
-                                $isFormList = is_array($form) && !empty($form) && array_values($form) === $form;
-                            @endphp
-                            
                             @if($isFormList)
                                 <!-- Render as list/table if form itself is a sequential array -->
                                 @include('livewire.vcards.partials.field', [
                                     'key' => $section,
                                     'value' => $form,
                                     'wirePath' => '',
+                                    'hideListHeaderButton' => true,
                                 ])
                             @else
                                 <!-- Render individual fields if form is associative -->

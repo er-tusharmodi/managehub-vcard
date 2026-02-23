@@ -18,6 +18,7 @@ class ClientSectionEditor extends Component
     public array $sections = [];
     public array $form = [];
     public array $uploads = [];
+    public array $newItem = [];
     public bool $showIndex = false;
 
     public function mount(string $subdomain, string $section = null): void
@@ -58,9 +59,37 @@ class ClientSectionEditor extends Component
         $data[$this->section] = $payload;
 
         $this->storeJson($data);
+        $this->form = $payload;
         $this->uploads = [];
 
         session()->flash('success', 'vCard data updated.');
+    }
+
+    public function saveAndNotify(): void
+    {
+        $this->validateIfRules($this->rulesForForm());
+        $this->save();
+        $this->dispatch('notify', type: 'success', message: 'Changes saved successfully!');
+        $this->dispatch('close-modal');
+    }
+
+    public function updated(string $propertyName): void
+    {
+        if (str_starts_with($propertyName, 'uploads.')) {
+            return;
+        }
+
+        $rules = $this->rulesForAll();
+        if (!isset($rules[$propertyName])) {
+            $rule = $this->ruleForProperty($propertyName);
+            if ($rule !== null) {
+                $rules[$propertyName] = $rule;
+            }
+        }
+
+        if (!empty($rules)) {
+            $this->validateOnly($propertyName, $rules);
+        }
     }
 
     public function addRow(string $path, array $columns = []): void
@@ -76,7 +105,17 @@ class ClientSectionEditor extends Component
         }
 
         if (!empty($columns)) {
-            $list[] = array_fill_keys($columns, '');
+            // Use newItem data if available, otherwise create empty row
+            if (!empty($this->newItem)) {
+                $newRow = [];
+                foreach ($columns as $col) {
+                    $newRow[$col] = $this->newItem[$col] ?? '';
+                }
+                $list[] = $newRow;
+                $this->newItem = []; // Clear for next add
+            } else {
+                $list[] = array_fill_keys($columns, '');
+            }
         } else {
             $list[] = '';
         }
@@ -85,6 +124,129 @@ class ClientSectionEditor extends Component
             $this->form = $list;
         } else {
             data_set($this->form, $path, $list);
+        }
+    }
+
+    public function addRowAndSave(string $path, array $columns = []): void
+    {
+        $this->validateIfRules($this->rulesForNewItemFromColumns($columns));
+        // Get the current list to determine the new index
+        if (empty($path)) {
+            $list = $this->form;
+        } else {
+            $list = data_get($this->form, $path, []);
+        }
+        
+        $newIndex = count(is_array($list) ? $list : []);
+        
+        // Add the row
+        $this->addRow($path, $columns);
+        
+        // Move uploads from newItem to the new index in the correct path
+        if (isset($this->uploads['newItem']) && !empty($this->uploads['newItem'])) {
+            if (empty($path)) {
+                // Root level array: uploads[newIndex] = uploads.newItem
+                $this->uploads[$newIndex] = $this->uploads['newItem'];
+            } else {
+                // Nested array: uploads[path][newIndex] = uploads.newItem
+                data_set($this->uploads, $path . '.' . $newIndex, $this->uploads['newItem']);
+            }
+            unset($this->uploads['newItem']);
+        }
+        
+        $this->save();
+        $this->newItem = []; // Clear the form
+        $this->dispatch('notify', type: 'success', message: 'Item added successfully!');
+        $this->dispatch('close-modal');
+    }
+
+    private function rulesForAll(): array
+    {
+        return array_merge($this->rulesForForm(), $this->rulesForNewItem());
+    }
+
+    private function rulesForForm(): array
+    {
+        $rules = [];
+        $this->buildRulesFromData($this->form, 'form', $rules);
+        return $rules;
+    }
+
+    private function rulesForNewItem(): array
+    {
+        $rules = [];
+        $this->buildRulesFromData($this->newItem, 'newItem', $rules);
+        return $rules;
+    }
+
+    private function rulesForNewItemFromColumns(array $columns): array
+    {
+        $rules = [];
+        foreach ($columns as $col) {
+            if (preg_match('/^id$/i', $col)) {
+                continue;
+            }
+
+            $ruleParts = $this->isImageKey($col) ? ['nullable'] : ['required'];
+            if ($this->isNumericKey($col)) {
+                $ruleParts[] = 'numeric';
+            }
+            $rules['newItem.' . $col] = implode('|', $ruleParts);
+        }
+
+        return $rules;
+    }
+
+    private function buildRulesFromData(array $data, string $prefix, array &$rules): void
+    {
+        foreach ($data as $key => $value) {
+            $path = $prefix . '.' . $key;
+
+            if (is_array($value)) {
+                $this->buildRulesFromData($value, $path, $rules);
+                continue;
+            }
+
+            $fieldKey = is_string($key) ? $key : '';
+            $ruleParts = $this->isImageKey($fieldKey) ? ['nullable'] : ['required'];
+            if ($this->isNumericKey($fieldKey)) {
+                $ruleParts[] = 'numeric';
+            }
+
+            $rules[$path] = implode('|', $ruleParts);
+        }
+    }
+
+    private function ruleForProperty(string $propertyName): ?string
+    {
+        $segments = explode('.', $propertyName);
+        $fieldKey = end($segments);
+        if (!is_string($fieldKey) || $fieldKey === '') {
+            return null;
+        }
+
+        $ruleParts = $this->isImageKey($fieldKey) ? ['nullable'] : ['required'];
+        if ($this->isNumericKey($fieldKey)) {
+            $ruleParts[] = 'numeric';
+        }
+
+        return implode('|', $ruleParts);
+    }
+
+    private function isImageKey(string $key): bool
+    {
+        return preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb|picture|background)/i', $key) === 1;
+    }
+
+    private function isNumericKey(string $key): bool
+    {
+        return preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $key) === 1;
+    }
+
+    private function validateIfRules(array $rules): void
+    {
+        if (!empty($rules)) {
+            $this->validate($rules);
         }
     }
 
@@ -136,11 +298,23 @@ class ClientSectionEditor extends Component
         }
     }
 
-    public function removeRowWithConfirm(string $path, int $index): void
+    public function confirmRemoveRow(string $path, int $index): void
+    {
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
+            index: $index,
+            path: $path,
+            method: 'removeRowWithConfirm',
+            message: 'Are you sure you want to delete this item?'
+        );
+    }
+
+    public function removeRowWithConfirm(int $index, string $path = ''): void
     {
         $this->removeRow($path, $index);
         $this->save();
-        session()->flash('success', 'Item deleted successfully.');
+        $this->dispatch('notify', type: 'success', message: 'Item deleted successfully!');
     }
 
     private function loadVcard(string $subdomain): Vcard
@@ -219,17 +393,31 @@ class ClientSectionEditor extends Component
                 continue;
             }
 
-            if ($value && method_exists($value, 'isValid') && $value->isValid()) {
-                $path = $value->store('vcards/' . $this->vcard->subdomain . '/uploads', 'public');
-                $newUrl = Storage::disk('public')->url($path);
+            // Skip null, empty, or non-file values
+            if (empty($value)) {
+                continue;
+            }
+
+            // Check if it's a Livewire TemporaryUploadedFile or Laravel UploadedFile
+            if (method_exists($value, 'isValid')) {
+                if (!$value->isValid()) {
+                    continue;
+                }
                 
-                // Check if original value had url('...') wrapper format
-                $originalValue = $payload[$key] ?? '';
-                if (is_string($originalValue) && preg_match('/^url\([\'"]?.+[\'"]?\)$/i', $originalValue)) {
-                    // Preserve the url() wrapper format
-                    $payload[$key] = "url('" . $newUrl . "')";
-                } else {
-                    $payload[$key] = $newUrl;
+                try {
+                    $path = $value->store('vcards/' . $this->vcard->subdomain . '/uploads', 'public');
+                    $newUrl = Storage::disk('public')->url($path);
+                    
+                    // Check if original value had url('...') wrapper format
+                    $originalValue = $payload[$key] ?? '';
+                    if (is_string($originalValue) && preg_match('/^url\([\'"]?.+[\'"]?\)$/i', $originalValue)) {
+                        // Preserve the url() wrapper format
+                        $payload[$key] = "url('" . $newUrl . "')";
+                    } else {
+                        $payload[$key] = $newUrl;
+                    }
+                } catch (\Exception $e) {
+                    \Log::error('File upload error: ' . $e->getMessage());
                 }
             }
         }

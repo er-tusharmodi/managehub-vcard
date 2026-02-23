@@ -21,6 +21,7 @@
     $isTextArea = is_string($key) && preg_match('/(description|desc|about|bio|note|tagline|address|subtitle|message)/i', $key);
     $isUrl = is_string($key) && preg_match('/(url|link|website|maps|facebook|instagram|youtube|twitter|whatsapp)/i', $key) && !$isImageKey;
     $isPhone = is_string($key) && preg_match('/(phone|mobile|whatsapp|tel)/i', $key);
+    $isNumber = is_string($key) && preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $key);
 
     $wirePath = $wirePath ?? $key;
     $uploadPath = 'uploads.' . $wirePath;
@@ -58,7 +59,7 @@
                     <button type="button" class="btn btn-outline-secondary btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="moveRow('{{ $wirePath }}', {{ $i }}, 1)" title="Move Down">
                         <i class="mdi mdi-arrow-down"></i>
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="removeRow('{{ $wirePath }}', {{ $i }})" wire:confirm="Are you sure you want to delete this item?" title="Remove">
+                    <button type="button" class="btn btn-outline-danger btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="confirmRemoveRow('{{ $wirePath }}', {{ $i }})" title="Remove">
                         <i class="mdi mdi-delete"></i>
                     </button>
                 </div>
@@ -83,23 +84,22 @@
             return preg_match('/(tag|color|id)/i', $col);
         });
         
-        // Get non-image and non-excluded columns for table
-        $displayColumns = array_diff($columns, $imageColumns, $excludeColumns);
+        // Get other columns (excluding images and excluded columns)
+        $otherColumns = array_diff($columns, $imageColumns, $excludeColumns);
+        
+        // Display columns with images first, then others
+        $displayColumns = array_merge($imageColumns, $otherColumns);
     @endphp
     
     <div class="col-12 mb-4">
         <!-- Header Section -->
-        <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
-            <div>
-                <h6 class="mb-1 fw-semibold">
-                    <i class="mdi mdi-table me-2"></i>{{ $label }}
-                </h6>
-                <p class="text-muted small mb-0">{{ count($value) }} {{ count($value) === 1 ? $itemLabel : strtolower($label) }} added</p>
+        @if (!($hideListHeaderButton ?? false))
+            <div class="d-flex justify-content-end align-items-center mb-3 pb-3 border-bottom">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal{{ $wirePath }}">
+                    <i class="mdi mdi-plus me-1"></i> Add {{ $itemLabel }}
+                </button>
             </div>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal{{ $wirePath }}">
-                <i class="mdi mdi-plus me-1"></i> Add {{ $itemLabel }}
-            </button>
-        </div>
+        @endif
 
         @if (empty($value))
             <!-- Empty State -->
@@ -121,7 +121,8 @@
                         <tr>
                             @foreach ($displayColumns as $col)
                                 @php
-                                    $colLabel = \Illuminate\Support\Str::headline($col);
+                                    $isImage = in_array($col, $imageColumns);
+                                    $colLabel = $isImage ? 'Image' : \Illuminate\Support\Str::headline($col);
                                     $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
                                 @endphp
                                 <th style="font-weight: 600; color: #475569; font-size: 0.85rem; padding: 12px 16px; min-width: {{ $isColTextarea ? '150px' : '120px' }};">
@@ -151,11 +152,24 @@
                                     @php
                                         $colValue = $row[$col] ?? '';
                                         $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
+                                        $isColImage = preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb|picture)/i', $col) || 
+                                                      (is_string($colValue) && (preg_match('/(\.jpg|\.jpeg|\.png|\.gif|\.webp|\.svg)/i', $colValue) || 
+                                                       preg_match('/url\([\'"]?https?:\/\//i', $colValue)));
                                     @endphp
                                     <td style="padding: 12px 16px; max-width: 300px;">
-                                        <span class="form-control-plaintext" style="font-size: 0.85rem;">
-                                            {{ !empty($colValue) ? (strlen($colValue) > 50 ? substr($colValue, 0, 50) . '...' : $colValue) : '—' }}
-                                        </span>
+                                        @if ($isColImage && !empty($colValue))
+                                            @php
+                                                $imageUrl = $colValue;
+                                                if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $colValue, $matches)) {
+                                                    $imageUrl = $matches[1];
+                                                }
+                                            @endphp
+                                            <img src="{{ $imageUrl }}" alt="{{ $col }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0;">
+                                        @else
+                                            <span class="form-control-plaintext" style="font-size: 0.85rem;">
+                                                {{ !empty($colValue) ? (strlen($colValue) > 50 ? substr($colValue, 0, 50) . '...' : $colValue) : '—' }}
+                                            </span>
+                                        @endif
                                     </td>
                                 @endforeach
                                 <td style="padding: 12px 16px; text-align: center;">
@@ -176,7 +190,7 @@
                                         </button>
                                         
                                         <!-- Delete -->
-                                        <button type="button" class="btn btn-sm btn-outline-danger rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="removeRowWithConfirm('{{ $wirePath }}', {{ $i }})" wire:confirm="Are you sure you want to delete this item? This action cannot be undone." title="Delete">
+                                        <button type="button" class="btn btn-sm btn-outline-danger rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="confirmRemoveRow('{{ $wirePath }}', {{ $i }})" title="Delete">
                                             <i class="mdi mdi-delete" style="font-size: 14px;"></i>
                                         </button>
                                     </div>
@@ -200,7 +214,7 @@
                         }
                     }
                 @endphp
-                <div class="modal fade" id="editModal{{ $wirePath }}{{ $i }}" tabindex="-1" aria-labelledby="editLabel{{ $wirePath }}{{ $i }}" aria-hidden="true">
+                <div class="modal fade" id="editModal{{ $wirePath }}{{ $i }}" tabindex="-1" aria-labelledby="editLabel{{ $wirePath }}{{ $i }}" aria-hidden="true" wire:ignore.self>
                     <div class="modal-dialog modal-lg modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header" style="border-bottom: 1px solid #e2e8f0; background-color: #f8fafc;">
@@ -222,6 +236,7 @@
                                                            preg_match('/url\([\'"]?https?:\/\//i', $colValue)));
                                             $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
                                             $isColColor = preg_match('/(tag_color|color|bg_color|background_color)/i', $col);
+                                            $isColNumber = preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $col);
                                             $modalModelPath = empty($wirePath) ? "form.{$i}.{$col}" : "form.{$wirePath}.{$i}.{$col}";
                                             $modalUploadPath = empty($wirePath) ? "uploads.{$i}.{$col}" : "uploads.{$wirePath}.{$i}.{$col}";
                                         @endphp
@@ -242,26 +257,38 @@
                                                         <img src="{{ $imageUrl }}" alt="" style="max-width: 100%; max-height: 150px; border-radius: 8px; border: 1px solid #e2e8f0;">
                                                     </div>
                                                 @endif
+                                                <div wire:loading wire:target="uploads.{{ empty($wirePath) ? $i : $wirePath . '.' . $i }}.{{ $col }}" class="mb-2">
+                                                    <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                                        <span class="visually-hidden">Uploading...</span>
+                                                    </div>
+                                                    <small class="text-primary ms-2">Uploading image...</small>
+                                                </div>
                                                 <input type="file" class="form-control" wire:model.live="{{ $modalUploadPath }}" accept="image/*">
                                                 <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
                                             @elseif ($isColColor)
                                                 <div class="d-flex gap-2 align-items-center">
-                                                    <input type="color" class="form-control form-control-color" wire:model="{{ $modalModelPath }}" style="width: 60px; height: 38px;">
-                                                    <input type="text" class="form-control" wire:model="{{ $modalModelPath }}" placeholder="#000000">
+                                                    <input type="color" class="form-control form-control-color" wire:model="{{ $modalModelPath }}" style="width: 60px; height: 38px;" required>
+                                                    <input type="text" class="form-control" wire:model="{{ $modalModelPath }}" placeholder="#000000" required>
                                                 </div>
                                             @elseif ($isColTextarea)
-                                                <textarea class="form-control" rows="4" wire:model="{{ $modalModelPath }}"></textarea>
+                                                <textarea class="form-control" rows="4" wire:model="{{ $modalModelPath }}" required></textarea>
                                             @else
-                                                <input type="text" class="form-control" wire:model="{{ $modalModelPath }}">
+                                                <input type="{{ $isColNumber ? 'number' : 'text' }}" class="form-control" wire:model="{{ $modalModelPath }}" {{ $isColNumber ? 'step=0.01' : '' }} required>
                                             @endif
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                             <div class="modal-footer" style="border-top: 1px solid #e2e8f0;">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                                    <i class="mdi mdi-check me-1"></i>Done
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:loading.attr="disabled">Close</button>
+                                <button type="button" class="btn btn-primary" wire:click="saveAndNotify" wire:loading.attr="disabled">
+                                    <span wire:loading.remove>
+                                        <i class="mdi mdi-check me-1"></i>Save Changes
+                                    </span>
+                                    <span wire:loading>
+                                        <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                                        Saving...
+                                    </span>
                                 </button>
                             </div>
                         </div>
@@ -290,6 +317,7 @@
                                     $isColImage = preg_match('/(image|logo|banner|profile|photo|avatar|icon|bg|thumb|picture)/i', $col);
                                     $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
                                     $isColColor = preg_match('/(tag_color|color|bg_color|background_color)/i', $col);
+                                    $isColNumber = preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $col);
                                 @endphp
                                 
                                 <div class="col-12">
@@ -297,26 +325,38 @@
                                         {{ \Illuminate\Support\Str::headline($col) }}
                                     </label>
                                     @if ($isColImage)
-                                        <input type="file" class="form-control" accept="image/*">
+                                        <div wire:loading wire:target="uploads.newItem.{{ $col }}" class="mb-2">
+                                            <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                                <span class="visually-hidden">Uploading...</span>
+                                            </div>
+                                            <small class="text-primary ms-2">Uploading image...</small>
+                                        </div>
+                                        <input type="file" class="form-control" wire:model.live="uploads.newItem.{{ $col }}" accept="image/*">
                                         <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
                                     @elseif ($isColColor)
                                         <div class="d-flex gap-2 align-items-center">
-                                            <input type="color" class="form-control form-control-color" value="#000000" style="width: 60px; height: 38px;">
-                                            <input type="text" class="form-control" placeholder="#000000">
+                                            <input type="color" class="form-control form-control-color" wire:model="newItem.{{ $col }}" style="width: 60px; height: 38px;" required>
+                                            <input type="text" class="form-control" wire:model="newItem.{{ $col }}" placeholder="#000000" required>
                                         </div>
                                     @elseif ($isColTextarea)
-                                        <textarea class="form-control" rows="4"></textarea>
+                                        <textarea class="form-control" rows="4" wire:model="newItem.{{ $col }}" required></textarea>
                                     @else
-                                        <input type="text" class="form-control">
+                                        <input type="{{ $isColNumber ? 'number' : 'text' }}" class="form-control" wire:model="newItem.{{ $col }}" {{ $isColNumber ? 'step=0.01' : '' }} required>
                                     @endif
                                 </div>
                             @endforeach
                         </div>
                     </div>
                     <div class="modal-footer" style="border-top: 1px solid #e2e8f0;">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary" wire:click="addRow('{{ $wirePath }}', @js($columns))" data-bs-dismiss="modal">
-                            <i class="mdi mdi-check me-1"></i>Add {{ $itemLabel }}
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" wire:loading.attr="disabled">Cancel</button>
+                        <button type="button" class="btn btn-primary" wire:click="addRowAndSave('{{ $wirePath }}', @js($columns))" wire:loading.attr="disabled">
+                            <span wire:loading.remove>
+                                <i class="mdi mdi-check me-1"></i>Add {{ $itemLabel }}
+                            </span>
+                            <span wire:loading>
+                                <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+                                Adding...
+                            </span>
                         </button>
                     </div>
                 </div>
@@ -339,14 +379,14 @@
                     <img src="{{ $imageUrl }}" alt="" style="max-width: 160px; height: auto;" class="img-thumbnail">
                 </div>
             @endif
-            <input type="file" class="form-control" wire:model="{{ $uploadPath }}" accept="image/*">
+            <input type="file" class="form-control" wire:model.live="{{ $uploadPath }}" accept="image/*">
             <small class="form-text text-muted d-block mt-1">
                 <i class="mdi mdi-information-outline"></i> Upload a new image to replace the current one
             </small>
         @elseif ($isTextArea)
-            <textarea class="form-control" rows="3" wire:model="form.{{ $wirePath }}"></textarea>
+            <textarea class="form-control" rows="3" wire:model="form.{{ $wirePath }}" required></textarea>
         @else
-            <input type="{{ $isUrl ? 'url' : ($isPhone ? 'tel' : 'text') }}" class="form-control" wire:model="form.{{ $wirePath }}">
+            <input type="{{ $isNumber ? 'number' : ($isUrl ? 'url' : ($isPhone ? 'tel' : 'text')) }}" class="form-control" wire:model="form.{{ $wirePath }}" {{ $isNumber ? 'step=0.01' : '' }} required>
         @endif
     </div>
 @endif

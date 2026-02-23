@@ -335,6 +335,7 @@
                     var detail = (event && event.detail) ? event.detail : {};
                     var componentId = detail.id;
                     var index = detail.index;
+                    var path = detail.path || '';
                     var message = detail.message || 'Delete this item?';
                     var method = detail.method || 'deleteVcardConfirmed';
                     if (!componentId || typeof index === 'undefined') {
@@ -345,7 +346,12 @@
                         if (window.Livewire && Livewire.find) {
                             var component = Livewire.find(componentId);
                             if (component) {
-                                component.call(method, index);
+                                // Call with path if it exists, otherwise just index
+                                if (path !== '') {
+                                    component.call(method, index, path);
+                                } else {
+                                    component.call(method, index);
+                                }
                             }
                         }
                     });
@@ -375,6 +381,17 @@
                     registerLivewireListener();
                 });
                 setTimeout(registerLivewireListener, 500);
+
+                // Close modal event listener
+                document.addEventListener('close-modal', function() {
+                    var openModals = document.querySelectorAll('.modal.show');
+                    openModals.forEach(function(modal) {
+                        var modalInstance = bootstrap.Modal.getInstance(modal);
+                        if (modalInstance) {
+                            modalInstance.hide();
+                        }
+                    });
+                });
             })();
         </script>
 
