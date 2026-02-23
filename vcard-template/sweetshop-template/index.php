@@ -317,9 +317,7 @@ $paymentStrokeMap = [
                     <?php foreach ($data["gallery"] ?? [] as $item): ?>
                         <?php $image = $item["image"] ?? $fallbackImage; ?>
                         <div class="g-item">
-                            <div
-                                style="height:100%;background:url('<?= h($image); ?>') center/cover no-repeat"
-                            ></div>
+                            <img src="<?= h($image); ?>" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
                         </div>
                     <?php endforeach; ?>
                 </div>

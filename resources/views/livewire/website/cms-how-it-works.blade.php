@@ -25,52 +25,56 @@
         </div>
 
         <div class="mb-3">
-            <h5 class="mb-3">Steps</h5>
-            @foreach ($steps as $index => $step)
-                <div class="card mb-3 p-3">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group mb-2">
-                                <label class="form-label">Step Number</label>
-                                <input type="number" wire:model="steps.{{ $index }}.number" class="form-control" disabled>
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="form-group mb-2">
-                                <label class="form-label">Title</label>
-                                <input type="text" wire:model="steps.{{ $index }}.title" class="form-control" placeholder="Step Title">
-                                @error("steps.{$index}.title") <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group mb-2">
-                        <label class="form-label">Description</label>
-                        <textarea wire:model="steps.{{ $index }}.description" class="form-control" rows="2" placeholder="Step description"></textarea>
-                        @error("steps.{$index}.description") <span class="text-danger small">{{ $message }}</span> @enderror
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <label class="form-label">Badge Background</label>
-                                <input type="text" wire:model="steps.{{ $index }}.badge_bg" class="form-control" placeholder="bg-blue-100">
-                                @error("steps.{$index}.badge_bg") <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mb-2">
-                                <label class="form-label">Badge Text Color</label>
-                                <input type="text" wire:model="steps.{{ $index }}.badge_text" class="form-control" placeholder="text-blue-700">
-                                @error("steps.{$index}.badge_text") <span class="text-danger small">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" wire:click="removeStep({{ $index }})" class="btn btn-danger btn-sm">Remove Step</button>
-                </div>
-            @endforeach
-        </div>
-
-        <div class="form-group mb-3">
-            <button type="button" wire:click="addStep" class="btn btn-outline-primary">+ Add Step</button>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h5 class="mb-0">Steps</h5>
+                <button type="button" wire:click="addStep" class="btn btn-outline-primary btn-sm">+ Add Step</button>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 56px;">#</th>
+                            <th style="width: 220px;">Title</th>
+                            <th>Description</th>
+                            <th style="width: 200px;">Badge Background</th>
+                            <th style="width: 200px;">Badge Text Color</th>
+                            <th style="width: 120px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($steps as $index => $step)
+                            <tr>
+                                <td>
+                                    <input type="number" wire:model="steps.{{ $index }}.number" class="form-control" disabled>
+                                </td>
+                                <td>
+                                    <input type="text" wire:model="steps.{{ $index }}.title" class="form-control" placeholder="Step Title">
+                                    @error("steps.{$index}.title") <span class="text-danger small">{{ $message }}</span> @enderror
+                                </td>
+                                <td>
+                                    <textarea wire:model="steps.{{ $index }}.description" class="form-control" rows="2" placeholder="Step description"></textarea>
+                                    @error("steps.{$index}.description") <span class="text-danger small">{{ $message }}</span> @enderror
+                                </td>
+                                <td>
+                                    <input type="text" wire:model="steps.{{ $index }}.badge_bg" class="form-control" placeholder="bg-blue-100">
+                                    @error("steps.{$index}.badge_bg") <span class="text-danger small">{{ $message }}</span> @enderror
+                                </td>
+                                <td>
+                                    <input type="text" wire:model="steps.{{ $index }}.badge_text" class="form-control" placeholder="text-blue-700">
+                                    @error("steps.{$index}.badge_text") <span class="text-danger small">{{ $message }}</span> @enderror
+                                </td>
+                                <td>
+                                    <button type="button" wire:click="removeStep({{ $index }})" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center text-muted py-4">No steps yet. Click "Add Step" to create one.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <div class="form-group mt-4">

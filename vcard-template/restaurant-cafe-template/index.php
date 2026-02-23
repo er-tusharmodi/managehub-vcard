@@ -285,7 +285,9 @@ $socialIconClasses = [
                         <?php foreach (data_list($data, "gallery") as $item): ?>
                             <?php $image = $item["image"] ?? data_get($data, "assets.fallbackImage", ""); ?>
                             <div>
-                                <div class="gal-item" style="background:url('<?= e($image); ?>') center/cover no-repeat;"></div>
+                                <div class="gal-item">
+                                    <img src="<?= e($image); ?>" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                </div>
                                 <div class="gal-cap"><?= e($item["caption"] ?? ""); ?></div>
                             </div>
                         <?php endforeach; ?>

@@ -397,7 +397,7 @@ $socialIconClasses = [
                     <div class="gallery-grid" id="galleryGrid">
                         <?php foreach (data_list($data, "gallery") as $url): ?>
                             <div class="gal-item">
-                                <div class="gal-placeholder" style="background:url('<?= e($url); ?>') center/cover no-repeat;"></div>
+                                <img class="gal-placeholder" src="<?= e($url); ?>" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
                             </div>
                         <?php endforeach; ?>
                     </div>

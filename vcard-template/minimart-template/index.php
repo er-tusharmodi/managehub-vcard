@@ -384,8 +384,17 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="gallery-grid" id="galleryGrid">
                         <?php foreach (data_list($data, "gallery") as $item): ?>
+                            <?php
+                                $bg = $item["bg"] ?? "";
+                                $imageUrl = $bg;
+                                if (preg_match('/url\([\'\"]?(.*?)[\'\"]?\)/i', $bg, $matches)) {
+                                    $imageUrl = $matches[1];
+                                }
+                            ?>
                             <div class="g-item">
-                                <div style="height:100%;background:<?= e($item["bg"] ?? ""); ?>;display:flex;align-items:center;justify-content:center;"></div>
+                                <?php if (!empty($imageUrl)): ?>
+                                    <img src="<?= e($imageUrl); ?>" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                                <?php endif; ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
