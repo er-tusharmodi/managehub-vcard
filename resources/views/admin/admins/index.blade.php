@@ -46,47 +46,20 @@
                                     @endforeach
                                 </td>
                                 <td class="text-end pe-4">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('admin.admins.edit', $admin) }}" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Edit">
+                                    <div class="d-flex" role="group" style="gap: 0.4rem !important;">
+                                        <a href="{{ route('admin.admins.edit', $admin) }}" class="btn btn-outline-primary btn-sm" data-bs-toggle="tooltip" title="Edit">
                                             <i class="mdi mdi-pencil-outline"></i>
                                         </a>
-                                        <button class="btn btn-outline-danger delete-admin-btn" data-admin-id="{{ $admin->id }}" data-admin-name="{{ $admin->name }}" data-bs-toggle="tooltip" title="Delete">
-                                            <i class="mdi mdi-trash-can-outline"></i>
-                                        </button>
+                                        <form method="POST" action="{{ route('admin.admins.destroy', $admin) }}" style="display:inline;" class="delete-admin-form">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="button" class="btn btn-outline-danger btn-sm delete-admin-btn" data-admin-id="{{ $admin->id }}" data-admin-name="{{ $admin->name }}" data-bs-toggle="tooltip" title="Delete">
+                                                <i class="mdi mdi-trash-can-outline"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </td>
                             </tr>
-
-                            <!-- Delete Modal for this admin -->
-                            <div class="modal fade" id="deleteModal{{ $admin->id }}" tabindex="-1">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-danger text-white">
-                                            <h6 class="modal-title">
-                                                <i class="mdi mdi-alert-circle me-2"></i> Delete Admin
-                                            </h6>
-                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p class="mb-2">Are you sure you want to delete this admin account?</p>
-                                            <div class="alert alert-warning small mb-0">
-                                                <strong>{{ $admin->name }}</strong> ({{ $admin->email }})
-                                            </div>
-                                            <p class="text-muted small mt-3 mb-0">This action cannot be undone. All associated data will be removed.</p>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <form method="POST" action="{{ route('admin.admins.destroy', $admin) }}" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">
-                                                    <i class="mdi mdi-delete me-1"></i> Delete
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         @empty
                             <tr>
                                 <td colspan="4" class="text-center py-5 text-muted">
@@ -101,13 +74,15 @@
         </div>
     </div>
 
+    <!-- Toast Container is in main layout -->
+
     <style>
         .table tbody td {
             padding: 1rem 0.75rem;
             vertical-align: middle;
         }
 
-        .btn-group-sm .btn {
+        .btn-sm {
             padding: 0.35rem 0.65rem;
             font-size: 0.875rem;
         }
@@ -121,14 +96,17 @@
                 return new bootstrap.Tooltip(tooltipTriggerEl);
             });
 
-            // Handle delete button clicks
+            // Handle delete button clicks - use common showConfirmToast from main layout
             document.querySelectorAll('.delete-admin-btn').forEach(button => {
                 button.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const adminId = this.dataset.adminId;
+                    const form = this.closest('.delete-admin-form');
                     const adminName = this.dataset.adminName;
-                    const modal = new bootstrap.Modal(document.getElementById(`deleteModal${adminId}`));
-                    modal.show();
+                    
+                    // Use the common template confirmation from main layout
+                    showConfirmToast('Delete Admin?', function() {
+                        form.submit();
+                    }, adminName);
                 });
             });
         });

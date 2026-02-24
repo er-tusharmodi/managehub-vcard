@@ -19,6 +19,27 @@
             .toast-container {
                 position: static;
             }
+
+            .toast.show {
+                opacity: 1;
+                animation: slideInUp 0.3s ease-out;
+            }
+
+            @keyframes slideInUp {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            .toast-body {
+                border-radius: 12px;
+                padding: 1.5rem;
+            }
         </style>
 
         @livewireStyles
@@ -228,23 +249,33 @@
                     }
                 }
 
-                function showConfirmToast(message, onConfirm) {
+                window.showConfirmToast = function(message, onConfirm, itemName = '') {
                     var container = document.getElementById('admin-toast-container');
                     if (!container || !message) {
                         return;
                     }
 
                     var toastEl = document.createElement('div');
-                    toastEl.className = 'toast align-items-center text-bg-warning border-0 mb-2 fade';
+                    toastEl.className = 'toast align-items-center border-0 mb-2 fade';
                     toastEl.setAttribute('role', 'alert');
                     toastEl.setAttribute('aria-live', 'assertive');
                     toastEl.setAttribute('aria-atomic', 'true');
+                    toastEl.style.minWidth = '500px';
+                    
+                    var itemNameHtml = itemName ? `<p class="mb-0 mt-2 small text-muted">${itemName}</p>` : '';
+                    
                     toastEl.innerHTML = '' +
-                        '<div class="d-flex">' +
-                            '<div class="toast-body">' + message + '</div>' +
-                            '<div class="d-flex align-items-center gap-2 pe-2">' +
-                                '<button type="button" class="btn btn-sm btn-danger text-white" data-confirm="true" style="background-color: #dc3545; border-color: #dc3545;">Delete</button>' +
-                                '<button type="button" class="btn btn-sm btn-light" data-cancel="true">Cancel</button>' +
+                        '<div class="toast-body bg-white text-dark border-2 border-danger rounded-3 d-flex align-items-center justify-content-between">' +
+                            '<div class="d-flex align-items-center gap-3">' +
+                                '<i class="mdi mdi-alert-circle" style="color: #dc3545; font-size: 1.8em; flex-shrink: 0;"></i>' +
+                                '<div>' +
+                                    '<strong class="d-block">' + message + '</strong>' +
+                                    itemNameHtml +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="d-flex gap-2" style="flex-shrink: 0;">' +
+                                '<button type="button" class="btn btn-sm btn-danger" data-confirm="true">Delete</button>' +
+                                '<button type="button" class="btn btn-sm btn-warning" data-cancel="true">Cancel</button>' +
                             '</div>' +
                         '</div>';
 
@@ -280,7 +311,7 @@
                     } else {
                         toastEl.classList.add('show');
                     }
-                }
+                };
 
                 document.addEventListener('DOMContentLoaded', function () {
                     var successMessage = @json(session('success'));

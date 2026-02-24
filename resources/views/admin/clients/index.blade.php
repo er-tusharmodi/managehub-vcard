@@ -179,11 +179,11 @@
                                     <small class="text-muted">{{ $client->created_at?->format('d M Y') }}</small>
                                 </td>
                                 <td class="text-end pe-4">
-                                    <div class="btn-group btn-group-sm" role="group">
-                                        <a href="{{ route('admin.vcards.index') }}?sort=created_at&direction=desc&client={{ $client->id }}" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="View vCards">
+                                    <div class="d-flex" role="group" style="gap: 0.4rem !important;">
+                                        <a href="{{ route('admin.vcards.index') }}?sort=created_at&direction=desc&client={{ $client->id }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="View vCards">
                                             <i class="mdi mdi-eye-outline"></i>
                                         </a>
-                                        <a href="mailto:{{ $client->email }}" class="btn btn-outline-info" data-bs-toggle="tooltip" title="Email Client">
+                                        <a href="mailto:{{ $client->email }}" class="btn btn-sm btn-outline-info" data-bs-toggle="tooltip" title="Email Client">
                                             <i class="mdi mdi-email-outline"></i>
                                         </a>
                                     </div>

@@ -15,8 +15,15 @@ class AdminUserController extends Controller
 {
     public function index(): View
     {
+        $admins = User::with('roles')
+            ->whereHas('roles', function ($query) {
+                $query->whereIn('name', ['admin', 'super-admin']);
+            })
+            ->orderBy('name')
+            ->get();
+
         return view('admin.admins.index', [
-            'admins' => User::with('roles')->orderBy('name')->get(),
+            'admins' => $admins,
         ]);
     }
 

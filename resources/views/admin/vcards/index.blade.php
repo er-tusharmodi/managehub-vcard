@@ -153,26 +153,26 @@
                                         <small class="text-muted">{{ $vcard->created_at?->format('d M Y') }}</small>
                                     </td>
                                     <td class="text-end pe-4">
-                                        <div class="btn-group btn-group-sm" role="group">
+                                        <div class="d-flex" role="group" style="gap: 0.4rem !important;">
                                             @if ($vcard->status === 'active')
-                                                <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Preview vCard">
+                                                <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Preview vCard">
                                                     <i class="mdi mdi-eye-outline"></i>
                                                 </a>
                                             @endif
                                             @if ($vcard->user_id)
-                                                <button type="button" class="btn btn-outline-success share-btn" data-vcard-id="{{ $vcard->id }}" data-bs-toggle="tooltip" title="Share Credentials with Client">
+                                                <button type="button" class="btn btn-sm btn-outline-success share-btn" data-vcard-id="{{ $vcard->id }}" data-bs-toggle="tooltip" title="Share Credentials with Client">
                                                     <i class="mdi mdi-share-outline"></i>
                                                 </button>
                                             @endif
-                                            <a href="{{ route('admin.vcards.edit', $vcard->id) }}" class="btn btn-outline-warning" data-bs-toggle="tooltip" title="Edit vCard Details">
+                                            <a href="{{ route('admin.vcards.edit', $vcard->id) }}" class="btn btn-sm btn-outline-warning" data-bs-toggle="tooltip" title="Edit vCard Details">
                                                 <i class="mdi mdi-pencil-outline"></i>
                                             </a>
                                             @if ($vcard->user_id)
-                                                <a href="{{ route('admin.vcards.data.section', $vcard->id) }}" class="btn btn-outline-info" data-bs-toggle="tooltip" title="Edit vCard Content">
+                                                <a href="{{ route('admin.vcards.data.section', $vcard->id) }}" class="btn btn-sm btn-outline-info" data-bs-toggle="tooltip" title="Edit vCard Content">
                                                     <i class="mdi mdi-file-document-outline"></i>
                                                 </a>
                                             @endif
-                                            <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $vcard->id }}" data-bs-toggle="tooltip" title="Delete vCard">
+                                            <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $vcard->id }}" data-bs-toggle="tooltip" title="Delete vCard">
                                                 <i class="mdi mdi-trash-can-outline"></i>
                                             </button>
                                         </div>
@@ -364,7 +364,7 @@
             font-weight: 500;
         }
 
-        .btn-group-sm .btn {
+        .btn-sm {
             padding: 0.35rem 0.65rem;
             font-size: 0.875rem;
         }
