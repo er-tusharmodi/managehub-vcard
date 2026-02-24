@@ -73,7 +73,13 @@
                                     @error("categories.{$index}.description") <span class="text-danger small">{{ $message }}</span> @enderror
                                 </td>
                                 <td>
-                                    <button type="button" wire:click="removeCategory({{ $index }})" class="btn btn-outline-danger btn-sm w-100">Remove</button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-danger btn-sm w-100"
+                                        onclick="showConfirmToast('Delete this category?', function () { if (window.Livewire && Livewire.find) { Livewire.find('{{ $this->getId() }}').call('removeCategoryConfirmed', {{ $index }}); } })"
+                                    >
+                                        Remove
+                                    </button>
                                 </td>
                             </tr>
                         @empty

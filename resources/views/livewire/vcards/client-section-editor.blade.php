@@ -1,109 +1,123 @@
 <div>
-    <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
-        <div class="flex-grow-1">
-            <h4 class="fs-18 fw-semibold m-0">vCard Editor</h4>
-            <div class="text-muted">{{ $vcard->subdomain }}.{{ $baseDomain }}</div>
-        </div>
-
-        <div class="text-end">
-            <ol class="breadcrumb m-0 py-0">
-                <li class="breadcrumb-item"><a href="/">vCard</a></li>
-                <li class="breadcrumb-item active">Edit</li>
-            </ol>
-        </div>
-    </div>
-
-    @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
-
     @if ($subscriptionBlocked)
-        <div class="alert alert-warning">
-            {{ $subscriptionMessage }}
+        <div class="alert alert-warning border-0 shadow-sm">
+            <div class="d-flex align-items-start gap-2">
+                <i class="mdi mdi-alert fs-18 mt-1 flex-shrink-0"></i>
+                <div>
+                    <strong>Subscription Inactive</strong>
+                    <p class="mb-0 small">{{ $subscriptionMessage }}</p>
+                </div>
+            </div>
         </div>
     @elseif ($showIndex)
+        <!-- Section Index View -->
+        <div class="mb-4">
+            <p class="text-muted">Select a section to edit your vCard content</p>
+        </div>
+
         @php
             $iconMap = [
-                'meta' => ['icon' => 'fa-id-card', 'color' => 'text-primary'],
-                'assets' => ['icon' => 'fa-image', 'color' => 'text-danger'],
-                'banner' => ['icon' => 'fa-flag', 'color' => 'text-warning'],
-                'profile' => ['icon' => 'fa-user', 'color' => 'text-info'],
-                'sections' => ['icon' => 'fa-layer-group', 'color' => 'text-primary'],
-                'labels' => ['icon' => 'fa-tags', 'color' => 'text-success'],
-                'status' => ['icon' => 'fa-clock', 'color' => 'text-warning'],
-                'services' => ['icon' => 'fa-scissors', 'color' => 'text-primary'],
-                'packages' => ['icon' => 'fa-box', 'color' => 'text-info'],
-                'products' => ['icon' => 'fa-bag-shopping', 'color' => 'text-success'],
-                'gallery' => ['icon' => 'fa-images', 'color' => 'text-danger'],
-                'appointment' => ['icon' => 'fa-calendar-check', 'color' => 'text-success'],
-                'booking' => ['icon' => 'fa-calendar', 'color' => 'text-success'],
-                'hours' => ['icon' => 'fa-clock', 'color' => 'text-warning'],
-                'location' => ['icon' => 'fa-location-dot', 'color' => 'text-danger'],
-                'social' => ['icon' => 'fa-share-nodes', 'color' => 'text-info'],
-                'payments' => ['icon' => 'fa-credit-card', 'color' => 'text-primary'],
-                'doctor' => ['icon' => 'fa-stethoscope', 'color' => 'text-danger'],
-                'shop' => ['icon' => 'fa-store', 'color' => 'text-success'],
-                'barbers' => ['icon' => 'fa-user-group', 'color' => 'text-info'],
-                'specializations' => ['icon' => 'fa-star-of-life', 'color' => 'text-danger'],
-                'awards' => ['icon' => 'fa-trophy', 'color' => 'text-warning'],
-                'testimonials' => ['icon' => 'fa-comment-dots', 'color' => 'text-info'],
+                'meta' => ['icon' => 'mdi-information', 'color' => 'text-primary'],
+                'assets' => ['icon' => 'mdi-image', 'color' => 'text-danger'],
+                'banner' => ['icon' => 'mdi-panorama', 'color' => 'text-warning'],
+                'profile' => ['icon' => 'mdi-account', 'color' => 'text-info'],
+                'sections' => ['icon' => 'mdi-layers', 'color' => 'text-primary'],
+                'labels' => ['icon' => 'mdi-tag-multiple', 'color' => 'text-success'],
+                'status' => ['icon' => 'mdi-clock', 'color' => 'text-warning'],
+                'services' => ['icon' => 'mdi-briefcase', 'color' => 'text-primary'],
+                'packages' => ['icon' => 'mdi-package', 'color' => 'text-info'],
+                'products' => ['icon' => 'mdi-shopping', 'color' => 'text-success'],
+                'gallery' => ['icon' => 'mdi-image-multiple', 'color' => 'text-danger'],
+                'appointment' => ['icon' => 'mdi-calendar-check', 'color' => 'text-success'],
+                'booking' => ['icon' => 'mdi-calendar', 'color' => 'text-success'],
+                'hours' => ['icon' => 'mdi-clock-outline', 'color' => 'text-warning'],
+                'location' => ['icon' => 'mdi-map-marker', 'color' => 'text-danger'],
+                'social' => ['icon' => 'mdi-share-variant', 'color' => 'text-info'],
+                'payments' => ['icon' => 'mdi-credit-card', 'color' => 'text-primary'],
+                'doctor' => ['icon' => 'mdi-hospital-box', 'color' => 'text-danger'],
+                'shop' => ['icon' => 'mdi-store', 'color' => 'text-success'],
+                'barbers' => ['icon' => 'mdi-people', 'color' => 'text-info'],
+                'specializations' => ['icon' => 'mdi-star', 'color' => 'text-danger'],
+                'awards' => ['icon' => 'mdi-trophy', 'color' => 'text-warning'],
+                'testimonials' => ['icon' => 'mdi-comment-multiple', 'color' => 'text-info'],
             ];
         @endphp
-        <div class="row g-4">
+
+        <div class="row g-3">
             @foreach ($sections as $tab)
                 @php
-                    $iconData = $iconMap[$tab] ?? ['icon' => 'fa-layer-group', 'color' => 'text-primary'];
+                    $iconData = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'text-primary'];
                 @endphp
                 <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('vcard.editor.section', ['subdomain' => $vcard->subdomain, 'section' => $tab]) }}'">
-                        <div class="card-body text-center">
-                            <div class="mb-3">
-                                <i class="fas {{ $iconData['icon'] }} fs-1 {{ $iconData['color'] }}"></i>
+                    <a href="{{ route('vcard.editor', ['subdomain' => $vcard->subdomain, 'section' => $tab]) }}" class="text-decoration-none text-reset h-100">
+                        <div class="card border-0 shadow-sm h-100 transition-all-3s" style="cursor: pointer;">
+                            <div class="card-body text-center">
+                                <div class="mb-3">
+                                    <i class="mdi {{ $iconData['icon'] }} fs-1 {{ $iconData['color'] }}"></i>
+                                </div>
+                                <h6 class="card-title fw-semibold">{{ str_replace('_', ' ', ucfirst($tab)) }}</h6>
+                                <small class="text-muted">Edit {{ str_replace('_', ' ', $tab) }}</small>
                             </div>
-                            <h5 class="card-title">{{ \Illuminate\Support\Str::headline($tab) }}</h5>
-                            <p class="card-text text-muted">Manage {{ \Illuminate\Support\Str::headline($tab) }} fields</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
 
         <style>
-            .hover-shadow {
+            .transition-all-3s {
                 transition: all 0.3s ease;
             }
-            .hover-shadow:hover {
-                box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+            .card:hover {
                 transform: translateY(-2px);
-            }
-            .cursor-pointer {
-                cursor: pointer;
+                box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
             }
         </style>
     @else
-        <div class="card">
+        <!-- Section Edit View -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-light border-bottom">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 class="mb-0 fw-semibold">
+                            <i class="mdi mdi-pencil me-2 text-primary"></i>{{ str_replace('_', ' ', ucfirst($section)) }}
+                        </h5>
+                        <small class="text-muted">Edit fields for this section</small>
+                    </div>
+                    <a href="{{ route('vcard.editor', ['subdomain' => $vcard->subdomain]) }}" class="btn btn-sm btn-outline-secondary">
+                        <i class="mdi mdi-home-outline"></i> Sections
+                    </a>
+                </div>
+            </div>
+
             <div class="card-body">
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible fade show border-0" role="alert">
+                        <i class="mdi mdi-check-circle me-2"></i>{{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
+
                 <form wire:submit.prevent="save">
                     <div class="row">
                         @if (empty($form))
                             <div class="col-12">
-                                <div class="alert alert-warning">No data found for this section.</div>
+                                <div class="alert alert-info border-0">
+                                    <i class="mdi mdi-information-outline me-2"></i>No data available for this section.
+                                </div>
                             </div>
                         @else
                             @php
-                                // Check if the entire form is a list (array of objects)
                                 $isFormList = is_array($form) && !empty($form) && array_values($form) === $form;
                             @endphp
                             
                             @if($isFormList)
-                                <!-- Render as list/table if form itself is a sequential array -->
                                 @include('livewire.vcards.partials.field', [
                                     'key' => $section,
                                     'value' => $form,
                                     'wirePath' => '',
                                 ])
                             @else
-                                <!-- Render individual fields if form is associative -->
                                 @foreach ($form as $key => $value)
                                     @include('livewire.vcards.partials.field', [
                                         'key' => $key,
@@ -115,17 +129,23 @@
                         @endif
                     </div>
 
-                    <div class="mt-3 d-flex gap-2">
+                    <div class="mt-4 d-flex gap-2 border-top pt-4">
                         <button class="btn btn-primary" type="submit">
-                            <span wire:loading.remove>Save Changes</span>
-                            <span wire:loading><i class="mdi mdi-loading mdi-spin"></i> Saving...</span>
+                            <span wire:loading.remove>
+                                <i class="mdi mdi-content-save me-1"></i>Save Changes
+                            </span>
+                            <span wire:loading>
+                                <i class="mdi mdi-loading mdi-spin me-1"></i>Saving...
+                            </span>
                         </button>
-                        <a href="{{ route('vcard.editor.section', ['subdomain' => $vcard->subdomain]) }}" class="btn btn-secondary">Back</a>
+                        <a href="{{ route('vcard.editor', ['subdomain' => $vcard->subdomain]) }}" class="btn btn-outline-secondary">
+                            <i class="mdi mdi-arrow-left me-1"></i>Back
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
-        
+
         <style>
             [data-bs-toggle="collapse"] .mdi-chevron-down {
                 transition: transform 0.3s ease;
@@ -135,9 +155,6 @@
             }
             [data-bs-toggle="collapse"][aria-expanded="true"] .mdi-chevron-down {
                 transform: rotate(180deg);
-            }
-            .card-header:hover {
-                background-color: #e9ecef !important;
             }
         </style>
     @endif

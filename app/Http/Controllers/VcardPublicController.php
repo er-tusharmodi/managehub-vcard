@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vcard;
+use App\Models\VcardVisit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +20,9 @@ class VcardPublicController extends Controller
                     'vcard' => $vcard,
                 ], 403);
         }
+
+        // Track the visit
+        $this->trackVisit($vcard, $request);
 
         if (!$vcard->template_path) {
             abort(404);
@@ -55,5 +59,20 @@ class VcardPublicController extends Controller
         }
 
         return str_ireplace('<head>', '<head><base href="' . $baseHref . '">', $content);
+    }
+
+    private function trackVisit(Vcard $vcard, Request $request): void
+    {
+        // Get client IP address
+        $ipAddress = $request->getClientIp();
+        $userAgent = $request->header('User-Agent');
+
+        // Create visit record
+        VcardVisit::create([
+            'vcard_id' => $vcard->id,
+            'ip_address' => $ipAddress,
+            'user_agent' => $userAgent,
+            'visited_at' => now(),
+        ]);
     }
 }

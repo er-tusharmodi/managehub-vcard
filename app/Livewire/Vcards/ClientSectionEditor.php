@@ -14,7 +14,7 @@ class ClientSectionEditor extends Component
     use WithFileUploads;
 
     public Vcard $vcard;
-    public string $section = '';
+    public ?string $section = null;
     public array $sections = [];
     public array $form = [];
     public array $uploads = [];
@@ -23,9 +23,10 @@ class ClientSectionEditor extends Component
     public bool $subscriptionBlocked = false;
     public string $subscriptionMessage = 'Your subscription is inactive. Please contact support.';
 
-    public function mount(string $subdomain, string $section = null): void
+    public function mount(string $subdomain, ?string $section = null): void
     {
         $this->vcard = $this->loadVcard($subdomain);
+        $this->section = $section;
 
         if ($this->subscriptionBlocked) {
             return;

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClientDashboardController;
+use App\Http\Controllers\ClientVcardEditorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -15,10 +17,6 @@ use App\Livewire\Vcards\ClientSectionEditor;
 use App\Http\Controllers\VcardPublicController;
 
 Route::get('/', [WebsiteController::class, 'show'])->name('home');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])
@@ -83,11 +81,10 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
 
 require __DIR__ . '/auth.php';
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
+// Client Dashboard - Authenticated users
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -98,6 +95,12 @@ require __DIR__.'/auth.php';
 Route::get('/{subdomain}', [VcardPublicController::class, 'show'])
     ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
     ->name('vcard.public.path');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/my-vcard/{subdomain}/edit/{section?}', [ClientVcardEditorController::class, 'edit'])
+        ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
+        ->name('vcard.editor');
+});
 
 Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
     Route::get('/', [VcardPublicController::class, 'show'])->name('vcard.public');
