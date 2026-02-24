@@ -258,6 +258,60 @@
                     }
                 }
 
+                function showConfirmToast(message, onConfirm) {
+                    var container = document.getElementById('client-toast-container');
+                    if (!container || !message) {
+                        return;
+                    }
+
+                    var toastEl = document.createElement('div');
+                    toastEl.className = 'toast align-items-center text-bg-warning border-0 mb-2 fade';
+                    toastEl.setAttribute('role', 'alert');
+                    toastEl.setAttribute('aria-live', 'assertive');
+                    toastEl.setAttribute('aria-atomic', 'true');
+                    toastEl.innerHTML = '' +
+                        '<div class="d-flex">' +
+                            '<div class="toast-body">' + message + '</div>' +
+                            '<div class="d-flex align-items-center gap-2 pe-2">' +
+                                '<button type="button" class="btn btn-sm btn-danger text-white" data-confirm="true" style="background-color: #dc3545; border-color: #dc3545;">Delete</button>' +
+                                '<button type="button" class="btn btn-sm btn-light" data-cancel="true">Cancel</button>' +
+                            '</div>' +
+                        '</div>';
+
+                    container.appendChild(toastEl);
+
+                    var confirmBtn = toastEl.querySelector('[data-confirm]');
+                    var cancelBtn = toastEl.querySelector('[data-cancel]');
+
+                    function cleanup() {
+                        if (toastEl && toastEl.parentNode) {
+                            toastEl.remove();
+                        }
+                    }
+
+                    if (confirmBtn) {
+                        confirmBtn.addEventListener('click', function () {
+                            cleanup();
+                            if (typeof onConfirm === 'function') {
+                                onConfirm();
+                            }
+                        });
+                    }
+
+                    if (cancelBtn) {
+                        cancelBtn.addEventListener('click', function () {
+                            cleanup();
+                        });
+                    }
+
+                    if (window.bootstrap && typeof bootstrap.Toast === 'function') {
+                        var toast = new bootstrap.Toast(toastEl, { autohide: false });
+                        toast.show();
+                    } else {
+                        toastEl.classList.add('show');
+                    }
+                }
+
                 document.addEventListener('DOMContentLoaded', function () {
                     var successMessage = @json(session('success'));
                     var errorMessage = @json(session('error'));
@@ -315,6 +369,33 @@
                 document.addEventListener('notify', handleNotifyEvent);
                 window.addEventListener('notify', handleNotifyEvent);
 
+                function handleConfirmDeleteEvent(event) {
+                    var detail = (event && event.detail) ? event.detail : {};
+                    var componentId = detail.id;
+                    var index = detail.index;
+                    var path = detail.path || '';
+                    var message = detail.message || 'Delete this item?';
+                    var method = detail.method || 'deleteVcardConfirmed';
+                    if (!componentId || typeof index === 'undefined') {
+                        return;
+                    }
+
+                    showConfirmToast(message, function () {
+                        if (window.Livewire && Livewire.find) {
+                            var component = Livewire.find(componentId);
+                            if (component) {
+                                if (path !== '') {
+                                    component.call(method, index, path);
+                                } else {
+                                    component.call(method, index);
+                                }
+                            }
+                        }
+                    });
+                }
+
+                document.addEventListener('confirm-delete', handleConfirmDeleteEvent);
+
                 function registerLivewireListener() {
                     if (toastListenerRegistered) {
                         return;
@@ -337,6 +418,18 @@
                     registerLivewireListener();
                 });
                 setTimeout(registerLivewireListener, 500);
+
+                document.addEventListener('close-modal', function () {
+                    var openModals = document.querySelectorAll('.modal.show');
+                    openModals.forEach(function (modal) {
+                        if (window.bootstrap && bootstrap.Modal) {
+                            var modalInstance = bootstrap.Modal.getInstance(modal);
+                            if (modalInstance) {
+                                modalInstance.hide();
+                            }
+                        }
+                    });
+                });
             })();
         </script>
 
