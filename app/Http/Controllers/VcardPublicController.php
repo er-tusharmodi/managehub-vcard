@@ -13,6 +13,13 @@ class VcardPublicController extends Controller
     {
         $vcard = Vcard::where('subdomain', $subdomain)->firstOrFail();
 
+        if (!$vcard->isSubscriptionActive()) {
+            return response()
+                ->view('vcards.subscription-inactive', [
+                    'vcard' => $vcard,
+                ], 403);
+        }
+
         if (!$vcard->template_path) {
             abort(404);
         }

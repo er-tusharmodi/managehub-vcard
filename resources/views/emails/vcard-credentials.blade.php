@@ -11,7 +11,7 @@
                 <td>
                     <h2 style="margin-top: 0; color: #111827;">Welcome {{ $user->name }}</h2>
                     <p style="color: #4b5563;">Your vCard panel is ready. Use the credentials below to log in and edit your vCard data.</p>
-                    <p style="color: #111827; margin-bottom: 6px;"><strong>Login:</strong> {{ $user->email }}</p>
+                    <p style="color: #111827; margin-bottom: 6px;"><strong>Username:</strong> {{ $user->username }}</p>
                     <p style="color: #111827; margin-top: 0;"><strong>Password:</strong> {{ $password }}</p>
                     <p style="color: #4b5563;">vCard URL: <a href="{{ $vcardUrl }}">{{ $vcardUrl }}</a></p>
                     <p style="color: #4b5563;">Login URL: <a href="{{ $loginUrl }}">{{ $loginUrl }}</a></p>

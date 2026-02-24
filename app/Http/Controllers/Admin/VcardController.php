@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Helpers\UsernameGenerator;
 use App\Mail\VcardCredentialsMail;
 use App\Models\User;
 use App\Models\Vcard;
@@ -18,12 +19,30 @@ use Illuminate\View\View;
 
 class VcardController extends Controller
 {
-    public function index(VcardTemplateService $templates): View
+    public function index(Request $request, VcardTemplateService $templates): View
     {
+        $sort = $request->get('sort', 'created_at');
+        $direction = $request->get('direction', 'desc');
+        $validSorts = ['subdomain', 'client_name', 'status', 'subscription_status', 'created_at'];
+        $validDirections = ['asc', 'desc'];
+        
+        if (!in_array($sort, $validSorts)) {
+            $sort = 'created_at';
+        }
+        if (!in_array($direction, $validDirections)) {
+            $direction = 'desc';
+        }
+        
+        $vcards = Vcard::orderBy($sort, $direction)
+            ->paginate(15)
+            ->appends(request()->query());
+        
         return view('admin.vcards.index', [
-            'vcards' => Vcard::latest()->get(),
+            'vcards' => $vcards,
             'templates' => $templates->listTemplates(),
             'baseDomain' => config('vcard.base_domain'),
+            'sort' => $sort,
+            'direction' => $direction,
         ]);
     }
 
@@ -44,6 +63,8 @@ class VcardController extends Controller
             'client_address' => ['nullable', 'string', 'max:255'],
             'subdomain' => ['required', 'string', 'max:60', 'regex:/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/', 'unique:vcards,subdomain'],
             'template_key' => ['required', 'string'],
+            'subscription_status' => ['required', 'in:active,inactive'],
+            'subscription_expires_at' => ['nullable', 'date'],
         ]);
 
         $template = $templates->templatePath($validated['template_key']);
@@ -52,16 +73,20 @@ class VcardController extends Controller
         }
 
         $password = Str::random(12);
+        $username = UsernameGenerator::generateFromSubdomain($validated['subdomain']);
+        
         $user = User::firstOrCreate([
             'email' => $validated['client_email'],
         ], [
             'name' => $validated['client_name'],
+            'username' => $username,
             'password' => Hash::make($password),
         ]);
 
         if (!$user->wasRecentlyCreated) {
             $user->forceFill([
                 'name' => $validated['client_name'],
+                'username' => $username,
                 'password' => Hash::make($password),
             ])->save();
         }
@@ -82,6 +107,9 @@ class VcardController extends Controller
             'client_phone' => $validated['client_phone'] ?? null,
             'client_address' => $validated['client_address'] ?? null,
             'status' => 'active',
+            'subscription_status' => $validated['subscription_status'],
+            'subscription_started_at' => $validated['subscription_status'] === 'active' ? now() : null,
+            'subscription_expires_at' => $validated['subscription_expires_at'] ?? null,
             'created_by' => Auth::id(),
         ]);
 
@@ -128,9 +156,27 @@ class VcardController extends Controller
             'client_email' => ['required', 'email', 'max:255'],
             'client_phone' => ['nullable', 'string', 'max:50'],
             'client_address' => ['nullable', 'string', 'max:255'],
+            'subscription_status' => ['required', 'in:active,inactive'],
+            'subscription_expires_at' => ['nullable', 'date'],
         ]);
 
-        $vcard->update($validated);
+        $subscriptionStartedAt = $vcard->subscription_started_at;
+        if ($validated['subscription_status'] === 'active' && !$subscriptionStartedAt) {
+            $subscriptionStartedAt = now();
+        }
+        if ($validated['subscription_status'] === 'inactive') {
+            $subscriptionStartedAt = $subscriptionStartedAt;
+        }
+
+        $vcard->update([
+            'client_name' => $validated['client_name'],
+            'client_email' => $validated['client_email'],
+            'client_phone' => $validated['client_phone'] ?? null,
+            'client_address' => $validated['client_address'] ?? null,
+            'subscription_status' => $validated['subscription_status'],
+            'subscription_started_at' => $subscriptionStartedAt,
+            'subscription_expires_at' => $validated['subscription_expires_at'] ?? null,
+        ]);
 
         // Update the user details as well
         if ($vcard->user_id) {
@@ -252,10 +298,79 @@ class VcardController extends Controller
 
     private function sendCredentials(User $user, string $password, Vcard $vcard): void
     {
-        $baseDomain = config('vcard.base_domain');
-        $loginUrl = 'http://' . $vcard->subdomain . '.' . $baseDomain . ':8000/login';
-        $vcardUrl = 'http://' . $vcard->subdomain . '.' . $baseDomain . ':8000/';
+        try {
+            $baseDomain = config('vcard.base_domain');
+            $loginUrl = 'https://' . $vcard->subdomain . '.' . $baseDomain . '/login';
+            $vcardUrl = 'https://' . $vcard->subdomain . '.' . $baseDomain . '/';
 
-        Mail::to($user->email)->send(new VcardCredentialsMail($user, $password, $loginUrl, $vcardUrl));
+            \Log::info('Preparing to send email to: ' . $user->email);
+            Mail::to($user->email)->send(new VcardCredentialsMail($user, $password, $loginUrl, $vcardUrl));
+            \Log::info('Email queued/sent successfully to: ' . $user->email);
+        } catch (\Exception $e) {
+            \Log::error('Error sending credentials email: ' . $e->getMessage(), ['exception' => $e]);
+            throw $e;
+        }
+    }
+
+    public function shareVcard(Vcard $vcard)
+    {
+        if (!$vcard->user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        // Generate a temporary password for sharing
+        $tempPassword = Str::random(12);
+        $vcard->user->update([
+            'password' => Hash::make($tempPassword),
+        ]);
+
+        return response()->json([
+            'username' => $vcard->user->username,
+            'email' => $vcard->user->email,
+            'clientName' => $vcard->client_name,
+            'password' => $tempPassword,
+        ]);
+    }
+
+    public function regeneratePassword(Vcard $vcard)
+    {
+        if (!$vcard->user) {
+            return response()->json(['error' => 'User not found'], 404);
+        }
+
+        $newPassword = Str::random(12);
+        $vcard->user->update([
+            'password' => Hash::make($newPassword),
+        ]);
+
+        return response()->json([
+            'password' => $newPassword,
+            'message' => 'Password regenerated successfully',
+        ]);
+    }
+
+    public function sendCredentialsToClient(Request $request, Vcard $vcard)
+    {
+        try {
+            $request->validate([
+                'password' => ['required', 'string'],
+            ]);
+
+            if (!$vcard->user) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+
+            // Send credentials
+            \Log::info('Sending credentials for vCard: ' . $vcard->subdomain . ' to ' . $vcard->user->email);
+            $this->sendCredentials($vcard->user, $request->password, $vcard);
+            \Log::info('Credentials sent successfully for vCard: ' . $vcard->subdomain);
+
+            return response()->json([
+                'message' => 'Credentials sent to client successfully',
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Failed to send credentials: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to send credentials: ' . $e->getMessage()], 500);
+        }
     }
 }

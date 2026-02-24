@@ -35,8 +35,8 @@
                                     @csrf
 
                                     <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Email address</label>
-                                        <input class="form-control" type="email" id="emailaddress" name="email" value="{{ old('email') }}" required autofocus placeholder="Enter your email">
+                                        <label for="login" class="form-label">Username or Email</label>
+                                        <input class="form-control" type="text" id="login" name="login" value="{{ old('login') }}" required autofocus placeholder="Enter your username or email">
                                     </div>
 
                                     <div class="mb-3">

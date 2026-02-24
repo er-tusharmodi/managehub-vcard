@@ -18,12 +18,34 @@ class Vcard extends Model
         'data_path',
         'template_path',
         'status',
+        'subscription_status',
+        'subscription_started_at',
+        'subscription_expires_at',
         'created_by',
     ];
 
     protected $casts = [
         'domain_verified_at' => 'datetime',
+        'subscription_started_at' => 'datetime',
+        'subscription_expires_at' => 'datetime',
     ];
+
+    public function isSubscriptionActive(): bool
+    {
+        if ($this->subscription_status !== 'active') {
+            return false;
+        }
+
+        if ($this->subscription_started_at && now()->lt($this->subscription_started_at)) {
+            return false;
+        }
+
+        if ($this->subscription_expires_at && now()->gt($this->subscription_expires_at)) {
+            return false;
+        }
+
+        return true;
+    }
 
     public function user(): BelongsTo
     {

@@ -20,10 +20,17 @@ class ClientSectionEditor extends Component
     public array $uploads = [];
     public array $newItem = [];
     public bool $showIndex = false;
+    public bool $subscriptionBlocked = false;
+    public string $subscriptionMessage = 'Your subscription is inactive. Please contact support.';
 
     public function mount(string $subdomain, string $section = null): void
     {
         $this->vcard = $this->loadVcard($subdomain);
+
+        if ($this->subscriptionBlocked) {
+            return;
+        }
+
         $data = $this->loadJson();
         $this->sections = array_keys($data);
 
@@ -54,6 +61,11 @@ class ClientSectionEditor extends Component
 
     public function save(): void
     {
+        if ($this->subscriptionBlocked) {
+            session()->flash('error', $this->subscriptionMessage);
+            return;
+        }
+
         $payload = $this->applyUploads($this->form, $this->uploads);
         $data = $this->loadJson();
         $data[$this->section] = $payload;
@@ -67,6 +79,11 @@ class ClientSectionEditor extends Component
 
     public function saveAndNotify(): void
     {
+        if ($this->subscriptionBlocked) {
+            $this->dispatch('notify', type: 'error', message: $this->subscriptionMessage);
+            return;
+        }
+
         $this->validateIfRules($this->rulesForForm());
         $this->save();
         $this->dispatch('notify', type: 'success', message: 'Changes saved successfully!');
@@ -330,6 +347,13 @@ class ClientSectionEditor extends Component
 
         if (!$isAdmin && $vcard->user_id && Auth::id() !== $vcard->user_id) {
             abort(403);
+        }
+
+        if (!$isAdmin && !$vcard->isSubscriptionActive()) {
+            $this->subscriptionBlocked = true;
+            if ($vcard->subscription_expires_at) {
+                $this->subscriptionMessage = 'Your subscription expired on ' . $vcard->subscription_expires_at->format('d M Y') . '.';
+            }
         }
 
         return $vcard;

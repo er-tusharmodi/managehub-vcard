@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\WebsiteCmsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\WebsiteController;
@@ -63,6 +64,8 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
 
     Route::resource('admins', AdminUserController::class)->except('show');
 
+    Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
+
     Route::get('/vcards', [AdminVcardController::class, 'index'])->name('vcards.index');
     Route::get('/vcards/create', [AdminVcardController::class, 'create'])->name('vcards.create');
     Route::post('/vcards', [AdminVcardController::class, 'store'])->name('vcards.store');
@@ -71,6 +74,11 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::get('/vcards/{vcard}/data/{section?}', AdminSectionEditor::class)->name('vcards.data.section');
     Route::patch('/vcards/{vcard}/status', [AdminVcardController::class, 'updateStatus'])->name('vcards.updateStatus');
     Route::delete('/vcards/{vcard}', [AdminVcardController::class, 'destroy'])->name('vcards.destroy');
+    
+    // vCard Share Routes
+    Route::get('/vcards/{vcard}/share', [AdminVcardController::class, 'shareVcard'])->name('vcards.share');
+    Route::post('/vcards/{vcard}/regenerate-password', [AdminVcardController::class, 'regeneratePassword'])->name('vcards.regeneratePassword');
+    Route::post('/vcards/{vcard}/send-credentials', [AdminVcardController::class, 'sendCredentialsToClient'])->name('vcards.sendCredentials');
 });
 
 require __DIR__ . '/auth.php';

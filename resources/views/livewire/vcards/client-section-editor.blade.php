@@ -17,7 +17,11 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    @if ($showIndex)
+    @if ($subscriptionBlocked)
+        <div class="alert alert-warning">
+            {{ $subscriptionMessage }}
+        </div>
+    @elseif ($showIndex)
         @php
             $iconMap = [
                 'meta' => ['icon' => 'fa-id-card', 'color' => 'text-primary'],

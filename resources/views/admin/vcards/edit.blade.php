@@ -49,6 +49,19 @@
                         <label class="form-label">Template (Read-only)</label>
                         <input type="text" class="form-control" value="{{ $vcard->template_key }}" disabled>
                     </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Subscription Status</label>
+                        <select name="subscription_status" class="form-select" required>
+                            <option value="active" @if(old('subscription_status', $vcard->subscription_status) === 'active') selected @endif>Active</option>
+                            <option value="inactive" @if(old('subscription_status', $vcard->subscription_status) === 'inactive') selected @endif>Inactive</option>
+                        </select>
+                        @error('subscription_status')<div class="text-danger small">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Subscription Expiry</label>
+                        <input type="date" name="subscription_expires_at" class="form-control" value="{{ old('subscription_expires_at', $vcard->subscription_expires_at?->format('Y-m-d')) }}">
+                        @error('subscription_expires_at')<div class="text-danger small">{{ $message }}</div>@enderror
+                    </div>
                 </div>
 
                 <div class="mt-4">
