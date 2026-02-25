@@ -88,7 +88,6 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::post('/templates/{templateKey}/update/code', [App\Http\Controllers\Admin\TemplateController::class, 'updateCode'])->name('templates.update.code');
     Route::post('/templates/{templateKey}/update/visual', [App\Http\Controllers\Admin\TemplateController::class, 'updateVisual'])->name('templates.update.visual');
     Route::delete('/templates/{templateKey}', [App\Http\Controllers\Admin\TemplateController::class, 'destroy'])->name('templates.destroy');
-    Route::get('/templates/{templateKey}/preview', [App\Http\Controllers\Admin\TemplateController::class, 'preview'])->name('templates.preview');
     
     // Template Visibility & Ordering Routes
     Route::post('/templates/{templateKey}/toggle-visibility', [App\Http\Controllers\Admin\TemplateController::class, 'toggleVisibility'])->name('templates.toggleVisibility');
@@ -97,6 +96,10 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::patch('/templates/{templateKey}/category', [App\Http\Controllers\Admin\TemplateController::class, 'updateCategory'])->name('templates.updateCategory');
     Route::post('/templates/sync', [App\Http\Controllers\Admin\TemplateController::class, 'syncFilesystem'])->name('templates.sync');
 });
+
+// Public Template Routes (no auth required)
+Route::get('/template-preview/{templateKey}', [App\Http\Controllers\Admin\TemplateController::class, 'preview'])
+    ->name('admin.templates.preview');
 
 Route::get('/template-assets/{templateKey}/{path}', [App\Http\Controllers\Admin\TemplateController::class, 'asset'])
     ->where('path', '.*')
