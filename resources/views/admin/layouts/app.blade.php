@@ -153,6 +153,13 @@
                             </li>
 
                             <li>
+                                <a href="{{ route('admin.templates.index') }}" class="tp-link">
+                                    <i data-feather="layers"></i>
+                                    <span> Templates </span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('admin.clients.index') }}" class="tp-link">
                                     <i data-feather="users"></i>
                                     <span> Clients </span>

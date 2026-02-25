@@ -14,6 +14,8 @@ use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\Admin\VcardController as AdminVcardController;
 use App\Livewire\Vcards\AdminSectionEditor;
 use App\Livewire\Vcards\ClientSectionEditor;
+use App\Livewire\Admin\TemplateCodeEditor;
+use App\Livewire\Admin\TemplateVisualEditor;
 use App\Http\Controllers\VcardPublicController;
 
 Route::get('/', [WebsiteController::class, 'show'])->name('home');
@@ -77,7 +79,20 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::get('/vcards/{vcard}/share', [AdminVcardController::class, 'shareVcard'])->name('vcards.share');
     Route::post('/vcards/{vcard}/regenerate-password', [AdminVcardController::class, 'regeneratePassword'])->name('vcards.regeneratePassword');
     Route::post('/vcards/{vcard}/send-credentials', [AdminVcardController::class, 'sendCredentialsToClient'])->name('vcards.sendCredentials');
+    
+    // Template Management Routes
+    Route::get('/templates', [App\Http\Controllers\Admin\TemplateController::class, 'index'])->name('templates.index');
+    Route::get('/templates/{templateKey}/edit/code', TemplateCodeEditor::class)->name('templates.edit.code');
+    Route::get('/templates/{templateKey}/edit/visual/{section?}', TemplateVisualEditor::class)->name('templates.edit.visual');
+    Route::post('/templates/{templateKey}/update/code', [App\Http\Controllers\Admin\TemplateController::class, 'updateCode'])->name('templates.update.code');
+    Route::post('/templates/{templateKey}/update/visual', [App\Http\Controllers\Admin\TemplateController::class, 'updateVisual'])->name('templates.update.visual');
+    Route::delete('/templates/{templateKey}', [App\Http\Controllers\Admin\TemplateController::class, 'destroy'])->name('templates.destroy');
+    Route::get('/templates/{templateKey}/preview', [App\Http\Controllers\Admin\TemplateController::class, 'preview'])->name('templates.preview');
 });
+
+Route::get('/template-assets/{templateKey}/{path}', [App\Http\Controllers\Admin\TemplateController::class, 'asset'])
+    ->where('path', '.*')
+    ->name('templates.asset');
 
 require __DIR__ . '/auth.php';
 

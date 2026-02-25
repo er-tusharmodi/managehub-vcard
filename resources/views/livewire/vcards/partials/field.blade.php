@@ -163,6 +163,9 @@
                                                 if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $colValue, $matches)) {
                                                     $imageUrl = $matches[1];
                                                 }
+                                                if (isset($assetBaseUrl) && is_string($imageUrl) && !preg_match('~^(https?:)?//|data:|/~', $imageUrl)) {
+                                                    $imageUrl = rtrim($assetBaseUrl, '/') . '/' . ltrim($imageUrl, '/');
+                                                }
                                             @endphp
                                             <img src="{{ $imageUrl }}" alt="{{ $col }}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0;">
                                         @else
@@ -251,6 +254,9 @@
                                                         $imageUrl = $colValue;
                                                         if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $colValue, $matches)) {
                                                             $imageUrl = $matches[1];
+                                                        }
+                                                        if (isset($assetBaseUrl) && is_string($imageUrl) && !preg_match('~^(https?:)?//|data:|/~', $imageUrl)) {
+                                                            $imageUrl = rtrim($assetBaseUrl, '/') . '/' . ltrim($imageUrl, '/');
                                                         }
                                                     @endphp
                                                     <div class="mb-2">
@@ -373,6 +379,9 @@
                     $imageUrl = $value;
                     if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $value, $matches)) {
                         $imageUrl = $matches[1];
+                    }
+                    if (isset($assetBaseUrl) && is_string($imageUrl) && !preg_match('~^(https?:)?//|data:|/~', $imageUrl)) {
+                        $imageUrl = rtrim($assetBaseUrl, '/') . '/' . ltrim($imageUrl, '/');
                     }
                 @endphp
                 <div class="mb-2">
