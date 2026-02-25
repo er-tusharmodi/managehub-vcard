@@ -221,55 +221,153 @@
 
         <!-- vCard Previews -->
         @if(isset($templates) && count($templates) > 0)
-        <section class="py-20 bg-bg-light relative overflow-hidden">
-            <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full" style="background: radial-gradient(circle at center, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0));"></div>
-            <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full" style="background: radial-gradient(circle at center, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0));"></div>
+        <section class="py-24 relative overflow-hidden" style="background: linear-gradient(135deg, {{ $primaryColor }} 0%, {{ $secondaryColor }} 100%);">
+            <!-- Animated Background Elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-blob"></div>
+                <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-2000"></div>
+                <div class="absolute bottom-1/4 left-1/2 w-96 h-96 bg-white rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-4000"></div>
+            </div>
 
-            <div class="container mx-auto px-4 max-w-8xl relative z-10">
-                <div class="text-center mb-12">
-                    <h2 class="vcard-preview-title text-3xl md:text-5xl font-bold mb-4">
-                        {{ $vcardPreviewsSection['title'] ?? 'Explore Our vCard Templates' }}
+            <div class="container mx-auto px-4 max-w-7xl relative z-10">
+                <!-- Header -->
+                <div class="text-center mb-16">
+                    <div class="inline-block mb-4">
+                        <span class="px-4 py-2 bg-white/20 backdrop-blur-sm text-white text-sm font-semibold rounded-full border border-white/30">
+                            ✨ Premium Templates
+                        </span>
+                    </div>
+                    <h2 class="vcard-preview-title text-4xl md:text-6xl font-bold mb-6 text-white">
+                        {{ $vcardPreviewsSection['title'] ?? 'Stunning vCard Templates' }}
                     </h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">
-                        {{ $vcardPreviewsSection['subtitle'] ?? 'Browse our collection of professional vCard templates. Each template is fully customizable and ready to use.' }}
+                    <p class="text-white/90 text-lg max-w-3xl mx-auto leading-relaxed">
+                        {{ $vcardPreviewsSection['subtitle'] ?? 'Choose from our collection of professionally designed templates. Each one is crafted with care and fully customizable to match your brand.' }}
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-                    @foreach ($templates as $template)
-                        <div class="group bg-white rounded-3xl border border-border-light shadow-sm hover:shadow-xl transition transform hover:-translate-y-1">
-                            <div class="px-4 pt-4">
-                                <div class="flex items-start justify-between gap-3">
-                                    <div>
-                                        <h3 class="text-lg font-semibold text-gray-900">
-                                            {{ $template['title'] }}
-                                        </h3>
-                                    </div>
-                                    <span class="text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded-full" style="background-color: rgba(15, 23, 42, 0.06); color: #0f172a;">{{ $template['category'] }}</span>
+                <!-- Templates Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    @foreach ($templates as $index => $template)
+                        <div class="group relative" style="animation: fadeInUp 0.6s ease-out {{ $index * 0.1 }}s backwards;">
+                            <!-- Card Container -->
+                            <div class="relative bg-white/95 backdrop-blur-sm rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-500 hover:scale-105 hover:shadow-3xl hover:-translate-y-2">
+                                <!-- Category Badge -->
+                                <div class="absolute top-4 right-4 z-10">
+                                    <span class="px-3 py-1.5 text-white text-xs font-bold rounded-full shadow-lg" style="background: linear-gradient(to right, {{ $primaryColor }}, {{ $secondaryColor }});">
+                                        {{ $template['category'] }}
+                                    </span>
                                 </div>
-                            </div>
 
-                            <div class="px-4 py-4">
-                                <div class="rounded-2xl border border-border-light overflow-hidden bg-gray-50" style="height: 260px;">
-                                    <div class="h-9 bg-gray-900 flex items-center px-3">
-                                        <div class="w-2.5 h-2.5 rounded-full bg-red-500 mr-2"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-yellow-400 mr-2"></div>
-                                        <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                                <!-- Phone Mockup -->
+                                <div class="relative p-6 pb-4">
+                                    <div class="relative mx-auto" style="max-width: 280px;">
+                                        <!-- Phone Frame -->
+                                        <div class="relative bg-gray-900 rounded-[2.5rem] p-3 shadow-2xl">
+                                            <!-- Notch -->
+                                            <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-1/3 h-6 bg-gray-900 rounded-b-3xl z-10"></div>
+                                            
+                                            <!-- Screen -->
+                                            <div class="relative bg-white rounded-[2rem] overflow-hidden" style="height: 400px;">
+                                                <!-- Status Bar -->
+                                                <div class="absolute top-0 inset-x-0 h-8 bg-gradient-to-b from-black/5 to-transparent z-10 flex items-center justify-between px-6 text-[10px] text-gray-600">
+                                                    <span>9:41</span>
+                                                    <div class="flex items-center gap-1">
+                                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path></svg>
+                                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M17.778 8.222c-4.296-4.296-11.26-4.296-15.556 0A1 1 0 01.808 6.808c5.076-5.077 13.308-5.077 18.384 0a1 1 0 01-1.414 1.414zM14.95 11.05a7 7 0 00-9.9 0 1 1 0 01-1.414-1.414 9 9 0 0112.728 0 1 1 0 01-1.414 1.414zM12.12 13.88a3 3 0 00-4.242 0 1 1 0 01-1.415-1.415 5 5 0 017.072 0 1 1 0 01-1.415 1.415zM9 16a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                                        <svg class="w-4 h-3" fill="currentColor" viewBox="0 0 24 20"><rect x="1" y="3" width="18" height="14" rx="2" fill="currentColor"></rect><path d="M20 8v4a2 2 0 002-2V8z"></path></svg>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Template Preview -->
+                                                <iframe src="{{ $template['preview_url'] }}" class="w-full h-full border-none" loading="lazy" style="pointer-events: none;"></iframe>
+                                                
+                                                <!-- Overlay on hover -->
+                                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
+                                                    <a href="{{ $template['preview_url'] }}" target="_blank" class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 px-6 py-3 bg-white text-gray-900 font-semibold rounded-full hover:bg-gray-100 inline-flex items-center gap-2 shadow-xl">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                        </svg>
+                                                        <span>Preview</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <iframe src="{{ $template['preview_url'] }}" class="w-full" style="height: calc(100% - 36px); border: none;" loading="lazy"></iframe>
                                 </div>
-                            </div>
 
-                            <div class="px-4 pb-4 flex items-center justify-between">
-                                <div class="text-xs text-gray-500">Live Preview</div>
-                                <a href="{{ $template['preview_url'] }}" target="_blank" class="text-sm font-semibold text-primary hover:text-primary-dark transition">
-                                    View Full Size
-                                </a>
+                                <!-- Template Info -->
+                                <div class="px-6 pb-6">
+                                    <h3 class="template-card-title text-xl font-bold text-gray-900 mb-2 transition-colors">
+                                        {{ $template['title'] }}
+                                    </h3>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-sm text-gray-500 flex items-center gap-1">
+                                            <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            Live Preview
+                                        </span>
+                                        <a href="{{ $template['preview_url'] }}" target="_blank" class="template-view-link text-sm font-semibold transition-colors inline-flex items-center gap-1" style="color: {{ $primaryColor }};">
+                                            View Full
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
+
+            <!-- CSS Animations -->
+            <style>
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(30px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                @keyframes blob {
+                    0%, 100% {
+                        transform: translate(0, 0) scale(1);
+                    }
+                    33% {
+                        transform: translate(30px, -50px) scale(1.1);
+                    }
+                    66% {
+                        transform: translate(-20px, 20px) scale(0.9);
+                    }
+                }
+                
+                .animate-blob {
+                    animation: blob 7s infinite;
+                }
+                
+                .animation-delay-2000 {
+                    animation-delay: 2s;
+                }
+                
+                .animation-delay-4000 {
+                    animation-delay: 4s;
+                }
+
+                /* Dynamic hover colors for template cards */
+                .template-card-title:hover {
+                    color: {{ $primaryColor }} !important;
+                }
+                
+                .template-view-link:hover {
+                    color: {{ $secondaryColor }} !important;
+                }
+            </style>
         </section>
         @endif
 
