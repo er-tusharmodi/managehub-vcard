@@ -16,6 +16,7 @@ class ClientSectionEditor extends Component
     public Vcard $vcard;
     public ?string $section = null;
     public array $sections = [];
+    public array $sectionsConfig = [];
     public array $form = [];
     public array $uploads = [];
     public array $newItem = [];
@@ -33,7 +34,16 @@ class ClientSectionEditor extends Component
         }
 
         $data = $this->loadJson();
-        $this->sections = array_keys($data);
+        
+        // Load sections config if available
+        if (isset($data['_sections_config']) && is_array($data['_sections_config'])) {
+            $this->sectionsConfig = $data['_sections_config'];
+        }
+        
+        // Filter out metadata keys (those starting with _)
+        $this->sections = array_filter(array_keys($data), function ($key) {
+            return !str_starts_with($key, '_');
+        });
 
         if ($section === null) {
             $this->showIndex = true;
@@ -333,6 +343,30 @@ class ClientSectionEditor extends Component
         $this->removeRow($path, $index);
         $this->save();
         $this->dispatch('notify', type: 'success', message: 'Item deleted successfully!');
+    }
+
+    public function toggleSection(string $section): void
+    {
+        if ($this->subscriptionBlocked) {
+            $this->dispatch('notify', type: 'error', message: $this->subscriptionMessage);
+            return;
+        }
+
+        $data = $this->loadJson();
+
+        if (!isset($data['_sections_config'][$section])) {
+            $this->dispatch('notify', type: 'error', message: 'Section configuration not found.');
+            return;
+        }
+
+        // Toggle the enabled status
+        $data['_sections_config'][$section]['enabled'] = !$data['_sections_config'][$section]['enabled'];
+
+        $this->storeJson($data);
+
+        $status = $data['_sections_config'][$section]['enabled'] ? 'enabled' : 'disabled';
+        $this->dispatch('notify', type: 'success', message: "Section {$status} successfully!");
+        $this->dispatch('section-toggled');
     }
 
     private function loadVcard(string $subdomain): Vcard

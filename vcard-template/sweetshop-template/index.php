@@ -1,5 +1,9 @@
 <?php
-$dataPath = __DIR__ . "/default.json";
+// Load from data.json (vCard data) first, fallback to default.json (template defaults)
+$dataPath = __DIR__ . "/../data.json";
+if (!file_exists($dataPath)) {
+    $dataPath = __DIR__ . "/default.json";
+}
 $data = [];
 
 if (is_readable($dataPath)) {
@@ -37,6 +41,22 @@ function text_with_breaks($value)
     $value = (string) $value;
     $value = preg_replace('/<br\s*\/?>(\r\n|\r|\n)?/i', "\n", $value);
     return nl2br(h($value), false);
+}
+
+function isSectionEnabled($data, $section)
+{
+    // If _sections_config doesn't exist, all sections are enabled by default
+    if (!isset($data['_sections_config'])) {
+        return true;
+    }
+    
+    // If the specific section config doesn't exist, enable by default
+    if (!isset($data['_sections_config'][$section])) {
+        return true;
+    }
+    
+    // Return the enabled status
+    return $data['_sections_config'][$section]['enabled'] ?? true;
 }
 
 require_once __DIR__ . "/icons.php";
@@ -153,6 +173,7 @@ $paymentStrokeMap = [
 
         <div class="section-space"></div>
 
+        <?php if (isSectionEnabled($data, 'location')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -180,7 +201,9 @@ $paymentStrokeMap = [
                 </a>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'socialLinks')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -214,7 +237,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'services')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -242,7 +267,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'products')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -304,7 +331,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'gallery')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -323,7 +352,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'hours')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -359,7 +390,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'qr')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -391,7 +424,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'payments')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -420,7 +455,9 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
+        <?php if (isSectionEnabled($data, 'contact')): ?>
         <div class="sec">
             <div class="sec-header">
                 <div class="sec-icon">
@@ -515,6 +552,7 @@ $paymentStrokeMap = [
                 </div>
             </div>
         </div>
+        <?php endif; ?>
 
         <div class="vcard-footer">
             <p id="footer-copy">

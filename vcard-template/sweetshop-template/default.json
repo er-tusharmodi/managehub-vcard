@@ -1,4 +1,15 @@
 {
+    "_sections_config": {
+        "location": { "enabled": true, "label": "Location" },
+        "socialLinks": { "enabled": true, "label": "Social Links" },
+        "services": { "enabled": true, "label": "Services" },
+        "products": { "enabled": true, "label": "Products" },
+        "gallery": { "enabled": true, "label": "Gallery" },
+        "hours": { "enabled": true, "label": "Business Hours" },
+        "payments": { "enabled": true, "label": "Payment Methods" },
+        "qr": { "enabled": true, "label": "QR Code" },
+        "contact": { "enabled": true, "label": "Contact Form" }
+    },
     "meta": {
         "title": "Ambay Sweets",
         "bannerAlt": "Cover",

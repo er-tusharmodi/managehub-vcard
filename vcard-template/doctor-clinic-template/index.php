@@ -1,7 +1,11 @@
 <?php
 declare(strict_types=1);
 
-$dataPath = __DIR__ . "/default.json";
+// Load from data.json (vCard data) first, fallback to default.json (template defaults)
+$dataPath = __DIR__ . "/../data.json";
+if (!file_exists($dataPath)) {
+    $dataPath = __DIR__ . "/default.json";
+}
 $rawData = @file_get_contents($dataPath);
 $data = $rawData ? json_decode($rawData, true) : [];
 
@@ -40,6 +44,17 @@ function data_list(array $data, string $path): array
 function js_str($value): string
 {
     return json_encode($value ?? "", JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+}
+
+function isSectionEnabled($data, $section)
+{
+    if (!isset($data['_sections_config'])) {
+        return true;
+    }
+    if (!isset($data['_sections_config'][$section])) {
+        return true;
+    }
+    return $data['_sections_config'][$section]['enabled'] ?? true;
 }
 
 $bannerImage = data_get($data, "assets.bannerImage", "");
@@ -194,6 +209,7 @@ $socialIconClasses = [
                 </div>
             </div>
 
+            <?php if (isSectionEnabled($data, 'specializations')): ?>
             <div class="sec sec-top">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -218,7 +234,9 @@ $socialIconClasses = [
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
 
+            <?php if (isSectionEnabled($data, 'appointment')): ?>
             <div class="sec" id="appointmentSection">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -314,6 +332,7 @@ $socialIconClasses = [
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
 
             <div class="sec">
                 <div class="sec-header">

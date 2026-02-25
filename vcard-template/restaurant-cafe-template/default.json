@@ -1,4 +1,16 @@
 {
+    "_sections_config": {
+        "story": { "enabled": true, "label": "Our Story" },
+        "menu": { "enabled": true, "label": "Menu" },
+        "gallery": { "enabled": true, "label": "Gallery" },
+        "reserve": { "enabled": true, "label": "Reserve Table" },
+        "offers": { "enabled": true, "label": "Experiences & Offers" },
+        "hours": { "enabled": true, "label": "Opening Hours" },
+        "location": { "enabled": true, "label": "Location" },
+        "follow": { "enabled": true, "label": "Social Media" },
+        "payments": { "enabled": true, "label": "Payment Options" },
+        "qr": { "enabled": true, "label": "QR Code" }
+    },
     "meta": {
         "title": "La Piazza - Restaurant & Cafe"
     },

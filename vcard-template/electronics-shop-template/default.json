@@ -1,4 +1,18 @@
 {
+    "_sections_config": {
+        "whyChoose": { "enabled": true, "label": "Why Choose Us" },
+        "categories": { "enabled": true, "label": "Product Categories" },
+        "featuredProducts": { "enabled": true, "label": "Featured Products" },
+        "repairServices": { "enabled": true, "label": "Repair Services" },
+        "brands": { "enabled": true, "label": "Brands We Carry" },
+        "gallery": { "enabled": true, "label": "Store Gallery" },
+        "hours": { "enabled": true, "label": "Store Hours" },
+        "location": { "enabled": true, "label": "Our Location" },
+        "follow": { "enabled": true, "label": "Follow & Connect" },
+        "payments": { "enabled": true, "label": "Payment Options" },
+        "qr": { "enabled": true, "label": "QR Code" },
+        "enquiry": { "enabled": true, "label": "Send Enquiry" }
+    },
     "meta": {
         "title": "TechNova Electronics"
     },

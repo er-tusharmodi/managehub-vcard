@@ -1,4 +1,16 @@
 {
+    "_sections_config": {
+        "categories": { "enabled": true, "label": "Product Categories" },
+        "picks": { "enabled": true, "label": "Today's Picks" },
+        "deals": { "enabled": true, "label": "Special Deals" },
+        "gallery": { "enabled": true, "label": "Store Gallery" },
+        "hours": { "enabled": true, "label": "Business Hours" },
+        "location": { "enabled": true, "label": "Our Location" },
+        "social": { "enabled": true, "label": "Social & Connect" },
+        "payments": { "enabled": true, "label": "Payment Methods" },
+        "qr": { "enabled": true, "label": "QR Code" },
+        "contact": { "enabled": true, "label": "Contact Us" }
+    },
     "meta": {
         "title": "FreshMart – Your Neighbourhood Mini Mart"
     },

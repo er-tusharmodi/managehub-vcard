@@ -74,6 +74,7 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::get('/vcards/{vcard}/data/{section?}', AdminSectionEditor::class)->name('vcards.data.section');
     Route::patch('/vcards/{vcard}/status', [AdminVcardController::class, 'updateStatus'])->name('vcards.updateStatus');
     Route::delete('/vcards/{vcard}', [AdminVcardController::class, 'destroy'])->name('vcards.destroy');
+    Route::post('/vcards/sync-sections', [AdminVcardController::class, 'syncSections'])->name('vcards.syncSections');
     
     // vCard Share Routes
     Route::get('/vcards/{vcard}/share', [AdminVcardController::class, 'shareVcard'])->name('vcards.share');

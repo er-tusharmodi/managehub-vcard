@@ -431,4 +431,41 @@ class VcardController extends Controller
             $data['business']['website'] = $url;
         }
     }
+
+    /**
+     * Run sync sections config command
+     */
+    public function syncSections(Request $request)
+    {
+        try {
+            \Illuminate\Support\Facades\Artisan::call('vcards:sync-sections');
+            $output = \Illuminate\Support\Facades\Artisan::output();
+            
+            $message = 'Sections synced successfully!';
+            
+            // Return JSON for AJAX requests
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => $message
+                ]);
+            }
+            
+            // Return redirect for form submissions
+            return redirect()->back()->with('success', $message);
+        } catch (\Exception $e) {
+            $errorMessage = 'Sync failed: ' . $e->getMessage();
+            
+            // Return JSON for AJAX requests
+            if ($request->expectsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $errorMessage
+                ], 500);
+            }
+            
+            // Return redirect for form submissions
+            return redirect()->back()->with('error', $errorMessage);
+        }
+    }
 }

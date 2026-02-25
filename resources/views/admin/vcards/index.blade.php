@@ -9,6 +9,11 @@
             <p class="text-muted small mb-0">Create and manage digital business cards</p>
         </div>
         <div class="text-end">
+            <button type="button" 
+                    class="btn btn-outline-secondary me-2"
+                    onclick="confirmSyncSections()">
+                <i class="mdi mdi-sync me-1"></i>Sync Sections Config
+            </button>
             <a href="{{ route('admin.vcards.create') }}" class="btn btn-primary">
                 <i class="mdi mdi-plus-circle me-2"></i>Add New vCard
             </a>
@@ -662,5 +667,88 @@
                 });
             }
         });
+
+        // Sync sections confirmation
+        function confirmSyncSections() {
+            const message = 'Sync section configurations to all vCards?';
+            const itemName = 'This will update all existing vCard data files with the latest section configuration from their templates.';
+            
+            // Create custom toast with Confirm button (not Delete)
+            var container = document.getElementById('admin-toast-container');
+            if (!container) {
+                if (confirm(message + '\n\n' + itemName)) {
+                    submitSyncForm();
+                }
+                return;
+            }
+
+            var toastEl = document.createElement('div');
+            toastEl.className = 'toast align-items-center border-0 mb-2 fade';
+            toastEl.setAttribute('role', 'alert');
+            toastEl.setAttribute('aria-live', 'assertive');
+            toastEl.setAttribute('aria-atomic', 'true');
+            toastEl.style.minWidth = '500px';
+            
+            toastEl.innerHTML = '' +
+                '<div class="toast-body bg-white text-dark border-2 border-primary rounded-3 d-flex align-items-center justify-content-between">' +
+                    '<div class="d-flex align-items-center gap-3">' +
+                        '<i class="mdi mdi-sync-circle" style="color: #0d6efd; font-size: 1.8em; flex-shrink: 0;"></i>' +
+                        '<div>' +
+                            '<strong class="d-block">' + message + '</strong>' +
+                            '<p class="mb-0 mt-2 small text-muted">' + itemName + '</p>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="d-flex gap-2" style="flex-shrink: 0;">' +
+                        '<button type="button" class="btn btn-sm btn-primary" data-confirm="true">Confirm</button>' +
+                        '<button type="button" class="btn btn-sm btn-secondary" data-cancel="true">Cancel</button>' +
+                    '</div>' +
+                '</div>';
+
+            container.appendChild(toastEl);
+
+            var confirmBtn = toastEl.querySelector('[data-confirm]');
+            var cancelBtn = toastEl.querySelector('[data-cancel]');
+
+            function cleanup() {
+                if (toastEl && toastEl.parentNode) {
+                    toastEl.remove();
+                }
+            }
+
+            if (confirmBtn) {
+                confirmBtn.addEventListener('click', function () {
+                    cleanup();
+                    submitSyncForm();
+                });
+            }
+
+            if (cancelBtn) {
+                cancelBtn.addEventListener('click', function () {
+                    cleanup();
+                });
+            }
+
+            if (window.bootstrap && typeof bootstrap.Toast === 'function') {
+                var toast = new bootstrap.Toast(toastEl, { autohide: false });
+                toast.show();
+            } else {
+                toastEl.classList.add('show');
+            }
+        }
+
+        function submitSyncForm() {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '{{ route('admin.vcards.syncSections') }}';
+            
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = '_token';
+            csrfInput.value = '{{ csrf_token() }}';
+            
+            form.appendChild(csrfInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
     </script>
 @endsection

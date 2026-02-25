@@ -1,4 +1,17 @@
 {
+    "_sections_config": {
+        "collections": { "enabled": true, "label": "Our Collections" },
+        "purity": { "enabled": true, "label": "Gold Purity" },
+        "certifications": { "enabled": true, "label": "Certifications" },
+        "services": { "enabled": true, "label": "Our Services" },
+        "showroom": { "enabled": true, "label": "Visit Showroom" },
+        "hours": { "enabled": true, "label": "Showroom Hours" },
+        "location": { "enabled": true, "label": "Location" },
+        "follow": { "enabled": true, "label": "Follow & Connect" },
+        "payments": { "enabled": true, "label": "Payment Options" },
+        "qr": { "enabled": true, "label": "QR Code" },
+        "enquiry": { "enabled": true, "label": "Send Enquiry" }
+    },
     "meta": {
         "title": "Sona Jewellers \u2013 Fine Jewellery"
     },

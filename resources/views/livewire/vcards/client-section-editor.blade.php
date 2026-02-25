@@ -15,6 +15,15 @@
             <p class="text-muted">Select a section to edit your vCard content</p>
         </div>
 
+        @if (empty($sectionsConfig))
+            <div class="alert alert-warning border-0">
+                <i class="mdi mdi-alert-outline me-2"></i>
+                <strong>Section configuration not found.</strong>
+                <p class="mb-2 mt-2">This vCard needs to be synced with the latest template structure.</p>
+                <p class="mb-0 small text-muted">Please contact support or run: <code>php artisan vcards:sync-sections</code></p>
+            </div>
+        @endif
+
         @php
             $iconMap = [
                 'meta' => ['icon' => 'mdi-information', 'color' => 'text-primary'],
@@ -46,20 +55,62 @@
         <div class="row g-3">
             @foreach ($sections as $tab)
                 @php
+                    // Only show sections that have config entries
+                    if (empty($sectionsConfig) || !isset($sectionsConfig[$tab])) {
+                        continue;
+                    }
                     $iconData = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'text-primary'];
+                    $isEnabled = $sectionsConfig[$tab]['enabled'] ?? true;
+                    $sectionLabel = $sectionsConfig[$tab]['label'] ?? str_replace('_', ' ', ucfirst($tab));
                 @endphp
                 <div class="col-md-6 col-lg-4">
-                    <a href="{{ route('vcard.editor', ['subdomain' => $vcard->subdomain, 'section' => $tab]) }}" class="text-decoration-none text-reset h-100">
-                        <div class="card border-0 shadow-sm h-100 transition-all-3s" style="cursor: pointer;">
-                            <div class="card-body text-center">
+                    <div class="card border-0 shadow-sm h-100 {{ $isEnabled ? '' : 'opacity-75' }}">
+                        <div class="card-body">
+                            <!-- Header with toggle -->
+                            <div class="d-flex justify-content-between align-items-start mb-3">
                                 <div class="mb-3">
                                     <i class="mdi {{ $iconData['icon'] }} fs-1 {{ $iconData['color'] }}"></i>
                                 </div>
-                                <h6 class="card-title fw-semibold">{{ str_replace('_', ' ', ucfirst($tab)) }}</h6>
-                                <small class="text-muted">Edit {{ str_replace('_', ' ', $tab) }}</small>
+                                <div class="form-check form-switch">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        id="toggle-{{ $tab }}"
+                                        {{ $isEnabled ? 'checked' : '' }}
+                                        wire:click="toggleSection('{{ $tab }}')"
+                                        style="cursor: pointer;"
+                                        title="Toggle section visibility"
+                                    >
+                                </div>
                             </div>
+                            
+                            <!-- Section title and status -->
+                            <div class="text-center mb-3">
+                                <h6 class="card-title fw-semibold mb-2">{{ $sectionLabel }}</h6>
+                                @if ($isEnabled)
+                                    <span class="badge bg-success-subtle text-success">
+                                        <i class="mdi mdi-check-circle me-1"></i>Enabled
+                                    </span>
+                                @else
+                                    <span class="badge bg-secondary-subtle text-secondary">
+                                        <i class="mdi mdi-close-circle me-1"></i>Disabled
+                                    </span>
+                                @endif
+                            </div>
+                            
+                            <!-- Edit button -->
+                            @if ($isEnabled)
+                                <a href="{{ route('vcard.editor', ['subdomain' => $vcard->subdomain, 'section' => $tab]) }}" 
+                                   class="btn btn-sm btn-outline-primary w-100">
+                                    <i class="mdi mdi-pencil me-1"></i>Edit Section
+                                </a>
+                            @else
+                                <button class="btn btn-sm btn-outline-secondary w-100" disabled>
+                                    <i class="mdi mdi-pencil-off me-1"></i>Section Disabled
+                                </button>
+                            @endif
                         </div>
-                    </a>
+                    </div>
                 </div>
             @endforeach
         </div>

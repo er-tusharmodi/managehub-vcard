@@ -1,4 +1,16 @@
 {
+    "_sections_config": {
+        "specializations": { "enabled": true, "label": "Specializations" },
+        "appointment": { "enabled": true, "label": "Appointment" },
+        "conditions": { "enabled": true, "label": "Conditions Treated" },
+        "fees": { "enabled": true, "label": "Consultation Fees" },
+        "hours": { "enabled": true, "label": "Clinic Hours" },
+        "awards": { "enabled": true, "label": "Awards & Certifications" },
+        "location": { "enabled": true, "label": "Location" },
+        "social": { "enabled": true, "label": "Social Links" },
+        "payments": { "enabled": true, "label": "Payment Methods" },
+        "contactSave": { "enabled": true, "label": "Save Contact" }
+    },
     "meta": {
         "title": "Dr. Anil Sharma – Family & General Physician"
     },

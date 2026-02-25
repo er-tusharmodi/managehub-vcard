@@ -15,16 +15,28 @@ class AdminSectionEditor extends Component
     public Vcard $vcard;
     public string $section = '';
     public array $sections = [];
+    public array $sectionsConfig = [];
     public array $form = [];
     public array $uploads = [];
     public array $newItem = [];
     public bool $showIndex = false;
+    public string $editMode = 'visual'; // 'visual' or 'code'
+    public string $jsonContent = '';
 
     public function mount(Vcard $vcard, string $section = null): void
     {
         $this->vcard = $vcard;
         $data = $this->loadJson();
-        $this->sections = array_keys($data);
+        
+        // Load sections config if available
+        if (isset($data['_sections_config']) && is_array($data['_sections_config'])) {
+            $this->sectionsConfig = $data['_sections_config'];
+        }
+        
+        // Filter out metadata keys (those starting with _)
+        $this->sections = array_filter(array_keys($data), function ($key) {
+            return !str_starts_with($key, '_');
+        });
 
         if ($section === null) {
             $this->showIndex = true;
@@ -405,6 +417,74 @@ class AdminSectionEditor extends Component
         }
 
         return $payload;
+    }
+
+    public function toggleSection(string $section): void
+    {
+        $data = $this->loadJson();
+
+        if (!isset($data['_sections_config'][$section])) {
+            $this->dispatch('notify', type: 'error', message: 'Section configuration not found.');
+            return;
+        }
+
+        // Toggle the enabled status
+        $data['_sections_config'][$section]['enabled'] = !$data['_sections_config'][$section]['enabled'];
+
+        $this->storeJson($data);
+        $this->sectionsConfig = $data['_sections_config'];
+
+        $status = $data['_sections_config'][$section]['enabled'] ? 'enabled' : 'disabled';
+        $this->dispatch('notify', type: 'success', message: "Section {$status} successfully!");
+        $this->dispatch('section-toggled');
+    }
+
+    public function switchToCodeEditor(): void
+    {
+        $data = $this->loadJson();
+        $this->jsonContent = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $this->editMode = 'code';
+        $this->dispatch('notify', type: 'info', message: 'Switched to code editor mode');
+    }
+
+    public function switchToVisualEditor(): void
+    {
+        $this->editMode = 'visual';
+        $this->showIndex = true; // Return to section index when switching back from code editor
+        
+        // Reload sections config in case it was changed in code editor
+        $data = $this->loadJson();
+        if (isset($data['_sections_config']) && is_array($data['_sections_config'])) {
+            $this->sectionsConfig = $data['_sections_config'];
+        }
+        
+        $this->dispatch('notify', type: 'info', message: 'Switched to visual editor mode');
+    }
+
+    public function saveCodeEditor(): void
+    {
+        // Validate JSON
+        $decoded = json_decode($this->jsonContent, true);
+        
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $this->dispatch('notify', type: 'error', message: 'Invalid JSON: ' . json_last_error_msg());
+            return;
+        }
+
+        if (!is_array($decoded)) {
+            $this->dispatch('notify', type: 'error', message: 'JSON must be an object/array');
+            return;
+        }
+
+        // Save the decoded data
+        $this->storeJson($decoded);
+        
+        // Refresh the sections config
+        if (isset($decoded['_sections_config']) && is_array($decoded['_sections_config'])) {
+            $this->sectionsConfig = $decoded['_sections_config'];
+        }
+        
+        $this->dispatch('notify', type: 'success', message: 'JSON saved successfully!');
     }
 
     public function render()

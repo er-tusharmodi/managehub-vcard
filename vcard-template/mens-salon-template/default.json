@@ -1,4 +1,18 @@
 {
+    "_sections_config": {
+        "services": { "enabled": true, "label": "Services" },
+        "packages": { "enabled": true, "label": "Packages" },
+        "booking": { "enabled": true, "label": "Booking" },
+        "barbers": { "enabled": true, "label": "Barbers" },
+        "products": { "enabled": true, "label": "Products" },
+        "hours": { "enabled": true, "label": "Hours" },
+        "location": { "enabled": true, "label": "Location" },
+        "gallery": { "enabled": true, "label": "Gallery" },
+        "payments": { "enabled": true, "label": "Payments" },
+        "social": { "enabled": true, "label": "Social Links" },
+        "qr": { "enabled": true, "label": "QR Code" },
+        "contact": { "enabled": true, "label": "Contact" }
+    },
     "meta": {
         "title": "The Barbershop – Men's Grooming Studio"
     },
