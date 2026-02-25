@@ -1,0 +1,71 @@
+# Node modules
+node_modules/
+npm-debug.log
+
+# PHP vendor
+vendor/
+
+# Environment files
+.env*
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+
+# Testing
+tests/
+phpunit.xml
+.phpunit.result.cache
+
+# Documentation
+*.md
+README.md
+LICENSE
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Storage
+storage/app/*
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+storage/logs/*
+!storage/.gitkeep
+!storage/app/.gitkeep
+!storage/app/public/.gitkeep
+!storage/framework/.gitkeep
+!storage/framework/cache/.gitkeep
+!storage/framework/sessions/.gitkeep
+!storage/framework/views/.gitkeep
+!storage/logs/.gitkeep
+
+# Build output
+public/build/
+public/hot
+public/storage
+
+# Docker
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# Theme files (not needed in container)
+Backendtheme/
+vcard-template/
+v/
+
+# Misc
+.DS_Store
+Thumbs.db
