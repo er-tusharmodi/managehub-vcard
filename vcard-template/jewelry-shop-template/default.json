@@ -4,9 +4,7 @@
     },
     "assets": {
         "bannerImage": "uploads/1772003101_61p7aCMIBjL._AC_UY436_FMwebp_QL65_.webp",
-        "profileImage": "uploads/1772002744_61q9aP5AnGL._AC_UY218_.jpg",
-        "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
-        "profileAlt": "Sona Jewellers profile photo"
+        "profileImage": "uploads/1772003182_41wP5ZQfzxL-_AC_SR120-120_.jpg"
     },
     "shop": {
         "name": "Sona Jewellers",

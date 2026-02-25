@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Template;
 use App\Services\VcardTemplateService;
 use App\Services\TemplateBackupService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Artisan;
 
 class TemplateController extends Controller
 {
@@ -26,11 +28,34 @@ class TemplateController extends Controller
     {
         $templates = $this->templateService->listTemplates();
 
-        // Add vCard count for each template
+        // Get database records for template metadata
+        $templateModels = Template::all()->keyBy('template_key');
+
+        // Add vCard count and database info for each template
         foreach ($templates as &$template) {
             $template['vcard_count'] = $this->templateService->getVcardCount($template['key']);
             $template['can_delete'] = $this->templateService->canDelete($template['key']);
+            
+            // Add database metadata if exists
+            $dbTemplate = $templateModels->get($template['key']);
+            if ($dbTemplate) {
+                $template['id'] = $dbTemplate->id;
+                $template['display_name'] = $dbTemplate->display_name;
+                $template['category'] = $dbTemplate->category;
+                $template['is_visible'] = $dbTemplate->is_visible;
+                $template['display_order'] = $dbTemplate->display_order;
+            } else {
+                // Template exists on filesystem but not in database
+                $template['id'] = null;
+                $template['display_name'] = $template['name'];
+                $template['category'] = null;
+                $template['is_visible'] = false;
+                $template['display_order'] = 999;
+            }
         }
+
+        // Sort by display order
+        usort($templates, fn($a, $b) => ($a['display_order'] ?? 999) <=> ($b['display_order'] ?? 999));
 
         return view('admin.templates.index', compact('templates'));
     }
@@ -275,5 +300,129 @@ class TemplateController extends Controller
 
         return response(File::get($realAssetPath))
             ->header('Content-Type', $mimeType);
+    }
+
+    /**
+     * Toggle template visibility for home page
+     */
+    public function toggleVisibility(string $templateKey)
+    {
+        try {
+            $template = Template::where('template_key', $templateKey)->firstOrFail();
+            $template->is_visible = !$template->is_visible;
+            $template->save();
+
+            return response()->json([
+                'success' => true,
+                'is_visible' => $template->is_visible,
+                'message' => $template->is_visible 
+                    ? 'Template is now visible on home page' 
+                    : 'Template is now hidden from home page',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to toggle visibility: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update display order for templates (drag-drop)
+     */
+    public function updateOrder(Request $request)
+    {
+        $request->validate([
+            'order' => 'required|array',
+            'order.*.id' => 'required|exists:templates,id',
+            'order.*.position' => 'required|integer|min:0',
+        ]);
+
+        try {
+            foreach ($request->order as $item) {
+                Template::where('id', $item['id'])
+                    ->update(['display_order' => $item['position']]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Template order updated successfully!',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update order: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update template display name
+     */
+    public function updateDisplayName(Request $request, string $templateKey)
+    {
+        $request->validate([
+            'display_name' => 'required|string|max:255',
+        ]);
+
+        try {
+            $template = Template::where('template_key', $templateKey)->firstOrFail();
+            $template->display_name = $request->display_name;
+            $template->save();
+
+            return response()->json([
+                'success' => true,
+                'display_name' => $template->display_name,
+                'message' => 'Display name updated successfully!',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update display name: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Update template category
+     */
+    public function updateCategory(Request $request, string $templateKey)
+    {
+        $request->validate([
+            'category' => 'nullable|string|max:100',
+        ]);
+
+        try {
+            $template = Template::where('template_key', $templateKey)->firstOrFail();
+            $template->category = $request->category;
+            $template->save();
+
+            return response()->json([
+                'success' => true,
+                'category' => $template->category,
+                'message' => 'Category updated successfully!',
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to update category: ' . $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    /**
+     * Sync templates from filesystem to database
+     */
+    public function syncFilesystem()
+    {
+        try {
+            Artisan::call('templates:sync');
+            
+            return redirect()->route('admin.templates.index')
+                ->with('success', 'Templates synced successfully from filesystem!');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.templates.index')
+                ->with('error', 'Failed to sync templates: ' . $e->getMessage());
+        }
     }
 }

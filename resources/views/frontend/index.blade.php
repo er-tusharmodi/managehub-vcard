@@ -220,7 +220,7 @@
         @endif
 
         <!-- vCard Previews -->
-        @if(isset($vcardPreviews) && count($vcardPreviews) > 0)
+        @if(isset($templates) && count($templates) > 0)
         <section class="py-20 bg-bg-light relative overflow-hidden">
             <div class="absolute -top-24 -right-24 w-72 h-72 rounded-full" style="background: radial-gradient(circle at center, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0));"></div>
             <div class="absolute -bottom-24 -left-24 w-72 h-72 rounded-full" style="background: radial-gradient(circle at center, rgba(16, 185, 129, 0.18), rgba(16, 185, 129, 0));"></div>
@@ -228,24 +228,24 @@
             <div class="container mx-auto px-4 max-w-8xl relative z-10">
                 <div class="text-center mb-12">
                     <h2 class="vcard-preview-title text-3xl md:text-5xl font-bold mb-4">
-                        {{ $vcardPreviewsSection['title'] ?? 'vCard Previews' }}
+                        {{ $vcardPreviewsSection['title'] ?? 'Explore Our vCard Templates' }}
                     </h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">
-                        {{ $vcardPreviewsSection['subtitle'] ?? 'Explore multiple vCard styles from the CMS. Each preview opens the exact HTML file you uploaded.' }}
+                        {{ $vcardPreviewsSection['subtitle'] ?? 'Browse our collection of professional vCard templates. Each template is fully customizable and ready to use.' }}
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
-                    @foreach ($vcardPreviews as $preview)
+                    @foreach ($templates as $template)
                         <div class="group bg-white rounded-3xl border border-border-light shadow-sm hover:shadow-xl transition transform hover:-translate-y-1">
                             <div class="px-4 pt-4">
                                 <div class="flex items-start justify-between gap-3">
                                     <div>
                                         <h3 class="text-lg font-semibold text-gray-900">
-                                            {{ $preview['title'] ?? 'Untitled vCard' }}
+                                            {{ $template['title'] }}
                                         </h3>
                                     </div>
-                                    <span class="text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded-full" style="background-color: rgba(15, 23, 42, 0.06); color: #0f172a;">{{ $preview['category'] ?? 'General' }}</span>
+                                    <span class="text-xs font-semibold uppercase tracking-wide px-2 py-1 rounded-full" style="background-color: rgba(15, 23, 42, 0.06); color: #0f172a;">{{ $template['category'] }}</span>
                                 </div>
                             </div>
 
@@ -256,28 +256,15 @@
                                         <div class="w-2.5 h-2.5 rounded-full bg-yellow-400 mr-2"></div>
                                         <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
                                     </div>
-                                    @if (!empty($preview['preview_file']))
-                                        <iframe src="{{ $preview['preview_file'] }}" class="w-full" style="height: calc(100% - 36px); border: none;"></iframe>
-                                    @else
-                                        <div class="h-full flex items-center justify-center text-gray-400" style="height: calc(100% - 36px);">
-                                            <div class="text-center">
-                                                <i class="mdi mdi-file-document mdi-48px"></i>
-                                                <p class="text-sm mt-2">No preview file</p>
-                                            </div>
-                                        </div>
-                                    @endif
+                                    <iframe src="{{ $template['preview_url'] }}" class="w-full" style="height: calc(100% - 36px); border: none;" loading="lazy"></iframe>
                                 </div>
                             </div>
 
                             <div class="px-4 pb-4 flex items-center justify-between">
-                                <div class="text-xs text-gray-500">Uploaded preview</div>
-                                @if (!empty($preview['preview_file']))
-                                    <a href="{{ $preview['preview_file'] }}" target="_blank" class="text-sm font-semibold text-primary hover:text-primary-dark transition">
-                                        Open Preview
-                                    </a>
-                                @else
-                                    <span class="text-sm text-gray-400">No file</span>
-                                @endif
+                                <div class="text-xs text-gray-500">Live Preview</div>
+                                <a href="{{ $template['preview_url'] }}" target="_blank" class="text-sm font-semibold text-primary hover:text-primary-dark transition">
+                                    View Full Size
+                                </a>
                             </div>
                         </div>
                     @endforeach
