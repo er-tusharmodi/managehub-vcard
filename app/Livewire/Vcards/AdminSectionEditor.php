@@ -444,6 +444,7 @@ class AdminSectionEditor extends Component
         $data = $this->loadJson();
         $this->jsonContent = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         $this->editMode = 'code';
+        $this->showIndex = false; // Hide section index to show code editor
         $this->dispatch('notify', type: 'info', message: 'Switched to code editor mode');
     }
 
