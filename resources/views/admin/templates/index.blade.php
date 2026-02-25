@@ -19,14 +19,43 @@
     }
     /* Grid Container for Drag & Drop */
     .templates-grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
         margin-bottom: 2rem;
     }
     
     .template-item {
         position: relative;
+        flex: 0 0 calc(25% - 0.75rem);
+        width: calc(25% - 0.75rem);
+        cursor: move;
+        cursor: grab;
+    }
+    
+    .template-item:active {
+        cursor: grabbing;
+    }
+    
+    @media (max-width: 1200px) {
+        .template-item {
+            flex: 0 0 calc(33.333% - 0.75rem);
+            width: calc(33.333% - 0.75rem);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .template-item {
+            flex: 0 0 calc(50% - 0.75rem);
+            width: calc(50% - 0.75rem);
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .template-item {
+            flex: 0 0 100%;
+            width: 100%;
+        }
     }
     
     .drag-handle {
@@ -45,12 +74,21 @@
         cursor: grabbing;
     }
     
-    .template-card {
+    .template-item {
         transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .template-item:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
     
     .sortable-ghost {
         opacity: 0.4;
+        background: #f8f9fa;
+    }
+    
+    .sortable-chosen {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     
     .sortable-drag {
@@ -139,25 +177,24 @@
     <!-- Templates Grid -->
     <div id="templates-grid" class="templates-grid-container">
         @forelse($templates as $template)
-        <div class="template-item" data-template-id="{{ $template['id'] }}" data-template-key="{{ $template['key'] }}">
-            <div class="card template-card h-100">
-                <div class="order-badge">
-                    #{{ $loop->iteration }}
-                </div>
-                
-                <div class="card-body">
-                    <!-- Header with Drag Handle -->
-                    <div class="d-flex align-items-center mb-3">
-                        <div class="drag-handle me-2" title="Drag to reorder">
-                            <i class="mdi mdi-drag-vertical font-size-20"></i>
-                        </div>
-                        <div class="avatar-sm rounded bg-soft-primary flex-shrink-0">
-                            <i class="mdi mdi-file-code font-size-24 text-primary"></i>
-                        </div>
-                        <div class="flex-grow-1 ms-3">
-                            <h5 class="card-title mb-1 editable-field" 
-                                data-field="display_name"
-                                data-template-key="{{ $template['key'] }}"
+        <div class="template-item card" data-template-id="{{ $template['id'] }}" data-template-key="{{ $template['key'] }}">
+            <div class="order-badge">
+                #{{ $loop->iteration }}
+            </div>
+            
+            <div class="card-body">
+                <!-- Header with Drag Handle -->
+                <div class="d-flex align-items-center mb-3">
+                    <div class="drag-handle me-2" title="Drag to reorder">
+                        <i class="mdi mdi-drag-vertical font-size-20"></i>
+                    </div>
+                    <div class="avatar-sm rounded bg-soft-primary flex-shrink-0">
+                        <i class="mdi mdi-file-code font-size-24 text-primary"></i>
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <h5 class="card-title mb-1 editable-field" 
+                            data-field="display_name"
+                            data-template-key="{{ $template['key'] }}"
                                 onclick="editField(this)"
                                 title="Click to edit">
                                 {{ $template['display_name'] ?? ucwords(str_replace('-', ' ', $template['key'])) }}
@@ -245,7 +282,6 @@
                         </button>
                     </div>
                 </div>
-            </div>
         </div>
         @empty
         <div class="col-12">
@@ -293,34 +329,28 @@
 let deleteTemplateKey = null;
 
 // Initialize Sortable for drag-drop
-document.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
     const grid = document.getElementById('templates-grid');
-    if (grid) {
-        const sortable = new Sortable(grid, {
-            animation: 150,
-            handle: '.drag-handle',
+    
+    if (!grid) {
+        console.error('Templates grid not found');
+        return;
+    }
+    
+    try {
+        new Sortable(grid, {
+            animation: 200,
             ghostClass: 'sortable-ghost',
+            chosenClass: 'sortable-chosen',
             dragClass: 'sortable-drag',
-            filter: function(evt, target) {
-                // Only allow dragging items with valid template ID
-                const item = target.closest('.template-item');
-                return !item || !item.dataset.templateId || item.dataset.templateId === '';
-            },
-            onStart: function(evt) {
-                console.log('Drag started:', evt.item.dataset.templateKey);
-            },
             onEnd: async function(evt) {
-                console.log('Drag ended. Old index:', evt.oldIndex, 'New index:', evt.newIndex);
                 if (evt.oldIndex !== evt.newIndex) {
                     await updateOrder();
-                } else {
-                    console.log('No position change, skipping update');
                 }
             }
         });
-        console.log('✓ Sortable initialized with', grid.querySelectorAll('.template-item').length, 'items');
-    } else {
-        console.error('❌ Templates grid not found!');
+    } catch (error) {
+        console.error('Failed to initialize drag & drop:', error);
     }
 });
 
@@ -332,11 +362,8 @@ async function updateOrder() {
         position: index
     })).filter(item => !isNaN(item.id));
 
-    console.log('Updating order:', order);
-
     if (order.length === 0) {
         showToast('warning', 'No templates to reorder');
-        console.error('No valid templates found for reordering');
         return;
     }
 

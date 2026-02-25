@@ -4,7 +4,8 @@
     },
     "assets": {
         "bannerImage": "uploads/1772003101_61p7aCMIBjL._AC_UY436_FMwebp_QL65_.webp",
-        "profileImage": "uploads/1772003182_41wP5ZQfzxL-_AC_SR120-120_.jpg"
+        "profileImage": "uploads/1772003182_41wP5ZQfzxL-_AC_SR120-120_.jpg",
+        "qrCodeImage": ""
     },
     "shop": {
         "name": "Sona Jewellers",

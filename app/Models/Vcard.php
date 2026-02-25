@@ -19,6 +19,7 @@ class Vcard extends Model
         'client_address',
         'data_path',
         'template_path',
+        'qr_code_path',
         'status',
         'subscription_status',
         'subscription_started_at',

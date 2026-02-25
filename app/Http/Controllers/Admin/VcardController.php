@@ -8,6 +8,7 @@ use App\Mail\VcardCredentialsMail;
 use App\Models\User;
 use App\Models\Vcard;
 use App\Services\VcardTemplateService;
+use App\Services\QrCodeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -114,6 +115,13 @@ class VcardController extends Controller
         ]);
 
         $this->publishTemplateAssets($vcard, $templates);
+
+        // Generate QR code for the vCard
+        $qrCodeService = app(QrCodeService::class);
+        $qrCodeService->generateVcardQr($vcard);
+        
+        // Update data.json with QR code URL
+        $this->updateDataJsonWithQrCode($vcard, $qrCodeService);
 
         $this->sendCredentials($user, $password, $vcard);
 
@@ -240,6 +248,11 @@ class VcardController extends Controller
         \Illuminate\Support\Facades\File::copyDirectory($templatePath, $targetPath);
 
         $defaultData = $templates->loadDefaultJson($vcard->template_key);
+        
+        // Set the vCard's public URL in the data
+        $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
+        $this->setWebsiteUrl($defaultData, $vcardUrl);
+        
         $dataJson = json_encode($defaultData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         Storage::disk('public')->put($basePath . '/default.json', $dataJson);
@@ -371,6 +384,51 @@ class VcardController extends Controller
         } catch (\Exception $e) {
             \Log::error('Failed to send credentials: ' . $e->getMessage());
             return response()->json(['error' => 'Failed to send credentials: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Update data.json with QR code URL
+     */
+    private function updateDataJsonWithQrCode(Vcard $vcard, QrCodeService $qrCodeService): void
+    {
+        $data = $this->loadJson($vcard);
+        
+        // Get QR code URL
+        $qrCodeUrl = $qrCodeService->getQrCodeUrl($vcard);
+        
+        // Add QR code URL to assets section
+        if (!isset($data['assets'])) {
+            $data['assets'] = [];
+        }
+        
+        $data['assets']['qrCodeImage'] = $qrCodeUrl;
+        
+        // Ensure website URL is set correctly
+        $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
+        $this->setWebsiteUrl($data, $vcardUrl);
+        
+        // Save updated data
+        $this->storeJson($vcard, $data);
+    }
+    
+    /**
+     * Set website URL in data structure (works with different template structures)
+     */
+    private function setWebsiteUrl(array &$data, string $url): void
+    {
+        // Check common locations where website URL might be stored
+        if (isset($data['shop'])) {
+            $data['shop']['website'] = $url;
+        }
+        if (isset($data['doctor'])) {
+            $data['doctor']['website'] = $url;
+        }
+        if (isset($data['R'])) {
+            $data['R']['website'] = $url;
+        }
+        if (isset($data['business'])) {
+            $data['business']['website'] = $url;
         }
     }
 }
