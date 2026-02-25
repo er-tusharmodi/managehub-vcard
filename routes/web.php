@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientVcardEditorController;
+use App\Http\Controllers\Client\VcardSubmissionController as ClientVcardSubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminProfileController;
@@ -17,6 +18,7 @@ use App\Livewire\Vcards\ClientSectionEditor;
 use App\Livewire\Admin\TemplateCodeEditor;
 use App\Livewire\Admin\TemplateVisualEditor;
 use App\Http\Controllers\VcardPublicController;
+use App\Http\Controllers\VcardSubmissionController;
 
 Route::get('/', [WebsiteController::class, 'show'])->name('home');
 
@@ -110,6 +112,14 @@ require __DIR__ . '/auth.php';
 // Client Dashboard - Authenticated users
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/vcards/{vcard}/submissions/{type}', [ClientVcardSubmissionController::class, 'index'])
+        ->where('type', 'order|booking|enquiry|contact')
+        ->name('client.submissions.index');
+    
+    Route::patch('/vcards/{vcard}/submissions/{type}/{id}/status', [ClientVcardSubmissionController::class, 'updateStatus'])
+        ->where('type', 'order|booking|enquiry|contact')
+        ->name('client.submissions.updateStatus');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -122,6 +132,12 @@ Route::get('/{subdomain}', [VcardPublicController::class, 'show'])
     ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
     ->name('vcard.public.path');
 
+Route::post('/vcard/{subdomain}/submit/{type}', [VcardSubmissionController::class, 'submit'])
+    ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
+    ->where('type', 'order|booking|enquiry|contact')
+    ->middleware('throttle:20,1')
+    ->name('vcard.submit.path');
+
 Route::middleware('auth')->group(function () {
     Route::get('/my-vcard/{subdomain}/edit/{section?}', [ClientVcardEditorController::class, 'edit'])
         ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
@@ -130,6 +146,11 @@ Route::middleware('auth')->group(function () {
 
 Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
     Route::get('/', [VcardPublicController::class, 'show'])->name('vcard.public');
+
+    Route::post('/submit/{type}', [VcardSubmissionController::class, 'submit'])
+        ->where('type', 'order|booking|enquiry|contact')
+        ->middleware('throttle:20,1')
+        ->name('vcard.submit');
 
     Route::middleware('auth')->group(function () {
         Route::get('/vcard/edit/{section?}', ClientSectionEditor::class)->name('vcard.editor.section');

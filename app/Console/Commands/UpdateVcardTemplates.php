@@ -59,16 +59,25 @@ class UpdateVcardTemplates extends Command
                     continue;
                 }
 
-                // Copy index.php from source to vCard template
-                $sourceIndexPath = $sourceTemplateDir . '/index.php';
-                $destIndexPath = $templatePath . '/index.php';
+                // Copy template files from source to vCard template
+                $filesToCopy = ['index.php', 'script.js', 'style.css', 'default.json'];
+                $copiedFiles = 0;
 
-                if (file_exists($sourceIndexPath)) {
-                    File::copy($sourceIndexPath, $destIndexPath);
+                foreach ($filesToCopy as $file) {
+                    $sourcePath = $sourceTemplateDir . '/' . $file;
+                    $destPath = $templatePath . '/' . $file;
+
+                    if (file_exists($sourcePath)) {
+                        File::copy($sourcePath, $destPath);
+                        $copiedFiles++;
+                    }
+                }
+
+                if ($copiedFiles > 0) {
                     $updated++;
                 } else {
                     $this->newLine();
-                    $this->warn("Source index.php not found for template: {$templateKey}");
+                    $this->warn("No template files found for template: {$templateKey}");
                     $skipped++;
                 }
 

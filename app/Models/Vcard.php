@@ -65,6 +65,26 @@ class Vcard extends Model
         return $this->hasMany(VcardVisit::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(VcardOrder::class);
+    }
+
+    public function bookings(): HasMany
+    {
+        return $this->hasMany(VcardBooking::class);
+    }
+
+    public function enquiries(): HasMany
+    {
+        return $this->hasMany(VcardEnquiry::class);
+    }
+
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(VcardContact::class);
+    }
+
     public function getTotalVisitors(): int
     {
         return $this->visits()->count();

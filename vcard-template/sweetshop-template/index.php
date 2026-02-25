@@ -658,7 +658,8 @@ $paymentStrokeMap = [
                 $data,
                 JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
             ); ?>;
+            window.__VCARD_SUBDOMAIN__ = <?= json_encode(basename(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH))); ?>;
         </script>
-        <script src="script.js"></script>
+        <script src="script.js?v=<?= time(); ?>"></script>
     </body>
 </html>

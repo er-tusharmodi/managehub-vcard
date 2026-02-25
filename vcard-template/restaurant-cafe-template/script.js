@@ -4,9 +4,7 @@ const pick = (path, fallback = "") =>
 const tpl = (template = "", data = {}) =>
     template.replace(/\{\{(\w+)\}\}/g, (_, key) => data[key] ?? "");
 const sq = (value = "") =>
-    String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+    String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 
 const setText = (id, value) => {
     const el = $id(id);
@@ -28,6 +26,49 @@ const setAttr = (id, attr, value) => {
         el.setAttribute(attr, value ?? "");
     }
 };
+
+const getSubmissionUrl = (type) => {
+    // Use injected subdomain from PHP if available
+    if (window.__VCARD_SUBDOMAIN__) {
+        return `/vcard/${window.__VCARD_SUBDOMAIN__}/submit/${type}`;
+    }
+
+    const hostParts = window.location.hostname.split(".");
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+
+    // Check if on subdomain (subdomain.domain.com)
+    if (hostParts.length > 2) {
+        return `/submit/${type}`;
+    }
+
+    // Check if subdomain is in path (/subdomain or /vcard/subdomain)
+    if (pathParts.length > 0) {
+        // If path starts with 'vcard', subdomain is next part
+        if (pathParts[0] === "vcard" && pathParts.length > 1) {
+            return `/vcard/${pathParts[1]}/submit/${type}`;
+        }
+        // Otherwise first part is the subdomain
+        return `/vcard/${pathParts[0]}/submit/${type}`;
+    }
+
+    // Fallback
+    return `/submit/${type}`;
+};
+
+const sendSubmission = (type, payload) =>
+    fetch(getSubmissionUrl(type), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((res) => res.json())
+        .catch((err) => {
+            console.error("Submission error:", err);
+            return { success: false };
+        });
 
 let APP = {};
 let R = {};
@@ -127,7 +168,9 @@ const renderRatingStrip = () => {
 const renderCuisineTags = () => {
     setHTML(
         "cuisineTags",
-        (APP.profile?.cuisineTags || []).map((item) => `<span class="ctag">${item}</span>`).join(""),
+        (APP.profile?.cuisineTags || [])
+            .map((item) => `<span class="ctag">${item}</span>`)
+            .join(""),
     );
 };
 
@@ -205,7 +248,8 @@ const renderReviews = () => {
         "reviewList",
         (APP.reviews?.items || [])
             .map((item) => {
-                const color = item.sourceType === "zomato" ? "#e53935" : "var(--muted)";
+                const color =
+                    item.sourceType === "zomato" ? "#e53935" : "var(--muted)";
                 return `
                     <div class="review-card">
                         <div class="rev-top">
@@ -363,7 +407,10 @@ function chQty(id, delta, price, name) {
     if (q) {
         q.textContent = cart[id]?.qty || 0;
     }
-    const totalQty = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
+    const totalQty = Object.values(cart).reduce(
+        (sum, item) => sum + item.qty,
+        0,
+    );
     const badge = $id("cartBadge");
     if (badge) {
         badge.textContent = totalQty;
@@ -399,14 +446,21 @@ function openCart() {
     $id("cartOverlay")?.classList.add("show");
 }
 
-function sendCartWA() {
+async function sendCartWA() {
     const items = Object.values(cart);
     let total = 0;
     let message = `Meal Order - ${R.name}\n\n`;
+    const orderItems = [];
     items.forEach((item) => {
         const amount = item.price * item.qty;
         total += amount;
         message += `* ${item.name} x${item.qty} = Rs.${amount}\n`;
+        orderItems.push({
+            name: item.name,
+            qty: item.qty,
+            price: item.price,
+            total: amount,
+        });
     });
     message += `\nTotal: Rs.${total}`;
     const note = $id("cartNote")?.value.trim();
@@ -414,7 +468,22 @@ function sendCartWA() {
         message += `\nNote: ${note}`;
     }
     message += "\n\nPlease confirm my order!";
-    window.open(`https://wa.me/${R.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+
+    await sendSubmission("order", {
+        source_template: pick("meta.title") || "restaurant-cafe-template",
+        shop_name: R.name || "",
+        name: "",
+        phone: "",
+        email: "",
+        message: note || "Meal order",
+        items: orderItems,
+        total: total,
+    });
+
+    window.open(
+        `https://wa.me/${R.whatsapp}?text=${encodeURIComponent(message)}`,
+        "_blank",
+    );
     closeCart();
 }
 
@@ -428,7 +497,7 @@ function closeCartOutside(event) {
     }
 }
 
-function submitReservation() {
+async function submitReservation() {
     const name = $id("rName")?.value.trim() || "";
     const phone = $id("rPhone")?.value.trim() || "";
     if (!name || !phone) {
@@ -452,7 +521,25 @@ function submitReservation() {
         message += `\nNotes: ${notes}`;
     }
     message += "\n\nPlease confirm my reservation!";
-    window.open(`https://wa.me/${R.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+
+    await sendSubmission("booking", {
+        source_template: pick("meta.title") || "restaurant-cafe-template",
+        shop_name: R.name || "",
+        name,
+        phone,
+        message: notes,
+        items: [
+            { label: "date", value: date },
+            { label: "time", value: time },
+            { label: "guests", value: guests },
+            { label: "occasion", value: occasion },
+        ],
+    });
+
+    window.open(
+        `https://wa.me/${R.whatsapp}?text=${encodeURIComponent(message)}`,
+        "_blank",
+    );
     if ($id("reservationForm")) {
         $id("reservationForm").style.display = "none";
     }
@@ -498,7 +585,7 @@ function closeResOutside(event) {
     }
 }
 
-function submitReservationModal() {
+async function submitReservationModal() {
     const name = $id("rName2")?.value.trim() || "";
     const phone = $id("rPhone2")?.value.trim() || "";
     if (!name || !phone) {
@@ -509,7 +596,23 @@ function submitReservationModal() {
     const time = $id("rTime2")?.value || "";
     const guests = $id("rGuests2")?.value || "";
     const message = `Table Reservation - ${R.name}\n\nName: ${name}\nPhone: ${phone}\nDate: ${date} at ${time}\nGuests: ${guests}\n\nPlease confirm!`;
-    window.open(`https://wa.me/${R.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+
+    await sendSubmission("booking", {
+        source_template: pick("meta.title") || "restaurant-cafe-template",
+        shop_name: R.name || "",
+        name,
+        phone,
+        message: "",
+        items: [
+            { label: "date", value: date },
+            { label: "time", value: time },
+            { label: "guests", value: guests },
+        ],
+    });
+    window.open(
+        `https://wa.me/${R.whatsapp}?text=${encodeURIComponent(message)}`,
+        "_blank",
+    );
     closeReserveModal();
     showToast(pick("messages.reservationSent"));
 }
@@ -519,7 +622,10 @@ function callUs() {
 }
 
 function openWA() {
-    window.open(`https://wa.me/${R.whatsapp}?text=${encodeURIComponent(pick("messages.waEnquiry"))}`, "_blank");
+    window.open(
+        `https://wa.me/${R.whatsapp}?text=${encodeURIComponent(pick("messages.waEnquiry"))}`,
+        "_blank",
+    );
 }
 
 function emailUs() {
@@ -600,12 +706,18 @@ function closeShareModal() {
 }
 
 function shareWA() {
-    window.open(`https://wa.me/?text=${encodeURIComponent(`Check out ${R.name}: ${R.website}`)}`, "_blank");
+    window.open(
+        `https://wa.me/?text=${encodeURIComponent(`Check out ${R.name}: ${R.website}`)}`,
+        "_blank",
+    );
     closeShareModal();
 }
 
 function shareFB() {
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(R.website)}`, "_blank");
+    window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(R.website)}`,
+        "_blank",
+    );
     closeShareModal();
 }
 
@@ -768,7 +880,7 @@ const renderAll = () => {
     }
 
     genQR();
-}
+};
 
 const boot = async () => {
     try {

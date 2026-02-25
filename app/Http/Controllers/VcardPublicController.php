@@ -39,6 +39,7 @@ class VcardPublicController extends Controller
         $baseHref = '/storage/' . trim($vcard->template_path, '/') . '/';
 
         $content = $this->injectBaseHref($content, $baseHref);
+        $content = $this->injectSubdomain($content, $subdomain);
 
         return response($content);
     }
@@ -59,6 +60,15 @@ class VcardPublicController extends Controller
         }
 
         return str_ireplace('<head>', '<head><base href="' . $baseHref . '">', $content);
+    }
+
+    private function injectSubdomain(string $content, string $subdomain): string
+    {
+        // Inject the subdomain variable correctly
+        $search = 'window.__VCARD_SUBDOMAIN__ = "";';
+        $replace = 'window.__VCARD_SUBDOMAIN__ = ' . json_encode($subdomain) . ';';
+        
+        return str_replace($search, $replace, $content);
     }
 
     private function trackVisit(Vcard $vcard, Request $request): void

@@ -2,9 +2,7 @@ const $id = (id) => document.getElementById(id);
 const tpl = (template, values = {}) =>
     (template || "").replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 const sq = (value = "") =>
-    String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+    String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 const pick = (path, fallback = "") =>
     path.split(".").reduce((acc, key) => acc?.[key], APP) ?? fallback;
 
@@ -28,6 +26,49 @@ const setAttr = (id, attr, value) => {
         el.setAttribute(attr, value ?? "");
     }
 };
+
+const getSubmissionUrl = (type) => {
+    // Use injected subdomain from PHP if available
+    if (window.__VCARD_SUBDOMAIN__) {
+        return `/vcard/${window.__VCARD_SUBDOMAIN__}/submit/${type}`;
+    }
+
+    const hostParts = window.location.hostname.split(".");
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+
+    // Check if on subdomain (subdomain.domain.com)
+    if (hostParts.length > 2) {
+        return `/submit/${type}`;
+    }
+
+    // Check if subdomain is in path (/subdomain or /vcard/subdomain)
+    if (pathParts.length > 0) {
+        // If path starts with 'vcard', subdomain is next part
+        if (pathParts[0] === "vcard" && pathParts.length > 1) {
+            return `/vcard/${pathParts[1]}/submit/${type}`;
+        }
+        // Otherwise first part is the subdomain
+        return `/vcard/${pathParts[0]}/submit/${type}`;
+    }
+
+    // Fallback
+    return `/submit/${type}`;
+};
+
+const sendSubmission = (type, payload) =>
+    fetch(getSubmissionUrl(type), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((res) => res.json())
+        .catch((err) => {
+            console.error("Submission error:", err);
+            return { success: false };
+        });
 
 let APP = {};
 let SHOP = {};
@@ -141,7 +182,10 @@ const renderPackages = () => {
                         </div>
                         <div class="pkg-items">
                             ${(item.items || [])
-                                .map((label) => `<div class="pkg-item">${CHECK_ICON}${label}</div>`)
+                                .map(
+                                    (label) =>
+                                        `<div class="pkg-item">${CHECK_ICON}${label}</div>`,
+                                )
                                 .join("")}
                         </div>
                         <div class="pkg-footer">
@@ -232,7 +276,10 @@ const renderBarbers = () => {
                             <div class="barber-exp">${item.exp || ""}</div>
                             <div class="barber-skills">
                                 ${(item.skills || [])
-                                    .map((skill) => `<span class="b-chip">${skill}</span>`)
+                                    .map(
+                                        (skill) =>
+                                            `<span class="b-chip">${skill}</span>`,
+                                    )
                                     .join("")}
                             </div>
                         </div>
@@ -505,7 +552,7 @@ function selectSlot(el) {
     selectedSlot = el.dataset.slot || selectedSlot;
 }
 
-function confirmBooking() {
+async function confirmBooking() {
     const name = $id("bName")?.value.trim();
     const phone = $id("bPhone")?.value.trim();
 
@@ -514,9 +561,11 @@ function confirmBooking() {
         return;
     }
 
-    const service = $id("bService")?.value || pick("booking.form.defaultService");
+    const service =
+        $id("bService")?.value || pick("booking.form.defaultService");
     const barber = $id("bBarber")?.value || pick("booking.form.defaultBarber");
     const note = $id("bNote")?.value || pick("booking.form.defaultNote");
+    const slot = selectedSlot || APP.booking?.defaultSlot || "";
 
     const msg = tpl(APP.messages?.bookingTemplate, {
         shopName: SHOP.name,
@@ -524,8 +573,21 @@ function confirmBooking() {
         phone,
         service,
         barber,
-        slot: selectedSlot || APP.booking?.defaultSlot || "",
+        slot,
         note,
+    });
+
+    await sendSubmission("booking", {
+        source_template: pick("meta.title") || "mens-salon-template",
+        shop_name: SHOP.name || "",
+        name,
+        phone,
+        message: note,
+        items: [
+            { label: "service", value: service },
+            { label: "barber", value: barber },
+            { label: "slot", value: slot },
+        ],
     });
 
     window.open(
@@ -746,7 +808,9 @@ async function boot() {
     try {
         const response = await fetch("default.json", { cache: "no-cache" });
         if (!response.ok) {
-            throw new Error(`default.json load failed with status ${response.status}`);
+            throw new Error(
+                `default.json load failed with status ${response.status}`,
+            );
         }
 
         APP = await response.json();

@@ -17,6 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
         ]);
+        
+        // Exclude vCard submission endpoints from CSRF verification
+        $middleware->validateCsrfTokens(except: [
+            '/vcard/*/submit/*',
+            '/submit/*',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

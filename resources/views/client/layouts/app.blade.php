@@ -158,6 +158,57 @@
                                 </li>
                             @endforelse
 
+                            @php
+                                $submissionMenu = [];
+                                foreach ($userVcards as $vcard) {
+                                    $types = [];
+                                    $templatePath = $vcard->template_path ? trim($vcard->template_path, '/') : '';
+                                    $defaultJsonPath = $templatePath ? \Illuminate\Support\Facades\Storage::disk('public')->path($templatePath . '/default.json') : '';
+
+                                    if ($defaultJsonPath && is_readable($defaultJsonPath)) {
+                                        $data = json_decode(file_get_contents($defaultJsonPath), true);
+                                        if (is_array($data)) {
+                                            if (isset($data['cart']) || isset($data['products'])) {
+                                                $types['order'] = 'Orders';
+                                            }
+                                            if (isset($data['booking']) || isset($data['reservation']) || isset($data['reserve'])) {
+                                                $types['booking'] = 'Bookings';
+                                            }
+                                            if (isset($data['enquiryForm']) || isset($data['enquiry'])) {
+                                                $types['enquiry'] = 'Enquiries';
+                                            }
+                                            if (isset($data['contactForm']) || isset($data['contact'])) {
+                                                $types['contact'] = 'Contacts';
+                                            }
+                                        }
+                                    }
+
+                                    if (!empty($types)) {
+                                        $submissionMenu[] = ['vcard' => $vcard, 'types' => $types];
+                                    }
+                                }
+                            @endphp
+
+                            @if (!empty($submissionMenu))
+                                <li class="menu-title">Submissions</li>
+                                @foreach ($submissionMenu as $entry)
+                                    <li>
+                                        <span class="tp-link text-muted" style="cursor: default;">
+                                            <i data-feather="chevrons-right"></i>
+                                            <span>{{ substr($entry['vcard']->client_name, 0, 18) }}</span>
+                                        </span>
+                                    </li>
+                                    @foreach ($entry['types'] as $typeKey => $typeLabel)
+                                        <li>
+                                            <a href="{{ route('client.submissions.index', [$entry['vcard']->id, $typeKey]) }}" class="tp-link" style="padding-left: 42px;">
+                                                <i data-feather="file-text"></i>
+                                                <span>{{ $typeLabel }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endforeach
+                            @endif
+
                             <li class="menu-title">Account</li>
 
                             <li>

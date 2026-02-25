@@ -82,6 +82,104 @@
         </div>
     </div>
 
+    <!-- Submissions Statistics Row -->
+    @if(!empty($activeSubmissionTypes))
+        <div class="row g-3 mb-4">
+            <div class="col-12">
+                <h5 class="mb-3 fw-semibold">
+                    <i class="mdi mdi-chart-line text-primary me-2"></i>Submissions Overview
+                </h5>
+            </div>
+
+            @if(isset($activeSubmissionTypes['orders']))
+            <!-- Orders Card -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #ef4444;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <p class="text-muted small mb-1">Orders</p>
+                                <h4 class="mb-0 fw-bold" style="color: #ef4444;">{{ $submissionStats['orders']['total'] }}</h4>
+                            </div>
+                            <i class="mdi mdi-cart" style="font-size: 32px; color: #ef4444; opacity: 0.2;"></i>
+                        </div>
+                        <div class="d-flex gap-2 mb-2">
+                            <span class="badge bg-light text-dark">Today: {{ $submissionStats['orders']['today'] }}</span>
+                            <span class="badge bg-light text-dark">Week: {{ $submissionStats['orders']['week'] }}</span>
+                        </div>
+                        <div class="text-success fw-semibold">
+                            Revenue: ₹{{ number_format($submissionStats['orders']['revenue'], 2) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            @if(isset($activeSubmissionTypes['bookings']))
+            <!-- Bookings Card -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #3b82f6;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <p class="text-muted small mb-1">Bookings</p>
+                                <h4 class="mb-0 fw-bold" style="color: #3b82f6;">{{ $submissionStats['bookings']['total'] }}</h4>
+                            </div>
+                            <i class="mdi mdi-calendar-check" style="font-size: 32px; color: #3b82f6; opacity: 0.2;"></i>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <span class="badge bg-light text-dark">Today: {{ $submissionStats['bookings']['today'] }}</span>
+                            <span class="badge bg-light text-dark">Week: {{ $submissionStats['bookings']['week'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            @if(isset($activeSubmissionTypes['enquiries']))
+            <!-- Enquiries Card -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #f59e0b;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <p class="text-muted small mb-1">Enquiries</p>
+                                <h4 class="mb-0 fw-bold" style="color: #f59e0b;">{{ $submissionStats['enquiries']['total'] }}</h4>
+                            </div>
+                            <i class="mdi mdi-help-circle" style="font-size: 32px; color: #f59e0b; opacity: 0.2;"></i>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <span class="badge bg-light text-dark">Today: {{ $submissionStats['enquiries']['today'] }}</span>
+                            <span class="badge bg-light text-dark">Week: {{ $submissionStats['enquiries']['week'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            @if(isset($activeSubmissionTypes['contacts']))
+            <!-- Messages Card -->
+            <div class="col-md-6 col-xl-3">
+                <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #10b981;">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <p class="text-muted small mb-1">Messages</p>
+                                <h4 class="mb-0 fw-bold" style="color: #10b981;">{{ $submissionStats['contacts']['total'] }}</h4>
+                            </div>
+                            <i class="mdi mdi-message-text" style="font-size: 32px; color: #10b981; opacity: 0.2;"></i>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <span class="badge bg-light text-dark">Today: {{ $submissionStats['contacts']['today'] }}</span>
+                            <span class="badge bg-light text-dark">Week: {{ $submissionStats['contacts']['week'] }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+    @endif
+
     <!-- vCards Table -->
     <div class="card border-0 shadow-sm" id="vcards">
         <div class="card-header bg-white border-bottom px-4 py-3">

@@ -3,9 +3,7 @@ const money = (value) => Number(value || 0).toLocaleString("en-IN");
 const tpl = (template, values = {}) =>
     (template || "").replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 const sq = (value = "") =>
-    String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+    String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 const pick = (path, fallback = "") =>
     path.split(".").reduce((acc, key) => acc?.[key], APP) ?? fallback;
 
@@ -29,6 +27,49 @@ const setAttr = (id, attr, value) => {
         el.setAttribute(attr, value ?? "");
     }
 };
+
+const getSubmissionUrl = (type) => {
+    // Use injected subdomain from PHP if available
+    if (window.__VCARD_SUBDOMAIN__) {
+        return `/vcard/${window.__VCARD_SUBDOMAIN__}/submit/${type}`;
+    }
+
+    const hostParts = window.location.hostname.split(".");
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+
+    // Check if on subdomain (subdomain.domain.com)
+    if (hostParts.length > 2) {
+        return `/submit/${type}`;
+    }
+
+    // Check if subdomain is in path (/subdomain or /vcard/subdomain)
+    if (pathParts.length > 0) {
+        // If path starts with 'vcard', subdomain is next part
+        if (pathParts[0] === "vcard" && pathParts.length > 1) {
+            return `/vcard/${pathParts[1]}/submit/${type}`;
+        }
+        // Otherwise first part is the subdomain
+        return `/vcard/${pathParts[0]}/submit/${type}`;
+    }
+
+    // Fallback
+    return `/submit/${type}`;
+};
+
+const sendSubmission = (type, payload) =>
+    fetch(getSubmissionUrl(type), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((res) => res.json())
+        .catch((err) => {
+            console.error("Submission error:", err);
+            return { success: false };
+        });
 
 let APP = {};
 let SHOP = {};
@@ -467,11 +508,12 @@ function openCart() {
     $id("cartOverlay")?.classList.add("show");
 }
 
-function sendCartWA() {
+async function sendCartWA() {
     const items = PRODUCTS.filter((item) => cart[item.id] > 0);
     let total = 0;
     let message = `${tpl(APP.cart?.waHeader, { shopName: SHOP.name })}\n\n`;
 
+    const orderItems = [];
     items.forEach((item) => {
         const lineTotal = item.price * cart[item.id];
         total += lineTotal;
@@ -482,9 +524,28 @@ function sendCartWA() {
             qty: cart[item.id],
             total: money(lineTotal),
         })}\n`;
+
+        orderItems.push({
+            name: item.name,
+            brand: item.brand,
+            qty: cart[item.id],
+            price: item.price,
+            total: lineTotal,
+        });
     });
 
     message += `\n${tpl(APP.cart?.waTotal, { total: money(total) })}\n\n${APP.cart?.waFooter || ""}`;
+
+    await sendSubmission("order", {
+        source_template: pick("meta.title") || "electronics-shop-template",
+        shop_name: SHOP.name || "",
+        name: "",
+        phone: "",
+        email: "",
+        message: "Cart order",
+        items: orderItems,
+        total: total,
+    });
 
     window.open(
         `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`,
@@ -652,9 +713,12 @@ function promoAction() {
     closePromo();
 }
 
-function submitContact() {
+async function submitContact() {
     const name = $id("cName")?.value.trim();
     const phone = $id("cPhone")?.value.trim();
+    const email = $id("cEmail")?.value.trim();
+    const category = $id("cCat")?.value || pick("enquiryForm.defaultCategory");
+    const note = $id("cMsg")?.value || pick("enquiryForm.defaultMessage");
 
     if (!name || !phone) {
         showToast(pick("messages.namePhoneRequired"));
@@ -665,9 +729,19 @@ function submitContact() {
         shopName: SHOP.name,
         name,
         phone,
-        email: $id("cEmail")?.value || pick("enquiryForm.defaultEmail"),
-        category: $id("cCat")?.value || pick("enquiryForm.defaultCategory"),
-        message: $id("cMsg")?.value || pick("enquiryForm.defaultMessage"),
+        email: email || pick("enquiryForm.defaultEmail"),
+        category,
+        message: note,
+    });
+
+    await sendSubmission("enquiry", {
+        source_template: pick("meta.title") || "electronics-shop-template",
+        shop_name: SHOP.name || "",
+        name,
+        phone,
+        email,
+        message: note,
+        items: [{ label: "category", value: category }],
     });
 
     window.open(
@@ -727,7 +801,9 @@ async function boot() {
     try {
         const res = await fetch("default.json", { cache: "no-cache" });
         if (!res.ok) {
-            throw new Error(`default.json load failed with status ${res.status}`);
+            throw new Error(
+                `default.json load failed with status ${res.status}`,
+            );
         }
 
         APP = await res.json();
