@@ -13,6 +13,12 @@ class VcardVisit extends Model
         'vcard_id',
         'ip_address',
         'user_agent',
+        'page_url',
+        'referrer',
+        'browser',
+        'device',
+        'platform',
+        'country',
         'visited_at',
     ];
 

@@ -6,6 +6,7 @@ use App\Models\Vcard;
 use App\Models\VcardVisit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Jenssegers\Agent\Agent;
 use Symfony\Component\HttpFoundation\Response;
 
 class VcardPublicController extends Controller
@@ -76,12 +77,29 @@ class VcardPublicController extends Controller
         // Get client IP address
         $ipAddress = $request->getClientIp();
         $userAgent = $request->header('User-Agent');
+        $referrer = $request->headers->get('referer');
+        $pageUrl = $request->fullUrl();
+
+        $agent = new Agent();
+        $agent->setUserAgent($userAgent ?? '');
+        $device = 'Desktop';
+        if ($agent->isTablet()) {
+            $device = 'Tablet';
+        } elseif ($agent->isMobile()) {
+            $device = 'Mobile';
+        }
 
         // Create visit record
         VcardVisit::create([
             'vcard_id' => $vcard->id,
             'ip_address' => $ipAddress,
             'user_agent' => $userAgent,
+            'page_url' => $pageUrl,
+            'referrer' => $referrer,
+            'browser' => $agent->browser() ?: null,
+            'device' => $device,
+            'platform' => $agent->platform() ?: null,
+            'country' => null,
             'visited_at' => now(),
         ]);
     }

@@ -250,7 +250,11 @@ class TemplateController extends Controller
                 $content = $baseTag . $content;
             }
 
-            return response($content)->header('Content-Type', 'text/html');
+            return response($content)
+                ->header('Content-Type', 'text/html')
+                ->header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
+                ->header('Pragma', 'no-cache')
+                ->header('Expires', '0');
         } catch (\Exception $e) {
             abort(500, 'Failed to preview template: ' . $e->getMessage());
         }

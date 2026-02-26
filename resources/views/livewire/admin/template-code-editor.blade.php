@@ -149,10 +149,10 @@
                         <h5 class="card-title mb-3">Live Preview</h5>
                         <div class="border rounded bg-light" style="height: 600px; overflow: hidden;">
                             <iframe 
+                                id="template-preview-iframe"
                                 src="{{ route('admin.templates.preview', $templateKey) }}?t={{ $previewKey }}" 
                                 class="w-100 h-100 border-0"
                                 style="background: white;"
-                                wire:key="preview-{{ $previewKey }}"
                             ></iframe>
                         </div>
                         <div class="text-center mt-2">
@@ -170,30 +170,13 @@
 
 @push('scripts')
 <script>
-    // Listen for toast notifications from Livewire
-    Livewire.on('show-toast', function(data) {
-        const type = data[0].type || data.type;
-        const message = data[0].message || data.message;
-        showToast(type, message);
+    // Watch for previewKey changes and reload iframe
+    document.addEventListener('livewire:updated', () => {
+        const iframe = document.getElementById('template-preview-iframe');
+        if (iframe) {
+            const baseUrl = iframe.src.split('?')[0];
+            iframe.src = baseUrl + '?t=' + Date.now();
+        }
     });
-
-    function showToast(type, message) {
-        const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
-        const icon = type === 'success' ? 'mdi-check-circle' : 'mdi-alert-circle';
-        
-        const alert = document.createElement('div');
-        alert.className = `alert ${alertClass} alert-dismissible fade show position-fixed top-0 end-0 m-3`;
-        alert.style.zIndex = '9999';
-        alert.innerHTML = `
-            <i class="mdi ${icon} me-2"></i>${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        `;
-        
-        document.body.appendChild(alert);
-        
-        setTimeout(() => {
-            alert.remove();
-        }, 5000);
-    }
 </script>
 @endpush

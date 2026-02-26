@@ -6,7 +6,7 @@
     <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column mb-4">
         <div class="flex-grow-1">
             <h4 class="fs-18 fw-semibold m-0">Create vCard</h4>
-            <p class="text-muted small mb-0">Create a new vCard and automatically send login credentials to the client</p>
+            <p class="text-muted small mb-0">Create a new vCard and optionally send login credentials to the client</p>
         </div>
         <div class="text-end">
             <a href="{{ route('admin.vcards.index') }}" class="btn btn-sm btn-outline-secondary">Back</a>
@@ -18,7 +18,11 @@
             <i class="mdi mdi-check-decagram me-2"></i>
             <strong>vCard Created Successfully!</strong>
             <div class="mt-2 small">
-                <p class="mb-2"><i class="mdi mdi-check me-1" style="color: #28a745;"></i> Username and password sent to client email</p>
+                @if (session('credentials_sent'))
+                    <p class="mb-2"><i class="mdi mdi-check me-1" style="color: #28a745;"></i> Username and password sent to client email</p>
+                @else
+                    <p class="mb-2"><i class="mdi mdi-information-outline me-1" style="color: #6c757d;"></i> Credentials email was not sent</p>
+                @endif
                 {{ session('success') }}
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
@@ -83,8 +87,16 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Subscription Expiry</label>
-                        <input type="date" name="subscription_expires_at" class="form-control" value="{{ old('subscription_expires_at') }}">
+                        <input type="date" name="subscription_expires_at" class="form-control" value="{{ old('subscription_expires_at') }}" min="{{ date('Y-m-d') }}">
                         @error('subscription_expires_at')<div class="text-danger small">{{ $message }}</div>@enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Send client credentials</label>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="send_credentials" name="send_credentials" value="1" @if(old('send_credentials')) checked @endif>
+                            <label class="form-check-label" for="send_credentials">Email username and password</label>
+                        </div>
+                        <div class="small text-muted mt-1">Disabled by default. Enable to send credentials after create.</div>
                     </div>
                 </div>
 
@@ -92,7 +104,7 @@
                     <button type="submit" id="submitBtn" class="btn btn-primary">
                         <i class="mdi mdi-plus-circle me-2"></i>Create vCard
                     </button>
-                    <small class="text-muted d-block mt-2">✓ Credentials will be automatically sent to the client email</small>
+                    <small class="text-muted d-block mt-2">Credentials email is sent only when the toggle is enabled.</small>
                 </div>
             </form>
         </div>

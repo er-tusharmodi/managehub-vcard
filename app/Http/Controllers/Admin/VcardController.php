@@ -65,7 +65,8 @@ class VcardController extends Controller
             'subdomain' => ['required', 'string', 'max:60', 'regex:/^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/', 'unique:vcards,subdomain'],
             'template_key' => ['required', 'string'],
             'subscription_status' => ['required', 'in:active,inactive'],
-            'subscription_expires_at' => ['nullable', 'date'],
+            'subscription_expires_at' => ['nullable', 'date', 'after_or_equal:today'],
+            'send_credentials' => ['nullable', 'boolean'],
         ]);
 
         $template = $templates->templatePath($validated['template_key']);
@@ -123,11 +124,17 @@ class VcardController extends Controller
         // Update data.json with QR code URL
         $this->updateDataJsonWithQrCode($vcard, $qrCodeService);
 
-        $this->sendCredentials($user, $password, $vcard);
+        $sendCredentials = (bool) ($validated['send_credentials'] ?? false);
+        if ($sendCredentials) {
+            $this->sendCredentials($user, $password, $vcard);
+        }
 
         $domain = config('vcard.base_domain');
         $target = config('vcard.cname_target');
-        return redirect()->route('admin.vcards.index')->with('success', "vCard created! Add DNS A record: {$vcard->subdomain}.{$domain} → {$target}");
+        return redirect()
+            ->route('admin.vcards.index')
+            ->with('success', "vCard created! Add DNS A record: {$vcard->subdomain}.{$domain} → {$target}")
+            ->with('credentials_sent', $sendCredentials);
     }
 
     public function destroy(Vcard $vcard): RedirectResponse

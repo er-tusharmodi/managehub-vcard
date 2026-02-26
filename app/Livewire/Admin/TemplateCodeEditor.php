@@ -56,7 +56,7 @@ class TemplateCodeEditor extends Component
             if (!empty($this->jsonContent)) {
                 $decoded = json_decode($this->jsonContent, true);
                 if (json_last_error() !== JSON_ERROR_NONE) {
-                    $this->dispatch('show-toast', type: 'error', message: 'Invalid JSON syntax: ' . json_last_error_msg());
+                    $this->dispatch('notify', type: 'error', message: 'Invalid JSON syntax: ' . json_last_error_msg());
                     return;
                 }
             }
@@ -73,7 +73,7 @@ class TemplateCodeEditor extends Component
                 unlink($tempFile);
                 
                 if ($returnVar !== 0) {
-                    $this->dispatch('show-toast', type: 'error', message: 'PHP syntax error: ' . implode("\n", $output));
+                    $this->dispatch('notify', type: 'error', message: 'PHP syntax error: ' . implode("\n", $output));
                     return;
                 }
             }
@@ -94,9 +94,9 @@ class TemplateCodeEditor extends Component
             // Refresh preview
             $this->previewKey = time();
             
-            $this->dispatch('show-toast', type: 'success', message: 'Template updated successfully!');
+            $this->dispatch('notify', type: 'success', message: 'Template updated successfully!');
         } catch (\Exception $e) {
-            $this->dispatch('show-toast', type: 'error', message: 'Failed to update: ' . $e->getMessage());
+            $this->dispatch('notify', type: 'error', message: 'Failed to update: ' . $e->getMessage());
         }
     }
 

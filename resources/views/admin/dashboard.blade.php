@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="d-flex align-items-baseline mb-2">
-                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">91.6K</div>
+                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ number_format($totalVisits) }}</div>
                                 <div class="me-auto">
                                     <span class="text-primary d-inline-flex align-items-center">
                                         15%
@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="d-flex align-items-baseline mb-2">
-                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">15%</div>
+                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ number_format($conversionRate, 2) }}%</div>
                                 <div class="me-auto">
                                     <span class="text-danger d-inline-flex align-items-center">
                                         10%
@@ -58,11 +58,11 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center">
-                                <div class="fs-14 mb-1">Session duration</div>
+                                <div class="fs-14 mb-1">Avg Daily Visits</div>
                             </div>
 
                             <div class="d-flex align-items-baseline mb-2">
-                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">90 Sec</div>
+                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ number_format($avgDailyVisits) }}</div>
                                 <div class="me-auto">
                                     <span class="text-success d-inline-flex align-items-center">
                                         25%
@@ -83,7 +83,7 @@
                             </div>
 
                             <div class="d-flex align-items-baseline mb-2">
-                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ number_format(\App\Models\User::count()) }}</div>
+                                <div class="fs-22 mb-0 me-2 fw-semibold text-black">{{ number_format($totalUsers) }}</div>
                                 <div class="me-auto">
                                     <span class="text-success d-inline-flex align-items-center">
                                         4%
@@ -94,6 +94,40 @@
                             <div id="active-users" class="apex-charts"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                            <i data-feather="smartphone" class="widgets-icons"></i>
+                        </div>
+                        <h5 class="card-title mb-0">Device Breakdown</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="device-breakdown" class="apex-charts"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-6">
+            <div class="card">
+                <div class="card-header">
+                    <div class="d-flex align-items-center">
+                        <div class="border border-dark rounded-2 me-2 widget-icons-sections">
+                            <i data-feather="globe" class="widgets-icons"></i>
+                        </div>
+                        <h5 class="card-title mb-0">Browser Breakdown</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="browser-breakdown" class="apex-charts"></div>
                 </div>
             </div>
         </div>
@@ -139,76 +173,30 @@
                                     </tr>
                                 </thead>
 
-                                <tr>
-                                    <td>Instagram</td>
-                                    <td>3,550</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-danger" style="width: 80.0%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @php
+                                    $trafficTotal = collect($trafficSources)->sum('visits');
+                                    $trafficColors = ['bg-primary', 'bg-success', 'bg-danger', 'bg-warning', 'bg-info', 'bg-secondary', 'bg-dark'];
+                                @endphp
 
-                                <tr>
-                                    <td>Facebook</td>
-                                    <td>1,245</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-primary" style="width: 55.9%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Twitter</td>
-                                    <td>1,798</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-secondary" style="width: 67.0%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>YouTube</td>
-                                    <td>986</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-success" style="width: 38.72%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Pinterest</td>
-                                    <td>854</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-danger" style="width: 45.08%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Linkedin</td>
-                                    <td>650</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-warning" style="width: 68.0%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>Nextdoor</td>
-                                    <td>420</td>
-                                    <td class="w-50">
-                                        <div class="progress progress-md mt-0">
-                                            <div class="progress-bar bg-info" style="width: 56.4%"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @forelse ($trafficSources as $index => $source)
+                                    @php
+                                        $percent = $trafficTotal > 0 ? round(($source['visits'] / $trafficTotal) * 100, 2) : 0;
+                                        $color = $trafficColors[$index % count($trafficColors)];
+                                    @endphp
+                                    <tr>
+                                        <td>{{ $source['source'] }}</td>
+                                        <td>{{ number_format($source['visits']) }}</td>
+                                        <td class="w-50">
+                                            <div class="progress progress-md mt-0">
+                                                <div class="progress-bar {{ $color }}" style="width: {{ $percent }}%"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center text-muted">No traffic data yet.</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -256,115 +244,35 @@
                                     <tr>
                                         <th>Page name</th>
                                         <th>Visitors</th>
-                                        <th>Unique</th>
-                                        <th colspan="2">Bounce rate</th>
+                                        <th colspan="2">Share</th>
                                     </tr>
                                 </thead>
 
-                                <tr>
-                                    <td>
-                                        /home
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>5,896</td>
-                                    <td>3,654</td>
-                                    <td>82.54%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-1" class="apex-charts"></div>
-                                    </td>
-                                </tr>
+                                @php
+                                    $pageTotal = collect($topPages)->sum('visits');
+                                @endphp
 
-                                <tr>
-                                    <td>
-                                        /about.html
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>3,898</td>
-                                    <td>3,450</td>
-                                    <td>76.29%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-2" class="apex-charts"></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        /index.html
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>3,057</td>
-                                    <td>2,589</td>
-                                    <td>72.68%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-3" class="apex-charts"></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        /invoice.html
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>867</td>
-                                    <td>795</td>
-                                    <td>44.78%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-4" class="apex-charts"></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        /docs/
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>958</td>
-                                    <td>801</td>
-                                    <td>41.15%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-5" class="apex-charts"></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        /service.html
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>658</td>
-                                    <td>589</td>
-                                    <td>32.65%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-6" class="apex-charts"></div>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        /analytical.html
-                                        <a href="#" class="ms-1" aria-label="Open website">
-                                            <i data-feather="link" class="ms-1 text-primary" style="height: 15px; width: 15px;"></i>
-                                        </a>
-                                    </td>
-                                    <td>457</td>
-                                    <td>859</td>
-                                    <td>32.65%</td>
-                                    <td class="w-25">
-                                        <div id="sparkline-bounce-7" class="apex-charts"></div>
-                                    </td>
-                                </tr>
+                                @forelse ($topPages as $page)
+                                    @php
+                                        $percent = $pageTotal > 0 ? round(($page['visits'] / $pageTotal) * 100, 2) : 0;
+                                    @endphp
+                                    <tr>
+                                        <td>
+                                            {{ $page['page'] }}
+                                        </td>
+                                        <td>{{ number_format($page['visits']) }}</td>
+                                        <td>{{ $percent }}%</td>
+                                        <td class="w-25">
+                                            <div class="progress progress-md mt-0">
+                                                <div class="progress-bar bg-primary" style="width: {{ $percent }}%"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">No page data yet.</td>
+                                    </tr>
+                                @endforelse
 
                             </tbody>
                         </table>
@@ -378,6 +286,97 @@
 
 @push('scripts')
     <script src="{{ asset('backendtheme/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
-    <script src="https://apexcharts.com/samples/assets/stock-prices.js"></script>
-    <script src="{{ asset('backendtheme/assets/js/pages/analytics-dashboard.init.js') }}"></script>
+    <script>
+        const last30Visits = @json($last30Visits);
+        const last30Labels = @json($last30Days);
+        const monthlySales = @json($monthlySales);
+        const monthLabels = @json($monthLabels);
+        const deviceBreakdown = @json($deviceBreakdown);
+        const browserBreakdown = @json($browserBreakdown);
+
+        const buildSparkline = (selector, seriesData, color) => {
+            const el = document.querySelector(selector);
+            if (!el) {
+                return;
+            }
+            const options = {
+                chart: {
+                    type: 'area',
+                    height: 45,
+                    sparkline: { enabled: true },
+                    animations: { enabled: false }
+                },
+                dataLabels: { enabled: false },
+                fill: { opacity: 0.16, type: 'solid' },
+                stroke: { width: 2, lineCap: 'round', curve: 'smooth' },
+                series: [{ name: 'Visits', data: seriesData }],
+                colors: [color],
+                tooltip: { theme: 'light' }
+            };
+            const chart = new ApexCharts(el, options);
+            chart.render();
+        };
+
+        buildSparkline('#website-visitors', last30Visits, '#537AEF');
+        buildSparkline('#conversion-visitors', last30Visits.map(value => Math.round(value * 0.1)), '#ec8290');
+        buildSparkline('#session-visitors', last30Visits.map(value => Math.max(1, Math.round(value * 0.3))), '#28a745');
+        buildSparkline('#active-users', last30Visits.map(value => Math.max(1, Math.round(value * 0.2))), '#6f42c1');
+
+        const monthlySalesEl = document.querySelector('#monthly-sales');
+        if (monthlySalesEl) {
+            const options = {
+                chart: { type: 'bar', height: 307, parentHeightOffset: 0, toolbar: { show: false } },
+                colors: ['#537AEF'],
+                series: [{ name: 'Sales', data: monthlySales }],
+                fill: { opacity: 1 },
+                plotOptions: {
+                    bar: {
+                        columnWidth: '50%',
+                        borderRadius: 4,
+                        borderRadiusApplication: 'end',
+                        borderRadiusWhenStacked: 'last'
+                    }
+                },
+                grid: { strokeDashArray: 4, padding: { top: -20, right: 0, bottom: -4 }, xaxis: { lines: { show: true } } },
+                xaxis: { categories: monthLabels, axisTicks: { color: '#f0f4f7' } },
+                yaxis: { title: { text: 'Sales', style: { fontSize: '12px', fontWeight: 600 } } },
+                tooltip: { theme: 'light' },
+                legend: { position: 'top', show: true, horizontalAlign: 'center' },
+                dataLabels: { enabled: false }
+            };
+            const chart = new ApexCharts(monthlySalesEl, options);
+            chart.render();
+        }
+
+        const deviceEl = document.querySelector('#device-breakdown');
+        if (deviceEl) {
+            const labels = deviceBreakdown.map(item => item.label || 'Unknown');
+            const series = deviceBreakdown.map(item => item.visits || 0);
+            const options = {
+                chart: { type: 'donut', height: 300 },
+                labels,
+                series,
+                legend: { position: 'bottom' },
+                colors: ['#537AEF', '#2ABE4E', '#F77824', '#6f42c1', '#adb5bd']
+            };
+            const chart = new ApexCharts(deviceEl, options);
+            chart.render();
+        }
+
+        const browserEl = document.querySelector('#browser-breakdown');
+        if (browserEl) {
+            const labels = browserBreakdown.map(item => item.label || 'Unknown');
+            const series = browserBreakdown.map(item => item.visits || 0);
+            const options = {
+                chart: { type: 'bar', height: 300, toolbar: { show: false } },
+                series: [{ name: 'Visits', data: series }],
+                xaxis: { categories: labels },
+                colors: ['#537AEF'],
+                plotOptions: { bar: { columnWidth: '45%', borderRadius: 4 } },
+                dataLabels: { enabled: false }
+            };
+            const chart = new ApexCharts(browserEl, options);
+            chart.render();
+        }
+    </script>
 @endpush
