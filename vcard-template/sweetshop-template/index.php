@@ -663,6 +663,49 @@ $paymentStrokeMap = [
 
         <div class="toast" id="toast"></div>
 
+        <!-- Icon Templates (hidden) -->
+        <div class="icon-templates" style="display:none;">
+            <span id="share"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('share')); ?></svg></span>
+            <span id="save"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('save')); ?></svg></span>
+            <span id="phone"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('phone')); ?></svg></span>
+            <span id="whatsapp"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('whatsapp')); ?></svg></span>
+            <span id="email"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('email')); ?></svg></span>
+            <span id="directions"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('directions')); ?></svg></span>
+            <span id="location"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('location')); ?></svg></span>
+            <span id="globe"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('globe')); ?></svg></span>
+            <span id="services"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('services')); ?></svg></span>
+            <span id="products"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('products')); ?></svg></span>
+            <span id="gallery"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('gallery')); ?></svg></span>
+            <span id="clock"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('clock')); ?></svg></span>
+            <span id="qr"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('qr')); ?></svg></span>
+            <span id="payment"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('payment')); ?></svg></span>
+            <span id="mail"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('mail')); ?></svg></span>
+            <span id="map-arrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('map-arrow')); ?></svg></span>
+            <span id="info"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('info')); ?></svg></span>
+            <span id="download"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('download')); ?></svg></span>
+            <span id="link"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('link')); ?></svg></span>
+            <span id="send"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('send')); ?></svg></span>
+            <span id="check"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('check')); ?></svg></span>
+            <span id="check-large"><?= get_icon('check-large'); ?></span>
+            <span id="reset"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('reset')); ?></svg></span>
+            <span id="cart"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('cart')); ?></svg></span>
+            <span id="cart-thin"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('cart-thin')); ?></svg></span>
+            <span id="close"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('close')); ?></svg></span>
+            <span id="facebook"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('facebook')); ?></svg></span>
+            <span id="instagram"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('instagram')); ?></svg></span>
+            <span id="youtube"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('youtube')); ?></svg></span>
+            <span id="chevron-right"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('chevron-right')); ?></svg></span>
+            <span id="plus"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('plus')); ?></svg></span>
+            <span id="minus"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('minus')); ?></svg></span>
+            <span id="ui_arrow_right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('ui_arrow_right')); ?></svg></span>
+            <span id="ui_check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('ui_check')); ?></svg></span>
+            <span id="ui_star"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('ui_star')); ?></svg></span>
+            <span id="ui_cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('ui_cart')); ?></svg></span>
+            <span id="payment-upi"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('payment-upi')); ?></svg></span>
+            <span id="payment-bank"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('payment-bank')); ?></svg></span>
+            <span id="payment-cash"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor"><?php echo preg_replace('/viewBox.*?>/', '', get_icon('payment-cash')); ?></svg></span>
+        </div>
+
         <script>
             window.APP_DATA = <?= json_encode(
                 $data,

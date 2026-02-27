@@ -715,6 +715,40 @@ $socialIconClasses = [
             </div>
 
             <div class="toast" id="toast"></div>
+            
+            <!-- Hidden Icon Templates -->
+            <div class="icon-templates" style="display: none;">
+                <!-- Banner Icons -->
+                <span id="banner_grocery"><svg viewBox="0 0 24 24" width="30" height="30"><?= getIcon("banner_grocery"); ?></svg></span>
+                <span id="banner_fruits"><svg viewBox="0 0 24 24" width="30" height="30"><?= getIcon("banner_fruits"); ?></svg></span>
+                <span id="banner_essentials"><svg viewBox="0 0 24 24" width="30" height="30"><?= getIcon("banner_essentials"); ?></svg></span>
+                <span id="banner_dairy"><svg viewBox="0 0 24 24" width="30" height="30"><?= getIcon("banner_dairy"); ?></svg></span>
+                <span id="banner_beverages"><svg viewBox="0 0 24 24" width="30" height="30"><?= getIcon("banner_beverages"); ?></svg></span>
+                
+                <!-- Badge Icons -->
+                <span id="badge_trusted"><svg viewBox="0 0 24 24"><?= getIcon("badge_trusted"); ?></svg></span>
+                <span id="badge_open"><svg viewBox="0 0 24 24"><?= getIcon("badge_open"); ?></svg></span>
+                <span id="badge_delivery"><svg viewBox="0 0 24 24"><?= getIcon("badge_delivery"); ?></svg></span>
+                <span id="badge_prices"><svg viewBox="0 0 24 24"><?= getIcon("badge_prices"); ?></svg></span>
+                <span id="badge_fresh"><svg viewBox="0 0 24 24"><?= getIcon("badge_fresh"); ?></svg></span>
+                
+                <!-- Social Icons -->
+                <span id="social_whatsapp"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_whatsapp"); ?></svg></span>
+                <span id="social_facebook"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_facebook"); ?></svg></span>
+                <span id="social_instagram"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_instagram"); ?></svg></span>
+                <span id="social_youtube"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_youtube"); ?></svg></span>
+                
+                <!-- Payment Icons -->
+                <span id="pay_upi"><svg viewBox="0 0 24 24"><?= getIcon("pay_upi"); ?></svg></span>
+                <span id="pay_card"><svg viewBox="0 0 24 24"><?= getIcon("pay_card"); ?></svg></span>
+                <span id="pay_cash"><svg viewBox="0 0 24 24"><?= getIcon("pay_cash"); ?></svg></span>
+                
+                <!-- UI Icons -->
+                <span id="ui_arrow_right"><svg viewBox="0 0 24 24"><?= getIcon("ui_arrow_right"); ?></svg></span>
+                <span id="ui_check"><svg viewBox="0 0 24 24"><?= getIcon("ui_check"); ?></svg></span>
+                <span id="ui_star"><svg viewBox="0 0 24 24"><?= getIcon("ui_star"); ?></svg></span>
+                <span id="ui_cart"><svg viewBox="0 0 24 24"><?= getIcon("ui_cart"); ?></svg></span>
+            </div>
         </main>
         <script>
             window.__APP__ = <?= json_encode($data ?: [], JSON_UNESCAPED_SLASHES); ?>;

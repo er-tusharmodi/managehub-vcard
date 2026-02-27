@@ -2,6 +2,14 @@ const $id = (id) => document.getElementById(id);
 const $$ = (selector, root = document) =>
     Array.from(root.querySelectorAll(selector));
 
+const iconTpl = (id, fallbackId) => {
+    const primary = $id(id)?.innerHTML || "";
+    if (primary) {
+        return primary;
+    }
+    return fallbackId ? $id(fallbackId)?.innerHTML || "" : "";
+};
+
 let APP = {};
 let SHOP = {};
 let PRODUCTS = [];

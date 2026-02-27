@@ -27,6 +27,14 @@ const setAttr = (id, attr, value) => {
     }
 };
 
+const iconTpl = (id, fallbackId) => {
+    const primary = $id(id)?.innerHTML || "";
+    if (primary) {
+        return primary;
+    }
+    return fallbackId ? $id(fallbackId)?.innerHTML || "" : "";
+};
+
 const getSubmissionUrl = (type) => {
     // Use injected subdomain from PHP if available
     if (window.__VCARD_SUBDOMAIN__) {

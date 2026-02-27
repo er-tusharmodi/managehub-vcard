@@ -87,54 +87,62 @@ const sendSubmission = (type, payload) => {
         });
 };
 
+const iconTpl = (id, fallbackId) => {
+    const primary = $id(id)?.innerHTML || "";
+    if (primary) {
+        return primary;
+    }
+    return fallbackId ? $id(fallbackId)?.innerHTML || "" : "";
+};
+
 let APP = {};
 let SHOP = {};
 let PRODUCTS = [];
 let cart = {};
 
-const PILL_ICONS = {
-    shield: `<svg class="ic-sm" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,
-    truck: `<svg class="ic-sm" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
-    clock: `<svg class="ic-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
-    price: `<svg class="ic-sm" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
-    chat: `<svg class="ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
-    refresh: `<svg class="ic-sm" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>`,
-};
+const PILL_ICONS = () => ({
+    shield: () => iconTpl("pill_shield"),
+    truck: () => iconTpl("pill_truck"),
+    clock: () => iconTpl("pill_clock"),
+    price: () => iconTpl("pill_price"),
+    chat: () => iconTpl("pill_chat"),
+    refresh: () => iconTpl("pill_refresh"),
+});
 
-const CATEGORY_ICONS = {
-    phone: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>`,
-    laptop: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
-    appliance: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="7" y1="6" x2="17" y2="6"/><line x1="7" y1="10" x2="17" y2="10"/><circle cx="10" cy="16" r="2"/></svg>`,
-    tv: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M2 8h20"/></svg>`,
-    accessories: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><path d="M6.5 6.5h.01M6.5 17.5h.01M17.5 6.5h.01M17.5 17.5h.01M12 12h.01"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>`,
-    gaming: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><path d="M6 12h12M12 6v12"/><rect x="2" y="7" width="20" height="10" rx="2"/></svg>`,
-};
+const CATEGORY_ICONS = () => ({
+    phone: () => iconTpl("cat_phone"),
+    laptop: () => iconTpl("cat_laptop"),
+    appliance: () => iconTpl("cat_appliance"),
+    tv: () => iconTpl("cat_tv"),
+    accessories: () => iconTpl("cat_accessories"),
+    gaming: () => iconTpl("cat_gaming"),
+});
 
-const PAYMENT_ICONS = {
-    upi: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
-    card: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/><path d="M7 15h3M14 15h.01"/></svg>`,
-    bank: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><circle cx="8" cy="15" r="1"/></svg>`,
-    cash: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
-};
+const PAYMENT_ICONS = () => ({
+    upi: () => iconTpl("pay_upi"),
+    card: () => iconTpl("pay_card"),
+    bank: () => iconTpl("pay_bank"),
+    cash: () => iconTpl("pay_cash"),
+});
 
-const SOCIAL_ICONS = {
+const SOCIAL_ICONS = () => ({
     whatsapp: {
         className: "ic-wa",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
+        svg: () => iconTpl("social_whatsapp"),
     },
     facebook: {
         className: "ic-fb",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+        svg: () => iconTpl("social_facebook"),
     },
     instagram: {
         className: "ic-ig",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+        svg: () => iconTpl("social_instagram"),
     },
     youtube: {
         className: "ic-yt",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>`,
+        svg: () => iconTpl("social_youtube"),
     },
-};
+});
 
 const renderProfileBadges = () => {
     setHTML(
@@ -164,13 +172,14 @@ const renderStats = () => {
 };
 
 const renderWhyChoose = () => {
+    const icons = PILL_ICONS();
     setHTML(
         "whyPills",
         (APP.whyChoose || [])
             .map(
                 (item) => `
                     <span class="pill ${item.tone || ""}">
-                        ${PILL_ICONS[item.icon] || ""}
+                        ${icons[item.icon]?.() || ""}
                         ${item.text || ""}
                     </span>`,
             )
@@ -202,8 +211,7 @@ const renderProducts = () => {
                     <div class="prod-img">
                         <div class="prod-img-placeholder" style="background:${item.bg || ""};height:100%">
                             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.4">
-                                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                                <path d="M8 21h8M12 17v4"/>
+                                ${iconTpl("cat_laptop")}
                             </svg>
                         </div>
                         ${item.tag ? `<span class="prod-tag ${String(item.tag).toLowerCase()}" style="background:${item.tagColor || ""}">${item.tag}</span>` : ""}
@@ -220,11 +228,11 @@ const renderProducts = () => {
                             </div>
                             <div class="qty-ctrl">
                                 <button class="qty-btn" onclick="changeQty(${item.id},-1)">
-                                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    <svg viewBox="0 0 24 24">${iconTpl("minus")}</svg>
                                 </button>
                                 <span class="qty-num" id="qty-${item.id}">${cart[item.id] || 0}</span>
                                 <button class="qty-btn" onclick="changeQty(${item.id},1)">
-                                    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    <svg viewBox="0 0 24 24">${iconTpl("plus")}</svg>
                                 </button>
                             </div>
                         </div>
@@ -248,7 +256,7 @@ const renderRepairs = () => {
                         <div class="repair-price">${item.price || ""}</div>
                         <button class="repair-wa" onclick="enquireWA('${sq(item.query || item.name)}')">
                             <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="2">
-                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                                ${iconTpl("social_whatsapp")}
                             </svg>
                         </button>
                     </div>`,
@@ -478,7 +486,8 @@ function openCart() {
     }
 
     if (!items.length) {
-        body.innerHTML = `<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>${pick("cart.empty")}</div>`;
+        const cartSvg = iconTpl("ui_cart");
+        body.innerHTML = `<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5">${cartSvg}</svg>${pick("cart.empty")}</div>`;
         $id("cartOverlay")?.classList.add("show");
         return;
     }
@@ -492,9 +501,9 @@ function openCart() {
             return `<div class="cart-item">
                 <div class="ci-name">${item.name}<br><small style="color:var(--muted);font-weight:400">${item.brand} · ₹${money(item.price)}</small></div>
                 <div class="ci-qty">
-                    <button class="ci-qty-btn" onclick="changeQty(${item.id},-1);openCart()"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                    <button class="ci-qty-btn" onclick="changeQty(${item.id},-1);openCart()"><svg viewBox="0 0 24 24">${iconTpl("minus")}</svg></button>
                     <span class="ci-qty-num">${cart[item.id]}</span>
-                    <button class="ci-qty-btn" onclick="changeQty(${item.id},1);openCart()"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                    <button class="ci-qty-btn" onclick="changeQty(${item.id},1);openCart()"><svg viewBox="0 0 24 24">${iconTpl("plus")}</svg></button>
                 </div>
                 <div class="ci-price">₹${money(lineTotal)}</div>
             </div>`;
@@ -504,7 +513,7 @@ function openCart() {
     body.innerHTML = `${rows}
         <div class="cart-total"><span>${pick("cart.totalLabel")}</span><span class="cart-total-amt">₹${money(total)}</span></div>
         <button class="cart-order-btn" onclick="sendCartWA()">
-            <svg class="ic" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            <svg class="ic" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">${iconTpl("social_whatsapp")}</svg>
             ${pick("cart.orderButton")}
         </button>`;
 

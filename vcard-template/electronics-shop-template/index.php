@@ -803,6 +803,40 @@ $socialIconClasses = [
                 </svg>
                 <span id="toastMsg"><?= e(data_get($data, "messages.defaultToast", "")); ?></span>
             </div>
+
+            <!-- Icon Templates (hidden) -->
+            <div class="icon-templates" style="display:none;">
+                <span id="pill_shield"><svg class="ic-sm" viewBox="0 0 24 24"><?= getIcon("pill_shield"); ?></svg></span>
+                <span id="pill_truck"><svg class="ic-sm" viewBox="0 0 24 24"><?= getIcon("pill_truck"); ?></svg></span>
+                <span id="pill_clock"><svg class="ic-sm" viewBox="0 0 24 24"><?= getIcon("pill_clock"); ?></svg></span>
+                <span id="pill_price"><svg class="ic-sm" viewBox="0 0 24 24"><?= getIcon("pill_price"); ?></svg></span>
+                <span id="pill_chat"><svg class="ic-sm" viewBox="0 0 24 24"><?= getIcon("pill_chat"); ?></svg></span>
+                <span id="pill_refresh"><svg class="ic-sm" viewBox="0 0 24 24"><?= getIcon("pill_refresh"); ?></svg></span>
+                <span id="cat_phone"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("cat_phone"); ?></svg></span>
+                <span id="cat_laptop"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("cat_laptop"); ?></svg></span>
+                <span id="cat_appliance"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("cat_appliance"); ?></svg></span>
+                <span id="cat_tv"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("cat_tv"); ?></svg></span>
+                <span id="cat_accessories"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("cat_accessories"); ?></svg></span>
+                <span id="cat_gaming"><svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("cat_gaming"); ?></svg></span>
+                <span id="repair_mobile"><svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("repair_mobile"); ?></svg></span>
+                <span id="repair_laptop"><svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("repair_laptop"); ?></svg></span>
+                <span id="repair_ac"><svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("repair_ac"); ?></svg></span>
+                <span id="repair_battery"><svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><?= getIcon("repair_battery"); ?></svg></span>
+                <span id="pay_upi"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_upi"); ?></svg></span>
+                <span id="pay_card"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_card"); ?></svg></span>
+                <span id="pay_bank"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_bank"); ?></svg></span>
+                <span id="pay_cash"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_cash"); ?></svg></span>
+                <span id="ui_arrow_right"><svg viewBox="0 0 24 24"><?= getIcon("ui_arrow_right"); ?></svg></span>
+                <span id="ui_check"><svg viewBox="0 0 24 24"><?= getIcon("ui_check"); ?></svg></span>
+                <span id="ui_star"><svg viewBox="0 0 24 24"><?= getIcon("ui_star"); ?></svg></span>
+                <span id="ui_cart"><svg viewBox="0 0 24 24"><?= getIcon("ui_cart"); ?></svg></span>
+                <span id="minus"><svg viewBox="0 0 24 24"><?= getIcon("minus"); ?></svg></span>
+                <span id="plus"><svg viewBox="0 0 24 24"><?= getIcon("plus"); ?></svg></span>
+                <span id="social_whatsapp"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_whatsapp"); ?></svg></span>
+                <span id="social_facebook"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_facebook"); ?></svg></span>
+                <span id="social_instagram"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_instagram"); ?></svg></span>
+                <span id="social_youtube"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_youtube"); ?></svg></span>
+            </div>
         </main>
         <script>
             window.__APP__ = <?= json_encode($data ?: [], JSON_UNESCAPED_SLASHES); ?>;

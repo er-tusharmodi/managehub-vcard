@@ -28,43 +28,27 @@ const setAttr = (id, attr, value) => {
     }
 };
 
+const iconTpl = (id, fallbackId) => {
+    const primary = $id(id)?.innerHTML || "";
+    if (primary) {
+        return primary;
+    }
+    return fallbackId ? $id(fallbackId)?.innerHTML || "" : "";
+};
+
+const SOCIAL_CLASSES = {
+    whatsapp: "ic-wa",
+    instagram: "ic-ig",
+    facebook: "ic-fb",
+    pinterest: "ic-pin",
+    youtube: "ic-yt",
+};
+
 let APP = {};
 let SHOP = {};
 let PRODUCTS = [];
 let currentCat = "all";
 let cart = {};
-
-const SERVICE_ICONS = {
-    star: `<path d="M12 2l2.4 4.8L20 8l-4 3.9L17 18l-5-2.6L7 18l1-6.1L4 8l5.6-1.2z"/>`,
-    map: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>`,
-    wrench: `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>`,
-    card: `<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>`,
-    arrow: `<path d="M5 12h14M12 5l7 7-7 7"/>`,
-    heart: `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`,
-};
-
-const SOCIAL_ICONS = {
-    whatsapp: {
-        cls: "ic-wa",
-        svg: `<svg viewBox="0 0 24 24" width="18" height="18" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
-    },
-    instagram: {
-        cls: "ic-ig",
-        svg: `<svg viewBox="0 0 24 24" width="18" height="18" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
-    },
-    facebook: {
-        cls: "ic-fb",
-        svg: `<svg viewBox="0 0 24 24" width="18" height="18" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
-    },
-    pinterest: {
-        cls: "ic-pin",
-        svg: `<svg viewBox="0 0 24 24" width="18" height="18" stroke-width="1.8" stroke="#e60023" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.65 7.86 6.39 9.29-.09-.78-.17-1.98.04-2.83.18-.77 1.23-5.22 1.23-5.22s-.31-.63-.31-1.56c0-1.46.85-2.55 1.9-2.55.9 0 1.33.67 1.33 1.48 0 .9-.58 2.26-.87 3.51-.25 1.05.52 1.9 1.55 1.9 1.86 0 3.1-2.4 3.1-5.24 0-2.16-1.46-3.67-3.56-3.67-2.42 0-3.84 1.82-3.84 3.7 0 .73.28 1.52.63 1.95.07.08.08.15.06.23l-.23.95c-.04.15-.12.18-.28.11-1.03-.48-1.68-2-1.68-3.22 0-2.62 1.9-5.03 5.49-5.03 2.88 0 5.12 2.05 5.12 4.79 0 2.86-1.8 5.16-4.3 5.16-.84 0-1.63-.44-1.9-.95l-.52 1.93c-.19.72-.69 1.62-1.03 2.17.78.24 1.6.37 2.46.37 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>`,
-    },
-    youtube: {
-        cls: "ic-yt",
-        svg: `<svg viewBox="0 0 24 24" width="18" height="18" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>`,
-    },
-};
 
 const socialAction = (item) =>
     item.action === "openWA"
@@ -221,18 +205,23 @@ const renderServices = () => {
     setHTML(
         "servicesList",
         (APP.services || [])
-            .map(
-                (item) => `
+            .map((item) => {
+                const iconKey = item.icon || "star";
+                const iconHtml = iconTpl(
+                    `icon-service-${iconKey}`,
+                    "icon-service-star",
+                );
+                return `
                     <div class="svc-item">
                         <div class="svc-ico">
-                            <svg viewBox="0 0 24 24">${SERVICE_ICONS[item.icon] || SERVICE_ICONS.star}</svg>
+                            ${iconHtml}
                         </div>
                         <div class="svc-info">
                             <div class="svc-name">${item.name || ""}</div>
                             <div class="svc-desc">${item.desc || ""}</div>
                         </div>
-                    </div>`,
-            )
+                    </div>`;
+            })
             .join(""),
     );
 };
@@ -280,17 +269,20 @@ const renderFollowLinks = () => {
         "socialList",
         (APP.followLinks || [])
             .map((item) => {
-                const icon = SOCIAL_ICONS[item.type] || SOCIAL_ICONS.whatsapp;
+                const iconHtml = iconTpl(
+                    `icon-social-${item.type}`,
+                    "icon-social-whatsapp",
+                );
+                const iconClass = SOCIAL_CLASSES[item.type] || "ic-wa";
+                const arrowIcon = iconTpl("icon-ui-arrow-right");
                 return `
                     <div class="social-item ${item.type === "pinterest" ? "ic-pin" : ""}" onclick="${socialAction(item)}">
-                        <div class="s-ico ${icon.cls}">${icon.svg}</div>
+                        <div class="s-ico ${iconClass}">${iconHtml}</div>
                         <div>
                             <div class="s-name">${item.name || ""}</div>
                             <div class="s-val">${item.value || ""}</div>
                         </div>
-                        <div class="s-arrow">
-                            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
-                        </div>
+                        <div class="s-arrow">${arrowIcon}</div>
                     </div>`;
             })
             .join(""),
@@ -329,14 +321,14 @@ function renderCollections() {
     setHTML(
         "collectionsGrid",
         list
-            .map(
-                (item) => `
+            .map((item) => {
+                const starIcon = iconTpl("icon-service-star");
+                const waIcon = iconTpl("icon-ui-whatsapp");
+                return `
                     <div class="coll-card">
                         <div class="coll-img">
                             <div class="coll-img-ph" style="background:${item.bg || ""};height:100%">
-                                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.2">
-                                    <path d="M12 2l2.4 4.8L20 8l-4 3.9L17 18l-5-2.6L7 18l1-6.1L4 8l5.6-1.2z"/>
-                                </svg>
+                                ${starIcon}
                             </div>
                             ${item.tag ? `<span class="coll-badge" style="background:${item.tagColor}">${item.tag}</span>` : ""}
                         </div>
@@ -350,13 +342,13 @@ function renderCollections() {
                                     ${item.oldPrice ? `<div class="coll-old">₹${money(item.oldPrice)}</div>` : ""}
                                 </div>
                                 <button class="enquire-btn" onclick="enquireWA('${sq(item.name)}')">
-                                    <svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                    ${waIcon}
                                     ${pick("labels.enquireButton")}
                                 </button>
                             </div>
                         </div>
-                    </div>`,
-            )
+                    </div>`;
+            })
             .join(""),
     );
 }
@@ -370,7 +362,8 @@ function openCart() {
     }
 
     if (!items.length) {
-        body.innerHTML = `<div class="cart-empty"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><br />${pick("cart.empty")}</div>`;
+        const emptyIcon = iconTpl("icon-ui-cart");
+        body.innerHTML = `<div class="cart-empty">${emptyIcon}<br />${pick("cart.empty")}</div>`;
         $id("cartOverlay")?.classList.add("show");
         return;
     }
@@ -384,9 +377,9 @@ function openCart() {
             return `<div class="cart-item">
                 <div class="ci-name">${item.name}<br /><small style="color:var(--muted);font-weight:400">₹${money(item.price)} · ${item.metal}</small></div>
                 <div class="ci-qty">
-                    <button class="ci-qty-btn" onclick="changeQty(${item.id},-1);openCart()"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5" width="12" height="12"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                    <button class="ci-qty-btn" onclick="changeQty(${item.id},-1);openCart()">${iconTpl("icon-ui-minus")}</button>
                     <span class="ci-qty-num">${cart[item.id]}</span>
-                    <button class="ci-qty-btn" onclick="changeQty(${item.id},1);openCart()"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5" width="12" height="12"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+                    <button class="ci-qty-btn" onclick="changeQty(${item.id},1);openCart()">${iconTpl("icon-ui-plus")}</button>
                 </div>
                 <div class="ci-price">₹${money(lineTotal)}</div>
             </div>`;
@@ -396,7 +389,7 @@ function openCart() {
     body.innerHTML = `${rows}
         <div class="cart-total"><span>${pick("cart.totalLabel")}</span><span class="cart-total-amt">₹${money(total)}</span></div>
         <button class="cart-order-btn" onclick="sendCartWA()">
-            <svg viewBox="0 0 24 24" width="18" height="18" stroke="#fff" fill="none" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            ${iconTpl("icon-ui-whatsapp")}
             ${pick("cart.sendLabel")}
         </button>`;
 

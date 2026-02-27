@@ -27,53 +27,61 @@ const setAttr = (id, attr, value) => {
     }
 };
 
+const iconTpl = (id, fallbackId) => {
+    const primary = $id(id)?.innerHTML || "";
+    if (primary) {
+        return primary;
+    }
+    return fallbackId ? $id(fallbackId)?.innerHTML || "" : "";
+};
+
 let APP = {};
 let SHOP = {};
 let PRODUCTS = [];
 let cart = {};
 
-const BANNER_ICONS = {
-    grocery: `<svg width="30" height="30" viewBox="0 0 24 24"><path d="M3 2h1l1 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-.5L20 2h1"/><path d="M7 17v4M17 17v4"/></svg>`,
-    fruits: `<svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M7.4 15c0-2.5 1.3-4.5 3.1-5.2C8.6 8.7 7 6.5 7 4M16.6 15c0-2.5-1.3-4.5-3.1-5.2C15.4 8.7 17 6.5 17 4"/></svg>`,
-    essentials: `<svg width="30" height="30" viewBox="0 0 24 24"><path d="M3 20h18M5 20V8l7-6 7 6v12"/><path d="M9 20v-6h6v6"/></svg>`,
-    dairy: `<svg width="30" height="30" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
-    beverages: `<svg width="30" height="30" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>`,
-};
+const BANNER_ICONS = () => ({
+    grocery: () => iconTpl("banner_grocery"),
+    fruits: () => iconTpl("banner_fruits"),
+    essentials: () => iconTpl("banner_essentials"),
+    dairy: () => iconTpl("banner_dairy"),
+    beverages: () => iconTpl("banner_beverages"),
+});
 
-const BADGE_ICONS = {
-    trusted: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
-    open: `<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>`,
-    delivery: `<rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>`,
-    prices: `<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>`,
-    fresh: `<polyline points="20 6 9 17 4 12"/>`,
-};
+const BADGE_ICONS = () => ({
+    trusted: () => iconTpl("badge_trusted"),
+    open: () => iconTpl("badge_open"),
+    delivery: () => iconTpl("badge_delivery"),
+    prices: () => iconTpl("badge_prices"),
+    fresh: () => iconTpl("badge_fresh"),
+});
 
-const SOCIAL_ICONS = {
+const SOCIAL_ICONS = () => ({
     whatsapp: {
         cls: "ic-wa",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
+        svg: () => iconTpl("social_whatsapp"),
     },
     facebook: {
         cls: "ic-fb",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+        svg: () => iconTpl("social_facebook"),
     },
     instagram: {
         cls: "ic-ig",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+        svg: () => iconTpl("social_instagram"),
     },
     youtube: {
         cls: "ic-yt",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>`,
+        svg: () => iconTpl("social_youtube"),
     },
-};
+});
 
-const PAYMENT_ICONS = {
-    upi: `<rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>`,
-    card: `<rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>`,
-    cash: `<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>`,
-};
+const PAYMENT_ICONS = () => ({
+    upi: () => iconTpl("pay_upi"),
+    card: () => iconTpl("pay_card"),
+    cash: () => iconTpl("pay_cash"),
+});
 
-const CART_ICON = `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke="var(--border)" width="38" height="38"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>`;
+const CART_ICON = () => iconTpl("ui_cart");
 
 const socialAction = (item = {}) => {
     if (item.action === "wa") {
@@ -86,16 +94,17 @@ const socialAction = (item = {}) => {
 };
 
 const cartEmptyMarkup = () =>
-    `<div class="cart-empty">${CART_ICON}${pick("sections.cart.emptyHtml")}</div>`;
+    `<div class="cart-empty">${CART_ICON()}${pick("sections.cart.emptyHtml")}</div>`;
 
 const renderBanner = () => {
+    const icons = BANNER_ICONS();
     setHTML(
         "bannerIcons",
         (APP.banner?.icons || [])
             .map(
                 (item) => `
                     <div class="banner-icon-item">
-                        ${BANNER_ICONS[item.icon] || ""}
+                        ${icons[item.icon]?.() || ""}
                         <span>${item.label || ""}</span>
                     </div>`,
             )
@@ -104,13 +113,14 @@ const renderBanner = () => {
 };
 
 const renderBadges = () => {
+    const icons = BADGE_ICONS();
     setHTML(
         "badgeStrip",
         (APP.badges || [])
             .map(
                 (item) => `
                     <div class="badge-item">
-                        <svg viewBox="0 0 24 24">${BADGE_ICONS[item.icon] || ""}</svg>
+                        <svg viewBox="0 0 24 24">${icons[item.icon]?.() || ""}</svg>
                         ${item.text || ""}
                     </div>`,
             )
@@ -119,15 +129,16 @@ const renderBadges = () => {
 };
 
 const renderSocial = () => {
+    const icons = SOCIAL_ICONS();
     setHTML(
         "socialList",
         (APP.social || [])
             .map((item) => {
-                const icon = SOCIAL_ICONS[item.type] || {};
+                const icon = icons[item.type] || {};
                 const click = socialAction(item);
                 return `
                     <div class="social-item"${click ? ` onclick="${click}"` : ""}>
-                        <div class="s-ico ${icon.cls || ""}">${icon.svg || ""}</div>
+                        <div class="s-ico ${icon.cls || ""}">${icon.svg?.() || ""}</div>
                         <div>
                             <div class="s-name">${item.name || ""}</div>
                             <div class="s-val">${item.value || ""}</div>
@@ -247,6 +258,7 @@ const renderHours = () => {
 };
 
 const renderPayments = () => {
+    const icons = PAYMENT_ICONS();
     setHTML(
         "paymentList",
         (APP.payments || [])
@@ -255,7 +267,7 @@ const renderPayments = () => {
                     <div class="pay-item">
                         <div class="pay-icon-wrap">
                             <svg viewBox="0 0 24 24" stroke="${item.stroke || "#15803d"}" stroke-width="2">
-                                ${PAYMENT_ICONS[item.icon] || ""}
+                                ${icons[item.icon]?.() || ""}
                             </svg>
                         </div>
                         <div>

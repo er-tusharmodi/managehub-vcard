@@ -127,19 +127,13 @@ $socialIconClasses = [
                 <div class="banner-top-bar">
                     <button class="share-btn" onclick="openShare()">
                         <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2">
-                            <circle cx="18" cy="5" r="3" />
-                            <circle cx="6" cy="12" r="3" />
-                            <circle cx="18" cy="19" r="3" />
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                            <?= getIcon("ui_share"); ?>
                         </svg>
                         <span id="banner-share"><?= e(data_get($data, "banner.share")); ?></span>
                     </button>
                     <button class="save-btn-top" onclick="saveContact()">
                         <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2.2">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-                            <polyline points="17 21 17 13 7 13 7 21" />
-                            <polyline points="7 3 7 8 15 8" />
+                            <?= getIcon("ui_save_disk"); ?>
                         </svg>
                         <span id="banner-save-contact"><?= e(data_get($data, "banner.saveContact")); ?></span>
                     </button>
@@ -156,7 +150,7 @@ $socialIconClasses = [
                     <div class="profile-avatar">
                         <img id="profile-image" src="<?= e($profileImage); ?>" alt="<?= e($profileAlt); ?>" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
                         <div class="verified-badge">
-                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+                            <svg viewBox="0 0 24 24"><?= getIcon("ui_check"); ?></svg>
                         </div>
                     </div>
                 </div>
@@ -171,43 +165,37 @@ $socialIconClasses = [
                 <div class="profile-action-btns">
                     <button class="pab call" onclick="callShop()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1.14h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6.37 6.37l.97-.97a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7a2 2 0 0 1 1.73 2.01z" />
+                            <?= getIcon("ui_call"); ?>
                         </svg>
                         <span id="action-call"><?= e(data_get($data, "profile.actions.call")); ?></span>
                     </button>
                     <button class="pab whatsapp" onclick="openWA()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                            <?= getIcon("ui_whatsapp"); ?>
                         </svg>
                         <span id="action-whatsapp"><?= e(data_get($data, "profile.actions.whatsapp")); ?></span>
                     </button>
                     <button class="pab save" onclick="saveContact()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                            <circle cx="12" cy="7" r="4" />
+                            <?= getIcon("ui_user"); ?>
                         </svg>
                         <span id="action-save"><?= e(data_get($data, "profile.actions.save")); ?></span>
                     </button>
                     <button class="pab email" onclick="emailShop()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                            <polyline points="22,6 12,13 2,6" />
+                            <?= getIcon("ui_mail"); ?>
                         </svg>
                         <span id="action-email"><?= e(data_get($data, "profile.actions.email")); ?></span>
                     </button>
                     <button class="pab direction" onclick="openMaps()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                            <?= getIcon("ui_direction"); ?>
                         </svg>
                         <span id="action-directions"><?= e(data_get($data, "profile.actions.directions")); ?></span>
                     </button>
                     <button class="pab share" onclick="openShare()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="18" cy="5" r="3" />
-                            <circle cx="6" cy="12" r="3" />
-                            <circle cx="18" cy="19" r="3" />
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                            <?= getIcon("ui_share"); ?>
                         </svg>
                         <span id="action-share"><?= e(data_get($data, "profile.actions.share")); ?></span>
                     </button>
@@ -218,7 +206,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <path d="M12 2l2.4 4.8L20 8l-4 3.9L17 18l-5-2.6L7 18l1-6.1L4 8l5.6-1.2z" />
+                            <?= getIcon("service_star"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-collections"><?= e(data_get($data, "sections.collections")); ?></span>
@@ -243,7 +231,7 @@ $socialIconClasses = [
                                 <div class="coll-img">
                                     <div class="coll-img-ph" style="background:<?= e($item["bg"] ?? ""); ?>;height:100%">
                                         <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.2">
-                                            <path d="M12 2l2.4 4.8L20 8l-4 3.9L17 18l-5-2.6L7 18l1-6.1L4 8l5.6-1.2z"/>
+                                            <?= getIcon("service_star"); ?>
                                         </svg>
                                     </div>
                                     <?php if (!empty($item["tag"])): ?>
@@ -262,7 +250,9 @@ $socialIconClasses = [
                                             <?php endif; ?>
                                         </div>
                                         <button class="enquire-btn" onclick="enquireWA(<?= js_str($item["name"] ?? ""); ?>)">
-                                            <svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                            <svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2.5">
+                                                <?= getIcon("ui_whatsapp"); ?>
+                                            </svg>
                                             <?= e(data_get($data, "labels.enquireButton")); ?>
                                         </button>
                                     </div>
@@ -277,7 +267,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <?= getIcon("ui_shield"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-purity"><?= e(data_get($data, "sections.purity")); ?></span>
@@ -306,8 +296,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <circle cx="12" cy="8" r="6" />
-                            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" />
+                            <?= getIcon("ui_medal"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-certifications"><?= e(data_get($data, "sections.certifications")); ?></span>
@@ -331,7 +320,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                            <?= getIcon("service_wrench"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-services"><?= e(data_get($data, "sections.services")); ?></span>
@@ -358,8 +347,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                            <circle cx="12" cy="10" r="3" />
+                            <?= getIcon("service_map"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-showroom"><?= e(data_get($data, "sections.showroom")); ?></span>
@@ -368,8 +356,7 @@ $socialIconClasses = [
                     <a class="address-link" href="#" onclick="return (openMaps(), !1);">
                         <div class="addr-icon-wrap">
                             <svg viewBox="0 0 24 24" width="18" height="18" stroke-width="1.8">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
+                                <?= getIcon("service_map"); ?>
                             </svg>
                         </div>
                         <div class="addr-text">
@@ -378,7 +365,7 @@ $socialIconClasses = [
                             <span id="showroom-line2"><?= e(data_get($data, "showroom.line2")); ?></span><br />
                             <a class="map-btn" href="#" onclick="return (openMaps(), !1);">
                                 <svg viewBox="0 0 24 24">
-                                    <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                                    <?= getIcon("ui_direction"); ?>
                                 </svg>
                                 <span id="showroom-map-label"><?= e(data_get($data, "showroom.mapLabel")); ?></span>
                             </a>
@@ -391,8 +378,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <circle cx="12" cy="12" r="10" />
-                            <polyline points="12 6 12 12 16 14" />
+                            <?= getIcon("ui_clock"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-hours"><?= e(data_get($data, "sections.hours")); ?></span>
@@ -420,11 +406,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <circle cx="18" cy="5" r="3" />
-                            <circle cx="6" cy="12" r="3" />
-                            <circle cx="18" cy="19" r="3" />
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                            <?= getIcon("ui_share"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-follow"><?= e(data_get($data, "sections.follow")); ?></span>
@@ -450,7 +432,7 @@ $socialIconClasses = [
                                     <div class="s-val"><?= e($item["value"] ?? ""); ?></div>
                                 </div>
                                 <div class="s-arrow">
-                                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+                                    <svg viewBox="0 0 24 24"><?= getIcon("ui_arrow_right"); ?></svg>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -462,8 +444,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                            <polyline points="22,6 12,13 2,6" />
+                            <?= getIcon("ui_mail"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-enquiry"><?= e(data_get($data, "sections.enquiry")); ?></span>
@@ -483,8 +464,7 @@ $socialIconClasses = [
                         <textarea class="form-field" id="eMsg" placeholder="<?= e(data_get($data, "enquiryForm.messagePlaceholder")); ?>"></textarea>
                         <button class="form-submit" onclick="submitEnquiry()">
                             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
-                                <line x1="22" y1="2" x2="11" y2="13" />
-                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                <?= getIcon("ui_send"); ?>
                             </svg>
                             <span id="enquiry-submit-label"><?= e(data_get($data, "enquiryForm.submitLabel")); ?></span>
                         </button>
@@ -506,10 +486,7 @@ $socialIconClasses = [
                 <div class="sec-header">
                     <div class="sec-icon">
                         <svg viewBox="0 0 24 24" width="16" height="16" stroke-width="1.8">
-                            <rect x="3" y="3" width="7" height="7" />
-                            <rect x="14" y="3" width="7" height="7" />
-                            <rect x="14" y="14" width="7" height="7" />
-                            <rect x="3" y="14" width="7" height="7" />
+                            <?= getIcon("ui_grid"); ?>
                         </svg>
                     </div>
                     <span class="sec-title" id="sec-title-scan"><?= e(data_get($data, "sections.scan")); ?></span>
@@ -520,9 +497,7 @@ $socialIconClasses = [
                         <div class="qr-desc" id="qr-description"><?= e(data_get($data, "qr.description")); ?></div>
                         <button class="qr-download-btn" onclick="downloadQR()">
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                <polyline points="7 10 12 15 17 10" />
-                                <line x1="12" y1="15" x2="12" y2="3" />
+                                <?= getIcon("ui_download"); ?>
                             </svg>
                             <span id="qr-download-label"><?= e(data_get($data, "qr.downloadLabel")); ?></span>
                         </button>
@@ -541,21 +516,19 @@ $socialIconClasses = [
             <div class="bottom-bar">
                 <button class="bb-btn call" onclick="callShop()">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e7d32" stroke-width="2">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1.14h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6.37 6.37l.97-.97a2 2 0 0 1 2.11-.45c.91.34 1.85.58 2.81.7a2 2 0 0 1 1.73 2.01z" />
+                        <?= getIcon("ui_call"); ?>
                     </svg>
                     <span class="bb-label" id="bb-call"><?= e(data_get($data, "bottomBar.call")); ?></span>
                 </button>
                 <button class="bb-btn save" onclick="saveContact()">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#b8860b" stroke-width="2">
-                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-                        <polyline points="17 21 17 13 7 13 7 21" />
-                        <polyline points="7 3 7 8 15 8" />
+                        <?= getIcon("ui_save_disk"); ?>
                     </svg>
                     <span class="bb-label" id="bb-save"><?= e(data_get($data, "bottomBar.save")); ?></span>
                 </button>
                 <button class="bb-btn wa" onclick="openWA()">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#128c7e" stroke-width="2">
-                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                        <?= getIcon("ui_whatsapp"); ?>
                     </svg>
                     <span class="bb-label" id="bb-whatsapp"><?= e(data_get($data, "bottomBar.whatsapp")); ?></span>
                 </button>
@@ -566,9 +539,7 @@ $socialIconClasses = [
                     <div class="cart-handle"></div>
                     <div class="cart-title">
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="1.8">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                            <line x1="3" y1="6" x2="21" y2="6" />
-                            <path d="M16 10a4 4 0 0 1-8 0" />
+                            <?= getIcon("ui_cart"); ?>
                         </svg>
                         <span id="cart-title"><?= e(data_get($data, "cart.title")); ?></span>
                     </div>
@@ -583,20 +554,19 @@ $socialIconClasses = [
                     <div class="share-btns">
                         <button class="share-opt wa" onclick="shareWA()">
                             <svg viewBox="0 0 24 24" stroke="#128c7e" stroke-width="1.8">
-                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                                <?= getIcon("ui_whatsapp"); ?>
                             </svg>
                             <span id="share-wa-label"><?= e(data_get($data, "shareModal.whatsapp")); ?></span>
                         </button>
                         <button class="share-opt fb" onclick="shareFB()">
                             <svg viewBox="0 0 24 24" stroke="#1877f2" stroke-width="1.8">
-                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                                <?= getIcon("ui_facebook"); ?>
                             </svg>
                             <span id="share-fb-label"><?= e(data_get($data, "shareModal.facebook")); ?></span>
                         </button>
                         <button class="share-opt copy" onclick="copyLink()">
                             <svg viewBox="0 0 24 24" stroke="#8a7355" stroke-width="1.8">
-                                <rect x="9" y="9" width="13" height="13" rx="2" />
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                                <?= getIcon("ui_copy"); ?>
                             </svg>
                             <span id="share-copy-label"><?= e(data_get($data, "shareModal.copy")); ?></span>
                         </button>
@@ -608,10 +578,31 @@ $socialIconClasses = [
 
             <div class="toast" id="toast">
                 <svg viewBox="0 0 24 24" width="14" height="14" stroke-width="2">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
+                    <?= getIcon("ui_check_circle"); ?>
                 </svg>
                 <span id="toastMsg"><?= e(data_get($data, "labels.toastDefault")); ?></span>
+            </div>
+
+            <div class="icon-templates" aria-hidden="true" style="display:none">
+                <span id="icon-service-star"><svg viewBox="0 0 24 24"><?= getIcon("service_star"); ?></svg></span>
+                <span id="icon-service-map"><svg viewBox="0 0 24 24"><?= getIcon("service_map"); ?></svg></span>
+                <span id="icon-service-wrench"><svg viewBox="0 0 24 24"><?= getIcon("service_wrench"); ?></svg></span>
+                <span id="icon-service-card"><svg viewBox="0 0 24 24"><?= getIcon("service_card"); ?></svg></span>
+                <span id="icon-service-arrow"><svg viewBox="0 0 24 24"><?= getIcon("service_arrow"); ?></svg></span>
+                <span id="icon-service-heart"><svg viewBox="0 0 24 24"><?= getIcon("service_heart"); ?></svg></span>
+
+                <span id="icon-social-whatsapp"><?= getIcon("social_whatsapp"); ?></span>
+                <span id="icon-social-instagram"><?= getIcon("social_instagram"); ?></span>
+                <span id="icon-social-facebook"><?= getIcon("social_facebook"); ?></span>
+                <span id="icon-social-pinterest"><?= getIcon("social_pinterest"); ?></span>
+                <span id="icon-social-youtube"><?= getIcon("social_youtube"); ?></span>
+
+                <span id="icon-ui-arrow-right"><svg viewBox="0 0 24 24"><?= getIcon("ui_arrow_right"); ?></svg></span>
+                <span id="icon-ui-cart"><svg viewBox="0 0 24 24"><?= getIcon("ui_cart"); ?></svg></span>
+                <span id="icon-ui-copy"><svg viewBox="0 0 24 24"><?= getIcon("ui_copy"); ?></svg></span>
+                <span id="icon-ui-minus"><svg viewBox="0 0 24 24"><?= getIcon("ui_minus"); ?></svg></span>
+                <span id="icon-ui-plus"><svg viewBox="0 0 24 24"><?= getIcon("ui_plus"); ?></svg></span>
+                <span id="icon-ui-whatsapp"><svg viewBox="0 0 24 24"><?= getIcon("ui_whatsapp"); ?></svg></span>
             </div>
         </main>
         <script>

@@ -788,6 +788,30 @@ $socialIconClasses = [
                 </svg>
                 <span id="toastMsg"><?= e(data_get($data, "messages.defaultToast")); ?></span>
             </div>
+
+            <!-- Icon Templates (hidden) -->
+            <div class="icon-templates" style="display:none;">
+                <span id="service_scissor"><svg viewBox="0 0 24 24"><?= getIcon("service_scissor"); ?></svg></span>
+                <span id="service_heart"><svg viewBox="0 0 24 24"><?= getIcon("service_heart"); ?></svg></span>
+                <span id="service_razor"><svg viewBox="0 0 24 24"><?= getIcon("service_razor"); ?></svg></span>
+                <span id="service_sun"><svg viewBox="0 0 24 24"><?= getIcon("service_sun"); ?></svg></span>
+                <span id="service_leaf"><svg viewBox="0 0 24 24"><?= getIcon("service_leaf"); ?></svg></span>
+                <span id="tip_clock"><?= getIcon("tip_clock"); ?></span>
+                <span id="tip_shield"><?= getIcon("tip_shield"); ?></span>
+                <span id="tip_leaf"><?= getIcon("tip_leaf"); ?></span>
+                <span id="tip_heart"><?= getIcon("tip_heart"); ?></span>
+                <span id="tip_layers"><?= getIcon("tip_layers"); ?></span>
+                <span id="social_whatsapp"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_whatsapp"); ?></svg></span>
+                <span id="social_instagram"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_instagram"); ?></svg></span>
+                <span id="social_youtube"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_youtube"); ?></svg></span>
+                <span id="social_facebook"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_facebook"); ?></svg></span>
+                <span id="pay_cash"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><?= getIcon("pay_cash"); ?></svg></span>
+                <span id="pay_card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><?= getIcon("pay_card"); ?></svg></span>
+                <span id="ui_arrow_right"><svg viewBox="0 0 24 24"><?= getIcon("ui_arrow_right"); ?></svg></span>
+                <span id="ui_check"><svg viewBox="0 0 24 24"><?= getIcon("ui_check"); ?></svg></span>
+                <span id="ui_star"><svg viewBox="0 0 24 24"><?= getIcon("ui_star"); ?></svg></span>
+                <span id="ui_cart"><svg viewBox="0 0 24 24"><?= getIcon("ui_cart"); ?></svg></span>
+            </div>
         </main>
         <script>
             window.__APP__ = <?= json_encode($data ?: [], JSON_UNESCAPED_SLASHES); ?>;

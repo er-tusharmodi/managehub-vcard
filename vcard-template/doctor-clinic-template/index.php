@@ -252,12 +252,12 @@ $socialIconClasses = [
                                 <?php else: ?>
                                     <div class="slot-card<?= $isSelected ? " selected" : ""; ?>" onclick="selectSlot(this)" data-slot="<?= e($slotLabel); ?>">
                                         <div class="slot-check">
-                                            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+                                            <svg viewBox="0 0 24 24"><?= getIcon("ui_check"); ?></svg>
                                         </div>
                                         <div class="slot-session"><?= e($slotItem["session"] ?? ""); ?></div>
                                         <div class="slot-time"><?= e($slotItem["time"] ?? ""); ?></div>
                                         <div class="slot-avail">
-                                            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                                            <svg viewBox="0 0 24 24"><?= getIcon("chip_info"); ?></svg>
                                             <?= e($slotItem["availability"] ?? ""); ?>
                                         </div>
                                     </div>
@@ -702,14 +702,14 @@ $socialIconClasses = [
                     </button>
                     <div class="promo-icon">
                         <svg viewBox="0 0 24 24" width="28" height="28">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                            <?= getIcon("social_whatsapp"); ?>
                         </svg>
                     </div>
                     <h3 id="promo-title"><?= e(data_get($data, "promo.title")); ?></h3>
                     <p id="promo-text"><?= e(data_get($data, "promo.text")); ?></p>
                     <button class="promo-cta" onclick="promoAction()">
                         <svg viewBox="0 0 24 24" width="18" height="18">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                            <?= getIcon("social_whatsapp"); ?>
                         </svg>
                         <span id="promo-cta-label"><?= e(data_get($data, "promo.ctaLabel")); ?></span>
                     </button>
@@ -718,10 +718,37 @@ $socialIconClasses = [
 
             <div class="toast" id="toast">
                 <svg viewBox="0 0 24 24" stroke-width="2" width="15" height="15">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
+                    <?= getIcon("ui_check"); ?>
                 </svg>
                 <span id="toastMsg"><?= e(data_get($data, "messages.defaultToast")); ?></span>
+            </div>
+
+            <!-- Icon Templates (hidden) -->
+            <div class="icon-templates" style="display:none;">
+                <span id="icon-chip-pulse"><svg viewBox="0 0 24 24"><?= getIcon("chip_pulse"); ?></svg></span>
+                <span id="icon-chip-heart"><svg viewBox="0 0 24 24"><?= getIcon("chip_heart"); ?></svg></span>
+                <span id="icon-chip-info"><svg viewBox="0 0 24 24"><?= getIcon("chip_info"); ?></svg></span>
+                <span id="icon-chip-respiratory"><svg viewBox="0 0 24 24"><?= getIcon("chip_respiratory"); ?></svg></span>
+                <span id="icon-chip-home"><svg viewBox="0 0 24 24"><?= getIcon("chip_home"); ?></svg></span>
+                <span id="icon-chip-search"><svg viewBox="0 0 24 24"><?= getIcon("chip_search"); ?></svg></span>
+                <span id="icon-chip-preventive"><svg viewBox="0 0 24 24"><?= getIcon("chip_preventive"); ?></svg></span>
+                <span id="icon-tip-sun"><svg viewBox="0 0 24 24"><?= getIcon("tip_sun"); ?></svg></span>
+                <span id="icon-tip-heart"><svg viewBox="0 0 24 24"><?= getIcon("tip_heart"); ?></svg></span>
+                <span id="icon-tip-drop"><svg viewBox="0 0 24 24"><?= getIcon("tip_drop"); ?></svg></span>
+                <span id="icon-tip-cup"><svg viewBox="0 0 24 24"><?= getIcon("tip_cup"); ?></svg></span>
+                <span id="icon-award-medal"><svg viewBox="0 0 24 24"><?= getIcon("award_medal"); ?></svg></span>
+                <span id="icon-award-pulse"><svg viewBox="0 0 24 24"><?= getIcon("award_pulse"); ?></svg></span>
+                <span id="icon-award-book"><svg viewBox="0 0 24 24"><?= getIcon("award_book"); ?></svg></span>
+                <span id="icon-award-patients"><svg viewBox="0 0 24 24"><?= getIcon("award_patients"); ?></svg></span>
+                <span id="icon-social-whatsapp"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_whatsapp"); ?></svg></span>
+                <span id="icon-social-facebook"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_facebook"); ?></svg></span>
+                <span id="icon-social-youtube"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_youtube"); ?></svg></span>
+                <span id="icon-social-website"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><?= getIcon("social_website"); ?></svg></span>
+                <span id="icon-pay-cash"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_cash"); ?></svg></span>
+                <span id="icon-pay-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_card"); ?></svg></span>
+                <span id="icon-pay-shield"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><?= getIcon("pay_shield"); ?></svg></span>
+                <span id="icon-ui-star"><svg viewBox="0 0 24 24"><?= getIcon("ui_star"); ?></svg></span>
+                <span id="icon-ui-check"><svg viewBox="0 0 24 24"><?= getIcon("ui_check"); ?></svg></span>
             </div>
         </main>
         <script>
