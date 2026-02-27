@@ -41,6 +41,8 @@ class VcardSubmissionController extends Controller
             'phone' => ['nullable', 'string', 'max:50'],
             'message' => ['nullable', 'string', 'max:5000'],
             'items' => ['nullable', 'array'],
+            'items.*.label' => ['nullable', 'string', 'max:100'],
+            'items.*.value' => ['nullable', 'string', 'max:500'],
             'total' => ['nullable', 'numeric', 'min:0'],
             'source_template' => ['nullable', 'string', 'max:255'],
         ]);

@@ -84,20 +84,36 @@ const getSubmissionUrl = (type) => {
     return `/submit/${type}`;
 };
 
-const sendSubmission = (type, payload) =>
-    fetch(getSubmissionUrl(type), {
+const sendSubmission = (type, payload) => {
+    const csrfToken =
+        document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute("content") || "";
+    return fetch(getSubmissionUrl(type), {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
+            ...(csrfToken && { "X-CSRF-TOKEN": csrfToken }),
         },
         body: JSON.stringify(payload),
     })
-        .then((res) => res.json())
+        .then(async (res) => {
+            const data = await res.json();
+            if (!res.ok) {
+                console.error(
+                    `Submission ${type} failed with status ${res.status}:`,
+                    data,
+                );
+                return { success: false, ...data };
+            }
+            return data;
+        })
         .catch((err) => {
             console.error("Submission error:", err);
-            return { success: false };
+            return { success: false, message: err.message };
         });
+};
 
 const hydrateImages = () => {
     const banner = $id("banner-cover");

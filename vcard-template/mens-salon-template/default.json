@@ -383,9 +383,7 @@
     },
     "location": {
         "title": "The Barbershop",
-        "line1": "Shop No. 7, Ground Floor, Plaza Centre",
-        "line2": "Koregaon Park, Pune – 411001",
-        "line3": "Maharashtra, India",
+        "address": "Shop No. 7, Ground Floor, Plaza Centre, Koregaon Park, Pune – 411001, Maharashtra, India",
         "mapLabel": "Get Directions"
     },
     "social": [

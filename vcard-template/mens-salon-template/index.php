@@ -240,7 +240,7 @@ $socialIconClasses = [
                     <div class="services-grid" id="servicesGrid">
                         <?php foreach (data_list($data, "services") as $item): ?>
                             <?php $iconKey = "service_" . ($item["icon"] ?? ""); ?>
-                            <div class="svc-card" onclick="bookSvc(<?= js_str($item["name"] ?? ""); ?>)">
+                            <div class="svc-card">
                                 <div class="svc-thumb" style="background:<?= e($item["bg"] ?? ""); ?>">
                                     <div class="svc-thumb-icon">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" width="22" height="22"><?= getIcon($iconKey); ?></svg>
@@ -252,7 +252,6 @@ $socialIconClasses = [
                                     <div class="svc-desc"><?= e($item["desc"] ?? ""); ?></div>
                                     <div class="svc-footer">
                                         <div class="svc-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><?= e($item["dur"] ?? ""); ?></div>
-                                        <button class="svc-book-chip" onclick="event.stopPropagation();bookSvc(<?= js_str($item["name"] ?? ""); ?>)"><?= e(data_get($data, "labels.bookChip")); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -308,10 +307,7 @@ $socialIconClasses = [
                                             <div class="pkg-save"><?= e($item["save"]); ?></div>
                                         <?php endif; ?>
                                     </div>
-                                    <button class="pkg-btn" onclick="bookSvc(<?= js_str(($item["name"] ?? "") . " Package"); ?>)">
-                                        <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                                        <?= e(data_get($data, "labels.bookNow")); ?>
-                                    </button>
+
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -445,7 +441,7 @@ $socialIconClasses = [
                                         <?php endforeach; ?>
                                     </div>
                                 </div>
-                                <button class="barber-book-btn" onclick="bookBarber(<?= js_str($item["name"] ?? ""); ?>)"><?= e(data_get($data, "labels.bookChip")); ?></button>
+
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -483,7 +479,6 @@ $socialIconClasses = [
                                                 <span class="prod-old"><?= e($item["old"]); ?></span>
                                             <?php endif; ?>
                                         </span>
-                                        <button class="buy-btn" onclick="enquireProduct(<?= js_str($item["name"] ?? ""); ?>)"><?= e(data_get($data, "labels.buy")); ?></button>
                                     </div>
                                 </div>
                             </div>
@@ -532,28 +527,28 @@ $socialIconClasses = [
                     <div class="sec-title" id="sec-title-location"><?= e(data_get($data, "sections.location.title")); ?></div>
                 </div>
                 <div class="sec-body">
-                    <a href="#" class="address-link" onclick="return (openMaps(), !1);">
-                        <div class="addr-icon-wrap">
-                            <svg class="ic" viewBox="0 0 24 24">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                                <circle cx="12" cy="10" r="3" />
-                            </svg>
-                        </div>
-                        <div class="addr-text">
-                            <strong id="location-name"><?= e(data_get($data, "location.title")); ?></strong>
-                            <span id="location-line1"><?= e(data_get($data, "location.line1")); ?></span><br />
-                            <span id="location-line2"><?= e(data_get($data, "location.line2")); ?></span><br />
-                            <span id="location-line3"><?= e(data_get($data, "location.line3")); ?></span>
-                            <div>
-                                <a class="map-btn" href="#" onclick="return (openMaps(), !1);">
-                                    <svg viewBox="0 0 24 24">
-                                        <polygon points="3 11 22 2 13 21 11 13 3 11" />
-                                    </svg>
-                                    <span id="location-map-label"><?= e(data_get($data, "location.mapLabel")); ?></span>
-                                </a>
+                    <div class="location-wrapper">
+                        <div class="location-title" id="location-name"><?= e(data_get($data, "location.title")); ?></div>
+                        <a href="#" class="address-link" onclick="return (openMaps(), !1);">
+                            <div class="addr-icon-wrap">
+                                <svg class="ic" viewBox="0 0 24 24">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                    <circle cx="12" cy="10" r="3" />
+                                </svg>
                             </div>
-                        </div>
-                    </a>
+                            <div class="addr-text">
+                                <span id="location-address"><?= e(data_get($data, "location.address")); ?></span>
+                                <div>
+                                    <a class="map-btn" href="#" onclick="return (openMaps(), !1);">
+                                        <svg viewBox="0 0 24 24">
+                                            <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                                        </svg>
+                                        <span id="location-map-label"><?= e(data_get($data, "location.mapLabel")); ?></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
 

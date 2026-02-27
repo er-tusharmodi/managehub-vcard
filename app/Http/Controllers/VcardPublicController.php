@@ -41,6 +41,7 @@ class VcardPublicController extends Controller
         $baseHref = '/storage/' . trim($vcard->template_path, '/') . '/';
 
         $content = $this->injectBaseHref($content, $baseHref);
+        $content = $this->injectCsrfToken($content);
         $content = $this->injectSubdomain($content, $subdomain);
 
         return response($content);
@@ -71,6 +72,15 @@ class VcardPublicController extends Controller
         }
 
         return str_ireplace('<head>', '<head><base href="' . $baseHref . '">', $content);
+    }
+
+    private function injectCsrfToken(string $content): string
+    {
+        // Inject CSRF token meta tag into head
+        $csrfToken = csrf_token();
+        $metaTag = '<meta name="csrf-token" content="' . htmlspecialchars($csrfToken, ENT_QUOTES, 'UTF-8') . '" />';
+        
+        return str_ireplace('</head>', $metaTag . '</head>', $content);
     }
 
     private function injectSubdomain(string $content, string $subdomain): string

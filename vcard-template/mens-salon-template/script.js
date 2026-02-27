@@ -55,20 +55,36 @@ const getSubmissionUrl = (type) => {
     return `/submit/${type}`;
 };
 
-const sendSubmission = (type, payload) =>
-    fetch(getSubmissionUrl(type), {
+const sendSubmission = (type, payload) => {
+    const csrfToken =
+        document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute("content") || "";
+    return fetch(getSubmissionUrl(type), {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-Requested-With": "XMLHttpRequest",
+            ...(csrfToken && { "X-CSRF-TOKEN": csrfToken }),
         },
         body: JSON.stringify(payload),
     })
-        .then((res) => res.json())
+        .then(async (res) => {
+            const data = await res.json();
+            if (!res.ok) {
+                console.error(
+                    `Submission ${type} failed with status ${res.status}:`,
+                    data,
+                );
+                return { success: false, ...data };
+            }
+            return data;
+        })
         .catch((err) => {
             console.error("Submission error:", err);
-            return { success: false };
+            return { success: false, message: err.message };
         });
+};
 
 let APP = {};
 let SHOP = {};
@@ -141,7 +157,7 @@ const renderServices = () => {
         (APP.services || [])
             .map(
                 (item) => `
-                    <div class="svc-card" onclick="bookSvc('${sq(item.name)}')">
+                    <div class="svc-card">
                         <div class="svc-thumb" style="background:${item.bg || ""}">
                             <div class="svc-thumb-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" width="22" height="22">${SERVICE_ICONS[item.icon] || ""}</svg>
@@ -153,7 +169,6 @@ const renderServices = () => {
                             <div class="svc-desc">${item.desc || ""}</div>
                             <div class="svc-footer">
                                 <div class="svc-dur"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${item.dur || ""}</div>
-                                <button class="svc-book-chip" onclick="event.stopPropagation();bookSvc('${sq(item.name)}')">${pick("labels.bookChip")}</button>
                             </div>
                         </div>
                     </div>`,
@@ -194,10 +209,6 @@ const renderPackages = () => {
                                 ${item.old ? `<div class="pkg-old">${item.old}</div>` : ""}
                                 ${item.save ? `<div class="pkg-save">${item.save}</div>` : ""}
                             </div>
-                            <button class="pkg-btn" onclick="bookSvc('${sq(`${item.name} Package`)}')">
-                                <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                                ${pick("labels.bookNow")}
-                            </button>
                         </div>
                     </div>`,
             )
@@ -283,7 +294,6 @@ const renderBarbers = () => {
                                     .join("")}
                             </div>
                         </div>
-                        <button class="barber-book-btn" onclick="bookBarber('${sq(item.name)}')">${pick("labels.bookChip")}</button>
                     </div>`,
             )
             .join(""),
@@ -365,7 +375,6 @@ const renderProducts = () => {
                             <div class="prod-desc">${item.desc || ""}</div>
                             <div class="prod-footer">
                                 <span><span class="prod-price">${item.price || ""}</span>${item.old ? `<span class="prod-old">${item.old}</span>` : ""}</span>
-                                <button class="buy-btn" onclick="enquireProduct('${sq(item.name)}')">${pick("labels.buy")}</button>
                             </div>
                         </div>
                     </div>`,
