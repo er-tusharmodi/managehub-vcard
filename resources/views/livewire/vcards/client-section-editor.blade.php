@@ -55,10 +55,7 @@
         <div class="row g-3">
             @foreach ($sections as $tab)
                 @php
-                    // Only show sections that have config entries
-                    if (empty($sectionsConfig) || !isset($sectionsConfig[$tab])) {
-                        continue;
-                    }
+                    // Show all sections (with or without config)
                     $iconData = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'text-primary'];
                     $isEnabled = $sectionsConfig[$tab]['enabled'] ?? true;
                     $sectionLabel = $sectionsConfig[$tab]['label'] ?? str_replace('_', ' ', ucfirst($tab));
