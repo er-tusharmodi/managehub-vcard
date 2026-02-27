@@ -28,6 +28,13 @@ class VcardSubmissionController extends Controller
 
         $vcard = Vcard::where('subdomain', $subdomain)->firstOrFail();
 
+        if (!$vcard->isSubscriptionActive()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Subscription inactive. Please contact your service provider.',
+            ], 403);
+        }
+
         $validated = $request->validate([
             'name' => ['nullable', 'string', 'max:255'],
             'email' => ['nullable', 'email', 'max:255'],

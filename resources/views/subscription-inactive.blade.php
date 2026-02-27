@@ -55,12 +55,9 @@
         <div class="wrap">
             <div class="card">
                 <div class="tag">Subscription Required</div>
-                <h1 class="title">This vCard is inactive</h1>
+                <h1 class="title">Subscription inactive</h1>
                 <p class="text">
-                    The subscription for this vCard is not active right now. Please contact your service provider to renew access.
-                </p>
-                <p class="text">
-                    vCard: {{ $vcard->subdomain }}.{{ config('vcard.base_domain') }}
+                    Your subscription has expired. Please contact your service provider to renew access.
                 </p>
             </div>
         </div>

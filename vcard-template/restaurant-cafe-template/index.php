@@ -551,7 +551,25 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="pay-grid" id="payGrid">
                         <?php foreach (data_list($data, "payments") as $item): ?>
-                            <?php $iconKey = "payment_" . ($item["icon"] ?? ""); ?>
+                            <?php
+                            $iconName = $item["icon"] ?? "";
+                            if ($iconName === "") {
+                                $label = strtolower((string) ($item["name"] ?? ""));
+                                if (str_contains($label, "upi") || str_contains($label, "qr")) {
+                                    $iconName = "upi";
+                                } elseif (str_contains($label, "wallet")) {
+                                    $iconName = "wallet";
+                                } elseif (str_contains($label, "card") || str_contains($label, "bank")) {
+                                    $iconName = "card";
+                                } elseif (str_contains($label, "cash")) {
+                                    $iconName = "cash";
+                                }
+                            }
+                            if ($iconName === "") {
+                                $iconName = "cash";
+                            }
+                            $iconKey = "payment_" . $iconName;
+                            ?>
                             <div class="pay-item">
                                 <div class="pay-icon">
                                     <span style="display:flex;color:<?= e($item["stroke"] ?? "#1565c0"); ?>"><?= getIcon($iconKey); ?></span>

@@ -2,9 +2,7 @@ const $id = (id) => document.getElementById(id);
 const tpl = (template = "", values = {}) =>
     template.replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 const sq = (value = "") =>
-    String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+    String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 const pick = (path, fallback = "") =>
     path.split(".").reduce((acc, key) => acc?.[key], APP) ?? fallback;
 
@@ -67,17 +65,6 @@ const SOCIAL_ICONS = {
         cls: "ic-yt",
         svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>`,
     },
-};
-
-const CATEGORY_ICONS = {
-    fruits: `<path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z"/><path d="M7.4 15c0-2.5 1.3-4.5 3.1-5.2C8.6 8.7 7 6.5 7 4"/>`,
-    dairy: `<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>`,
-    grains: `<path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>`,
-    snacks: `<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>`,
-    beverages: `<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>`,
-    care: `<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>`,
-    frozen: `<path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"/>`,
-    baby: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
 };
 
 const PAYMENT_ICONS = {
@@ -163,12 +150,8 @@ const renderCategories = () => {
             .map(
                 (item) => `
                     <div class="cat-card" onclick="enquireWA('${sq(item.query || item.name || "")}')">
-                        <div class="cat-icon" style="background:${item.bg || ""}">
-                            <svg viewBox="0 0 24 24" stroke="${item.stroke || "#15803d"}">
-                                ${CATEGORY_ICONS[item.icon] || ""}
-                            </svg>
-                        </div>
                         <div class="cat-name">${item.name || ""}</div>
+                        <div class="cat-count">${item.count || ""}</div>
                     </div>`,
             )
             .join(""),
@@ -214,7 +197,10 @@ const renderDeals = () => {
         "dealsList",
         (APP.deals || [])
             .map((item) => {
-                const action = item.action?.type === "wa" ? "openWA()" : `enquireWA('${sq(item.action?.value || item.name || "")}')`;
+                const action =
+                    item.action?.type === "wa"
+                        ? "openWA()"
+                        : `enquireWA('${sq(item.action?.value || item.name || "")}')`;
                 return `
                     <div class="deal-item">
                         <div class="deal-badge">${item.badge || ""}</div>
@@ -330,10 +316,26 @@ const renderStaticText = () => {
     setText("contactSuccessText", pick("sections.contact.success.text"));
     setText("contactAnotherLabel", pick("sections.contact.success.button"));
 
-    setAttr("cName", "placeholder", pick("sections.contact.form.namePlaceholder"));
-    setAttr("cPhone", "placeholder", pick("sections.contact.form.phonePlaceholder"));
-    setAttr("cEmail", "placeholder", pick("sections.contact.form.emailPlaceholder"));
-    setAttr("cMsg", "placeholder", pick("sections.contact.form.messagePlaceholder"));
+    setAttr(
+        "cName",
+        "placeholder",
+        pick("sections.contact.form.namePlaceholder"),
+    );
+    setAttr(
+        "cPhone",
+        "placeholder",
+        pick("sections.contact.form.phonePlaceholder"),
+    );
+    setAttr(
+        "cEmail",
+        "placeholder",
+        pick("sections.contact.form.emailPlaceholder"),
+    );
+    setAttr(
+        "cMsg",
+        "placeholder",
+        pick("sections.contact.form.messagePlaceholder"),
+    );
 
     setHTML(
         "footerLine1",
@@ -373,7 +375,11 @@ const renderApp = () => {
         banner.style.background = `url(${APP.assets.bannerImage}) center/cover no-repeat`;
     }
 
-    setAttr("profileImage", "src", APP.assets?.profileImage || APP.assets?.fallbackImage || "");
+    setAttr(
+        "profileImage",
+        "src",
+        APP.assets?.profileImage || APP.assets?.fallbackImage || "",
+    );
     setAttr("profileImage", "alt", SHOP.name || "");
 
     renderStaticText();
@@ -402,7 +408,10 @@ const renderApp = () => {
     if (promoOverlay) {
         promoOverlay.classList.remove("show");
         if (APP.promo?.enabled) {
-            setTimeout(() => promoOverlay.classList.add("show"), Number(APP.promo?.delayMs) || 2200);
+            setTimeout(
+                () => promoOverlay.classList.add("show"),
+                Number(APP.promo?.delayMs) || 2200,
+            );
         }
     }
 };
@@ -420,7 +429,10 @@ function changeQty(id, delta) {
 }
 
 function updateCartBadge() {
-    const total = Object.values(cart).reduce((sum, qty) => sum + Number(qty || 0), 0);
+    const total = Object.values(cart).reduce(
+        (sum, qty) => sum + Number(qty || 0),
+        0,
+    );
     const badge = $id("cartBadge");
     if (!badge) {
         return;
@@ -475,7 +487,10 @@ function sendCartWA() {
     });
     message += `\n${tpl(pick("messages.orderFooter"), { total })}`;
 
-    window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(
+        `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`,
+        "_blank",
+    );
     closeCart();
 }
 
@@ -534,8 +549,13 @@ function openMaps() {
 }
 
 function enquireWA(itemName) {
-    const message = tpl(pick("messages.enquireTemplate"), { item: itemName || "" });
-    window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
+    const message = tpl(pick("messages.enquireTemplate"), {
+        item: itemName || "",
+    });
+    window.open(
+        `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(message)}`,
+        "_blank",
+    );
 }
 
 function downloadQR() {
@@ -626,7 +646,10 @@ function submitContact() {
         message: msg,
     });
 
-    window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`, "_blank");
+    window.open(
+        `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(text)}`,
+        "_blank",
+    );
     if ($id("contactForm")) {
         $id("contactForm").style.display = "none";
     }

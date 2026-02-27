@@ -48,20 +48,6 @@
         "nextSlot": "Next slot: 11:30 AM today"
     },
     "profile": {
-        "stats": [
-            {
-                "value": "18+",
-                "label": "Yrs Exp."
-            },
-            {
-                "value": "12k+",
-                "label": "Patients"
-            },
-            {
-                "value": "4.9 ⭐",
-                "label": "Rating"
-            }
-        ],
         "actions": {
             "call": "Call",
             "whatsapp": "WhatsApp",
@@ -284,17 +270,17 @@
             "desc": "Recognized among Top 10 General Physicians in Maharashtra"
         },
         {
-            "icon": "pulse",
+            "icon": "medal",
             "name": "ACLS & BLS Certified",
             "desc": "Advanced Cardiac Life Support — AHA Certified"
         },
         {
-            "icon": "book",
+            "icon": "medal",
             "name": "Fellowship in Diabetology",
             "desc": "RSSDI Certified Diabetes Educator, 2018"
         },
         {
-            "icon": "patients",
+            "icon": "medal",
             "name": "12,000+ Patients Treated",
             "desc": "18 years of trusted family healthcare in Mumbai"
         }

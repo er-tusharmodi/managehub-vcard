@@ -438,8 +438,21 @@ $paymentStrokeMap = [
                 <div class="payment-list" id="payment-list">
                     <?php foreach ($data["paymentMethods"] ?? [] as $item): ?>
                         <?php
-                        $type = $item["type"] ?? "cash";
-                        $iconKey = in_array($type, ["upi", "bank", "cash"], true) ? $type : "cash";
+                        $type = $item["type"] ?? "";
+                        $iconKey = in_array($type, ["upi", "bank", "cash"], true) ? $type : "";
+                        if ($iconKey === "") {
+                            $label = strtolower((string) ($item["name"] ?? ""));
+                            if (str_contains($label, "upi") || str_contains($label, "qr")) {
+                                $iconKey = "upi";
+                            } elseif (str_contains($label, "bank") || str_contains($label, "card")) {
+                                $iconKey = "bank";
+                            } elseif (str_contains($label, "cash")) {
+                                $iconKey = "cash";
+                            }
+                        }
+                        if ($iconKey === "") {
+                            $iconKey = "cash";
+                        }
                         $stroke = $paymentStrokeMap[$iconKey] ?? "currentColor";
                         ?>
                         <div class="pay-item">

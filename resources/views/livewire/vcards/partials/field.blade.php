@@ -4,6 +4,7 @@
     $isAssoc = $isArray && array_values($value) !== $value;
     $isList = $isArray && !$isAssoc;
     $isScalarList = $isList && (empty($value) || !is_array($value[0] ?? null));
+    $categoryOptions = $categoryOptions ?? [];
     
     // Enhanced image detection: check key name OR value content
     $isImageKey = false;
@@ -22,6 +23,7 @@
     $isUrl = is_string($key) && preg_match('/(url|link|website|maps|facebook|instagram|youtube|twitter|whatsapp)/i', $key) && !$isImageKey;
     $isPhone = is_string($key) && preg_match('/(phone|mobile|whatsapp|tel)/i', $key);
     $isNumber = is_string($key) && preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $key);
+    $isCategoryKey = is_string($key) && preg_match('/^(category_key|cat)$/i', $key);
 
     $wirePath = $wirePath ?? $key;
     $uploadPath = 'uploads.' . $wirePath;
@@ -41,6 +43,7 @@
                         'key' => $childKey,
                         'value' => $childValue,
                         'wirePath' => $wirePath . '.' . $childKey,
+                        'categoryOptions' => $categoryOptions,
                     ])
                 @endforeach
             </div>
@@ -240,6 +243,7 @@
                                             $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
                                             $isColColor = preg_match('/(tag_color|color|bg_color|background_color)/i', $col);
                                             $isColNumber = preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $col);
+                                            $isColCategory = preg_match('/^(category_key|cat)$/i', $col);
                                             $modalModelPath = empty($wirePath) ? "form.{$i}.{$col}" : "form.{$wirePath}.{$i}.{$col}";
                                             $modalUploadPath = empty($wirePath) ? "uploads.{$i}.{$col}" : "uploads.{$wirePath}.{$i}.{$col}";
                                         @endphp
@@ -271,6 +275,13 @@
                                                 </div>
                                                 <input type="file" class="form-control" wire:model.live="{{ $modalUploadPath }}" accept="image/*">
                                                 <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
+                                            @elseif ($isColCategory && !empty($categoryOptions))
+                                                <select class="form-select" wire:model="{{ $modalModelPath }}">
+                                                    <option value="" disabled>Select category</option>
+                                                    @foreach ($categoryOptions as $option)
+                                                        <option value="{{ $option['key'] }}">{{ $option['label'] }}</option>
+                                                    @endforeach
+                                                </select>
                                             @elseif ($isColColor)
                                                 <div class="d-flex gap-2 align-items-center">
                                                     <input type="color" class="form-control form-control-color" wire:model="{{ $modalModelPath }}" style="width: 60px; height: 38px;" required>
@@ -324,6 +335,7 @@
                                     $isColTextarea = preg_match('/(description|desc|about|bio|note|details|content)/i', $col);
                                     $isColColor = preg_match('/(tag_color|color|bg_color|background_color)/i', $col);
                                     $isColNumber = preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $col);
+                                    $isColCategory = preg_match('/^(category_key|cat)$/i', $col);
                                 @endphp
                                 
                                 <div class="col-12">
@@ -339,6 +351,13 @@
                                         </div>
                                         <input type="file" class="form-control" wire:model.live="uploads.newItem.{{ $col }}" accept="image/*">
                                         <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
+                                    @elseif ($isColCategory && !empty($categoryOptions))
+                                        <select class="form-select" wire:model="newItem.{{ $col }}">
+                                            <option value="" disabled>Select category</option>
+                                            @foreach ($categoryOptions as $option)
+                                                <option value="{{ $option['key'] }}">{{ $option['label'] }}</option>
+                                            @endforeach
+                                        </select>
                                     @elseif ($isColColor)
                                         <div class="d-flex gap-2 align-items-center">
                                             <input type="color" class="form-control form-control-color" wire:model="newItem.{{ $col }}" style="width: 60px; height: 38px;" required>
@@ -392,6 +411,13 @@
             <small class="form-text text-muted d-block mt-1">
                 <i class="mdi mdi-information-outline"></i> Upload a new image to replace the current one
             </small>
+        @elseif ($isCategoryKey && !empty($categoryOptions))
+            <select class="form-select" wire:model="form.{{ $wirePath }}">
+                <option value="" disabled>Select category</option>
+                @foreach ($categoryOptions as $option)
+                    <option value="{{ $option['key'] }}">{{ $option['label'] }}</option>
+                @endforeach
+            </select>
         @elseif ($isTextArea)
             <textarea class="form-control" rows="3" wire:model="form.{{ $wirePath }}" required></textarea>
         @else

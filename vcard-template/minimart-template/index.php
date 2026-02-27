@@ -277,19 +277,12 @@ $socialIconClasses = [
                     <div class="sec-title" id="sectionCategoriesTitle"><?= e(data_get($data, "sections.categories.title")); ?></div>
                 </div>
                 <div class="sec-body">
-                    <div class="categories-grid" id="categoriesGrid">
+                    <div class="cat-grid" id="categoriesGrid">
                         <?php foreach (data_list($data, "categories") as $item): ?>
-                            <?php
-                            $query = $item["query"] ?? $item["name"] ?? "";
-                            $iconKey = "category_" . ($item["icon"] ?? "");
-                            ?>
+                            <?php $query = $item["query"] ?? $item["name"] ?? ""; ?>
                             <div class="cat-card" onclick="enquireWA(<?= js_str($query); ?>)">
-                                <div class="cat-icon" style="background:<?= e($item["bg"] ?? ""); ?>">
-                                    <svg viewBox="0 0 24 24" stroke="<?= e($item["stroke"] ?? "#15803d"); ?>">
-                                        <?= getIcon($iconKey); ?>
-                                    </svg>
-                                </div>
                                 <div class="cat-name"><?= e($item["name"] ?? ""); ?></div>
+                                <div class="cat-count"><?= e($item["count"] ?? ""); ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -510,7 +503,25 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="payment-list" id="paymentList">
                         <?php foreach (data_list($data, "payments") as $item): ?>
-                            <?php $iconKey = "pay_" . ($item["icon"] ?? ""); ?>
+                            <?php
+                            $iconName = $item["icon"] ?? "";
+                            if ($iconName === "") {
+                                $label = strtolower((string) ($item["name"] ?? ""));
+                                if (str_contains($label, "upi") || str_contains($label, "qr")) {
+                                    $iconName = "upi";
+                                } elseif (str_contains($label, "card")) {
+                                    $iconName = "card";
+                                } elseif (str_contains($label, "bank")) {
+                                    $iconName = "bank";
+                                } elseif (str_contains($label, "cash")) {
+                                    $iconName = "cash";
+                                }
+                            }
+                            if ($iconName === "") {
+                                $iconName = "cash";
+                            }
+                            $iconKey = "pay_" . $iconName;
+                            ?>
                             <div class="pay-item">
                                 <div class="pay-icon-wrap">
                                     <svg viewBox="0 0 24 24" stroke="<?= e($item["stroke"] ?? "#15803d"); ?>" stroke-width="2">

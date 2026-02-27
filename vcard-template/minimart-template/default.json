@@ -228,60 +228,52 @@
     ],
     "categories": [
         {
+            "key": "fruits-veggies",
             "name": "Fruits & Veggies",
             "query": "Fresh Fruits & Vegetables",
-            "icon": "fruits",
-            "bg": "linear-gradient(135deg,#dcfce7,#bbf7d0)",
-            "stroke": "#15803d"
+            "count": "120+ items"
         },
         {
+            "key": "dairy-eggs",
             "name": "Dairy & Eggs",
             "query": "Dairy & Eggs",
-            "icon": "dairy",
-            "bg": "linear-gradient(135deg,#fffbeb,#fef3c7)",
-            "stroke": "#d97706"
+            "count": "60+ items"
         },
         {
+            "key": "grains-pulses",
             "name": "Grains & Pulses",
             "query": "Grains & Pulses",
-            "icon": "grains",
-            "bg": "linear-gradient(135deg,#fff7ed,#fed7aa)",
-            "stroke": "#ea580c"
+            "count": "80+ items"
         },
         {
+            "key": "snacks",
             "name": "Snacks",
             "query": "Snacks & Biscuits",
-            "icon": "snacks",
-            "bg": "linear-gradient(135deg,#fdf2f8,#fbcfe8)",
-            "stroke": "#db2777"
+            "count": "150+ items"
         },
         {
+            "key": "beverages",
             "name": "Beverages",
             "query": "Cold Drinks & Juices",
-            "icon": "beverages",
-            "bg": "linear-gradient(135deg,#eff6ff,#bfdbfe)",
-            "stroke": "#2563eb"
+            "count": "90+ items"
         },
         {
+            "key": "personal-care",
             "name": "Personal Care",
             "query": "Cleaning & Personal Care",
-            "icon": "care",
-            "bg": "linear-gradient(135deg,#f5f0ff,#ede9fe)",
-            "stroke": "#7c3aed"
+            "count": "110+ items"
         },
         {
+            "key": "frozen-foods",
             "name": "Frozen Foods",
             "query": "Frozen Foods",
-            "icon": "frozen",
-            "bg": "linear-gradient(135deg,#f0fdfa,#ccfbf1)",
-            "stroke": "#0d9488"
+            "count": "40+ items"
         },
         {
+            "key": "baby-kids",
             "name": "Baby & Kids",
             "query": "Baby & Kids Products",
-            "icon": "baby",
-            "bg": "linear-gradient(135deg,#fff1f2,#fecdd3)",
-            "stroke": "#e11d48"
+            "count": "55+ items"
         }
     ],
     "products": [
@@ -289,6 +281,7 @@
             "id": 1,
             "name": "Aashirvaad Atta 5kg",
             "desc": "Whole wheat flour, golden grade.",
+            "category_key": "grains-pulses",
             "price": 240,
             "oldPrice": 280,
             "per": "/bag",
@@ -300,6 +293,7 @@
             "id": 2,
             "name": "Amul Full Cream Milk 1L",
             "desc": "Fresh pasteurised milk, daily supply.",
+            "category_key": "dairy-eggs",
             "price": 68,
             "per": "/litre",
             "tag": "FRESH",
@@ -310,6 +304,7 @@
             "id": 3,
             "name": "Kurkure Masala Munch 3-Pack",
             "desc": "Crispy corn puffs, party pack.",
+            "category_key": "snacks",
             "price": 75,
             "oldPrice": 90,
             "per": "/pack",
@@ -321,6 +316,7 @@
             "id": 4,
             "name": "Tropicana Orange Juice 1L",
             "desc": "100% real fruit juice, no sugar added.",
+            "category_key": "beverages",
             "price": 130,
             "per": "/bottle",
             "tag": "POPULAR",
@@ -331,6 +327,7 @@
             "id": 5,
             "name": "Dettol Handwash 250ml",
             "desc": "Antibacterial liquid soap refill.",
+            "category_key": "personal-care",
             "price": 95,
             "per": "/bottle",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"
@@ -339,6 +336,7 @@
             "id": 6,
             "name": "Britannia Bourbon 3-Pack",
             "desc": "Chocolate cream biscuits combo.",
+            "category_key": "snacks",
             "price": 60,
             "per": "/pack",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')"

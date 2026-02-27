@@ -55,20 +55,6 @@
             "share": "Share Card"
         }
     },
-    "stats": [
-        {
-            "value": "38+",
-            "label": "Years Legacy"
-        },
-        {
-            "value": "25K+",
-            "label": "Happy Families"
-        },
-        {
-            "value": "5000+",
-            "label": "Designs"
-        }
-    ],
     "sections": {
         "collections": "Our Collections",
         "purity": "Gold Purity We Offer",
@@ -123,6 +109,7 @@
             "tag": "BESTSELLER",
             "tagColor": "#c9a84c",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "gold",
             "cat": "gold"
         },
         {
@@ -135,6 +122,7 @@
             "tag": "GIA CERT",
             "tagColor": "#1565c0",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "diamond",
             "cat": "diamond"
         },
         {
@@ -147,6 +135,7 @@
             "tag": "BRIDAL",
             "tagColor": "#b5676a",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "bridal",
             "cat": "bridal"
         },
         {
@@ -159,6 +148,7 @@
             "tag": "SALE",
             "tagColor": "#7b1fa2",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "silver",
             "cat": "silver"
         },
         {
@@ -171,6 +161,7 @@
             "tag": "KIDS",
             "tagColor": "#2e7d32",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "kids",
             "cat": "kids"
         },
         {
@@ -183,6 +174,7 @@
             "tag": "TRENDING",
             "tagColor": "#e65100",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "diamond",
             "cat": "diamond"
         },
         {
@@ -195,6 +187,7 @@
             "tag": null,
             "tagColor": null,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "gold",
             "cat": "gold"
         },
         {
@@ -207,6 +200,7 @@
             "tag": "PREMIUM",
             "tagColor": "#880e4f",
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "category_key": "bridal",
             "cat": "bridal"
         }
     ],

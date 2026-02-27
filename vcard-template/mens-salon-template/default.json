@@ -46,20 +46,6 @@
         "name": "The Barbershop",
         "role": "Premium Men's Grooming Studio",
         "tagline": "Your style, our craft. Classic cuts, modern fades & luxury grooming — where every man leaves looking his best.",
-        "stats": [
-            {
-                "value": "8+",
-                "label": "Yrs Open"
-            },
-            {
-                "value": "15k+",
-                "label": "Clients"
-            },
-            {
-                "value": "4.9⭐",
-                "label": "Rating"
-            }
-        ],
         "actions": {
             "call": "Call",
             "whatsapp": "WhatsApp",
@@ -295,16 +281,32 @@
         {
             "avatar": "A",
             "gradient": "linear-gradient(135deg,#1e3a5f,#2563eb)",
+            "category_key": "hair-styling",
             "name": "Aakash Verma",
             "role": "Beard Architect · 5 Yrs Exp.",
             "exp": "Beard sculpting, hot towel shave, grooming consults",
             "skills": ["Beard Shape", "Hot Towel", "Facial"]
         }
     ],
+    "categories": [
+        {
+            "key": "hair-styling",
+            "label": "Hair Styling"
+        },
+        {
+            "key": "beard-care",
+            "label": "Beard Care"
+        },
+        {
+            "key": "grooming",
+            "label": "Grooming"
+        }
+    ],
     "products": [
         {
             "name": "Hair Wax",
             "desc": "Medium hold, matte finish. For everyday style.",
+            "category_key": "beard-care",
             "price": "₹299",
             "old": "₹349",
             "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -315,6 +317,7 @@
         {
             "name": "Beard Oil",
             "desc": "Nourishing beard oil with argan & jojoba.",
+            "category_key": "hair-styling",
             "price": "₹249",
             "old": "",
             "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -325,6 +328,7 @@
         {
             "name": "Pomade",
             "desc": "High shine, strong hold. Slick back styles.",
+            "category_key": "hair-styling",
             "price": "₹349",
             "old": "₹399",
             "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",

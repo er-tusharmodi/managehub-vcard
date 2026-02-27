@@ -6,6 +6,7 @@ use App\Models\Vcard;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -23,6 +24,7 @@ class ClientSectionEditor extends Component
     public bool $showIndex = false;
     public bool $subscriptionBlocked = false;
     public string $subscriptionMessage = 'Your subscription is inactive. Please contact support.';
+    public array $categoryOptions = [];
 
     public function mount(string $subdomain, ?string $section = null): void
     {
@@ -34,6 +36,7 @@ class ClientSectionEditor extends Component
         }
 
         $data = $this->loadJson();
+        $this->categoryOptions = $this->buildCategoryOptions($data);
         
         // Load sections config if available
         if (isset($data['_sections_config']) && is_array($data['_sections_config'])) {
@@ -223,6 +226,39 @@ class ClientSectionEditor extends Component
         }
 
         return $rules;
+    }
+
+    private function buildCategoryOptions(array $data): array
+    {
+        $rawCategories = $data['categories'] ?? [];
+        if (!is_array($rawCategories)) {
+            return [];
+        }
+
+        $options = [];
+        foreach ($rawCategories as $category) {
+            if (!is_array($category)) {
+                continue;
+            }
+
+            $key = $category['key'] ?? null;
+            $label = $category['label'] ?? $category['name'] ?? $category['query'] ?? $key;
+
+            if (!$key && $label) {
+                $key = Str::slug($label);
+            }
+
+            if (!$key || $key === 'all') {
+                continue;
+            }
+
+            $options[$key] = $label ?? $key;
+        }
+
+        return collect($options)
+            ->map(fn ($label, $key) => ['key' => $key, 'label' => $label])
+            ->values()
+            ->toArray();
     }
 
     private function buildRulesFromData(array $data, string $prefix, array &$rules): void

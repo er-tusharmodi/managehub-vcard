@@ -167,6 +167,7 @@
                                     'key' => $section,
                                     'value' => $form,
                                     'wirePath' => '',
+                                    'categoryOptions' => $categoryOptions,
                                 ])
                             @else
                                 @foreach ($form as $key => $value)
@@ -174,6 +175,7 @@
                                         'key' => $key,
                                         'value' => $value,
                                         'wirePath' => $key,
+                                        'categoryOptions' => $categoryOptions,
                                     ])
                                 @endforeach
                             @endif

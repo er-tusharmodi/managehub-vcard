@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Vcard;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,19 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::user()?->hasRole('admin')) {
             return redirect()->intended(route('admin.dashboard', absolute: false));
+        }
+
+        $hasActive = Vcard::where('user_id', Auth::id())
+            ->where('subscription_status', 'active')
+            ->where(function ($query) {
+                $query->whereNull('subscription_expires_at')
+                    ->orWhere('subscription_expires_at', '>=', now());
+            })
+            ->exists();
+
+        if (!$hasActive) {
+            Auth::logout();
+            return redirect()->route('subscription.inactive');
         }
 
         return redirect()->intended(route('dashboard', absolute: false));

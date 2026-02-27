@@ -89,7 +89,8 @@ foreach ($categories as $cat) {
 $collections = data_list($data, "collections");
 if ($currentCat !== "all") {
     $collections = array_values(array_filter($collections, static function ($item) use ($currentCat) {
-        return ($item["cat"] ?? "") === $currentCat;
+        $itemCat = $item["category_key"] ?? $item["cat"] ?? "";
+        return $itemCat === $currentCat;
     }));
 }
 
@@ -214,15 +215,6 @@ $socialIconClasses = [
                         <span id="action-share"><?= e(data_get($data, "profile.actions.share")); ?></span>
                     </button>
                 </div>
-            </div>
-
-            <div class="stats-strip" id="statsStrip">
-                <?php foreach (data_list($data, "stats") as $item): ?>
-                    <div class="stat-item">
-                        <div class="stat-num"><?= e($item["value"] ?? ""); ?></div>
-                        <div class="stat-label"><?= e($item["label"] ?? ""); ?></div>
-                    </div>
-                <?php endforeach; ?>
             </div>
 
             <div class="sec">

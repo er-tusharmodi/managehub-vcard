@@ -175,12 +175,16 @@ class VcardController extends Controller
             'subscription_expires_at' => ['nullable', 'date'],
         ]);
 
-        $subscriptionStartedAt = $vcard->subscription_started_at;
-        if ($validated['subscription_status'] === 'active' && !$subscriptionStartedAt) {
-            $subscriptionStartedAt = now();
+        $subscriptionStatus = $validated['subscription_status'];
+        $expiresAt = $validated['subscription_expires_at'] ?? null;
+
+        if ($subscriptionStatus === 'inactive' && $expiresAt && now()->lt($expiresAt)) {
+            $subscriptionStatus = 'active';
         }
-        if ($validated['subscription_status'] === 'inactive') {
-            $subscriptionStartedAt = $subscriptionStartedAt;
+
+        $subscriptionStartedAt = $vcard->subscription_started_at;
+        if ($subscriptionStatus === 'active' && !$subscriptionStartedAt) {
+            $subscriptionStartedAt = now();
         }
 
         $vcard->update([
@@ -188,9 +192,9 @@ class VcardController extends Controller
             'client_email' => $validated['client_email'],
             'client_phone' => $validated['client_phone'] ?? null,
             'client_address' => $validated['client_address'] ?? null,
-            'subscription_status' => $validated['subscription_status'],
+            'subscription_status' => $subscriptionStatus,
             'subscription_started_at' => $subscriptionStartedAt,
-            'subscription_expires_at' => $validated['subscription_expires_at'] ?? null,
+            'subscription_expires_at' => $expiresAt,
         ]);
 
         // Update the user details as well

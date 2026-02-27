@@ -178,18 +178,6 @@ $socialIconClasses = [
                 <div class="profile-name" id="profile-name"><?= e(data_get($data, "profile.name")); ?></div>
                 <div class="profile-role" id="profile-role"><?= e(data_get($data, "profile.role")); ?></div>
                 <div class="profile-tagline" id="profile-tagline"><?= e(data_get($data, "profile.tagline")); ?></div>
-                <div class="profile-stats" id="profileStats">
-                    <?php $stats = data_list($data, "profile.stats"); ?>
-                    <?php foreach ($stats as $index => $item): ?>
-                        <div class="pstat">
-                            <div class="pstat-num"><?= e($item["value"] ?? ""); ?></div>
-                            <div class="pstat-lbl"><?= e($item["label"] ?? ""); ?></div>
-                        </div>
-                        <?php if ($index < count($stats) - 1): ?>
-                            <div class="stat-div"></div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
                 <div class="profile-action-btns">
                     <button class="pab call" onclick="callShop()">
                         <svg viewBox="0 0 24 24">
@@ -626,7 +614,25 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="payment-list" id="paymentList">
                         <?php foreach (data_list($data, "payments") as $item): ?>
-                            <?php $iconKey = "pay_" . ($item["icon"] ?? ""); ?>
+                            <?php
+                            $iconName = $item["icon"] ?? "";
+                            if ($iconName === "") {
+                                $label = strtolower((string) ($item["name"] ?? ""));
+                                if (str_contains($label, "upi") || str_contains($label, "qr")) {
+                                    $iconName = "upi";
+                                } elseif (str_contains($label, "card")) {
+                                    $iconName = "card";
+                                } elseif (str_contains($label, "bank")) {
+                                    $iconName = "bank";
+                                } elseif (str_contains($label, "cash")) {
+                                    $iconName = "cash";
+                                }
+                            }
+                            if ($iconName === "") {
+                                $iconName = "cash";
+                            }
+                            $iconKey = "pay_" . $iconName;
+                            ?>
                             <div class="pay-item">
                                 <div class="pay-icon-wrap">
                                     <span style="display:flex;color:<?= e($item["stroke"] ?? "#15803d"); ?>"><?= getIcon($iconKey); ?></span>

@@ -99,19 +99,6 @@
             </div>
         </div>
 
-        <!-- vCard Preview -->
-        <div class="col-md-6 col-lg-4">
-            <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.vcard', $page) }}'">
-                <div class="card-body text-center">
-                    <div class="mb-3">
-                        <i class="fas fa-id-card fs-1 text-info"></i>
-                    </div>
-                    <h5 class="card-title">vCard Preview</h5>
-                    <p class="card-text text-muted">Profile information</p>
-                </div>
-            </div>
-        </div>
-
         <!-- How It Works -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.how-it-works', $page) }}'">

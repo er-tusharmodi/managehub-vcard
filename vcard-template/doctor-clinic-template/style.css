@@ -1128,6 +1128,7 @@ select.bf-input {
 }
 .pay-icon-wrap svg {
     fill: none;
+    stroke: currentColor;
 }
 .pay-name {
     font-size: 0.86rem;

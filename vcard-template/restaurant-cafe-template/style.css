@@ -1033,6 +1033,7 @@ textarea.bf-inp {
 }
 .pay-icon svg {
     fill: none;
+    stroke: currentColor;
 }
 .pay-name {
     font-size: 0.78rem;

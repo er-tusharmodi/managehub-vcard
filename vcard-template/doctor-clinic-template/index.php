@@ -150,18 +150,6 @@ $socialIconClasses = [
                 <div class="profile-name" id="profile-name"><?= e(data_get($data, "doctor.name")); ?></div>
                 <div class="profile-role" id="profile-role"><?= e(data_get($data, "doctor.role")); ?></div>
                 <div class="profile-qual" id="profile-qualification"><?= e(data_get($data, "doctor.qualification")); ?></div>
-                <div class="profile-stats" id="profileStats">
-                    <?php $stats = data_list($data, "profile.stats"); ?>
-                    <?php foreach ($stats as $index => $item): ?>
-                        <div class="pstat">
-                            <div class="pstat-num"><?= e($item["value"] ?? ""); ?></div>
-                            <div class="pstat-lbl"><?= e($item["label"] ?? ""); ?></div>
-                        </div>
-                        <?php if ($index < count($stats) - 1): ?>
-                            <div class="stat-divider"></div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
                 <div class="profile-action-btns">
                     <button class="pab call" onclick="callClinic()">
                         <svg viewBox="0 0 24 24">
@@ -379,16 +367,8 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="fees-list" id="feesList">
                         <?php foreach (data_list($data, "fees.items") as $item): ?>
-                            <?php
-                            $feeIconKey = "fee_" . ($item["icon"] ?? "");
-                            $feeBg = $item["bg"] ?? "#e0f2fe";
-                            $feeColor = $item["color"] ?? "#0369a1";
-                            ?>
                             <div class="fee-item">
                                 <div class="fee-left">
-                                    <div class="fee-icon" style="background:<?= e($feeBg); ?>;color:<?= e($feeColor); ?>">
-                                        <?= getIcon($feeIconKey); ?>
-                                    </div>
                                     <div>
                                         <div class="fee-name"><?= e($item["name"] ?? ""); ?></div>
                                         <div class="fee-note"><?= e($item["note"] ?? ""); ?></div>
@@ -461,7 +441,7 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="awards-list" id="awardsList">
                         <?php foreach (data_list($data, "awards") as $item): ?>
-                            <?php $awardIconKey = "award_" . ($item["icon"] ?? ""); ?>
+                            <?php $awardIconKey = "award_medal"; ?>
                             <div class="award-item">
                                 <div class="award-icon"><?= getIcon($awardIconKey); ?></div>
                                 <div>
@@ -562,7 +542,25 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="payment-list" id="paymentList">
                         <?php foreach (data_list($data, "payments") as $item): ?>
-                            <?php $payIconKey = "pay_" . ($item["icon"] ?? ""); ?>
+                            <?php
+                            $iconName = $item["icon"] ?? "";
+                            if ($iconName === "") {
+                                $label = strtolower((string) ($item["name"] ?? ""));
+                                if (str_contains($label, "upi") || str_contains($label, "qr")) {
+                                    $iconName = "upi";
+                                } elseif (str_contains($label, "card")) {
+                                    $iconName = "card";
+                                } elseif (str_contains($label, "bank")) {
+                                    $iconName = "bank";
+                                } elseif (str_contains($label, "cash")) {
+                                    $iconName = "cash";
+                                }
+                            }
+                            if ($iconName === "") {
+                                $iconName = "cash";
+                            }
+                            $payIconKey = "pay_" . $iconName;
+                            ?>
                             <div class="pay-item">
                                 <div class="pay-icon-wrap">
                                     <span style="display:flex;color:<?= e($item["stroke"] ?? "#0d9488"); ?>"><?= getIcon($payIconKey); ?></span>

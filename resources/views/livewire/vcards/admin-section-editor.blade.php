@@ -221,20 +221,22 @@
                         @else
                             @if($isFormList)
                                 <!-- Render as list/table if form itself is a sequential array -->
-                                @include('livewire.vcards.partials.field', [
-                                    'key' => $section,
-                                    'value' => $form,
-                                    'wirePath' => '',
-                                    'hideListHeaderButton' => true,
-                                ])
+                                    @include('livewire.vcards.partials.field', [
+                                        'key' => $section,
+                                        'value' => $form,
+                                        'wirePath' => '',
+                                        'categoryOptions' => $categoryOptions,
+                                        'hideListHeaderButton' => true,
+                                    ])
                             @else
                                 <!-- Render individual fields if form is associative -->
                                 @foreach ($form as $key => $value)
-                                    @include('livewire.vcards.partials.field', [
-                                        'key' => $key,
-                                        'value' => $value,
-                                        'wirePath' => $key,
-                                    ])
+                                        @include('livewire.vcards.partials.field', [
+                                            'key' => $key,
+                                            'value' => $value,
+                                            'wirePath' => $key,
+                                            'categoryOptions' => $categoryOptions,
+                                        ])
                                 @endforeach
                             @endif
                         @endif

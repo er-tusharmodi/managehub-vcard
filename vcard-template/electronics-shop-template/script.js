@@ -94,13 +94,6 @@ const CATEGORY_ICONS = {
     gaming: `<svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.8"><path d="M6 12h12M12 6v12"/><rect x="2" y="7" width="20" height="10" rx="2"/></svg>`,
 };
 
-const REPAIR_ICONS = {
-    mobile: `<svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18.01"/></svg>`,
-    laptop: `<svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
-    ac: `<svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="2" width="18" height="20" rx="2"/><line x1="7" y1="6" x2="17" y2="6"/></svg>`,
-    battery: `<svg width="20" height="20" viewBox="0 0 24 24" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M21 12h-3M6 12H3M12 21v-3M12 6V3"/></svg>`,
-};
-
 const PAYMENT_ICONS = {
     upi: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`,
     card: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/><path d="M7 15h3M14 15h.01"/></svg>`,
@@ -176,9 +169,6 @@ const renderCategories = () => {
             .map(
                 (item) => `
                     <div class="cat-card" onclick="enquireWA('${sq(item.query || item.name)}')">
-                        <div class="cat-icon" style="background:${item.bg || ""}">
-                            <span style="display:flex;color:${item.stroke || "#1565c0"}">${CATEGORY_ICONS[item.icon] || ""}</span>
-                        </div>
                         <div class="cat-name">${item.name || ""}</div>
                         <div class="cat-count">${item.count || ""}</div>
                     </div>`,
@@ -235,9 +225,6 @@ const renderRepairs = () => {
             .map(
                 (item) => `
                     <div class="repair-item">
-                        <div class="repair-ico" style="background:${item.bg || "#e3f2fd"}">
-                            <span style="display:flex;color:${item.stroke || "#1565c0"}">${REPAIR_ICONS[item.icon] || ""}</span>
-                        </div>
                         <div class="repair-info">
                             <div class="repair-name">${item.name || ""}</div>
                             <div class="repair-sub">${item.sub || ""}</div>

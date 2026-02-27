@@ -43,8 +43,12 @@ class Vcard extends Model
             return false;
         }
 
-        if ($this->subscription_expires_at && now()->gt($this->subscription_expires_at)) {
-            return false;
+        if ($this->subscription_expires_at) {
+            $expiresAt = $this->subscription_expires_at->copy()->endOfDay();
+            if (now()->gt($expiresAt)) {
+                $this->forceFill(['subscription_status' => 'inactive'])->saveQuietly();
+                return false;
+            }
         }
 
         return true;

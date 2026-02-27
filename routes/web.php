@@ -22,6 +22,10 @@ use App\Http\Controllers\VcardSubmissionController;
 
 Route::get('/', [WebsiteController::class, 'show'])->name('home');
 
+Route::get('/subscription-inactive', function () {
+    return view('subscription-inactive');
+})->name('subscription.inactive');
+
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])
         ->name('admin.login');
@@ -110,7 +114,7 @@ Route::get('/template-assets/{templateKey}/{path}', [App\Http\Controllers\Admin\
 require __DIR__ . '/auth.php';
 
 // Client Dashboard - Authenticated users
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'subscription.active'])->group(function () {
     Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/vcards/{vcard}/submissions/{type}', [ClientVcardSubmissionController::class, 'index'])
@@ -128,6 +132,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/vcard/{subdomain}/inactive', [VcardPublicController::class, 'inactive'])
+    ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
+    ->name('vcard.inactive');
+
 Route::get('/{subdomain}', [VcardPublicController::class, 'show'])
     ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
     ->name('vcard.public.path');
@@ -138,7 +146,7 @@ Route::post('/vcard/{subdomain}/submit/{type}', [VcardSubmissionController::clas
     ->middleware('throttle:20,1')
     ->name('vcard.submit.path');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'subscription.active'])->group(function () {
     Route::get('/my-vcard/{subdomain}/edit/{section?}', [ClientVcardEditorController::class, 'edit'])
         ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
         ->name('vcard.editor');
@@ -147,12 +155,14 @@ Route::middleware('auth')->group(function () {
 Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
     Route::get('/', [VcardPublicController::class, 'show'])->name('vcard.public');
 
+    Route::get('/inactive', [VcardPublicController::class, 'inactive'])->name('vcard.inactive.domain');
+
     Route::post('/submit/{type}', [VcardSubmissionController::class, 'submit'])
         ->where('type', 'order|booking|enquiry|contact')
         ->middleware('throttle:20,1')
         ->name('vcard.submit');
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware(['auth', 'subscription.active'])->group(function () {
         Route::get('/vcard/edit/{section?}', ClientSectionEditor::class)->name('vcard.editor.section');
     });
 });

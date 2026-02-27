@@ -66,20 +66,6 @@
             "enquiry": "Enquire"
         }
     },
-    "stats": [
-        {
-            "value": "10K+",
-            "label": "Happy Customers"
-        },
-        {
-            "value": "500+",
-            "label": "Products in Stock"
-        },
-        {
-            "value": "15 Yrs",
-            "label": "Experience"
-        }
-    ],
     "sections": {
         "whyChoose": "Why Choose Us",
         "categories": "Product Categories",
@@ -135,52 +121,40 @@
     ],
     "categories": [
         {
+            "key": "smartphones",
             "name": "Smartphones",
             "count": "50+ models",
-            "query": "Smartphones",
-            "bg": "linear-gradient(135deg,#e3f2fd,#90caf9)",
-            "stroke": "#1565c0",
-            "icon": "phone"
+            "query": "Smartphones"
         },
         {
+            "key": "laptops-pc",
             "name": "Laptops & PC",
             "count": "30+ models",
-            "query": "Laptops & Computers",
-            "bg": "linear-gradient(135deg,#f3e5f5,#ce93d8)",
-            "stroke": "#7b1fa2",
-            "icon": "laptop"
+            "query": "Laptops & Computers"
         },
         {
+            "key": "home-appliances",
             "name": "Home Appliances",
             "count": "80+ items",
-            "query": "Home Appliances",
-            "bg": "linear-gradient(135deg,#e0f7fa,#80deea)",
-            "stroke": "#00838f",
-            "icon": "appliance"
+            "query": "Home Appliances"
         },
         {
+            "key": "smart-tv",
             "name": "Smart TV",
             "count": "25+ models",
-            "query": "Smart TV & Audio",
-            "bg": "linear-gradient(135deg,#fce4ec,#f48fb1)",
-            "stroke": "#c2185b",
-            "icon": "tv"
+            "query": "Smart TV & Audio"
         },
         {
+            "key": "accessories",
             "name": "Accessories",
             "count": "200+ items",
-            "query": "Accessories",
-            "bg": "linear-gradient(135deg,#fff3e0,#ffcc80)",
-            "stroke": "#e65100",
-            "icon": "accessories"
+            "query": "Accessories"
         },
         {
+            "key": "gaming",
             "name": "Gaming",
             "count": "40+ items",
-            "query": "Gaming & Wearables",
-            "bg": "linear-gradient(135deg,#e8f5e9,#a5d6a7)",
-            "stroke": "#2e7d32",
-            "icon": "gaming"
+            "query": "Gaming & Wearables"
         }
     ],
     "products": [
@@ -189,6 +163,7 @@
             "name": "Samsung Galaxy S24 5G",
             "brand": "Samsung",
             "spec": "6.2\" · 8GB RAM · 256GB · AI Camera",
+            "category_key": "smartphones",
             "price": 74999,
             "oldPrice": 84999,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -200,6 +175,7 @@
             "name": "OnePlus Nord CE4 5G",
             "brand": "OnePlus",
             "spec": "6.7\" · 8GB · 128GB · 100W Charge",
+            "category_key": "smartphones",
             "price": 24999,
             "oldPrice": 29999,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -211,6 +187,7 @@
             "name": "HP Victus 15 Gaming Laptop",
             "brand": "HP",
             "spec": "i5-13th · 16GB · 512GB SSD · RTX 3050",
+            "category_key": "laptops-pc",
             "price": 69999,
             "oldPrice": 79999,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -222,6 +199,7 @@
             "name": "boAt Rockerz 550 Headphones",
             "brand": "boAt",
             "spec": "70Hr Battery · Deep Bass · Foldable",
+            "category_key": "accessories",
             "price": 1499,
             "oldPrice": 2999,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -233,6 +211,7 @@
             "name": "Xiaomi 43\" Smart TV",
             "brand": "Xiaomi",
             "spec": "4K · Android TV · Dolby Audio",
+            "category_key": "smart-tv",
             "price": 26999,
             "oldPrice": 32999,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
@@ -244,6 +223,7 @@
             "name": "Apple AirPods Pro (2nd Gen)",
             "brand": "Apple",
             "spec": "Active Noise Cancellation · H2 Chip",
+            "category_key": "accessories",
             "price": 24900,
             "oldPrice": 26900,
             "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",

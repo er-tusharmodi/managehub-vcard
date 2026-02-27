@@ -16,10 +16,11 @@ class VcardPublicController extends Controller
         $vcard = Vcard::where('subdomain', $subdomain)->firstOrFail();
 
         if (!$vcard->isSubscriptionActive()) {
-            return response()
-                ->view('vcards.subscription-inactive', [
-                    'vcard' => $vcard,
-                ], 403);
+            if ($request->routeIs('vcard.public')) {
+                return redirect('/inactive');
+            }
+
+            return redirect()->route('vcard.inactive', ['subdomain' => $subdomain]);
         }
 
         // Track the visit
@@ -43,6 +44,15 @@ class VcardPublicController extends Controller
         $content = $this->injectSubdomain($content, $subdomain);
 
         return response($content);
+    }
+
+    public function inactive(Request $request, string $subdomain): Response
+    {
+        $vcard = Vcard::where('subdomain', $subdomain)->firstOrFail();
+
+        return response()->view('vcards.subscription-inactive', [
+            'vcard' => $vcard,
+        ], 403);
     }
 
     private function renderTemplate(string $indexPath): string

@@ -112,11 +112,30 @@
             "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
         }
     ],
+    "categories": [
+        {
+            "key": "classic",
+            "label": "Classic Sweets"
+        },
+        {
+            "key": "dry-fruit",
+            "label": "Dry Fruit"
+        },
+        {
+            "key": "sugar-free",
+            "label": "Sugar Free"
+        },
+        {
+            "key": "ladoo",
+            "label": "Ladoo"
+        }
+    ],
     "products": [
         {
             "id": 1,
             "name": "Kaju Katli",
             "desc": "Premium cashew sweet, pure desi ghee.",
+            "category_key": "dry-fruit",
             "price": 800,
             "per": "/kg",
             "tag": "Best Seller",
@@ -127,6 +146,7 @@
             "id": 2,
             "name": "Gulab Jamun",
             "desc": "Soft syrupy milk balls in rose syrup.",
+            "category_key": "classic",
             "price": 350,
             "oldPrice": 400,
             "per": "/kg",
@@ -138,6 +158,7 @@
             "id": 3,
             "name": "Dry Fruit Barfi",
             "desc": "Almonds, pistachios & saffron loaded.",
+            "category_key": "dry-fruit",
             "price": 1200,
             "per": "/kg",
             "tag": "Premium",
@@ -148,6 +169,7 @@
             "id": 4,
             "name": "Sugar Free Barfi",
             "desc": "Diabetic-friendly, natural sweeteners.",
+            "category_key": "sugar-free",
             "price": 600,
             "oldPrice": 700,
             "per": "/kg",
@@ -159,6 +181,7 @@
             "id": 5,
             "name": "Motichoor Ladoo",
             "desc": "Fine boondi ladoo, festival favourite.",
+            "category_key": "ladoo",
             "price": 450,
             "per": "/kg",
             "tag": "",
@@ -168,6 +191,7 @@
             "id": 6,
             "name": "Besan Ladoo",
             "desc": "Roasted gram flour, ghee & cardamom.",
+            "category_key": "ladoo",
             "price": 400,
             "per": "/kg",
             "tag": "",

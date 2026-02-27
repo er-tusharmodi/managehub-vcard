@@ -208,15 +208,6 @@ $socialIconClasses = [
                 </div>
             </div>
 
-            <div class="stats-strip" id="statsStrip">
-                <?php foreach (data_list($data, "stats") as $item): ?>
-                    <div class="stat-card">
-                        <div class="stat-num"><?= e($item["value"] ?? ""); ?></div>
-                        <div class="stat-label"><?= e($item["label"] ?? ""); ?></div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-
             <?php if (isSectionEnabled($data, 'whyChoose')): ?>
             <div class="sec">
                 <div class="sec-header">
@@ -258,13 +249,9 @@ $socialIconClasses = [
                     <div class="cat-grid" id="categoriesGrid">
                         <?php foreach (data_list($data, "categories") as $item): ?>
                             <?php
-                            $iconKey = "cat_" . ($item["icon"] ?? "");
                             $query = $item["query"] ?? $item["name"] ?? "";
                             ?>
                             <div class="cat-card" onclick="enquireWA(<?= js_str($query); ?>)">
-                                <div class="cat-icon" style="background:<?= e($item["bg"] ?? ""); ?>">
-                                    <span style="display:flex;color:<?= e($item["stroke"] ?? "#1565c0"); ?>"><?= getIcon($iconKey); ?></span>
-                                </div>
                                 <div class="cat-name"><?= e($item["name"] ?? ""); ?></div>
                                 <div class="cat-count"><?= e($item["count"] ?? ""); ?></div>
                             </div>
@@ -360,14 +347,8 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="repair-list" id="repairList">
                         <?php foreach (data_list($data, "repairServices") as $item): ?>
-                            <?php
-                            $iconKey = "repair_" . ($item["icon"] ?? "");
-                            $query = $item["query"] ?? $item["name"] ?? "";
-                            ?>
+                            <?php $query = $item["query"] ?? $item["name"] ?? ""; ?>
                             <div class="repair-item">
-                                <div class="repair-ico" style="background:<?= e($item["bg"] ?? "#e3f2fd"); ?>">
-                                    <span style="display:flex;color:<?= e($item["stroke"] ?? "#1565c0"); ?>"><?= getIcon($iconKey); ?></span>
-                                </div>
                                 <div class="repair-info">
                                     <div class="repair-name"><?= e($item["name"] ?? ""); ?></div>
                                     <div class="repair-sub"><?= e($item["sub"] ?? ""); ?></div>
@@ -554,7 +535,25 @@ $socialIconClasses = [
                 <div class="sec-body">
                     <div class="payment-list" id="paymentList">
                         <?php foreach (data_list($data, "payments") as $item): ?>
-                            <?php $iconKey = "pay_" . ($item["icon"] ?? ""); ?>
+                            <?php
+                            $iconName = $item["icon"] ?? "";
+                            if (!$iconName) {
+                                $label = strtolower((string) ($item["name"] ?? ""));
+                                if (str_contains($label, "upi") || str_contains($label, "qr")) {
+                                    $iconName = "upi";
+                                } elseif (str_contains($label, "card")) {
+                                    $iconName = "card";
+                                } elseif (str_contains($label, "bank")) {
+                                    $iconName = "bank";
+                                } elseif (str_contains($label, "cash")) {
+                                    $iconName = "cash";
+                                }
+                            }
+                            if ($iconName === "") {
+                                $iconName = "cash";
+                            }
+                            $iconKey = "pay_" . $iconName;
+                            ?>
                             <div class="pay-item">
                                 <div class="pay-icon-wrap">
                                     <span style="display:flex;color:<?= e($item["stroke"] ?? "#3b82f6"); ?>"><?= getIcon($iconKey); ?></span>
