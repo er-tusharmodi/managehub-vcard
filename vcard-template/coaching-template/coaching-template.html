@@ -1,0 +1,2020 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Pinnacle Excellence Academy – UPSC | SSC | Banking | State PSC Coaching</title>
+    <!-- Open Graph / WhatsApp / Facebook preview tags -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Pinnacle Excellence Academy – UPSC | SSC | Banking Coaching" />
+    <meta property="og:description" content="17+ years · 3200+ selections · 94% success rate. Expert coaching for UPSC, SSC, Banking, State PSC & Railway. Free Demo Class available!" />
+    <meta property="og:url"         content="https://pinnacleacademy.in" />
+    <meta property="og:image"       content="https://pinnacleacademy.in/og-image.jpg" />
+    <meta name="twitter:card"       content="summary_large_image" />
+    <meta name="description"        content="Pinnacle Excellence Academy – Best coaching for UPSC CSE, SSC CGL, SBI/IBPS PO, State PSC. 17+ years · 3200+ selections · Free Demo Class!" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+      /* ════════════════════════════════════════════
+         ROOT & RESET
+      ════════════════════════════════════════════ */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --indigo: #4338ca;
+        --indigo2: #818cf8;
+        --navy: #0f1d3a;
+        --light: #eef2ff;
+        --accent: #f59e0b;
+        --text: #0f172a;
+        --muted: #64748b;
+        --card: #fff;
+        --border: #e2e8f0;
+        --radius: 16px;
+        --green: #16a34a;
+        --amber: #d97706;
+        --blue: #2563eb;
+        --red: #e11d48;
+        --purple: #7c3aed;
+        --teal: #0d9488;
+      }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: "Segoe UI", system-ui, sans-serif;
+        background: #f1f5f9;
+        color: var(--text);
+        max-width: 480px;
+        margin: 0 auto;
+        position: relative;
+        min-height: 100vh;
+        overflow-x: hidden;
+        padding-bottom: 84px;
+      }
+
+      /* ════════════════════════════════════════════
+         SVG ICON HELPERS
+      ════════════════════════════════════════════ */
+      svg.ic    { width:18px; height:18px; stroke-width:2;   display:inline-block; vertical-align:middle; }
+      svg.ic-sm { width:15px; height:15px; stroke-width:2;   display:inline-block; vertical-align:middle; }
+      svg.ic-lg { width:22px; height:22px; stroke-width:1.8; display:inline-block; vertical-align:middle; }
+
+      /* ════════════════════════════════════════════
+         BANNER
+      ════════════════════════════════════════════ */
+      .banner { position:relative; width:100%; height:216px; overflow:hidden; }
+      .banner-bg {
+        width:100%; height:100%;
+        background: linear-gradient(135deg,#0f1d3a 0%,#1e3a8a 38%,#4338ca 68%,#6d28d9 100%);
+        position:relative;
+      }
+      .banner-pattern {
+        position:absolute; inset:0; opacity:.06;
+        background-image: radial-gradient(circle,#fff 1px,transparent 1px);
+        background-size:20px 20px;
+      }
+      /* animated geometric shapes in banner */
+      .banner-shapes { position:absolute; inset:0; overflow:hidden; }
+      .bshape {
+        position:absolute; border-radius:50%; opacity:.08;
+        background:rgba(255,255,255,.9);
+        animation: floatShape 6s ease-in-out infinite;
+      }
+      @keyframes floatShape { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+      .star {
+        position:absolute; width:3px; height:3px;
+        background:rgba(255,255,255,.65); border-radius:50%;
+        animation:twinkle 2.5s infinite;
+      }
+      @keyframes twinkle { 0%,100%{opacity:.25;} 50%{opacity:1;} }
+      .banner-wave { position:absolute; bottom:0; left:0; right:0; }
+      .banner-wave svg { width:100%; height:52px; }
+      .banner-top-bar {
+        position:absolute; top:0; left:0; right:0;
+        display:flex; justify-content:space-between; align-items:center;
+        padding:.75rem 1rem; z-index:5;
+      }
+      .share-btn {
+        background:rgba(255,255,255,.18); backdrop-filter:blur(8px);
+        border:1px solid rgba(255,255,255,.35); color:#fff;
+        padding:.38rem .9rem; border-radius:20px; font-size:.76rem;
+        font-weight:600; cursor:pointer; display:flex; align-items:center; gap:.35rem;
+      }
+      .verified-badge {
+        background:rgba(255,255,255,.2); backdrop-filter:blur(8px);
+        border:1px solid rgba(255,255,255,.4); color:#fff;
+        padding:.38rem .8rem; border-radius:20px; font-size:.72rem;
+        font-weight:700; display:flex; align-items:center; gap:.3rem;
+      }
+      .verified-badge svg { stroke:#fbbf24; fill:none; }
+      .banner-center {
+        position:absolute; bottom:68px; left:0; right:0;
+        text-align:center;
+      }
+      .banner-tagline {
+        color:rgba(255,255,255,.88); font-size:.78rem;
+        font-weight:600; letter-spacing:1.6px; text-transform:uppercase;
+      }
+      .banner-sub {
+        color:rgba(255,255,255,.55); font-size:.68rem; margin-top:.2rem; letter-spacing:.5px;
+      }
+
+      /* ════════════════════════════════════════════
+         STATUS BAR
+      ════════════════════════════════════════════ */
+      .status-bar {
+        background:linear-gradient(135deg,#0f1d3a,#4338ca);
+        color:#fff; padding:.6rem 1.2rem;
+        display:flex; align-items:center; justify-content:space-between;
+      }
+      .status-open { display:flex; align-items:center; gap:.4rem; font-size:.78rem; font-weight:700; }
+      .dot-pulse {
+        width:8px; height:8px; border-radius:50%; background:#4ade80;
+        animation:pulse 1.8s infinite;
+      }
+      @keyframes pulse { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.55;transform:scale(1.25);} }
+      .next-batch { font-size:.73rem; color:rgba(255,255,255,.85); }
+
+      /* ════════════════════════════════════════════
+         PROFILE CARD
+      ════════════════════════════════════════════ */
+      .profile-card {
+        background:var(--card); margin:0 .8rem;
+        border-radius:var(--radius); padding:0 1.2rem 1.4rem;
+        box-shadow:0 4px 24px rgba(0,0,0,.11);
+        position:relative; margin-top:-50px; z-index:10;
+      }
+      .profile-logo-wrap {
+        display:flex; justify-content:center;
+        margin-top:-44px; margin-bottom:.8rem; position:relative;
+      }
+      .profile-logo {
+        width:90px; height:90px; border-radius:18px;
+        border:4px solid #fff; box-shadow:0 4px 16px rgba(0,0,0,.16);
+        background:linear-gradient(135deg,#4338ca,#6d28d9);
+        display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      }
+      .profile-logo svg { stroke:#fff; fill:none; width:44px; height:44px; stroke-width:1.4; }
+      .est-tag {
+        position:absolute; bottom:-6px; right:calc(50% - 64px);
+        background:linear-gradient(135deg,var(--accent),#f59e0b);
+        color:#fff; font-size:.6rem; font-weight:700;
+        padding:.18rem .55rem; border-radius:10px;
+        white-space:nowrap; box-shadow:0 2px 6px rgba(0,0,0,.15);
+      }
+      .profile-name  { text-align:center; font-size:1.22rem; font-weight:800; color:var(--text); margin-top:.45rem; }
+      .profile-role  { text-align:center; color:var(--indigo); font-size:.83rem; font-weight:700; margin:.22rem 0; }
+      .profile-qual  { text-align:center; color:var(--muted); font-size:.74rem; margin-bottom:.65rem; line-height:1.5; }
+
+      /* ── stat grid ── */
+      .profile-stats {
+        display:grid; grid-template-columns:1fr auto 1fr auto 1fr auto 1fr;
+        align-items:center;
+        background:#f8fafc; border-radius:13px;
+        padding:.75rem .4rem; margin-bottom:1rem; gap:.15rem;
+      }
+      .pstat { text-align:center; }
+      .pstat-num { font-size:1.05rem; font-weight:800; color:var(--navy); }
+      .pstat-lbl { font-size:.62rem; color:var(--muted); margin-top:.04rem; }
+      .stat-div { width:1px; min-height:32px; align-self:stretch; background:var(--border); }
+
+      /* ── action buttons ── */
+      .profile-action-btns { display:grid; grid-template-columns:repeat(3,1fr); gap:.5rem; }
+      .pab {
+        border:none; border-radius:11px; padding:.65rem .3rem;
+        font-size:.72rem; font-weight:700; cursor:pointer;
+        display:flex; flex-direction:column; align-items:center; gap:.28rem;
+        transition:.18s;
+      }
+      .pab:active { transform:scale(.95); }
+      .pab.call      { background:#dcfce7; color:#15803d; }
+      .pab.whatsapp  { background:#d1fae5; color:#065f46; }
+      .pab.save      { background:#e0f2fe; color:#0369a1; }
+      .pab.email     { background:#ede9fe; color:#6d28d9; }
+      .pab.direction { background:#fef9c3; color:#854d0e; }
+      .pab.share     { background:#fce7f3; color:#9d174d; }
+      .pab svg { fill:none; stroke:currentColor; width:18px; height:18px; stroke-width:2; }
+
+      /* ════════════════════════════════════════════
+         TRUST SIGNALS STRIP
+      ════════════════════════════════════════════ */
+      .trust-strip {
+        background:linear-gradient(135deg,#fef3c7,#fffbeb);
+        border-bottom:1px solid #fde68a;
+        padding:.55rem .85rem;
+        display:flex; align-items:center; justify-content:space-around; gap:.25rem;
+        overflow-x:auto;
+      }
+      .trust-strip::-webkit-scrollbar { display:none; }
+      .trust-item { display:flex; align-items:center; gap:.3rem; font-size:.69rem; font-weight:700; color:#92400e; white-space:nowrap; }
+      .trust-item svg { stroke:#d97706; fill:none; width:13px; height:13px; flex-shrink:0; }
+
+      /* ════════════════════════════════════════════
+         SECTION SHELL
+      ════════════════════════════════════════════ */
+      .sec { margin:.55rem .8rem; background:var(--card); border-radius:var(--radius); overflow:hidden; box-shadow:0 2px 14px rgba(0,0,0,.07); }
+      .sec-header {
+        display:flex; align-items:center; gap:.65rem;
+        padding:.9rem 1.1rem .75rem; border-bottom:1px solid var(--border);
+      }
+      .sec-icon {
+        width:32px; height:32px; border-radius:8px;
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      }
+      .sec-icon svg { stroke:#fff; fill:none; width:16px; height:16px; stroke-width:2.2; }
+      .sec-icon.g-amber  { background:linear-gradient(135deg,#f59e0b,#ef4444); }
+      .sec-icon.g-green  { background:linear-gradient(135deg,#16a34a,#0d9488); }
+      .sec-icon.g-blue   { background:linear-gradient(135deg,#2563eb,#0d9488); }
+      .sec-icon.g-red    { background:linear-gradient(135deg,#e11d48,#f59e0b); }
+      .sec-icon.g-purple { background:linear-gradient(135deg,#7c3aed,#4338ca); }
+      .sec-title    { font-size:.93rem; font-weight:700; color:var(--text); }
+      .sec-subtitle { font-size:.71rem; color:var(--muted); margin-left:auto; font-weight:500; }
+      .sec-body     { padding:.9rem 1.1rem; }
+
+      /* ════════════════════════════════════════════
+         CHIP TAGS
+      ════════════════════════════════════════════ */
+      .chip-row { display:flex; flex-wrap:wrap; gap:.42rem; }
+      .chip {
+        padding:.35rem .82rem; border-radius:20px; font-size:.72rem; font-weight:600;
+        border:1.5px solid; display:inline-flex; align-items:center; gap:.28rem;
+      }
+      .chip svg { width:12px; height:12px; stroke-width:2.5; fill:none; stroke:currentColor; }
+      .chip-indigo { background:#eef2ff; color:var(--indigo);  border-color:#c7d2fe; }
+      .chip-blue   { background:#eff6ff; color:var(--blue);    border-color:#bfdbfe; }
+      .chip-purple { background:#faf5ff; color:#7c3aed;        border-color:#ddd6fe; }
+      .chip-green  { background:#f0fdf4; color:var(--green);   border-color:#bbf7d0; }
+      .chip-amber  { background:#fffbeb; color:var(--amber);   border-color:#fde68a; }
+      .chip-red    { background:#fff1f2; color:var(--red);     border-color:#fecdd3; }
+      .chip-teal   { background:#f0fdfa; color:var(--teal);    border-color:#99f6e4; }
+
+      /* ════════════════════════════════════════════
+         WHY CHOOSE US
+      ════════════════════════════════════════════ */
+      .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
+      .why-card {
+        background:#f8fafc; border-radius:13px; border:1.5px solid var(--border);
+        padding:.85rem .8rem; text-align:center;
+      }
+      .why-icon {
+        width:42px; height:42px; border-radius:12px;
+        display:flex; align-items:center; justify-content:center; margin:0 auto .55rem;
+      }
+      .why-icon svg { fill:none; stroke:#fff; width:20px; height:20px; stroke-width:1.9; }
+      .why-title { font-size:.82rem; font-weight:800; color:var(--text); margin-bottom:.2rem; }
+      .why-desc  { font-size:.69rem; color:var(--muted); line-height:1.45; }
+
+      /* ════════════════════════════════════════════
+         COURSE CARDS (horizontal scroll)
+      ════════════════════════════════════════════ */
+      .hscroll { display:flex; gap:.7rem; overflow-x:auto; padding:.2rem .1rem .5rem; scroll-snap-type:x mandatory; }
+      .hscroll::-webkit-scrollbar { display:none; }
+
+      .course-card {
+        min-width:182px; max-width:182px; background:var(--card);
+        border-radius:14px; border:1.5px solid var(--border);
+        overflow:hidden; cursor:pointer; transition:.2s;
+        scroll-snap-align:start; flex-shrink:0;
+      }
+      .course-card:active { transform:scale(.97); }
+      .course-banner {
+        height:78px; display:flex; align-items:center; justify-content:center;
+        position:relative; overflow:hidden;
+      }
+      .course-banner svg { width:34px; height:34px; stroke:rgba(255,255,255,.9); fill:none; stroke-width:1.5; }
+      .c-success-badge {
+        position:absolute; bottom:6px; right:6px;
+        background:rgba(0,0,0,.28); color:#fff;
+        font-size:.58rem; font-weight:800; padding:.15rem .42rem; border-radius:8px;
+      }
+      .course-body { padding:.72rem .78rem .82rem; }
+      .course-name   { font-size:.84rem; font-weight:800; color:var(--text); margin-bottom:.15rem; }
+      .course-tag    { font-size:.66rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; margin-bottom:.42rem; }
+      .course-pills  { display:flex; flex-wrap:wrap; gap:.3rem; margin-bottom:.52rem; }
+      .c-pill { background:#f1f5f9; color:var(--muted); font-size:.63rem; font-weight:600; padding:.18rem .48rem; border-radius:20px; }
+      .course-enroll {
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        color:#fff; border:none; border-radius:8px; padding:.44rem .5rem;
+        font-size:.72rem; font-weight:700; cursor:pointer; width:100%;
+        display:flex; align-items:center; justify-content:center; gap:.25rem; transition:.2s;
+      }
+      .course-enroll:active { transform:scale(.97); }
+      .course-enroll svg { stroke:#fff; fill:none; width:13px; height:13px; }
+
+      /* ════════════════════════════════════════════
+         BATCH CARDS
+      ════════════════════════════════════════════ */
+      .batch-list { display:flex; flex-direction:column; gap:.65rem; }
+      .batch-item {
+        border-radius:13px; border:1.5px solid var(--border);
+        padding:.88rem .88rem .88rem 1.1rem;
+        background:#f8fafc; position:relative; overflow:hidden;
+      }
+      .batch-item::before {
+        content:''; position:absolute; left:0; top:0; bottom:0;
+        width:4px; border-radius:2px 0 0 2px;
+      }
+      .batch-item.enrolling::before { background:var(--indigo); }
+      .batch-item.starting::before  { background:#f59e0b; }
+      .batch-item.full::before      { background:#e11d48; }
+      .batch-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:.42rem; }
+      .batch-name  { font-size:.86rem; font-weight:800; color:var(--text); }
+      .batch-fee-hint { font-size:.68rem; color:var(--indigo); font-weight:700; margin-top:.12rem; }
+      .batch-badge {
+        font-size:.63rem; font-weight:700; padding:.2rem .52rem;
+        border-radius:20px; white-space:nowrap;
+      }
+      .badge-enroll  { background:#eef2ff; color:var(--indigo); }
+      .badge-starting{ background:#fef3c7; color:#d97706; }
+      .badge-full    { background:#ffe4e6; color:#e11d48; }
+      .batch-meta { display:flex; flex-wrap:wrap; gap:.48rem; margin-bottom:.52rem; }
+      .bm { display:flex; align-items:center; gap:.22rem; font-size:.7rem; color:var(--muted); font-weight:500; }
+      .bm svg { stroke:var(--muted); fill:none; width:12px; height:12px; }
+      .batch-seats     { font-size:.7rem; color:var(--green); font-weight:700; display:flex; align-items:center; gap:.25rem; }
+      .batch-seats-full{ font-size:.7rem; color:var(--red); font-weight:700; }
+      .batch-seats svg { stroke:var(--green); fill:none; width:12px; height:12px; }
+      .batch-cta {
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        color:#fff; border:none; border-radius:9px; padding:.5rem .75rem;
+        font-size:.76rem; font-weight:700; cursor:pointer; margin-top:.48rem;
+        width:100%; transition:.2s; display:flex; align-items:center; justify-content:center; gap:.35rem;
+      }
+      .batch-cta svg { stroke:#fff; fill:none; width:14px; height:14px; }
+      .batch-cta:active  { transform:scale(.98); }
+      .batch-cta.waitlist{ background:#94a3b8; cursor:default; }
+
+      /* ════════════════════════════════════════════
+         DEMO REGISTRATION FORM
+      ════════════════════════════════════════════ */
+      .demo-promo-bar {
+        background:linear-gradient(135deg,#eef2ff,#ede9fe);
+        border-radius:12px; padding:.85rem 1rem;
+        display:flex; align-items:center; gap:.7rem; margin-bottom:1rem;
+      }
+      .demo-promo-icon {
+        width:46px; height:46px; border-radius:12px;
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      }
+      .demo-promo-icon svg { stroke:#fff; fill:none; width:22px; height:22px; }
+      .demo-promo-text h5 { font-size:.88rem; font-weight:800; color:var(--text); }
+      .demo-promo-text p  { font-size:.71rem; color:var(--muted); margin-top:.1rem; line-height:1.45; }
+
+      .demo-slots { display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:.85rem; }
+      .demo-slot {
+        border-radius:12px; border:1.5px solid var(--border);
+        padding:.65rem .8rem; cursor:pointer; transition:.2s; position:relative;
+      }
+      .demo-slot:active { transform:scale(.98); }
+      .demo-slot.selected { border-color:var(--indigo); background:#eef2ff; }
+      .demo-slot-day  { font-size:.68rem; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; margin-bottom:.2rem; }
+      .demo-slot-time { font-size:.83rem; font-weight:700; color:var(--text); }
+      .demo-slot-topic{ font-size:.66rem; color:var(--indigo); font-weight:600; margin-top:.18rem; }
+      .demo-slot-mode { font-size:.64rem; color:var(--muted); margin-top:.1rem; }
+      .demo-slot-check {
+        position:absolute; top:.42rem; right:.42rem; width:18px; height:18px;
+        background:var(--indigo); border-radius:50%; display:none;
+        align-items:center; justify-content:center;
+      }
+      .demo-slot.selected .demo-slot-check { display:flex; }
+      .demo-slot-check svg { stroke:#fff; fill:none; width:10px; height:10px; stroke-width:3; }
+
+      .bf-group  { display:flex; flex-direction:column; gap:.3rem; margin-bottom:.7rem; }
+      .bf-label  { font-size:.7rem; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.4px; }
+      .bf-input  {
+        background:#f8fafc; border:1.5px solid var(--border);
+        border-radius:10px; padding:.65rem .85rem; font-size:.84rem;
+        color:var(--text); font-family:inherit; transition:.3s; width:100%;
+      }
+      .bf-input:focus { outline:none; border-color:var(--indigo); box-shadow:0 0 0 3px rgba(67,56,202,.12); }
+      .bf-input::placeholder { color:#c0b0a0; }
+      .bf-row { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+      select.bf-input {
+        appearance:none;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+        background-repeat:no-repeat; background-position:right .75rem center; padding-right:2.2rem;
+      }
+      .bf-submit {
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        color:#fff; border:none; border-radius:11px; padding:.84rem;
+        font-size:.88rem; font-weight:700; cursor:pointer; width:100%;
+        display:flex; align-items:center; justify-content:center; gap:.4rem; transition:.2s;
+      }
+      .bf-submit:active { transform:scale(.98); }
+      .bf-submit svg { stroke:#fff; fill:none; width:18px; height:18px; }
+      .demo-success { display:none; text-align:center; padding:1.2rem 0; }
+      .demo-success-icon {
+        width:56px; height:56px; background:linear-gradient(135deg,#dcfce7,#bbf7d0);
+        border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto .75rem;
+      }
+      .demo-success-icon svg { stroke:#16a34a; fill:none; width:26px; height:26px; }
+      .demo-success h4 { font-size:1rem; font-weight:800; margin-bottom:.4rem; }
+      .demo-success p  { font-size:.79rem; color:var(--muted); line-height:1.55; margin-bottom:.9rem; }
+      .reset-btn { background:#f1f5f9; border:none; border-radius:9px; padding:.55rem 1.4rem; font-size:.8rem; font-weight:700; cursor:pointer; color:var(--text); }
+
+      /* ════════════════════════════════════════════
+         FEE TABLE
+      ════════════════════════════════════════════ */
+      .fees-list { display:flex; flex-direction:column; gap:.65rem; }
+      .fee-item {
+        display:flex; align-items:center; justify-content:space-between;
+        padding:.85rem; background:#f8fafc; border-radius:13px; border:1px solid var(--border);
+      }
+      .fee-left { display:flex; align-items:center; gap:.7rem; }
+      .fee-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .fee-icon svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; }
+      .fee-name   { font-size:.86rem; font-weight:700; color:var(--text); }
+      .fee-note   { font-size:.7rem; color:var(--muted); margin-top:.06rem; }
+      .fee-amount { font-size:1.02rem; font-weight:800; color:var(--indigo); }
+      .fee-old    { font-size:.77rem; color:var(--muted); text-decoration:line-through; margin-left:.32rem; }
+      .emi-note {
+        background:#f0fdf4; border:1px solid #bbf7d0; border-radius:10px;
+        padding:.6rem .85rem; margin-top:.65rem;
+        display:flex; align-items:center; gap:.4rem;
+        font-size:.74rem; color:#15803d; font-weight:600;
+      }
+      .emi-note svg { stroke:#15803d; fill:none; width:15px; height:15px; flex-shrink:0; }
+
+      /* ════════════════════════════════════════════
+         FACULTY
+      ════════════════════════════════════════════ */
+      .faculty-card {
+        min-width:150px; max-width:150px; background:var(--card);
+        border-radius:14px; border:1.5px solid var(--border); padding:1rem .85rem;
+        text-align:center; scroll-snap-align:start; flex-shrink:0;
+      }
+      .faculty-avatar {
+        width:62px; height:62px; border-radius:50%;
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        display:flex; align-items:center; justify-content:center; margin:0 auto .55rem;
+        font-size:1.35rem; font-weight:800; color:#fff;
+      }
+      .faculty-name    { font-size:.82rem; font-weight:800; color:var(--text); margin-bottom:.12rem; }
+      .faculty-subject { font-size:.7rem;  color:var(--indigo); font-weight:600; margin-bottom:.12rem; }
+      .faculty-exp     { font-size:.67rem; color:var(--muted); }
+      .faculty-wa {
+        background:#d1fae5; color:#065f46; border:none; border-radius:8px;
+        padding:.38rem .5rem; font-size:.67rem; font-weight:700;
+        cursor:pointer; margin-top:.58rem; width:100%;
+        display:flex; align-items:center; justify-content:center; gap:.2rem;
+      }
+      .faculty-wa svg { stroke:#065f46; fill:none; width:13px; height:13px; }
+
+      /* ════════════════════════════════════════════
+         RESULTS / TOPPERS
+      ════════════════════════════════════════════ */
+      .ranker-card {
+        min-width:120px; max-width:120px; border-radius:14px;
+        border:1.5px solid var(--border); overflow:hidden;
+        flex-shrink:0; text-align:center; background:var(--card);
+        scroll-snap-align:start;
+      }
+      .ranker-banner {
+        height:70px; display:flex; align-items:center; justify-content:center;
+        font-size:1.8rem; font-weight:900; position:relative;
+      }
+      .ranker-rank-badge {
+        position:absolute; top:5px; right:5px;
+        background:rgba(0,0,0,.3); color:#fff;
+        font-size:.58rem; font-weight:800; padding:.14rem .38rem; border-radius:7px;
+      }
+      .ranker-body  { padding:.62rem .5rem .72rem; }
+      .ranker-name  { font-size:.78rem; font-weight:800; color:var(--text); }
+      .ranker-exam  { font-size:.66rem; color:var(--indigo); font-weight:600; margin:.08rem 0; }
+      .ranker-score { font-size:.65rem; color:var(--muted); }
+
+      /* ════════════════════════════════════════════
+         TESTIMONIALS
+      ════════════════════════════════════════════ */
+      .review-card { background:#f8fafc; border-radius:13px; border:1px solid var(--border); padding:.9rem; margin-bottom:.72rem; }
+      .review-card:last-child { margin-bottom:0; }
+      .review-top { display:flex; align-items:center; gap:.6rem; margin-bottom:.48rem; }
+      .review-avatar {
+        width:38px; height:38px; border-radius:50%;
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        display:flex; align-items:center; justify-content:center;
+        font-size:.88rem; font-weight:800; color:#fff; flex-shrink:0;
+      }
+      .review-name  { font-size:.86rem; font-weight:700; color:var(--text); }
+      .review-meta  { font-size:.68rem; color:var(--muted); }
+      .review-stars { margin-left:auto; font-size:.75rem; }
+      .review-text  { font-size:.77rem; color:#334155; line-height:1.55; }
+      .review-tag   {
+        display:inline-block; background:#eef2ff; color:var(--indigo);
+        font-size:.63rem; font-weight:700; padding:.17rem .52rem;
+        border-radius:20px; margin-top:.48rem;
+      }
+
+      /* ════════════════════════════════════════════
+         STUDY MATERIALS
+      ════════════════════════════════════════════ */
+      .material-list { display:flex; flex-direction:column; gap:.62rem; }
+      .material-item {
+        display:flex; align-items:center; gap:.72rem; padding:.78rem;
+        background:#f8fafc; border-radius:12px; border:1px solid var(--border); cursor:pointer;
+        transition:.18s;
+      }
+      .material-item:active { transform:scale(.98); }
+      .mat-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .mat-icon svg { fill:none; width:18px; height:18px; stroke-width:2; }
+      .mat-name   { font-size:.84rem; font-weight:700; color:var(--text); }
+      .mat-detail { font-size:.71rem; color:var(--muted); margin-top:.06rem; }
+      .mat-arrow  { margin-left:auto; }
+      .mat-arrow svg { stroke:#bbb; fill:none; width:14px; height:14px; }
+
+      /* ════════════════════════════════════════════
+         LEARNING MODES
+      ════════════════════════════════════════════ */
+      .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; }
+      .mode-card {
+        background:#f8fafc; border-radius:13px; border:1.5px solid var(--border);
+        padding:.95rem .82rem; text-align:center;
+      }
+      .mode-icon { width:44px; height:44px; border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto .55rem; }
+      .mode-icon svg { fill:none; stroke:#fff; width:22px; height:22px; stroke-width:1.8; }
+      .mode-name { font-size:.84rem; font-weight:800; color:var(--text); margin-bottom:.22rem; }
+      .mode-desc { font-size:.7rem; color:var(--muted); line-height:1.45; }
+
+      /* ════════════════════════════════════════════
+         FAQ / SCHOLARSHIP
+      ════════════════════════════════════════════ */
+      .faq-list { display:flex; flex-direction:column; gap:0; }
+      .faq-item { border-bottom:1px solid var(--border); }
+      .faq-item:last-child { border-bottom:none; }
+      .faq-q {
+        display:flex; align-items:center; justify-content:space-between;
+        padding:.78rem 0; cursor:pointer; gap:.5rem;
+        font-size:.83rem; font-weight:700; color:var(--text);
+      }
+      .faq-arrow { transition:.3s; flex-shrink:0; }
+      .faq-arrow svg { stroke:var(--muted); fill:none; width:16px; height:16px; }
+      .faq-item.open .faq-arrow { transform:rotate(180deg); }
+      .faq-a {
+        font-size:.77rem; color:var(--muted); line-height:1.55;
+        padding:0 0 .78rem; display:none;
+      }
+      .faq-item.open .faq-a { display:block; }
+
+      .scholarship-box {
+        background:linear-gradient(135deg,#eef2ff,#ede9fe);
+        border-radius:13px; padding:1rem; margin-top:.75rem;
+        display:flex; align-items:center; gap:.75rem;
+      }
+      .sch-icon { width:44px; height:44px; border-radius:12px; background:linear-gradient(135deg,var(--indigo),#6d28d9); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .sch-icon svg { stroke:#fff; fill:none; width:22px; height:22px; }
+      .sch-text h5  { font-size:.86rem; font-weight:800; color:var(--text); }
+      .sch-text p   { font-size:.71rem; color:var(--muted); margin:.1rem 0 .5rem; line-height:1.45; }
+      .sch-btn {
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        color:#fff; border:none; border-radius:8px; padding:.42rem .9rem;
+        font-size:.74rem; font-weight:700; cursor:pointer; display:inline-block;
+      }
+
+      /* ════════════════════════════════════════════
+         DOWNLOADS
+      ════════════════════════════════════════════ */
+      .dl-grid { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+      .dl-btn {
+        border:none; border-radius:12px; padding:.82rem .6rem;
+        font-size:.78rem; font-weight:700; cursor:pointer;
+        display:flex; flex-direction:column; align-items:center; gap:.38rem; transition:.2s;
+      }
+      .dl-btn:active { transform:scale(.97); }
+      .dl-btn svg { fill:none; stroke:currentColor; width:20px; height:20px; stroke-width:2; }
+      .dl-brochure { background:linear-gradient(135deg,#f59e0b,#ef4444); color:#fff; }
+      .dl-syllabus { background:#eef2ff; color:var(--indigo); border:1.5px solid #c7d2fe; }
+      .dl-admit    { background:#f0fdf4; color:#15803d; border:1.5px solid #bbf7d0; }
+      .dl-app      { background:linear-gradient(135deg,#0f1d3a,#4338ca); color:#fff; }
+
+      /* ════════════════════════════════════════════
+         SOCIAL MEDIA
+      ════════════════════════════════════════════ */
+      .social-list { display:flex; flex-direction:column; gap:.52rem; }
+      .social-item {
+        display:flex; align-items:center; gap:.72rem; padding:.62rem .85rem;
+        border-radius:12px; border:1px solid var(--border);
+        cursor:pointer; transition:.18s;
+      }
+      .social-item:active { transform:scale(.98); }
+      .s-ico { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .s-ico svg { fill:none; }
+      .s-name { font-size:.85rem; font-weight:600; color:var(--text); }
+      .s-val  { font-size:.71rem; color:var(--muted); }
+      .s-arrow { margin-left:auto; }
+      .s-arrow svg { stroke:#bbb; fill:none; width:14px; height:14px; }
+      .ic-wa  { background:#e0f7e9; } .ic-wa svg  { stroke:#128c7e; }
+      .ic-fb  { background:#e8f0fe; } .ic-fb svg  { stroke:#1877f2; }
+      .ic-yt  { background:#ffebee; } .ic-yt svg  { stroke:#ff0000; }
+      .ic-ig  { background:#fce7f3; } .ic-ig svg  { stroke:#e1306c; }
+      .ic-tg  { background:#e0f2fe; } .ic-tg svg  { stroke:#229ed9; }
+      .ic-web { background:#e0f2fe; } .ic-web svg { stroke:#0369a1; }
+
+      /* ════════════════════════════════════════════
+         ENQUIRE / QUICK CONTACT CTA SECTION
+      ════════════════════════════════════════════ */
+      .enquire-section { background:linear-gradient(135deg,#0f1d3a,#4338ca); border-radius:var(--radius); margin:.55rem .8rem; padding:1.2rem 1.1rem; }
+      .enquire-title { color:#fff; font-size:1rem; font-weight:800; margin-bottom:.3rem; }
+      .enquire-sub   { color:rgba(255,255,255,.75); font-size:.76rem; margin-bottom:1rem; line-height:1.5; }
+      .enquire-btns  { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+      .enq-btn {
+        border:none; border-radius:11px; padding:.72rem .5rem;
+        font-size:.78rem; font-weight:700; cursor:pointer; transition:.2s;
+        display:flex; align-items:center; justify-content:center; gap:.38rem;
+      }
+      .enq-btn:active { transform:scale(.97); }
+      .enq-btn svg { fill:none; stroke:currentColor; width:17px; height:17px; stroke-width:2; }
+      .enq-call { background:#dcfce7; color:#15803d; }
+      .enq-wa   { background:#d1fae5; color:#065f46; }
+      .enq-visit{ background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.3); }
+      .enq-refer{ background:rgba(255,255,255,.1); color:rgba(255,255,255,.9); border:1px solid rgba(255,255,255,.25); }
+
+      /* ════════════════════════════════════════════
+         MAP / LOCATION
+      ════════════════════════════════════════════ */
+      .map-frame {
+        border-radius:12px; overflow:hidden; border:1px solid var(--border);
+        margin-bottom:.75rem; height:200px; background:#e2e8f0; position:relative;
+      }
+      .map-frame iframe { width:100%; height:100%; border:none; display:block; }
+      .map-address {
+        font-size:.79rem; color:var(--text); line-height:1.55;
+        margin-bottom:.72rem; display:flex; gap:.42rem;
+      }
+      .map-address svg { stroke:var(--indigo); fill:none; width:16px; height:16px; flex-shrink:0; margin-top:2px; }
+      .directions-btn {
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        color:#fff; border:none; border-radius:10px; padding:.7rem;
+        font-size:.82rem; font-weight:700; cursor:pointer; width:100%;
+        display:flex; align-items:center; justify-content:center; gap:.4rem;
+      }
+      .directions-btn svg { stroke:#fff; fill:none; width:16px; height:16px; }
+
+      /* ════════════════════════════════════════════
+         PAYMENT
+      ════════════════════════════════════════════ */
+      .payment-list { display:flex; flex-direction:column; gap:.62rem; }
+      .pay-item {
+        display:flex; align-items:center; gap:.72rem;
+        padding:.78rem; background:#f8fafc; border-radius:12px; border:1px solid var(--border);
+      }
+      .pay-icon { width:38px; height:38px; border-radius:10px; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.08); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+      .pay-icon svg { fill:none; }
+      .pay-name   { font-size:.85rem; font-weight:700; color:var(--text); }
+      .pay-detail { font-size:.71rem; color:var(--muted); margin-top:.08rem; }
+
+      /* ════════════════════════════════════════════
+         QR SECTION
+      ════════════════════════════════════════════ */
+      .qr-inner { text-align:center; padding:.4rem 0; }
+      #instituteQR { display:flex; justify-content:center; margin:1rem 0; }
+      #instituteQR canvas, #instituteQR img { border-radius:12px !important; border:5px solid #eef2ff !important; box-shadow:0 4px 16px rgba(0,0,0,.1); }
+      .qr-actions { display:flex; gap:.6rem; justify-content:center; }
+      .qr-btn {
+        flex:1; max-width:155px; padding:.6rem; border-radius:10px;
+        border:1.5px solid var(--border); background:#f8fafc; color:var(--text);
+        font-size:.76rem; font-weight:600; cursor:pointer;
+        display:flex; align-items:center; justify-content:center; gap:.35rem; transition:.2s;
+      }
+      .qr-btn svg { stroke:var(--text); fill:none; }
+      .qr-btn:active { transform:scale(.97); }
+
+      /* ════════════════════════════════════════════
+         FLOATING BOTTOM BAR
+      ════════════════════════════════════════════ */
+      .float-bar {
+        position:fixed; bottom:0; left:50%; transform:translateX(-50%);
+        width:100%; max-width:480px; background:#fff;
+        border-top:1px solid var(--border);
+        display:grid; grid-template-columns:1fr 1fr 1fr 1fr;
+        z-index:999; box-shadow:0 -4px 20px rgba(0,0,0,.1);
+      }
+      .fab {
+        display:flex; flex-direction:column; align-items:center; gap:.2rem;
+        padding:.62rem .3rem; border:none; background:transparent; cursor:pointer;
+        font-size:.66rem; font-weight:700; transition:.18s; color:var(--muted);
+      }
+      .fab:active { background:#f1f5f9; }
+      .fab svg { fill:none; stroke-width:1.9; }
+      .fab.call-fab  { color:#15803d; } .fab.call-fab svg  { stroke:#15803d; }
+      .fab.wa-fab    { color:#128c7e; } .fab.wa-fab svg    { stroke:#128c7e; }
+      .fab.demo-fab  { background:linear-gradient(135deg,#eef2ff,#ede9fe); border-left:1px solid var(--border); border-right:1px solid var(--border); color:var(--indigo); }
+      .fab.demo-fab svg { stroke:var(--indigo); }
+      .fab.save-fab  { color:var(--blue); } .fab.save-fab svg  { stroke:var(--blue); }
+
+      /* ════════════════════════════════════════════
+         SHARE MODAL
+      ════════════════════════════════════════════ */
+      .modal-overlay {
+        display:none; position:fixed; inset:0; background:rgba(0,0,0,.55);
+        z-index:8000; align-items:center; justify-content:center;
+        max-width:480px; left:50%; transform:translateX(-50%);
+      }
+      .modal-overlay.show { display:flex; }
+      .modal-box { background:#fff; border-radius:20px; padding:1.4rem; width:calc(100% - 3rem); max-width:340px; animation:fadeIn .28s ease; }
+      @keyframes fadeIn { from{opacity:0;transform:scale(.94);} to{opacity:1;transform:scale(1);} }
+      .modal-title { font-size:.97rem; font-weight:800; color:var(--text); margin-bottom:1rem; text-align:center; }
+      .share-opts  { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-bottom:.85rem; }
+      .sh-opt {
+        padding:.7rem; border-radius:12px; border:1.5px solid var(--border);
+        cursor:pointer; display:flex; align-items:center; gap:.5rem;
+        font-size:.8rem; font-weight:600; transition:.18s;
+      }
+      .sh-opt:active { transform:scale(.97); }
+      .sh-opt svg { fill:none; stroke:currentColor; }
+      .modal-cancel { width:100%; padding:.7rem; border-radius:10px; border:1px solid var(--border); background:transparent; font-size:.84rem; font-weight:600; cursor:pointer; color:var(--muted); }
+
+      /* ════════════════════════════════════════════
+         PROMO POPUP
+      ════════════════════════════════════════════ */
+      .promo-overlay {
+        display:none; position:fixed; inset:0; background:rgba(0,0,0,.6);
+        z-index:9000; align-items:flex-end; justify-content:center;
+        max-width:480px; left:50%; transform:translateX(-50%);
+      }
+      .promo-overlay.show { display:flex; }
+      .promo-box {
+        background:#fff; border-radius:20px 20px 0 0; padding:2rem 1.5rem 2rem;
+        width:100%; text-align:center; animation:slideUp .4s ease; position:relative;
+      }
+      .promo-close { position:absolute; top:.9rem; right:1rem; background:rgba(0,0,0,.06); border:none; width:30px; height:30px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+      .promo-close svg { stroke:#666; fill:none; }
+      .promo-icon { width:60px; height:60px; background:linear-gradient(135deg,var(--indigo),#6d28d9); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto .9rem; }
+      .promo-icon svg { stroke:#fff; fill:none; width:28px; height:28px; }
+      .promo-box h3 { font-size:1.08rem; font-weight:800; color:var(--text); margin-bottom:.48rem; }
+      .promo-box p  { font-size:.81rem; color:var(--muted); line-height:1.6; margin-bottom:1.2rem; }
+      .promo-cta {
+        background:linear-gradient(135deg,var(--indigo),#6d28d9);
+        color:#fff; border:none; border-radius:12px; padding:.88rem 2rem;
+        font-size:.9rem; font-weight:700; cursor:pointer; width:100%;
+        display:flex; align-items:center; justify-content:center; gap:.4rem;
+      }
+      .promo-cta svg { stroke:#fff; fill:none; }
+      @keyframes slideUp { from{transform:translateY(100%);} to{transform:translateY(0);} }
+
+      /* ════════════════════════════════════════════
+         TOAST
+      ════════════════════════════════════════════ */
+      .toast {
+        position:fixed; bottom:90px; left:50%;
+        transform:translateX(-50%) translateY(20px);
+        background:var(--navy); color:#fff; padding:.55rem 1.1rem;
+        border-radius:24px; font-size:.79rem; font-weight:600;
+        z-index:9999; opacity:0; transition:.3s;
+        display:flex; align-items:center; gap:.4rem; white-space:nowrap;
+        box-shadow:0 4px 15px rgba(0,0,0,.25);
+      }
+      .toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+      .toast svg  { stroke:var(--indigo2); fill:none; }
+
+      /* ════════════════════════════════════════════
+         FOOTER
+      ════════════════════════════════════════════ */
+      .site-footer {
+        text-align:center; padding:1.5rem 1.2rem 1rem;
+        font-size:.72rem; color:var(--muted);
+        border-top:1px solid var(--border); margin:0 .8rem;
+      }
+      .site-footer strong { color:var(--indigo); }
+      .footer-links { display:flex; justify-content:center; gap:1rem; margin-top:.55rem; flex-wrap:wrap; }
+      .footer-links span { font-size:.67rem; color:var(--muted); cursor:pointer; }
+      .footer-links span:hover { color:var(--indigo); }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- ══════════════════════════════════════════════════
+         1. BANNER
+    ══════════════════════════════════════════════════ -->
+    <div class="banner">
+      <div class="banner-bg">
+        <div class="banner-pattern"></div>
+        <div class="banner-shapes">
+          <!-- decorative floating blobs -->
+          <div class="bshape" style="width:90px;height:90px;top:-20px;left:-20px;animation-delay:0s;"></div>
+          <div class="bshape" style="width:60px;height:60px;top:30px;right:10px;animation-delay:1.5s;"></div>
+          <div class="bshape" style="width:40px;height:40px;bottom:40px;left:60px;animation-delay:0.8s;"></div>
+        </div>
+        <div class="banner-shapes">
+          <!-- twinkling stars -->
+          <div class="star" style="top:14%;left:8%;animation-delay:0s"></div>
+          <div class="star" style="top:30%;left:25%;animation-delay:.4s"></div>
+          <div class="star" style="top:10%;left:55%;animation-delay:.8s"></div>
+          <div class="star" style="top:50%;left:72%;animation-delay:.2s"></div>
+          <div class="star" style="top:25%;left:88%;animation-delay:1.1s"></div>
+          <div class="star" style="top:65%;left:42%;animation-delay:.6s"></div>
+          <div class="star" style="top:18%;left:96%;animation-delay:1.4s"></div>
+          <div class="star" style="top:75%;left:15%;animation-delay:.9s"></div>
+          <div class="star" style="top:55%;left:35%;animation-delay:1.7s"></div>
+        </div>
+        <div class="banner-center">
+          <div class="banner-tagline">🎯 Shaping Tomorrow&#39;s Leaders</div>
+          <div class="banner-sub">UPSC · SSC · Banking · State PSC · Railway</div>
+        </div>
+        <div class="banner-wave">
+          <svg viewBox="0 0 480 52" fill="none" preserveAspectRatio="none">
+            <path d="M0,32 C80,52 160,12 240,32 C320,52 400,16 480,32 L480,52 L0,52 Z" fill="#f1f5f9"/>
+          </svg>
+        </div>
+      </div>
+      <div class="banner-top-bar">
+        <button class="share-btn" onclick="openShare()">
+          <svg class="ic-sm" viewBox="0 0 24 24" stroke="#fff" stroke-width="2">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Share
+        </button>
+        <div class="verified-badge">
+          <svg width="13" height="13" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Govt. Registered
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         2. STATUS BAR
+    ══════════════════════════════════════════════════ -->
+    <div class="status-bar">
+      <div class="status-open">
+        <div class="dot-pulse"></div>
+        Admissions Open · Limited Seats
+      </div>
+      <div class="next-batch">⚡ Next Batch: 1 Aug 2025</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         3. PROFILE CARD
+    ══════════════════════════════════════════════════ -->
+    <div class="profile-card">
+      <div class="profile-logo-wrap">
+        <div class="profile-logo">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <span class="est-tag">Est. 2008</span>
+      </div>
+      <div class="profile-name">Pinnacle Excellence Academy</div>
+      <div class="profile-role">UPSC · SSC · Banking · State PSC · Railway Coaching</div>
+      <div class="profile-qual">Founded by Dr. Rajesh Verma (IRS Retd.) · IIT Delhi · 20+ Yrs Teaching Experience</div>
+
+      <div class="profile-stats">
+        <div class="pstat">
+          <div class="pstat-num" id="cnt-yrs">17</div>
+          <div class="pstat-lbl">Yrs Active</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="pstat">
+          <div class="pstat-num" id="cnt-sel">3200+</div>
+          <div class="pstat-lbl">Selections</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="pstat">
+          <div class="pstat-num" id="cnt-rate">94%</div>
+          <div class="pstat-lbl">Success Rate</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="pstat">
+          <div class="pstat-num">4.9⭐</div>
+          <div class="pstat-lbl">Rating</div>
+        </div>
+      </div>
+
+      <div class="profile-action-btns">
+        <button class="pab call"      onclick="callInstitute()">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 5.09 5.09l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 14.92z"/></svg>
+          Call
+        </button>
+        <button class="pab whatsapp"  onclick="openWA()">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          WhatsApp
+        </button>
+        <button class="pab save"      onclick="saveContact()">
+          <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save
+        </button>
+        <button class="pab email"     onclick="emailInstitute()">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email
+        </button>
+        <button class="pab direction" onclick="openMaps()">
+          <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Directions
+        </button>
+        <button class="pab share"     onclick="openShare()">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Share
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         4. TRUST SIGNALS
+    ══════════════════════════════════════════════════ -->
+    <div class="trust-strip">
+      <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Govt. Regd.</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>3200+ Selections</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>17 Yrs Running</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Expert Faculty</div>
+      <div class="trust-item"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>ISO Certified</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         5. DIRECTOR MESSAGE
+    ══════════════════════════════════════════════════ -->
+    <div class="sec" style="margin-top:.55rem;">
+      <div class="sec-header">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="sec-title">Director's Message</div>
+      </div>
+      <div class="sec-body">
+        <div style="display:flex;gap:.9rem;align-items:flex-start;">
+          <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#4338ca,#6d28d9);display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;color:#fff;flex-shrink:0;">RV</div>
+          <div>
+            <div style="font-size:.9rem;font-weight:800;color:var(--text);">Dr. Rajesh Verma</div>
+            <div style="font-size:.71rem;color:var(--indigo);font-weight:600;margin-bottom:.5rem;">Founder & Director · IRS Officer (Retd.) · IIT Delhi Alumni</div>
+            <div style="font-size:.78rem;color:#334155;line-height:1.62;">"Success in competitive exams is not about talent alone — it's about the right strategy, disciplined practice, and unwavering guidance. At Pinnacle, we have turned that belief into 3200+ selections across UPSC, SSC, Banking, and State PSC over 17 remarkable years."</div>
+          </div>
+        </div>
+        <div class="chip-row" style="margin-top:.88rem;">
+          <span class="chip chip-indigo"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>IIT Delhi Alumni</span>
+          <span class="chip chip-amber"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>IRS Officer (Retd.)</span>
+          <span class="chip chip-green"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>20+ Yrs Teaching</span>
+          <span class="chip chip-purple"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>National Awardee</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         6. WHY CHOOSE US
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-amber">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="sec-title">Why Choose Pinnacle?</div>
+      </div>
+      <div class="sec-body">
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon" style="background:linear-gradient(135deg,#4338ca,#6d28d9);">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="why-title">Proven Strategy</div>
+            <div class="why-desc">Exam-specific approach crafted by ex-officers with 20+ years of result data</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon" style="background:linear-gradient(135deg,#16a34a,#0d9488);">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="why-title">Expert Faculty</div>
+            <div class="why-desc">IIT / JNU / IRS alumni with combined 100+ years of teaching experience</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon" style="background:linear-gradient(135deg,#d97706,#ef4444);">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div class="why-title">Offline + Online</div>
+            <div class="why-desc">Attend from anywhere — hybrid & self-paced options with live doubt sessions</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">
+              <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <div class="why-title">Rich Study Kit</div>
+            <div class="why-desc">2500+ pages notes · 500+ mocks · daily CA PDF delivered to WhatsApp</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon" style="background:linear-gradient(135deg,#0d9488,#0891b2);">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="why-title">0% EMI Fees</div>
+            <div class="why-desc">Flexible payment in instalments · up to 50% scholarship for merit students</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon" style="background:linear-gradient(135deg,#e11d48,#d97706);">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 5.09 5.09l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 14.92z"/></svg>
+            </div>
+            <div class="why-title">24/7 Mentorship</div>
+            <div class="why-desc">Personal mentors assigned · weekly personal progress tracking for every student</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         7. COURSES OFFERED
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-amber">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="sec-title">Courses Offered</div>
+        <div class="sec-subtitle">Swipe →</div>
+      </div>
+      <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
+        <div class="hscroll">
+
+          <div class="course-card" onclick="enquireWA('UPSC Civil Services Course')">
+            <div class="course-banner" style="background:linear-gradient(135deg,#0f1d3a,#4338ca);">
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span class="c-success-badge">94% pass rate</span>
+            </div>
+            <div class="course-body">
+              <div class="course-name">UPSC CSE</div>
+              <div class="course-tag">Civil Services</div>
+              <div class="course-pills"><span class="c-pill">12 Months</span><span class="c-pill">GS + CSAT</span><span class="c-pill">Interview</span></div>
+              <button class="course-enroll" onclick="event.stopPropagation();enquireWA('UPSC Civil Services')"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Enroll Now</button>
+            </div>
+          </div>
+
+          <div class="course-card" onclick="enquireWA('SSC CGL / CHSL Course')">
+            <div class="course-banner" style="background:linear-gradient(135deg,#15803d,#0d9488);">
+              <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              <span class="c-success-badge">800+ selections</span>
+            </div>
+            <div class="course-body">
+              <div class="course-name">SSC CGL/CHSL</div>
+              <div class="course-tag">Staff Selection</div>
+              <div class="course-pills"><span class="c-pill">6 Months</span><span class="c-pill">Tier 1 & 2</span><span class="c-pill">Mock Tests</span></div>
+              <button class="course-enroll" onclick="event.stopPropagation();enquireWA('SSC CGL CHSL')" style="background:linear-gradient(135deg,#15803d,#0d9488);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Enroll Now</button>
+            </div>
+          </div>
+
+          <div class="course-card" onclick="enquireWA('Banking SBI / IBPS Course')">
+            <div class="course-banner" style="background:linear-gradient(135deg,#1d4ed8,#0891b2);">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <span class="c-success-badge">500+ POs selected</span>
+            </div>
+            <div class="course-body">
+              <div class="course-name">SBI / IBPS PO</div>
+              <div class="course-tag">Banking Sector</div>
+              <div class="course-pills"><span class="c-pill">5 Months</span><span class="c-pill">Pre+Mains</span><span class="c-pill">GD/PI</span></div>
+              <button class="course-enroll" onclick="event.stopPropagation();enquireWA('SBI IBPS Banking')" style="background:linear-gradient(135deg,#1d4ed8,#0891b2);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Enroll Now</button>
+            </div>
+          </div>
+
+          <div class="course-card" onclick="enquireWA('State PSC PCS Course')">
+            <div class="course-banner" style="background:linear-gradient(135deg,#7c3aed,#db2777);">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <span class="c-success-badge">State specific</span>
+            </div>
+            <div class="course-body">
+              <div class="course-name">State PSC / PCS</div>
+              <div class="course-tag">State Services</div>
+              <div class="course-pills"><span class="c-pill">10 Months</span><span class="c-pill">Pre+Mains+Int</span></div>
+              <button class="course-enroll" onclick="event.stopPropagation();enquireWA('State PSC PCS')" style="background:linear-gradient(135deg,#7c3aed,#db2777);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Enroll Now</button>
+            </div>
+          </div>
+
+          <div class="course-card" onclick="enquireWA('RRB NTPC Railway Course')">
+            <div class="course-banner" style="background:linear-gradient(135deg,#d97706,#ef4444);">
+              <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              <span class="c-success-badge">300+ selections</span>
+            </div>
+            <div class="course-body">
+              <div class="course-name">RRB / NTPC</div>
+              <div class="course-tag">Railways</div>
+              <div class="course-pills"><span class="c-pill">4 Months</span><span class="c-pill">CBT 1 & 2</span><span class="c-pill">Reasoning</span></div>
+              <button class="course-enroll" onclick="event.stopPropagation();enquireWA('RRB NTPC Railway')" style="background:linear-gradient(135deg,#d97706,#ef4444);"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Enroll Now</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         8. UPCOMING BATCHES
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-green">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="sec-title">Upcoming Batches</div>
+      </div>
+      <div class="sec-body">
+        <div class="batch-list">
+
+          <div class="batch-item enrolling">
+            <div class="batch-top">
+              <div>
+                <div class="batch-name">UPSC CSE Foundation 2026</div>
+                <div class="batch-fee-hint">₹45,000 · EMI Available</div>
+              </div>
+              <span class="batch-badge badge-enroll">Enrolling</span>
+            </div>
+            <div class="batch-meta">
+              <span class="bm"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>1 Aug 2025</span>
+              <span class="bm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mon–Sat · 7–9 AM</span>
+              <span class="bm"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Offline + Online</span>
+            </div>
+            <div class="batch-seats"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>18 seats left of 60 — Filling fast!</div>
+            <button class="batch-cta" onclick="enquireWA('UPSC CSE Foundation Batch Aug 2025')">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              Enquire & Reserve Seat via WhatsApp
+            </button>
+          </div>
+
+          <div class="batch-item starting">
+            <div class="batch-top">
+              <div>
+                <div class="batch-name">SSC CGL Crash Course</div>
+                <div class="batch-fee-hint">₹22,000 · Early Bird: ₹18,000</div>
+              </div>
+              <span class="batch-badge badge-starting">Starting Soon</span>
+            </div>
+            <div class="batch-meta">
+              <span class="bm"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>15 Jul 2025</span>
+              <span class="bm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Daily · 5–7 PM</span>
+              <span class="bm"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg>Online Only</span>
+            </div>
+            <div class="batch-seats"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>32 seats left of 80</div>
+            <button class="batch-cta" onclick="enquireWA('SSC CGL Crash Course July 2025')">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              Enquire & Reserve Seat via WhatsApp
+            </button>
+          </div>
+
+          <div class="batch-item full">
+            <div class="batch-top">
+              <div>
+                <div class="batch-name">Banking SBI PO Pre-Batch</div>
+                <div class="batch-fee-hint">₹18,000</div>
+              </div>
+              <span class="batch-badge badge-full">Houseful</span>
+            </div>
+            <div class="batch-meta">
+              <span class="bm"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>10 Jun 2025</span>
+              <span class="bm"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mon–Fri · 9–11 AM</span>
+            </div>
+            <div class="batch-seats-full">⛔ Batch Full — Join the Waitlist for next batch</div>
+            <button class="batch-cta waitlist" onclick="enquireWA('Banking SBI PO Waitlist for next batch')">Join Waitlist</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         9. FREE DEMO REGISTRATION
+    ══════════════════════════════════════════════════ -->
+    <div class="sec" id="demoSection">
+      <div class="sec-header">
+        <div class="sec-icon g-red">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <div class="sec-title">Book a Free Demo Class</div>
+      </div>
+      <div class="sec-body">
+        <div id="demoForm">
+          <div class="demo-promo-bar">
+            <div class="demo-promo-icon"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="demo-promo-text">
+              <h5>Experience Before You Enroll 🎯</h5>
+              <p>FREE 2-hour live class · Expert faculty · Q&A session · No commitment needed</p>
+            </div>
+          </div>
+
+          <div style="font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:.55rem;">Choose Your Demo Slot</div>
+          <div class="demo-slots" id="demoSlotGrid">
+            <div class="demo-slot selected" onclick="selectDemo(this)" data-slot="Saturday – Classroom Demo">
+              <div class="demo-slot-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="demo-slot-day">Saturday</div>
+              <div class="demo-slot-time">10:00 – 12:00 PM</div>
+              <div class="demo-slot-topic">📖 UPSC GS Strategy</div>
+              <div class="demo-slot-mode">🏛 Offline · Classroom</div>
+            </div>
+            <div class="demo-slot" onclick="selectDemo(this)" data-slot="Sunday – Online Demo">
+              <div class="demo-slot-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="demo-slot-day">Sunday</div>
+              <div class="demo-slot-time">11:00 AM – 1 PM</div>
+              <div class="demo-slot-topic">📊 Maths & Reasoning</div>
+              <div class="demo-slot-mode">🖥 Online · Google Meet</div>
+            </div>
+            <div class="demo-slot" onclick="selectDemo(this)" data-slot="Weekday Evening – Online Demo">
+              <div class="demo-slot-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="demo-slot-day">Weekday Eve</div>
+              <div class="demo-slot-time">6:00 – 8:00 PM</div>
+              <div class="demo-slot-topic">💰 Banking Prep</div>
+              <div class="demo-slot-mode">🖥 Online · Zoom</div>
+            </div>
+            <div class="demo-slot" onclick="selectDemo(this)" data-slot="Flexible – Counsellor will arrange">
+              <div class="demo-slot-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+              <div class="demo-slot-day">Flexible</div>
+              <div class="demo-slot-time">As Preferred</div>
+              <div class="demo-slot-topic">🎯 Any Subject</div>
+              <div class="demo-slot-mode">📞 Counsellor will call you</div>
+            </div>
+          </div>
+
+          <div class="bf-row">
+            <div class="bf-group"><label class="bf-label">Your Name *</label><input class="bf-input" id="dName" placeholder="Full name" type="text"/></div>
+            <div class="bf-group"><label class="bf-label">Phone *</label><input class="bf-input" id="dPhone" placeholder="+91 XXXXX" type="tel"/></div>
+          </div>
+          <div class="bf-row">
+            <div class="bf-group">
+              <label class="bf-label">Target Exam</label>
+              <select class="bf-input" id="dExam">
+                <option>UPSC CSE</option><option>SSC CGL / CHSL</option>
+                <option>SBI / IBPS PO</option><option>State PSC / PCS</option>
+                <option>RRB / NTPC</option><option>Other</option>
+              </select>
+            </div>
+            <div class="bf-group">
+              <label class="bf-label">Education</label>
+              <select class="bf-input" id="dEdu">
+                <option>Graduate</option><option>Post Graduate</option>
+                <option>Final Year</option><option>Class 12</option>
+              </select>
+            </div>
+          </div>
+          <div class="bf-group">
+            <label class="bf-label">Previous Attempts (optional)</label>
+            <input class="bf-input" id="dAttempt" placeholder="e.g. 1st attempt, cleared prelims once…" type="text"/>
+          </div>
+          <button class="bf-submit" onclick="bookDemo()">
+            <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Register for Free Demo via WhatsApp
+          </button>
+        </div>
+
+        <div class="demo-success" id="demoSuccess">
+          <div class="demo-success-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+          <h4>Demo Class Registered! 🎉</h4>
+          <p>Our counsellor will confirm your demo slot on WhatsApp within 1 hour. Please save our number to receive details and meeting link.</p>
+          <button class="reset-btn" onclick="resetDemo()">Register Another</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         10. FEE STRUCTURE
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-amber">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <div class="sec-title">Fee Structure</div>
+      </div>
+      <div class="sec-body">
+        <div class="fees-list">
+          <div class="fee-item">
+            <div class="fee-left">
+              <div class="fee-icon" style="background:#e0f2fe;color:#0369a1;"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div><div class="fee-name">UPSC CSE Foundation</div><div class="fee-note">12 Months · GS + Optional + Test Series</div></div>
+            </div>
+            <div><span class="fee-amount">₹45,000</span><span class="fee-old">₹60,000</span></div>
+          </div>
+          <div class="fee-item">
+            <div class="fee-left">
+              <div class="fee-icon" style="background:#f0fdf4;color:#15803d;"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/></svg></div>
+              <div><div class="fee-name">SSC CGL / CHSL</div><div class="fee-note">6 Months · Tier 1+2 + Reasoning + English</div></div>
+            </div>
+            <div><span class="fee-amount">₹22,000</span><span class="fee-old">₹30,000</span></div>
+          </div>
+          <div class="fee-item">
+            <div class="fee-left">
+              <div class="fee-icon" style="background:#ede9fe;color:#7c3aed;"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+              <div><div class="fee-name">Banking SBI / IBPS PO</div><div class="fee-note">5 Months · Pre + Mains + GD/PI</div></div>
+            </div>
+            <span class="fee-amount">₹18,000</span>
+          </div>
+          <div class="fee-item">
+            <div class="fee-left">
+              <div class="fee-icon" style="background:#fef3c7;color:#d97706;"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+              <div><div class="fee-name">Online Live Batch (Any Exam)</div><div class="fee-note">Recorded backup · Doubt App included</div></div>
+            </div>
+            <span class="fee-amount">₹12,000</span>
+          </div>
+        </div>
+        <div class="emi-note">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          EMI Available · 0% Interest · Scholarship up to 50% for meritorious students
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         11. EXPERT FACULTY
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="sec-title">Expert Faculty</div>
+        <div class="sec-subtitle">Swipe →</div>
+      </div>
+      <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
+        <div class="hscroll">
+          <div class="faculty-card">
+            <div class="faculty-avatar">RV</div>
+            <div class="faculty-name">Dr. Rajesh Verma</div>
+            <div class="faculty-subject">GS & UPSC Strategy</div>
+            <div class="faculty-exp">IRS Officer · 20 Yrs</div>
+            <button class="faculty-wa" onclick="enquireWA('Faculty Dr. Rajesh Verma')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Connect</button>
+          </div>
+          <div class="faculty-card">
+            <div class="faculty-avatar" style="background:linear-gradient(135deg,#16a34a,#0d9488);">PK</div>
+            <div class="faculty-name">Prof. Priya Kapoor</div>
+            <div class="faculty-subject">Maths & Reasoning</div>
+            <div class="faculty-exp">IIT Bombay · 15 Yrs</div>
+            <button class="faculty-wa" onclick="enquireWA('Faculty Prof. Priya Kapoor')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Connect</button>
+          </div>
+          <div class="faculty-card">
+            <div class="faculty-avatar" style="background:linear-gradient(135deg,#d97706,#ef4444);">AS</div>
+            <div class="faculty-name">Mr. Amit Singh</div>
+            <div class="faculty-subject">English & Reading</div>
+            <div class="faculty-exp">MA English · 12 Yrs</div>
+            <button class="faculty-wa" onclick="enquireWA('Faculty Mr. Amit Singh')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Connect</button>
+          </div>
+          <div class="faculty-card">
+            <div class="faculty-avatar" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">NM</div>
+            <div class="faculty-name">Dr. Neha Mishra</div>
+            <div class="faculty-subject">Economy & Polity</div>
+            <div class="faculty-exp">JNU · 13 Yrs</div>
+            <button class="faculty-wa" onclick="enquireWA('Faculty Dr. Neha Mishra')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Connect</button>
+          </div>
+          <div class="faculty-card">
+            <div class="faculty-avatar" style="background:linear-gradient(135deg,#0d9488,#0891b2);">SK</div>
+            <div class="faculty-name">Mr. Sanjay Kumar</div>
+            <div class="faculty-subject">Current Affairs & GK</div>
+            <div class="faculty-exp">Ex-Journalist · 10 Yrs</div>
+            <button class="faculty-wa" onclick="enquireWA('Faculty Mr. Sanjay Kumar')"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg> Connect</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         12. TOP SELECTIONS (Results Gallery)
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-amber">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="sec-title">Our Top Selections 🏆</div>
+        <div class="sec-subtitle">Swipe →</div>
+      </div>
+      <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
+        <div class="hscroll">
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#d97706,#f59e0b);">🥇<span class="ranker-rank-badge">AIR 14</span></div>
+            <div class="ranker-body"><div class="ranker-name">Arun Sharma</div><div class="ranker-exam">UPSC CSE 2024</div><div class="ranker-score">IAS · Batch 2022</div></div>
+          </div>
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#4338ca,#6d28d9);">🥈<span class="ranker-rank-badge">AIR 38</span></div>
+            <div class="ranker-body"><div class="ranker-name">Priya Nair</div><div class="ranker-exam">UPSC CSE 2023</div><div class="ranker-score">IPS · Batch 2021</div></div>
+          </div>
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#16a34a,#0d9488);">🏆<span class="ranker-rank-badge">Rank 1</span></div>
+            <div class="ranker-body"><div class="ranker-name">Ravi Kumar</div><div class="ranker-exam">SSC CGL 2024</div><div class="ranker-score">IT Inspector · 2023</div></div>
+          </div>
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#0891b2,#2563eb);">🎖<span class="ranker-rank-badge">SBI PO</span></div>
+            <div class="ranker-body"><div class="ranker-name">Sneha Joshi</div><div class="ranker-exam">Banking 2024</div><div class="ranker-score">SBI PO · Batch 2023</div></div>
+          </div>
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#7c3aed,#db2777);">⭐<span class="ranker-rank-badge">Rank 3</span></div>
+            <div class="ranker-body"><div class="ranker-name">Mohan Yadav</div><div class="ranker-exam">UP PSC 2024</div><div class="ranker-score">SDM · Batch 2022</div></div>
+          </div>
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#d97706,#ef4444);">🏅<span class="ranker-rank-badge">AIR 8</span></div>
+            <div class="ranker-body"><div class="ranker-name">Kavita Singh</div><div class="ranker-exam">UPSC CSE 2022</div><div class="ranker-score">IRS · Batch 2020</div></div>
+          </div>
+          <div class="ranker-card">
+            <div class="ranker-banner" style="background:linear-gradient(135deg,#0f1d3a,#1e3a8a);">🎯<span class="ranker-rank-badge">Rank 5</span></div>
+            <div class="ranker-body"><div class="ranker-name">Anita Rawat</div><div class="ranker-exam">UK PSC 2023</div><div class="ranker-score">BDO · Batch 2022</div></div>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:.9rem;">
+          <button onclick="enquireWA('View Full Results and Selections List 3200+')" style="background:linear-gradient(135deg,#4338ca,#6d28d9);color:#fff;border:none;border-radius:10px;padding:.62rem 1.4rem;font-size:.8rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;">
+            <svg width="15" height="15" viewBox="0 0 24 24" stroke="#fff" fill="none" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            View All 3200+ Selections
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         13. STUDENT TESTIMONIALS
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="sec-title">Student Reviews</div>
+        <div class="sec-subtitle" style="color:var(--amber);font-weight:800;">4.9 ⭐</div>
+      </div>
+      <div class="sec-body">
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">AS</div>
+            <div><div class="review-name">Arun Sharma</div><div class="review-meta">UPSC AIR 14 · Batch 2022</div></div>
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="review-text">"Pinnacle's structured approach and Dr. Verma's personal mentoring changed everything for me. From mains strategy to interview prep — they covered it all. After two failed attempts elsewhere, I finally cleared with AIR 14."</div>
+          <span class="review-tag">✅ UPSC CSE 2024 – IAS</span>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#16a34a,#0d9488);">PK</div>
+            <div><div class="review-name">Priya Kapoor</div><div class="review-meta">SSC CGL Rank 12 · Batch 2023</div></div>
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="review-text">"The daily test series and current affairs module at Pinnacle is phenomenal. Mock tests are exam-level tough, which made the actual paper feel easy. Faculty responds in doubt groups within minutes."</div>
+          <span class="review-tag">✅ SSC CGL 2024 – Tax Inspector</span>
+        </div>
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#0891b2,#2563eb);">MR</div>
+            <div><div class="review-name">Mohammed Raza</div><div class="review-meta">SBI PO Selected · Batch 2023</div></div>
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+          </div>
+          <div class="review-text">"Best coaching for banking in the city. Online mode was absolutely seamless and Prof. Priya's maths sessions are legendary — she makes complex problems look trivial. Worth every rupee."</div>
+          <span class="review-tag">✅ SBI PO 2024 – Probationary Officer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         14. STUDY MATERIALS
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-blue">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <div class="sec-title">Study Materials & Resources</div>
+      </div>
+      <div class="sec-body">
+        <div class="material-list">
+          <div class="material-item" onclick="enquireWA('Printed Study Notes')">
+            <div class="mat-icon" style="background:#eef2ff;"><svg viewBox="0 0 24 24" stroke="#4338ca"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div><div class="mat-name">Printed Study Notes</div><div class="mat-detail">2500+ pages · Topic-wise · Updated annually</div></div>
+            <div class="mat-arrow"><svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="material-item" onclick="enquireWA('PYQ Question Banks 10 Years')">
+            <div class="mat-icon" style="background:#f0fdf4;"><svg viewBox="0 0 24 24" stroke="#16a34a"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+            <div><div class="mat-name">PYQ Banks (10 Years)</div><div class="mat-detail">5000+ solved questions with full explanations</div></div>
+            <div class="mat-arrow"><svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="material-item" onclick="enquireWA('Online Mock Test Series 500+')">
+            <div class="mat-icon" style="background:#fef3c7;"><svg viewBox="0 0 24 24" stroke="#d97706"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+            <div><div class="mat-name">Online Test Series</div><div class="mat-detail">500+ mock tests · Full syllabus + sectional</div></div>
+            <div class="mat-arrow"><svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="material-item" onclick="enquireWA('Daily Current Affairs PDF WhatsApp')">
+            <div class="mat-icon" style="background:#fce7f3;"><svg viewBox="0 0 24 24" stroke="#db2777"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div>
+            <div><div class="mat-name">Daily Current Affairs PDF</div><div class="mat-detail">WhatsApp + App · Every morning by 7 AM</div></div>
+            <div class="mat-arrow"><svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="material-item" onclick="enquireWA('Video Lecture Library 1200 hours')">
+            <div class="mat-icon" style="background:#ffe4e6;"><svg viewBox="0 0 24 24" stroke="#e11d48"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div><div class="mat-name">Video Lecture Library</div><div class="mat-detail">1200+ hours · 2-year access on mobile app</div></div>
+            <div class="mat-arrow"><svg viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         15. LEARNING MODES
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-green">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="sec-title">Learning Modes</div>
+      </div>
+      <div class="sec-body">
+        <div class="mode-grid">
+          <div class="mode-card">
+            <div class="mode-icon" style="background:linear-gradient(135deg,#4338ca,#6d28d9);"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+            <div class="mode-name">Offline</div>
+            <div class="mode-desc">AC classrooms · Smartboards · Library · Daily doubts</div>
+          </div>
+          <div class="mode-card">
+            <div class="mode-icon" style="background:linear-gradient(135deg,#0891b2,#2563eb);"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <div class="mode-name">Online Live</div>
+            <div class="mode-desc">Zoom/Meet · Recorded backup · WhatsApp doubt group</div>
+          </div>
+          <div class="mode-card">
+            <div class="mode-icon" style="background:linear-gradient(135deg,#16a34a,#0d9488);"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+            <div class="mode-name">Hybrid</div>
+            <div class="mode-desc">Switch between offline & online any day — same batch</div>
+          </div>
+          <div class="mode-card">
+            <div class="mode-icon" style="background:linear-gradient(135deg,#d97706,#ef4444);"><svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>
+            <div class="mode-name">Self-Paced</div>
+            <div class="mode-desc">Pre-recorded only · Ideal for working professionals</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         16. FAQ & SCHOLARSHIP
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-purple">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="sec-title">FAQs & Scholarship</div>
+      </div>
+      <div class="sec-body">
+        <div class="faq-list">
+          <div class="faq-item open">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Can I join if I am a working professional?
+              <div class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="faq-a">Absolutely! Our Online Live and Self-Paced batches are specifically designed for working professionals. You can study at your own pace with recorded sessions accessible 24/7 on mobile.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Is there any scholarship or concession available?
+              <div class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="faq-a">Yes! We offer merit-based scholarships up to 50% off for students who score well in our entrance test. SC/ST/OBC candidates get additional concessions. Contact us for details.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              What study material is included in the fee?
+              <div class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="faq-a">Fee includes printed notes, PYQ banks, online test series access, daily current affairs PDF, and 2-year access to our video lecture library on the app. Everything you need — all-in-one.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Do you offer demo class before enrollment?
+              <div class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="faq-a">Yes! We offer a completely FREE 2-hour demo class before you enroll. You can attend offline or online. Just fill the registration form above or WhatsApp us to book your slot.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Is EMI available for course fees?
+              <div class="faq-arrow"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+            <div class="faq-a">Yes! We offer 0% interest EMI in 3 to 6 monthly installments for all courses. UPI, card, bank transfer, and cash — all modes accepted.</div>
+          </div>
+        </div>
+
+        <div class="scholarship-box">
+          <div class="sch-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <div class="sch-text">
+            <h5>🎓 Scholarship Test Available</h5>
+            <p>Score 70%+ in our free entrance test and get up to 50% scholarship on course fee.</p>
+            <button class="sch-btn" onclick="enquireWA('Scholarship Test Registration – Pinnacle Academy')">Apply for Scholarship</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         17. DOWNLOADS
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-red">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        </div>
+        <div class="sec-title">Downloads</div>
+      </div>
+      <div class="sec-body">
+        <div class="dl-grid">
+          <button class="dl-btn dl-brochure" onclick="enquireWA('Download Institute Brochure PDF')">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Brochure
+          </button>
+          <button class="dl-btn dl-syllabus" onclick="enquireWA('Download Exam Syllabus PDF')">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Get Syllabus
+          </button>
+          <button class="dl-btn dl-admit" onclick="enquireWA('Download Previous Admit Cards Sample')">
+            <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            Admit Card Guide
+          </button>
+          <button class="dl-btn dl-app" onclick="enquireWA('Download Pinnacle Learning App Link')">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            Get Our App
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         18. SOCIAL MEDIA
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <div class="sec-title">Follow & Connect</div>
+      </div>
+      <div class="sec-body">
+        <div class="social-list">
+          <div class="social-item" onclick="openWA()">
+            <div class="s-ico ic-wa"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+            <div><div class="s-name">WhatsApp Channel</div><div class="s-val">Daily CA, tips & batch updates</div></div>
+            <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="social-item" onclick="window.open('https://youtube.com/@pinnacle-academy','_blank')">
+            <div class="s-ico ic-yt"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg></div>
+            <div><div class="s-name">YouTube</div><div class="s-val">Free lectures · 85,000+ subscribers</div></div>
+            <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="social-item" onclick="window.open('https://t.me/pinnacleacademy','_blank')">
+            <div class="s-ico ic-tg"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+            <div><div class="s-name">Telegram</div><div class="s-val">Free study group · 1.2 Lakh members</div></div>
+            <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="social-item" onclick="window.open('https://instagram.com/pinnacleacademy','_blank')">
+            <div class="s-ico ic-ig"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+            <div><div class="s-name">Instagram</div><div class="s-val">Topper stories · Daily motivation</div></div>
+            <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="social-item" onclick="window.open('https://facebook.com/pinnacleacademy','_blank')">
+            <div class="s-ico ic-fb"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+            <div><div class="s-name">Facebook Page</div><div class="s-val">Results & admission announcements</div></div>
+            <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+          <div class="social-item" onclick="window.open('https://pinnacleacademy.in','_blank')">
+            <div class="s-ico ic-web"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div><div class="s-name">Website</div><div class="s-val">pinnacleacademy.in</div></div>
+            <div class="s-arrow"><svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         19. QUICK ENQUIRY / REFER A FRIEND CTA SECTION
+    ══════════════════════════════════════════════════ -->
+    <div class="enquire-section">
+      <div class="enquire-title">🚀 Ready to Start Your Journey?</div>
+      <div class="enquire-sub">Talk to our expert counsellors — free consultation, zero pressure. Or refer a friend and earn ₹1000 cash reward!</div>
+      <div class="enquire-btns">
+        <button class="enq-btn enq-call" onclick="callInstitute()">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 5.09 5.09l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 14.92z"/></svg>
+          Call Now
+        </button>
+        <button class="enq-btn enq-wa" onclick="openWA()">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Chat on WhatsApp
+        </button>
+        <button class="enq-btn enq-visit" onclick="openMaps()">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Visit Us
+        </button>
+        <button class="enq-btn enq-refer" onclick="enquireWA('Refer a Friend Program – Pinnacle Academy ₹1000 reward')">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Refer & Earn ₹1000
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         20. LOCATION & MAP
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="sec-title">Find Us</div>
+      </div>
+      <div class="sec-body">
+        <!-- Replace src below with your actual Google Maps embed URL -->
+        <div class="map-frame">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.9!2d77.1235!3d28.7041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQyJzE0LjgiTiA3N8KwMDcnMjQuNiJF!5e0!3m2!1sen!2sin!4v1620000000000"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Pinnacle Academy Location">
+          </iframe>
+        </div>
+        <div class="map-address">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Plot No. 12, Sector 15, Rohini, New Delhi – 110085. Near Metro Station Gate No. 2, Pinnacle Tower, 3rd Floor.</span>
+        </div>
+        <button class="directions-btn" onclick="openMaps()">
+          <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Get Directions on Google Maps
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         21. PAYMENT OPTIONS
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon g-blue">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <div class="sec-title">Payment Options</div>
+      </div>
+      <div class="sec-body">
+        <div class="payment-list">
+          <div class="pay-item">
+            <div class="pay-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+            <div><div class="pay-name">Cash / DD / NEFT</div><div class="pay-detail">At institute counter · Receipt provided</div></div>
+          </div>
+          <div class="pay-item">
+            <div class="pay-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <div><div class="pay-name">UPI / QR Code</div><div class="pay-detail">PhonePe · GPay · Paytm · BHIM UPI</div></div>
+          </div>
+          <div class="pay-item">
+            <div class="pay-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+            <div><div class="pay-name">Debit / Credit Card</div><div class="pay-detail">All major cards · No extra charges</div></div>
+          </div>
+          <div class="pay-item">
+            <div class="pay-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <div><div class="pay-name">EMI (0% Interest)</div><div class="pay-detail">3 to 6 month installments · No cost EMI</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         22. QR CODE
+    ══════════════════════════════════════════════════ -->
+    <div class="sec">
+      <div class="sec-header">
+        <div class="sec-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="14" width="3" height="3"/><rect x="14" y="18" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
+        </div>
+        <div class="sec-title">Save & Share Profile</div>
+      </div>
+      <div class="sec-body">
+        <div class="qr-inner">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.3rem;">Scan QR to visit our website · save contact · share profile</div>
+          <div id="instituteQR"></div>
+          <div class="qr-actions">
+            <button class="qr-btn" onclick="saveContact()">
+              <svg viewBox="0 0 24 24" width="15" height="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+              Save Contact
+            </button>
+            <button class="qr-btn" onclick="downloadQR()">
+              <svg viewBox="0 0 24 24" width="15" height="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download QR
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         FOOTER
+    ══════════════════════════════════════════════════ -->
+    <div class="site-footer">
+      This is a verified digital coaching card<br/>
+      <strong>Pinnacle Excellence Academy</strong> · Est. 2008 · Govt. Regd. DL-EDU-2008-00123<br/>
+      <span style="font-size:.65rem;color:#aaa;">Plot 12, Sector 15, Rohini, New Delhi – 110085</span>
+      <div class="footer-links">
+        <span onclick="enquireWA('Privacy Policy')">Privacy Policy</span>
+        <span onclick="enquireWA('Terms & Conditions')">Terms</span>
+        <span onclick="enquireWA('Refund Policy')">Refund Policy</span>
+        <span onclick="enquireWA('Grievance Contact')">Grievance</span>
+      </div>
+      <div style="font-size:.63rem;color:#bbb;margin-top:.5rem;">© 2008–2025 Pinnacle Excellence Academy. All rights reserved.</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         FLOATING BOTTOM BAR
+    ══════════════════════════════════════════════════ -->
+    <div class="float-bar">
+      <button class="fab call-fab" onclick="callInstitute()">
+        <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.9"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 5.09 5.09l1.32-1.32a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 14.92z"/></svg>
+        Call
+      </button>
+      <button class="fab wa-fab" onclick="openWA()">
+        <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.9"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        WhatsApp
+      </button>
+      <button class="fab demo-fab" onclick="document.getElementById('demoSection').scrollIntoView({behavior:'smooth'})">
+        <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.9"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Free Demo
+      </button>
+      <button class="fab save-fab" onclick="saveContact()">
+        <svg width="22" height="22" viewBox="0 0 24 24" stroke-width="1.9"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save
+      </button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         SHARE MODAL
+    ══════════════════════════════════════════════════ -->
+    <div class="modal-overlay" id="shareModal">
+      <div class="modal-box">
+        <div class="modal-title">Share Coaching Profile</div>
+        <div class="share-opts">
+          <div class="sh-opt" onclick="shareWA()" style="color:#128c7e;">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke="#128c7e" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            WhatsApp
+          </div>
+          <div class="sh-opt" onclick="copyLink()" style="color:var(--indigo);">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke="var(--indigo)" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy Link
+          </div>
+          <div class="sh-opt" onclick="shareNative()" style="color:var(--blue);">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            More…
+          </div>
+          <div class="sh-opt" onclick="shareFB()" style="color:#1877f2;">
+            <svg width="20" height="20" viewBox="0 0 24 24" stroke="#1877f2" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            Facebook
+          </div>
+        </div>
+        <button class="modal-cancel" onclick="closeShare()">Cancel</button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         PROMO POPUP
+    ══════════════════════════════════════════════════ -->
+    <div class="promo-overlay" id="promoOverlay">
+      <div class="promo-box">
+        <button class="promo-close" onclick="closePromo()"><svg width="14" height="14" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="promo-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+        <h3>🎯 Free Demo Class This Weekend!</h3>
+        <p>Join our FREE 2-hour live demo class with India's top exam faculty. Limited seats — UPSC, SSC, Banking & more. No commitment, no pressure. Just learning!</p>
+        <button class="promo-cta" onclick="closePromo();document.getElementById('demoSection').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Register for Free Demo Now
+        </button>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         TOAST
+    ══════════════════════════════════════════════════ -->
+    <div class="toast" id="toast">
+      <svg viewBox="0 0 24 24" stroke-width="2" width="15" height="15"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Done!
+    </div>
+
+    <!-- ══════════════════════════════════════════════════
+         JAVASCRIPT
+    ══════════════════════════════════════════════════ -->
+    <script>
+      const INST = {
+        name    : "Pinnacle Excellence Academy",
+        phone   : "+911140001234",
+        whatsapp: "911140001234",
+        email   : "info@pinnacleacademy.in",
+        address : "Plot No. 12, Sector 15, Rohini, New Delhi – 110085",
+        maps    : "https://maps.google.com/?q=Rohini+Sector+15+New+Delhi",
+        website : "https://pinnacleacademy.in",
+        reg     : "DL-EDU-2008-00123",
+      };
+
+      /* ── Animated counters — start from 0, animate up ── */
+      function animateCounter(id, target, prefix, suffix, duration) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        let start = 0;
+        const step = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += step;
+          if (start >= target) { start = target; clearInterval(timer); }
+          el.textContent = prefix + Math.floor(start) + suffix;
+        }, 16);
+      }
+
+      /* ── Demo slot selection ── */
+      let selectedDemoSlot = "Saturday \u2013 Classroom Demo";
+      function selectDemo(el) {
+        document.querySelectorAll('.demo-slot').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        selectedDemoSlot = el.dataset.slot;
+      }
+
+      /* ── Phone number validation ── */
+      function isValidPhone(p) { return /^[+]?[\d\s\-()]{7,15}$/.test(p); }
+
+      /* ── Book demo ── */
+      function bookDemo() {
+        const n = document.getElementById('dName').value.trim();
+        const p = document.getElementById('dPhone').value.trim();
+        if (!n)              { showToast("Please enter your name!"); return; }
+        if (!isValidPhone(p)){ showToast("Please enter a valid phone number!"); return; }
+        const exam    = document.getElementById('dExam').value;
+        const edu     = document.getElementById('dEdu').value;
+        const attempt = document.getElementById('dAttempt').value.trim() || "First attempt";
+        const msg = `\uD83C\uDF93 *Free Demo Registration \u2013 ${INST.name}*\n\n\uD83D\uDC64 Name: ${n}\n\uD83D\uDCDE Phone: ${p}\n\uD83C\uDFAF Target Exam: ${exam}\n\uD83C\uDF93 Education: ${edu}\n\uD83D\uDCC5 Preferred Slot: ${selectedDemoSlot}\n\uD83D\uDCCB Attempts: ${attempt}\n\nKindly confirm my demo class. Thank you!`;
+        window.open(`https://wa.me/${INST.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+        document.getElementById('demoForm').style.display = 'none';
+        document.getElementById('demoSuccess').style.display = 'block';
+      }
+      function resetDemo() {
+        document.getElementById('demoForm').style.display   = 'block';
+        document.getElementById('demoSuccess').style.display = 'none';
+        ['dName','dPhone','dAttempt'].forEach(id => document.getElementById(id).value = '');
+      }
+
+      /* ── FAQ accordion ── */
+      function toggleFaq(el) {
+        const item = el.parentElement;
+        const wasOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!wasOpen) item.classList.add('open');
+      }
+
+      /* ── Contact actions ── */
+      function callInstitute()  { window.location.href = `tel:${INST.phone}`; }
+      function openWA()         { window.open(`https://wa.me/${INST.whatsapp}?text=${encodeURIComponent("Hi! I'm interested in your coaching programs at Pinnacle Excellence Academy. Please share details.")}`, '_blank'); }
+      function emailInstitute() { window.location.href = `mailto:${INST.email}`; }
+      function openMaps()       { window.open(INST.maps, '_blank'); }
+      function enquireWA(item)  { window.open(`https://wa.me/${INST.whatsapp}?text=${encodeURIComponent("Hi! I want to enquire about: *" + item + "* at Pinnacle Excellence Academy.")}`, '_blank'); }
+
+      /* ── Save contact ── */
+      function saveContact() {
+        const v = `BEGIN:VCARD\nVERSION:3.0\nFN:${INST.name}\nTITLE:Competitive Exam Coaching Institute\nORG:Pinnacle Excellence Academy\nTEL;TYPE=CELL:${INST.phone}\nEMAIL:${INST.email}\nADR:;;${INST.address};;;;\nURL:${INST.website}\nNOTE:UPSC SSC Banking State PSC Railway Coaching | Reg. ${INST.reg} | Est. 2008\nEND:VCARD`;
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([v], { type: 'text/vcard' }));
+        a.download = 'PinnacleAcademy.vcf';
+        a.click();
+        showToast("Contact saved!");
+      }
+
+      /* ── QR code ── */
+      function genQR() {
+        const el = document.getElementById('instituteQR');
+        if (!el || typeof QRCode === 'undefined') return;
+        el.innerHTML = '';
+        new QRCode(el, { text: INST.website, width: 165, height: 165, colorDark: '#0f1d3a', colorLight: '#eef2ff', correctLevel: QRCode.CorrectLevel.H });
+      }
+      function downloadQR() {
+        const c = document.querySelector('#instituteQR canvas');
+        if (!c) { showToast("QR not ready yet"); return; }
+        const a = document.createElement('a');
+        a.href = c.toDataURL('image/png');
+        a.download = 'PinnacleAcademy_QR.png';
+        a.click();
+        showToast("QR Code downloaded!");
+      }
+
+      /* ── Share modal — fixed backdrop and cancel ── */
+      const shareModal = document.getElementById('shareModal');
+      function openShare()  { shareModal.classList.add('show'); }
+      function closeShare() { shareModal.classList.remove('show'); }
+      shareModal.addEventListener('click', e => { if (e.target === shareModal) closeShare(); });
+
+      /* ── Clipboard with HTTP fallback ── */
+      function copyToClipboard(text, successMsg) {
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(() => showToast(successMsg));
+        } else {
+          const ta = document.createElement('textarea');
+          ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.focus(); ta.select();
+          try { document.execCommand('copy'); showToast(successMsg); } catch(e) { showToast("Copy manually: " + text); }
+          document.body.removeChild(ta);
+        }
+      }
+      function copyLink()   { copyToClipboard(INST.website, "Link copied!"); closeShare(); }
+      function shareWA()    { window.open(`https://wa.me/?text=${encodeURIComponent("Check out Pinnacle Excellence Academy \u2013 Best Coaching for UPSC, SSC, Banking: " + INST.website)}`, '_blank'); closeShare(); }
+      function shareFB()    { window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(INST.website), '_blank'); closeShare(); }
+      function shareNative(){ if (navigator.share) { navigator.share({ title: INST.name, url: INST.website }); closeShare(); } else copyLink(); }
+
+      /* ── Promo popup — fixed close logic ── */
+      const promoOverlay = document.getElementById('promoOverlay');
+      function closePromo() { promoOverlay.classList.remove('show'); }
+      promoOverlay.addEventListener('click', e => { if (e.target === promoOverlay) closePromo(); });
+
+      /* ── Toast ── */
+      function showToast(m) {
+        const t = document.getElementById('toast');
+        t.innerHTML = `<svg viewBox="0 0 24 24" stroke-width="2.2" width="14" height="14" stroke="#818cf8" fill="none"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>&nbsp;${m}`;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2800);
+      }
+
+      /* ── Init ── */
+      window.addEventListener('load', () => {
+        // Animate counters from 0
+        animateCounter('cnt-yrs',  17,   '',   '',  1400);
+        animateCounter('cnt-sel',  3200, '',   '+', 1800);
+        animateCounter('cnt-rate', 94,   '',   '%', 1600);
+
+        // Generate QR (defer means QRCode may load async — retry if needed)
+        const tryQR = () => { typeof QRCode !== 'undefined' ? genQR() : setTimeout(tryQR, 200); };
+        tryQR();
+
+        // Promo popup after 3s
+        setTimeout(() => promoOverlay.classList.add('show'), 3000);
+      });
+    </script>
+  </body>
+</html>

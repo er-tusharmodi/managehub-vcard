@@ -1,0 +1,605 @@
+{
+    "meta": {
+        "title": "Pinnacle Excellence Academy – UPSC | SSC | Banking | State PSC Coaching",
+        "description": "17+ years · 3200+ selections · 94% success rate. Expert coaching for UPSC, SSC, Banking, State PSC & Railway. Free Demo Class available!",
+        "ogTitle": "Pinnacle Excellence Academy – UPSC | SSC | Banking Coaching",
+        "ogDescription": "17+ years · 3200+ selections · 94% success rate. Expert coaching for UPSC, SSC, Banking, State PSC & Railway. Free Demo Class available!",
+        "ogUrl": "https://pinnacleacademy.in",
+        "ogImage": "https://pinnacleacademy.in/og-image.jpg",
+        "twitterCard": "summary_large_image"
+    },
+    "shop": {
+        "name": "Pinnacle Excellence Academy",
+        "tagline": "UPSC · SSC · Banking · State PSC · Railway Coaching",
+        "phone": "+911140001234",
+        "whatsapp": "911140001234",
+        "email": "info@pinnacleacademy.in",
+        "address": "Plot No. 12, Sector 15, Rohini, New Delhi – 110085",
+        "maps": "https://maps.google.com/?q=Rohini+Sector+15+New+Delhi",
+        "website": "https://pinnacleacademy.in",
+        "registrationId": "DL-EDU-2008-00123",
+        "vcardFileName": "PinnacleAcademy.vcf",
+        "qrFileName": "PinnacleAcademy_QR.png",
+        "established": "2008"
+    },
+    "banner": {
+        "tagline": "Shaping Tomorrow's Leaders",
+        "sub": "UPSC · SSC · Banking · State PSC · Railway"
+    },
+    "status": {
+        "openText": "Admissions Open · Limited Seats",
+        "nextBatch": "Next Batch: 1 Aug 2025"
+    },
+    "profile": {
+        "logoImageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+        "logoIconClass": "bi-mortarboard-fill",
+        "estTag": "Est. 2008",
+        "name": "Pinnacle Excellence Academy",
+        "role": "UPSC · SSC · Banking · State PSC · Railway Coaching",
+        "qual": "Founded by Dr. Rajesh Verma (IRS Retd.) · IIT Delhi · 20+ Yrs Teaching Experience",
+        "actions": {
+            "call": "Call",
+            "whatsapp": "WhatsApp",
+            "save": "Save",
+            "email": "Email",
+            "directions": "Directions",
+            "share": "Share"
+        }
+    },
+    "counters": {
+        "years": 17,
+        "selections": 3200,
+        "successRate": 94
+    },
+    "stats": [
+        { "id": "cnt-yrs", "label": "Yrs Active", "suffix": "" },
+        { "id": "cnt-sel", "label": "Selections", "suffix": "+" },
+        { "id": "cnt-rate", "label": "Success Rate", "suffix": "%" },
+        { "id": "cnt-rating", "label": "Rating", "static": "4.9⭐" }
+    ],
+    "trust": {
+        "items": [
+            { "iconClass": "bi-shield-check", "text": "Govt. Regd." },
+            { "iconClass": "bi-award", "text": "3200+ Selections" },
+            { "iconClass": "bi-clock-history", "text": "17 Yrs Running" },
+            { "iconClass": "bi-people", "text": "Expert Faculty" },
+            { "iconClass": "bi-patch-check", "text": "ISO Certified" }
+        ]
+    },
+    "director": {
+        "title": "Director's Message",
+        "name": "Dr. Rajesh Verma",
+        "role": "Founder & Director · IRS Officer (Retd.) · IIT Delhi Alumni",
+        "message": "Success in competitive exams is not about talent alone — it's about the right strategy, disciplined practice, and unwavering guidance. At Pinnacle, we have turned that belief into 3200+ selections across UPSC, SSC, Banking, and State PSC over 17 remarkable years.",
+        "initials": "RV",
+        "badges": [
+            {
+                "label": "IIT Delhi Alumni",
+                "class": "chip-indigo",
+                "iconClass": "bi-patch-check"
+            },
+            {
+                "label": "IRS Officer (Retd.)",
+                "class": "chip-amber",
+                "iconClass": "bi-shield-check"
+            },
+            {
+                "label": "20+ Yrs Teaching",
+                "class": "chip-green",
+                "iconClass": "bi-clock-history"
+            },
+            {
+                "label": "National Awardee",
+                "class": "chip-purple",
+                "iconClass": "bi-stars"
+            }
+        ]
+    },
+    "whyChoose": {
+        "title": "Why Choose Pinnacle?",
+        "items": [
+            {
+                "title": "Proven Strategy",
+                "description": "Exam-specific approach crafted by ex-officers with 20+ years of result data",
+                "gradient": "linear-gradient(135deg,#4338ca,#6d28d9)",
+                "iconClass": "bi-mortarboard"
+            },
+            {
+                "title": "Expert Faculty",
+                "description": "IIT / JNU / IRS alumni with combined 100+ years of teaching experience",
+                "gradient": "linear-gradient(135deg,#16a34a,#0d9488)",
+                "iconClass": "bi-people"
+            },
+            {
+                "title": "Offline + Online",
+                "description": "Attend from anywhere — hybrid & self-paced options with live doubt sessions",
+                "gradient": "linear-gradient(135deg,#d97706,#ef4444)",
+                "iconClass": "bi-laptop"
+            },
+            {
+                "title": "Rich Study Kit",
+                "description": "2500+ pages notes · 500+ mocks · daily CA PDF delivered to WhatsApp",
+                "gradient": "linear-gradient(135deg,#7c3aed,#2563eb)",
+                "iconClass": "bi-journal-bookmark"
+            },
+            {
+                "title": "0% EMI Fees",
+                "description": "Flexible payment in instalments · up to 50% scholarship for merit students",
+                "gradient": "linear-gradient(135deg,#0d9488,#0891b2)",
+                "iconClass": "bi-cash-stack"
+            },
+            {
+                "title": "24/7 Mentorship",
+                "description": "Personal mentors assigned · weekly personal progress tracking for every student",
+                "gradient": "linear-gradient(135deg,#e11d48,#d97706)",
+                "iconClass": "bi-telephone"
+            }
+        ]
+    },
+    "courses": {
+        "title": "Courses Offered",
+        "subtitle": "Swipe →",
+        "items": [
+            {
+                "name": "UPSC CSE",
+                "tag": "Civil Services",
+                "successBadge": "94% pass rate",
+                "bannerGradient": "linear-gradient(135deg,#0f1d3a,#4338ca)",
+                "pills": ["12 Months", "GS + CSAT", "Interview"],
+                "enquiryText": "UPSC Civil Services",
+                "buttonGradient": "linear-gradient(135deg,#4338ca,#6d28d9)",
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "iconClass": "bi-shield-check"
+            },
+            {
+                "name": "SSC CGL/CHSL",
+                "tag": "Staff Selection",
+                "successBadge": "800+ selections",
+                "bannerGradient": "linear-gradient(135deg,#15803d,#0d9488)",
+                "pills": ["6 Months", "Tier 1 & 2", "Mock Tests"],
+                "enquiryText": "SSC CGL CHSL",
+                "buttonGradient": "linear-gradient(135deg,#15803d,#0d9488)",
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "iconClass": "bi-easel2"
+            },
+            {
+                "name": "SBI / IBPS PO",
+                "tag": "Banking Sector",
+                "successBadge": "500+ POs selected",
+                "bannerGradient": "linear-gradient(135deg,#1d4ed8,#0891b2)",
+                "pills": ["5 Months", "Pre+Mains", "GD/PI"],
+                "enquiryText": "SBI IBPS Banking",
+                "buttonGradient": "linear-gradient(135deg,#1d4ed8,#0891b2)",
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "iconClass": "bi-cash"
+            },
+            {
+                "name": "State PSC / PCS",
+                "tag": "State Services",
+                "successBadge": "State specific",
+                "bannerGradient": "linear-gradient(135deg,#7c3aed,#db2777)",
+                "pills": ["10 Months", "Pre+Mains+Int"],
+                "enquiryText": "State PSC PCS",
+                "buttonGradient": "linear-gradient(135deg,#7c3aed,#db2777)",
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "iconClass": "bi-building"
+            },
+            {
+                "name": "RRB / NTPC",
+                "tag": "Railways",
+                "successBadge": "300+ selections",
+                "bannerGradient": "linear-gradient(135deg,#d97706,#ef4444)",
+                "pills": ["4 Months", "CBT 1 & 2", "Reasoning"],
+                "enquiryText": "RRB NTPC Railway",
+                "buttonGradient": "linear-gradient(135deg,#d97706,#ef4444)",
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "iconClass": "bi-train-front"
+            }
+        ]
+    },
+    "batches": {
+        "title": "Upcoming Batches",
+        "items": [
+            {
+                "status": "enrolling",
+                "name": "UPSC CSE Foundation 2026",
+                "feeHint": "₹45,000 · EMI Available",
+                "badge": "Enrolling",
+                "meta": [
+                    { "iconClass": "bi-calendar-event", "text": "1 Aug 2025" },
+                    { "iconClass": "bi-clock", "text": "Mon–Sat · 7–9 AM" },
+                    { "iconClass": "bi-broadcast", "text": "Offline + Online" }
+                ],
+                "seats": "18 seats left of 60 — Filling fast!",
+                "ctaText": "Enquire & Reserve Seat via WhatsApp",
+                "enquiryText": "UPSC CSE Foundation Batch Aug 2025"
+            },
+            {
+                "status": "starting",
+                "name": "SSC CGL Crash Course",
+                "feeHint": "₹22,000 · Early Bird: ₹18,000",
+                "badge": "Starting Soon",
+                "meta": [
+                    { "iconClass": "bi-calendar-event", "text": "15 Jul 2025" },
+                    { "iconClass": "bi-clock", "text": "Daily · 5–7 PM" },
+                    { "iconClass": "bi-laptop", "text": "Online Only" }
+                ],
+                "seats": "32 seats left of 80",
+                "ctaText": "Enquire & Reserve Seat via WhatsApp",
+                "enquiryText": "SSC CGL Crash Course July 2025"
+            },
+            {
+                "status": "full",
+                "name": "Banking SBI PO Pre-Batch",
+                "feeHint": "₹18,000",
+                "badge": "Houseful",
+                "meta": [
+                    { "iconClass": "bi-calendar-event", "text": "10 Jun 2025" },
+                    { "iconClass": "bi-clock", "text": "Mon–Fri · 9–11 AM" }
+                ],
+                "seatsFull": "Batch Full — Join the Waitlist for next batch",
+                "ctaText": "Join Waitlist",
+                "ctaClass": "waitlist",
+                "enquiryText": "Banking SBI PO Waitlist for next batch"
+            }
+        ]
+    },
+    "demo": {
+        "title": "Book a Free Demo Class",
+        "promoTitle": "Experience Before You Enroll",
+        "promoText": "FREE 2-hour live class · Expert faculty · Q&A session · No commitment needed",
+        "slotTitle": "Choose Your Demo Slot",
+        "slots": [
+            {
+                "slot": "Saturday – Classroom Demo",
+                "day": "Saturday",
+                "time": "10:00 – 12:00 PM",
+                "topic": "UPSC GS Strategy",
+                "mode": "Offline · Classroom",
+                "selected": true
+            },
+            {
+                "slot": "Sunday – Online Demo",
+                "day": "Sunday",
+                "time": "11:00 AM – 1 PM",
+                "topic": "Maths & Reasoning",
+                "mode": "Online · Google Meet"
+            },
+            {
+                "slot": "Weekday Evening – Online Demo",
+                "day": "Weekday Eve",
+                "time": "6:00 – 8:00 PM",
+                "topic": "Banking Prep",
+                "mode": "Online · Zoom"
+            },
+            {
+                "slot": "Flexible – Counsellor will arrange",
+                "day": "Flexible",
+                "time": "As Preferred",
+                "topic": "Any Subject",
+                "mode": "Counsellor will call you"
+            }
+        ],
+        "form": {
+            "nameLabel": "Your Name *",
+            "phoneLabel": "Phone *",
+            "examLabel": "Target Exam",
+            "educationLabel": "Education",
+            "attemptLabel": "Previous Attempts (optional)",
+            "submitText": "Register for Free Demo via WhatsApp"
+        },
+        "examOptions": [
+            "UPSC CSE",
+            "SSC CGL / CHSL",
+            "SBI / IBPS PO",
+            "State PSC / PCS",
+            "RRB / NTPC",
+            "Other"
+        ],
+        "educationOptions": [
+            "Graduate",
+            "Post Graduate",
+            "Final Year",
+            "Class 12"
+        ],
+        "success": {
+            "title": "Demo Class Registered! 🎉",
+            "text": "Our counsellor will confirm your demo slot on WhatsApp within 1 hour. Please save our number to receive details and meeting link.",
+            "resetText": "Register Another"
+        }
+    },
+    "booking": { "enabled": true, "label": "Booking" },
+    "fees": {
+        "title": "Fee Structure",
+        "items": [
+            {
+                "name": "UPSC CSE Foundation",
+                "note": "12 Months · GS + Optional + Test Series",
+                "amount": "₹45,000",
+                "oldAmount": "₹60,000",
+                "iconClass": "bi-shield-check",
+                "color": "#0369a1",
+                "bg": "#e0f2fe"
+            },
+            {
+                "name": "SSC CGL / CHSL",
+                "note": "6 Months · Tier 1+2 + Reasoning + English",
+                "amount": "₹22,000",
+                "oldAmount": "₹30,000",
+                "iconClass": "bi-laptop",
+                "color": "#15803d",
+                "bg": "#f0fdf4"
+            },
+            {
+                "name": "Banking SBI / IBPS PO",
+                "note": "5 Months · Pre + Mains + GD/PI",
+                "amount": "₹18,000",
+                "oldAmount": "",
+                "iconClass": "bi-cash-stack",
+                "color": "#7c3aed",
+                "bg": "#ede9fe"
+            },
+            {
+                "name": "Online Live Batch (Any Exam)",
+                "note": "Recorded backup · Doubt App included",
+                "amount": "₹12,000",
+                "oldAmount": "",
+                "iconClass": "bi-laptop",
+                "color": "#d97706",
+                "bg": "#fef3c7"
+            }
+        ],
+        "emiNote": "EMI Available · 0% Interest · Scholarship up to 50% for meritorious students"
+    },
+    "faculty": {
+        "title": "Expert Faculty",
+        "subtitle": "Swipe →",
+        "items": [
+            {
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "initials": "RV",
+                "name": "Dr. Rajesh Verma",
+                "subject": "GS & UPSC Strategy",
+                "experience": "IRS Officer · 20 Yrs",
+                "gradient": "linear-gradient(135deg,#4338ca,#6d28d9)",
+                "enquiryText": "Faculty Dr. Rajesh Verma"
+            },
+            {
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "initials": "PK",
+                "name": "Prof. Priya Kapoor",
+                "subject": "Maths & Reasoning",
+                "experience": "IIT Bombay · 15 Yrs",
+                "gradient": "linear-gradient(135deg,#16a34a,#0d9488)",
+                "enquiryText": "Faculty Prof. Priya Kapoor"
+            },
+            {
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "initials": "AS",
+                "name": "Mr. Amit Singh",
+                "subject": "English & Reading",
+                "experience": "MA English · 12 Yrs",
+                "gradient": "linear-gradient(135deg,#d97706,#ef4444)",
+                "enquiryText": "Faculty Mr. Amit Singh"
+            },
+            {
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "initials": "NM",
+                "name": "Dr. Neha Mishra",
+                "subject": "Economy & Polity",
+                "experience": "JNU · 13 Yrs",
+                "gradient": "linear-gradient(135deg,#7c3aed,#2563eb)",
+                "enquiryText": "Faculty Dr. Neha Mishra"
+            },
+            {
+                "imageUrl": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
+                "initials": "SK",
+                "name": "Mr. Sanjay Kumar",
+                "subject": "Current Affairs & GK",
+                "experience": "Ex-Journalist · 10 Yrs",
+                "gradient": "linear-gradient(135deg,#0d9488,#0891b2)",
+                "enquiryText": "Faculty Mr. Sanjay Kumar"
+            }
+        ]
+    },
+    "materials": {
+        "title": "Study Materials & Resources",
+        "items": [
+            {
+                "name": "Printed Study Notes",
+                "detail": "2500+ pages · Topic-wise · Updated annually",
+                "iconClass": "bi-journal-text",
+                "iconColor": "#4338ca",
+                "bg": "#eef2ff",
+                "enquiryText": "Printed Study Notes"
+            },
+            {
+                "name": "PYQ Banks (10 Years)",
+                "detail": "5000+ solved questions with full explanations",
+                "iconClass": "bi-plus-circle",
+                "iconColor": "#16a34a",
+                "bg": "#f0fdf4",
+                "enquiryText": "PYQ Question Banks 10 Years"
+            },
+            {
+                "name": "Online Test Series",
+                "detail": "500+ mock tests · Full syllabus + sectional",
+                "iconClass": "bi-star",
+                "iconColor": "#d97706",
+                "bg": "#fef3c7",
+                "enquiryText": "Online Mock Test Series 500+"
+            },
+            {
+                "name": "Daily Current Affairs PDF",
+                "detail": "WhatsApp + App · Every morning by 7 AM",
+                "iconClass": "bi-calendar2-week",
+                "iconColor": "#db2777",
+                "bg": "#fce7f3",
+                "enquiryText": "Daily Current Affairs PDF WhatsApp"
+            },
+            {
+                "name": "Video Lecture Library",
+                "detail": "1200+ hours · 2-year access on mobile app",
+                "iconClass": "bi-play-circle",
+                "iconColor": "#e11d48",
+                "bg": "#ffe4e6",
+                "enquiryText": "Video Lecture Library 1200 hours"
+            }
+        ]
+    },
+    "modes": {
+        "title": "Learning Modes",
+        "items": [
+            {
+                "name": "Offline",
+                "description": "AC classrooms · Smartboards · Library · Daily doubts",
+                "gradient": "linear-gradient(135deg,#4338ca,#6d28d9)",
+                "iconClass": "bi-building"
+            },
+            {
+                "name": "Online Live",
+                "description": "Zoom/Meet · Recorded backup · WhatsApp doubt group",
+                "gradient": "linear-gradient(135deg,#0891b2,#2563eb)",
+                "iconClass": "bi-laptop"
+            },
+            {
+                "name": "Hybrid",
+                "description": "Switch between offline & online any day — same batch",
+                "gradient": "linear-gradient(135deg,#16a34a,#0d9488)",
+                "iconClass": "bi-layers"
+            },
+            {
+                "name": "Self-Paced",
+                "description": "Pre-recorded only · Ideal for working professionals",
+                "gradient": "linear-gradient(135deg,#d97706,#ef4444)",
+                "iconClass": "bi-play-circle"
+            }
+        ]
+    },
+    "faq": {
+        "title": "FAQs",
+        "items": [
+            {
+                "question": "Can I join if I am a working professional?",
+                "answer": "Absolutely! Our Online Live and Self-Paced batches are specifically designed for working professionals. You can study at your own pace with recorded sessions accessible 24/7 on mobile.",
+                "open": true
+            },
+            {
+                "question": "What study material is included in the fee?",
+                "answer": "Fee includes printed notes, PYQ banks, online test series access, daily current affairs PDF, and 2-year access to our video lecture library on the app. Everything you need — all-in-one."
+            },
+            {
+                "question": "Do you offer demo class before enrollment?",
+                "answer": "Yes! We offer a completely FREE 2-hour demo class before you enroll. You can attend offline or online. Just fill the registration form above or WhatsApp us to book your slot."
+            },
+            {
+                "question": "Is EMI available for course fees?",
+                "answer": "Yes! We offer 0% interest EMI in 3 to 6 monthly installments for all courses. UPI, card, bank transfer, and cash — all modes accepted."
+            }
+        ]
+    },
+    "social": {
+        "title": "Follow & Connect",
+        "items": [
+            {
+                "iconClass": "ic-wa",
+                "label": "WhatsApp Channel",
+                "value": "Daily CA, tips & batch updates",
+                "action": "openWA"
+            },
+            {
+                "iconClass": "ic-yt",
+                "label": "YouTube",
+                "value": "Free lectures · 85,000+ subscribers",
+                "url": "https://youtube.com/@pinnacle-academy"
+            },
+            {
+                "iconClass": "ic-tg",
+                "label": "Telegram",
+                "value": "Free study group · 1.2 Lakh members",
+                "url": "https://t.me/pinnacleacademy"
+            },
+            {
+                "iconClass": "ic-ig",
+                "label": "Instagram",
+                "value": "Topper stories · Daily motivation",
+                "url": "https://instagram.com/pinnacleacademy"
+            },
+            {
+                "iconClass": "ic-fb",
+                "label": "Facebook Page",
+                "value": "Results & admission announcements",
+                "url": "https://facebook.com/pinnacleacademy"
+            },
+            {
+                "iconClass": "ic-web",
+                "label": "Website",
+                "value": "pinnacleacademy.in",
+                "url": "https://pinnacleacademy.in"
+            }
+        ]
+    },
+    "location": {
+        "title": "Find Us",
+        "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.9!2d77.1235!3d28.7041!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDQyJzE0LjgiTiA3N8KwMDcnMjQuNiJF!5e0!3m2!1sen!2sin!4v1620000000000",
+        "address": "Plot No. 12, Sector 15, Rohini, New Delhi – 110085. Near Metro Station Gate No. 2, Pinnacle Tower, 3rd Floor.",
+        "directionsText": "Get Directions on Google Maps"
+    },
+    "payment": {
+        "title": "Payment Options",
+        "items": [
+            {
+                "iconClass": "bi-cash-coin",
+                "name": "Cash / DD / NEFT",
+                "detail": "At institute counter · Receipt provided"
+            },
+            {
+                "iconClass": "bi-qr-code",
+                "name": "UPI / QR Code",
+                "detail": "PhonePe · GPay · Paytm · BHIM UPI"
+            },
+            {
+                "iconClass": "bi-credit-card",
+                "name": "Debit / Credit Card",
+                "detail": "All major cards · No extra charges"
+            },
+            {
+                "iconClass": "bi-shield-check",
+                "name": "EMI (0% Interest)",
+                "detail": "3 to 6 month installments · No cost EMI"
+            }
+        ]
+    },
+    "qr": {
+        "title": "Save & Share Profile",
+        "intro": "Scan QR to visit our website · save contact · share profile",
+        "saveText": "Save Contact",
+        "downloadText": "Download QR"
+    },
+    "footer": {
+        "line1": "This is a verified digital coaching card",
+        "line2": "Pinnacle Excellence Academy · Est. 2008 · Govt. Regd. DL-EDU-2008-00123",
+        "line3": "Plot 12, Sector 15, Rohini, New Delhi – 110085",
+        "links": [
+            { "label": "Privacy Policy", "enquiryText": "Privacy Policy" },
+            { "label": "Terms", "enquiryText": "Terms & Conditions" },
+            { "label": "Refund Policy", "enquiryText": "Refund Policy" },
+            { "label": "Grievance", "enquiryText": "Grievance Contact" }
+        ],
+        "copyright": "© 2008–2025 Pinnacle Excellence Academy. All rights reserved."
+    },
+    "messages": {
+        "waEnquiry": "Hi! I'm interested in your coaching programs at Pinnacle Excellence Academy. Please share details.",
+        "shareText": "Check out Pinnacle Excellence Academy – Best Coaching for UPSC, SSC, Banking: {{website}}",
+        "demoHeader": "Free Demo Registration",
+        "demoConfirm": "Kindly confirm my demo class. Thank you!"
+    },
+    "toast": {
+        "contactSaved": "Contact saved!",
+        "qrDownloaded": "QR Code downloaded!",
+        "qrNotReady": "QR not ready yet",
+        "linkCopied": "Link copied!",
+        "nameRequired": "Please enter your name!",
+        "phoneInvalid": "Please enter a valid phone number!"
+    }
+}

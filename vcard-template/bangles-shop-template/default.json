@@ -1,0 +1,516 @@
+{
+  "meta": {
+    "title": "Shringaar Bangles & Churra House"
+  },
+  "shop": {
+    "name": "Shringaar Bangles & Churra House",
+    "tagline": "Premium Bangles, Churra & Bridal Jewellery",
+    "phone": "+919876543210",
+    "whatsapp": "919876543210",
+    "email": "shringaar@gmail.com",
+    "address": "45 Bazaar Street, Chandni Chowk, Delhi – 110006",
+    "maps": "https://maps.google.com/?q=Chandni+Chowk+Delhi",
+    "website": "",
+    "vcardFileName": "ShringaarBangles.vcf",
+    "qrFileName": "shringaar_qr.png"
+  },
+  "banner": {
+    "decorationIconClasses": [
+      "bi-gem",
+      "bi-bullseye",
+      "bi-gem",
+      "bi-gem",
+      "bi-flower1",
+      "bi-gem",
+      "bi-bullseye",
+      "bi-gem",
+      "bi-gem",
+      "bi-flower1"
+    ]
+  },
+  "hero": {
+    "buttons": {
+      "share": "Share",
+      "saveContact": "Save Contact"
+    },
+    "profile": {
+      "name": "Shringaar Bangles & Churra House",
+      "role": "✨ Premium Bangles · Churra · Bridal Jewellery ✨",
+      "bio": "Your one-stop destination for the finest bangles, traditional churra, bridal sets & fashion jewellery. Serving love since 2005 for weddings, festivals & everyday elegance.",
+      "avatarIconClass": "bi-gem"
+    },
+    "actions": {
+      "call": "Call",
+      "whatsapp": "WhatsApp",
+      "save": "Save",
+      "email": "Email",
+      "directions": "Directions",
+      "share": "Share"
+    }
+  },
+  "sections": {
+    "location": {
+      "title": "Our Location",
+      "primary": "45 Bazaar Street, Chandni Chowk",
+      "secondary": "Delhi, NCR – 110006, India",
+      "landmark": "🕐 Landmark: Near Jama Masjid Gate No. 1",
+      "mapButton": "Open in Maps"
+    },
+    "social": {
+      "title": "Social Links",
+      "items": [
+        {
+          "icon": "wa",
+          "iconClass": "ic-wa",
+          "name": "WhatsApp",
+          "value": "+91 98765 43210",
+          "action": "openWA"
+        },
+        {
+          "icon": "fb",
+          "iconClass": "ic-fb",
+          "name": "Facebook",
+          "value": "facebook.com/shringaarbangles",
+          "action": ""
+        },
+        {
+          "icon": "ig",
+          "iconClass": "ic-ig",
+          "name": "Instagram",
+          "value": "@shringaar_bangles",
+          "action": ""
+        },
+        {
+          "icon": "yt",
+          "iconClass": "ic-yt",
+          "name": "YouTube",
+          "value": "Shringaar Official",
+          "action": ""
+        }
+      ]
+    },
+    "collections": {
+      "title": "Our Collections",
+      "items": [
+        {
+          "name": "Bridal Churra Sets",
+          "description": "Traditional red & ivory ivory churra for the big day.",
+          "background": "linear-gradient(145deg,#fce4ec,#f48fb1)",
+          "iconClass": "bi-gem"
+        },
+        {
+          "name": "Gold-Plated Bangles",
+          "description": "Antique & modern gold-plated designs for all occasions.",
+          "background": "linear-gradient(145deg,#ffe0b2,#ffcc80)",
+          "iconClass": "bi-stars"
+        },
+        {
+          "name": "Glass Bangles",
+          "description": "Colourful glass churra & bangles in all sizes & sets.",
+          "background": "linear-gradient(145deg,#e8f5e9,#c8e6c9)",
+          "iconClass": "bi-gem"
+        },
+        {
+          "name": "Mehndi & Haldi Sets",
+          "description": "Custom ceremony bangles for all pre-wedding rituals.",
+          "background": "linear-gradient(145deg,#f3e5f5,#e1bee7)",
+          "iconClass": "bi-flower1"
+        }
+      ]
+    },
+    "products": {
+      "title": "Shop Our Products",
+      "iconClass": "bi-gem"
+    },
+    "sizeGuide": {
+      "title": "Bangle Size Guide",
+      "badges": [
+        {
+          "size": "2/2",
+          "label": "XS Wrist"
+        },
+        {
+          "size": "2/4",
+          "label": "S Wrist"
+        },
+        {
+          "size": "2/6",
+          "label": "M Wrist"
+        },
+        {
+          "size": "2/8",
+          "label": "L Wrist"
+        },
+        {
+          "size": "2/10",
+          "label": "XL Wrist"
+        },
+        {
+          "size": "2/12",
+          "label": "XXL"
+        },
+        {
+          "size": "2/14",
+          "label": "Plus"
+        },
+        {
+          "size": "Custom",
+          "label": "Order"
+        }
+      ],
+      "note": "📏 How to measure: Use a measuring tape around the widest part of your hand (thumb to pinky). The measurement in cm = your bangle size in inches. Not sure? WhatsApp us for a free size consultation! 💬"
+    },
+    "occasions": {
+      "title": "Perfect For Every Occasion",
+      "items": [
+        {
+          "label": "Wedding & Shaadi",
+          "iconClass": "bi-heart-fill"
+        },
+        {
+          "label": "Sangeet & Mehndi",
+          "iconClass": "bi-emoji-smile-fill"
+        },
+        {
+          "label": "Karva Chauth",
+          "iconClass": "bi-gem"
+        },
+        {
+          "label": "Teej Festival",
+          "iconClass": "bi-flower1"
+        },
+        {
+          "label": "Diwali",
+          "iconClass": "bi-stars"
+        },
+        {
+          "label": "Eid Celebrations",
+          "iconClass": "bi-flower2"
+        },
+        {
+          "label": "Baby Shower (Godh Bharai)",
+          "iconClass": "bi-balloon-heart"
+        },
+        {
+          "label": "Engagement",
+          "iconClass": "bi-gem"
+        },
+        {
+          "label": "Gifting",
+          "iconClass": "bi-gift-fill"
+        },
+        {
+          "label": "Everyday Wear",
+          "iconClass": "bi-stars"
+        }
+      ]
+    },
+    "customization": {
+      "title": "Customization & Special Services",
+      "items": [
+        {
+          "icon": "shield",
+          "title": "Bridal Churra Package",
+          "description": "Complete bridal set with matching necklace & earrings. Available in glass, lac, gold-plated & kundan. Packaging, box & shagna ceremony support included."
+        },
+        {
+          "icon": "group",
+          "title": "Bulk & Wholesale Orders",
+          "description": "Special rates for retailers, event planners & bulk buyers. Minimum order: 1 dozen. Custom colour matching & branding available."
+        },
+        {
+          "icon": "delivery",
+          "title": "Home Delivery Available",
+          "description": "Order via WhatsApp & get delivery at your doorstep. Free delivery within 10 km on orders ₹500+."
+        },
+        {
+          "icon": "star",
+          "title": "Gift Hampers & Packaging",
+          "description": "Beautiful gift packaging for festivals, baby showers & weddings. Custom boxes with personalised messages available on request."
+        }
+      ]
+    },
+    "gallery": {
+      "title": "Gallery",
+      "items": [
+        {
+          "height": "100%",
+          "cardHeight": "",
+          "background": "linear-gradient(145deg,#fce4ec,#f48fb1)",
+          "iconClass": "bi-gem"
+        },
+        {
+          "height": "100%",
+          "cardHeight": "90px",
+          "background": "linear-gradient(145deg,#ffe0b2,#ffcc80)",
+          "iconClass": "bi-stars"
+        },
+        {
+          "height": "100%",
+          "cardHeight": "90px",
+          "background": "linear-gradient(145deg,#e8f5e9,#c8e6c9)",
+          "iconClass": "bi-gem"
+        },
+        {
+          "height": "100%",
+          "cardHeight": "90px",
+          "background": "linear-gradient(145deg,#f3e5f5,#e1bee7)",
+          "iconClass": "bi-flower1"
+        },
+        {
+          "height": "100%",
+          "cardHeight": "90px",
+          "background": "linear-gradient(145deg,#fff9c4,#fff176)",
+          "iconClass": "bi-gem"
+        },
+        {
+          "height": "100%",
+          "cardHeight": "90px",
+          "background": "linear-gradient(145deg,#e3f2fd,#bbdefb)",
+          "iconClass": "bi-gift-fill"
+        }
+      ]
+    },
+    "hours": {
+      "title": "Business Hours",
+      "badge": "Open Now",
+      "rows": [
+        {
+          "day": "Monday",
+          "time": "10:00 am – 8:30 pm",
+          "open": true,
+          "closed": false
+        },
+        {
+          "day": "Tuesday",
+          "time": "10:00 am – 8:30 pm",
+          "open": true,
+          "closed": false
+        },
+        {
+          "day": "Wednesday",
+          "time": "10:00 am – 8:30 pm",
+          "open": true,
+          "closed": false
+        },
+        {
+          "day": "Thursday",
+          "time": "10:00 am – 8:30 pm",
+          "open": true,
+          "closed": false
+        },
+        {
+          "day": "Friday",
+          "time": "10:00 am – 8:30 pm",
+          "open": true,
+          "closed": false
+        },
+        {
+          "day": "Saturday",
+          "time": "9:00 am – 9:00 pm",
+          "open": true,
+          "closed": false
+        },
+        {
+          "day": "Sunday",
+          "time": "Closed",
+          "open": false,
+          "closed": true
+        }
+      ],
+      "seasonNote": {
+        "prefix": "🌟",
+        "highlight": "Extended hours",
+        "suffix": "during wedding season & festivals (Diwali, Navratri, Eid). WhatsApp us to confirm."
+      },
+      "suggest": "Suggest new hours"
+    },
+    "qr": {
+      "title": "Scan & Save Our Contact",
+      "description": "Scan QR code to visit this page & save contact",
+      "download": "Download QR",
+      "copy": "Copy Link"
+    },
+    "payments": {
+      "title": "Payment Methods",
+      "items": [
+        {
+          "type": "upi",
+          "name": "UPI / GPay / PhonePe",
+          "detail": "UPI ID: shringaar@okaxis"
+        },
+        {
+          "type": "bank",
+          "name": "Bank Transfer / NEFT",
+          "detail": "SBI A/C: 0000 0000 0000 | IFSC: SBIN0001234"
+        },
+        {
+          "type": "cash",
+          "name": "Cash",
+          "detail": "Cash accepted in-store & on delivery"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contact / Enquire",
+      "labels": {
+        "name": "Name",
+        "mobile": "Mobile",
+        "occasion": "Occasion",
+        "message": "Message / Custom Order Details"
+      },
+      "placeholders": {
+        "name": "Your name",
+        "mobile": "+91 XXXXXXXXXX",
+        "message": "Mention size, colour, quantity or any special requirement..."
+      },
+      "occasionOptions": [
+        "Select Occasion",
+        "Wedding / Shaadi",
+        "Sangeet / Mehndi",
+        "Karva Chauth",
+        "Teej / Navratri",
+        "Diwali / Festival",
+        "Eid",
+        "Baby Shower (Godh Bharai)",
+        "Engagement",
+        "Gifting",
+        "Daily Wear / Other"
+      ],
+      "submit": "Send Enquiry via WhatsApp",
+      "successTitle": "Enquiry Sent! 🎉",
+      "successText": "We'll get back to you on WhatsApp very soon.",
+      "successAction": "Send Another Enquiry"
+    }
+  },
+  "footer": {
+    "line1Prefix": "© 2025",
+    "line1Suffix": "· All Rights Reserved",
+    "line2Prefix": "Powered by",
+    "line2Brand": "managehub.in"
+  },
+  "floatingBar": {
+    "call": "Call",
+    "save": "Save Contact",
+    "whatsapp": "WhatsApp",
+    "cart": "Cart"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty.",
+    "emptySub": "Add bangles to start an order!",
+    "total": "Total",
+    "order": "Order via WhatsApp"
+  },
+  "share": {
+    "title": "Share This Card",
+    "cancel": "Cancel",
+    "options": [
+      {
+        "key": "wa",
+        "label": "WhatsApp",
+        "action": "shareWA"
+      },
+      {
+        "key": "copy",
+        "label": "Copy Link",
+        "action": "copyLink"
+      },
+      {
+        "key": "fb",
+        "label": "Facebook",
+        "action": "shareFB"
+      },
+      {
+        "key": "more",
+        "label": "More Options",
+        "action": "shareNative"
+      }
+    ]
+  },
+  "toast": {
+    "contactSaved": "Contact saved to your phone!",
+    "qrNotReady": "QR not ready",
+    "qrDownloaded": "QR Code downloaded!",
+    "linkCopied": "Link copied to clipboard!",
+    "namePhoneRequired": "Name and phone are required"
+  },
+  "messages": {
+    "waEnquiry": "Hi! I want to enquire about your bangles & churra collection.",
+    "shareText": "Check out {{name}}: {{website}}",
+    "orderHeader": "💍 *New Order – {{name}}*",
+    "orderConfirm": "Please confirm my order!",
+    "contactHeader": "💍 *Enquiry – {{name}}*",
+    "occasionLabel": "🎉 Occasion",
+    "fallbackOccasion": "Not specified",
+    "fallbackMessage": "No message"
+  },
+  "products": [
+    {
+      "id": 1,
+      "name": "Bridal Churra Set",
+      "desc": "Traditional red & ivory glass churra set, 21 pieces.",
+      "price": 1999,
+      "per": "/set",
+      "oldPrice": 0,
+      "tag": "Best Seller",
+      "tagColor": "#d63a7a",
+      "bg": "linear-gradient(145deg,#fce4ec,#f48fb1)"
+    },
+    {
+      "id": 2,
+      "name": "Gold Plated Bangles",
+      "desc": "Antique gold plated bangles set of 12.",
+      "price": 799,
+      "per": "/set",
+      "oldPrice": 999,
+      "tag": "Trending",
+      "tagColor": "#c8952a",
+      "bg": "linear-gradient(145deg,#fff3e0,#ffcc80)"
+    },
+    {
+      "id": 3,
+      "name": "Kundan Bangle Set",
+      "desc": "Handcrafted kundan stone bangles, 6 piece set.",
+      "price": 1499,
+      "per": "/set",
+      "oldPrice": 0,
+      "tag": "Premium",
+      "tagColor": "#6a1b9a",
+      "bg": "linear-gradient(145deg,#f3e5f5,#ce93d8)"
+    },
+    {
+      "id": 4,
+      "name": "Glass Bangles (Dozen)",
+      "desc": "Vibrant coloured glass bangles, assorted shades.",
+      "price": 149,
+      "per": "/dozen",
+      "oldPrice": 199,
+      "tag": "Value",
+      "tagColor": "#1565c0",
+      "bg": "linear-gradient(145deg,#e3f2fd,#90caf9)"
+    },
+    {
+      "id": 5,
+      "name": "Lac Bangles Set",
+      "desc": "Handmade lac bangles, embellished with stones.",
+      "price": 599,
+      "per": "/set",
+      "oldPrice": 0,
+      "tag": "",
+      "tagColor": "",
+      "bg": "linear-gradient(145deg,#e8f5e9,#a5d6a7)"
+    },
+    {
+      "id": 6,
+      "name": "Silver Oxidised Set",
+      "desc": "Bohemian oxidised silver bangles, set of 6.",
+      "price": 449,
+      "per": "/set",
+      "oldPrice": 0,
+      "tag": "",
+      "tagColor": "",
+      "bg": "linear-gradient(145deg,#eceff1,#b0bec5)"
+    }
+  ]
+}
