@@ -638,17 +638,12 @@ function showToast(message) {
 }
 
 const bootstrap = () => {
-    APP = window.APP_DATA || {};
+    APP = window.__APP__ || window.APP_DATA || {};
     SHOP = {
         ...(APP.shop || {}),
         website: APP.shop?.website || window.location.href,
     };
     PRODUCTS = APP.products || [];
-
-    hydrateStaticText();
-    bindSocialLinks();
-    updateCartBadge();
-    genQR();
 };
 
 window.addEventListener("DOMContentLoaded", bootstrap);

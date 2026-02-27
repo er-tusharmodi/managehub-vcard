@@ -680,29 +680,10 @@ const renderAll = () => {
     genQR();
 };
 
-async function boot() {
-    try {
-        const response = await fetch("default.json", { cache: "no-cache" });
-        if (!response.ok) {
-            throw new Error(
-                `default.json load failed with status ${response.status}`,
-            );
-        }
-
-        APP = await response.json();
-        DOC = APP.doctor || {};
-        DOC.website = DOC.website || window.location.href;
-
-        renderAll();
-
-        if (APP.promo?.enabled) {
-            setTimeout(() => {
-                $id("promoOverlay")?.classList.add("show");
-            }, APP.promo?.delayMs || 2200);
-        }
-    } catch (error) {
-        console.error("Failed to load default.json", error);
-    }
+function boot() {
+    APP = window.__APP__ || {};
+    DOC = APP.doctor || {};
+    DOC.website = DOC.website || window.location.href;
 }
 
 "loading" === document.readyState

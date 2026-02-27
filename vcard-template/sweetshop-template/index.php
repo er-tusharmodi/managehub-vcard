@@ -1,9 +1,6 @@
 <?php
-// Load from data.json (vCard data) first, fallback to default.json (template defaults)
-$dataPath = __DIR__ . "/../data.json";
-if (!file_exists($dataPath)) {
-    $dataPath = __DIR__ . "/default.json";
-}
+// Load from default.json (template defaults)
+$dataPath = __DIR__ . "/default.json";
 $data = [];
 
 if (is_readable($dataPath)) {

@@ -2,9 +2,7 @@ const $id = (id) => document.getElementById(id);
 const tpl = (template, values = {}) =>
     (template || "").replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 const sq = (value = "") =>
-    String(value)
-        .replace(/\\/g, "\\\\")
-        .replace(/'/g, "\\'");
+    String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 const money = (value) => Number(value || 0).toLocaleString("en-IN");
 const pick = (path, fallback = "") =>
     path.split(".").reduce((acc, key) => acc?.[key], APP) ?? fallback;
@@ -456,7 +454,8 @@ function submitEnquiry() {
     }
 
     const email = $id("eEmail")?.value || pick("enquiryForm.defaultEmail");
-    const category = $id("eCategory")?.value || pick("enquiryForm.defaultCategory");
+    const category =
+        $id("eCategory")?.value || pick("enquiryForm.defaultCategory");
     const budget = $id("eBudget")?.value || pick("enquiryForm.defaultBudget");
     const message = $id("eMsg")?.value || pick("enquiryForm.defaultMessage");
 
@@ -631,36 +630,14 @@ function showToast(message) {
     }, 2800);
 }
 
-async function boot() {
-    try {
-        const res = await fetch("default.json", { cache: "no-cache" });
-        if (!res.ok) {
-            throw new Error(`default.json load failed with status ${res.status}`);
-        }
-
-        APP = await res.json();
-        SHOP = APP.shop || {};
-        SHOP.website = SHOP.website || window.location.href;
-
-        PRODUCTS = APP.collections || [];
-        currentCat = (APP.categories || []).find((item) => item.active)?.key || "all";
-        cart = {};
-
-        fillStaticContent();
-        renderStats();
-        mountCategoryChips();
-        renderCollections();
-        renderPurity();
-        renderCertifications();
-        renderServices();
-        renderTestimonials();
-        renderHours();
-        renderFollowLinks();
-        renderEnquiryCategories();
-        genQR();
-    } catch (error) {
-        console.error("Failed to load default.json", error);
-    }
+function boot() {
+    APP = window.__APP__ || {};
+    SHOP = APP.shop || {};
+    SHOP.website = SHOP.website || window.location.href;
+    PRODUCTS = APP.collections || [];
+    currentCat =
+        (APP.categories || []).find((item) => item.active)?.key || "all";
+    cart = {};
 }
 
 "loading" === document.readyState

@@ -1,11 +1,8 @@
 <?php
 declare(strict_types=1);
 
-// Load from data.json (vCard data) first, fallback to default.json (template defaults)
-$dataPath = __DIR__ . "/../data.json";
-if (!file_exists($dataPath)) {
-    $dataPath = __DIR__ . "/default.json";
-}
+// Load from default.json (template defaults)
+$dataPath = __DIR__ . "/default.json";
 $rawData = @file_get_contents($dataPath);
 $data = $rawData ? json_decode($rawData, true) : [];
 

@@ -800,31 +800,12 @@ const renderAll = () => {
     genQR();
 };
 
-async function boot() {
-    try {
-        const res = await fetch("default.json", { cache: "no-cache" });
-        if (!res.ok) {
-            throw new Error(
-                `default.json load failed with status ${res.status}`,
-            );
-        }
-
-        APP = await res.json();
-        SHOP = APP.shop || {};
-        SHOP.website = SHOP.website || window.location.href;
-        PRODUCTS = APP.products || [];
-        cart = {};
-
-        renderAll();
-
-        if (APP.promo?.enabled && $id("promoOverlay")) {
-            setTimeout(() => {
-                $id("promoOverlay")?.classList.add("show");
-            }, APP.promo?.delayMs || 2200);
-        }
-    } catch (error) {
-        console.error("Failed to load default.json", error);
-    }
+function boot() {
+    APP = window.__APP__ || {};
+    SHOP = APP.shop || {};
+    SHOP.website = SHOP.website || window.location.href;
+    PRODUCTS = APP.products || [];
+    cart = {};
 }
 
 "loading" === document.readyState

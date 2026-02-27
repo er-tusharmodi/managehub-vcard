@@ -682,18 +682,12 @@ function showToast(message) {
     setTimeout(() => toast.classList.remove("show"), 2400);
 }
 
-const boot = async () => {
-    try {
-        const response = await fetch("default.json", { cache: "no-cache" });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-        APP = await response.json();
-        cart = {};
-        renderApp();
-    } catch (error) {
-        console.error("Failed to load default.json", error);
-    }
+const boot = () => {
+    APP = window.__APP__ || {};
+    SHOP = APP.shop || {};
+    SHOP.website = SHOP.website || window.location.href;
+    PRODUCTS = APP.products || [];
+    cart = {};
 };
 
 document.readyState === "loading"

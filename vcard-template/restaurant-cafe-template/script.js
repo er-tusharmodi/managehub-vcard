@@ -898,17 +898,10 @@ const renderAll = () => {
     genQR();
 };
 
-const boot = async () => {
-    try {
-        const response = await fetch("default.json", { cache: "no-cache" });
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}`);
-        }
-        APP = await response.json();
-        renderAll();
-    } catch (error) {
-        console.error("Failed to load default.json", error);
-    }
+const boot = () => {
+    APP = window.__APP__ || {};
+    R = APP.restaurant || {};
+    MENU = APP.menu || {};
 };
 
 document.readyState === "loading"
