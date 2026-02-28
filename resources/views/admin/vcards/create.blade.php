@@ -58,12 +58,22 @@
                         @error('client_address')<div class="text-danger small">{{ $message }}</div>@enderror
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Subdomain</label>
+                        <label class="form-label">Subdomain <span class="text-danger">*</span></label>
                         <div class="input-group">
-                            <input type="text" name="subdomain" class="form-control" value="{{ old('subdomain') }}" placeholder="client-vcard" required>
+                            <input type="text" 
+                                   name="subdomain" 
+                                   class="form-control @error('subdomain') is-invalid @enderror" 
+                                   value="{{ old('subdomain') }}" 
+                                   placeholder="client-vcard" 
+                                   pattern="[a-z0-9][a-z0-9-]*[a-z0-9]"
+                                   title="Only lowercase letters, numbers, and hyphens allowed"
+                                   required>
                             <span class="input-group-text">.{{ $baseDomain }}</span>
                         </div>
-                        @error('subdomain')<div class="text-danger small">{{ $message }}</div>@enderror
+                        @error('subdomain')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                        <small class="form-text text-muted">Choose a unique subdomain (e.g., johndoe, my-shop, etc.)</small>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Template</label>

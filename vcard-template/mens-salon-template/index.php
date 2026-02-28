@@ -463,7 +463,7 @@ $socialIconClasses = [
                             <div class="prod-card">
                                 <div class="prod-thumb" style="background:<?= e($item["thumbBg"] ?? ""); ?>">
                                     <?php if (!empty($item["tag"])): ?>
-                                        <span class="prod-tag" style="background:<?= e($item["tagBg"] ?? ""); ?>;color:<?= e($item["tagColor"] ?? ""); ?>"><?= e($item["tag"]); ?></span>
+                                        <span class="prod-tag" style="color:<?= e($item["tagColor"] ?? ""); ?>"><?= e($item["tag"]); ?></span>
                                     <?php endif; ?>
                                 </div>
                                 <div class="prod-body">

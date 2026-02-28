@@ -37,6 +37,22 @@ class Vcard extends Model
         'subscription_expires_at' => 'datetime',
     ];
 
+    /**
+     * Boot the model and ensure unique index on subdomain
+     */
+    protected static function boot()
+    {
+        parent::boot();
+        
+        // Ensure unique index on subdomain field for MongoDB
+        try {
+            $collection = (new static)->getConnection()->getCollection((new static)->getTable());
+            $collection->createIndex(['subdomain' => 1], ['unique' => true]);
+        } catch (\Exception $e) {
+            // Index might already exist, ignore
+        }
+    }
+
     public function isSubscriptionActive(): bool
     {
         if ($this->subscription_status !== 'active') {

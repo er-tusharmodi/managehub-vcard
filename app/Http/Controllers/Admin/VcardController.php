@@ -67,6 +67,9 @@ class VcardController extends Controller
             'subscription_status' => ['required', 'in:active,inactive'],
             'subscription_expires_at' => ['nullable', 'date', 'after_or_equal:today'],
             'send_credentials' => ['nullable', 'boolean'],
+        ], [
+            'subdomain.unique' => 'This subdomain is already taken. Please choose a different one.',
+            'subdomain.regex' => 'Subdomain can only contain lowercase letters, numbers, and hyphens.',
         ]);
 
         $template = $templates->templatePath($validated['template_key']);
@@ -95,6 +98,13 @@ class VcardController extends Controller
 
         if (method_exists($user, 'assignRole')) {
             $user->assignRole('client');
+        }
+
+        // Double check subdomain uniqueness before creating
+        if (Vcard::where('subdomain', Str::lower($validated['subdomain']))->exists()) {
+            return back()
+                ->withErrors(['subdomain' => 'This subdomain is already taken. Please choose a different one.'])
+                ->withInput();
         }
 
         $vcard = Vcard::create([

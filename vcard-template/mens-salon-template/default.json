@@ -13,6 +13,110 @@
         "qr": { "enabled": true, "label": "QR Code" },
         "contact": { "enabled": true, "label": "Contact" }
     },
+    "_field_config": {
+        "services": {
+            "name": {
+                "label": "Service Name",
+                "placeholder": "Haircut, Fade, Beard Trim, etc.",
+                "help": "Name of the grooming service",
+                "maxLength": 100,
+                "required": true
+            },
+            "desc": {
+                "type": "textarea",
+                "label": "Description",
+                "placeholder": "Brief description of what's included",
+                "help": "Describe the service in 1-2 lines",
+                "rows": 2,
+                "maxLength": 200,
+                "showCounter": true,
+                "required": true
+            },
+            "price": {
+                "label": "Price",
+                "placeholder": "₹150",
+                "help": "Service price (include ₹ symbol)",
+                "maxLength": 20,
+                "required": true
+            },
+            "dur": {
+                "label": "Duration",
+                "placeholder": "25 min",
+                "help": "How long the service takes",
+                "maxLength": 20,
+                "required": true
+            },
+            "product_image": {
+                "type": "image",
+                "label": "Service Image",
+                "help": "Upload an image for this service (500x500px recommended)",
+                "required": false
+            },
+            "icon": {
+                "label": "Icon Name",
+                "placeholder": "scissor, razor, heart, etc.",
+                "help": "Icon identifier for the service",
+                "required": false
+            }
+        },
+        "barbers": {
+            "name": {
+                "label": "Barber Name",
+                "placeholder": "John Smith",
+                "help": "Full name of the barber/stylist",
+                "maxLength": 100,
+                "required": true
+            },
+            "role": {
+                "label": "Specialization",
+                "placeholder": "Senior Barber, Fade Specialist, etc.",
+                "help": "Their role or specialty",
+                "maxLength": 100,
+                "required": true
+            },
+            "exp": {
+                "label": "Experience",
+                "placeholder": "8 Years",
+                "help": "Years of experience",
+                "maxLength": 50,
+                "required": false
+            },
+            "profile_image": {
+                "type": "image",
+                "label": "Profile Photo",
+                "help": "Upload barber's photo (500x500px)",
+                "required": false
+            }
+        },
+        "products": {
+            "name": {
+                "label": "Product Name",
+                "placeholder": "Beard Oil, Hair Wax, etc.",
+                "help": "Name of the grooming product",
+                "maxLength": 100,
+                "required": true
+            },
+            "brand": {
+                "label": "Brand",
+                "placeholder": "Beardo, Set Wet, etc.",
+                "help": "Brand name",
+                "maxLength": 100,
+                "required": true
+            },
+            "price": {
+                "label": "Price",
+                "placeholder": "₹399",
+                "help": "Retail price",
+                "required": true
+            },
+            "product_image": {
+                "type": "image",
+                "label": "Product Image",
+                "help": "Product photo (500x500px)",
+                "required": false
+            }
+        }
+    },
     "meta": {
         "title": "The Barbershop – Men's Grooming Studio"
     },
@@ -310,7 +414,6 @@
             "old": "₹349",
             "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "Top Seller",
-            "tagBg": "#c9a84c",
             "tagColor": "#1c1c1c"
         },
         {
@@ -321,7 +424,6 @@
             "old": "",
             "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "Popular",
-            "tagBg": "#15803d",
             "tagColor": "#fff"
         },
         {
@@ -332,7 +434,6 @@
             "old": "₹399",
             "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "Premium",
-            "tagBg": "#0369a1",
             "tagColor": "#fff"
         },
         {
@@ -342,7 +443,6 @@
             "old": "",
             "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "",
-            "tagBg": "",
             "tagColor": ""
         }
     ],

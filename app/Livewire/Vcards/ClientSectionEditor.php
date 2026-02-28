@@ -360,6 +360,9 @@ class ClientSectionEditor extends Component
         } else {
             data_set($this->form, $path, $list);
         }
+        
+        // Save changes to JSON file
+        $this->save();
     }
 
     public function confirmRemoveRow(string $path, int $index): void
@@ -482,8 +485,20 @@ class ClientSectionEditor extends Component
 
     public function render()
     {
+        // Load field config for current section if available
+        $fieldConfig = [];
+        if ($this->section) {
+            $data = $this->loadJson();
+            if (isset($data['_field_config'][$this->section])) {
+                $fieldConfig = $data['_field_config'][$this->section];
+                // Make it available globally for field partial
+                $GLOBALS['_field_config'] = $fieldConfig;
+            }
+        }
+        
         return view('livewire.vcards.client-section-editor', [
             'baseDomain' => config('vcard.base_domain'),
+            'fieldConfig' => $fieldConfig,
         ])->layout('layouts.vcard-editor');
     }
 }

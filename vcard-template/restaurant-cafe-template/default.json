@@ -11,6 +11,62 @@
         "payments": { "enabled": true, "label": "Payment Options" },
         "qr": { "enabled": true, "label": "QR Code" }
     },
+    "_field_config": {
+        "MENU": {
+            "Starters": {
+                "name": {
+                    "label": "Dish Name",
+                    "placeholder": "Bruschetta Classica",
+                    "help": "Name of the dish (keep it short and descriptive)",
+                    "maxLength": 100,
+                    "required": true
+                },
+                "desc": {
+                    "type": "textarea",
+                    "label": "Description",
+                    "placeholder": "Grilled sourdough, San Marzano tomato, fresh basil...",
+                    "help": "Describe ingredients and preparation (max 150 characters)",
+                    "rows": 2,
+                    "maxLength": 150,
+                    "showCounter": true,
+                    "required": true
+                },
+                "price": {
+                    "type": "number",
+                    "label": "Price (₹)",
+                    "placeholder": "299",
+                    "help": "Current selling price in rupees",
+                    "required": true
+                },
+                "op": {
+                    "type": "number",
+                    "label": "Original Price (₹)",
+                    "placeholder": "399",
+                    "help": "Optional: original price if item is on discount",
+                    "required": false
+                },
+                "tag": {
+                    "label": "Tag",
+                    "placeholder": "Chef Pick, Popular, New, Healthy",
+                    "help": "Optional badge to highlight the dish",
+                    "maxLength": 50,
+                    "required": false
+                },
+                "product_image": {
+                    "type": "image",
+                    "label": "Dish Photo",
+                    "help": "Upload appetizing food photo (500x500px recommended)",
+                    "required": false
+                },
+                "veg": {
+                    "type": "toggle",
+                    "label": "Vegetarian",
+                    "help": "Mark as vegetarian dish",
+                    "required": false
+                }
+            }
+        }
+    },
     "meta": {
         "title": "La Piazza - Restaurant & Cafe"
     },

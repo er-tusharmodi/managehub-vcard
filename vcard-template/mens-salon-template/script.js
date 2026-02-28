@@ -376,7 +376,7 @@ const renderProducts = () => {
                 (item) => `
                     <div class="prod-card">
                         <div class="prod-thumb" style="background:${item.thumbBg || ""}">
-                            ${item.tag ? `<span class="prod-tag" style="background:${item.tagBg};color:${item.tagColor}">${item.tag}</span>` : ""}
+                            ${item.tag ? `<span class="prod-tag" style="color:${item.tagColor}">${item.tag}</span>` : ""}
                         </div>
                         <div class="prod-body">
                             <div class="prod-name">${item.name || ""}</div>
