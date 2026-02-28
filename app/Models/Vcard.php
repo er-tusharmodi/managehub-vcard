@@ -2,13 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Carbon\Carbon;
 
 class Vcard extends Model
 {
+    protected $connection = 'mongodb';
+
+    protected $table = 'vcards';
+
     protected $fillable = [
         'user_id',
         'subdomain',
@@ -96,8 +100,9 @@ class Vcard extends Model
 
     public function getTodayVisitors(): int
     {
+        $today = today();
         return $this->visits()
-            ->whereDate('visited_at', today())
+            ->whereBetween('visited_at', [$today->startOfDay(), $today->copy()->endOfDay()])
             ->count();
     }
 
@@ -114,8 +119,10 @@ class Vcard extends Model
     public function getThisMonthVisitors(): int
     {
         return $this->visits()
-            ->whereMonth('visited_at', now()->month)
-            ->whereYear('visited_at', now()->year)
+            ->whereBetween('visited_at', [
+                now()->startOfMonth(),
+                now()->endOfMonth(),
+            ])
             ->count();
     }
 

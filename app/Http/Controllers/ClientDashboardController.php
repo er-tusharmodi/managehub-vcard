@@ -38,26 +38,30 @@ class ClientDashboardController extends Controller
         $plannedExpiry = $vcards->max('subscription_expires_at');
 
         // Get submission stats
+        $today = today();
+        $todayStart = $today->startOfDay();
+        $todayEnd = $today->copy()->endOfDay();
+        
         $submissionStats = [
             'orders' => [
                 'total' => VcardOrder::whereIn('vcard_id', $vcardIds)->count(),
-                'today' => VcardOrder::whereIn('vcard_id', $vcardIds)->whereDate('created_at', today())->count(),
+                'today' => VcardOrder::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [$todayStart, $todayEnd])->count(),
                 'week' => VcardOrder::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
                 'revenue' => VcardOrder::whereIn('vcard_id', $vcardIds)->sum('total'),
             ],
             'bookings' => [
                 'total' => VcardBooking::whereIn('vcard_id', $vcardIds)->count(),
-                'today' => VcardBooking::whereIn('vcard_id', $vcardIds)->whereDate('created_at', today())->count(),
+                'today' => VcardBooking::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [$todayStart, $todayEnd])->count(),
                 'week' => VcardBooking::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
             ],
             'enquiries' => [
                 'total' => VcardEnquiry::whereIn('vcard_id', $vcardIds)->count(),
-                'today' => VcardEnquiry::whereIn('vcard_id', $vcardIds)->whereDate('created_at', today())->count(),
+                'today' => VcardEnquiry::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [$todayStart, $todayEnd])->count(),
                 'week' => VcardEnquiry::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
             ],
             'contacts' => [
                 'total' => VcardContact::whereIn('vcard_id', $vcardIds)->count(),
-                'today' => VcardContact::whereIn('vcard_id', $vcardIds)->whereDate('created_at', today())->count(),
+                'today' => VcardContact::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [$todayStart, $todayEnd])->count(),
                 'week' => VcardContact::whereIn('vcard_id', $vcardIds)->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count(),
             ],
         ];

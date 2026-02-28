@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class Template extends Model
 {
     use HasFactory;
+
+    protected $connection = 'mongodb';
+
+    protected $table = 'templates';
 
     protected $fillable = [
         'template_key',
@@ -28,7 +32,7 @@ class Template extends Model
      */
     public function scopeVisible($query)
     {
-        return $query->where('is_visible', true);
+        return $query->where('is_visible', 1);
     }
 
     /**

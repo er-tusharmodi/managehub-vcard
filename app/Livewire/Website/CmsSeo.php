@@ -5,12 +5,15 @@ namespace App\Livewire\Website;
 use Livewire\Component;
 use App\Models\WebsitePage;
 use App\Livewire\Concerns\HandlesToastValidation;
+use App\Repositories\Contracts\WebsitePageRepository;
+use Livewire\Attributes\Locked;
 
 class CmsSeo extends Component
 {
     use HandlesToastValidation;
 
     public ?WebsitePage $page = null;
+    #[Locked] public string $pageSlug = '';
     public $meta_title = '';
     public $meta_description = '';
     public $meta_keywords = '';
@@ -18,6 +21,7 @@ class CmsSeo extends Component
 
     public function mount(WebsitePage $page)
     {
+        $this->pageSlug = $page->slug;
         $this->page = $page;
         $this->loadSettings();
     }
@@ -33,6 +37,8 @@ class CmsSeo extends Component
 
     public function save()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $validated = $this->validateWithToast([
             'meta_title' => ['required', 'string', 'max:160'],
             'meta_description' => ['required', 'string', 'max:160'],
@@ -40,7 +46,7 @@ class CmsSeo extends Component
             'canonical_url' => ['nullable', 'url'],
         ]);
 
-        $this->page->update([
+        app(WebsitePageRepository::class)->updateAttributes($this->page, [
             'meta_title' => $validated['meta_title'],
             'meta_description' => $validated['meta_description'],
         ]);
@@ -51,7 +57,10 @@ class CmsSeo extends Component
             'canonical_url' => $validated['canonical_url'],
         ];
 
-        $this->page->update(['data' => $data]);
+        app(WebsitePageRepository::class)->updateData($this->page, $data);
+        $this->page->meta_title = $validated['meta_title'];
+        $this->page->meta_description = $validated['meta_description'];
+        $this->page->data = $data;
 
         $this->dispatch('notify',
             type: 'success',

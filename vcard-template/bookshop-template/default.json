@@ -1,452 +1,391 @@
 {
-  "meta": {
-    "title": "PageTurner Books"
-  },
-  "shop": {
-    "name": "PageTurner Books",
-    "tagline": "Your Neighbourhood Bookshop & Reading Hub",
-    "phone": "+919876543210",
-    "whatsapp": "919876543210",
-    "email": "hello@pageturnerbooks.in",
-    "website": "https://pageturnerbooks.in",
-    "maps": "https://maps.google.com/?q=PageTurner+Books+Connaught+Place+Delhi",
-    "address": "42 Bookworm Lane, Connaught Place, New Delhi 110001",
-    "coverImage": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80",
-    "coverAlt": "PageTurner Books Cover",
-    "avatarImage": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&q=80",
-    "avatarAlt": "PageTurner Books",
-    "vcardFileName": "PageTurnerBooks.vcf",
-    "qrFileName": "pageturner_qr.png",
-    "avatarFallbackIconClass": "bi-book-fill"
-  },
-  "hero": {
-    "buttons": {
-      "share": "Share",
-      "saveContact": "Save Contact"
+    "_sections_config": {
+        "location": { "enabled": true, "label": "Location" },
+        "socialLinks": { "enabled": true, "label": "Social Links" },
+        "services": { "enabled": true, "label": "Services" },
+        "products": { "enabled": true, "label": "Products" },
+        "gallery": { "enabled": true, "label": "Gallery" },
+        "hours": { "enabled": true, "label": "Business Hours" },
+        "payments": { "enabled": true, "label": "Payment Methods" },
+        "qr": { "enabled": true, "label": "QR Code" },
+        "contact": { "enabled": true, "label": "Contact Form" }
     },
-    "profile": {
-      "name": "PageTurner Books",
-      "role": "📖 Your Neighbourhood Bookshop & Reading Hub",
-      "bio": "Curated books across every genre — Fiction, Non-fiction, Academic, Children & Rare Finds. Serving curious minds since 2005. Book Club · Author Events · Custom Orders."
+    "meta": {
+        "title": "PageTurner Books"
     },
-    "actions": {
-      "call": "Call",
-      "whatsapp": "WhatsApp",
-      "save": "Save",
-      "email": "Email",
-      "directions": "Directions",
-      "share": "Share"
-    }
-  },
-  "sections": {
-    "stats": {
-      "title": "By the Numbers",
-      "items": [
-        {
-          "number": "20K+",
-          "label": "Titles in Stock"
+    "shop": {
+        "name": "PageTurner Books",
+        "tagline": "Your Neighbourhood Bookshop & Reading Hub",
+        "phone": "+919876543210",
+        "whatsapp": "919876543210",
+        "email": "hello@pageturnerbooks.in",
+        "website": "https://pageturnerbooks.in",
+        "maps": "https://maps.google.com/?q=PageTurner+Books+Connaught+Place+Delhi",
+        "address": "42 Bookworm Lane, Connaught Place, New Delhi 110001",
+        "coverImage": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80",
+        "coverAlt": "PageTurner Books Cover",
+        "avatarImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "avatarAlt": "PageTurner Books",
+        "vcardFileName": "PageTurnerBooks.vcf",
+        "qrFileName": "pageturner_qr.png",
+        "avatarFallbackIconClass": "bi-book-fill"
+    },
+    "hero": {
+        "buttons": {
+            "share": "Share",
+            "saveContact": "Save Contact"
         },
-        {
-          "number": "19",
-          "label": "Years Serving"
+        "profile": {
+            "name": "PageTurner Books",
+            "role": "📖 Your Neighbourhood Bookshop & Reading Hub",
+            "bio": "Curated books across every genre — Fiction, Non-fiction, Academic, Children & Rare Finds. Serving curious minds since 2005. Book Club · Author Events · Custom Orders."
         },
-        {
-          "number": "4.9 ★",
-          "label": "Google Rating"
+        "actions": {
+            "call": "Call",
+            "whatsapp": "WhatsApp",
+            "save": "Save",
+            "email": "Email",
+            "directions": "Directions",
+            "share": "Share"
         }
-      ]
     },
-    "categories": {
-      "title": "Browse by Category",
-      "items": [
-        {
-          "label": "All Books",
-          "active": true
+    "sections": {
+        "categories": {
+            "title": "Browse by Category",
+            "items": [
+                {
+                    "label": "All Books",
+                    "active": true
+                },
+                {
+                    "label": "Fiction",
+                    "active": false
+                },
+                {
+                    "label": "Non-Fiction",
+                    "active": false
+                },
+                {
+                    "label": "Children",
+                    "active": false
+                },
+                {
+                    "label": "Academic",
+                    "active": false
+                },
+                {
+                    "label": "Self-Help",
+                    "active": false
+                },
+                {
+                    "label": "Rare & Vintage",
+                    "active": false
+                },
+                {
+                    "label": "Comics",
+                    "active": false
+                }
+            ]
         },
-        {
-          "label": "Fiction",
-          "active": false
+        "location": {
+            "title": "Our Location",
+            "primary": "42 Bookworm Lane, Connaught Place",
+            "secondary": "New Delhi, Delhi – 110001, India",
+            "mapButton": "Open in Maps"
         },
-        {
-          "label": "Non-Fiction",
-          "active": false
+        "social": {
+            "title": "Find Us Online",
+            "items": [
+                {
+                    "icon": "wa",
+                    "iconClass": "ic-wa",
+                    "name": "WhatsApp",
+                    "value": "+91 98765 43210",
+                    "action": "openWA"
+                },
+                {
+                    "icon": "ig",
+                    "iconClass": "ic-ig",
+                    "name": "Instagram",
+                    "value": "@pageturnerbooks",
+                    "action": ""
+                },
+                {
+                    "icon": "fb",
+                    "iconClass": "ic-fb",
+                    "name": "Facebook",
+                    "value": "facebook.com/pageturnerbooks",
+                    "action": ""
+                },
+                {
+                    "icon": "yt",
+                    "iconClass": "ic-yt",
+                    "name": "YouTube",
+                    "value": "PageTurner Books Reviews",
+                    "action": ""
+                }
+            ]
         },
-        {
-          "label": "Children",
-          "active": false
+        "services": {
+            "title": "Our Services",
+            "items": [
+                {
+                    "name": "Custom Book Orders",
+                    "description": "Can't find it? We'll source any book within 3–5 days.",
+                    "image": "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400&q=75"
+                },
+                {
+                    "name": "Gift Wrapping",
+                    "description": "Elegant gift packing for birthdays, festivals & occasions.",
+                    "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&q=75"
+                },
+                {
+                    "name": "Book Subscription Box",
+                    "description": "Monthly curated box delivered to your door. ₹499/mo.",
+                    "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=75"
+                },
+                {
+                    "name": "School & Bulk Supply",
+                    "description": "Textbooks, stationery & bulk orders for schools & colleges.",
+                    "image": "https://images.unsplash.com/photo-1549778399-f94fd24c4f3c?w=400&q=75"
+                }
+            ]
         },
-        {
-          "label": "Academic",
-          "active": false
+        "products": {
+            "title": "Featured Books"
         },
-        {
-          "label": "Self-Help",
-          "active": false
+        "gallery": {
+            "title": "Our Store Gallery",
+            "images": [
+                "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=300&q=70",
+                "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+                "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=70",
+                "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=70",
+                "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=70",
+                "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&q=70"
+            ]
         },
-        {
-          "label": "Rare & Vintage",
-          "active": false
+        "hours": {
+            "title": "Business Hours",
+            "badge": "Open Now",
+            "suggest": "Suggest new hours",
+            "rows": [
+                {
+                    "day": "Monday",
+                    "time": "10:00 am – 8:00 pm",
+                    "open": true,
+                    "closed": false
+                },
+                {
+                    "day": "Tuesday",
+                    "time": "10:00 am – 8:00 pm",
+                    "open": true,
+                    "closed": false
+                },
+                {
+                    "day": "Wednesday",
+                    "time": "10:00 am – 8:00 pm",
+                    "open": true,
+                    "closed": false
+                },
+                {
+                    "day": "Thursday",
+                    "time": "10:00 am – 8:00 pm",
+                    "open": true,
+                    "closed": false
+                },
+                {
+                    "day": "Friday",
+                    "time": "10:00 am – 9:00 pm",
+                    "open": true,
+                    "closed": false
+                },
+                {
+                    "day": "Saturday",
+                    "time": "9:00 am – 9:00 pm",
+                    "open": true,
+                    "closed": false
+                },
+                {
+                    "day": "Sunday",
+                    "time": "Closed",
+                    "open": false,
+                    "closed": true
+                }
+            ]
         },
-        {
-          "label": "Comics",
-          "active": false
+        "qr": {
+            "title": "Scan & Save Our Contact",
+            "description": "Scan QR to visit this page & save our contact",
+            "download": "Download QR",
+            "copy": "Copy Link"
+        },
+        "payments": {
+            "title": "Payment Methods",
+            "items": [
+                {
+                    "type": "upi",
+                    "name": "UPI / GPay / PhonePe",
+                    "detail": "UPI ID: pageturner@okaxis"
+                },
+                {
+                    "type": "card",
+                    "name": "Credit / Debit Card",
+                    "detail": "Visa, Mastercard, RuPay accepted"
+                },
+                {
+                    "type": "cash",
+                    "name": "Cash",
+                    "detail": "Available in-store & COD for local orders"
+                }
+            ]
+        },
+        "contact": {
+            "title": "Contact / Book Enquiry",
+            "labels": {
+                "name": "Name",
+                "mobile": "Mobile",
+                "email": "Email",
+                "message": "Book Title / Message"
+            },
+            "placeholders": {
+                "name": "Your name",
+                "mobile": "+91 XXXXXXXXXX",
+                "email": "your@email.com",
+                "message": "Looking for a specific book? Ask us anything..."
+            },
+            "submit": "Send via WhatsApp",
+            "successTitle": "Enquiry Sent!",
+            "successText": "We'll get back to you on WhatsApp within 1 hour during store hours.",
+            "successAction": "Send another message"
         }
-      ]
     },
-    "location": {
-      "title": "Our Location",
-      "primary": "42 Bookworm Lane, Connaught Place",
-      "secondary": "New Delhi, Delhi – 110001, India",
-      "mapButton": "Open in Maps"
+    "footer": {
+        "prefix": "© 2026",
+        "suffix": "· Handcrafted with ❤️ for Book Lovers"
     },
-    "social": {
-      "title": "Find Us Online",
-      "items": [
+    "floatingBar": {
+        "call": "Call",
+        "whatsapp": "WhatsApp",
+        "save": "Save",
+        "cart": "Cart"
+    },
+    "cart": {
+        "title": "Your Book Cart",
+        "empty": "Your cart is empty.",
+        "emptySub": "Add books to start an order!",
+        "total": "Total",
+        "order": "Order Books via WhatsApp",
+        "each": "each"
+    },
+    "share": {
+        "title": "Share PageTurner Books",
+        "cancel": "Cancel",
+        "options": [
+            {
+                "key": "wa",
+                "label": "WhatsApp",
+                "action": "shareWA"
+            },
+            {
+                "key": "fb",
+                "label": "Facebook",
+                "action": "shareFB"
+            },
+            {
+                "key": "more",
+                "label": "More...",
+                "action": "shareNative"
+            },
+            {
+                "key": "copy",
+                "label": "Copy Link",
+                "action": "copyLink"
+            }
+        ]
+    },
+    "toast": {
+        "contactSaved": "Contact saved to your phone!",
+        "qrNotReady": "QR not ready",
+        "qrDownloaded": "QR Code downloaded!",
+        "linkCopied": "Link copied to clipboard!",
+        "namePhoneRequired": "Name and phone are required"
+    },
+    "messages": {
+        "waEnquiry": "Hi! I have a book enquiry.",
+        "shareText": "Check out {{name}}: {{website}}",
+        "orderHeader": "📚 *New Book Order – {{name}}*",
+        "orderConfirm": "Please confirm my order!",
+        "contactHeader": "📚 *Book Enquiry – {{name}}*",
+        "fallbackEmail": "—",
+        "fallbackMessage": "No message"
+    },
+    "products": [
         {
-          "icon": "wa",
-          "iconClass": "ic-wa",
-          "name": "WhatsApp",
-          "value": "+91 98765 43210",
-          "action": "openWA"
+            "id": 1,
+            "name": "Atomic Habits",
+            "author": "James Clear",
+            "desc": "Tiny changes, remarkable results.",
+            "price": 499,
+            "oldPrice": 599,
+            "tag": "Bestseller",
+            "tagColor": "#c8922a",
+            "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=75"
         },
         {
-          "icon": "ig",
-          "iconClass": "ic-ig",
-          "name": "Instagram",
-          "value": "@pageturnerbooks",
-          "action": ""
+            "id": 2,
+            "name": "The Alchemist",
+            "author": "Paulo Coelho",
+            "desc": "A journey of self-discovery.",
+            "price": 299,
+            "oldPrice": 350,
+            "tag": "Featured",
+            "tagColor": "",
+            "image": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=75"
         },
         {
-          "icon": "fb",
-          "iconClass": "ic-fb",
-          "name": "Facebook",
-          "value": "facebook.com/pageturnerbooks",
-          "action": ""
+            "id": 3,
+            "name": "Rich Dad Poor Dad",
+            "author": "Robert Kiyosaki",
+            "desc": "Financial wisdom for all.",
+            "price": 399,
+            "oldPrice": 450,
+            "tag": "Popular",
+            "tagColor": "#1a2744",
+            "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&q=75"
         },
         {
-          "icon": "yt",
-          "iconClass": "ic-yt",
-          "name": "YouTube",
-          "value": "PageTurner Books Reviews",
-          "action": ""
+            "id": 4,
+            "name": "Ikigai",
+            "author": "Francesc Miralles",
+            "desc": "The Japanese secret to a long life.",
+            "price": 349,
+            "oldPrice": 399,
+            "tag": "Recommended",
+            "tagColor": "",
+            "image": "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=75"
+        },
+        {
+            "id": 5,
+            "name": "Sapiens",
+            "author": "Yuval Noah Harari",
+            "desc": "A brief history of humankind.",
+            "price": 599,
+            "oldPrice": 699,
+            "tag": "Staff Pick",
+            "tagColor": "#b5341a",
+            "image": "https://images.unsplash.com/photo-1549778399-f94fd24c4f3c?w=300&q=75"
+        },
+        {
+            "id": 6,
+            "name": "The Midnight Library",
+            "author": "Matt Haig",
+            "desc": "Between life and death lies a library.",
+            "price": 449,
+            "oldPrice": 499,
+            "tag": "New Arrival",
+            "tagColor": "",
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         }
-      ]
-    },
-    "services": {
-      "title": "Our Services",
-      "items": [
-        {
-          "name": "Custom Book Orders",
-          "description": "Can't find it? We'll source any book within 3–5 days.",
-          "image": "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=400&q=75"
-        },
-        {
-          "name": "Gift Wrapping",
-          "description": "Elegant gift packing for birthdays, festivals & occasions.",
-          "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&q=75"
-        },
-        {
-          "name": "Book Subscription Box",
-          "description": "Monthly curated box delivered to your door. ₹499/mo.",
-          "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=75"
-        },
-        {
-          "name": "School & Bulk Supply",
-          "description": "Textbooks, stationery & bulk orders for schools & colleges.",
-          "image": "https://images.unsplash.com/photo-1549778399-f94fd24c4f3c?w=400&q=75"
-        }
-      ]
-    },
-    "products": {
-      "title": "Featured Books"
-    },
-    "events": {
-      "title": "Book Club & Events",
-      "items": [
-        {
-          "day": "15",
-          "month": "Mar",
-          "title": "Monthly Book Club Meetup",
-          "line1": "📍 In-store · 5:00 PM – 7:00 PM",
-          "line2": "This month: \"The Midnight Library\" by Matt Haig",
-          "badge": "Free Entry"
-        },
-        {
-          "day": "22",
-          "month": "Mar",
-          "title": "Author Meet & Book Signing",
-          "line1": "📍 In-store · 4:00 PM – 6:00 PM",
-          "line2": "Meet debut author Priya Sharma – \"City of Echoes\"",
-          "badge": "RSVP Required"
-        },
-        {
-          "day": "05",
-          "month": "Apr",
-          "title": "Children's Storytelling Session",
-          "line1": "📍 In-store · 11:00 AM – 12:00 PM",
-          "line2": "For ages 4–10. Interactive stories & activities.",
-          "badge": "Free Entry"
-        }
-      ]
-    },
-    "gallery": {
-      "title": "Our Store Gallery",
-      "images": [
-        "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=300&q=70",
-        "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=70",
-        "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=70",
-        "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=70",
-        "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=70",
-        "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&q=70"
-      ]
-    },
-    "reviews": {
-      "title": "What Readers Say",
-      "items": [
-        {
-          "avatar": "AK",
-          "name": "Ananya Kumar",
-          "date": "Feb 2026",
-          "stars": "★★★★★",
-          "text": "Best bookshop in Delhi! The staff genuinely loves books and their recommendations are always spot on. Found three rare editions I'd been hunting for months."
-        },
-        {
-          "avatar": "RS",
-          "name": "Rohan Sharma",
-          "date": "Jan 2026",
-          "stars": "★★★★★",
-          "text": "The monthly book club is such a wonderful experience. Great curation, great people, great discussions. I've read more in the last 6 months than the past 3 years!"
-        },
-        {
-          "avatar": "PM",
-          "name": "Priya Mehta",
-          "date": "Dec 2025",
-          "stars": "★★★★☆",
-          "text": "Ordered custom books for my school's library. Delivered within 4 days, perfectly packed. The gift wrapping service for my daughter's birthday was lovely too!"
-        }
-      ]
-    },
-    "hours": {
-      "title": "Business Hours",
-      "badge": "Open Now",
-      "suggest": "Suggest new hours",
-      "rows": [
-        {
-          "day": "Monday",
-          "time": "10:00 am – 8:00 pm",
-          "open": true,
-          "closed": false
-        },
-        {
-          "day": "Tuesday",
-          "time": "10:00 am – 8:00 pm",
-          "open": true,
-          "closed": false
-        },
-        {
-          "day": "Wednesday",
-          "time": "10:00 am – 8:00 pm",
-          "open": true,
-          "closed": false
-        },
-        {
-          "day": "Thursday",
-          "time": "10:00 am – 8:00 pm",
-          "open": true,
-          "closed": false
-        },
-        {
-          "day": "Friday",
-          "time": "10:00 am – 9:00 pm",
-          "open": true,
-          "closed": false
-        },
-        {
-          "day": "Saturday",
-          "time": "9:00 am – 9:00 pm",
-          "open": true,
-          "closed": false
-        },
-        {
-          "day": "Sunday",
-          "time": "Closed",
-          "open": false,
-          "closed": true
-        }
-      ]
-    },
-    "qr": {
-      "title": "Scan & Save Our Contact",
-      "description": "Scan QR to visit this page & save our contact",
-      "download": "Download QR",
-      "copy": "Copy Link"
-    },
-    "payments": {
-      "title": "Payment Methods",
-      "items": [
-        {
-          "type": "upi",
-          "name": "UPI / GPay / PhonePe",
-          "detail": "UPI ID: pageturner@okaxis"
-        },
-        {
-          "type": "card",
-          "name": "Credit / Debit Card",
-          "detail": "Visa, Mastercard, RuPay accepted"
-        },
-        {
-          "type": "cash",
-          "name": "Cash",
-          "detail": "Available in-store & COD for local orders"
-        }
-      ]
-    },
-    "contact": {
-      "title": "Contact / Book Enquiry",
-      "labels": {
-        "name": "Name",
-        "mobile": "Mobile",
-        "email": "Email",
-        "message": "Book Title / Message"
-      },
-      "placeholders": {
-        "name": "Your name",
-        "mobile": "+91 XXXXXXXXXX",
-        "email": "your@email.com",
-        "message": "Looking for a specific book? Ask us anything..."
-      },
-      "submit": "Send via WhatsApp",
-      "successTitle": "Enquiry Sent!",
-      "successText": "We'll get back to you on WhatsApp within 1 hour during store hours.",
-      "successAction": "Send another message"
-    }
-  },
-  "footer": {
-    "prefix": "© 2026",
-    "suffix": "· Handcrafted with ❤️ for Book Lovers"
-  },
-  "floatingBar": {
-    "call": "Call",
-    "whatsapp": "WhatsApp",
-    "save": "Save",
-    "cart": "Cart"
-  },
-  "cart": {
-    "title": "Your Book Cart",
-    "empty": "Your cart is empty.",
-    "emptySub": "Add books to start an order!",
-    "total": "Total",
-    "order": "Order Books via WhatsApp",
-    "each": "each"
-  },
-  "share": {
-    "title": "Share PageTurner Books",
-    "cancel": "Cancel",
-    "options": [
-      {
-        "key": "wa",
-        "label": "WhatsApp",
-        "action": "shareWA"
-      },
-      {
-        "key": "fb",
-        "label": "Facebook",
-        "action": "shareFB"
-      },
-      {
-        "key": "more",
-        "label": "More...",
-        "action": "shareNative"
-      },
-      {
-        "key": "copy",
-        "label": "Copy Link",
-        "action": "copyLink"
-      }
     ]
-  },
-  "toast": {
-    "contactSaved": "Contact saved to your phone!",
-    "qrNotReady": "QR not ready",
-    "qrDownloaded": "QR Code downloaded!",
-    "linkCopied": "Link copied to clipboard!",
-    "namePhoneRequired": "Name and phone are required"
-  },
-  "messages": {
-    "waEnquiry": "Hi! I have a book enquiry.",
-    "shareText": "Check out {{name}}: {{website}}",
-    "orderHeader": "📚 *New Book Order – {{name}}*",
-    "orderConfirm": "Please confirm my order!",
-    "contactHeader": "📚 *Book Enquiry – {{name}}*",
-    "fallbackEmail": "—",
-    "fallbackMessage": "No message"
-  },
-  "products": [
-    {
-      "id": 1,
-      "name": "Atomic Habits",
-      "author": "James Clear",
-      "desc": "Tiny changes, remarkable results.",
-      "price": 499,
-      "oldPrice": 599,
-      "tag": "Bestseller",
-      "tagColor": "#c8922a",
-      "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=75"
-    },
-    {
-      "id": 2,
-      "name": "The Alchemist",
-      "author": "Paulo Coelho",
-      "desc": "A journey of self-discovery.",
-      "price": 299,
-      "oldPrice": 350,
-      "tag": "",
-      "tagColor": "",
-      "image": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=75"
-    },
-    {
-      "id": 3,
-      "name": "Rich Dad Poor Dad",
-      "author": "Robert Kiyosaki",
-      "desc": "Financial wisdom for all.",
-      "price": 399,
-      "oldPrice": 450,
-      "tag": "Popular",
-      "tagColor": "#1a2744",
-      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&q=75"
-    },
-    {
-      "id": 4,
-      "name": "Ikigai",
-      "author": "Francesc Miralles",
-      "desc": "The Japanese secret to a long life.",
-      "price": 349,
-      "oldPrice": 399,
-      "tag": "",
-      "tagColor": "",
-      "image": "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=75"
-    },
-    {
-      "id": 5,
-      "name": "Sapiens",
-      "author": "Yuval Noah Harari",
-      "desc": "A brief history of humankind.",
-      "price": 599,
-      "oldPrice": 699,
-      "tag": "Staff Pick",
-      "tagColor": "#b5341a",
-      "image": "https://images.unsplash.com/photo-1549778399-f94fd24c4f3c?w=300&q=75"
-    },
-    {
-      "id": 6,
-      "name": "The Midnight Library",
-      "author": "Matt Haig",
-      "desc": "Between life and death lies a library.",
-      "price": 449,
-      "oldPrice": 499,
-      "tag": "",
-      "tagColor": "",
-      "image": "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=300&q=75"
-    }
-  ]
 }

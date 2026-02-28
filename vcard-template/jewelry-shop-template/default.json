@@ -16,8 +16,8 @@
         "title": "Sona Jewellers \u2013 Fine Jewellery"
     },
     "assets": {
-        "bannerImage": "uploads/1772003101_61p7aCMIBjL._AC_UY436_FMwebp_QL65_.webp",
-        "profileImage": "uploads/1772003182_41wP5ZQfzxL-_AC_SR120-120_.jpg",
+        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "qrCodeImage": ""
     },
     "shop": {
@@ -108,7 +108,7 @@
             "oldPrice": 22000,
             "tag": "BESTSELLER",
             "tagColor": "#c9a84c",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "gold",
             "cat": "gold"
         },
@@ -121,7 +121,7 @@
             "oldPrice": 48000,
             "tag": "GIA CERT",
             "tagColor": "#1565c0",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "diamond",
             "cat": "diamond"
         },
@@ -134,7 +134,7 @@
             "oldPrice": null,
             "tag": "BRIDAL",
             "tagColor": "#b5676a",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "bridal",
             "cat": "bridal"
         },
@@ -147,7 +147,7 @@
             "oldPrice": 2800,
             "tag": "SALE",
             "tagColor": "#7b1fa2",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "silver",
             "cat": "silver"
         },
@@ -160,7 +160,7 @@
             "oldPrice": null,
             "tag": "KIDS",
             "tagColor": "#2e7d32",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "kids",
             "cat": "kids"
         },
@@ -173,7 +173,7 @@
             "oldPrice": 72000,
             "tag": "TRENDING",
             "tagColor": "#e65100",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "diamond",
             "cat": "diamond"
         },
@@ -186,7 +186,7 @@
             "oldPrice": null,
             "tag": null,
             "tagColor": null,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "gold",
             "cat": "gold"
         },
@@ -199,7 +199,7 @@
             "oldPrice": 135000,
             "tag": "PREMIUM",
             "tagColor": "#880e4f",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "category_key": "bridal",
             "cat": "bridal"
         }
@@ -233,25 +233,25 @@
     "certifications": [
         {
             "emoji": "\ud83c\udfc5",
-            "bg": "#fff8e1",
+            "product_image": "#fff8e1",
             "name": "BIS Hallmark",
             "sub": "Gold purity certified"
         },
         {
             "emoji": "\ud83d\udc8e",
-            "bg": "#e3f2fd",
+            "product_image": "#e3f2fd",
             "name": "GIA Certified",
             "sub": "Natural diamonds"
         },
         {
             "emoji": "\ud83d\udd2c",
-            "bg": "#f3e5f5",
+            "product_image": "#f3e5f5",
             "name": "IGI Certified",
             "sub": "Lab grown diamonds"
         },
         {
             "emoji": "\u2705",
-            "bg": "#e8f5e9",
+            "product_image": "#e8f5e9",
             "name": "ISO 9001",
             "sub": "Quality management"
         }

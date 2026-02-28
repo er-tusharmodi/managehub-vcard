@@ -11,8 +11,8 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^4.1",
-        "simplesoftwareio/simple-qrcode": "^4.2",
-        "spatie/laravel-permission": "^7.1"
+        "mongodb/laravel-mongodb": "^5.6",
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

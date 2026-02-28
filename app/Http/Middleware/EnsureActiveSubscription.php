@@ -17,7 +17,7 @@ class EnsureActiveSubscription
             return $next($request);
         }
 
-        if (method_exists($user, 'hasRole') && $user->hasRole('admin')) {
+        if (method_exists($user, 'hasRole') && ($user->hasRole('admin') || $user->hasRole('super-admin'))) {
             return $next($request);
         }
 

@@ -17,9 +17,8 @@
         "title": "The Barbershop – Men's Grooming Studio"
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
-        "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
+        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "qrCodeImage": ""
     },
     "shop": {
@@ -104,7 +103,7 @@
             "desc": "Regular cut, wash & blow-dry finish.",
             "price": "₹150",
             "dur": "25 min",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "icon": "scissor"
         },
         {
@@ -112,7 +111,7 @@
             "desc": "Skin fade, taper or burst fade with detail.",
             "price": "₹250",
             "dur": "35 min",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "icon": "scissor"
         },
         {
@@ -120,7 +119,7 @@
             "desc": "Precision beard sculpting & clean edges.",
             "price": "₹120",
             "dur": "20 min",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "icon": "heart"
         },
         {
@@ -128,7 +127,7 @@
             "desc": "Classic hot towel + straight razor shave.",
             "price": "₹199",
             "dur": "30 min",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "icon": "razor"
         },
         {
@@ -136,7 +135,7 @@
             "desc": "Global color, highlights or streaks.",
             "price": "₹599",
             "dur": "60 min",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "icon": "sun"
         },
         {
@@ -144,7 +143,7 @@
             "desc": "Deep conditioning scalp & hair treatment.",
             "price": "₹349",
             "dur": "45 min",
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "icon": "leaf"
         }
     ],
@@ -309,7 +308,7 @@
             "category_key": "beard-care",
             "price": "₹299",
             "old": "₹349",
-            "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "Top Seller",
             "tagBg": "#c9a84c",
             "tagColor": "#1c1c1c"
@@ -320,7 +319,7 @@
             "category_key": "hair-styling",
             "price": "₹249",
             "old": "",
-            "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "Popular",
             "tagBg": "#15803d",
             "tagColor": "#fff"
@@ -331,7 +330,7 @@
             "category_key": "hair-styling",
             "price": "₹349",
             "old": "₹399",
-            "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "Premium",
             "tagBg": "#0369a1",
             "tagColor": "#fff"
@@ -341,7 +340,7 @@
             "desc": "Natural matte finish with flexible hold.",
             "price": "₹279",
             "old": "",
-            "thumbBg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "",
             "tagBg": "",
             "tagColor": ""

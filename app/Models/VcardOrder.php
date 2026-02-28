@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class VcardOrder extends Model
 {
+    protected $connection = 'mongodb';
+
+    protected $table = 'vcard_orders';
+
     protected $fillable = [
         'vcard_id',
         'source_template',

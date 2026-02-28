@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Mongo\Role;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -17,19 +17,34 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        Role::firstOrCreate(['name' => 'manager']);
+        // Create roles in MongoDB
+        Role::query()->updateOrCreate(
+            ['name' => 'admin', 'guard_name' => 'web'],
+            ['permissions' => []]
+        );
+        
+        Role::query()->updateOrCreate(
+            ['name' => 'manager', 'guard_name' => 'web'],
+            ['permissions' => []]
+        );
 
-        $admin = User::firstOrCreate(
+        // Create admin user
+        $admin = User::query()->updateOrCreate(
             ['email' => 'admin@managehub.test'],
             [
                 'name' => 'Admin User',
+                'username' => 'admin',
                 'password' => Hash::make('admin123'),
+                'roles' => ['admin'],
+                'permissions' => [],
             ]
         );
 
-        $admin->syncRoles([$adminRole->name]);
+        $this->command->info('Admin user created: admin@managehub.test / admin123');
 
-        $this->call(WebsiteCmsFromHtmlSeeder::class);
+        $this->call([
+            WebsiteCmsFromHtmlSeeder::class,
+            TemplateSeeder::class,
+        ]);
     }
 }

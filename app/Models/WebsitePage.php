@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class WebsitePage extends Model
 {
+    protected $connection = 'mongodb';
+
+    protected $table = 'website_pages';
+
     protected $fillable = [
         'slug',
         'title',
@@ -46,4 +50,12 @@ class WebsitePage extends Model
         'footer_links' => 'array',
         'data' => 'array',
     ];
+
+    /**
+     * Get the route key for the model. Used by Laravel route model binding and Livewire.
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

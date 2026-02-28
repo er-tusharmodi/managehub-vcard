@@ -42,7 +42,7 @@
                                 </td>
                                 <td>
                                     @foreach ($admin->roles as $role)
-                                        <span class="badge bg-primary-subtle text-primary">{{ $role->name }}</span>
+                                        <span class="badge bg-primary-subtle text-primary">{{ $role }}</span>
                                     @endforeach
                                 </td>
                                 <td class="text-end pe-4">

@@ -17,9 +17,8 @@
         "title": "TechNova Electronics"
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
-        "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
+        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "profileAlt": "TechNova Electronics profile photo",
         "qrCodeImage": ""
     },
@@ -166,7 +165,7 @@
             "category_key": "smartphones",
             "price": 74999,
             "oldPrice": 84999,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "HOT",
             "tagColor": "#f44336"
         },
@@ -178,7 +177,7 @@
             "category_key": "smartphones",
             "price": 24999,
             "oldPrice": 29999,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "SALE",
             "tagColor": "#ff6d00"
         },
@@ -190,7 +189,7 @@
             "category_key": "laptops-pc",
             "price": 69999,
             "oldPrice": 79999,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "NEW",
             "tagColor": "#00c853"
         },
@@ -202,7 +201,7 @@
             "category_key": "accessories",
             "price": 1499,
             "oldPrice": 2999,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "TRENDING",
             "tagColor": "#1565c0"
         },
@@ -214,7 +213,7 @@
             "category_key": "smart-tv",
             "price": 26999,
             "oldPrice": 32999,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "HOT",
             "tagColor": "#f44336"
         },
@@ -226,7 +225,7 @@
             "category_key": "accessories",
             "price": 24900,
             "oldPrice": 26900,
-            "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
             "tag": "NEW",
             "tagColor": "#00c853"
         }
@@ -237,7 +236,7 @@
             "sub": "OEM quality · 90-day warranty",
             "price": "₹799+",
             "query": "Mobile Screen Replacement",
-            "bg": "#e3f2fd",
+            "product_image": "#e3f2fd",
             "stroke": "#1565c0",
             "icon": "mobile"
         },
@@ -246,7 +245,7 @@
             "sub": "Software & hardware · All brands",
             "price": "₹499+",
             "query": "Laptop Repair & Service",
-            "bg": "#f3e5f5",
+            "product_image": "#f3e5f5",
             "stroke": "#7b1fa2",
             "icon": "laptop"
         },
@@ -255,7 +254,7 @@
             "sub": "Gas refill · Cleaning · Parts",
             "price": "₹399+",
             "query": "AC/Fridge Servicing",
-            "bg": "#e0f7fa",
+            "product_image": "#e0f7fa",
             "stroke": "#00838f",
             "icon": "ac"
         },
@@ -264,7 +263,7 @@
             "sub": "Mobile & laptop batteries",
             "price": "₹299+",
             "query": "Battery Replacement",
-            "bg": "#fff3e0",
+            "product_image": "#fff3e0",
             "stroke": "#e65100",
             "icon": "battery"
         }
@@ -284,12 +283,12 @@
         "Philips"
     ],
     "gallery": [
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
     ],
     "hours": {
         "openLabel": "Open Now",

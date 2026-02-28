@@ -3,15 +3,17 @@
 namespace App\Livewire\Website;
 
 use App\Models\WebsitePage;
-use App\Models\WebsiteSetting;
 use App\Livewire\Concerns\HandlesToastValidation;
+use App\Repositories\Contracts\WebsiteSettingRepository;
 use Livewire\Component;
+use Livewire\Attributes\Locked;
 
 class CmsGeneral extends Component
 {
     use HandlesToastValidation;
 
     public $page;
+    #[Locked] public string $pageSlug = '';
     public $settings;
     
     public $site_url;
@@ -21,6 +23,7 @@ class CmsGeneral extends Component
 
     public function mount(WebsitePage $page)
     {
+        $this->pageSlug = $page->slug;
         $this->page = $page;
         $this->settings = $this->loadSettings();
         
@@ -32,6 +35,8 @@ class CmsGeneral extends Component
 
     public function save()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $this->validateWithToast([
             'site_url' => 'nullable|url|max:255',
             'contact_email' => 'nullable|email|max:255',
@@ -40,10 +45,12 @@ class CmsGeneral extends Component
         ]);
 
         // Save settings
-        WebsiteSetting::updateOrCreate(['key' => 'site_url'], ['value' => $this->site_url]);
-        WebsiteSetting::updateOrCreate(['key' => 'contact_email'], ['value' => $this->contact_email]);
-        WebsiteSetting::updateOrCreate(['key' => 'contact_phone'], ['value' => $this->contact_phone]);
-        WebsiteSetting::updateOrCreate(['key' => 'contact_address'], ['value' => $this->contact_address]);
+        app(WebsiteSettingRepository::class)->setMany([
+            'site_url' => $this->site_url,
+            'contact_email' => $this->contact_email,
+            'contact_phone' => $this->contact_phone,
+            'contact_address' => $this->contact_address,
+        ]);
 
         $this->dispatch('notify',
             type: 'success',
@@ -53,9 +60,9 @@ class CmsGeneral extends Component
 
     private function loadSettings(): array
     {
-        return WebsiteSetting::whereIn('key', [
-            'site_url', 'contact_email', 'contact_phone', 'contact_address'
-        ])->pluck('value', 'key')->toArray();
+        return app(WebsiteSettingRepository::class)->getMany([
+            'site_url', 'contact_email', 'contact_phone', 'contact_address',
+        ]);
     }
 
     public function render()

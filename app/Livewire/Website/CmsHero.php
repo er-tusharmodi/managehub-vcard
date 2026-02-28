@@ -6,12 +6,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\WebsitePage;
 use App\Livewire\Concerns\HandlesToastValidation;
+use App\Repositories\Contracts\WebsitePageRepository;
+use Livewire\Attributes\Locked;
 
 class CmsHero extends Component
 {
     use HandlesToastValidation, WithFileUploads;
 
     public ?WebsitePage $page = null;
+    #[Locked] public string $pageSlug = '';
     public $hero_title = '';
     public $hero_title_highlight = '';
     public $hero_subtitle = '';
@@ -21,6 +24,7 @@ class CmsHero extends Component
 
     public function mount(WebsitePage $page)
     {
+        $this->pageSlug = $page->slug;
         $this->page = $page;
         $this->loadSettings();
     }
@@ -33,6 +37,14 @@ class CmsHero extends Component
         $this->hero_image_path = $this->page->data['hero_image_path'] ?? '';
         $this->hero_image_file = null;
         $this->cta_buttons = $this->page->data['hero_buttons'] ?? [];
+    }
+
+    public function updatedHeroImageFile()
+    {
+        // Page reload on file change to prevent model serialization issues
+        if ($this->pageSlug) {
+            $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        }
     }
 
     public function addButton()
@@ -48,6 +60,8 @@ class CmsHero extends Component
 
     public function save()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $validated = $this->validateWithToast([
             'hero_title' => ['required', 'string'],
             'hero_title_highlight' => ['required', 'string'],
@@ -70,7 +84,8 @@ class CmsHero extends Component
         $data['hero_image_path'] = $this->hero_image_path;
         $data['hero_buttons'] = $validated['cta_buttons'];
 
-        $this->page->update(['data' => $data]);
+        app(WebsitePageRepository::class)->updateData($this->page, $data);
+        $this->page->data = $data;
 
         $this->dispatch('notify',
             type: 'success',

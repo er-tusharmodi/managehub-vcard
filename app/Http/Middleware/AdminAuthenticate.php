@@ -15,6 +15,10 @@ class AdminAuthenticate
     public function handle(Request $request, Closure $next): mixed
     {
         if (!Auth::check()) {
+            // For AJAX/JSON requests, return 401 instead of redirecting
+            if ($request->expectsJson()) {
+                return response('Unauthorized', 401);
+            }
             return redirect()->route('admin.login');
         }
 

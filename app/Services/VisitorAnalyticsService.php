@@ -10,32 +10,28 @@ class VisitorAnalyticsService
     public function topPages(int $limit = 7): array
     {
         return VcardVisit::query()
-            ->selectRaw('page_url, count(*) as visits')
             ->whereNotNull('page_url')
+            ->get(['page_url'])
             ->groupBy('page_url')
-            ->orderByDesc('visits')
-            ->limit($limit)
-            ->get()
-            ->map(fn ($row) => [
-                'page' => $row->page_url,
-                'visits' => (int) $row->visits,
+            ->map(fn($group) => [
+                'page' => $group->first()->page_url,
+                'visits' => $group->count(),
             ])
+            ->sortByDesc('visits')
+            ->take($limit)
+            ->values()
             ->toArray();
     }
 
     public function trafficSources(int $limit = 7): array
     {
         $rawSources = VcardVisit::query()
-            ->selectRaw('referrer, count(*) as visits')
-            ->groupBy('referrer')
-            ->orderByDesc('visits')
-            ->limit(100)
-            ->get();
+            ->get(['referrer']);
 
         $bucketed = [];
         foreach ($rawSources as $row) {
             $source = $this->normalizeSource($row->referrer);
-            $bucketed[$source] = ($bucketed[$source] ?? 0) + (int) $row->visits;
+            $bucketed[$source] = ($bucketed[$source] ?? 0) + 1;
         }
 
         return collect($bucketed)
@@ -52,31 +48,31 @@ class VisitorAnalyticsService
     public function deviceBreakdown(): array
     {
         return VcardVisit::query()
-            ->selectRaw('device, count(*) as visits')
             ->whereNotNull('device')
+            ->get(['device'])
             ->groupBy('device')
-            ->orderByDesc('visits')
-            ->get()
-            ->map(fn ($row) => [
-                'label' => $row->device,
-                'visits' => (int) $row->visits,
+            ->map(fn($group) => [
+                'label' => $group->first()->device,
+                'visits' => $group->count(),
             ])
+            ->sortByDesc('visits')
+            ->values()
             ->toArray();
     }
 
     public function browserBreakdown(): array
     {
         return VcardVisit::query()
-            ->selectRaw('browser, count(*) as visits')
             ->whereNotNull('browser')
+            ->get(['browser'])
             ->groupBy('browser')
-            ->orderByDesc('visits')
-            ->limit(7)
-            ->get()
-            ->map(fn ($row) => [
-                'label' => $row->browser,
-                'visits' => (int) $row->visits,
+            ->map(fn($group) => [
+                'label' => $group->first()->browser,
+                'visits' => $group->count(),
             ])
+            ->sortByDesc('visits')
+            ->take(7)
+            ->values()
             ->toArray();
     }
 

@@ -6,12 +6,15 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\WebsitePage;
 use App\Livewire\Concerns\HandlesToastValidation;
+use App\Repositories\Contracts\WebsitePageRepository;
+use Livewire\Attributes\Locked;
 
 class CmsVcard extends Component
 {
     use HandlesToastValidation, WithFileUploads;
 
     public ?WebsitePage $page = null;
+    #[Locked] public string $pageSlug = '';
     public $vcards = [];
     public $showModal = false;
     public $showPreviewModal = false;
@@ -28,6 +31,7 @@ class CmsVcard extends Component
 
     public function mount(WebsitePage $page)
     {
+        $this->pageSlug = $page->slug;
         $this->page = $page;
         $this->loadSettings();
     }
@@ -40,6 +44,14 @@ class CmsVcard extends Component
         $section = $this->page->data['vcard_previews_section'] ?? [];
         $this->sectionTitle = $section['title'] ?? 'vCard Previews';
         $this->sectionSubtitle = $section['subtitle'] ?? 'Explore multiple vCard styles from the CMS. Each preview opens the exact HTML file you uploaded.';
+    }
+
+    public function updatedModalPreviewFile()
+    {
+        // Page reload on file change to prevent model serialization issues
+        if ($this->pageSlug) {
+            $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        }
     }
 
     public function openModal()
@@ -111,6 +123,8 @@ class CmsVcard extends Component
 
     public function saveSection()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $this->validateWithToast([
             'sectionTitle' => ['required', 'string', 'max:100'],
             'sectionSubtitle' => ['required', 'string', 'max:255'],
@@ -159,13 +173,16 @@ class CmsVcard extends Component
 
     public function saveToDatabase()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $data = $this->page->data ?? [];
         $data['vcard_previews'] = $this->vcards;
         $data['vcard_previews_section'] = [
             'title' => $this->sectionTitle,
             'subtitle' => $this->sectionSubtitle,
         ];
-        $this->page->update(['data' => $data]);
+        app(WebsitePageRepository::class)->updateData($this->page, $data);
+        $this->page->data = $data;
     }
 
     public function render()

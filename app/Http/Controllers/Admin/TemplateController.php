@@ -338,7 +338,7 @@ class TemplateController extends Controller
     {
         $request->validate([
             'order' => 'required|array',
-            'order.*.id' => 'required|exists:templates,id',
+            'order.*.id' => 'required|string',
             'order.*.position' => 'required|integer|min:0',
         ]);
 

@@ -15,9 +15,8 @@
         "title": "La Piazza - Restaurant & Cafe"
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
-        "fallbackImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg",
+        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "qrCodeImage": ""
     },
     "R": {
@@ -28,7 +27,7 @@
         "email": "hello@lapiazza.in",
         "address": "12 Connaught Place, Block B, New Delhi 110001",
         "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhi",
-        "website": ""
+        "website": "https://lapiazza.in"
     },
     "MENU": {
         "Starters": [
@@ -40,7 +39,7 @@
                 "price": 299,
                 "tag": "Chef Pick",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -52,7 +51,7 @@
                 "op": 399,
                 "tag": "Popular",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -63,7 +62,7 @@
                 "price": 449,
                 "tag": "",
                 "tc": "",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -74,7 +73,7 @@
                 "price": 379,
                 "tag": "Healthy",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -85,7 +84,7 @@
                 "price": 329,
                 "tag": "New",
                 "tc": "#6a1b9a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -96,7 +95,7 @@
                 "price": 249,
                 "tag": "",
                 "tc": "",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -107,7 +106,7 @@
                 "price": 499,
                 "tag": "Bestseller",
                 "tc": "#1565c0",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -118,7 +117,7 @@
                 "price": 699,
                 "tag": "For 2",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             }
         ],
@@ -131,7 +130,7 @@
                 "price": 549,
                 "tag": "Classic",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -142,7 +141,7 @@
                 "price": 699,
                 "tag": "Spicy",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -153,7 +152,7 @@
                 "price": 749,
                 "tag": "Premium",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -164,7 +163,7 @@
                 "price": 599,
                 "tag": "Vegan",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -175,7 +174,7 @@
                 "price": 799,
                 "tag": "Bestseller",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -187,7 +186,7 @@
                 "op": 849,
                 "tag": "Hot Deal",
                 "tc": "#e65100",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -198,7 +197,7 @@
                 "price": 899,
                 "tag": "Luxury",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -209,7 +208,7 @@
                 "price": 849,
                 "tag": "Signature",
                 "tc": "#1565c0",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             }
         ],
@@ -222,7 +221,7 @@
                 "price": 599,
                 "tag": "Chef Fav",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -233,7 +232,7 @@
                 "price": 449,
                 "tag": "Vegan",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -244,7 +243,7 @@
                 "price": 849,
                 "tag": "Luxury",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -255,7 +254,7 @@
                 "price": 499,
                 "tag": "Veg",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -266,7 +265,7 @@
                 "price": 899,
                 "tag": "Must Try",
                 "tc": "#1565c0",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -278,7 +277,7 @@
                 "op": 749,
                 "tag": "Popular",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -289,7 +288,7 @@
                 "price": 649,
                 "tag": "Vegetarian",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -300,7 +299,7 @@
                 "price": 579,
                 "tag": "New",
                 "tc": "#6a1b9a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             }
         ],
@@ -313,7 +312,7 @@
                 "price": 749,
                 "tag": "Chef Special",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -324,7 +323,7 @@
                 "price": 999,
                 "tag": "Premium",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -335,7 +334,7 @@
                 "price": 1199,
                 "tag": "Signature",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -347,7 +346,7 @@
                 "op": 1049,
                 "tag": "Hot Deal",
                 "tc": "#e65100",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -358,7 +357,7 @@
                 "price": 549,
                 "tag": "Veg",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -369,7 +368,7 @@
                 "price": 1299,
                 "tag": "Indulge",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -380,7 +379,7 @@
                 "price": 1099,
                 "tag": "Must Try",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             },
             {
@@ -391,7 +390,7 @@
                 "price": 649,
                 "tag": "Comfort",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             }
         ],
@@ -405,7 +404,7 @@
                 "op": 379,
                 "tag": "Bestseller",
                 "tc": "#b8962e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -416,7 +415,7 @@
                 "price": 279,
                 "tag": "",
                 "tc": "",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -427,7 +426,7 @@
                 "price": 299,
                 "tag": "Popular",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -438,7 +437,7 @@
                 "price": 349,
                 "tag": "Must Try",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -449,7 +448,7 @@
                 "price": 249,
                 "tag": "Kids Love",
                 "tc": "#6a1b9a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -460,7 +459,7 @@
                 "price": 219,
                 "tag": "Cafe Fav",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -471,7 +470,7 @@
                 "price": 319,
                 "tag": "New",
                 "tc": "#6a1b9a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -482,7 +481,7 @@
                 "price": 299,
                 "tag": "Regional",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             }
         ],
@@ -495,7 +494,7 @@
                 "price": 199,
                 "tag": "Signature",
                 "tc": "#3a4a2e",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -506,7 +505,7 @@
                 "price": 229,
                 "tag": "",
                 "tc": "",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -517,7 +516,7 @@
                 "price": 499,
                 "tag": "Bestseller",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -528,7 +527,7 @@
                 "price": 349,
                 "tag": "Refreshing",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -540,7 +539,7 @@
                 "op": 499,
                 "tag": "Happy Hrs",
                 "tc": "#880e4f",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -551,7 +550,7 @@
                 "price": 549,
                 "tag": "Classic",
                 "tc": "#c2562a",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -562,7 +561,7 @@
                 "price": 179,
                 "tag": "No Alcohol",
                 "tc": "#2e7d32",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             },
             {
@@ -573,7 +572,7 @@
                 "price": 159,
                 "tag": "",
                 "tc": "",
-                "bg": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg')",
+                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             }
         ]
@@ -630,7 +629,7 @@
         "qr": "QR Code & Save Contact"
     },
     "story": {
-        "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/profile.png",
+        "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "paragraph1": "Born from a passion for authentic Neapolitan cooking, La Piazza brings the soul of Southern Italy to your city. Every dish is crafted with imported ingredients and recipes passed down through generations.",
         "paragraph2": "Our wood-fired oven burns at 485°C — the secret behind our crispy, airy crusts that guests travel across the city for.",
         "chefName": "Marco Rosetti",
@@ -653,27 +652,27 @@
     "gallery": [
         {
             "caption": "Margherita Pizza",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
             "caption": "Carbonara",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
             "caption": "Signature Latte",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
             "caption": "Tiramisu",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
             "caption": "Brunello di M.",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
             "caption": "Caprese Salad",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/image.jpg"
+            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         }
     ],
     "reservation": {
@@ -798,28 +797,28 @@
     "offers": [
         {
             "icon": "brunch",
-            "bg": "#fff3e0",
+            "product_image": "#fff3e0",
             "title": "Weekend Brunch",
             "desc": "Sat & Sun · 10 AM – 3 PM. Buffet with live counter, pancakes, eggs & artisan coffee.",
             "tag": "₹599 per person"
         },
         {
             "icon": "candle",
-            "bg": "#fce4ec",
+            "product_image": "#fce4ec",
             "title": "Candlelight Dinner",
             "desc": "Private table, 4-course meal, complimentary wine. Book 48 hrs in advance.",
             "tag": "₹2,999 for 2"
         },
         {
             "icon": "coffee",
-            "bg": "#e8f5e9",
+            "product_image": "#e8f5e9",
             "title": "Café Happy Hours",
             "desc": "Mon–Fri · 3 PM – 6 PM. Buy 1 Get 1 on all hot & cold beverages.",
             "tag": "BOGO Offer"
         },
         {
             "icon": "cake",
-            "bg": "#e8eaf6",
+            "product_image": "#e8eaf6",
             "title": "Birthday Celebration",
             "desc": "Free dessert platter & table decoration for the birthday person. Just mention while booking!",
             "tag": "Complimentary"

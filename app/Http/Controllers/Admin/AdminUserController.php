@@ -9,18 +9,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\View;
-use Spatie\Permission\Models\Role;
+use App\Models\Mongo\Role;
 
 class AdminUserController extends Controller
 {
     public function index(): View
     {
-        $admins = User::with('roles')
-            ->whereHas('roles', function ($query) {
-                $query->whereIn('name', ['admin', 'super-admin']);
+        $admins = User::query()
+            ->get()
+            ->filter(function ($user) {
+                $roles = $user->roles ?? [];
+                return in_array('admin', $roles) || in_array('super-admin', $roles);
             })
-            ->orderBy('name')
-            ->get();
+            ->sortBy('name')
+            ->values();
 
         return view('admin.admins.index', [
             'admins' => $admins,
@@ -41,7 +43,7 @@ class AdminUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', Password::defaults()],
             'roles' => ['required', 'array'],
-            'roles.*' => ['string', 'exists:roles,name'],
+            'roles.*' => ['string'],
         ]);
 
         $admin = User::create([
@@ -59,7 +61,7 @@ class AdminUserController extends Controller
     public function edit(User $admin): View
     {
         return view('admin.admins.edit', [
-            'admin' => $admin->load('roles'),
+            'admin' => $admin,
             'roles' => Role::orderBy('name')->get(),
         ]);
     }
@@ -71,7 +73,7 @@ class AdminUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $admin->id],
             'password' => ['nullable', 'confirmed', Password::defaults()],
             'roles' => ['required', 'array'],
-            'roles.*' => ['string', 'exists:roles,name'],
+            'roles.*' => ['string'],
         ]);
 
         $admin->update([

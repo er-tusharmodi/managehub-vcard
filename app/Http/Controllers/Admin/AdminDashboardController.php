@@ -27,7 +27,11 @@ class AdminDashboardController extends Controller
         for ($i = 29; $i >= 0; $i--) {
             $date = Carbon::now()->subDays($i);
             $last30Days[] = $date->format('M d');
-            $last30Visits[] = VcardVisit::whereDate('visited_at', $date)->count();
+            
+            // MongoDB date filtering
+            $startOfDay = $date->startOfDay();
+            $endOfDay = $date->copy()->endOfDay();
+            $last30Visits[] = VcardVisit::whereBetween('visited_at', [$startOfDay, $endOfDay])->count();
         }
 
         $monthLabels = [];
@@ -35,8 +39,12 @@ class AdminDashboardController extends Controller
         for ($i = 11; $i >= 0; $i--) {
             $date = Carbon::now()->subMonths($i);
             $monthLabels[] = $date->format('M');
-            $monthlySales[] = (float) VcardOrder::whereYear('created_at', $date->year)
-                ->whereMonth('created_at', $date->month)
+            
+            // MongoDB date filtering  
+            $startOfMonth = $date->copy()->startOfMonth();
+            $endOfMonth = $date->copy()->endOfMonth();
+            $monthlySales[] = (float) VcardOrder::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                ->get()
                 ->sum('total');
         }
 

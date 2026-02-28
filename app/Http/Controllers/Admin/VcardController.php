@@ -93,11 +93,8 @@ class VcardController extends Controller
             ])->save();
         }
 
-        if (method_exists($user, 'assignRole') && class_exists(\Spatie\Permission\Models\Role::class)) {
-            $roleExists = \Spatie\Permission\Models\Role::where('name', 'client')->exists();
-            if ($roleExists) {
-                $user->assignRole('client');
-            }
+        if (method_exists($user, 'assignRole')) {
+            $user->assignRole('client');
         }
 
         $vcard = Vcard::create([

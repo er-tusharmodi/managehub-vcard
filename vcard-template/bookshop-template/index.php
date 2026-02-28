@@ -204,26 +204,6 @@ if ($actionDataJson === false) {
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title"><?= e(v($data, 'sections.stats.title')) ?></div>
-      </div>
-      <div class="sec-body">
-        <div class="stats-row">
-          <?php foreach (a($data, 'sections.stats.items') as $item): ?>
-            <?php if (!is_array($item)) { continue; } ?>
-            <div class="stat-item">
-              <div class="stat-num"><?= e($item['number'] ?? '') ?></div>
-              <div class="stat-lbl"><?= e($item['label'] ?? '') ?></div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-header">
-        <div class="sec-icon">
-          <i class="bi bi-stars ico" aria-hidden="true"></i>
-        </div>
         <div class="sec-title"><?= e(v($data, 'sections.categories.title')) ?></div>
       </div>
       <div class="sec-body">
@@ -366,66 +346,12 @@ if ($actionDataJson === false) {
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title"><?= e(v($data, 'sections.events.title')) ?></div>
-      </div>
-      <div class="sec-body">
-        <div class="event-list">
-          <?php foreach (a($data, 'sections.events.items') as $item): ?>
-            <?php if (!is_array($item)) { continue; } ?>
-            <div class="event-item">
-              <div class="event-date">
-                <div class="ev-day"><?= e($item['day'] ?? '') ?></div>
-                <div class="ev-mon"><?= e($item['month'] ?? '') ?></div>
-              </div>
-              <div class="event-body">
-                <div class="ev-title"><?= e($item['title'] ?? '') ?></div>
-                <div class="ev-info"><?= e($item['line1'] ?? '') ?><br /><?= e($item['line2'] ?? '') ?></div>
-                <span class="ev-badge"><?= e($item['badge'] ?? '') ?></span>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-header">
-        <div class="sec-icon">
-          <i class="bi bi-stars ico" aria-hidden="true"></i>
-        </div>
         <div class="sec-title"><?= e(v($data, 'sections.gallery.title')) ?></div>
       </div>
       <div class="sec-body">
         <div class="gallery-grid">
           <?php foreach (a($data, 'sections.gallery.images') as $image): ?>
             <div class="g-item"><div style="height:100%;background:url('<?= e($image) ?>') center/cover no-repeat"></div></div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </div>
-
-    <div class="sec">
-      <div class="sec-header">
-        <div class="sec-icon">
-          <i class="bi bi-stars ico" aria-hidden="true"></i>
-        </div>
-        <div class="sec-title"><?= e(v($data, 'sections.reviews.title')) ?></div>
-      </div>
-      <div class="sec-body">
-        <div class="reviews-list">
-          <?php foreach (a($data, 'sections.reviews.items') as $item): ?>
-            <?php if (!is_array($item)) { continue; } ?>
-            <div class="review-card">
-              <div class="review-top">
-                <div class="rev-avatar"><?= e($item['avatar'] ?? '') ?></div>
-                <div>
-                  <div class="rev-name"><?= e($item['name'] ?? '') ?></div>
-                  <div class="rev-date"><?= e($item['date'] ?? '') ?></div>
-                </div>
-                <div class="rev-stars"><?= e($item['stars'] ?? '') ?></div>
-              </div>
-              <div class="rev-text"><?= e($item['text'] ?? '') ?></div>
-            </div>
           <?php endforeach; ?>
         </div>
       </div>

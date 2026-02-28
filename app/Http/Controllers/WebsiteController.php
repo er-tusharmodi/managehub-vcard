@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Template;
-use App\Models\WebsitePage;
-use App\Models\WebsiteSetting;
+use App\Repositories\Contracts\WebsitePageRepository;
+use App\Repositories\Contracts\WebsiteSettingRepository;
 use Illuminate\View\View;
 
 class WebsiteController extends Controller
 {
-    public function show(?WebsitePage $page = null): View
+    public function show(): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->firstOrFail();
+        $pageRepository = app(WebsitePageRepository::class);
+        $page = $pageRepository->firstOrCreateHome();
 
-        $settings = WebsiteSetting::pluck('value', 'key')->toArray();
+        $settings = app(WebsiteSettingRepository::class)->all();
 
-        $pages = WebsitePage::orderBy('title')->get();
+        $pages = $pageRepository->allOrderedByTitle();
 
         // Get visible templates for home page vCard Previews section
         $templates = Template::visible()->ordered()->get()->map(function ($template) {

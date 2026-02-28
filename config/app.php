@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'vcard_storage_mode' => env('VCARD_STORAGE_MODE', 'file_only'),
+
 ];

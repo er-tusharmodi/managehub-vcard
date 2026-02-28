@@ -363,9 +363,9 @@ window.addEventListener('load', function() {
 async function updateOrder() {
     const templateItems = document.querySelectorAll('.template-item');
     const order = Array.from(templateItems).map((item, index) => ({
-        id: parseInt(item.dataset.templateId),
+        id: item.dataset.templateId,
         position: index
-    })).filter(item => !isNaN(item.id));
+    })).filter(item => item.id);
 
     if (order.length === 0) {
         showToast('warning', 'No templates to reorder');

@@ -5,12 +5,15 @@ namespace App\Livewire\Website;
 use Livewire\Component;
 use App\Models\WebsitePage;
 use App\Livewire\Concerns\HandlesToastValidation;
+use App\Repositories\Contracts\WebsitePageRepository;
+use Livewire\Attributes\Locked;
 
 class CmsSocial extends Component
 {
     use HandlesToastValidation;
 
     public ?WebsitePage $page = null;
+    #[Locked] public string $pageSlug = '';
     public $links = [];
 
     protected $socialPlatforms = [
@@ -43,6 +46,7 @@ class CmsSocial extends Component
 
     public function mount(WebsitePage $page)
     {
+        $this->pageSlug = $page->slug;
         $this->page = $page;
         $this->loadSettings();
     }
@@ -80,6 +84,8 @@ class CmsSocial extends Component
 
     public function save()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $validated = $this->validateWithToast([
             'links' => ['required', 'array'],
             'links.*.platform' => ['required', 'string', 'in:' . implode(',', $this->socialPlatforms)],
@@ -89,7 +95,8 @@ class CmsSocial extends Component
         $data = $this->page->data ?? [];
         $data['social_links'] = $validated['links'];
 
-        $this->page->update(['data' => $data]);
+        app(WebsitePageRepository::class)->updateData($this->page, $data);
+        $this->page->data = $data;
 
         $this->dispatch('notify',
             type: 'success',

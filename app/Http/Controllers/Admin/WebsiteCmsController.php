@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\WebsitePage;
-use App\Models\WebsiteSetting;
+use App\Repositories\Contracts\WebsitePageRepository;
+use App\Repositories\Contracts\WebsiteSettingRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -13,13 +14,7 @@ class WebsiteCmsController extends Controller
 {
     public function index(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.index', [
             'page' => $page,
@@ -28,26 +23,14 @@ class WebsiteCmsController extends Controller
 
     public function showGeneral(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.general', ['page' => $page]);
     }
 
     public function showBranding(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.branding', [
             'page' => $page,
@@ -57,52 +40,28 @@ class WebsiteCmsController extends Controller
 
     public function showSocial(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.social', ['page' => $page]);
     }
 
     public function showSeo(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.seo', ['page' => $page]);
     }
 
     public function showHero(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.hero', ['page' => $page]);
     }
 
     public function showCategories(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.categories', [
             'page' => $page,
@@ -113,26 +72,14 @@ class WebsiteCmsController extends Controller
 
     public function showVcard(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.vcard', ['page' => $page]);
     }
 
     public function showHowItWorks(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.how-it-works', [
             'page' => $page,
@@ -142,26 +89,14 @@ class WebsiteCmsController extends Controller
 
     public function showCta(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.cta', ['page' => $page]);
     }
 
     public function showFooter(?WebsitePage $page = null): View
     {
-        $page = $page ?? WebsitePage::where('slug', 'home')->first();
-        if (!$page) {
-            $page = WebsitePage::create([
-                'slug' => 'home',
-                'title' => 'Home',
-            ]);
-        }
+        $page = $this->resolvePage($page);
 
         return view('admin.website-cms.footer', ['page' => $page]);
     }
@@ -279,23 +214,22 @@ class WebsiteCmsController extends Controller
         }
 
         // Process social links
+        $settingRepository = app(WebsiteSettingRepository::class);
+
         if (!empty($validated['social_links'])) {
             foreach ($validated['social_links'] as $social) {
                 if (!empty($social['key']) && !empty($social['url'])) {
-                    WebsiteSetting::updateOrCreate(
-                        ['key' => 'social_' . $social['key']],
-                        ['value' => $social['url']]
-                    );
+                    $settingRepository->set('social_' . $social['key'], $social['url']);
                 }
             }
         }
 
         foreach ($this->defaultSettings() as $key => $default) {
-            $value = $validated[$key] ?? WebsiteSetting::where('key', $key)->value('value') ?? $default;
-            WebsiteSetting::updateOrCreate(['key' => $key], ['value' => $value]);
+            $value = $validated[$key] ?? $settingRepository->get($key, $default);
+            $settingRepository->set($key, $value);
         }
 
-        $page->update([
+        app(WebsitePageRepository::class)->updateAttributes($page, [
             'title' => $validated['page_title'],
             'meta_title' => $validated['meta_title'] ?? null,
             'meta_description' => $validated['meta_description'] ?? null,
@@ -376,9 +310,7 @@ class WebsiteCmsController extends Controller
     private function loadSettings(): array
     {
         $defaults = $this->defaultSettings();
-        $stored = WebsiteSetting::whereIn('key', array_keys($defaults))
-            ->pluck('value', 'key')
-            ->toArray();
+        $stored = app(WebsiteSettingRepository::class)->getMany(array_keys($defaults));
         return array_merge($defaults, $stored);
     }
 
@@ -417,5 +349,16 @@ class WebsiteCmsController extends Controller
             'favicon_path' => null,
             'hero_image_path' => null,
         ];
+    }
+
+    private function resolvePage(?WebsitePage $page): WebsitePage
+    {
+        $repository = app(WebsitePageRepository::class);
+
+        if ($page && $page->slug) {
+            return $repository->findBySlug($page->slug) ?? $page;
+        }
+
+        return $repository->firstOrCreateHome();
     }
 }

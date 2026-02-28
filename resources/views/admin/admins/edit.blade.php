@@ -44,7 +44,7 @@
                         @foreach ($roles as $role)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="roles[]" id="role_{{ $role->id }}" value="{{ $role->name }}"
-                                    @checked($admin->roles->pluck('name')->contains($role->name))>
+                                    @checked(in_array($role->name, $admin->roles ?? []))>
                                 <label class="form-check-label" for="role_{{ $role->id }}">{{ $role->name }}</label>
                             </div>
                         @endforeach

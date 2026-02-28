@@ -41,8 +41,8 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $login = $this->string('login');
-        $password = $this->string('password');
+        $login = $this->input('login');
+        $password = $this->input('password');
         
         // Determine if login is username or email
         $credentials = [];
@@ -93,6 +93,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('login')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->input('login')).'|'.$this->ip());
     }
 }

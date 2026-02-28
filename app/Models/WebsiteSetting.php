@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use MongoDB\Laravel\Eloquent\Model;
 
 class WebsiteSetting extends Model
 {
+    protected $connection = 'mongodb';
+
+    protected $table = 'website_settings';
+
     protected $fillable = [
         'key',
         'value',

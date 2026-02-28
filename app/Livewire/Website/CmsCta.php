@@ -5,12 +5,15 @@ namespace App\Livewire\Website;
 use Livewire\Component;
 use App\Models\WebsitePage;
 use App\Livewire\Concerns\HandlesToastValidation;
+use App\Repositories\Contracts\WebsitePageRepository;
+use Livewire\Attributes\Locked;
 
 class CmsCta extends Component
 {
     use HandlesToastValidation;
 
     public ?WebsitePage $page = null;
+    #[Locked] public string $pageSlug = '';
     public $title = '';
     public $subtitle = '';
     public $primary_label = '';
@@ -20,6 +23,7 @@ class CmsCta extends Component
 
     public function mount(WebsitePage $page)
     {
+        $this->pageSlug = $page->slug;
         $this->page = $page;
         $this->loadSettings();
     }
@@ -37,6 +41,8 @@ class CmsCta extends Component
 
     public function save()
     {
+        $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
+        
         $validated = $this->validateWithToast([
             'title' => ['required', 'string'],
             'subtitle' => ['required', 'string'],
@@ -49,7 +55,8 @@ class CmsCta extends Component
         $data = $this->page->data ?? [];
         $data['cta_section'] = $validated;
 
-        $this->page->update(['data' => $data]);
+        app(WebsitePageRepository::class)->updateData($this->page, $data);
+        $this->page->data = $data;
 
         $this->dispatch('notify',
             type: 'success',
