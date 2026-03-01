@@ -6,7 +6,8 @@ npm-debug.log
 vendor/
 
 # Environment files
-# .env*
+.env*
+.env
 !.env.example
 
 # IDE
