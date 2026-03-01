@@ -21,7 +21,7 @@ RUN composer install \
 COPY . .
 RUN composer dump-autoload --optimize --classmap-authoritative
 
-FROM php:8.2-fpm-alpine AS php-fpm
+FROM php:8.4-fpm-alpine AS php-fpm
 
 RUN apk add --no-cache \
     freetype-dev \
