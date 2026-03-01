@@ -6,7 +6,7 @@ npm-debug.log
 vendor/
 
 # Environment files
-.env*
+# .env*
 !.env.example
 
 # IDE
@@ -61,6 +61,7 @@ docker-compose*.yml
 
 # Theme files (not needed in container)
 Backendtheme/
+v/
 
 # Misc
 .DS_Store
