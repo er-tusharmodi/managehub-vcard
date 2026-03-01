@@ -115,9 +115,11 @@ RUN cat > /etc/supervisord.conf <<'EOF'
 [supervisord]
 nodaemon=true
 user=root
+logfile=/var/log/supervisor/supervisord.log
+pidfile=/var/run/supervisord.pid
 
 [program:php-fpm]
-command=php-fpm -F
+command=/usr/local/sbin/php-fpm --nodaemonize --fpm-config /usr/local/etc/php-fpm.conf
 autostart=true
 autorestart=true
 priority=5
@@ -143,7 +145,10 @@ user=www-data
 autostart=true
 autorestart=true
 redirect_stderr=true
-stdout_logfile=/var/www/html/storage/logs/worker.log
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
 
 [program:laravel-schedule]
 command=sh -c "while true; do php /var/www/html/artisan schedule:run --verbose --no-interaction; sleep 60; done"
@@ -152,7 +157,10 @@ user=www-data
 autostart=true
 autorestart=true
 redirect_stderr=true
-stdout_logfile=/var/www/html/storage/logs/scheduler.log
+stdout_logfile=/dev/stdout
+stdout_logfile_maxbytes=0
+stderr_logfile=/dev/stderr
+stderr_logfile_maxbytes=0
 EOF
 
 EXPOSE 80
