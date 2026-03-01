@@ -35,7 +35,8 @@ services:
       - "443:443"
     volumes:
       # Nginx config folder
-      - ./nginx-conf:/etc/nginx/conf.d:ro
+      #- ./nginx-conf:/etc/nginx/conf.d:ro
+      - ./nginx-conf/default.conf:/etc/nginx/conf.d/default.conf
       # SSL Certificates (Yahan se Nginx ko files milengi)
       - /etc/letsencrypt:/etc/letsencrypt:ro
     networks:
