@@ -81,8 +81,7 @@ const bindImageFallbacks = () => {
         avatar.addEventListener("error", () => {
             avatar.style.display = "none";
             if (avatar.parentNode) {
-                const iconClass =
-                    state.data.shop.avatarFallbackIconClass || "bi-book-fill";
+                const iconClass = "bi-book-fill";
                 avatar.parentNode.innerHTML = `<i class="bi ${iconClass} ico-xl" aria-hidden="true"></i>`;
             }
         });

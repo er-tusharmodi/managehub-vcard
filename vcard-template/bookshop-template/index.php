@@ -89,7 +89,6 @@ $actionData = [
         'address' => (string) ($shop['address'] ?? ''),
         'qrFileName' => (string) ($shop['qrFileName'] ?? ''),
         'vcardFileName' => (string) ($shop['vcardFileName'] ?? ''),
-        'avatarFallbackIconClass' => (string) ($shop['avatarFallbackIconClass'] ?? 'bi-book-fill'),
     ],
     'messages' => [
         'waEnquiry' => (string) ($messages['waEnquiry'] ?? ''),
@@ -157,7 +156,7 @@ if ($actionDataJson === false) {
     <div class="profile-card">
       <div class="profile-avatar-wrap">
         <div class="profile-avatar">
-          <img id="avatarImage" src="<?= e(v($data, 'shop.avatarImage')) ?>" alt="<?= e(v($data, 'shop.avatarAlt')) ?>" />
+          <img id="avatarImage" src="<?= e(v($data, 'shop.avatarImage')) ?>" alt="<?= e(v($data, 'shop.name')) ?>" />
         </div>
       </div>
       <div class="profile-name"><?= e(v($data, 'hero.profile.name')) ?></div>

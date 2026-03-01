@@ -80,6 +80,9 @@ class ClientSectionEditor extends Component
             return;
         }
 
+        $this->resetValidation();
+        $this->validateIfRules($this->rulesForForm());
+
         $payload = $this->applyUploads($this->form, $this->uploads);
         $data = $this->loadJson();
         $data[$this->section] = $payload;
@@ -272,12 +275,10 @@ class ClientSectionEditor extends Component
             }
 
             $fieldKey = is_string($key) ? $key : '';
-            $ruleParts = $this->isImageKey($fieldKey) ? ['nullable'] : ['required'];
-            if ($this->isNumericKey($fieldKey)) {
-                $ruleParts[] = 'numeric';
+            $rule = $this->buildRuleForField($fieldKey);
+            if ($rule !== null) {
+                $rules[$path] = $rule;
             }
-
-            $rules[$path] = implode('|', $ruleParts);
         }
     }
 
@@ -289,12 +290,36 @@ class ClientSectionEditor extends Component
             return null;
         }
 
+        return $this->buildRuleForField($fieldKey);
+    }
+
+    private function buildRuleForField(string $fieldKey): ?string
+    {
+        if ($fieldKey === '') {
+            return null;
+        }
+
+        if ($this->isSystemManagedKey($fieldKey) || $this->isOptionalTextKey($fieldKey)) {
+            return 'nullable';
+        }
+
         $ruleParts = $this->isImageKey($fieldKey) ? ['nullable'] : ['required'];
         if ($this->isNumericKey($fieldKey)) {
             $ruleParts[] = 'numeric';
         }
 
         return implode('|', $ruleParts);
+    }
+
+    private function isSystemManagedKey(string $key): bool
+    {
+        return preg_match('/^(qr|vcard|qrcode|vcf)$/i', $key) === 1
+            || preg_match('/(filename|file_name)$/i', $key) === 1;
+    }
+
+    private function isOptionalTextKey(string $key): bool
+    {
+        return preg_match('/(alt|subtitle|sub|note|description|desc|bio|tagline)$/i', $key) === 1;
     }
 
     private function isImageKey(string $key): bool

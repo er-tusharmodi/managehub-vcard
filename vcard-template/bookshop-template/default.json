@@ -25,10 +25,8 @@
         "coverImage": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=800&q=80",
         "coverAlt": "PageTurner Books Cover",
         "avatarImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "avatarAlt": "PageTurner Books",
         "vcardFileName": "PageTurnerBooks.vcf",
-        "qrFileName": "pageturner_qr.png",
-        "avatarFallbackIconClass": "bi-book-fill"
+        "qrFileName": "pageturner_qr.png"
     },
     "hero": {
         "buttons": {

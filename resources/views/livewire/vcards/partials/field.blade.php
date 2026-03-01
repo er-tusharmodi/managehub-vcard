@@ -85,7 +85,14 @@
         <div class="d-flex flex-column gap-2">
             @foreach ($value as $i => $item)
                 <div class="d-flex gap-2 align-items-center" wire:key="{{ $wirePath }}-{{ $i }}">
-                    <input type="text" class="form-control" wire:model="form.{{ $wirePath }}.{{ $i }}">
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control @error('form.' . $wirePath . '.' . $i) is-invalid @enderror" wire:model="form.{{ $wirePath }}.{{ $i }}">
+                        @error('form.' . $wirePath . '.' . $i)
+                            <div class="invalid-feedback d-block">
+                                <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <button type="button" class="btn btn-outline-secondary btn-sm rounded-circle p-0" style="width: 32px; height: 32px;" wire:click="moveRow('{{ $wirePath }}', {{ $i }}, -1)" title="Move Up">
                         <i class="mdi mdi-arrow-up"></i>
                     </button>
@@ -336,25 +343,50 @@
                                                         </div>
                                                         <small class="text-primary ms-2">Uploading image...</small>
                                                     </div>
-                                                    <input type="file" class="form-control" wire:model.live="{{ $modalUploadPath }}" accept="image/*">
+                                                    <input type="file" class="form-control @error($modalUploadPath) is-invalid @enderror" wire:model.live="{{ $modalUploadPath }}" accept="image/*">
+                                                    @error($modalUploadPath)
+                                                        <div class="invalid-feedback d-block">
+                                                            <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                     <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
                                                 @endif
                                             @elseif ($isColCategory && !empty($categoryOptions))
-                                                <select class="form-select" wire:model="{{ $modalModelPath }}">
+                                                <select class="form-select @error($modalModelPath) is-invalid @enderror" wire:model="{{ $modalModelPath }}">
                                                     <option value="" disabled>Select category</option>
                                                     @foreach ($categoryOptions as $option)
                                                         <option value="{{ $option['key'] }}">{{ $option['label'] }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error($modalModelPath)
+                                                    <div class="invalid-feedback d-block">
+                                                        <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                                    </div>
+                                                @enderror
                                             @elseif ($isColColor)
                                                 <div class="d-flex gap-2 align-items-center">
-                                                    <input type="color" class="form-control form-control-color" wire:model="{{ $modalModelPath }}" style="width: 60px; height: 38px;" required>
-                                                    <input type="text" class="form-control" wire:model="{{ $modalModelPath }}" placeholder="#000000" required>
+                                                    <input type="color" class="form-control form-control-color @error($modalModelPath) is-invalid @enderror" wire:model="{{ $modalModelPath }}" style="width: 60px; height: 38px;" required>
+                                                    <input type="text" class="form-control @error($modalModelPath) is-invalid @enderror" wire:model="{{ $modalModelPath }}" placeholder="#000000" required>
                                                 </div>
+                                                @error($modalModelPath)
+                                                    <div class="invalid-feedback d-block">
+                                                        <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                                    </div>
+                                                @enderror
                                             @elseif ($isColTextarea)
-                                                <textarea class="form-control" rows="4" wire:model="{{ $modalModelPath }}" required></textarea>
+                                                <textarea class="form-control @error($modalModelPath) is-invalid @enderror" rows="4" wire:model="{{ $modalModelPath }}" required></textarea>
+                                                @error($modalModelPath)
+                                                    <div class="invalid-feedback d-block">
+                                                        <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                                    </div>
+                                                @enderror
                                             @else
-                                                <input type="{{ $isColNumber ? 'number' : 'text' }}" class="form-control" wire:model="{{ $modalModelPath }}" {{ $isColNumber ? 'step=0.01' : '' }} required>
+                                                <input type="{{ $isColNumber ? 'number' : 'text' }}" class="form-control @error($modalModelPath) is-invalid @enderror" wire:model="{{ $modalModelPath }}" {{ $isColNumber ? 'step=0.01' : '' }} required>
+                                                @error($modalModelPath)
+                                                    <div class="invalid-feedback d-block">
+                                                        <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                                    </div>
+                                                @enderror
                                             @endif
                                         </div>
                                     @endforeach
@@ -425,25 +457,50 @@
                                                 </div>
                                                 <small class="text-primary ms-2">Uploading image...</small>
                                             </div>
-                                            <input type="file" class="form-control" wire:model.live="uploads.newItem.{{ $col }}" accept="image/*">
+                                            <input type="file" class="form-control @error('uploads.newItem.' . $col) is-invalid @enderror" wire:model.live="uploads.newItem.{{ $col }}" accept="image/*">
+                                            @error('uploads.newItem.' . $col)
+                                                <div class="invalid-feedback d-block">
+                                                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                                </div>
+                                            @enderror
                                             <small class="text-muted d-block mt-1">Upload image (JPG, PNG, GIF)</small>
                                         @endif
                                     @elseif ($isColCategory && !empty($categoryOptions))
-                                        <select class="form-select" wire:model="newItem.{{ $col }}">
+                                        <select class="form-select @error('newItem.' . $col) is-invalid @enderror" wire:model="newItem.{{ $col }}">
                                             <option value="" disabled>Select category</option>
                                             @foreach ($categoryOptions as $option)
                                                 <option value="{{ $option['key'] }}">{{ $option['label'] }}</option>
                                             @endforeach
                                         </select>
+                                        @error('newItem.' . $col)
+                                            <div class="invalid-feedback d-block">
+                                                <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                            </div>
+                                        @enderror
                                     @elseif ($isColColor)
                                         <div class="d-flex gap-2 align-items-center">
-                                            <input type="color" class="form-control form-control-color" wire:model="newItem.{{ $col }}" style="width: 60px; height: 38px;" required>
-                                            <input type="text" class="form-control" wire:model="newItem.{{ $col }}" placeholder="#000000" required>
+                                            <input type="color" class="form-control form-control-color @error('newItem.' . $col) is-invalid @enderror" wire:model="newItem.{{ $col }}" style="width: 60px; height: 38px;" required>
+                                            <input type="text" class="form-control @error('newItem.' . $col) is-invalid @enderror" wire:model="newItem.{{ $col }}" placeholder="#000000" required>
                                         </div>
+                                        @error('newItem.' . $col)
+                                            <div class="invalid-feedback d-block">
+                                                <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                            </div>
+                                        @enderror
                                     @elseif ($isColTextarea)
-                                        <textarea class="form-control" rows="4" wire:model="newItem.{{ $col }}" required></textarea>
+                                        <textarea class="form-control @error('newItem.' . $col) is-invalid @enderror" rows="4" wire:model="newItem.{{ $col }}" required></textarea>
+                                        @error('newItem.' . $col)
+                                            <div class="invalid-feedback d-block">
+                                                <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                            </div>
+                                        @enderror
                                     @else
-                                        <input type="{{ $isColNumber ? 'number' : 'text' }}" class="form-control" wire:model="newItem.{{ $col }}" {{ $isColNumber ? 'step=0.01' : '' }} required>
+                                        <input type="{{ $isColNumber ? 'number' : 'text' }}" class="form-control @error('newItem.' . $col) is-invalid @enderror" wire:model="newItem.{{ $col }}" {{ $isColNumber ? 'step=0.01' : '' }} required>
+                                        @error('newItem.' . $col)
+                                            <div class="invalid-feedback d-block">
+                                                <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                                            </div>
+                                        @enderror
                                     @endif
                                 </div>
                             @endforeach
@@ -486,14 +543,24 @@
                        style="cursor: pointer;">
                 <label class="form-check-label" for="{{ $uniqueId }}">{{ $placeholder ?: 'Enable' }}</label>
             </div>
+            @error('form.' . $wirePath)
+                <div class="invalid-feedback d-block">
+                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                </div>
+            @enderror
         @elseif ($isDate || $isTime || $isDateTime)
             <input type="text" 
                    id="{{ $uniqueId }}"
-                   class="form-control flatpickr-input"
+                   class="form-control flatpickr-input @error('form.' . $wirePath) is-invalid @enderror"
                    wire:model="form.{{ $wirePath }}"
                    placeholder="{{ $placeholder }}"
                    data-field-type="{{ $isDate ? 'date' : ($isTime ? 'time' : 'datetime') }}"
                    {{ $isRequired ? 'required' : '' }}>
+            @error('form.' . $wirePath)
+                <div class="invalid-feedback d-block">
+                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                </div>
+            @enderror
             @if ($helpText)
                 <small class="form-text text-muted d-block mt-1">
                     <i class="mdi mdi-information-outline"></i> {{ $helpText }}
@@ -529,27 +596,37 @@
                     <img src="{{ $imageUrl }}" alt="" style="max-width: 160px; height: auto;" class="img-thumbnail">
                 </div>
             @endif
-            <input type="file" class="form-control" wire:model.live="{{ $uploadPath }}" accept="image/*">
+            <input type="file" class="form-control @error($uploadPath) is-invalid @enderror" wire:model.live="{{ $uploadPath }}" accept="image/*">
+            @error($uploadPath)
+                <div class="invalid-feedback d-block">
+                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                </div>
+            @enderror
             <small class="form-text text-muted d-block mt-1">
                 <i class="mdi mdi-information-outline"></i> Upload a new image to replace the current one
             </small>
         @elseif ($isCategoryKey && !empty($categoryOptions))
-            <select class="form-select" 
+            <select class="form-select @error('form.' . $wirePath) is-invalid @enderror" 
                     id="{{ $uniqueId }}"
                     wire:model="form.{{ $wirePath }}"
                     {{ $isRequired ? 'required' : '' }}>
-                <option value="">{{ $placeholder ?: 'Select category' }}</option>
+                <option value="">-- Select {{ $label }} --</option>
                 @foreach ($categoryOptions as $option)
-                    <option value="{{ $option['key'] }}">{{ $option['label'] }}</option>
+                    <option value="{{ $option['value'] }}">{{ $option['label'] }}</option>
                 @endforeach
             </select>
+            @error('form.' . $wirePath)
+                <div class="invalid-feedback d-block">
+                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                </div>
+            @enderror
             @if ($helpText)
                 <small class="form-text text-muted d-block mt-1">
                     <i class="mdi mdi-information-outline"></i> {{ $helpText }}
                 </small>
             @endif
         @elseif ($isTextArea)
-            <textarea class="form-control" 
+            <textarea class="form-control @error('form.' . $wirePath) is-invalid @enderror" 
                       id="{{ $uniqueId }}"
                       rows="{{ $rows }}" 
                       wire:model="form.{{ $wirePath }}"
@@ -557,6 +634,11 @@
                       {{ $maxLength ? "maxlength={$maxLength}" : '' }}
                       {{ $isRequired ? 'required' : '' }}
                       @if($showCounter && $maxLength) x-data="{ length: $wire.entangle('form.{{ $wirePath }}').live.length }" @endif></textarea>
+            @error('form.' . $wirePath)
+                <div class="invalid-feedback d-block">
+                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                </div>
+            @enderror
             @if ($showCounter && $maxLength)
                 <small class="form-text text-muted d-block mt-1" x-text="length + ' / {{ $maxLength }} characters'"></small>
             @elseif ($helpText)
@@ -567,12 +649,17 @@
         @else
             <input type="{{ $isNumber ? 'number' : ($isUrl ? 'url' : ($isPhone ? 'tel' : 'text')) }}" 
                    id="{{ $uniqueId }}"
-                   class="form-control" 
+                   class="form-control @error('form.' . $wirePath) is-invalid @enderror" 
                    wire:model="form.{{ $wirePath }}"
                    placeholder="{{ $placeholder }}"
                    {{ $isNumber ? 'step=0.01' : '' }}
                    {{ $maxLength && !$isNumber ? "maxlength={$maxLength}" : '' }}
                    {{ $isRequired ? 'required' : '' }}>
+            @error('form.' . $wirePath)
+                <div class="invalid-feedback d-block">
+                    <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}
+                </div>
+            @enderror
             @if ($helpText)
                 <small class="form-text text-muted d-block mt-1">
                     <i class="mdi mdi-information-outline"></i> {{ $helpText }}
