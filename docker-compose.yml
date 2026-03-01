@@ -1,6 +1,10 @@
 services:
   app:
-    image: ertusharmodi/managehub-vcard:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: managehub-vcard:latest
     container_name: managehub-vcard-app
     restart: unless-stopped
     expose:
