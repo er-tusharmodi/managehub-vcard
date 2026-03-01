@@ -25,7 +25,7 @@ class AdminSectionEditor extends Component
     public string $editMode = 'visual'; // 'visual' or 'code'
     public string $jsonContent = '';
 
-    public function mount(Vcard $vcard, ?string $section = null): void
+    public function mount(Vcard $vcard, string $section = null): void
     {
         $this->vcard = $vcard;
         $data = $this->loadJson();

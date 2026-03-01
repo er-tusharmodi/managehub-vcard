@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Mongo\Role;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
         // Share branding helper with all views
         \Illuminate\Support\Facades\View::share('branding', \App\Helpers\BrandingHelper::class);
 
