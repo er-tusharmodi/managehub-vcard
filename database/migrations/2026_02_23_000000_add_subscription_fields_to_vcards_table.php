@@ -9,9 +9,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('vcards', function (Blueprint $table) {
-            $table->string('subscription_status')->default('active')->after('status');
-            $table->timestamp('subscription_started_at')->nullable()->after('subscription_status');
-            $table->timestamp('subscription_expires_at')->nullable()->after('subscription_started_at');
+            $table->string('subscription_status')->default('active');
+            $table->timestamp('subscription_started_at')->nullable();
+            $table->timestamp('subscription_expires_at')->nullable();
         });
     }
 

@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('website_pages', function (Blueprint $table) {
-            $table->string('hero_title_highlight')->nullable()->after('hero_title');
-            $table->json('header_cta')->nullable()->after('hero_subtitle');
-            $table->json('hero_buttons')->nullable()->after('header_cta');
-            $table->json('categories')->nullable()->after('hero_image_path');
-            $table->json('vcard_preview')->nullable()->after('categories');
-            $table->json('how_it_works')->nullable()->after('vcard_preview');
-            $table->json('cta_section')->nullable()->after('how_it_works');
-            $table->text('footer_about')->nullable()->after('footer_text');
-            $table->json('footer_links')->nullable()->after('footer_about');
+            $table->string('hero_title_highlight')->nullable();
+            $table->json('header_cta')->nullable();
+            $table->json('hero_buttons')->nullable();
+            $table->json('categories')->nullable();
+            $table->json('vcard_preview')->nullable();
+            $table->json('how_it_works')->nullable();
+            $table->json('cta_section')->nullable();
+            $table->text('footer_about')->nullable();
+            $table->json('footer_links')->nullable();
         });
     }
 

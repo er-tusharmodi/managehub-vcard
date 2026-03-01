@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('website_pages', function (Blueprint $table) {
-            $table->json('data')->nullable()->after('footer_links');
+            $table->json('data')->nullable();
         });
     }
 

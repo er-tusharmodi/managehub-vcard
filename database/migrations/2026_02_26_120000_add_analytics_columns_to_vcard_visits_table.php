@@ -10,26 +10,26 @@ return new class extends Migration
     {
         Schema::table('vcard_visits', function (Blueprint $table) {
             if (!Schema::hasColumn('vcard_visits', 'page_url')) {
-                $table->string('page_url')->nullable()->after('user_agent');
+                $table->string('page_url')->nullable();
                 $table->index('page_url');
             }
             if (!Schema::hasColumn('vcard_visits', 'referrer')) {
-                $table->string('referrer')->nullable()->after('page_url');
+                $table->string('referrer')->nullable();
                 $table->index('referrer');
             }
             if (!Schema::hasColumn('vcard_visits', 'browser')) {
-                $table->string('browser')->nullable()->after('referrer');
+                $table->string('browser')->nullable();
                 $table->index('browser');
             }
             if (!Schema::hasColumn('vcard_visits', 'device')) {
-                $table->string('device')->nullable()->after('browser');
+                $table->string('device')->nullable();
                 $table->index('device');
             }
             if (!Schema::hasColumn('vcard_visits', 'platform')) {
-                $table->string('platform')->nullable()->after('device');
+                $table->string('platform')->nullable();
             }
             if (!Schema::hasColumn('vcard_visits', 'country')) {
-                $table->string('country')->nullable()->after('platform');
+                $table->string('country')->nullable();
                 $table->index('country');
             }
         });
