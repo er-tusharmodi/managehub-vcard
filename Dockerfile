@@ -79,9 +79,12 @@ RUN mkdir -p storage/framework/sessions \
     storage/framework/cache \
     storage/logs \
     bootstrap/cache \
+    vcard-template \
     /run/nginx \
     /var/log/supervisor \
-    && chown -R www-data:www-data storage bootstrap/cache
+    && chown -R www-data:www-data storage bootstrap/cache \
+    && chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 storage bootstrap/cache database
 
 FROM php-fpm AS production
 
@@ -119,7 +122,7 @@ logfile=/var/log/supervisor/supervisord.log
 pidfile=/var/run/supervisord.pid
 
 [program:php-fpm]
-command=/usr/local/sbin/php-fpm -R -F
+command=php-fpm -F -R
 autostart=true
 autorestart=true
 priority=5
@@ -129,7 +132,7 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 
 [program:nginx]
-command=/usr/sbin/nginx -g "daemon off;"
+command=nginx -g "daemon off;"
 autostart=true
 autorestart=true
 priority=10
