@@ -98,6 +98,7 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 SUPERVISOR_EOF
 
+
 # 7. Start Supervisord
 echo "🏁 Starting supervisord..."
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
