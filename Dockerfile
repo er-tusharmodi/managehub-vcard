@@ -117,7 +117,7 @@ logfile=/var/log/supervisor/supervisord.log
 pidfile=/var/run/supervisord.pid
 
 [program:php-fpm]
-command=/usr/local/sbin/php-fpm -F
+command=php-fpm -F -y /usr/local/etc/php-fpm.conf
 autostart=true
 autorestart=true
 priority=5

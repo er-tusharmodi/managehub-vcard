@@ -1,21 +1,33 @@
 services:
-  app:
-    image: ertusharmodi/managehub-vcard:latest
-    container_name: managehub-vcard-app
+  # 1. Main Website (managehub.in) - No Database
+  main-app:
+    image: ertusharmodi/managehub:latest
+    container_name: managehub-main-app
     restart: unless-stopped
     expose:
       - "80"
     env_file:
-      - .env
+      - .env.main
+    networks:
+      - managehub-network
+
+  # 2. VCard App (vcard.managehub.in) - With MongoDB
+  app:
+    image: ertusharmodi/managehub-vcard:latest
+    container_name: managehub-vcard-app
+    restart: unless-stopped
+    entrypoint: ["/bin/sh", "/usr/local/bin/docker-entrypoint.sh"]
+    expose:
+      - "80"
+    env_file:
+      - .env.vcard
     environment:
       APP_ENV: production
       APP_DEBUG: "false"
       DB_CONNECTION: mongodb
       DB_HOST: mongodb
       DB_PORT: 27017
-      MONGODB_HOST: mongodb
-      MONGODB_PORT: 27017
-      MONGODB_URI: mongodb://mongodb:27017
+      MONGODB_URI: mongodb://mongodb:27017/vcard_db
     depends_on:
       mongodb:
         condition: service_healthy
@@ -24,24 +36,25 @@ services:
     networks:
       - managehub-network
 
+  # 3. Nginx Proxy (Dono domains ko handle karega)
   nginx:
-    image: nginx:1.27-alpine
-    container_name: managehub-vcard-nginx
+    image: nginx:latest
+    container_name: managehub-nginx-proxy
     restart: unless-stopped
     depends_on:
+      - main-app
       - app
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      # Nginx config folder
-      #- ./nginx-conf:/etc/nginx/conf.d:ro
-      - ./nginx-conf/default.conf:/etc/nginx/conf.d/default.conf
-      # SSL Certificates (Yahan se Nginx ko files milengi)
+      - ./nginx-conf/default.conf:/etc/nginx/conf.d/default.conf:ro
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - app_storage:/var/www/html/storage:ro
     networks:
       - managehub-network
 
+  # 4. MongoDB (Sirf VCard App ke liye)
   mongodb:
     image: mongo:7
     container_name: managehub-vcard-mongodb
