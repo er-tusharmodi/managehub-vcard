@@ -6,6 +6,8 @@ sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh 2>/dev/null || true
 
 # 2. Permissions Fix
 echo "🔧 Setting permissions for Laravel folders..."
+# Permissions dene se pehle folders create karna safe hai
+mkdir -p /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database /var/www/html/public
 chown -R www-data:www-data /var/www/html/storage \
     /var/www/html/bootstrap/cache \
     /var/www/html/database \
@@ -33,21 +35,17 @@ echo "✅ MongoDB ready!"
 
 # 4. Laravel Optimizations
 echo "🚀 Optimizing Laravel..."
-php artisan config:clear 2>/dev/null || true
-php artisan route:clear 2>/dev/null || true
-php artisan view:clear 2>/dev/null || true
-php artisan cache:clear 2>/dev/null || true
-
-php artisan config:cache 2>/dev/null || true
-php artisan route:cache 2>/dev/null || true
-php artisan view:cache 2>/dev/null || true
+# Clear and Cache (Don't ignore errors here, we need to know if it fails)
+php artisan config:cache || true
+php artisan route:cache || true
+php artisan view:cache || true
 
 # 5. Storage Symlink
 echo "🔗 Setting up storage symlink..."
 rm -rf public/storage 2>/dev/null || true
-php artisan storage:link --force 2>/dev/null || true
+php artisan storage:link --force || true
 
-# 6. Fix Supervisor Config - Ensure php-fpm command is correct
+# 6. Fix Supervisor Config
 echo "⚙️ Configuring supervisor..."
 cat > /etc/supervisord.conf <<'SUPERVISOR_EOF'
 [supervisord]
@@ -57,7 +55,8 @@ logfile=/var/log/supervisor/supervisord.log
 pidfile=/var/run/supervisord.pid
 
 [program:php-fpm]
-command=/usr/local/sbin/php-fpm --allow-to-run-as-root --nodaemonize
+# ✅ FIXED: Adding explicit config path (-y) to stop "Usage" error
+command=/usr/local/sbin/php-fpm --allow-to-run-as-root --nodaemonize -y /usr/local/etc/php-fpm.conf
 autostart=true
 autorestart=true
 priority=5
