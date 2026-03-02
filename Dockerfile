@@ -41,6 +41,15 @@ RUN apk add --no-cache \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql mbstring exif pcntl bcmath gd zip opcache
 
+# ✅ FIXED: Force create missing config files in empty /usr/local/etc/
+RUN if [ ! -f /usr/local/etc/php-fpm.conf ]; then \
+        cp /usr/local/etc/php-fpm.conf.default /usr/local/etc/php-fpm.conf; \
+    fi && \
+    mkdir -p /usr/local/etc/php-fpm.d && \
+    if [ ! -f /usr/local/etc/php-fpm.d/www.conf ]; then \
+        cp /usr/local/etc/php-fpm.d/www.conf.default /usr/local/etc/php-fpm.d/www.conf; \
+    fi
+
 # Install Redis & MongoDB
 RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && pecl install redis mongodb \
@@ -66,7 +75,7 @@ COPY --chown=www-data:www-data . .
 COPY --from=composer-builder --chown=www-data:www-data /app/vendor ./vendor
 COPY --from=frontend-builder --chown=www-data:www-data /app/public/build ./public/build
 
-# ✅ Setup Directories and Permissions (Added public and database fix)
+# Setup Directories and Permissions
 RUN mkdir -p storage/framework/sessions \
     storage/framework/views \
     storage/framework/cache \
@@ -108,7 +117,7 @@ server {
 }
 EOF
 
-# ✅ Supervisor Config (Using absolute paths to avoid "Usage" error)
+# Supervisor Config (Absolute paths used)
 RUN cat > /etc/supervisord.conf <<'EOF'
 [supervisord]
 nodaemon=true
@@ -117,7 +126,7 @@ logfile=/var/log/supervisor/supervisord.log
 pidfile=/var/run/supervisord.pid
 
 [program:php-fpm]
-command=php-fpm -F -y /usr/local/etc/php-fpm.conf
+command=/usr/local/sbin/php-fpm -F -R -y /usr/local/etc/php-fpm.conf
 autostart=true
 autorestart=true
 priority=5
@@ -159,12 +168,11 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 EOF
 
-# Entrypoint setup with Windows Line Ending Fix
+# Entrypoint setup
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
     && sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh
 
 EXPOSE 80
 
-# ✅ Using Absolute Path for Entrypoint
 ENTRYPOINT ["/bin/sh", "/usr/local/bin/docker-entrypoint.sh"]
