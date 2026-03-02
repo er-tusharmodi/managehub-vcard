@@ -36,6 +36,7 @@ RUN apk add --no-cache \
     nginx \
     supervisor \
     sed \
+    bash \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         pdo_mysql mbstring exif pcntl bcmath gd zip opcache
@@ -65,7 +66,7 @@ COPY --chown=www-data:www-data . .
 COPY --from=composer-builder --chown=www-data:www-data /app/vendor ./vendor
 COPY --from=frontend-builder --chown=www-data:www-data /app/public/build ./public/build
 
-# Setup Directories and Permissions
+# ✅ Setup Directories and Permissions (Added public and database fix)
 RUN mkdir -p storage/framework/sessions \
     storage/framework/views \
     storage/framework/cache \
@@ -75,7 +76,7 @@ RUN mkdir -p storage/framework/sessions \
     /run/nginx \
     /var/log/supervisor \
     && chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 storage bootstrap/cache database
+    && chmod -R 775 storage bootstrap/cache database public
 
 # --- Stage 4: Production ---
 FROM php-fpm AS production
@@ -107,7 +108,7 @@ server {
 }
 EOF
 
-# Supervisor Config (FIXED COMMANDS)
+# ✅ Supervisor Config (Using absolute paths to avoid "Usage" error)
 RUN cat > /etc/supervisord.conf <<'EOF'
 [supervisord]
 nodaemon=true
@@ -116,7 +117,7 @@ logfile=/var/log/supervisor/supervisord.log
 pidfile=/var/run/supervisord.pid
 
 [program:php-fpm]
-command=php-fpm -F
+command=/usr/local/sbin/php-fpm -F
 autostart=true
 autorestart=true
 priority=5
@@ -126,7 +127,7 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 
 [program:nginx]
-command=nginx -g "daemon off;"
+command=/usr/sbin/nginx -g "daemon off;"
 autostart=true
 autorestart=true
 priority=10
@@ -136,7 +137,7 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 
 [program:laravel-queue]
-command=php /var/www/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600
+command=/usr/local/bin/php /var/www/html/artisan queue:work --sleep=3 --tries=3 --max-time=3600
 directory=/var/www/html
 user=www-data
 autostart=true
@@ -147,7 +148,7 @@ stderr_logfile=/dev/stderr
 stderr_logfile_maxbytes=0
 
 [program:laravel-schedule]
-command=sh -c "while true; do php /var/www/html/artisan schedule:run --verbose --no-interaction; sleep 60; done"
+command=/bin/sh -c "while true; do /usr/local/bin/php /var/www/html/artisan schedule:run --verbose --no-interaction; sleep 60; done"
 directory=/var/www/html
 user=www-data
 autostart=true
@@ -165,4 +166,5 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh \
 
 EXPOSE 80
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+# ✅ Using Absolute Path for Entrypoint
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/docker-entrypoint.sh"]
