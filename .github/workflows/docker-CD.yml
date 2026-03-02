@@ -20,7 +20,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/ubuntu/managehub-project
-            docker compose pull managehub-vcard-app
-            docker compose up -d managehub-vcard-app
-            docker restart managehub-vcard-app
+            docker compose pull app
+            docker compose up -d app
+            docker restart app
             docker compose restart nginx
