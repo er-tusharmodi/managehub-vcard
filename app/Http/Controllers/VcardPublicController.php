@@ -6,6 +6,7 @@ use App\Models\Vcard;
 use App\Models\VcardVisit;
 use App\Repositories\Contracts\VcardContentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,6 +18,14 @@ class VcardPublicController extends Controller
 
     public function show(Request $request, string $subdomain): Response
     {
+        // Path-based access (vcard.managehub.in/{subdomain}) is admin-preview only
+        if ($request->routeIs('vcard.public.path')) {
+            $user = Auth::user();
+            if (!$user || !($user->hasRole('admin') || $user->hasRole('super-admin'))) {
+                return redirect('/');
+            }
+        }
+
         $vcard = Vcard::where('subdomain', $subdomain)->firstOrFail();
 
         if (!$vcard->isSubscriptionActive()) {
