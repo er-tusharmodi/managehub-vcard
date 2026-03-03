@@ -261,7 +261,7 @@
                             @php $iconKey = "service_" . ($item["icon"] ?? "star"); @endphp
                             <div class="svc-item">
                                 <div class="svc-ico">
-                                    <svg viewBox="0 0 24 24">{{ getIcon($iconKey) ?: getIcon("service_star") }}</svg>
+                                    <svg viewBox="0 0 24 24">{!! getIcon($iconKey) ?: getIcon("service_star") !!}</svg>
                                 </div>
                                 <div class="svc-info">
                                     <div class="svc-name">{{ $item["name"] ?? "" }}</div>

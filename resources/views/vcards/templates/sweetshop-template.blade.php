@@ -550,7 +550,7 @@
                 <div id="cartBody">
                     <div class="cart-empty">
                         {!! getIcon("cart-thin", "", "currentColor") !!}
-                        <span id="cart-empty-message">{!! vcard_text_with_breaks(data_get($data, "cart.emptyMessage")) !!}</span>
+                        <span id="cart-empty-message">{!! data_get($data, "cart.emptyMessage") !!}</span>
                     </div>
                 </div>
             </div>

@@ -309,7 +309,7 @@
                                 : "enquireWA(" . js_str($actionValue) . ")";
 @endphp
                             <div class="deal-item">
-                                <div class="deal-badge">{{ $item["badge"] ?? "" }}</div>
+                                <div class="deal-badge">{!! $item["badge"] ?? "" !!}</div>
                                 <div class="deal-info">
                                     <div class="deal-name">{{ $item["name"] ?? "" }}</div>
                                     <div class="deal-desc">{{ $item["desc"] ?? "" }}</div>

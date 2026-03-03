@@ -198,7 +198,7 @@
                 $iconClass = (string) ($item['iconClass'] ?? '');
             @endphp
             <div class="social-item"{{ $action !== '' ? ' onclick="' . e($action . '()') . '"' : '' }}>
-              <div class="s-ico {{ $iconClass }}"><span class="social-icon">{{ $socialIcons[$iconKey] ?? '' }}</span></div>
+              <div class="s-ico {{ $iconClass }}"><span class="social-icon">{!! $socialIcons[$iconKey] ?? '' !!}</span></div>
               <div>
                 <div class="s-name">{{ $item['name'] ?? '' }}</div>
                 <div class="s-val">{{ $item['value'] ?? '' }}</div>
@@ -371,7 +371,7 @@
             @continue(!is_array($item))
             @php $type = (string) ($item['type'] ?? ''); @endphp
             <div class="pay-item">
-              <div class="pay-icon-wrap"><span class="pay-icon">{{ $paymentIcons[$type] ?? '' }}</span></div>
+              <div class="pay-icon-wrap"><span class="pay-icon">{!! $paymentIcons[$type] ?? '' !!}</span></div>
               <div>
                 <div class="pay-name">{{ $item['name'] ?? '' }}</div>
                 <div class="pay-detail">{{ $item['detail'] ?? '' }}</div>
@@ -477,7 +477,7 @@
             $action = (string) ($item['action'] ?? '');
 @endphp
             <div class="share-opt" onclick="{{ $action }}()">
-              <span class="share-icon">{{ $shareIcons[$key] ?? '' }}</span>
+              <span class="share-icon">{!! $shareIcons[$key] ?? '' !!}</span>
               <span class="share-label">{{ $item['label'] ?? '' }}</span>
             </div>
           @endforeach
