@@ -336,6 +336,10 @@ class VcardController extends Controller
         } catch (\Exception $e) {
             // Log but do NOT re-throw — a mail failure must not abort vcard creation
             \Log::error('Error sending credentials email: ' . $e->getMessage(), ['exception' => $e]);
+        }
+    }
+
+    public function shareVcard(Vcard $vcard)
     {
         if (!$vcard->user) {
             return response()->json(['error' => 'User not found'], 404);
