@@ -32,7 +32,8 @@ class Template extends Model
      */
     public function scopeVisible($query)
     {
-        return $query->where('is_visible', true);
+        // MongoDB may store is_visible as boolean true or integer 1 depending on how it was inserted
+        return $query->whereIn('is_visible', [true, 1]);
     }
 
     /**
