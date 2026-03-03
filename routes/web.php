@@ -166,3 +166,13 @@ Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
         Route::get('/vcard/edit/{section?}', ClientSectionEditor::class)->name('vcard.editor.section');
     });
 });
+
+// Route for the homepage
+Route::domain('vcard.managehub.in')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('homepage');
+});
+
+// Route for client-specific vCards
+Route::domain('{client}.managehub.in')->group(function () {
+    Route::get('/', [VCardController::class, 'show'])->name('client.vcard');
+});

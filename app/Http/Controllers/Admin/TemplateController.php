@@ -47,7 +47,7 @@ class TemplateController extends Controller
             } else {
                 // Template exists on filesystem but not in database
                 $template['id'] = null;
-                $template['display_name'] = $template['name'];
+                $template['display_name'] = $template['name'] ?? 'Unnamed Template';
                 $template['category'] = null;
                 $template['is_visible'] = false;
                 $template['display_order'] = 999;
