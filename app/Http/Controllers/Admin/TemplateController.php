@@ -235,9 +235,15 @@ class TemplateController extends Controller
                 'subdomain'    => 'preview',
             ];
             $subdomain = 'preview';
-            $assetBase = asset('vcard-assets/' . $templateKey . '/');
+            $assetBase = asset('vcard-assets/' . $templateKey) . '/';
 
             $content = view($templateView, compact('data', 'vcard', 'subdomain', 'assetBase'))->render();
+
+            return response($content)
+                ->header('Content-Type', 'text/html')
+                ->header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
+                ->header('Pragma', 'no-cache')
+                ->header('Expires', '0');
         } catch (\Exception $e) {
             abort(500, 'Failed to preview template: ' . $e->getMessage());
         }
