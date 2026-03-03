@@ -491,7 +491,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      window.__ACTION_DATA__ = {!! vcard_js_str($actionDataJson) !!};
+      window.__ACTION_DATA__ = {!! $actionDataJson !!};
     </script>
     <script src="{{ $assetBase }}script.js"></script>
   </body>

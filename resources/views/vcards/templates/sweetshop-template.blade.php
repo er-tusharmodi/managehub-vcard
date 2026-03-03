@@ -637,7 +637,7 @@
 
         <script>
             window.APP_DATA = {!! vcard_js_str($data) !!};
-            window.__VCARD_SUBDOMAIN__ = {{ json_encode(basename(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH))) }};
+            window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
     </body>
