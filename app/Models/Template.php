@@ -32,7 +32,7 @@ class Template extends Model
      */
     public function scopeVisible($query)
     {
-        return $query->where('is_visible', 1);
+        return $query->where('is_visible', true);
     }
 
     /**
