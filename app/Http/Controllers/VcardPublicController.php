@@ -35,8 +35,9 @@ class VcardPublicController extends Controller
         $data = $this->contentRepository->load($vcard);
 
         // Build the asset base URL pointing to template files in storage
+        // NOTE: url() strips trailing slashes, so we append '/' explicitly after calling url()
         $assetBase = $vcard->template_path
-            ? url('storage/' . trim($vcard->template_path, '/') . '/')
+            ? url('storage/' . trim($vcard->template_path, '/')) . '/'
             : '';
 
         $templateView = 'vcards.templates.' . $vcard->template_key;
