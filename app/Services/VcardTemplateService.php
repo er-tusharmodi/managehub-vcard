@@ -94,41 +94,39 @@ class VcardTemplateService
     }
 
     /**
+     * Get actual file paths for a template's editable files.
+     * - Blade view  : resources/views/vcards/templates/{key}.blade.php
+     * - CSS         : public/vcard-assets/{key}/style.css
+     * - JS          : public/vcard-assets/{key}/script.js
+     * - JSON        : vcard-template/{key}/default.json
+     */
+    private function resolveFilePaths(string $templateKey): array
+    {
+        return [
+            'php'  => resource_path('views/vcards/templates/' . $templateKey . '.blade.php'),
+            'css'  => public_path('vcard-assets/' . $templateKey . '/style.css'),
+            'js'   => public_path('vcard-assets/' . $templateKey . '/script.js'),
+            'json' => $this->defaultJsonPath($templateKey),
+        ];
+    }
+
+    /**
      * Get all template file contents
      */
     public function getTemplateFiles(string $templateKey): array
     {
-        $path = $this->templatePath($templateKey);
-        
-        if (!$path) {
+        if (!$this->templatePath($templateKey)) {
             throw new \Exception("Template not found");
         }
 
-        $files = [
-            'php' => '',
-            'css' => '',
-            'js' => '',
-            'json' => '',
-        ];
+        $paths = $this->resolveFilePaths($templateKey);
 
-        $phpPath = $path . DIRECTORY_SEPARATOR . 'index.php';
-        if (File::exists($phpPath)) {
-            $files['php'] = File::get($phpPath);
-        }
+        $files = ['php' => '', 'css' => '', 'js' => '', 'json' => ''];
 
-        $cssPath = $path . DIRECTORY_SEPARATOR . 'style.css';
-        if (File::exists($cssPath)) {
-            $files['css'] = File::get($cssPath);
-        }
-
-        $jsPath = $path . DIRECTORY_SEPARATOR . 'script.js';
-        if (File::exists($jsPath)) {
-            $files['js'] = File::get($jsPath);
-        }
-
-        $jsonPath = $path . DIRECTORY_SEPARATOR . 'default.json';
-        if (File::exists($jsonPath)) {
-            $files['json'] = File::get($jsonPath);
+        foreach ($files as $key => $_) {
+            if ($paths[$key] && File::exists($paths[$key])) {
+                $files[$key] = File::get($paths[$key]);
+            }
         }
 
         return $files;
@@ -139,30 +137,17 @@ class VcardTemplateService
      */
     public function updateTemplateFiles(string $templateKey, array $files): bool
     {
-        $path = $this->templatePath($templateKey);
-        
-        if (!$path) {
+        if (!$this->templatePath($templateKey)) {
             throw new \Exception("Template not found");
         }
 
-        if (isset($files['php'])) {
-            $phpPath = $path . DIRECTORY_SEPARATOR . 'index.php';
-            File::put($phpPath, $files['php']);
-        }
+        $paths = $this->resolveFilePaths($templateKey);
 
-        if (isset($files['css'])) {
-            $cssPath = $path . DIRECTORY_SEPARATOR . 'style.css';
-            File::put($cssPath, $files['css']);
-        }
-
-        if (isset($files['js'])) {
-            $jsPath = $path . DIRECTORY_SEPARATOR . 'script.js';
-            File::put($jsPath, $files['js']);
-        }
-
-        if (isset($files['json'])) {
-            $jsonPath = $path . DIRECTORY_SEPARATOR . 'default.json';
-            File::put($jsonPath, $files['json']);
+        foreach (['php', 'css', 'js', 'json'] as $key) {
+            if (isset($files[$key]) && $paths[$key]) {
+                File::ensureDirectoryExists(dirname($paths[$key]));
+                File::put($paths[$key], $files[$key]);
+            }
         }
 
         return true;

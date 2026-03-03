@@ -42,7 +42,7 @@
                                 <a class="nav-link {{ $activeTab === 'php' ? 'active' : '' }}" 
                                    wire:click="switchTab('php')" 
                                    style="cursor: pointer;">
-                                    <i class="mdi mdi-language-php me-1"></i> index.php
+                                    <i class="mdi mdi-language-html5 me-1"></i> HTML (Blade)
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -72,7 +72,7 @@
                         <div class="tab-content">
                             @if($activeTab === 'php')
                             <div class="mb-3">
-                                <label class="form-label">index.php</label>
+                                <label class="form-label">{{ $templateKey }}.blade.php &nbsp;<small class="text-muted">(resources/views/vcards/templates/)</small></label>
                                 <textarea 
                                     wire:model="phpContent" 
                                     class="form-control font-monospace" 
@@ -85,7 +85,7 @@
 
                             @if($activeTab === 'css')
                             <div class="mb-3">
-                                <label class="form-label">style.css</label>
+                                <label class="form-label">style.css &nbsp;<small class="text-muted">(public/vcard-assets/{{ $templateKey }}/)</small></label>
                                 <textarea 
                                     wire:model="cssContent" 
                                     class="form-control font-monospace" 
@@ -98,7 +98,7 @@
 
                             @if($activeTab === 'js')
                             <div class="mb-3">
-                                <label class="form-label">script.js</label>
+                                <label class="form-label">script.js &nbsp;<small class="text-muted">(public/vcard-assets/{{ $templateKey }}/)</small></label>
                                 <textarea 
                                     wire:model="jsContent" 
                                     class="form-control font-monospace" 
