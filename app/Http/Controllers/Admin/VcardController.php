@@ -124,12 +124,14 @@ class VcardController extends Controller
 
         $this->publishTemplateAssets($vcard, $templates);
 
-        // Generate QR code for the vCard
-        $qrCodeService = app(QrCodeService::class);
-        $qrCodeService->generateVcardQr($vcard);
-        
-        // Update data.json with QR code URL
-        $this->updateDataJsonWithQrCode($vcard, $qrCodeService);
+        // Generate QR code for the vCard (non-fatal — missing extension won't abort creation)
+        try {
+            $qrCodeService = app(QrCodeService::class);
+            $qrCodeService->generateVcardQr($vcard);
+            $this->updateDataJsonWithQrCode($vcard, $qrCodeService);
+        } catch (\Exception $e) {
+            \Log::warning('QR code generation failed for ' . $vcard->subdomain . ': ' . $e->getMessage());
+        }
 
         $sendCredentials = (bool) ($validated['send_credentials'] ?? false);
         if ($sendCredentials) {
@@ -324,19 +326,16 @@ class VcardController extends Controller
     {
         try {
             $baseDomain = config('vcard.base_domain');
-            $loginUrl = 'https://' . $vcard->subdomain . '.' . $baseDomain . '/login';
+            $appSubdomain = config('vcard.app_subdomain', 'vcard');
+            $loginUrl = 'https://' . $appSubdomain . '.' . $baseDomain . '/login';
             $vcardUrl = 'https://' . $vcard->subdomain . '.' . $baseDomain . '/';
 
             \Log::info('Preparing to send email to: ' . $user->email);
             Mail::to($user->email)->send(new VcardCredentialsMail($user, $password, $loginUrl, $vcardUrl));
             \Log::info('Email queued/sent successfully to: ' . $user->email);
         } catch (\Exception $e) {
+            // Log but do NOT re-throw — a mail failure must not abort vcard creation
             \Log::error('Error sending credentials email: ' . $e->getMessage(), ['exception' => $e]);
-            throw $e;
-        }
-    }
-
-    public function shareVcard(Vcard $vcard)
     {
         if (!$vcard->user) {
             return response()->json(['error' => 'User not found'], 404);
