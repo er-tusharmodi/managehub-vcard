@@ -93,3 +93,36 @@ if (!function_exists('vcard_star_markup')) {
         return $html;
     }
 }
+
+if (!function_exists('js_str')) {
+    /**
+     * JSON-encode a value for safe inline JavaScript output.
+     * Used by minimart, mens-salon, restaurant-cafe, jewelry-shop, electronics-shop templates.
+     */
+    function js_str(mixed $value): string
+    {
+        return json_encode($value ?? '', JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+    }
+}
+
+if (!function_exists('format_inr')) {
+    /**
+     * Format a number in Indian Rupee style (e.g. 1,00,000).
+     * Used by jewelry-shop, electronics-shop templates.
+     */
+    function format_inr(mixed $value): string
+    {
+        $number = (string) (int) ($value ?? 0);
+        $length = strlen($number);
+
+        if ($length <= 3) {
+            return $number;
+        }
+
+        $lastThree = substr($number, -3);
+        $rest      = substr($number, 0, -3);
+        $rest      = preg_replace('/\B(?=(\d{2})+(?!\d))/', ',', $rest);
+
+        return $rest . ',' . $lastThree;
+    }
+}

@@ -220,41 +220,24 @@ class TemplateController extends Controller
     public function preview(string $templateKey)
     {
         try {
-            $templatePath = $this->templateService->templatePath($templateKey);
-            
-            if (!$templatePath) {
+            $templateView = 'vcards.templates.' . $templateKey;
+
+            if (!\Illuminate\Support\Facades\View::exists($templateView)) {
                 abort(404, 'Template not found');
             }
 
-            $indexPath = $templatePath . DIRECTORY_SEPARATOR . 'index.php';
-            
-            if (!File::exists($indexPath)) {
-                abort(404, 'Template index.php not found');
-            }
+            // Load default.json as preview data
+            $data = $this->templateService->getTemplateDefaultJson($templateKey);
 
-            // Execute template in separate PHP process to avoid function conflicts
-            $phpBinary = PHP_BINARY;
-            $command = escapeshellarg($phpBinary) . ' ' . escapeshellarg($indexPath);
-            $content = shell_exec($command);
+            // Build dummy context variables matching VcardPublicController
+            $vcard = (object) [
+                'template_key' => $templateKey,
+                'subdomain'    => 'preview',
+            ];
+            $subdomain = 'preview';
+            $assetBase = asset('vcard-assets/' . $templateKey . '/');
 
-            if (!is_string($content) || empty($content)) {
-                abort(500, 'Failed to render template');
-            }
-
-            // Inject base tag for relative asset paths
-            $baseHref = rtrim(url("template-assets/{$templateKey}"), '/') . '/';
-            $baseTag = '<base href="' . $baseHref . '">';
-            $content = preg_replace('/(<head[^>]*>)/i', '$1' . $baseTag, $content, 1, $count);
-
-            if ($count === 0) {
-                $content = $baseTag . $content;
-            }
-
-            return response($content)
-                ->header('Content-Type', 'text/html')
-                ->header('Cache-Control', 'no-cache, no-store, must-revalidate, max-age=0')
-                ->header('Pragma', 'no-cache')
-                ->header('Expires', '0');
+            $content = view($templateView, compact('data', 'vcard', 'subdomain', 'assetBase'))->render();
         } catch (\Exception $e) {
             abort(500, 'Failed to preview template: ' . $e->getMessage());
         }
