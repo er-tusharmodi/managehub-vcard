@@ -34,7 +34,7 @@ class VcardPublicController extends Controller
         $data = $this->contentRepository->load($vcard);
 
         // Asset base points to public/vcard-assets/{template_key}/
-        $assetBase = asset('vcard-assets/' . $vcard->template_key . '/');
+        $assetBase = asset('vcard-assets/' . $vcard->template_key) . '/';
 
         $templateView = 'vcards.templates.' . $vcard->template_key;
 

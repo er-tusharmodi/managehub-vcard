@@ -20,11 +20,34 @@ use App\Livewire\Admin\TemplateVisualEditor;
 use App\Http\Controllers\VcardPublicController;
 use App\Http\Controllers\VcardSubmissionController;
 
-Route::get('/', [WebsiteController::class, 'show'])->name('home');
+// App domain (vcard.managehub.in) — exact match, registered first so it wins over wildcard below
+Route::domain(config('vcard.app_subdomain', 'vcard') . '.' . config('vcard.base_domain'))
+    ->group(function () {
+        Route::get('/', [WebsiteController::class, 'show'])->name('home');
+    });
+
+// Client vCard subdomain routes — wildcard, registered AFTER exact app domain above
+Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
+    Route::get('/', [VcardPublicController::class, 'show'])->name('vcard.public');
+
+    Route::get('/inactive', [VcardPublicController::class, 'inactive'])->name('vcard.inactive.domain');
+
+    Route::post('/submit/{type}', [VcardSubmissionController::class, 'submit'])
+        ->where('type', 'order|booking|enquiry|contact')
+        ->middleware('throttle:20,1')
+        ->name('vcard.submit');
+
+    Route::middleware(['auth', 'subscription.active'])->group(function () {
+        Route::get('/vcard/edit/{section?}', ClientSectionEditor::class)->name('vcard.editor.section');
+    });
+});
 
 Route::get('/subscription-inactive', function () {
     return view('subscription-inactive');
 })->name('subscription.inactive');
+
+// Fallback for local dev where domain routes don't apply (production uses the domain group above)
+Route::get('/', [WebsiteController::class, 'show']);
 
 Route::middleware('guest')->group(function () {
     Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])
@@ -150,19 +173,6 @@ Route::middleware(['auth', 'subscription.active'])->group(function () {
         ->name('vcard.editor');
 });
 
-Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
-    Route::get('/', [VcardPublicController::class, 'show'])->name('vcard.public');
-
-    Route::get('/inactive', [VcardPublicController::class, 'inactive'])->name('vcard.inactive.domain');
-
-    Route::post('/submit/{type}', [VcardSubmissionController::class, 'submit'])
-        ->where('type', 'order|booking|enquiry|contact')
-        ->middleware('throttle:20,1')
-        ->name('vcard.submit');
-
-    Route::middleware(['auth', 'subscription.active'])->group(function () {
-        Route::get('/vcard/edit/{section?}', ClientSectionEditor::class)->name('vcard.editor.section');
-    });
-});
+// Domain routes moved to top of file — see above
 
 
