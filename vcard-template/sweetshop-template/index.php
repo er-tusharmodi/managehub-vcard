@@ -1,62 +1,60 @@
 <?php
-// Load from default.json (template defaults)
-$dataPath = __DIR__ . "/default.json";
-$data = [];
-
-if (is_readable($dataPath)) {
-    $json = file_get_contents($dataPath);
-    $decoded = json_decode($json, true);
-    if (is_array($decoded)) {
-        $data = $decoded;
+// Load from default.json only if $data not already injected via Blade controller (database)
+if (!isset($data) || !is_array($data)) {
+    $dataPath = __DIR__ . "/default.json";
+    $data = [];
+    if (is_readable($dataPath)) {
+        $json = file_get_contents($dataPath);
+        $decoded = json_decode($json, true);
+        if (is_array($decoded)) {
+            $data = $decoded;
+        }
     }
 }
 
-function h($value)
-{
-    return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+if (!function_exists('h')) {
+    function h($value)
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+    }
 }
 
-function data_get($array, $path, $default = "")
-{
-    if (!is_array($array)) {
-        return $default;
-    }
-
-    $current = $array;
-    foreach (explode(".", $path) as $segment) {
-        if (!is_array($current) || !array_key_exists($segment, $current)) {
+if (!function_exists('data_get')) {
+    function data_get($array, $path, $default = "")
+    {
+        if (!is_array($array)) {
             return $default;
         }
-        $current = $current[$segment];
+        $current = $array;
+        foreach (explode(".", $path) as $segment) {
+            if (!is_array($current) || !array_key_exists($segment, $current)) {
+                return $default;
+            }
+            $current = $current[$segment];
+        }
+        return $current ?? $default;
     }
-
-    return $current ?? $default;
 }
 
-function text_with_breaks($value)
-{
-    $value = (string) $value;
-    $value = preg_replace('/<br\s*\/?>(\r\n|\r|\n)?/i', "\n", $value);
-    return nl2br(h($value), false);
+if (!function_exists('text_with_breaks')) {
+    function text_with_breaks($value)
+    {
+        $value = (string) $value;
+        $value = preg_replace('/<br\s*\/?>(\r\n|\r|\n)?/i', "\n", $value);
+        return nl2br(h($value), false);
+    }
 }
 
-function isSectionEnabled($data, $section)
-{
-    // If _sections_config doesn't exist, all sections are enabled by default
-    if (!isset($data['_sections_config'])) {
-        return true;
+if (!function_exists('isSectionEnabled')) {
+    function isSectionEnabled($data, $section)
+    {
+        if (!isset($data['_sections_config'])) return true;
+        if (!isset($data['_sections_config'][$section])) return true;
+        return $data['_sections_config'][$section]['enabled'] ?? true;
     }
-    
-    // If the specific section config doesn't exist, enable by default
-    if (!isset($data['_sections_config'][$section])) {
-        return true;
-    }
-    
-    // Return the enabled status
-    return $data['_sections_config'][$section]['enabled'] ?? true;
 }
 
-require_once __DIR__ . "/icons.php";
+if (!function_exists('getIcon')) { require_once __DIR__ . "/icons.php"; }
 
 $assets = $data["assets"] ?? [];
 $fallbackImage = $assets["fallbackImage"] ?? "";

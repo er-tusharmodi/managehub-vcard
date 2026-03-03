@@ -2,53 +2,57 @@
 
 declare(strict_types=1);
 
-function e(mixed $value): string
-{
-    return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+if (!function_exists('e')) {
+    function e(mixed $value): string
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
 }
 
-function v(array $data, string $path, mixed $default = ''): mixed
-{
-    $segments = explode('.', $path);
-    $current = $data;
-
-    foreach ($segments as $segment) {
-        if (!is_array($current) || !array_key_exists($segment, $current)) {
-            return $default;
+if (!function_exists('v')) {
+    function v(array $data, string $path, mixed $default = ''): mixed
+    {
+        $segments = explode('.', $path);
+        $current = $data;
+        foreach ($segments as $segment) {
+            if (!is_array($current) || !array_key_exists($segment, $current)) {
+                return $default;
+            }
+            $current = $current[$segment];
         }
-        $current = $current[$segment];
+        return $current;
     }
-
-    return $current;
 }
 
-function a(array $data, string $path): array
-{
-    $value = v($data, $path, []);
-    return is_array($value) ? $value : [];
+if (!function_exists('a')) {
+    function a(array $data, string $path): array
+    {
+        $value = v($data, $path, []);
+        return is_array($value) ? $value : [];
+    }
 }
 
-$jsonPath = __DIR__ . '/default.json';
-
-try {
-    if (!is_file($jsonPath)) {
-        throw new RuntimeException('default.json file not found.');
+// Load from default.json only if $data not already injected via Blade controller (database)
+if (!isset($data) || !is_array($data)) {
+    $jsonPath = __DIR__ . '/default.json';
+    try {
+        if (!is_file($jsonPath)) {
+            throw new RuntimeException('default.json file not found.');
+        }
+        $jsonRaw = file_get_contents($jsonPath);
+        if ($jsonRaw === false) {
+            throw new RuntimeException('Unable to read default.json file.');
+        }
+        $data = json_decode($jsonRaw, true, 512, JSON_THROW_ON_ERROR);
+        if (!is_array($data)) {
+            throw new RuntimeException('default.json must decode to an object.');
+        }
+    } catch (Throwable $exception) {
+        http_response_code(500);
+        header('Content-Type: text/plain; charset=UTF-8');
+        echo 'Configuration error: ' . $exception->getMessage();
+        exit;
     }
-
-    $jsonRaw = file_get_contents($jsonPath);
-    if ($jsonRaw === false) {
-        throw new RuntimeException('Unable to read default.json file.');
-    }
-
-    $data = json_decode($jsonRaw, true, 512, JSON_THROW_ON_ERROR);
-    if (!is_array($data)) {
-        throw new RuntimeException('default.json must decode to an object.');
-    }
-} catch (Throwable $exception) {
-    http_response_code(500);
-    header('Content-Type: text/plain; charset=UTF-8');
-    echo 'Configuration error: ' . $exception->getMessage();
-    exit;
 }
 
 $shop = is_array($data['shop'] ?? null) ? $data['shop'] : [];

@@ -111,8 +111,6 @@ Route::get('/template-assets/{templateKey}/{path}', [App\Http\Controllers\Admin\
     ->where('path', '.*')
     ->name('templates.asset');
 
-require __DIR__ . '/auth.php';
-
 // Client Dashboard - Authenticated users
 Route::middleware(['auth', 'verified', 'subscription.active'])->group(function () {
     Route::get('/dashboard', [ClientDashboardController::class, 'index'])->name('dashboard');
@@ -167,12 +165,4 @@ Route::domain('{subdomain}.' . config('vcard.base_domain'))->group(function () {
     });
 });
 
-// Route for the homepage
-Route::domain('vcard.managehub.in')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('homepage');
-});
 
-// Route for client-specific vCards
-Route::domain('{client}.managehub.in')->group(function () {
-    Route::get('/', [VCardController::class, 'show'])->name('client.vcard');
-});

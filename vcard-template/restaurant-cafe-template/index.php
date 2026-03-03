@@ -1,69 +1,73 @@
 <?php
 declare(strict_types=1);
 
-// Load from default.json (template defaults)
-$dataPath = __DIR__ . "/default.json";
-$rawData = @file_get_contents($dataPath);
-$data = $rawData ? json_decode($rawData, true) : [];
-
-if (!is_array($data)) {
-    $data = [];
+// Load from default.json only if $data not already injected via Blade controller (database)
+if (!isset($data) || !is_array($data)) {
+    $dataPath = __DIR__ . "/default.json";
+    $rawData = @file_get_contents($dataPath);
+    $data = $rawData ? json_decode($rawData, true) : [];
+    if (!is_array($data)) { $data = []; }
 }
 
-require_once __DIR__ . "/icons.php";
+if (!function_exists('getIcon')) { require_once __DIR__ . "/icons.php"; }
 
-function e($value): string
-{
-    return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+if (!function_exists('e')) {
+    function e($value): string
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+    }
 }
 
-function data_get(array $data, string $path, $default = "")
-{
-    $segments = explode(".", $path);
-    $value = $data;
-
-    foreach ($segments as $segment) {
-        if (!is_array($value) || !array_key_exists($segment, $value)) {
-            return $default;
+if (!function_exists('data_get')) {
+    function data_get(array $data, string $path, $default = "")
+    {
+        $segments = explode(".", $path);
+        $value = $data;
+        foreach ($segments as $segment) {
+            if (!is_array($value) || !array_key_exists($segment, $value)) {
+                return $default;
+            }
+            $value = $value[$segment];
         }
-        $value = $value[$segment];
+        return $value;
     }
-
-    return $value;
 }
 
-function data_list(array $data, string $path): array
-{
-    $value = data_get($data, $path, []);
-    return is_array($value) ? $value : [];
+if (!function_exists('data_list')) {
+    function data_list(array $data, string $path): array
+    {
+        $value = data_get($data, $path, []);
+        return is_array($value) ? $value : [];
+    }
 }
 
-function js_str($value): string
-{
-    return json_encode($value ?? "", JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+if (!function_exists('js_str')) {
+    function js_str($value): string
+    {
+        return json_encode($value ?? "", JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+    }
 }
 
-function star_markup(int $filled): string
-{
-    $stars = [];
-    for ($i = 0; $i < 5; $i++) {
-        $on = $i < $filled;
-        $fill = $on ? "#f4c430" : "#e0e0e0";
-        $stars[] = '<svg class="star" viewBox="0 0 24 24" fill="' . $fill . '" stroke="' . $fill . '" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+if (!function_exists('star_markup')) {
+    function star_markup(int $filled): string
+    {
+        $stars = [];
+        for ($i = 0; $i < 5; $i++) {
+            $on = $i < $filled;
+            $fill = $on ? "#f4c430" : "#e0e0e0";
+            $stars[] = '<svg class="star" viewBox="0 0 24 24" fill="' . $fill . '" stroke="' . $fill . '" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+        }
+        return implode("", $stars);
     }
-
-    return implode("", $stars);
 }
 
-function isSectionEnabled($data, $section)
-{
-    if (!isset($data['_sections_config'])) {
-        return true;
+if (!function_exists('isSectionEnabled')) {
+    function isSectionEnabled($data, $section)
+    {
+        if (!isset($data['_sections_config'])) return true;
+        if (!isset($data['_sections_config'][$section])) return true;
+        return $data['_sections_config'][$section]['enabled'] ?? true;
     }
-    if (!isset($data['_sections_config'][$section])) {
-        return true;
-    }
-    return $data['_sections_config'][$section]['enabled'] ?? true;
 }
 
 $bannerImage = data_get($data, "assets.bannerImage", "");

@@ -1,62 +1,64 @@
 <?php
 declare(strict_types=1);
 
-// Load from default.json (template defaults)
-$dataPath = __DIR__ . "/default.json";
-$rawData = @file_get_contents($dataPath);
-$data = $rawData ? json_decode($rawData, true) : [];
-
-if (!is_array($data)) {
-    $data = [];
+// Load from default.json only if $data not already injected via Blade controller (database)
+if (!isset($data) || !is_array($data)) {
+    $dataPath = __DIR__ . "/default.json";
+    $rawData = @file_get_contents($dataPath);
+    $data = $rawData ? json_decode($rawData, true) : [];
+    if (!is_array($data)) { $data = []; }
 }
 
-require_once __DIR__ . "/icons.php";
+if (!function_exists('getIcon')) { require_once __DIR__ . "/icons.php"; }
 
-function e($value): string
-{
-    return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+if (!function_exists('e')) {
+    function e($value): string
+    {
+        return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+    }
 }
 
-function data_get(array $data, string $path, $default = "")
-{
-    $segments = explode(".", $path);
-    $value = $data;
-
-    foreach ($segments as $segment) {
-        if (!is_array($value) || !array_key_exists($segment, $value)) {
-            return $default;
+if (!function_exists('data_get')) {
+    function data_get(array $data, string $path, $default = "")
+    {
+        $segments = explode(".", $path);
+        $value = $data;
+        foreach ($segments as $segment) {
+            if (!is_array($value) || !array_key_exists($segment, $value)) {
+                return $default;
+            }
+            $value = $value[$segment];
         }
-        $value = $value[$segment];
+        return $value;
     }
-
-    return $value;
 }
 
-function data_list(array $data, string $path): array
-{
-    $value = data_get($data, $path, []);
-    return is_array($value) ? $value : [];
-}
-
-function js_str($value): string
-{
-    return json_encode($value ?? "", JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
-}
-
-function format_inr($value): string
-{
-    $number = (string) (int) ($value ?? 0);
-    $length = strlen($number);
-
-    if ($length <= 3) {
-        return $number;
+if (!function_exists('data_list')) {
+    function data_list(array $data, string $path): array
+    {
+        $value = data_get($data, $path, []);
+        return is_array($value) ? $value : [];
     }
+}
 
-    $lastThree = substr($number, -3);
-    $rest = substr($number, 0, -3);
-    $rest = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $rest);
+if (!function_exists('js_str')) {
+    function js_str($value): string
+    {
+        return json_encode($value ?? "", JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP);
+    }
+}
 
-    return $rest . "," . $lastThree;
+if (!function_exists('format_inr')) {
+    function format_inr($value): string
+    {
+        $number = (string) (int) ($value ?? 0);
+        $length = strlen($number);
+        if ($length <= 3) return $number;
+        $lastThree = substr($number, -3);
+        $rest = substr($number, 0, -3);
+        $rest = preg_replace("/\B(?=(\d{2})+(?!\d))/", ",", $rest);
+        return $rest . "," . $lastThree;
+    }
 }
 
 function isSectionEnabled($data, $section)

@@ -280,6 +280,9 @@ class VcardController extends Controller
             'template_path' => $basePath,
             'data_path' => $storageRoot . '/' . $vcard->subdomain . '/data.json',
         ]);
+
+        // Seed vCard content into MongoDB via repository so Blade templates read from DB
+        app(\App\Repositories\Contracts\VcardContentRepository::class)->save($vcard, $defaultData);
     }
 
     private function loadJson(Vcard $vcard): array
