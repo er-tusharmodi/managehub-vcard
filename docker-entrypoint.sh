@@ -45,7 +45,11 @@ echo "🔗 Setting up storage symlink..."
 rm -rf public/storage 2>/dev/null || true
 php artisan storage:link --force || true
 
-# 6. Fix Supervisor Config
+# 6. Sync templates from filesystem to MongoDB
+echo "📋 Syncing templates..."
+php artisan templates:sync || true
+
+# 7. Fix Supervisor Config
 echo "⚙️ Configuring supervisor..."
 cat > /etc/supervisord.conf <<'SUPERVISOR_EOF'
 [supervisord]
@@ -99,6 +103,6 @@ stderr_logfile_maxbytes=0
 SUPERVISOR_EOF
 
 
-# 7. Start Supervisord
+# 8. Start Supervisord
 echo "🏁 Starting supervisord..."
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
