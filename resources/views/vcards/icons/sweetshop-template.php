@@ -1,4 +1,5 @@
 <?php
+if (!function_exists('get_icon')) {
 function get_icon($name, $class = "", $stroke = "currentColor")
 {
     $icons = [
@@ -59,4 +60,12 @@ function get_icon($name, $class = "", $stroke = "currentColor")
     }
 
     return $svg;
+}
+
+}
+
+if (!function_exists("getIcon")) {
+    function getIcon($name, $class = "", $stroke = "currentColor") {
+        return get_icon($name, $class, $stroke);
+    }
 }

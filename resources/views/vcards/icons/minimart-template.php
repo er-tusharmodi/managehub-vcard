@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function getIcon(string $name): string
+if (!function_exists("getIcon")) { function getIcon(string $name): string
 {
     $icons = [
         "banner_grocery" => '<svg width="30" height="30" viewBox="0 0 24 24"><path d="M3 2h1l1 9H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2h-.5L20 2h1"/><path d="M7 17v4M17 17v4"/></svg>',
@@ -46,4 +46,4 @@ function getIcon(string $name): string
     ];
 
     return $icons[$name] ?? "";
-}
+}}

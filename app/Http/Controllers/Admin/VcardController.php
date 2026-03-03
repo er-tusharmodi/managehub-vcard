@@ -251,34 +251,24 @@ class VcardController extends Controller
 
     private function publishTemplateAssets(Vcard $vcard, VcardTemplateService $templates): void
     {
-        $templatePath = $templates->templatePath($vcard->template_key);
-        if (!$templatePath) {
+        $defaultData = $templates->loadDefaultJson($vcard->template_key);
+
+        if (empty($defaultData)) {
             return;
         }
 
-        $storageRoot = config('vcard.storage_root');
-        $basePath = $storageRoot . '/' . $vcard->subdomain . '/template';
-
-        Storage::disk('public')->deleteDirectory($basePath);
-        Storage::disk('public')->makeDirectory($basePath);
-
-        $targetPath = Storage::disk('public')->path($basePath);
-        \Illuminate\Support\Facades\File::copyDirectory($templatePath, $targetPath);
-
-        $defaultData = $templates->loadDefaultJson($vcard->template_key);
-        
         // Set the vCard's public URL in the data
         $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
         $this->setWebsiteUrl($defaultData, $vcardUrl);
-        
+
         $dataJson = json_encode($defaultData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-        Storage::disk('public')->put($basePath . '/default.json', $dataJson);
-        Storage::disk('public')->put($storageRoot . '/' . $vcard->subdomain . '/data.json', $dataJson);
+        $storageRoot = config('vcard.storage_root');
+        $dataPath = $storageRoot . '/' . $vcard->subdomain . '/data.json';
+        Storage::disk('public')->put($dataPath, $dataJson);
 
         $vcard->update([
-            'template_path' => $basePath,
-            'data_path' => $storageRoot . '/' . $vcard->subdomain . '/data.json',
+            'data_path' => $dataPath,
         ]);
 
         // Seed vCard content into MongoDB via repository so Blade templates read from DB

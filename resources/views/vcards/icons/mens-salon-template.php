@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function getIcon(string $name): string
+if (!function_exists("getIcon")) { function getIcon(string $name): string
 {
     $icons = [
         "service_scissor" => '<path d="M6 2v6M6 22v-6M6 8c2 0 4 2 4 4s-2 4-4 4M18 2v6M18 22v-6M18 8c-2 0-4 2-4 4s2 4 4 4"/>',
@@ -31,4 +31,4 @@ function getIcon(string $name): string
     ];
 
     return $icons[$name] ?? "";
-}
+}}

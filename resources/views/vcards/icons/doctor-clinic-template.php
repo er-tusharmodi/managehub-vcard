@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function getIcon(string $name): string
+if (!function_exists("getIcon")) { function getIcon(string $name): string
 {
     $icons = [
         "chip_pulse" => '<svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>',
@@ -43,4 +43,4 @@ function getIcon(string $name): string
     ];
 
     return $icons[$name] ?? "";
-}
+}}

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-function getIcon(string $name): string
+if (!function_exists("getIcon")) { function getIcon(string $name): string
 {
     $icons = [
         "service_star" => '<path d="M12 2l2.4 4.8L20 8l-4 3.9L17 18l-5-2.6L7 18l1-6.1L4 8l5.6-1.2z"/>',
@@ -41,4 +41,4 @@ function getIcon(string $name): string
     ];
 
     return $icons[$name] ?? "";
-}
+}}
