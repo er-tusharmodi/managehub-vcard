@@ -47,9 +47,10 @@ class SyncTemplates extends Command
         foreach ($directories as $dir) {
             $templateKey = basename($dir);
             
-            // Skip if not a directory or doesn't have index.php
-            if (!File::exists($dir . '/index.php')) {
-                $this->warn("⚠️  Skipping {$templateKey}: No index.php found");
+            // Skip if no corresponding Blade view exists
+            $bladeView = resource_path('views/vcards/templates/' . $templateKey . '.blade.php');
+            if (!File::exists($bladeView)) {
+                $this->warn("⚠️  Skipping {$templateKey}: No Blade view found");
                 $skippedCount++;
                 continue;
             }
@@ -109,7 +110,7 @@ class SyncTemplates extends Command
                 ['Total templates in filesystem', count($directories)],
                 ['New templates added', $syncedCount],
                 ['Existing templates', count($directories) - $syncedCount - $skippedCount],
-                ['Skipped (no index.php)', $skippedCount],
+                ['Skipped (no Blade view)', $skippedCount],
                 ['Total in database', Template::count()],
                 ['Visible on home page', Template::visible()->count()],
             ]

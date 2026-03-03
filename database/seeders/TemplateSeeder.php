@@ -27,9 +27,10 @@ class TemplateSeeder extends Seeder
         foreach ($directories as $dir) {
             $templateKey = basename($dir);
             
-            // Skip if not a directory or doesn't have index.php
-            if (!File::exists($dir . '/index.php')) {
-                $this->command->warn("Skipping {$templateKey}: No index.php found");
+            // Skip if no corresponding Blade view exists
+            $bladeView = resource_path('views/vcards/templates/' . $templateKey . '.blade.php');
+            if (!File::exists($bladeView)) {
+                $this->command->warn("Skipping {$templateKey}: No Blade view found");
                 continue;
             }
 
