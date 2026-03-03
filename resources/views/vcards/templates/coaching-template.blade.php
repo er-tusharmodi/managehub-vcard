@@ -136,7 +136,7 @@
 
       <div class="profile-stats">
         @foreach(a($data, 'stats') as $index => $stat)
-          @continueIf(!is_array($stat))
+          @continue(!is_array($stat))
           <div class="pstat">
             <div class="pstat-num" id="{{ $stat['id'] ?? '' }}">{{ $stat['static'] ?? '0' }}</div>
             <div class="pstat-lbl">{{ $stat['label'] ?? '' }}</div>
@@ -180,7 +180,7 @@
     ══════════════════════════════════════════════════ -->
     <div class="trust-strip">
       @foreach(a($data, 'trust.items') as $item)
-        @continueIf(!is_array($item))
+        @continue(!is_array($item))
         <div class="trust-item"><i class="bi {{ $item['iconClass'] ?? '' }}"></i>{{ $item['text'] ?? '' }}</div>
       @endforeach
     </div>
@@ -210,7 +210,7 @@
         </div>
         <div class="chip-row" style="margin-top:.88rem;">
           @foreach(a($data, 'director.badges') as $badge)
-            @continueIf(!is_array($badge))
+            @continue(!is_array($badge))
             <span class="chip {{ $badge['class'] ?? '' }}"><i class="bi {{ $badge['iconClass'] ?? '' }}"></i>{{ $badge['label'] ?? '' }}</span>
           @endforeach
         </div>
@@ -230,7 +230,7 @@
       <div class="sec-body">
         <div class="why-grid">
           @foreach(a($data, 'whyChoose.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             <div class="why-card">
               <div class="why-icon" style="background:{{ $item['gradient'] ?? '' }};">
                 <i class="bi {{ $item['iconClass'] ?? '' }}" style="color:#fff;"></i>
@@ -257,7 +257,7 @@
       <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
         <div class="hscroll">
           @foreach(a($data, 'courses.items') as $course)
-            @continueIf(!is_array($course))
+            @continue(!is_array($course))
             <div class="course-card" onclick="enquireWA('{{ $course['enquiryText'] ?? '' }}')">
               <div class="course-banner" style="background:{{ $course['bannerGradient'] ?? '' }};">
                 @if(!empty($course['imageUrl']))
@@ -299,7 +299,7 @@
       <div class="sec-body">
         <div class="batch-list">
           @foreach(a($data, 'batches.items') as $batch)
-            @continueIf(!is_array($batch))
+            @continue(!is_array($batch))
             <div class="batch-item {{ $batch['status'] ?? '' }}">
               <div class="batch-top">
                 <div>
@@ -353,7 +353,7 @@
           </div>
           <div class="demo-slots" id="demoSlotGrid">
             @foreach(a($data, 'demo.slots') as $slot)
-              @continueIf(!is_array($slot))
+              @continue(!is_array($slot))
               <div class="demo-slot{{ !empty($slot['selected']) ? ' selected' : '' }}" onclick="selectDemo(this)" data-slot="{{ $slot['slot'] ?? '' }}">
                 <div class="demo-slot-check"><i class="bi bi-check2"></i></div>
                 <div class="demo-slot-day">{{ $slot['day'] ?? '' }}</div>
@@ -418,7 +418,7 @@
       <div class="sec-body">
         <div class="fees-list">
           @foreach(a($data, 'fees.items') as $fee)
-            @continueIf(!is_array($fee))
+            @continue(!is_array($fee))
             <div class="fee-item">
               <div class="fee-left">
                 <div class="fee-icon" style="background:{{ $fee['bg'] ?? '' }};color:{{ $fee['color'] ?? '' }};"><i class="bi {{ $fee['iconClass'] ?? '' }}"></i></div>
@@ -454,7 +454,7 @@
       <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
         <div class="hscroll">
           @foreach(a($data, 'faculty.items') as $faculty)
-            @continueIf(!is_array($faculty))
+            @continue(!is_array($faculty))
             <div class="faculty-card">
               <div class="faculty-avatar" style="background:{{ $faculty['gradient'] ?? '' }};">
                 @if(!empty($faculty['imageUrl']))
@@ -486,7 +486,7 @@
       <div class="sec-body">
         <div class="material-list">
           @foreach(a($data, 'materials.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             <div class="material-item" onclick="enquireWA('{{ $item['enquiryText'] ?? '' }}')">
               <div class="mat-icon" style="background:{{ $item['bg'] ?? '' }};"><i class="bi {{ $item['iconClass'] ?? '' }}" style="color:{{ $item['iconColor'] ?? '' }};"></i></div>
               <div><div class="mat-name">{{ $item['name'] ?? '' }}</div><div class="mat-detail">{{ $item['detail'] ?? '' }}</div></div>
@@ -510,7 +510,7 @@
       <div class="sec-body">
         <div class="mode-grid">
           @foreach(a($data, 'modes.items') as $mode)
-            @continueIf(!is_array($mode))
+            @continue(!is_array($mode))
             <div class="mode-card">
               <div class="mode-icon" style="background:{{ $mode['gradient'] ?? '' }};"><i class="bi {{ $mode['iconClass'] ?? '' }}" style="color:#fff;"></i></div>
               <div class="mode-name">{{ $mode['name'] ?? '' }}</div>
@@ -534,7 +534,7 @@
       <div class="sec-body">
         <div class="faq-list">
           @foreach(a($data, 'faq.items') as $faq)
-            @continueIf(!is_array($faq))
+            @continue(!is_array($faq))
             <div class="faq-item{{ !empty($faq['open']) ? ' open' : '' }}">
               <div class="faq-q" onclick="toggleFaq(this)">
                 {{ $faq['question'] ?? '' }}
@@ -560,7 +560,7 @@
       <div class="sec-body">
         <div class="social-list">
           @foreach(a($data, 'social.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             @php
               $action = (string) ($item['action'] ?? '');
               $url = (string) ($item['url'] ?? '');
@@ -623,7 +623,7 @@
       <div class="sec-body">
         <div class="payment-list">
           @foreach(a($data, 'payment.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             <div class="pay-item">
               <div class="pay-icon"><i class="bi {{ $item['iconClass'] ?? '' }}"></i></div>
               <div><div class="pay-name">{{ $item['name'] ?? '' }}</div><div class="pay-detail">{{ $item['detail'] ?? '' }}</div></div>
@@ -672,7 +672,7 @@
       <span style="font-size:.65rem;color:#aaa;">{{ v($data, 'footer.line3') }}</span>
       <div class="footer-links">
         @foreach(a($data, 'footer.links') as $link)
-          @continueIf(!is_array($link))
+          @continue(!is_array($link))
           <span onclick="enquireWA('{{ $link['enquiryText'] ?? '' }}')">{{ $link['label'] ?? '' }}</span>
         @endforeach
       </div>

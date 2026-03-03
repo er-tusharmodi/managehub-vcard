@@ -151,7 +151,7 @@
       <div class="sec-body">
         <div class="cat-scroll">
           @foreach(a($data, 'sections.categories.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             <div class="cat-chip{{ !empty($item['active']) ? ' active' : '' }}">{{ $item['label'] ?? '' }}</div>
           @endforeach
         </div>
@@ -191,7 +191,7 @@
       <div class="sec-body">
         <div class="social-list">
           @foreach(a($data, 'sections.social.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             @php
                 $action = (string) ($item['action'] ?? '');
                 $iconKey = (string) ($item['icon'] ?? '');
@@ -222,7 +222,7 @@
       <div class="sec-body">
         <div class="services-grid">
           @foreach(a($data, 'sections.services.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             <div class="svc-card">
               <div class="svc-img">
                 <div class="svc-img-placeholder" style="background:url('{{ $item['image'] ?? '' }}') center/cover no-repeat"></div>
@@ -247,7 +247,7 @@
       <div class="sec-body">
         <div class="products-grid" id="productsGrid">
           @foreach ($products as $product)
-            @continueIf(!is_array($product))
+            @continue(!is_array($product))
             @php
                 $productId = (int) ($product['id'] ?? 0);
                 $hasTag = (string) ($product['tag'] ?? '') !== '';
@@ -314,7 +314,7 @@
         <table class="hours-table">
           <tbody>
             @foreach(a($data, 'sections.hours.rows') as $item)
-              @continueIf(!is_array($item))
+              @continue(!is_array($item))
               @php
                 $openRow = !empty($item['open']) ? ' open-row' : '';
                 $closedClass = !empty($item['closed']) ? ' closed' : '';
@@ -368,7 +368,7 @@
       <div class="sec-body">
         <div class="payment-list">
           @foreach (a($data, 'sections.payments.items') as $item)
-            @continueIf(!is_array($item))
+            @continue(!is_array($item))
             @php $type = (string) ($item['type'] ?? ''); @endphp
             <div class="pay-item">
               <div class="pay-icon-wrap"><span class="pay-icon">{{ $paymentIcons[$type] ?? '' }}</span></div>
