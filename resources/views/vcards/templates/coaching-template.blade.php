@@ -741,6 +741,7 @@
 
     <script>
       window.__ACTION_DATA__ = {!! $actionDataJson !!};
+      window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
     </script>
     <script src="{{ $assetBase }}script.js"></script>
   </body>

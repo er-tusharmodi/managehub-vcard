@@ -364,14 +364,7 @@ class ClientSectionEditor extends Component
 
     private function ruleStringForField(string $fieldKey): string
     {
-        // Image, price/amount, system-managed, and known optional fields are nullable
-        if ($this->isImageKey($fieldKey)
-            || $this->isNumericKey($fieldKey)
-            || $this->isSystemManagedKey($fieldKey)
-            || $this->isOptionalTextKey($fieldKey)) {
-            return 'nullable';
-        }
-        return 'required';
+        return 'nullable';
     }
 
     private function isSystemManagedKey(string $key): bool
@@ -382,7 +375,7 @@ class ClientSectionEditor extends Component
 
     private function isOptionalTextKey(string $key): bool
     {
-        return preg_match('/(alt|subtitle|sub|note|description|desc|bio|tagline)$/i', $key) === 1;
+        return preg_match('/(alt|subtitle|sub|note|description|desc|bio|tagline|color|tone|tag|badge|icon|class|gradient|stroke|suffix|prefix|initials|label|query|exp|stars|rating|count|per|old|save|dur|key|tc|veg|today|open|closed|rowClass|action|url|type|detail|slot|enabled|active|spec|brand|status)$/i', $key) === 1;
     }
 
     private function isImageKey(string $key): bool
@@ -509,6 +502,7 @@ class ClientSectionEditor extends Component
         $this->section  = $section;
         $this->uploads  = [];
         $this->newItem  = [];
+        $this->dispatch('section-changed', section: $section);
 
         $data = $this->loadJson();
         $sectionData = $data[$section] ?? [];

@@ -3,6 +3,38 @@ const tpl = (template, values = {}) =>
     (template || "").replace(/\{\{(\w+)\}\}/g, (_, key) => values[key] ?? "");
 const sq = (value = "") =>
     String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+
+const getSubmissionUrl = (type) => {
+    if (window.__VCARD_SUBDOMAIN__)
+        return `/vcard/${window.__VCARD_SUBDOMAIN__}/submit/${type}`;
+    const hostParts = window.location.hostname.split(".");
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    if (hostParts.length > 2) return `/submit/${type}`;
+    if (pathParts.length > 0) {
+        if (pathParts[0] === "vcard" && pathParts.length > 1)
+            return `/vcard/${pathParts[1]}/submit/${type}`;
+        return `/vcard/${pathParts[0]}/submit/${type}`;
+    }
+    return `/submit/${type}`;
+};
+
+const sendSubmission = (type, payload) => {
+    const csrf =
+        document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute("content") || "";
+    return fetch(getSubmissionUrl(type), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            ...(csrf && { "X-CSRF-TOKEN": csrf }),
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((r) => r.json())
+        .catch(() => ({ success: false }));
+};
 const pick = (path, fallback = "") =>
     path.split(".").reduce((acc, key) => acc?.[key], APP) ?? fallback;
 
@@ -487,6 +519,21 @@ function bookAppointment() {
         visitType,
         slot: selectedSlot || APP.appointment?.defaultSlot || "",
         complaint,
+    });
+
+    sendSubmission("booking", {
+        source_template: "doctor-clinic-template",
+        name,
+        phone,
+        items: [
+            {
+                label: "Slot",
+                value: selectedSlot || APP.appointment?.defaultSlot || "",
+            },
+            { label: "Visit Type", value: visitType },
+            { label: "Age", value: age },
+            { label: "Complaint", value: complaint },
+        ],
     });
 
     window.open(

@@ -84,6 +84,7 @@
 
     <!-- Submissions Statistics Row -->
     @if(!empty($activeSubmissionTypes))
+        @php $firstVcard = $vcards->first(); @endphp
         <div class="row g-3 mb-4">
             <div class="col-12">
                 <h5 class="mb-3 fw-semibold">
@@ -95,7 +96,7 @@
             <!-- Orders Card -->
             <div class="col-md-6 col-xl-3">
                 <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #ef4444;">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <p class="text-muted small mb-1">Orders</p>
@@ -107,9 +108,14 @@
                             <span class="badge bg-light text-dark">Today: {{ $submissionStats['orders']['today'] }}</span>
                             <span class="badge bg-light text-dark">Week: {{ $submissionStats['orders']['week'] }}</span>
                         </div>
-                        <div class="text-success fw-semibold">
+                        <div class="text-success fw-semibold mb-3">
                             Revenue: ₹{{ number_format($submissionStats['orders']['revenue'], 2) }}
                         </div>
+                        @if($firstVcard)
+                            <a href="{{ route('client.leads', $firstVcard->subdomain) }}?tab=order" class="btn btn-sm btn-outline-danger mt-auto align-self-start">
+                                View All <i class="mdi mdi-arrow-right"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -119,7 +125,7 @@
             <!-- Bookings Card -->
             <div class="col-md-6 col-xl-3">
                 <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #3b82f6;">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <p class="text-muted small mb-1">Bookings</p>
@@ -127,10 +133,15 @@
                             </div>
                             <i class="mdi mdi-calendar-check" style="font-size: 32px; color: #3b82f6; opacity: 0.2;"></i>
                         </div>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 mb-3">
                             <span class="badge bg-light text-dark">Today: {{ $submissionStats['bookings']['today'] }}</span>
                             <span class="badge bg-light text-dark">Week: {{ $submissionStats['bookings']['week'] }}</span>
                         </div>
+                        @if($firstVcard)
+                            <a href="{{ route('client.leads', $firstVcard->subdomain) }}?tab=booking" class="btn btn-sm btn-outline-primary mt-auto align-self-start">
+                                View All <i class="mdi mdi-arrow-right"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -140,7 +151,7 @@
             <!-- Enquiries Card -->
             <div class="col-md-6 col-xl-3">
                 <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #f59e0b;">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <p class="text-muted small mb-1">Enquiries</p>
@@ -148,10 +159,15 @@
                             </div>
                             <i class="mdi mdi-help-circle" style="font-size: 32px; color: #f59e0b; opacity: 0.2;"></i>
                         </div>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 mb-3">
                             <span class="badge bg-light text-dark">Today: {{ $submissionStats['enquiries']['today'] }}</span>
                             <span class="badge bg-light text-dark">Week: {{ $submissionStats['enquiries']['week'] }}</span>
                         </div>
+                        @if($firstVcard)
+                            <a href="{{ route('client.leads', $firstVcard->subdomain) }}?tab=enquiry" class="btn btn-sm btn-outline-warning mt-auto align-self-start">
+                                View All <i class="mdi mdi-arrow-right"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -161,7 +177,7 @@
             <!-- Messages Card -->
             <div class="col-md-6 col-xl-3">
                 <div class="card border-0 shadow-sm h-100" style="border-left: 4px solid #10b981;">
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <div class="d-flex justify-content-between align-items-start mb-2">
                             <div>
                                 <p class="text-muted small mb-1">Messages</p>
@@ -169,10 +185,15 @@
                             </div>
                             <i class="mdi mdi-message-text" style="font-size: 32px; color: #10b981; opacity: 0.2;"></i>
                         </div>
-                        <div class="d-flex gap-2">
+                        <div class="d-flex gap-2 mb-3">
                             <span class="badge bg-light text-dark">Today: {{ $submissionStats['contacts']['today'] }}</span>
                             <span class="badge bg-light text-dark">Week: {{ $submissionStats['contacts']['week'] }}</span>
                         </div>
+                        @if($firstVcard)
+                            <a href="{{ route('client.leads', $firstVcard->subdomain) }}?tab=contact" class="btn btn-sm btn-outline-success mt-auto align-self-start">
+                                View All <i class="mdi mdi-arrow-right"></i>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -258,6 +279,9 @@
                                         <div class="d-flex justify-content-end gap-2">
                                             <a href="{{ route('vcard.editor', $vcard->subdomain) }}" class="btn btn-sm btn-outline-primary" data-bs-toggle="tooltip" title="Edit vCard">
                                                 <i class="mdi mdi-pencil-outline"></i>
+                                            </a>
+                                            <a href="{{ route('client.leads', $vcard->subdomain) }}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Leads">
+                                                <i class="mdi mdi-inbox-multiple-outline"></i>
                                             </a>
                                             <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="btn btn-sm btn-outline-success" data-bs-toggle="tooltip" title="View vCard">
                                                 <i class="mdi mdi-eye-outline"></i>

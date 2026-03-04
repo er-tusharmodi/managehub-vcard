@@ -544,6 +544,7 @@
         </main>
         <script>
             window.__APP__ = {!! vcard_js_str($data) !!};
+            window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
     </body>

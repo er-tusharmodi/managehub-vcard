@@ -7,7 +7,6 @@ use App\Models\VcardContact;
 use App\Models\VcardEnquiry;
 use App\Models\VcardOrder;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ClientDashboardController extends Controller
@@ -66,19 +65,20 @@ class ClientDashboardController extends Controller
             ],
         ];
 
-        // Determine which submission types are active
+        // Determine which submission types are active (use source template default.json via template_key)
         $activeSubmissionTypes = [];
         foreach ($vcards as $vcard) {
-            $templatePath = $vcard->template_path ? trim($vcard->template_path, '/') : '';
-            $defaultJsonPath = $templatePath ? Storage::disk('public')->path($templatePath . '/default.json') : '';
+            $defaultJsonPath = $vcard->template_key
+                ? base_path('vcard-template/' . $vcard->template_key . '/default.json')
+                : '';
 
             if ($defaultJsonPath && is_readable($defaultJsonPath)) {
                 $data = json_decode(file_get_contents($defaultJsonPath), true);
                 if (is_array($data)) {
-                    if (isset($data['cart']) || isset($data['products'])) {
+                    if (isset($data['cart'])) {
                         $activeSubmissionTypes['orders'] = true;
                     }
-                    if (isset($data['booking']) || isset($data['reservation'])) {
+                    if (isset($data['booking']) || isset($data['reservation']) || isset($data['reserveModal']) || isset($data['appointment'])) {
                         $activeSubmissionTypes['bookings'] = true;
                     }
                     if (isset($data['enquiryForm']) || isset($data['enquiry'])) {

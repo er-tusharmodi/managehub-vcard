@@ -10,7 +10,7 @@
         <i class="mdi mdi-message-text-outline me-1"></i>WhatsApp & Share Messages
     </h6>
     <p class="text-muted mb-3" style="font-size:.82rem;">
-        Use <code>{{'{{'}}name{{'}}'}}</code> and <code>{{'{{'}}website{{'}}'}}</code> as placeholders — they will be replaced with actual values.
+        Use <code>@{{name}}</code> and <code>@{{website}}</code> as placeholders — they will be replaced with actual values.
     </p>
 </div>
 

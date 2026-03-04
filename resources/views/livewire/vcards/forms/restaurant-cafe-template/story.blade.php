@@ -22,11 +22,15 @@
             <img src="{{ $storyPreview }}" class="rounded border" style="height:80px;width:80px;object-fit:cover;" alt="Story image">
         @endif
         <div class="flex-grow-1">
+            <div wire:loading wire:target="uploads.image" class="mb-1">
+                <span class="spinner-border spinner-border-sm text-primary"></span>
+                <small class="text-primary ms-1">Uploading…</small>
+            </div>
             <input type="file"
-                   class="form-control @error('form.image') is-invalid @enderror"
-                   wire:model="form.image"
+                   class="form-control @error('uploads.image') is-invalid @enderror"
+                   wire:model.live="uploads.image"
                    accept="image/*">
-            @error('form.image') <div class="invalid-feedback">{{ $message }}</div> @enderror
+            @error('uploads.image') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
     </div>
 </div>

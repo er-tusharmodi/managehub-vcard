@@ -272,4 +272,22 @@
         .cse-nav-active { background: rgba(var(--bs-primary-rgb),.08); border-left: 3px solid var(--bs-primary) !important; }
         .cse-nav-item { border-left: 3px solid transparent; }
     </style>
+
+    <script>
+    (function () {
+        window.addEventListener('section-changed', function (e) {
+            const section = e.detail.section;
+            const base = window.location.pathname.replace(/\/edit(\/[^\/]*)?$/, '');
+            history.pushState({ section: section }, '', base + '/edit/' + encodeURIComponent(section));
+        });
+        window.addEventListener('popstate', function (e) {
+            if (e.state && e.state.section) {
+                const el = document.querySelector('[wire\\:id]');
+                if (el && window.Livewire) {
+                    window.Livewire.find(el.getAttribute('wire:id')).call('selectSection', e.state.section);
+                }
+            }
+        });
+    })();
+    </script>
 </div>

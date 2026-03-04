@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientDashboardController;
 use App\Http\Controllers\ClientVcardEditorController;
+use App\Http\Controllers\ClientLeadsController;
 use App\Http\Controllers\Client\VcardSubmissionController as ClientVcardSubmissionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
@@ -171,6 +172,10 @@ Route::middleware(['auth', 'subscription.active'])->group(function () {
     Route::get('/my-vcard/{subdomain}/edit/{section?}', [ClientVcardEditorController::class, 'edit'])
         ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
         ->name('vcard.editor');
+
+    Route::get('/my-vcard/{subdomain}/leads', [ClientLeadsController::class, 'index'])
+        ->where('subdomain', '[a-z0-9]([a-z0-9-]*[a-z0-9])?')
+        ->name('client.leads');
 });
 
 // Domain routes moved to top of file — see above

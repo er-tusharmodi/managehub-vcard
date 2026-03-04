@@ -213,7 +213,7 @@
             </div>
         @else
             <!-- Table -->
-            <div class="table-responsive" style="border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden;">
+            <div class="table-responsive" style="border-radius: 12px; border: 1px solid #e2e8f0;">
                 <table class="table table-hover align-middle mb-0">
                     <thead style="background-color: #f8fafc; border-bottom: 2px solid #e2e8f0;">
                         <tr>

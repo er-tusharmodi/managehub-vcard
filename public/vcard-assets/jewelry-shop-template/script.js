@@ -7,6 +7,38 @@ const money = (value) => Number(value || 0).toLocaleString("en-IN");
 const pick = (path, fallback = "") =>
     path.split(".").reduce((acc, key) => acc?.[key], APP) ?? fallback;
 
+const getSubmissionUrl = (type) => {
+    if (window.__VCARD_SUBDOMAIN__)
+        return `/vcard/${window.__VCARD_SUBDOMAIN__}/submit/${type}`;
+    const hostParts = window.location.hostname.split(".");
+    const pathParts = window.location.pathname.split("/").filter(Boolean);
+    if (hostParts.length > 2) return `/submit/${type}`;
+    if (pathParts.length > 0) {
+        if (pathParts[0] === "vcard" && pathParts.length > 1)
+            return `/vcard/${pathParts[1]}/submit/${type}`;
+        return `/vcard/${pathParts[0]}/submit/${type}`;
+    }
+    return `/submit/${type}`;
+};
+
+const sendSubmission = (type, payload) => {
+    const csrf =
+        document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute("content") || "";
+    return fetch(getSubmissionUrl(type), {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+            ...(csrf && { "X-CSRF-TOKEN": csrf }),
+        },
+        body: JSON.stringify(payload),
+    })
+        .then((r) => r.json())
+        .catch(() => ({ success: false }));
+};
+
 const setText = (id, value) => {
     const el = $id(id);
     if (el) {
@@ -460,6 +492,18 @@ function submitEnquiry() {
         category,
         budget,
         message,
+    });
+
+    sendSubmission("enquiry", {
+        source_template: "jewelry-shop-template",
+        name,
+        phone,
+        email,
+        message,
+        items: [
+            { label: "Category", value: category },
+            { label: "Budget", value: budget },
+        ],
     });
 
     window.open(

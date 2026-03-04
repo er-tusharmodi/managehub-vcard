@@ -337,11 +337,7 @@ class AdminSectionEditor extends Component
 
     private function ruleStringForField(string $fieldKey): string
     {
-        // Image fields, price/amount fields, and known optional keys are all nullable
-        if ($this->isImageKey($fieldKey) || $this->isNumericKey($fieldKey)) {
-            return 'nullable';
-        }
-        return 'required';
+        return 'nullable';
     }
 
     private function isImageKey(string $key): bool

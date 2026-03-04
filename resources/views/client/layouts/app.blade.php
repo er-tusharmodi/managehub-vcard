@@ -162,16 +162,17 @@
                                 $submissionMenu = [];
                                 foreach ($userVcards as $vcard) {
                                     $types = [];
-                                    $templatePath = $vcard->template_path ? trim($vcard->template_path, '/') : '';
-                                    $defaultJsonPath = $templatePath ? \Illuminate\Support\Facades\Storage::disk('public')->path($templatePath . '/default.json') : '';
+                                    $defaultJsonPath = $vcard->template_key
+                                        ? base_path('vcard-template/' . $vcard->template_key . '/default.json')
+                                        : '';
 
                                     if ($defaultJsonPath && is_readable($defaultJsonPath)) {
                                         $data = json_decode(file_get_contents($defaultJsonPath), true);
                                         if (is_array($data)) {
-                                            if (isset($data['cart']) || isset($data['products'])) {
+                                            if (isset($data['cart'])) {
                                                 $types['order'] = 'Orders';
                                             }
-                                            if (isset($data['booking']) || isset($data['reservation']) || isset($data['reserve'])) {
+                                            if (isset($data['booking']) || isset($data['reservation']) || isset($data['reserveModal']) || isset($data['appointment'])) {
                                                 $types['booking'] = 'Bookings';
                                             }
                                             if (isset($data['enquiryForm']) || isset($data['enquiry'])) {
@@ -190,22 +191,14 @@
                             @endphp
 
                             @if (!empty($submissionMenu))
-                                <li class="menu-title">Submissions</li>
+                                <li class="menu-title">Leads</li>
                                 @foreach ($submissionMenu as $entry)
                                     <li>
-                                        <span class="tp-link text-muted" style="cursor: default;">
-                                            <i data-feather="chevrons-right"></i>
+                                        <a href="{{ route('client.leads', $entry['vcard']->subdomain) }}" class="tp-link">
+                                            <i data-feather="inbox"></i>
                                             <span>{{ substr($entry['vcard']->client_name, 0, 18) }}</span>
-                                        </span>
+                                        </a>
                                     </li>
-                                    @foreach ($entry['types'] as $typeKey => $typeLabel)
-                                        <li>
-                                            <a href="{{ route('client.submissions.index', [$entry['vcard']->id, $typeKey]) }}" class="tp-link" style="padding-left: 42px;">
-                                                <i data-feather="file-text"></i>
-                                                <span>{{ $typeLabel }}</span>
-                                            </a>
-                                        </li>
-                                    @endforeach
                                 @endforeach
                             @endif
 
@@ -226,7 +219,7 @@
             <!-- Main Content -->
             <div class="content-page position-relative">
                 <div class="content">
-                    <div class="container-xxl">
+                    <div class="container-fluid">
                         @yield('content')
                     </div>
                 </div>
