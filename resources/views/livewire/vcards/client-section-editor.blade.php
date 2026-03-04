@@ -210,7 +210,7 @@
                             </div>
                         @endif
 
-                        <form wire:submit.prevent="save">
+                        <form wire:submit.prevent="save" novalidate>
                             <div class="row">
                                 @if (empty($form))
                                     <div class="col-12">
