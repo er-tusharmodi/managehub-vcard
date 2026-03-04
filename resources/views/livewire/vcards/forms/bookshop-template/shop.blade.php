@@ -114,8 +114,14 @@
 <div class="col-lg-6 mb-3">
     <label class="form-label fw-semibold">Cover / Banner Image</label>
     @if(!empty($form['coverImage'] ?? ''))
+        @php
+            $coverPreview = $form['coverImage'];
+            if (isset($assetBaseUrl) && !preg_match('~^(https?:)?//|data:|/~', $coverPreview)) {
+                $coverPreview = rtrim($assetBaseUrl, '/') . '/' . ltrim($coverPreview, '/');
+            }
+        @endphp
         <div class="mb-2">
-            <img src="{{ $form['coverImage'] }}" alt="Cover"
+            <img src="{{ $coverPreview }}" alt="Cover"
                  class="img-thumbnail"
                  style="max-width:220px;max-height:100px;object-fit:cover;">
         </div>
@@ -148,8 +154,14 @@
 <div class="col-lg-6 mb-3">
     <label class="form-label fw-semibold">Store / Profile Picture</label>
     @if(!empty($form['avatarImage'] ?? ''))
+        @php
+            $avatarPreview = $form['avatarImage'];
+            if (isset($assetBaseUrl) && !preg_match('~^(https?:)?//|data:|/~', $avatarPreview)) {
+                $avatarPreview = rtrim($assetBaseUrl, '/') . '/' . ltrim($avatarPreview, '/');
+            }
+        @endphp
         <div class="mb-2">
-            <img src="{{ $form['avatarImage'] }}" alt="Avatar"
+            <img src="{{ $avatarPreview }}" alt="Avatar"
                  class="img-thumbnail rounded-circle"
                  style="width:80px;height:80px;object-fit:cover;">
         </div>

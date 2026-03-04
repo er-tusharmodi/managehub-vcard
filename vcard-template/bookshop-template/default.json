@@ -56,9 +56,9 @@
         "website": "https://pageturnerbooks.in",
         "maps": "https://maps.google.com/?q=PageTurner+Books+Connaught+Place+Delhi",
         "address": "42 Bookworm Lane, Connaught Place, New Delhi 110001",
-        "coverImage": "uploads/1772615261_dummyUser.png",
+        "coverImage": "/template-assets/bookshop-template/uploads/1772639763_TheBarbershop_QR.png",
         "coverAlt": "PageTurner Books Cover",
-        "avatarImage": "uploads/1772615117_PinnacleAcademy_QR.png",
+        "avatarImage": "/template-assets/bookshop-template/uploads/1772639139_dummyUser.png",
         "vcardFileName": "PageTurnerBooks.vcf",
         "qrFileName": "pageturner_qr.png"
     },
@@ -177,9 +177,9 @@
                     "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&q=75"
                 },
                 {
-                    "name": "School & Bulk Supply",
-                    "description": "Textbooks, stationery & bulk orders for schools & colleges.",
-                    "image": "https://images.unsplash.com/photo-1549778399-f94fd24c4f3c?w=400&q=75"
+                    "name": "asdas",
+                    "description": "dasdasd",
+                    "image": "/template-assets/bookshop-template/uploads/1772640360_TheBarbershop_QR.png"
                 }
             ]
         },
@@ -352,8 +352,8 @@
         "fallbackEmail": "\u2014",
         "fallbackMessage": "No message"
     },
-    "products": [
-        {
+    "products": {
+        "0": {
             "id": 1,
             "name": "Atomic Habits",
             "author": "James Clear",
@@ -364,7 +364,7 @@
             "tagColor": "#c8922a",
             "image": "https://images.unsplash.com/photo-1512820790803-83ca734da794?w=300&q=75"
         },
-        {
+        "1": {
             "id": 2,
             "name": "The Alchemist",
             "author": "Paulo Coelho",
@@ -375,7 +375,7 @@
             "tagColor": "",
             "image": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=300&q=75"
         },
-        {
+        "2": {
             "id": 3,
             "name": "Rich Dad Poor Dad",
             "author": "Robert Kiyosaki",
@@ -386,7 +386,7 @@
             "tagColor": "#1a2744",
             "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=300&q=75"
         },
-        {
+        "3": {
             "id": 4,
             "name": "Ikigai",
             "author": "Francesc Miralles",
@@ -397,18 +397,7 @@
             "tagColor": "",
             "image": "https://images.unsplash.com/photo-1524578271613-d550eacf6090?w=300&q=75"
         },
-        {
-            "id": 5,
-            "name": "Sapiens",
-            "author": "Yuval Noah Harari",
-            "desc": "A brief history of humankind.",
-            "price": 599,
-            "oldPrice": 699,
-            "tag": "Staff Pick",
-            "tagColor": "#b5341a",
-            "image": "https://images.unsplash.com/photo-1549778399-f94fd24c4f3c?w=300&q=75"
-        },
-        {
+        "4": {
             "id": 6,
             "name": "The Midnight Library",
             "author": "Matt Haig",
@@ -417,9 +406,12 @@
             "oldPrice": 499,
             "tag": "New Arrival",
             "tagColor": "",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/bookshop-template/uploads/1772640812_dummyUser__1_.png"
+        },
+        "newItem": {
+            "image": "/template-assets/bookshop-template/uploads/1772640443_dummyUser__1_.png"
         }
-    ],
+    },
     "_field_config": {
         "meta": {
             "title": {

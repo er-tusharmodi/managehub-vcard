@@ -20,6 +20,7 @@ class TemplateVisualEditor extends Component
     public array $form = [];
     public array $uploads = [];
     public array $newItem = [];
+    public array $categoryOptions = [];
 
     protected $templateService;
     protected $backupService;
@@ -110,6 +111,40 @@ class TemplateVisualEditor extends Component
             }
         }
         $this->form = $sectionData;
+        $this->categoryOptions = $this->buildCategoryOptions($data);
+    }
+
+    private function buildCategoryOptions(array $data): array
+    {
+        $rawCategories = $data['categories'] ?? [];
+        if (!is_array($rawCategories)) {
+            return [];
+        }
+
+        $options = [];
+        foreach ($rawCategories as $category) {
+            if (!is_array($category)) {
+                continue;
+            }
+
+            $key = $category['key'] ?? null;
+            $label = $category['label'] ?? $category['name'] ?? $category['query'] ?? $key;
+
+            if (!$key && $label) {
+                $key = \Illuminate\Support\Str::slug($label);
+            }
+
+            if (!$key || $key === 'all') {
+                continue;
+            }
+
+            $options[$key] = $label ?? $key;
+        }
+
+        return collect($options)
+            ->map(fn ($label, $key) => ['key' => $key, 'label' => $label])
+            ->values()
+            ->toArray();
     }
 
     public function save()
@@ -310,15 +345,18 @@ class TemplateVisualEditor extends Component
 
                     // Move file from temp to template uploads directory
                     File::copy($value->getRealPath(), $fullPath);
-                    
-                    // Set relative path in data
-                    data_set($data, $path, $relativePath);
+
+                    // Store as absolute path so previews work across all contexts
+                    // without needing $assetBaseUrl to be threaded through partials.
+                    // Uses root-relative path so it works on any domain.
+                    $absolutePath = '/template-assets/' . $this->templateKey . '/' . $relativePath;
+                    data_set($data, $path, $absolutePath);
                     
                     \Log::info('Template image uploaded', [
                         'template' => $this->templateKey,
                         'field' => $path,
                         'filename' => $filename,
-                        'path' => $relativePath
+                        'path' => $absolutePath,
                     ]);
                 } catch (\Exception $e) {
                     \Log::error('Template upload failed', [
@@ -349,7 +387,7 @@ class TemplateVisualEditor extends Component
                 continue;
             }
 
-            $ruleParts = $this->isImageKey($col) ? ['nullable'] : ['required'];
+            $ruleParts = ['nullable'];
             if ($this->isNumericKey($col)) {
                 $ruleParts[] = 'numeric';
             }
@@ -370,13 +408,8 @@ class TemplateVisualEditor extends Component
             }
 
             $fieldKey = is_string($key) ? $key : '';
-            
-            // Don't validate image fields - they can be empty or contain file paths
-            if ($this->isImageKey($fieldKey)) {
-                continue;
-            }
-            
-            $ruleParts = ['required'];
+
+            $ruleParts = ['nullable'];
             if ($this->isNumericKey($fieldKey)) {
                 $ruleParts[] = 'numeric';
             }

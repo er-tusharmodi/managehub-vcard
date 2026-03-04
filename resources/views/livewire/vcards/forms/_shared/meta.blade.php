@@ -54,8 +54,14 @@
 <div class="col-lg-6 mb-3">
     <label class="form-label fw-semibold">OG Share Image</label>
     @if(!empty($form['og_image'] ?? ''))
+        @php
+            $ogPreview = $form['og_image'];
+            if (isset($assetBaseUrl) && is_string($ogPreview) && !preg_match('~^(https?:)?//|data:|/~', $ogPreview)) {
+                $ogPreview = rtrim($assetBaseUrl, '/') . '/' . ltrim($ogPreview, '/');
+            }
+        @endphp
         <div class="mb-2">
-            <img src="{{ $form['og_image'] }}" alt="OG Image"
+            <img src="{{ $ogPreview }}" alt="OG Image"
                  class="img-thumbnail"
                  style="max-width:200px;max-height:100px;object-fit:cover;">
         </div>

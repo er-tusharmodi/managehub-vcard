@@ -327,9 +327,9 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "serviceImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "bannerImage": "/template-assets/doctor-clinic-template/uploads/1772639731_dummyUser__1_.png",
+        "profileImage": "/template-assets/doctor-clinic-template/uploads/1772640600_TheBarbershop_QR.png",
+        "serviceImage": "/template-assets/doctor-clinic-template/uploads/1772640596_TheBarbershop_QR.png",
         "qrCodeImage": ""
     },
     "doctor": {
@@ -726,11 +726,8 @@
             {
                 "name": "Twitter / X",
                 "url": ""
-            },
-            {
-                "name": "sdfsdfsd",
-                "url": "https://example.com"
             }
-        ]
+        ],
+        "name": "The Barbershopss"
     }
 }

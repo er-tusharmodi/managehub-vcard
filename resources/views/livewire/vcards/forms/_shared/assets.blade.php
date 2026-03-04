@@ -33,13 +33,21 @@
     @if(!in_array($imgKey, $knownImageKeys))
         @continue
     @endif
-    @php [$imgLabel, $imgHelp] = $assetLabels[$imgKey]; @endphp
+    @php
+        [$imgLabel, $imgHelp] = $assetLabels[$imgKey];
+        // Resolve relative paths using $assetBaseUrl for correct preview display
+        $imgPreviewUrl = $imgValue;
+        if (isset($assetBaseUrl) && is_string($imgPreviewUrl) && !empty($imgPreviewUrl)
+            && !preg_match('~^(https?:)?//|data:|/~', $imgPreviewUrl)) {
+            $imgPreviewUrl = rtrim($assetBaseUrl, '/') . '/' . ltrim($imgPreviewUrl, '/');
+        }
+    @endphp
 
     <div class="col-lg-6 mb-4">
         <label class="form-label fw-semibold">{{ $imgLabel }}</label>
         @if(!empty($imgValue))
             <div class="mb-2">
-                <img src="{{ $imgValue }}" alt="{{ $imgLabel }}"
+                <img src="{{ $imgPreviewUrl }}" alt="{{ $imgLabel }}"
                      class="img-thumbnail"
                      style="max-width:220px;max-height:110px;object-fit:cover;">
             </div>

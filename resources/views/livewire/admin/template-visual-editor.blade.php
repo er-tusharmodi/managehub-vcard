@@ -276,10 +276,11 @@
                                         @include($formPartial, ['assetBaseUrl' => $assetBaseUrl])
                                     @elseif($isFormList)
                                         @include('livewire.vcards.partials.field', [
-                                            'key'          => $section,
-                                            'value'        => $form,
-                                            'wirePath'     => '',
-                                            'assetBaseUrl' => $assetBaseUrl,
+                                            'key'             => $section,
+                                            'value'           => $form,
+                                            'wirePath'        => '',
+                                            'assetBaseUrl'    => $assetBaseUrl,
+                                            'categoryOptions' => $categoryOptions,
                                         ])
                                     @else
                                         @foreach ($form as $key => $value)
