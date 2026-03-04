@@ -354,6 +354,31 @@ class AdminSectionEditor extends Component
         return preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $key) === 1;
     }
 
+    public function resolveFormPartial(): ?string
+    {
+        if (!$this->section) {
+            return null;
+        }
+        $templateKey = $this->vcard->template_key ?? null;
+        if (!$templateKey) {
+            return null;
+        }
+
+        // Template-specific partial takes priority
+        $templateView = 'livewire.vcards.forms.' . $templateKey . '.' . $this->section;
+        if (view()->exists($templateView)) {
+            return $templateView;
+        }
+
+        // Fall back to shared partial
+        $sharedView = 'livewire.vcards.forms._shared.' . $this->section;
+        if (view()->exists($sharedView)) {
+            return $sharedView;
+        }
+
+        return null;
+    }
+
     private function validateIfRules(array $rules): void
     {
         if (!empty($rules)) {

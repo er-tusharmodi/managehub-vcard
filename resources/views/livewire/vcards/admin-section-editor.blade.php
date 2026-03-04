@@ -315,7 +315,10 @@
                                         </div>
                                     </div>
                                 @else
-                                    @if($isFormList)
+                                    @php $formPartial = $this->resolveFormPartial(); @endphp
+                                    @if($formPartial)
+                                        @include($formPartial)
+                                    @elseif($isFormList)
                                         @include('livewire.vcards.partials.field', [
                                             'key'                  => $section,
                                             'value'                => $form,

@@ -271,7 +271,10 @@
                                         $assetBaseUrl = url("template-assets/{$templateKey}/");
                                     @endphp
 
-                                    @if($isFormList)
+                                    @php $formPartial = $this->resolveFormPartial(); @endphp
+                                    @if($formPartial)
+                                        @include($formPartial, ['assetBaseUrl' => $assetBaseUrl])
+                                    @elseif($isFormList)
                                         @include('livewire.vcards.partials.field', [
                                             'key'          => $section,
                                             'value'        => $form,
