@@ -23,12 +23,20 @@ class VcardSubmission extends Model
         'total',
         'payload',
         'submitted_at',
+        'status',
     ];
 
     protected $casts = [
         'items' => 'array',
         'payload' => 'array',
         'submitted_at' => 'datetime',
-        'total' => 'decimal:2',
     ];
+
+    public function getTotalAttribute(mixed $value): ?float
+    {
+        if ($value instanceof \MongoDB\BSON\Decimal128) {
+            return (float)(string)$value;
+        }
+        return $value === null ? null : (float)$value;
+    }
 }

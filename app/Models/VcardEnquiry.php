@@ -26,8 +26,15 @@ class VcardEnquiry extends Model
     protected $casts = [
         'items' => 'array',
         'payload' => 'array',
-        'total' => 'decimal:2',
     ];
+
+    public function getTotalAttribute(mixed $value): ?float
+    {
+        if ($value instanceof \MongoDB\BSON\Decimal128) {
+            return (float)(string)$value;
+        }
+        return $value === null ? null : (float)$value;
+    }
 
     public function vcard(): BelongsTo
     {

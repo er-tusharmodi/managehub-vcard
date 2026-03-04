@@ -8,6 +8,7 @@ use App\Models\VcardBooking;
 use App\Models\VcardContact;
 use App\Models\VcardEnquiry;
 use App\Models\VcardOrder;
+use App\Models\Mongo\VcardSubmission;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -53,9 +54,9 @@ class VcardSubmissionController extends Controller
         ]);
     }
 
-    public function updateStatus(Request $request, Vcard $vcard, string $type, int $id)
+    public function updateStatus(Request $request, Vcard $vcard, string $type, string $id)
     {
-        if ($vcard->user_id !== $request->user()->id) {
+        if ((string) $vcard->user_id !== (string) $request->user()->id) {
             abort(403);
         }
 
@@ -68,17 +69,29 @@ class VcardSubmissionController extends Controller
             'status' => 'required|in:pending,accepted,declined',
         ]);
 
-        $modelClass = self::TYPE_MODEL_MAP[$type];
-        $submission = $modelClass::query()
-            ->where('vcard_id', $vcard->id)
-            ->findOrFail($id);
+        $mode = (string) config('app.vcard_storage_mode', 'file_only');
+        $unified = in_array($mode, ['mongo_only', 'mongo_preferred'], true);
+
+        if ($unified) {
+            $submission = VcardSubmission::where(function ($q) use ($vcard) {
+                    $q->where('legacy_vcard_id', (string) $vcard->id)
+                      ->orWhere('subdomain', $vcard->subdomain);
+                })
+                ->where('submission_type', $type)
+                ->findOrFail($id);
+        } else {
+            $modelClass = self::TYPE_MODEL_MAP[$type];
+            $submission = $modelClass::query()
+                ->where('vcard_id', $vcard->id)
+                ->findOrFail($id);
+        }
 
         $submission->update(['status' => $validated['status']]);
 
         return response()->json([
             'success' => true,
             'message' => 'Status updated successfully',
-            'status' => $validated['status'],
+            'status'  => $validated['status'],
         ]);
     }
 }
