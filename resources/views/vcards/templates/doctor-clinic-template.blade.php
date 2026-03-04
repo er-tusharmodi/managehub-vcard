@@ -24,6 +24,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <title>{{ data_get($data, 'meta.title') }}</title>
+        <meta name="description" content="{{ data_get($data, 'meta.description', '') }}">
+        <meta name="keywords" content="{{ data_get($data, 'meta.keywords', '') }}">
+        <meta property="og:title" content="{{ data_get($data, 'meta.title', '') }}">
+        <meta property="og:description" content="{{ data_get($data, 'meta.description', '') }}">
+        @if(data_get($data, 'meta.og_image'))
+        <meta property="og:image" content="{{ url(data_get($data, 'meta.og_image')) }}">
+        @endif
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
@@ -44,10 +51,10 @@
                         <svg class="ic-sm" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" /><line x1="8.59" y1="13.51" x2="15.42" y2="17.49" /><line x1="15.41" y1="6.51" x2="8.59" y2="10.49" /></svg>
                         <span id="banner-share-label">{{ data_get($data, 'banner.shareLabel') }}</span>
                     </button>
-                    <div class="verified-badge">
-                        <svg width="13" height="13" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
-                        <span id="banner-verified-label">{{ data_get($data, 'banner.verifiedLabel') }}</span>
-                    </div>
+                    <button class="save-btn-top" onclick="saveContact()">
+                        <svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        <span id="banner-save-label">{{ data_get($data, 'banner.saveContact', 'Save Contact') }}</span>
+                    </button>
                 </div>
             </div>
 

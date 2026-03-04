@@ -30,6 +30,13 @@
             content="width=device-width,initial-scale=1,maximum-scale=1"
         />
         <title>{{ data_get($data, "meta.title") }}</title>
+        <meta name="description" content="{{ data_get($data, 'meta.description', '') }}">
+        <meta name="keywords" content="{{ data_get($data, 'meta.keywords', '') }}">
+        <meta property="og:title" content="{{ data_get($data, 'meta.title', '') }}">
+        <meta property="og:description" content="{{ data_get($data, 'meta.description', '') }}">
+        @if(data_get($data, 'meta.og_image'))
+        <meta property="og:image" content="{{ url(data_get($data, 'meta.og_image')) }}">
+        @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
@@ -318,40 +325,6 @@
         </div>
         @endif
 
-        @if(vcard_section_enabled($data, 'qr'))
-        <div class="sec">
-            <div class="sec-header">
-                <div class="sec-icon">
-                    {!! getIcon("qr", "ic", "currentColor") !!}
-                </div>
-                <div class="sec-title" id="qr-title">{{ data_get($data, "sections.qrTitle") }}</div>
-            </div>
-            <div class="sec-body">
-                <div class="qr-card-inner">
-                    <p
-                        id="qr-description"
-                        style="
-                            font-size: 0.79rem;
-                            color: var(--muted);
-                            margin-bottom: 0.2rem;
-                        "
-                    >{{ data_get($data, "qr.description") }}</p>
-                    <div id="vcardQR"></div>
-                    <div class="qr-actions">
-                        <button class="qr-btn" onclick="downloadQR()">
-                            {!! getIcon("download", "ic-sm", "currentColor") !!}
-                            <span id="qr-download-label">{{ data_get($data, "qr.downloadLabel") }}</span>
-                        </button>
-                        <button class="qr-btn" onclick="copyLink()">
-                            {!! getIcon("link", "ic-sm", "currentColor") !!}
-                            <span id="qr-copy-label">{{ data_get($data, "qr.copyLabel") }}</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endif
-
         @if(vcard_section_enabled($data, 'payments'))
         <div class="sec">
             <div class="sec-header">
@@ -488,6 +461,40 @@
                         {!! getIcon("reset", "ic", "#fff") !!}
                         <span id="contact-success-btn-label">{{ data_get($data, "contactForm.successButtonLabel") }}</span>
                     </button>
+                </div>
+            </div>
+        </div>
+        @endif
+
+        @if(vcard_section_enabled($data, 'qr'))
+        <div class="sec">
+            <div class="sec-header">
+                <div class="sec-icon">
+                    {!! getIcon("qr", "ic", "currentColor") !!}
+                </div>
+                <div class="sec-title" id="qr-title">{{ data_get($data, "sections.qrTitle") }}</div>
+            </div>
+            <div class="sec-body">
+                <div class="qr-card-inner">
+                    <p
+                        id="qr-description"
+                        style="
+                            font-size: 0.79rem;
+                            color: var(--muted);
+                            margin-bottom: 0.2rem;
+                        "
+                    >{{ data_get($data, "qr.description") }}</p>
+                    <div id="vcardQR"></div>
+                    <div class="qr-actions">
+                        <button class="qr-btn" onclick="downloadQR()">
+                            {!! getIcon("download", "ic-sm", "currentColor") !!}
+                            <span id="qr-download-label">{{ data_get($data, "qr.downloadLabel") }}</span>
+                        </button>
+                        <button class="qr-btn" onclick="copyLink()">
+                            {!! getIcon("link", "ic-sm", "currentColor") !!}
+                            <span id="qr-copy-label">{{ data_get($data, "qr.copyLabel") }}</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

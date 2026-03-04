@@ -98,10 +98,10 @@
           <i class="bi bi-share-fill"></i>
           <span>{{ v($data, 'profile.actions.share') }}</span>
         </button>
-        <div class="verified-badge">
-          <i class="bi bi-patch-check"></i>
-          {{ v($data, 'trust.items.0.text', 'Govt. Registered') }}
-        </div>
+        <button class="save-btn-top" onclick="saveContact()">
+          <i class="bi bi-person-plus-fill"></i>
+          <span>{{ v($data, 'profile.actions.saveContact', 'Save Contact') }}</span>
+        </button>
       </div>
     </div>
 

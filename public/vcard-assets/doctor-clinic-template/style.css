@@ -125,6 +125,7 @@ svg.ic-lg {
     z-index: 5;
 }
 .share-btn,
+.save-btn-top,
 .verified-badge {
     backdrop-filter: blur(8px);
     color: #fff;
@@ -132,7 +133,8 @@ svg.ic-lg {
     display: flex;
     align-items: center;
 }
-.share-btn {
+.share-btn,
+.save-btn-top {
     background: rgba(255, 255, 255, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.35);
     padding: 0.38rem 0.9rem;

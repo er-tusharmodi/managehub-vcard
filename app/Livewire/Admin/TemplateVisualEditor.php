@@ -16,10 +16,10 @@ class TemplateVisualEditor extends Component
     public $templateName;
     public ?string $section = null;
     public array $sections = [];
+    public array $sectionsConfig = [];
     public array $form = [];
     public array $uploads = [];
     public array $newItem = [];
-    public bool $showIndex = false;
 
     protected $templateService;
     protected $backupService;
@@ -34,38 +34,82 @@ class TemplateVisualEditor extends Component
     {
         $this->templateKey = $templateKey;
         $this->templateName = ucwords(str_replace('-', ' ', $templateKey));
-        $this->section = $section;
 
         try {
             $data = $this->templateService->getTemplateDefaultJson($templateKey);
-            $this->sections = array_keys($data);
 
-            if ($section === null) {
-                $this->showIndex = true;
-                return;
-            }
+            // Build section list — exclude _field_config, files, _sections_config
+            $excluded = ['_field_config', 'files', '_sections_config'];
+            $allSections = array_values(array_filter(array_keys($data), fn($k) => !in_array($k, $excluded)));
 
-            if (in_array($section, $this->sections, true)) {
-                $this->section = $section;
-            } else {
-                $this->section = $this->sections[0] ?? 'meta';
+            // Move _common to front
+            $commonIdx = array_search('_common', $allSections);
+            if ($commonIdx !== false && $commonIdx > 0) {
+                array_splice($allSections, $commonIdx, 1);
+                array_unshift($allSections, '_common');
             }
+            $this->sections = $allSections;
 
-            $sectionData = $data[$this->section] ?? [];
-            
-            // Reindex numeric-keyed arrays to sequential format
-            if (is_array($sectionData) && !empty($sectionData)) {
-                $keys = array_keys($sectionData);
-                if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
-                    $sectionData = array_values($sectionData);
-                }
+            // Load sections config (for inline toggles)
+            $this->sectionsConfig = $data['_sections_config'] ?? [];
+
+            // Default to _common or first section
+            $target = $section ?? '_common';
+            if (!in_array($target, $this->sections, true)) {
+                $target = $this->sections[0] ?? 'meta';
             }
-            
-            $this->form = $sectionData;
+            $this->section = $target;
+            $this->loadFormForSection($this->section, $data);
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
             return redirect()->route('admin.templates.index');
         }
+    }
+
+    public function selectSection(string $section): void
+    {
+        if (!in_array($section, $this->sections, true)) {
+            return;
+        }
+        $this->section = $section;
+        $this->uploads = [];
+        $this->newItem = [];
+        try {
+            $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
+            $this->loadFormForSection($section, $data);
+        } catch (\Exception $e) {
+            session()->flash('error', $e->getMessage());
+        }
+    }
+
+    public function toggleSection(string $sectionKey): void
+    {
+        try {
+            $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
+            if (!isset($data['_sections_config'][$sectionKey])) {
+                return;
+            }
+            $data['_sections_config'][$sectionKey]['enabled'] = !($data['_sections_config'][$sectionKey]['enabled'] ?? true);
+            $this->sectionsConfig = $data['_sections_config'];
+            $this->backupService->backup($this->templateKey);
+            $this->templateService->updateTemplateDefaultJson($this->templateKey, $data);
+            $state = $data['_sections_config'][$sectionKey]['enabled'] ? 'enabled' : 'disabled';
+            $this->dispatch('notify', type: 'success', message: ucfirst($sectionKey) . ' section ' . $state . '.');
+        } catch (\Exception $e) {
+            $this->dispatch('notify', type: 'error', message: 'Failed to toggle section: ' . $e->getMessage());
+        }
+    }
+
+    private function loadFormForSection(string $section, array $data): void
+    {
+        $sectionData = $data[$section] ?? [];
+        if (is_array($sectionData) && !empty($sectionData)) {
+            $keys = array_keys($sectionData);
+            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+                $sectionData = array_values($sectionData);
+            }
+        }
+        $this->form = $sectionData;
     }
 
     public function save()
@@ -74,6 +118,20 @@ class TemplateVisualEditor extends Component
             $payload = $this->applyUploads($this->form, $this->uploads);
             $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
             $data[$this->section] = $payload;
+
+            // Sync _common fields to their mapped paths
+            if ($this->section === '_common') {
+                $fieldConfigs = $data['_field_config']['_common'] ?? [];
+                foreach ($payload as $key => $val) {
+                    $syncPaths = $fieldConfigs[$key]['sync'] ?? [];
+                    foreach ($syncPaths as $dotPath) {
+                        $parts = explode('.', $dotPath, 2);
+                        if (count($parts) === 2 && isset($data[$parts[0]]) && is_array($data[$parts[0]])) {
+                            $data[$parts[0]][$parts[1]] = $val;
+                        }
+                    }
+                }
+            }
 
             // Create backup before saving
             $this->backupService->backup($this->templateKey);
@@ -178,19 +236,46 @@ class TemplateVisualEditor extends Component
         }
     }
 
-    public function removeRowWithConfirm(string $path, int $index)
+    public function removeRowWithConfirm(int $index, string $path = '')
     {
         $this->removeRow($path, $index);
         $this->save();
         $this->dispatch('notify', type: 'success', message: 'Item removed successfully!');
     }
 
+    public function moveRow(string $path, int $index, int $direction): void
+    {
+        $list = empty($path) ? $this->form : data_get($this->form, $path, []);
+
+        if (!is_array($list)) {
+            return;
+        }
+
+        $target = $index + $direction;
+        if (!isset($list[$target])) {
+            return;
+        }
+
+        [$list[$index], $list[$target]] = [$list[$target], $list[$index]];
+
+        if (empty($path)) {
+            $this->form = $list;
+        } else {
+            data_set($this->form, $path, $list);
+        }
+
+        $this->save();
+    }
+
     public function confirmRemoveRow(string $path, int $index)
     {
-        $this->dispatch('confirm-delete', 
+        $this->dispatch(
+            'confirm-delete',
+            id: $this->getId(),
             message: 'Are you sure you want to delete this item?',
             path: $path,
-            index: $index
+            index: $index,
+            method: 'removeRowWithConfirm'
         );
     }
 
@@ -319,7 +404,23 @@ class TemplateVisualEditor extends Component
 
     public function render()
     {
-        return view('livewire.admin.template-visual-editor')
-            ->layout('layouts.admin-livewire');
+        $fieldConfig = [];
+        if ($this->section && $this->templateKey) {
+            try {
+                $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
+                if (isset($data['_field_config'][$this->section])) {
+                    $fieldConfig = $data['_field_config'][$this->section];
+                    $GLOBALS['_field_config'] = $fieldConfig;
+                } else {
+                    unset($GLOBALS['_field_config']);
+                }
+            } catch (\Exception $e) {
+                unset($GLOBALS['_field_config']);
+            }
+        }
+        $GLOBALS['_current_section'] = $this->section;
+        return view('livewire.admin.template-visual-editor', [
+            'fieldConfig' => $fieldConfig,
+        ])->layout('layouts.admin-livewire');
     }
 }

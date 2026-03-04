@@ -49,7 +49,7 @@ if (!function_exists('vcard_section_enabled')) {
      */
     function vcard_section_enabled(array $data, string $section): bool
     {
-        return (bool) ($data['_sections_config'][$section] ?? true);
+        return (bool) ($data['_sections_config'][$section]['enabled'] ?? true);
     }
 }
 

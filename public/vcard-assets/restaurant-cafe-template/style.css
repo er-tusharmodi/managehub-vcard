@@ -143,7 +143,8 @@ svg.ic-lg {
     background: #4caf50;
     animation: blink 1.5s infinite;
 }
-.share-btn {
+.share-btn,
+.save-btn-top {
     background: rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.35);

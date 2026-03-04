@@ -201,11 +201,13 @@ svg.ic-lg {
     z-index: 10;
 }
 .share-btn,
+.save-btn-top,
 .verified-badge {
     backdrop-filter: blur(8px);
     border-radius: 20px;
 }
-.share-btn {
+.share-btn,
+.save-btn-top {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.25);
     color: #fff;

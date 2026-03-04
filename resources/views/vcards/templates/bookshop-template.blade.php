@@ -76,6 +76,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     <title>{{ v($data, 'meta.title') }}</title>
+    <meta name="description" content="{{ v($data, 'meta.description') }}">
+    <meta name="keywords" content="{{ v($data, 'meta.keywords') }}">
+    <meta property="og:title" content="{{ v($data, 'meta.title') }}">
+    <meta property="og:description" content="{{ v($data, 'meta.description') }}">
+    @if(v($data, 'meta.og_image'))
+    <meta property="og:image" content="{{ url(v($data, 'meta.og_image')) }}">
+    @endif
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="{{ $assetBase }}style.css" />

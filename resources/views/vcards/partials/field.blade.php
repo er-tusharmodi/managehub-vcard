@@ -6,7 +6,7 @@
     $isScalarList = $isList && (empty($value) || !is_array($value[0] ?? null));
     $isImageKey = is_string($key) && preg_match('/(image|logo|banner|profile|photo|avatar|icon)/i', $key);
     $isTextArea = is_string($key) && preg_match('/(description|desc|about|bio|note|tagline|address|subtitle|message)/i', $key);
-    $isUrl = is_string($key) && preg_match('/(url|link|website|maps|facebook|instagram|youtube|twitter|whatsapp)/i', $key);
+    $isUrl = is_string($key) && preg_match('/(url|link|website|maps|facebook|instagram|youtube|twitter)/i', $key);
     $isPhone = is_string($key) && preg_match('/(phone|mobile|whatsapp|tel)/i', $key);
     $uploadName = str_starts_with($name, 'sections') ? 'uploads' . substr($name, strlen('sections')) : 'uploads[' . $name . ']';
     $useGrid = $useGrid ?? false;

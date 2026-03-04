@@ -17,6 +17,13 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <title>{{ data_get($data, "meta.title") }}</title>
+        <meta name="description" content="{{ data_get($data, 'meta.description', '') }}">
+        <meta name="keywords" content="{{ data_get($data, 'meta.keywords', '') }}">
+        <meta property="og:title" content="{{ data_get($data, 'meta.title', '') }}">
+        <meta property="og:description" content="{{ data_get($data, 'meta.description', '') }}">
+        @if(data_get($data, 'meta.og_image'))
+        <meta property="og:image" content="{{ url(data_get($data, 'meta.og_image')) }}">
+        @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
     </head>

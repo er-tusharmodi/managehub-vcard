@@ -1,467 +1,719 @@
 {
-    "_sections_config": {
-        "whyChoose": { "enabled": true, "label": "Why Choose Us" },
-        "categories": { "enabled": true, "label": "Product Categories" },
-        "featuredProducts": { "enabled": true, "label": "Featured Products" },
-        "repairServices": { "enabled": true, "label": "Repair Services" },
-        "brands": { "enabled": true, "label": "Brands We Carry" },
-        "gallery": { "enabled": true, "label": "Store Gallery" },
-        "hours": { "enabled": true, "label": "Store Hours" },
-        "location": { "enabled": true, "label": "Our Location" },
-        "follow": { "enabled": true, "label": "Follow & Connect" },
-        "payments": { "enabled": true, "label": "Payment Options" },
-        "qr": { "enabled": true, "label": "QR Code" },
-        "enquiry": { "enabled": true, "label": "Send Enquiry" }
-    },
+  "_sections_config": {
     "meta": {
-        "title": "TechNova Electronics"
+      "enabled": true,
+      "label": "SEO & Business"
     },
-    "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileAlt": "TechNova Electronics profile photo",
-        "qrCodeImage": ""
+    "whyChoose": {
+      "enabled": true,
+      "label": "Why Choose Us"
     },
-    "shop": {
-        "name": "TechNova Electronics",
-        "tagline": "Your Trusted Tech Partner – Selling · Servicing · Supporting",
-        "phone": "+919876543210",
-        "whatsapp": "919876543210",
-        "email": "info@technovaelectronics.com",
-        "address": "42, Tech Market, Nehru Place, New Delhi 110019",
-        "maps": "https://maps.google.com/?q=Nehru+Place+New+Delhi",
-        "website": "https://technovaelectronics.com"
+    "categories": {
+      "enabled": true,
+      "label": "Product Categories"
     },
-    "banner": {
-        "label": "⚡ Electronics",
-        "share": "Share",
-        "mainTagline": "Your Trusted Tech Partner",
-        "subTagline": "Selling · Servicing · Supporting"
+    "featuredProducts": {
+      "enabled": true,
+      "label": "Featured Products"
     },
-    "profile": {
-        "name": "TechNova Electronics",
-        "role": "🏪 Premium Electronics Store",
-        "bio": "Your one-stop destination for mobiles, laptops, home appliances, accessories & expert repair services. Genuine products. Best prices. Trusted by 10,000+ customers.",
-        "badges": [
-            {
-                "text": "✓ GST Registered",
-                "className": ""
-            },
-            {
-                "text": "ISI Certified",
-                "className": "green"
-            },
-            {
-                "text": "Since 2010",
-                "className": "orange"
-            }
-        ],
-        "actions": {
-            "call": "Call Us",
-            "whatsapp": "WhatsApp",
-            "save": "Save",
-            "email": "Email",
-            "direction": "Direction",
-            "enquiry": "Enquire"
-        }
+    "repairServices": {
+      "enabled": true,
+      "label": "Repair Services"
     },
-    "sections": {
-        "whyChoose": "Why Choose Us",
-        "categories": "Product Categories",
-        "featuredProducts": "Featured Products",
-        "repairServices": "Repair Services",
-        "brands": "Brands We Carry",
-        "gallery": "Our Store Gallery",
-        "hours": "Store Hours",
-        "location": "Our Location",
-        "follow": "Follow & Connect",
-        "payments": "Payment Options",
-        "enquiry": "Send Enquiry",
-        "qr": "QR Code & Contact"
+    "brands": {
+      "enabled": true,
+      "label": "Brands We Carry"
     },
-    "featured": {
-        "badge": "Add to Cart",
-        "emiNote": "Easy EMI starting ₹799/month · 0% interest · Instant approval"
+    "gallery": {
+      "enabled": true,
+      "label": "Store Gallery"
     },
-    "repair": {
-        "badge": "Expert Techs"
-    },
-    "whyChoose": [
-        {
-            "text": "100% Genuine Products",
-            "tone": "green",
-            "icon": "shield"
-        },
-        {
-            "text": "Free Doorstep Delivery",
-            "tone": "blue",
-            "icon": "truck"
-        },
-        {
-            "text": "1-Year Warranty",
-            "tone": "green",
-            "icon": "clock"
-        },
-        {
-            "text": "Best Price Guarantee",
-            "tone": "orange",
-            "icon": "price"
-        },
-        {
-            "text": "Expert Consultation",
-            "tone": "blue",
-            "icon": "chat"
-        },
-        {
-            "text": "Easy EMI Available",
-            "tone": "green",
-            "icon": "refresh"
-        }
-    ],
-    "categories": [
-        {
-            "key": "smartphones",
-            "name": "Smartphones",
-            "count": "50+ models",
-            "query": "Smartphones"
-        },
-        {
-            "key": "laptops-pc",
-            "name": "Laptops & PC",
-            "count": "30+ models",
-            "query": "Laptops & Computers"
-        },
-        {
-            "key": "home-appliances",
-            "name": "Home Appliances",
-            "count": "80+ items",
-            "query": "Home Appliances"
-        },
-        {
-            "key": "smart-tv",
-            "name": "Smart TV",
-            "count": "25+ models",
-            "query": "Smart TV & Audio"
-        },
-        {
-            "key": "accessories",
-            "name": "Accessories",
-            "count": "200+ items",
-            "query": "Accessories"
-        },
-        {
-            "key": "gaming",
-            "name": "Gaming",
-            "count": "40+ items",
-            "query": "Gaming & Wearables"
-        }
-    ],
-    "products": [
-        {
-            "id": 1,
-            "name": "Samsung Galaxy S24 5G",
-            "brand": "Samsung",
-            "spec": "6.2\" · 8GB RAM · 256GB · AI Camera",
-            "category_key": "smartphones",
-            "price": 74999,
-            "oldPrice": 84999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-            "tag": "HOT",
-            "tagColor": "#f44336"
-        },
-        {
-            "id": 2,
-            "name": "OnePlus Nord CE4 5G",
-            "brand": "OnePlus",
-            "spec": "6.7\" · 8GB · 128GB · 100W Charge",
-            "category_key": "smartphones",
-            "price": 24999,
-            "oldPrice": 29999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-            "tag": "SALE",
-            "tagColor": "#ff6d00"
-        },
-        {
-            "id": 3,
-            "name": "HP Victus 15 Gaming Laptop",
-            "brand": "HP",
-            "spec": "i5-13th · 16GB · 512GB SSD · RTX 3050",
-            "category_key": "laptops-pc",
-            "price": 69999,
-            "oldPrice": 79999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-            "tag": "NEW",
-            "tagColor": "#00c853"
-        },
-        {
-            "id": 4,
-            "name": "boAt Rockerz 550 Headphones",
-            "brand": "boAt",
-            "spec": "70Hr Battery · Deep Bass · Foldable",
-            "category_key": "accessories",
-            "price": 1499,
-            "oldPrice": 2999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-            "tag": "TRENDING",
-            "tagColor": "#1565c0"
-        },
-        {
-            "id": 5,
-            "name": "Xiaomi 43\" Smart TV",
-            "brand": "Xiaomi",
-            "spec": "4K · Android TV · Dolby Audio",
-            "category_key": "smart-tv",
-            "price": 26999,
-            "oldPrice": 32999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-            "tag": "HOT",
-            "tagColor": "#f44336"
-        },
-        {
-            "id": 6,
-            "name": "Apple AirPods Pro (2nd Gen)",
-            "brand": "Apple",
-            "spec": "Active Noise Cancellation · H2 Chip",
-            "category_key": "accessories",
-            "price": 24900,
-            "oldPrice": 26900,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-            "tag": "NEW",
-            "tagColor": "#00c853"
-        }
-    ],
-    "repairServices": [
-        {
-            "name": "Mobile Screen Replacement",
-            "sub": "OEM quality · 90-day warranty",
-            "price": "₹799+",
-            "query": "Mobile Screen Replacement",
-            "product_image": "#e3f2fd",
-            "stroke": "#1565c0",
-            "icon": "mobile"
-        },
-        {
-            "name": "Laptop Repair & Service",
-            "sub": "Software & hardware · All brands",
-            "price": "₹499+",
-            "query": "Laptop Repair & Service",
-            "product_image": "#f3e5f5",
-            "stroke": "#7b1fa2",
-            "icon": "laptop"
-        },
-        {
-            "name": "AC / Fridge Servicing",
-            "sub": "Gas refill · Cleaning · Parts",
-            "price": "₹399+",
-            "query": "AC/Fridge Servicing",
-            "product_image": "#e0f7fa",
-            "stroke": "#00838f",
-            "icon": "ac"
-        },
-        {
-            "name": "Battery Replacement",
-            "sub": "Mobile & laptop batteries",
-            "price": "₹299+",
-            "query": "Battery Replacement",
-            "product_image": "#fff3e0",
-            "stroke": "#e65100",
-            "icon": "battery"
-        }
-    ],
-    "brands": [
-        "Samsung",
-        "Apple",
-        "OnePlus",
-        "Xiaomi",
-        "Sony",
-        "LG",
-        "Lenovo",
-        "HP",
-        "Dell",
-        "Realme",
-        "Bosch",
-        "Philips"
-    ],
-    "gallery": [
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
-    ],
     "hours": {
-        "openLabel": "Open Now",
-        "rows": [
-            {
-                "day": "Monday",
-                "time": "10:00 AM – 9:00 PM",
-                "rowClass": "open-row"
-            },
-            {
-                "day": "Tuesday",
-                "time": "10:00 AM – 9:00 PM",
-                "rowClass": "open-row"
-            },
-            {
-                "day": "Wednesday",
-                "time": "10:00 AM – 9:00 PM"
-            },
-            {
-                "day": "Thursday",
-                "time": "10:00 AM – 9:00 PM"
-            },
-            {
-                "day": "Friday",
-                "time": "10:00 AM – 9:00 PM"
-            },
-            {
-                "day": "Saturday",
-                "time": "09:00 AM – 10:00 PM"
-            },
-            {
-                "day": "Sunday",
-                "time": "Closed",
-                "timeClass": "closed"
-            }
-        ]
+      "enabled": true,
+      "label": "Store Hours"
     },
     "location": {
-        "titleLine": "42, Tech Market, Nehru Place",
-        "addressLine": " New Delhi, Delhi – 110019, India",
-        "mapLabel": "Open in Maps"
+      "enabled": true,
+      "label": "Our Location"
     },
-    "socialLinks": [
-        {
-            "type": "whatsapp",
-            "name": "WhatsApp",
-            "value": "+91 98765 43210",
-            "action": "openWA"
-        },
-        {
-            "type": "facebook",
-            "name": "Facebook",
-            "value": "facebook.com/technovaelec"
-        },
-        {
-            "type": "instagram",
-            "name": "Instagram",
-            "value": "@technova_electronics"
-        },
-        {
-            "type": "youtube",
-            "name": "YouTube",
-            "value": "TechNova Electronics"
-        }
-    ],
-    "payments": [
-        {
-            "name": "UPI / QR Scan",
-            "detail": "GPay · PhonePe · Paytm · BHIM",
-            "badge": "Instant",
-            "icon": "upi",
-            "stroke": "#3b82f6"
-        },
-        {
-            "name": "Debit / Credit Card",
-            "detail": "Visa · Mastercard · RuPay",
-            "badge": "EMI OK",
-            "icon": "card",
-            "stroke": "#e65100"
-        },
-        {
-            "name": "Net Banking",
-            "detail": "All major banks supported",
-            "badge": "Secure",
-            "icon": "bank",
-            "stroke": "#2e7d32"
-        },
-        {
-            "name": "Cash on Delivery",
-            "detail": "Available for local orders",
-            "badge": "COD",
-            "icon": "cash",
-            "stroke": "#1565c0"
-        }
-    ],
-    "enquiryForm": {
-        "nameLabel": "Your Name *",
-        "namePlaceholder": "Full Name",
-        "phoneLabel": "Phone *",
-        "phonePlaceholder": "+91 XXXXX XXXXX",
-        "emailLabel": "Email (optional)",
-        "emailPlaceholder": "you@email.com",
-        "categoryLabel": "Category",
-        "categoryPlaceholder": "Select Category",
-        "messageLabel": "Message / Requirements",
-        "messagePlaceholder": "Tell us what you're looking for — model, budget, or repair issue...",
-        "categories": [
-            "Smartphones",
-            "Laptops & Computers",
-            "Home Appliances",
-            "Smart TV & Audio",
-            "Repair Service",
-            "Accessories",
-            "Other"
-        ],
-        "submitLabel": "Send via WhatsApp",
-        "successTitle": "Enquiry Sent!",
-        "successText": "We'll get back to you shortly.",
-        "successButton": "Send another enquiry",
-        "defaultCategory": "—",
-        "defaultEmail": "—",
-        "defaultMessage": "No message"
+    "follow": {
+      "enabled": true,
+      "label": "Follow & Connect"
+    },
+    "payments": {
+      "enabled": true,
+      "label": "Payment Options"
     },
     "qr": {
-        "note": "Scan to visit our website or save contact",
-        "downloadLabel": "Download QR",
-        "saveLabel": "Save Contact"
+      "enabled": true,
+      "label": "QR Code"
     },
-    "floatBar": {
-        "call": "Call",
-        "whatsapp": "WhatsApp",
-        "save": "Save",
-        "cart": "Cart"
-    },
-    "cart": {
-        "title": "Your Cart",
-        "empty": "Your cart is empty.<br>Add products to enquire or order!",
-        "totalLabel": "Total",
-        "orderButton": "Enquire via WhatsApp",
-        "waHeader": "🛒 *Product Enquiry – {{shopName}}*",
-        "waLine": "• {{brand}} {{name}} x{{qty}} = ₹{{total}}",
-        "waTotal": "💰 *Total: ₹{{total}}*",
-        "waFooter": "Please confirm availability & best offer!"
-    },
-    "share": {
-        "title": "Share TechNova Electronics",
-        "whatsapp": "WhatsApp",
-        "facebook": "Facebook",
-        "copy": "Copy Link",
-        "more": "More",
-        "cancel": "Cancel"
-    },
-    "promo": {
-        "enabled": false,
-        "delayMs": 2200,
-        "title": "Limited Time Offer",
-        "text": "Special deals on smartphones, laptops and accessories.",
-        "cta": "Chat on WhatsApp"
-    },
-    "messages": {
-        "defaultToast": "Done!",
-        "waGreeting": "Hi! I want to enquire about your products.",
-        "quickEnquiryTemplate": "Hi! I'm interested in: *{{item}}*. Please share details & price.",
-        "contactSaved": "Contact saved to your phone!",
-        "qrNotReady": "QR not ready",
-        "qrDownloaded": "QR Code downloaded!",
-        "linkCopied": "Link copied to clipboard!",
-        "namePhoneRequired": "Name and phone are required",
-        "formTemplate": "📱 *Enquiry – {{shopName}}*\n👤 {{name}}\n📞 {{phone}}\n📧 {{email}}\n🗂 Category: {{category}}\n💬 {{message}}",
-        "shareTemplate": "Check out {{shopName}}: {{website}}"
-    },
-    "files": {
-        "vcard": "TechNovaElectronics.vcf",
-        "qr": "technova_qr.png"
+    "enquiry": {
+      "enabled": true,
+      "label": "Send Enquiry"
     }
+  },
+  "meta": {
+    "title": "TechNova Electronics",
+    "description": "",
+    "keywords": "",
+    "og_image": ""
+  },
+  "assets": {
+    "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "profileAlt": "TechNova Electronics profile photo",
+    "qrCodeImage": ""
+  },
+  "shop": {
+    "name": "TechNova Electronics",
+    "tagline": "Your Trusted Tech Partner – Selling · Servicing · Supporting",
+    "phone": "+919876543210",
+    "whatsapp": "919876543210",
+    "email": "info@technovaelectronics.com",
+    "address": "42, Tech Market, Nehru Place, New Delhi 110019",
+    "maps": "https://maps.google.com/?q=Nehru+Place+New+Delhi",
+    "website": "https://technovaelectronics.com"
+  },
+  "banner": {
+    "label": "⚡ Electronics",
+    "share": "Share",
+    "mainTagline": "Your Trusted Tech Partner",
+    "subTagline": "Selling · Servicing · Supporting"
+  },
+  "profile": {
+    "name": "TechNova Electronics",
+    "role": "🏪 Premium Electronics Store",
+    "bio": "Your one-stop destination for mobiles, laptops, home appliances, accessories & expert repair services. Genuine products. Best prices. Trusted by 10,000+ customers.",
+    "badges": [
+      {
+        "text": "✓ GST Registered",
+        "className": ""
+      },
+      {
+        "text": "ISI Certified",
+        "className": "green"
+      },
+      {
+        "text": "Since 2010",
+        "className": "orange"
+      }
+    ],
+    "actions": {
+      "call": "Call Us",
+      "whatsapp": "WhatsApp",
+      "save": "Save",
+      "email": "Email",
+      "direction": "Direction",
+      "enquiry": "Enquire"
+    }
+  },
+  "sections": {
+    "whyChoose": "Why Choose Us",
+    "categories": "Product Categories",
+    "featuredProducts": "Featured Products",
+    "repairServices": "Repair Services",
+    "brands": "Brands We Carry",
+    "gallery": "Our Store Gallery",
+    "hours": "Store Hours",
+    "location": "Our Location",
+    "follow": "Follow & Connect",
+    "payments": "Payment Options",
+    "enquiry": "Send Enquiry",
+    "qr": "QR Code & Contact"
+  },
+  "featured": {
+    "badge": "Add to Cart",
+    "emiNote": "Easy EMI starting ₹799/month · 0% interest · Instant approval"
+  },
+  "repair": {
+    "badge": "Expert Techs"
+  },
+  "whyChoose": [
+    {
+      "text": "100% Genuine Products",
+      "tone": "green",
+      "icon": "shield"
+    },
+    {
+      "text": "Free Doorstep Delivery",
+      "tone": "blue",
+      "icon": "truck"
+    },
+    {
+      "text": "1-Year Warranty",
+      "tone": "green",
+      "icon": "clock"
+    },
+    {
+      "text": "Best Price Guarantee",
+      "tone": "orange",
+      "icon": "price"
+    },
+    {
+      "text": "Expert Consultation",
+      "tone": "blue",
+      "icon": "chat"
+    },
+    {
+      "text": "Easy EMI Available",
+      "tone": "green",
+      "icon": "refresh"
+    }
+  ],
+  "categories": [
+    {
+      "key": "smartphones",
+      "name": "Smartphones",
+      "count": "50+ models",
+      "query": "Smartphones"
+    },
+    {
+      "key": "laptops-pc",
+      "name": "Laptops & PC",
+      "count": "30+ models",
+      "query": "Laptops & Computers"
+    },
+    {
+      "key": "home-appliances",
+      "name": "Home Appliances",
+      "count": "80+ items",
+      "query": "Home Appliances"
+    },
+    {
+      "key": "smart-tv",
+      "name": "Smart TV",
+      "count": "25+ models",
+      "query": "Smart TV & Audio"
+    },
+    {
+      "key": "accessories",
+      "name": "Accessories",
+      "count": "200+ items",
+      "query": "Accessories"
+    },
+    {
+      "key": "gaming",
+      "name": "Gaming",
+      "count": "40+ items",
+      "query": "Gaming & Wearables"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy S24 5G",
+      "brand": "Samsung",
+      "spec": "6.2\" · 8GB RAM · 256GB · AI Camera",
+      "category_key": "smartphones",
+      "price": 74999,
+      "oldPrice": 84999,
+      "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+      "tag": "HOT",
+      "tagColor": "#f44336"
+    },
+    {
+      "id": 2,
+      "name": "OnePlus Nord CE4 5G",
+      "brand": "OnePlus",
+      "spec": "6.7\" · 8GB · 128GB · 100W Charge",
+      "category_key": "smartphones",
+      "price": 24999,
+      "oldPrice": 29999,
+      "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+      "tag": "SALE",
+      "tagColor": "#ff6d00"
+    },
+    {
+      "id": 3,
+      "name": "HP Victus 15 Gaming Laptop",
+      "brand": "HP",
+      "spec": "i5-13th · 16GB · 512GB SSD · RTX 3050",
+      "category_key": "laptops-pc",
+      "price": 69999,
+      "oldPrice": 79999,
+      "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+      "tag": "NEW",
+      "tagColor": "#00c853"
+    },
+    {
+      "id": 4,
+      "name": "boAt Rockerz 550 Headphones",
+      "brand": "boAt",
+      "spec": "70Hr Battery · Deep Bass · Foldable",
+      "category_key": "accessories",
+      "price": 1499,
+      "oldPrice": 2999,
+      "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+      "tag": "TRENDING",
+      "tagColor": "#1565c0"
+    },
+    {
+      "id": 5,
+      "name": "Xiaomi 43\" Smart TV",
+      "brand": "Xiaomi",
+      "spec": "4K · Android TV · Dolby Audio",
+      "category_key": "smart-tv",
+      "price": 26999,
+      "oldPrice": 32999,
+      "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+      "tag": "HOT",
+      "tagColor": "#f44336"
+    },
+    {
+      "id": 6,
+      "name": "Apple AirPods Pro (2nd Gen)",
+      "brand": "Apple",
+      "spec": "Active Noise Cancellation · H2 Chip",
+      "category_key": "accessories",
+      "price": 24900,
+      "oldPrice": 26900,
+      "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+      "tag": "NEW",
+      "tagColor": "#00c853"
+    }
+  ],
+  "repairServices": [
+    {
+      "name": "Mobile Screen Replacement",
+      "sub": "OEM quality · 90-day warranty",
+      "price": "₹799+",
+      "query": "Mobile Screen Replacement",
+      "product_image": "#e3f2fd",
+      "stroke": "#1565c0",
+      "icon": "mobile"
+    },
+    {
+      "name": "Laptop Repair & Service",
+      "sub": "Software & hardware · All brands",
+      "price": "₹499+",
+      "query": "Laptop Repair & Service",
+      "product_image": "#f3e5f5",
+      "stroke": "#7b1fa2",
+      "icon": "laptop"
+    },
+    {
+      "name": "AC / Fridge Servicing",
+      "sub": "Gas refill · Cleaning · Parts",
+      "price": "₹399+",
+      "query": "AC/Fridge Servicing",
+      "product_image": "#e0f7fa",
+      "stroke": "#00838f",
+      "icon": "ac"
+    },
+    {
+      "name": "Battery Replacement",
+      "sub": "Mobile & laptop batteries",
+      "price": "₹299+",
+      "query": "Battery Replacement",
+      "product_image": "#fff3e0",
+      "stroke": "#e65100",
+      "icon": "battery"
+    }
+  ],
+  "brands": [
+    "Samsung",
+    "Apple",
+    "OnePlus",
+    "Xiaomi",
+    "Sony",
+    "LG",
+    "Lenovo",
+    "HP",
+    "Dell",
+    "Realme",
+    "Bosch",
+    "Philips"
+  ],
+  "gallery": [
+    "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+    "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+  ],
+  "hours": {
+    "openLabel": "Open Now",
+    "rows": [
+      {
+        "day": "Monday",
+        "time": "10:00 AM – 9:00 PM",
+        "rowClass": "open-row"
+      },
+      {
+        "day": "Tuesday",
+        "time": "10:00 AM – 9:00 PM",
+        "rowClass": "open-row"
+      },
+      {
+        "day": "Wednesday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Thursday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Friday",
+        "time": "10:00 AM – 9:00 PM"
+      },
+      {
+        "day": "Saturday",
+        "time": "09:00 AM – 10:00 PM"
+      },
+      {
+        "day": "Sunday",
+        "time": "Closed",
+        "timeClass": "closed"
+      }
+    ]
+  },
+  "location": {
+    "titleLine": "42, Tech Market, Nehru Place",
+    "addressLine": " New Delhi, Delhi – 110019, India",
+    "mapLabel": "Open in Maps"
+  },
+  "socialLinks": [
+    {
+      "type": "whatsapp",
+      "name": "WhatsApp",
+      "value": "+91 98765 43210",
+      "action": "openWA"
+    },
+    {
+      "type": "facebook",
+      "name": "Facebook",
+      "value": "facebook.com/technovaelec"
+    },
+    {
+      "type": "instagram",
+      "name": "Instagram",
+      "value": "@technova_electronics"
+    },
+    {
+      "type": "youtube",
+      "name": "YouTube",
+      "value": "TechNova Electronics"
+    }
+  ],
+  "payments": [
+    {
+      "name": "UPI / QR Scan",
+      "detail": "GPay · PhonePe · Paytm · BHIM",
+      "badge": "Instant",
+      "icon": "upi",
+      "stroke": "#3b82f6"
+    },
+    {
+      "name": "Debit / Credit Card",
+      "detail": "Visa · Mastercard · RuPay",
+      "badge": "EMI OK",
+      "icon": "card",
+      "stroke": "#e65100"
+    },
+    {
+      "name": "Net Banking",
+      "detail": "All major banks supported",
+      "badge": "Secure",
+      "icon": "bank",
+      "stroke": "#2e7d32"
+    },
+    {
+      "name": "Cash on Delivery",
+      "detail": "Available for local orders",
+      "badge": "COD",
+      "icon": "cash",
+      "stroke": "#1565c0"
+    }
+  ],
+  "enquiryForm": {
+    "nameLabel": "Your Name *",
+    "namePlaceholder": "Full Name",
+    "phoneLabel": "Phone *",
+    "phonePlaceholder": "+91 XXXXX XXXXX",
+    "emailLabel": "Email (optional)",
+    "emailPlaceholder": "you@email.com",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Select Category",
+    "messageLabel": "Message / Requirements",
+    "messagePlaceholder": "Tell us what you're looking for — model, budget, or repair issue...",
+    "categories": [
+      "Smartphones",
+      "Laptops & Computers",
+      "Home Appliances",
+      "Smart TV & Audio",
+      "Repair Service",
+      "Accessories",
+      "Other"
+    ],
+    "submitLabel": "Send via WhatsApp",
+    "successTitle": "Enquiry Sent!",
+    "successText": "We'll get back to you shortly.",
+    "successButton": "Send another enquiry",
+    "defaultCategory": "—",
+    "defaultEmail": "—",
+    "defaultMessage": "No message"
+  },
+  "qr": {
+    "note": "Scan to visit our website or save contact",
+    "downloadLabel": "Download QR",
+    "saveLabel": "Save Contact"
+  },
+  "floatBar": {
+    "call": "Call",
+    "whatsapp": "WhatsApp",
+    "save": "Save",
+    "cart": "Cart"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty.<br>Add products to enquire or order!",
+    "totalLabel": "Total",
+    "orderButton": "Enquire via WhatsApp",
+    "waHeader": "🛒 *Product Enquiry – {{shopName}}*",
+    "waLine": "• {{brand}} {{name}} x{{qty}} = ₹{{total}}",
+    "waTotal": "💰 *Total: ₹{{total}}*",
+    "waFooter": "Please confirm availability & best offer!"
+  },
+  "share": {
+    "title": "Share TechNova Electronics",
+    "whatsapp": "WhatsApp",
+    "facebook": "Facebook",
+    "copy": "Copy Link",
+    "more": "More",
+    "cancel": "Cancel"
+  },
+  "promo": {
+    "enabled": false,
+    "delayMs": 2200,
+    "title": "Limited Time Offer",
+    "text": "Special deals on smartphones, laptops and accessories.",
+    "cta": "Chat on WhatsApp"
+  },
+  "messages": {
+    "defaultToast": "Done!",
+    "waGreeting": "Hi! I want to enquire about your products.",
+    "quickEnquiryTemplate": "Hi! I'm interested in: *{{item}}*. Please share details & price.",
+    "contactSaved": "Contact saved to your phone!",
+    "qrNotReady": "QR not ready",
+    "qrDownloaded": "QR Code downloaded!",
+    "linkCopied": "Link copied to clipboard!",
+    "namePhoneRequired": "Name and phone are required",
+    "formTemplate": "📱 *Enquiry – {{shopName}}*\n👤 {{name}}\n📞 {{phone}}\n📧 {{email}}\n🗂 Category: {{category}}\n💬 {{message}}",
+    "shareTemplate": "Check out {{shopName}}: {{website}}"
+  },
+  "files": {
+    "vcard": "TechNovaElectronics.vcf",
+    "qr": "technova_qr.png"
+  },
+  "_field_config": {
+    "meta": {
+      "title": {
+        "label": "Page Title",
+        "type": "text"
+      },
+      "description": {
+        "label": "Meta Description",
+        "type": "textarea"
+      },
+      "keywords": {
+        "label": "Meta Keywords",
+        "type": "text"
+      },
+      "og_image": {
+        "label": "OG Share Image",
+        "type": "image"
+      }
+    },
+    "socialLinks": {
+      "type": {
+        "label": "Platform",
+        "type": "select",
+        "options": [
+          {
+            "value": "whatsapp",
+            "label": "WhatsApp"
+          },
+          {
+            "value": "facebook",
+            "label": "Facebook"
+          },
+          {
+            "value": "instagram",
+            "label": "Instagram"
+          },
+          {
+            "value": "youtube",
+            "label": "YouTube"
+          },
+          {
+            "value": "twitter",
+            "label": "Twitter / X"
+          },
+          {
+            "value": "linkedin",
+            "label": "LinkedIn"
+          },
+          {
+            "value": "tiktok",
+            "label": "TikTok"
+          },
+          {
+            "value": "telegram",
+            "label": "Telegram"
+          },
+          {
+            "value": "pinterest",
+            "label": "Pinterest"
+          },
+          {
+            "value": "snapchat",
+            "label": "Snapchat"
+          },
+          {
+            "value": "website",
+            "label": "Website"
+          },
+          {
+            "value": "email",
+            "label": "Email"
+          },
+          {
+            "value": "phone",
+            "label": "Phone"
+          }
+        ]
+      },
+      "name": {
+        "label": "Display Name",
+        "type": "text"
+      },
+      "value": {
+        "label": "Username / Handle / Number",
+        "type": "text"
+      },
+      "url": {
+        "label": "Profile URL",
+        "type": "url"
+      },
+      "action": {
+        "label": "Action",
+        "type": "hidden"
+      },
+      "icon": {
+        "label": "Icon",
+        "type": "hidden"
+      },
+      "iconClass": {
+        "label": "Icon Class",
+        "type": "hidden"
+      },
+      "iconColor": {
+        "label": "Icon Color",
+        "type": "hidden"
+      }
+    },
+    "_common": {
+      "name": {
+        "label": "Business Name",
+        "type": "text",
+        "sync": [
+          "shop.name",
+          "meta.title",
+          "profile.name"
+        ]
+      },
+      "tagline": {
+        "label": "Tagline / Subtitle",
+        "type": "text",
+        "sync": [
+          "shop.tagline"
+        ]
+      },
+      "phone": {
+        "label": "Phone Number",
+        "type": "tel",
+        "sync": [
+          "shop.phone"
+        ]
+      },
+      "whatsapp": {
+        "label": "WhatsApp Number",
+        "type": "tel",
+        "sync": [
+          "shop.whatsapp"
+        ]
+      },
+      "email": {
+        "label": "Email Address",
+        "type": "email",
+        "sync": [
+          "shop.email"
+        ]
+      },
+      "address": {
+        "label": "Full Address",
+        "type": "textarea",
+        "sync": [
+          "shop.address"
+        ]
+      },
+      "maps": {
+        "label": "Google Maps URL",
+        "type": "url",
+        "sync": [
+          "shop.maps"
+        ]
+      },
+      "website": {
+        "label": "Website URL",
+        "type": "url",
+        "sync": [
+          "shop.website"
+        ]
+      },
+      "social": {
+        "label": "Social Media Links",
+        "type": "list",
+        "columns": [
+          "name",
+          "url"
+        ],
+        "help": "Add your social media profiles (name & link)"
+      }
+    }
+  },
+  "_common": {
+    "name": "TechNova Electronics",
+    "tagline": "Your Trusted Tech Partner – Selling · Servicing · Supporting",
+    "phone": "+919876543210",
+    "whatsapp": "919876543210",
+    "email": "info@technovaelectronics.com",
+    "address": "42, Tech Market, Nehru Place, New Delhi 110019",
+    "maps": "https://maps.google.com/?q=Nehru+Place+New+Delhi",
+    "website": "https://technovaelectronics.com",
+    "social": [
+      {
+        "name": "Facebook",
+        "url": ""
+      },
+      {
+        "name": "Instagram",
+        "url": ""
+      },
+      {
+        "name": "YouTube",
+        "url": ""
+      },
+      {
+        "name": "WhatsApp",
+        "url": ""
+      },
+      {
+        "name": "Twitter / X",
+        "url": ""
+      }
+    ]
+  }
 }

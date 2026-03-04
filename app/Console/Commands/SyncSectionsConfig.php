@@ -20,7 +20,7 @@ class SyncSectionsConfig extends Command
      *
      * @var string
      */
-    protected $description = 'Sync _sections_config from templates to existing vCard data.json files';
+    protected $description = 'Sync and merge _sections_config and _field_config from templates to existing vCard data.json files';
 
     /**
      * Execute the console command.
@@ -69,14 +69,7 @@ class SyncSectionsConfig extends Command
                     continue;
                 }
 
-                // Check if _sections_config already exists
-                if (isset($data['_sections_config'])) {
-                    $skipped++;
-                    $bar->advance();
-                    continue;
-                }
-
-                // Load template's default.json to get _sections_config
+                // Load template's default.json to merge _sections_config and _field_config
                 $templatePath = base_path('vcard-template/' . $vcard->template_name . '/default.json');
                 
                 if (!file_exists($templatePath)) {
@@ -98,8 +91,24 @@ class SyncSectionsConfig extends Command
                     continue;
                 }
 
-                // Add _sections_config to vCard's data
-                $data = ['_sections_config' => $templateData['_sections_config']] + $data;
+                // Merge _sections_config: add any new keys from template without overwriting existing per-vCard values
+                $existingConfig = $data['_sections_config'] ?? [];
+                $mergedConfig = array_merge($templateData['_sections_config'], $existingConfig);
+                $data['_sections_config'] = $mergedConfig;
+
+                // Merge _field_config: add any new section field configs from template
+                if (isset($templateData['_field_config'])) {
+                    $existingFieldConfig = $data['_field_config'] ?? [];
+                    $data['_field_config'] = array_merge($templateData['_field_config'], $existingFieldConfig);
+                }
+
+                // Ensure meta object has SEO fields (description, keywords, og_image)
+                if (isset($data['meta'])) {
+                    $data['meta'] = array_merge(
+                        ['description' => '', 'keywords' => '', 'og_image' => ''],
+                        $data['meta']
+                    );
+                }
 
                 // Save updated data.json
                 Storage::disk('public')->put(

@@ -42,15 +42,65 @@ class ClientSectionEditor extends Component
         if (isset($data['_sections_config']) && is_array($data['_sections_config'])) {
             $this->sectionsConfig = $data['_sections_config'];
         }
-        
-        // Filter out metadata keys (those starting with _)
-        $this->sections = array_filter(array_keys($data), function ($key) {
-            return !str_starts_with($key, '_');
-        });
+
+        // Bootstrap _common for existing vCards that don't have it yet
+        if (!isset($data['_common'])) {
+            $tplJson = $this->loadTemplateDefaultJson();
+            $commonFieldCfg = $tplJson['_field_config']['_common'] ?? [];
+            if (!empty($commonFieldCfg)) {
+                $common = [];
+                foreach ($commonFieldCfg as $key => $cfg) {
+                    $syncPaths = $cfg['sync'] ?? [];
+                    $primaryPath = $syncPaths[0] ?? null;
+                    if ($primaryPath) {
+                        $parts = explode('.', $primaryPath, 2);
+                        if (count($parts) === 2 && isset($data[$parts[0]][$parts[1]])) {
+                            $common[$key] = $data[$parts[0]][$parts[1]];
+                        }
+                    } else {
+                        // No sync path — initialize with type-appropriate default
+                        $common[$key] = ($cfg['type'] ?? 'text') === 'list' ? [] : '';
+                    }
+                }
+                if (!empty($common)) {
+                    $data['_common'] = $common;
+                }
+            }
+        } else {
+            // _common exists — fill in any NEW fields added to _field_config._common since last bootstrap
+            $tplJson = $this->loadTemplateDefaultJson();
+            $commonFieldCfg = $tplJson['_field_config']['_common'] ?? [];
+            foreach ($commonFieldCfg as $key => $cfg) {
+                if (!array_key_exists($key, $data['_common'])) {
+                    $syncPaths = $cfg['sync'] ?? [];
+                    $primaryPath = $syncPaths[0] ?? null;
+                    if ($primaryPath) {
+                        $parts = explode('.', $primaryPath, 2);
+                        $data['_common'][$key] = (count($parts) === 2 && isset($data[$parts[0]][$parts[1]]))
+                            ? $data[$parts[0]][$parts[1]] : '';
+                    } else {
+                        $data['_common'][$key] = ($cfg['type'] ?? 'text') === 'list' ? [] : '';
+                    }
+                }
+            }
+        }
+        $allSections = array_values(array_filter(array_keys($data), function ($key) {
+            if ($key === 'files') return false;
+            return $key === '_common' || !str_starts_with($key, '_');
+        }));
+        $commonIdx = array_search('_common', $allSections);
+        if ($commonIdx !== false && $commonIdx > 0) {
+            array_splice($allSections, $commonIdx, 1);
+            array_unshift($allSections, '_common');
+        }
+        $this->sections = $allSections;
 
         if ($section === null) {
-            $this->showIndex = true;
-            return;
+            $section = in_array('_common', $this->sections, true) ? '_common' : ($this->sections[0] ?? null);
+            if ($section === null) {
+                $this->showIndex = true;
+                return;
+            }
         }
 
         if (in_array($section, $this->sections, true)) {
@@ -87,11 +137,25 @@ class ClientSectionEditor extends Component
         $data = $this->loadJson();
         $data[$this->section] = $payload;
 
+        // Sync _common fields to their mapped paths in other sections
+        if ($this->section === '_common') {
+            $fieldConfigs = $data['_field_config']['_common'] ?? [];
+            foreach ($payload as $key => $val) {
+                $syncPaths = $fieldConfigs[$key]['sync'] ?? [];
+                foreach ($syncPaths as $dotPath) {
+                    $parts = explode('.', $dotPath, 2);
+                    if (count($parts) === 2 && isset($data[$parts[0]]) && is_array($data[$parts[0]])) {
+                        $data[$parts[0]][$parts[1]] = $val;
+                    }
+                }
+            }
+        }
+
         $this->storeJson($data);
         $this->form = $payload;
         $this->uploads = [];
 
-        session()->flash('success', 'vCard data updated.');
+        $this->dispatch('notify', type: 'success', message: 'Changes saved successfully!');
     }
 
     public function saveAndNotify(): void
@@ -221,11 +285,7 @@ class ClientSectionEditor extends Component
                 continue;
             }
 
-            $ruleParts = $this->isImageKey($col) ? ['nullable'] : ['required'];
-            if ($this->isNumericKey($col)) {
-                $ruleParts[] = 'numeric';
-            }
-            $rules['newItem.' . $col] = implode('|', $ruleParts);
+            $rules['newItem.' . $col] = $this->ruleStringForField($col);
         }
 
         return $rules;
@@ -299,16 +359,19 @@ class ClientSectionEditor extends Component
             return null;
         }
 
-        if ($this->isSystemManagedKey($fieldKey) || $this->isOptionalTextKey($fieldKey)) {
+        return $this->ruleStringForField($fieldKey);
+    }
+
+    private function ruleStringForField(string $fieldKey): string
+    {
+        // Image, price/amount, system-managed, and known optional fields are nullable
+        if ($this->isImageKey($fieldKey)
+            || $this->isNumericKey($fieldKey)
+            || $this->isSystemManagedKey($fieldKey)
+            || $this->isOptionalTextKey($fieldKey)) {
             return 'nullable';
         }
-
-        $ruleParts = $this->isImageKey($fieldKey) ? ['nullable'] : ['required'];
-        if ($this->isNumericKey($fieldKey)) {
-            $ruleParts[] = 'numeric';
-        }
-
-        return implode('|', $ruleParts);
+        return 'required';
     }
 
     private function isSystemManagedKey(string $key): bool
@@ -407,6 +470,30 @@ class ClientSectionEditor extends Component
         $this->removeRow($path, $index);
         $this->save();
         $this->dispatch('notify', type: 'success', message: 'Item deleted successfully!');
+    }
+
+    public function selectSection(string $section): void
+    {
+        if ($this->subscriptionBlocked) {
+            $this->dispatch('notify', type: 'error', message: $this->subscriptionMessage);
+            return;
+        }
+        if (!in_array($section, $this->sections, true)) {
+            return;
+        }
+        $this->section  = $section;
+        $this->uploads  = [];
+        $this->newItem  = [];
+
+        $data = $this->loadJson();
+        $sectionData = $data[$section] ?? [];
+        if (is_array($sectionData) && !empty($sectionData)) {
+            $keys = array_keys($sectionData);
+            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+                $sectionData = array_values($sectionData);
+            }
+        }
+        $this->form = $sectionData;
     }
 
     public function toggleSection(string $section): void
@@ -508,19 +595,35 @@ class ClientSectionEditor extends Component
         return $payload;
     }
 
+    private function loadTemplateDefaultJson(): array
+    {
+        $templateKey = $this->vcard->template_key ?? '';
+        if (!$templateKey) return [];
+        $path = base_path("vcard-template/{$templateKey}/default.json");
+        if (!file_exists($path)) return [];
+        return json_decode(file_get_contents($path), true) ?? [];
+    }
+
     public function render()
     {
-        // Load field config for current section if available
+        // Load field config — prefer vCard data, fallback to template default
         $fieldConfig = [];
         if ($this->section) {
             $data = $this->loadJson();
             if (isset($data['_field_config'][$this->section])) {
                 $fieldConfig = $data['_field_config'][$this->section];
-                // Make it available globally for field partial
+            } else {
+                $tplJson = $this->loadTemplateDefaultJson();
+                $fieldConfig = $tplJson['_field_config'][$this->section] ?? [];
+            }
+            if (!empty($fieldConfig)) {
                 $GLOBALS['_field_config'] = $fieldConfig;
+            } else {
+                unset($GLOBALS['_field_config']);
             }
         }
-        
+        $GLOBALS['_current_section'] = $this->section;
+
         return view('livewire.vcards.client-section-editor', [
             'baseDomain' => config('vcard.base_domain'),
             'fieldConfig' => $fieldConfig,
