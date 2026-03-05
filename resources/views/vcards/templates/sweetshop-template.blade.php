@@ -53,11 +53,11 @@
             <div class="banner-top-bar">
                 <button class="share-btn" onclick="openShare()">
                     {!! getIcon("share", "ic-sm", "currentColor") !!}
-                    <span id="top-share-label">{{ data_get($data, "header.shareLabel") }}</span>
+                    <span id="top-share-label">Share</span>
                 </button>
                 <button class="save-btn-top" onclick="saveContact()">
                     {!! getIcon("save", "ic-sm", "currentColor") !!}
-                    <span id="top-save-label">{{ data_get($data, "header.saveContactLabel") }}</span>
+                    <span id="top-save-label">Save Contact</span>
                 </button>
             </div>
         </div>
@@ -79,27 +79,27 @@
             <div class="profile-action-btns">
                 <button class="pab call" onclick="callShop()">
                     {!! getIcon("phone", "ic", "#2e7d32") !!}
-                    <span id="action-call-label">{{ data_get($data, "profile.actions.call") }}</span>
+                    <span id="action-call-label">Call</span>
                 </button>
                 <button class="pab whatsapp" onclick="openWA()">
                     {!! getIcon("whatsapp", "ic", "#1b5e20") !!}
-                    <span id="action-whatsapp-label">{{ data_get($data, "profile.actions.whatsapp") }}</span>
+                    <span id="action-whatsapp-label">WhatsApp</span>
                 </button>
                 <button class="pab save" onclick="saveContact()">
                     {!! getIcon("save", "ic", "#e65100") !!}
-                    <span id="action-save-label">{{ data_get($data, "profile.actions.save") }}</span>
+                    <span id="action-save-label">Save</span>
                 </button>
                 <button class="pab email" onclick="emailShop()">
                     {!! getIcon("email", "ic", "#1565c0") !!}
-                    <span id="action-email-label">{{ data_get($data, "profile.actions.email") }}</span>
+                    <span id="action-email-label">Email</span>
                 </button>
                 <button class="pab direction" onclick="openMaps()">
                     {!! getIcon("directions", "ic", "#880e4f") !!}
-                    <span id="action-directions-label">{{ data_get($data, "profile.actions.directions") }}</span>
+                    <span id="action-directions-label">Directions</span>
                 </button>
                 <button class="pab share" onclick="openShare()">
                     {!! getIcon("share", "ic", "#6a1b9a") !!}
-                    <span id="action-share-label">{{ data_get($data, "profile.actions.share") }}</span>
+                    <span id="action-share-label">Share</span>
                 </button>
             </div>
         </div>
@@ -112,7 +112,7 @@
                 <div class="sec-icon">
                     {!! getIcon("location", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="location-title">{{ data_get($data, "sections.locationTitle") }}</div>
+                <div class="sec-title" id="location-title">Our Location</div>
             </div>
             <div class="sec-body">
                 <a
@@ -128,7 +128,7 @@
                         <span id="location-line2">{{ data_get($data, "location.line2") }}</span>
                         <span class="map-btn">
                             {!! getIcon("map-arrow", "ic-sm", "currentColor") !!}
-                            <span id="location-map-label">{{ data_get($data, "location.mapButtonLabel") }}</span>
+                            <span id="location-map-label">Open in Maps</span>
                         </span>
                     </div>
                 </a>
@@ -142,7 +142,7 @@
                 <div class="sec-icon">
                     {!! getIcon("globe", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="social-title">{{ data_get($data, "sections.socialTitle") }}</div>
+                <div class="sec-title" id="social-title">Social Links</div>
             </div>
             <div class="sec-body">
                 <div class="social-list" id="social-list">
@@ -178,7 +178,7 @@
                 <div class="sec-icon">
                     {!! getIcon("services", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="services-title">{{ data_get($data, "sections.servicesTitle") }}</div>
+                <div class="sec-title" id="services-title">Our Services</div>
             </div>
             <div class="sec-body">
                 <div class="services-grid" id="services-grid">
@@ -208,7 +208,7 @@
                 <div class="sec-icon">
                     {!! getIcon("products", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="products-title">{{ data_get($data, "sections.productsTitle") }}</div>
+                <div class="sec-title" id="products-title">Our Products</div>
             </div>
             <div class="sec-body">
                 <div class="products-grid" id="productsGrid">
@@ -272,7 +272,7 @@
                 <div class="sec-icon">
                     {!! getIcon("gallery", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="gallery-title">{{ data_get($data, "sections.galleryTitle") }}</div>
+                <div class="sec-title" id="gallery-title">Gallery</div>
             </div>
             <div class="sec-body">
                 <div class="gallery-grid" id="gallery-grid">
@@ -293,12 +293,12 @@
                 <div class="sec-icon">
                     {!! getIcon("clock", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="hours-title">{{ data_get($data, "sections.hoursTitle") }}</div>
+                <div class="sec-title" id="hours-title">Business Hours</div>
             </div>
             <div class="sec-body">
                 <div class="today-badge">
                     {!! getIcon("clock", "", "currentColor") !!}
-                    <span id="hours-badge-label">{{ data_get($data, "businessHours.badge") }}</span>
+                    <span id="hours-badge-label">Open Now</span>
                 </div>
                 <table class="hours-table">
                     <tbody id="hours-rows">
@@ -319,7 +319,7 @@
                 </table>
                 <div class="suggest-link" onclick="emailShop()">
                     {!! getIcon("info", "ic-sm", "currentColor") !!}
-                    <span id="suggest-hours-label">{{ data_get($data, "businessHours.suggestLabel") }}</span>
+                    <span id="suggest-hours-label">Suggest new hours</span>
                 </div>
             </div>
         </div>
@@ -331,7 +331,7 @@
                 <div class="sec-icon">
                     {!! getIcon("payment", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="payment-title">{{ data_get($data, "sections.paymentTitle") }}</div>
+                <div class="sec-title" id="payment-title">Payment Methods</div>
             </div>
             <div class="sec-body">
                 <div class="payment-list" id="payment-list">
@@ -375,7 +375,7 @@
                 <div class="sec-icon">
                     {!! getIcon("mail", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="contact-title">{{ data_get($data, "sections.contactTitle") }}</div>
+                <div class="sec-title" id="contact-title">Contact Us</div>
             </div>
             <div class="sec-body">
                 <div id="contactForm">
@@ -428,7 +428,7 @@
                     </div>
                     <button class="cf-submit" onclick="submitContact()">
                         {!! getIcon("send", "ic", "#fff") !!}
-                        <span id="contact-submit-label">{{ data_get($data, "contactForm.submitLabel") }}</span>
+                        <span id="contact-submit-label">Send Message</span>
                     </button>
                 </div>
                 <div
@@ -459,7 +459,7 @@
                     >{{ data_get($data, "contactForm.successDescription") }}</div>
                     <button class="cf-submit" onclick="resetContact()">
                         {!! getIcon("reset", "ic", "#fff") !!}
-                        <span id="contact-success-btn-label">{{ data_get($data, "contactForm.successButtonLabel") }}</span>
+                        <span id="contact-success-btn-label">Send Another</span>
                     </button>
                 </div>
             </div>
@@ -472,7 +472,7 @@
                 <div class="sec-icon">
                     {!! getIcon("qr", "ic", "currentColor") !!}
                 </div>
-                <div class="sec-title" id="qr-title">{{ data_get($data, "sections.qrTitle") }}</div>
+                <div class="sec-title" id="qr-title">Scan &amp; Save Our Contact</div>
             </div>
             <div class="sec-body">
                 <div class="qr-card-inner">
@@ -488,11 +488,11 @@
                     <div class="qr-actions">
                         <button class="qr-btn" onclick="downloadQR()">
                             {!! getIcon("download", "ic-sm", "currentColor") !!}
-                            <span id="qr-download-label">{{ data_get($data, "qr.downloadLabel") }}</span>
+                            <span id="qr-download-label">Download QR</span>
                         </button>
                         <button class="qr-btn" onclick="copyLink()">
                             {!! getIcon("link", "ic-sm", "currentColor") !!}
-                            <span id="qr-copy-label">{{ data_get($data, "qr.copyLabel") }}</span>
+                            <span id="qr-copy-label">Copy Link</span>
                         </button>
                     </div>
                 </div>
@@ -519,15 +519,15 @@
         <div class="float-bar">
             <button class="fab call-fab" onclick="callShop()">
                 {!! getIcon("phone", "ic-lg", "currentColor") !!}
-                <span id="float-call-label">{{ data_get($data, "floatingBar.call") }}</span>
+                <span id="float-call-label">Call</span>
             </button>
             <button class="fab save-fab" onclick="saveContact()">
                 {!! getIcon("save", "ic-lg", "currentColor") !!}
-                <span id="float-save-label">{{ data_get($data, "floatingBar.save") }}</span>
+                <span id="float-save-label">Save Contact</span>
             </button>
             <button class="fab wa-fab" onclick="openWA()">
                 {!! getIcon("whatsapp", "ic-lg", "currentColor") !!}
-                <span id="float-wa-label">{{ data_get($data, "floatingBar.whatsapp") }}</span>
+                <span id="float-wa-label">WhatsApp</span>
             </button>
             <div class="fab cart-fab fab-wrap" onclick="openCart()">
                 <div class="cart-badge" id="cartBadge"></div>
@@ -535,7 +535,7 @@
                 <span
                     id="float-cart-label"
                     style="font-size: 0.67rem; font-weight: 700; color: #b5341a"
-                >{{ data_get($data, "floatingBar.cart") }}</span>
+                >Cart</span>
             </div>
         </div>
 
@@ -548,7 +548,7 @@
                 <div class="cart-header">
                     <div class="cart-title">
                         {!! getIcon("cart", "ic", "#2e1503") !!}
-                        <span id="cart-title">{{ data_get($data, "cart.title") }}</span>
+                        <span id="cart-title">Your Cart</span>
                     </div>
                     <button class="cart-close" onclick="closeCart()">
                         {!! getIcon("close", "ic-sm", "currentColor") !!}
@@ -565,23 +565,23 @@
 
         <div class="modal-overlay" id="shareModal" onclick="closeShare(event)">
             <div class="modal-box">
-                <div class="modal-title" id="share-modal-title">{{ data_get($data, "shareModal.title") }}</div>
+                <div class="modal-title" id="share-modal-title">Share This Card</div>
                 <div class="share-options">
                     <div class="share-opt" onclick="shareWA()">
                         {!! getIcon("whatsapp", "", "#128c7e") !!}
-                        <span id="share-opt-wa">{{ data_get($data, "shareModal.whatsapp") }}</span>
+                        <span id="share-opt-wa">WhatsApp</span>
                     </div>
                     <div class="share-opt" onclick="copyLink()">
                         {!! getIcon("link", "", "#666") !!}
-                        <span id="share-opt-copy">{{ data_get($data, "shareModal.copy") }}</span>
+                        <span id="share-opt-copy">Copy Link</span>
                     </div>
                     <div class="share-opt" onclick="shareFB()">
                         {!! getIcon("facebook", "", "#1877f2") !!}
-                        <span id="share-opt-fb">{{ data_get($data, "shareModal.facebook") }}</span>
+                        <span id="share-opt-fb">Facebook</span>
                     </div>
                     <div class="share-opt" onclick="shareNative()">
                         {!! getIcon("share", "", "#666") !!}
-                        <span id="share-opt-more">{{ data_get($data, "shareModal.more") }}</span>
+                        <span id="share-opt-more">More Options</span>
                     </div>
                 </div>
                 <button
@@ -592,7 +592,7 @@
                             .classList.remove('show')
                     "
                 >
-                    <span id="share-cancel-label">{{ data_get($data, "shareModal.cancel") }}</span>
+                    <span id="share-cancel-label">Cancel</span>
                 </button>
             </div>
         </div>

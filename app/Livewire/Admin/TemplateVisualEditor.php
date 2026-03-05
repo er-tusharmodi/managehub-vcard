@@ -39,8 +39,17 @@ class TemplateVisualEditor extends Component
         try {
             $data = $this->templateService->getTemplateDefaultJson($templateKey);
 
-            // Build section list — exclude _field_config, files, _sections_config
-            $excluded = ['_field_config', 'files', '_sections_config'];
+            // Build section list — exclude meta/system keys and entirely-static sections
+            $excluded = [
+                '_field_config', 'files', '_sections_config',
+                'floatingBar', 'floatBar', 'bottomBar', 'cart',
+                'footer', 'labels', 'toast', 'share', 'shareModal',
+                'banner', 'header', 'status',
+            ];
+            // 'sections' key is heading texts in most templates (not minimart)
+            if ($templateKey !== 'minimart-template') {
+                $excluded[] = 'sections';
+            }
             $allSections = array_values(array_filter(array_keys($data), fn($k) => !in_array($k, $excluded)));
 
             // Move _common to front

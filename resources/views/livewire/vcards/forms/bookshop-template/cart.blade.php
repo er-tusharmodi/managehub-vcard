@@ -11,8 +11,8 @@
     <p class="text-muted mb-3" style="font-size:.82rem;">Labels displayed in the book cart panel.</p>
 </div>
 
+{{-- Cart Title is hardcoded in the blade template — not editable --}}
 @foreach([
-    'title'    => ['label' => 'Cart Title', 'placeholder' => 'Your Book Cart', 'col' => 'col-lg-6'],
     'empty'    => ['label' => 'Empty Cart Message', 'placeholder' => 'Your cart is empty.', 'col' => 'col-lg-6'],
     'emptySub' => ['label' => 'Empty Cart Sub-message', 'placeholder' => 'Add books to start an order!', 'col' => 'col-12'],
     'total'    => ['label' => 'Total Label', 'placeholder' => 'Total', 'col' => 'col-lg-6'],

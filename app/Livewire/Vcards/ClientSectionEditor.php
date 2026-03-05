@@ -84,9 +84,19 @@ class ClientSectionEditor extends Component
                 }
             }
         }
-        $allSections = array_values(array_filter(array_keys($data), function ($key) {
-            if ($key === 'files') return false;
-            return $key === '_common' || !str_starts_with($key, '_');
+        $hiddenSections = [
+            'files', 'floatingBar', 'floatBar', 'bottomBar',
+            'footer', 'labels', 'toast', 'share', 'shareModal',
+            'banner', 'header', 'status', 'cart',
+            'messages', // static WA/modal message templates — admin-only
+        ];
+        // For templates where 'sections' key is just heading texts, hide it from sidebar
+        $templateKey2 = $this->vcard->template_key ?? '';
+        if (!in_array($templateKey2, ['minimart-template'], true)) {
+            $hiddenSections[] = 'sections';
+        }
+        $allSections = array_values(array_filter(array_keys($data), function ($key) use ($hiddenSections) {
+            return $key === '_common' || (!str_starts_with($key, '_') && !in_array($key, $hiddenSections));
         }));
         $commonIdx = array_search('_common', $allSections);
         if ($commonIdx !== false && $commonIdx > 0) {

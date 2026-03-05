@@ -66,13 +66,13 @@
                         <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2">
                             {!! getIcon("ui_share") !!}
                         </svg>
-                        <span id="banner-share">{{ data_get($data, "banner.share") }}</span>
+                        <span id="banner-share">Share</span>
                     </button>
                     <button class="save-btn-top" onclick="saveContact()">
                         <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2.2">
                             {!! getIcon("ui_save_disk") !!}
                         </svg>
-                        <span id="banner-save-contact">{{ data_get($data, "banner.saveContact") }}</span>
+                        <span id="banner-save-contact">Save Contact</span>
                     </button>
                 </div>
                 <div class="banner-text">
@@ -104,37 +104,37 @@
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             {!! getIcon("ui_call") !!}
                         </svg>
-                        <span id="action-call">{{ data_get($data, "profile.actions.call") }}</span>
+                        <span id="action-call">Call Now</span>
                     </button>
                     <button class="pab whatsapp" onclick="openWA()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             {!! getIcon("ui_whatsapp") !!}
                         </svg>
-                        <span id="action-whatsapp">{{ data_get($data, "profile.actions.whatsapp") }}</span>
+                        <span id="action-whatsapp">WhatsApp</span>
                     </button>
                     <button class="pab save" onclick="saveContact()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             {!! getIcon("ui_user") !!}
                         </svg>
-                        <span id="action-save">{{ data_get($data, "profile.actions.save") }}</span>
+                        <span id="action-save">Save Card</span>
                     </button>
                     <button class="pab email" onclick="emailShop()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             {!! getIcon("ui_mail") !!}
                         </svg>
-                        <span id="action-email">{{ data_get($data, "profile.actions.email") }}</span>
+                        <span id="action-email">Email Us</span>
                     </button>
                     <button class="pab direction" onclick="openMaps()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             {!! getIcon("ui_direction") !!}
                         </svg>
-                        <span id="action-directions">{{ data_get($data, "profile.actions.directions") }}</span>
+                        <span id="action-directions">Directions</span>
                     </button>
                     <button class="pab share" onclick="openShare()">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             {!! getIcon("ui_share") !!}
                         </svg>
-                        <span id="action-share">{{ data_get($data, "profile.actions.share") }}</span>
+                        <span id="action-share">Share Card</span>
                     </button>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                             {!! getIcon("service_star") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-collections">{{ data_get($data, "sections.collections") }}</span>
+                    <span class="sec-title" id="sec-title-collections">Our Collections</span>
                 </div>
                 <div class="sec-body" style="padding:0.75rem 0.85rem">
                     <div class="cat-scroll" id="catScroll">
@@ -190,7 +190,7 @@
                                             <svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" fill="none" stroke-width="2.5">
                                                 {!! getIcon("ui_whatsapp") !!}
                                             </svg>
-                                            {{ data_get($data, "labels.enquireButton") }}
+                                            Enquire
                                         </button>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@
                             {!! getIcon("ui_shield") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-purity">{{ data_get($data, "sections.purity") }}</span>
+                    <span class="sec-title" id="sec-title-purity">Gold Purity We Offer</span>
                 </div>
                 <div class="sec-body">
                     <div class="purity-row" id="purityRow">
@@ -236,7 +236,7 @@
                             {!! getIcon("ui_medal") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-certifications">{{ data_get($data, "sections.certifications") }}</span>
+                    <span class="sec-title" id="sec-title-certifications">Our Certifications</span>
                 </div>
                 <div class="sec-body">
                     <div class="cert-grid" id="certGrid">
@@ -260,7 +260,7 @@
                             {!! getIcon("service_wrench") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-services">{{ data_get($data, "sections.services") }}</span>
+                    <span class="sec-title" id="sec-title-services">Our Services</span>
                 </div>
                 <div class="sec-body">
                     <div class="svc-list" id="servicesList">
@@ -287,7 +287,7 @@
                             {!! getIcon("service_map") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-showroom">{{ data_get($data, "sections.showroom") }}</span>
+                    <span class="sec-title" id="sec-title-showroom">Visit Our Showroom</span>
                 </div>
                 <div class="sec-body">
                     <a class="address-link" href="#" onclick="return (openMaps(), !1);">
@@ -304,7 +304,7 @@
                                 <svg viewBox="0 0 24 24">
                                     {!! getIcon("ui_direction") !!}
                                 </svg>
-                                <span id="showroom-map-label">{{ data_get($data, "showroom.mapLabel") }}</span>
+                                <span id="showroom-map-label">Get Directions</span>
                             </a>
                         </div>
                     </a>
@@ -318,14 +318,14 @@
                             {!! getIcon("ui_clock") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-hours">{{ data_get($data, "sections.hours") }}</span>
+                    <span class="sec-title" id="sec-title-hours">Store Hours</span>
                 </div>
                 <div class="sec-body">
                     <table class="hours-table" id="hoursTable">
                         @foreach(data_get($data, "hours", []) as $row)
                             @if(!empty($row["today"]))
                                 <tr class="today">
-                                    <td class="day">{{ $row["day"] ?? "" }} <span class="today-badge">{{ data_get($data, "labels.todayBadge") }}</span></td>
+                                    <td class="day">{{ $row["day"] ?? "" }} <span class="today-badge">TODAY</span></td>
                                     <td class="time" style="color:var(--gold);font-weight:700">{{ $row["time"] ?? "" }}</td>
                                 </tr>
                             @else
@@ -346,7 +346,7 @@
                             {!! getIcon("ui_share") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-follow">{{ data_get($data, "sections.follow") }}</span>
+                    <span class="sec-title" id="sec-title-follow">Follow &amp; Connect</span>
                 </div>
                 <div class="sec-body">
                     <div class="social-list" id="socialList">
@@ -384,7 +384,7 @@
                             {!! getIcon("ui_mail") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-enquiry">{{ data_get($data, "sections.enquiry") }}</span>
+                    <span class="sec-title" id="sec-title-enquiry">Send Enquiry</span>
                 </div>
                 <div class="sec-body">
                     <div id="enquiryForm">
@@ -403,7 +403,7 @@
                             <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" fill="none" stroke-width="2">
                                 {!! getIcon("ui_send") !!}
                             </svg>
-                            <span id="enquiry-submit-label">{{ data_get($data, "enquiryForm.submitLabel") }}</span>
+                            <span id="enquiry-submit-label">Send Enquiry via WhatsApp</span>
                         </button>
                     </div>
                     <div class="form-success" id="enquirySuccess">
@@ -413,7 +413,7 @@
                             <span id="enquiry-success-text">{{ data_get($data, "enquiryForm.successText") }}</span>
                         </p>
                         <button onclick="resetEnquiry()" style="margin-top:1rem;background:linear-gradient(135deg,var(--gold),var(--gold2));border:none;border-radius:10px;padding:0.6rem 1.5rem;font-size:0.8rem;font-weight:700;color:var(--deep);cursor:pointer;">
-                            <span id="enquiry-success-button">{{ data_get($data, "enquiryForm.successButton") }}</span>
+                            <span id="enquiry-success-button">New Enquiry</span>
                         </button>
                     </div>
                 </div>
@@ -426,7 +426,7 @@
                             {!! getIcon("ui_grid") !!}
                         </svg>
                     </div>
-                    <span class="sec-title" id="sec-title-scan">{{ data_get($data, "sections.scan") }}</span>
+                    <span class="sec-title" id="sec-title-scan">Scan &amp; Share</span>
                 </div>
                 <div class="sec-body">
                     <div class="qr-section">
@@ -436,7 +436,7 @@
                             <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2">
                                 {!! getIcon("ui_download") !!}
                             </svg>
-                            <span id="qr-download-label">{{ data_get($data, "qr.downloadLabel") }}</span>
+                            <span id="qr-download-label">Download QR Code</span>
                         </button>
                     </div>
                 </div>
@@ -455,19 +455,19 @@
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#2e7d32" stroke-width="2">
                         {!! getIcon("ui_call") !!}
                     </svg>
-                    <span class="bb-label" id="bb-call">{{ data_get($data, "bottomBar.call") }}</span>
+                    <span class="bb-label" id="bb-call">Call</span>
                 </button>
                 <button class="bb-btn save" onclick="saveContact()">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#b8860b" stroke-width="2">
                         {!! getIcon("ui_save_disk") !!}
                     </svg>
-                    <span class="bb-label" id="bb-save">{{ data_get($data, "bottomBar.save") }}</span>
+                    <span class="bb-label" id="bb-save">Save Contact</span>
                 </button>
                 <button class="bb-btn wa" onclick="openWA()">
                     <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#128c7e" stroke-width="2">
                         {!! getIcon("ui_whatsapp") !!}
                     </svg>
-                    <span class="bb-label" id="bb-whatsapp">{{ data_get($data, "bottomBar.whatsapp") }}</span>
+                    <span class="bb-label" id="bb-whatsapp">WhatsApp</span>
                 </button>
             </div>
 
@@ -478,7 +478,7 @@
                         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" fill="none" stroke-width="1.8">
                             {!! getIcon("ui_cart") !!}
                         </svg>
-                        <span id="cart-title">{{ data_get($data, "cart.title") }}</span>
+                        <span id="cart-title">Your Wishlist / Cart</span>
                     </div>
                     <div id="cartBody"></div>
                 </div>
@@ -487,25 +487,25 @@
             <div class="share-modal" id="shareModal" onclick="closeShare(event)">
                 <div class="share-sheet">
                     <div class="cart-handle"></div>
-                    <div class="share-title" id="share-modal-title">{{ data_get($data, "shareModal.title") }}</div>
+                    <div class="share-title" id="share-modal-title">Share</div>
                     <div class="share-btns">
                         <button class="share-opt wa" onclick="shareWA()">
                             <svg viewBox="0 0 24 24" stroke="#128c7e" stroke-width="1.8">
                                 {!! getIcon("ui_whatsapp") !!}
                             </svg>
-                            <span id="share-wa-label">{{ data_get($data, "shareModal.whatsapp") }}</span>
+                            <span id="share-wa-label">WhatsApp</span>
                         </button>
                         <button class="share-opt fb" onclick="shareFB()">
                             <svg viewBox="0 0 24 24" stroke="#1877f2" stroke-width="1.8">
                                 {!! getIcon("ui_facebook") !!}
                             </svg>
-                            <span id="share-fb-label">{{ data_get($data, "shareModal.facebook") }}</span>
+                            <span id="share-fb-label">Facebook</span>
                         </button>
                         <button class="share-opt copy" onclick="copyLink()">
                             <svg viewBox="0 0 24 24" stroke="#8a7355" stroke-width="1.8">
                                 {!! getIcon("ui_copy") !!}
                             </svg>
-                            <span id="share-copy-label">{{ data_get($data, "shareModal.copy") }}</span>
+                            <span id="share-copy-label">Copy Link</span>
                         </button>
                     </div>
                 </div>

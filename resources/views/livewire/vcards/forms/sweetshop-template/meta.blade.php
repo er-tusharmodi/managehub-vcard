@@ -77,30 +77,4 @@
     </div>
 </div>
 
-{{-- Image Alt Texts (sweetshop-specific) --}}
-<div class="col-12 mt-1 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-image-text me-1"></i>Image Alt Texts
-        <small class="fw-normal text-muted ms-1 text-lowercase">(for accessibility &amp; SEO)</small>
-    </h6>
-</div>
 
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="meta-bannerAlt">Banner Image Alt</label>
-    <input type="text"
-           id="meta-bannerAlt"
-           class="form-control @error('form.bannerAlt') is-invalid @enderror"
-           wire:model="form.bannerAlt"
-           placeholder="e.g. Sweet Shop Banner – Assorted Sweets">
-    @error('form.bannerAlt') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="meta-profileAlt">Profile / Logo Image Alt</label>
-    <input type="text"
-           id="meta-profileAlt"
-           class="form-control @error('form.profileAlt') is-invalid @enderror"
-           wire:model="form.profileAlt"
-           placeholder="e.g. Owner photo or shop logo">
-    @error('form.profileAlt') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>

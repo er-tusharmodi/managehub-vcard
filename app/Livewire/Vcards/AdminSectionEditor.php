@@ -80,8 +80,18 @@ class AdminSectionEditor extends Component
         
         // Filter out metadata keys (those starting with _) and backend-managed sections
         // _common is the exception — it's shown first as "Basic Info"
-        $allSections = array_values(array_filter(array_keys($data), function ($key) {
-            return $key === '_common' || (!str_starts_with($key, '_') && $key !== 'files');
+        $hiddenSections = [
+            'files', 'floatingBar', 'floatBar', 'bottomBar',
+            'footer', 'labels', 'toast', 'share', 'shareModal',
+            'banner', 'header', 'status', 'cart',
+        ];
+        // For templates where 'sections' key is just heading texts, hide it from sidebar
+        $templateKey = $this->vcard->template_key ?? '';
+        if (!in_array($templateKey, ['minimart-template'], true)) {
+            $hiddenSections[] = 'sections';
+        }
+        $allSections = array_values(array_filter(array_keys($data), function ($key) use ($hiddenSections) {
+            return $key === '_common' || (!str_starts_with($key, '_') && !in_array($key, $hiddenSections));
         }));
         // Move _common to the front
         $commonIdx = array_search('_common', $allSections);

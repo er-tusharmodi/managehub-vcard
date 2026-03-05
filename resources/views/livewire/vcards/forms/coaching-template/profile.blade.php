@@ -91,30 +91,4 @@
     @error('form.qual') <div class="invalid-feedback">{{ $message }}</div> @enderror
 </div>
 
-{{-- Actions dict --}}
-@if(isset($form['actions']) && is_array($form['actions']))
-<div class="col-12 mt-1 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-cursor-default-click-outline me-1"></i>Action Buttons
-        <small class="fw-normal text-muted ms-1 text-lowercase">(label shown or URL for link buttons)</small>
-    </h6>
-</div>
-@foreach($form['actions'] as $actKey => $actVal)
-    @php
-        $actIsUrl = preg_match('/(whatsapp|email|share|url|link|maps|http)/i', $actKey)
-                    || (is_string($actVal) && str_starts_with($actVal, 'http'));
-    @endphp
-    <div class="col-lg-4 mb-3">
-        <label class="form-label fw-semibold" for="act-{{ $actKey }}">
-            {{ \Illuminate\Support\Str::headline($actKey) }}
-            @if($actIsUrl) <small class="text-muted fw-normal">(URL)</small> @endif
-        </label>
-        <input type="{{ $actIsUrl ? 'url' : 'text' }}"
-               id="act-{{ $actKey }}"
-               class="form-control form-control-sm @error('form.actions.' . $actKey) is-invalid @enderror"
-               wire:model="form.actions.{{ $actKey }}"
-               placeholder="{{ $actIsUrl ? 'https://' : 'Button label' }}">
-        @error('form.actions.' . $actKey) <div class="invalid-feedback">{{ $message }}</div> @enderror
-    </div>
-@endforeach
-@endif
+{{-- Action Button Labels are hardcoded in the blade template — not editable --}}

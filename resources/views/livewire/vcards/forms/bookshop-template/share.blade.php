@@ -4,32 +4,7 @@
  | Available: $form (array), $categoryOptions (array)
 --}}
 
-{{-- ── Share Sheet Labels ──────────────────────────────────────── --}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-share-variant-outline me-1"></i>Share Sheet
-    </h6>
-</div>
-
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="share-title">Share Sheet Title</label>
-    <input type="text"
-           id="share-title"
-           class="form-control @error('form.title') is-invalid @enderror"
-           wire:model="form.title"
-           placeholder="Share PageTurner Books">
-    @error('form.title') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="share-cancel">Cancel Button Label</label>
-    <input type="text"
-           id="share-cancel"
-           class="form-control @error('form.cancel') is-invalid @enderror"
-           wire:model="form.cancel"
-           placeholder="Cancel">
-    @error('form.cancel') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
+{{-- Share Sheet Title and Cancel label are hardcoded in the blade template — not editable --}}
 
 {{-- ── Share Options List ──────────────────────────────────────── --}}
 @if(isset($form['options']) && is_array($form['options']))

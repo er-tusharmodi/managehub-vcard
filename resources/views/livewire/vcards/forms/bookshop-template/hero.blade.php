@@ -4,32 +4,7 @@
  | Available: $form (array)
 --}}
 
-{{-- ── Share & Save Buttons ─────────────────────────────────────── --}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-button-cursor me-1"></i>Header Buttons
-    </h6>
-</div>
-
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="hero-btn-share">Share Button Label</label>
-    <input type="text"
-           id="hero-btn-share"
-           class="form-control @error('form.buttons.share') is-invalid @enderror"
-           wire:model="form.buttons.share"
-           placeholder="Share">
-    @error('form.buttons.share') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="hero-btn-save">Save Contact Button Label</label>
-    <input type="text"
-           id="hero-btn-save"
-           class="form-control @error('form.buttons.saveContact') is-invalid @enderror"
-           wire:model="form.buttons.saveContact"
-           placeholder="Save Contact">
-    @error('form.buttons.saveContact') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
+{{-- Header Buttons and Action Button Labels are hardcoded in the blade template — not editable --}}
 
 {{-- ── Profile Card ─────────────────────────────────────────────── --}}
 <div class="col-12 mb-2 mt-1">
@@ -68,28 +43,4 @@
     @error('form.profile.bio') <div class="invalid-feedback">{{ $message }}</div> @enderror
 </div>
 
-{{-- ── Action Buttons ───────────────────────────────────────────── --}}
-<div class="col-12 mb-2 mt-1">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-gesture-tap me-1"></i>Action Button Labels
-    </h6>
-</div>
-
-@foreach ([
-    'call'       => 'Call Button',
-    'whatsapp'   => 'WhatsApp Button',
-    'save'       => 'Save Contact Button',
-    'email'      => 'Email Button',
-    'directions' => 'Directions Button',
-    'share'      => 'Share Button',
-] as $actionKey => $actionLabel)
-    <div class="col-lg-6 mb-3">
-        <label class="form-label fw-semibold" for="hero-action-{{ $actionKey }}">{{ $actionLabel }}</label>
-        <input type="text"
-               id="hero-action-{{ $actionKey }}"
-               class="form-control @error('form.actions.' . $actionKey) is-invalid @enderror"
-               wire:model="form.actions.{{ $actionKey }}"
-               placeholder="{{ ucfirst($actionKey) }}">
-        @error('form.actions.' . $actionKey) <div class="invalid-feedback">{{ $message }}</div> @enderror
-    </div>
-@endforeach
+{{-- Action Button Labels are hardcoded in the blade template — not editable --}}

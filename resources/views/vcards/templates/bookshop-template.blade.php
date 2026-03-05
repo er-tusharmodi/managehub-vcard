@@ -94,11 +94,11 @@
       <div class="banner-top-bar">
         <button class="share-btn" onclick="openShare()">
           <i class="bi bi-share-fill ico-sm" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.buttons.share') }}</span>
+          <span>Share</span>
         </button>
         <button class="save-btn-top" onclick="saveContact()">
           <i class="bi bi-person-vcard-fill ico-sm" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.buttons.saveContact') }}</span>
+          <span>Save Contact</span>
         </button>
       </div>
     </div>
@@ -116,32 +116,32 @@
       <div class="profile-action-btns">
         <button class="pab call" onclick="callShop()">
           <i class="bi bi-telephone-fill ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.actions.call') }}</span>
+          <span>Call</span>
         </button>
 
         <button class="pab whatsapp" onclick="openWA()">
           <i class="bi bi-whatsapp ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.actions.whatsapp') }}</span>
+          <span>WhatsApp</span>
         </button>
 
         <button class="pab save" onclick="saveContact()">
           <i class="bi bi-person-vcard-fill ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.actions.save') }}</span>
+          <span>Save</span>
         </button>
 
         <button class="pab email" onclick="emailShop()">
           <i class="bi bi-envelope-fill ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.actions.email') }}</span>
+          <span>Email</span>
         </button>
 
         <button class="pab direction" onclick="openMaps()">
           <i class="bi bi-geo-alt-fill ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.actions.directions') }}</span>
+          <span>Directions</span>
         </button>
 
         <button class="pab share" onclick="openShare()">
           <i class="bi bi-share-fill ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'hero.actions.share') }}</span>
+          <span>Share</span>
         </button>
       </div>
     </div>
@@ -153,7 +153,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.categories.title') }}</div>
+        <div class="sec-title">Browse by Category</div>
       </div>
       <div class="sec-body">
         <div class="cat-scroll">
@@ -170,7 +170,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.location.title') }}</div>
+        <div class="sec-title">Our Location</div>
       </div>
       <div class="sec-body">
         <a class="address-link" href="#" onclick="return (openMaps(), false);">
@@ -181,7 +181,7 @@
             <strong>{{ v($data, 'sections.location.primary') }}</strong>
             <span>{{ v($data, 'sections.location.secondary') }}</span>
             <span class="map-btn"><i class="bi bi-geo-alt-fill ico-sm" aria-hidden="true"></i>
-              <span>{{ v($data, 'sections.location.mapButton') }}</span>
+              <span>Open in Maps</span>
             </span>
           </div>
         </a>
@@ -193,7 +193,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.social.title') }}</div>
+        <div class="sec-title">Find Us Online</div>
       </div>
       <div class="sec-body">
         <div class="social-list">
@@ -224,7 +224,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.services.title') }}</div>
+        <div class="sec-title">Our Services</div>
       </div>
       <div class="sec-body">
         <div class="services-grid">
@@ -249,7 +249,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.products.title') }}</div>
+        <div class="sec-title">Featured Books</div>
       </div>
       <div class="sec-body">
         <div class="products-grid" id="productsGrid">
@@ -295,7 +295,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.gallery.title') }}</div>
+        <div class="sec-title">Our Store Gallery</div>
       </div>
       <div class="sec-body">
         <div class="gallery-grid">
@@ -311,12 +311,12 @@
         <div class="sec-icon">
           <i class="bi bi-clock-fill ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.hours.title') }}</div>
+        <div class="sec-title">Business Hours</div>
       </div>
       <div class="sec-body">
         <div class="today-badge">
           <i class="bi bi-clock-fill ico" aria-hidden="true"></i>
-          <span>{{ v($data, 'sections.hours.badge') }}</span>
+          <span>Open Now</span>
         </div>
         <table class="hours-table">
           <tbody>
@@ -335,7 +335,7 @@
         </table>
         <div class="suggest-link" onclick="emailShop()">
           <i class="bi bi-info-circle-fill ico-sm" aria-hidden="true"></i>
-          <span>{{ v($data, 'sections.hours.suggest') }}</span>
+          <span>Suggest new hours</span>
         </div>
       </div>
     </div>
@@ -345,7 +345,7 @@
         <div class="sec-icon">
           <i class="bi bi-qr-code-scan ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.qr.title') }}</div>
+        <div class="sec-title">Scan &amp; Save Our Contact</div>
       </div>
       <div class="sec-body">
         <div class="qr-card-inner">
@@ -354,11 +354,11 @@
           <div class="qr-actions">
             <button class="qr-btn" onclick="downloadQR()">
               <i class="bi bi-download ico-sm" aria-hidden="true"></i>
-              <span>{{ v($data, 'sections.qr.download') }}</span>
+              <span>Download QR</span>
             </button>
             <button class="qr-btn" onclick="copyLink()">
               <i class="bi bi-link-45deg ico-sm" aria-hidden="true"></i>
-              <span>{{ v($data, 'sections.qr.copy') }}</span>
+              <span>Copy Link</span>
             </button>
           </div>
         </div>
@@ -370,7 +370,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.payments.title') }}</div>
+        <div class="sec-title">Payment Methods</div>
       </div>
       <div class="sec-body">
         <div class="payment-list">
@@ -394,7 +394,7 @@
         <div class="sec-icon">
           <i class="bi bi-stars ico" aria-hidden="true"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'sections.contact.title') }}</div>
+        <div class="sec-title">Contact / Book Enquiry</div>
       </div>
       <div class="sec-body">
         <div id="contactForm">
@@ -418,7 +418,7 @@
           </div>
           <button class="cf-submit" onclick="submitContact()">
             <i class="bi bi-send-fill ico" aria-hidden="true"></i>
-            <span>{{ v($data, 'sections.contact.submit') }}</span>
+            <span>Send via WhatsApp</span>
           </button>
         </div>
         <div class="contact-success" id="contactSuccess">
@@ -426,7 +426,7 @@
           <h4>{{ v($data, 'sections.contact.successTitle') }}</h4>
           <p>{{ v($data, 'sections.contact.successText') }}</p>
           <button style="margin-top:1rem;background:0 0;border:none;color:var(--navy);font-weight:700;cursor:pointer;font-size:0.84rem;" onclick="resetContact()">
-            {{ v($data, 'sections.contact.successAction') }}
+            Send another message
           </button>
         </div>
       </div>
@@ -441,20 +441,20 @@
     <div class="float-bar">
       <button class="fab call-fab" onclick="callShop()">
         <i class="bi bi-telephone-fill ico-lg" aria-hidden="true"></i>
-        <span>{{ v($data, 'floatingBar.call') }}</span>
+        <span>Call</span>
       </button>
       <button class="fab wa-fab" onclick="openWA()">
         <i class="bi bi-whatsapp ico-lg" aria-hidden="true"></i>
-        <span>{{ v($data, 'floatingBar.whatsapp') }}</span>
+        <span>WhatsApp</span>
       </button>
       <button class="fab save-fab" onclick="saveContact()">
         <i class="bi bi-person-vcard-fill ico-lg" aria-hidden="true"></i>
-        <span>{{ v($data, 'floatingBar.save') }}</span>
+        <span>Save</span>
       </button>
       <div class="fab-wrap" onclick="openCart()">
         <span class="cart-badge" id="cartBadge"></span>
         <i class="bi bi-cart3 ico-lg" aria-hidden="true"></i>
-        <span>{{ v($data, 'floatingBar.cart') }}</span>
+        <span>Cart</span>
       </div>
     </div>
 
@@ -463,7 +463,7 @@
         <div class="cart-header">
           <div class="cart-title">
             <i class="bi bi-cart3 ico" aria-hidden="true"></i>
-            <span>{{ v($data, 'cart.title') }}</span>
+            <span>Your Book Cart</span>
           </div>
           <button class="cart-close" onclick="closeCart()">
             <i class="bi bi-x-lg ico-sm" aria-hidden="true"></i>
@@ -475,7 +475,7 @@
 
     <div class="modal-overlay" id="shareModal" onclick="closeShare(event)">
       <div class="modal-box">
-        <div class="modal-title">{{ v($data, 'share.title') }}</div>
+        <div class="modal-title">Share</div>
         <div class="share-options">
           @foreach(a($data, 'share.options') as $item)
             @php
@@ -490,7 +490,7 @@
           @endforeach
         </div>
         <button class="modal-close-btn" onclick="document.getElementById('shareModal').classList.remove('show')">
-          {{ v($data, 'share.cancel') }}
+          Cancel
         </button>
       </div>
     </div>

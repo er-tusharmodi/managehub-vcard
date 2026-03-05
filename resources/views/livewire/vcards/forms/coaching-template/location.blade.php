@@ -10,16 +10,6 @@
     </h6>
 </div>
 
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="loc-title">Location Section Title</label>
-    <input type="text"
-           id="loc-title"
-           class="form-control @error('form.title') is-invalid @enderror"
-           wire:model="form.title"
-           placeholder="Find Us Here">
-    @error('form.title') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
 <div class="col-12 mb-3">
     <label class="form-label fw-semibold" for="loc-mapEmbed">Google Maps Embed Code</label>
     <textarea id="loc-mapEmbed"
@@ -45,12 +35,4 @@
     @error('form.address') <div class="invalid-feedback">{{ $message }}</div> @enderror
 </div>
 
-<div class="col-12 mb-3">
-    <label class="form-label fw-semibold" for="loc-directionsText">Directions / Get Here Text</label>
-    <textarea id="loc-directionsText"
-              class="form-control @error('form.directionsText') is-invalid @enderror"
-              wire:model="form.directionsText"
-              rows="2"
-              placeholder="Near landmark, metro station, etc."></textarea>
-    @error('form.directionsText') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
+

@@ -59,7 +59,25 @@
     // Fields with type 'hidden' in _field_config are suppressed entirely
     $isHiddenField = $fieldType === 'hidden'
         || (is_string($key) && in_array(strtolower($key), ['vcardname', 'qrname', 'icon', 'iconclass', 'iconcolor']))
-        || (is_string($key) && in_array(strtolower($key), ['vcard', 'qr']) && is_string($value) && (empty($value) || preg_match('/\.(vcf|png|jpg|jpeg|svg|webp)$/i', $value)));
+        || (is_string($key) && in_array(strtolower($key), ['vcard', 'qr']) && is_string($value) && (empty($value) || preg_match('/\.(vcf|png|jpg|jpeg|svg|webp)$/i', $value)))
+        // Button / label / title exact keys — static UI text
+        || (is_string($key) && preg_match('/^buttons?$|Button(Label)?$/i', $key))
+        // label and title at TOP LEVEL only — inside list items they are user-editable (e.g. category label)
+        || (is_string($key) && preg_match('/^(label|title)$/i', $key) && !str_contains((string)($wirePath ?? ''), '.'))
+        // Any key ending in common static-text suffixes across all templates
+        || (is_string($key) && preg_match('/Title$|Label$|Labels$|Heading$|Html$|Btn$|Badge$|Cancel$|Rights$|Copyright$|PoweredBy$|PoweredBrand$|Template$|Greeting$/i', $key))
+        // Specific static scalar keys found across all templates
+        || (is_string($key) && in_array(strtolower($key), [
+            'cancel', 'rights', 'copyright', 'poweredby', 'poweredbrand', 'na',
+            'nomessage', 'done', 'year', 'brand', 'emptyhtml', 'sub', 'intro',
+            'successtitle', 'successdescription', 'successaction',
+        ]))
+        // Named standalone field names hardcoded in blade templates
+        || (is_string($key) && preg_match('/^(shareLabel|saveLabel|saveContact|saveContactLabel|confirmLabel|submitLabel|submitText|resetText|successButton|downloadLabel|mapLabel|mapButton|todayBadge|enquireButton|verifiedLabel)$/i', $key))
+        // Action button labels, floatBar/floatingBar/bottomBar/actions — all hardcoded in blade
+        || (is_string($wirePath) && preg_match('/\.(actions|floatBar|floatingBar|bottomBar)\./i', $wirePath))
+        // Any field inside entirely-static section containers
+        || (is_string($wirePath) && preg_match('/^(footer|labels|toast|share|shareModal|banner|header)\b/i', $wirePath));
 
     // Contact/identity fields that are managed centrally via Basic Info (_common)
     // Hide them in all other sections so users only edit them once

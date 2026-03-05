@@ -90,14 +90,14 @@
                             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
                             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                         </svg>
-                        <span id="banner-share-label">{{ data_get($data, "banner.shareLabel") }}</span>
+                        <span id="banner-share-label">Share</span>
                     </button>
                     <button class="save-btn-top" onclick="saveContact()">
                         <svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke-width="2">
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                         </svg>
-                        <span id="banner-save-label">{{ data_get($data, "banner.saveContact", "Save Contact") }}</span>
+                        <span id="banner-save-label">Save Contact</span>
                     </button>
                 </div>
             </div>
@@ -131,13 +131,13 @@
                         <svg viewBox="0 0 24 24">
                             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z" />
                         </svg>
-                        <span id="action-call-label">{{ data_get($data, "profile.actions.call") }}</span>
+                        <span id="action-call-label">Call</span>
                     </button>
                     <button class="pab whatsapp" onclick="openWA()">
                         <svg viewBox="0 0 24 24">
                             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                         </svg>
-                        <span id="action-whatsapp-label">{{ data_get($data, "profile.actions.whatsapp") }}</span>
+                        <span id="action-whatsapp-label">WhatsApp</span>
                     </button>
                     <button class="pab book" onclick="scrollToBooking()">
                         <svg viewBox="0 0 24 24">
@@ -146,20 +146,20 @@
                             <line x1="8" y1="2" x2="8" y2="6" />
                             <line x1="3" y1="10" x2="21" y2="10" />
                         </svg>
-                        <span id="action-book-label">{{ data_get($data, "profile.actions.book") }}</span>
+                        <span id="action-book-label">Book Now</span>
                     </button>
                     <button class="pab email" onclick="emailShop()">
                         <svg viewBox="0 0 24 24">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                             <polyline points="22,6 12,13 2,6" />
                         </svg>
-                        <span id="action-email-label">{{ data_get($data, "profile.actions.email") }}</span>
+                        <span id="action-email-label">Email</span>
                     </button>
                     <button class="pab direction" onclick="openMaps()">
                         <svg viewBox="0 0 24 24">
                             <polygon points="3 11 22 2 13 21 11 13 3 11" />
                         </svg>
-                        <span id="action-direction-label">{{ data_get($data, "profile.actions.direction") }}</span>
+                        <span id="action-direction-label">Directions</span>
                     </button>
                     <button class="pab share" onclick="openShare()">
                         <svg viewBox="0 0 24 24">
@@ -169,7 +169,7 @@
                             <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
                             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                         </svg>
-                        <span id="action-share-label">{{ data_get($data, "profile.actions.share") }}</span>
+                        <span id="action-share-label">Share</span>
                     </button>
                 </div>
             </div>
@@ -181,7 +181,7 @@
                             <path d="M6 2v6M6 22v-6M6 8c2 0 4 2 4 4s-2 4-4 4M18 2v6M18 22v-6M18 8c-2 0-4 2-4 4s2 4 4 4" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-services">{{ data_get($data, "sections.services.title") }}</div>
+                    <div class="sec-title" id="sec-title-services">Our Services</div>
                     <div class="sec-sub" id="sec-sub-services">{{ data_get($data, "sections.services.sub") }}</div>
                 </div>
                 <div class="sec-body">
@@ -217,7 +217,7 @@
                             <path d="M2 12l10 5 10-5" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-packages">{{ data_get($data, "sections.packages.title") }}</div>
+                    <div class="sec-title" id="sec-title-packages">Grooming Packages</div>
                     <div class="sec-sub" id="sec-sub-packages">{{ data_get($data, "sections.packages.sub") }}</div>
                 </div>
                 <div class="sec-body">
@@ -273,7 +273,7 @@
                             <line x1="3" y1="10" x2="21" y2="10" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-booking">{{ data_get($data, "sections.booking.title") }}</div>
+                    <div class="sec-title" id="sec-title-booking">Book Appointment</div>
                 </div>
                 <div class="sec-body">
                     <div id="bookForm">
@@ -343,7 +343,7 @@
                             <svg class="ic" viewBox="0 0 24 24">
                                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                             </svg>
-                            <span id="booking-submit-label">{{ data_get($data, "booking.form.submitLabel") }}</span>
+                            <span id="booking-submit-label">Confirm Booking via WhatsApp</span>
                         </button>
                     </div>
                     <div class="book-success" id="bookSuccess">
@@ -356,7 +356,7 @@
                         <h4 id="booking-success-title">{{ data_get($data, "booking.success.title") }}</h4>
                         <p id="booking-success-text">{{ data_get($data, "booking.success.text") }}</p>
                         <button class="book-reset" onclick="resetBooking()">
-                            <span id="booking-success-button">{{ data_get($data, "booking.success.button") }}</span>
+                            <span id="booking-success-button">Book Another</span>
                         </button>
                     </div>
                 </div>
@@ -372,7 +372,7 @@
                             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-barbers">{{ data_get($data, "sections.barbers.title") }}</div>
+                    <div class="sec-title" id="sec-title-barbers">Meet Our Barbers</div>
                 </div>
                 <div class="sec-body">
                     <div class="barbers-list" id="barbersList">
@@ -405,7 +405,7 @@
                             <path d="M16 10a4 4 0 0 1-8 0" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-products">{{ data_get($data, "sections.products.title") }}</div>
+                    <div class="sec-title" id="sec-title-products">Grooming Products</div>
                     <div class="sec-sub" id="sec-sub-products">{{ data_get($data, "sections.products.sub") }}</div>
                 </div>
                 <div class="sec-body">
@@ -443,7 +443,7 @@
                             <polyline points="12 6 12 12 16 14" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-hours">{{ data_get($data, "sections.hours.title") }}</div>
+                    <div class="sec-title" id="sec-title-hours">Working Hours</div>
                 </div>
                 <div class="sec-body">
                     <div class="today-badge">
@@ -472,7 +472,7 @@
                             <circle cx="12" cy="10" r="3" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-location">{{ data_get($data, "sections.location.title") }}</div>
+                    <div class="sec-title" id="sec-title-location">Find Us</div>
                 </div>
                 <div class="sec-body">
                     <div class="location-wrapper">
@@ -491,7 +491,7 @@
                                         <svg viewBox="0 0 24 24">
                                             <polygon points="3 11 22 2 13 21 11 13 3 11" />
                                         </svg>
-                                        <span id="location-map-label">{{ data_get($data, "location.mapLabel") }}</span>
+                                        <span id="location-map-label">Get Directions</span>
                                     </a>
                                 </div>
                             </div>
@@ -511,7 +511,7 @@
                             <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-social">{{ data_get($data, "sections.social.title") }}</div>
+                    <div class="sec-title" id="sec-title-social">Follow Us</div>
                 </div>
                 <div class="sec-body">
                     <div class="social-list" id="socialList">
@@ -552,7 +552,7 @@
                             <line x1="1" y1="10" x2="23" y2="10" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-payments">{{ data_get($data, "sections.payments.title") }}</div>
+                    <div class="sec-title" id="sec-title-payments">Payment Modes</div>
                 </div>
                 <div class="sec-body">
                     <div class="payment-list" id="paymentList">
@@ -603,7 +603,7 @@
                             <rect x="18" y="18" width="3" height="3" />
                         </svg>
                     </div>
-                    <div class="sec-title" id="sec-title-qr">{{ data_get($data, "sections.qr.title") }}</div>
+                    <div class="sec-title" id="sec-title-qr">Scan &amp; Save</div>
                 </div>
                 <div class="sec-body">
                     <div class="qr-card-inner">
@@ -616,7 +616,7 @@
                                     <polyline points="17 21 17 13 7 13 7 21" />
                                     <polyline points="7 3 7 8 15 8" />
                                 </svg>
-                                <span id="qr-save-label">{{ data_get($data, "qr.saveLabel") }}</span>
+                                <span id="qr-save-label">Save Contact</span>
                             </button>
                             <button class="qr-btn" onclick="downloadQR()">
                                 <svg viewBox="0 0 24 24">
@@ -624,7 +624,7 @@
                                     <polyline points="7 10 12 15 17 10" />
                                     <line x1="12" y1="15" x2="12" y2="3" />
                                 </svg>
-                                <span id="qr-download-label">{{ data_get($data, "qr.downloadLabel") }}</span>
+                                <span id="qr-download-label">Download QR</span>
                             </button>
                         </div>
                     </div>
@@ -641,7 +641,7 @@
                     <svg class="ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z" />
                     </svg>
-                    <span id="fab-call-label">{{ data_get($data, "floatBar.call") }}</span>
+                    <span id="fab-call-label">Call</span>
                 </button>
                 <button class="fab book-fab" onclick="scrollToBooking()">
                     <svg class="ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
@@ -650,13 +650,13 @@
                         <line x1="8" y1="2" x2="8" y2="6" />
                         <line x1="3" y1="10" x2="21" y2="10" />
                     </svg>
-                    <span id="fab-book-label">{{ data_get($data, "floatBar.book") }}</span>
+                    <span id="fab-book-label">Book Now</span>
                 </button>
                 <button class="fab wa-fab" onclick="openWA()">
                     <svg class="ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
                         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                     </svg>
-                    <span id="fab-whatsapp-label">{{ data_get($data, "floatBar.whatsapp") }}</span>
+                    <span id="fab-whatsapp-label">WhatsApp</span>
                 </button>
                 <button class="fab save-fab" onclick="saveContact()">
                     <svg class="ic-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
@@ -664,26 +664,26 @@
                         <polyline points="17 21 17 13 7 13 7 21" />
                         <polyline points="7 3 7 8 15 8" />
                     </svg>
-                    <span id="fab-save-label">{{ data_get($data, "floatBar.save") }}</span>
+                    <span id="fab-save-label">Save</span>
                 </button>
             </div>
 
             <div class="modal-overlay" id="shareModal" onclick="closeShare(event)">
                 <div class="modal-box">
-                    <div class="modal-title" id="share-title">{{ data_get($data, "share.title") }}</div>
+                    <div class="modal-title" id="share-title">Share This Card</div>
                     <div class="share-options">
                         <div class="sh-opt" onclick="shareWA()" style="color:#128c7e">
                             <svg width="20" height="20" viewBox="0 0 24 24" stroke="#128c7e" stroke-width="2" fill="none">
                                 <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                             </svg>
-                            <span id="share-wa-label">{{ data_get($data, "share.whatsapp") }}</span>
+                            <span id="share-wa-label">WhatsApp</span>
                         </div>
                         <div class="sh-opt" onclick="copyLink()" style="color:var(--steel)">
                             <svg width="20" height="20" viewBox="0 0 24 24" stroke="var(--steel)" stroke-width="2" fill="none">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
                                 <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                             </svg>
-                            <span id="share-copy-label">{{ data_get($data, "share.copy") }}</span>
+                            <span id="share-copy-label">Copy Link</span>
                         </div>
                         <div class="sh-opt" onclick="shareNative()" style="color:#0369a1">
                             <svg width="20" height="20" viewBox="0 0 24 24" stroke="#0369a1" stroke-width="2" fill="none">
@@ -693,17 +693,17 @@
                                 <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
                                 <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
                             </svg>
-                            <span id="share-more-label">{{ data_get($data, "share.more") }}</span>
+                            <span id="share-more-label">More…</span>
                         </div>
                         <div class="sh-opt" onclick="shareFB()" style="color:#1877f2">
                             <svg width="20" height="20" viewBox="0 0 24 24" stroke="#1877f2" stroke-width="2" fill="none">
                                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
                             </svg>
-                            <span id="share-facebook-label">{{ data_get($data, "share.facebook") }}</span>
+                            <span id="share-facebook-label">Facebook</span>
                         </div>
                     </div>
                     <button class="modal-cancel" onclick="closeShareModal()">
-                        <span id="share-cancel-label">{{ data_get($data, "share.cancel") }}</span>
+                        <span id="share-cancel-label">Cancel</span>
                     </button>
                 </div>
             </div>

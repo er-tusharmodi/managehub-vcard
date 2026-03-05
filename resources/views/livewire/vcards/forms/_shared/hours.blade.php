@@ -12,34 +12,7 @@
     $scalarFields = array_filter($form, fn($v) => !is_array($v));
 @endphp
 
-{{-- ── Header Text Fields ────────────────────────────────────────── --}}
-@if(!empty($scalarFields))
-    <div class="col-12 mb-2">
-        <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-            <i class="mdi mdi-clock-outline me-1"></i>Hours Header
-        </h6>
-    </div>
-    @foreach($scalarFields as $hKey => $hVal)
-        @php $isTextareaKey = preg_match('/(note|text|message|desc|suggest)/i', $hKey); @endphp
-        <div class="{{ $isTextareaKey ? 'col-12' : 'col-lg-6' }} mb-3">
-            <label class="form-label fw-semibold" for="hours-{{ $hKey }}">
-                {{ \Illuminate\Support\Str::headline($hKey) }}
-            </label>
-            @if($isTextareaKey)
-                <textarea id="hours-{{ $hKey }}"
-                          class="form-control @error('form.' . $hKey) is-invalid @enderror"
-                          wire:model="form.{{ $hKey }}"
-                          rows="2"></textarea>
-            @else
-                <input type="text"
-                       id="hours-{{ $hKey }}"
-                       class="form-control @error('form.' . $hKey) is-invalid @enderror"
-                       wire:model="form.{{ $hKey }}">
-            @endif
-            @error('form.' . $hKey) <div class="invalid-feedback">{{ $message }}</div> @enderror
-        </div>
-    @endforeach
-@endif
+{{-- Header scalar fields (todayLabel, kitchenNote etc.) are static UI text hardcoded in blade — not shown here --}}
 
 {{-- ── Hours Rows ────────────────────────────────────────────────── --}}
 @if(!empty($rows))

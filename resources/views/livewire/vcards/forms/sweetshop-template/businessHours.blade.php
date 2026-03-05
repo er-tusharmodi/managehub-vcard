@@ -11,27 +11,6 @@
     </h6>
 </div>
 
-{{-- Scalar header fields --}}
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="bh-badge">Badge / Section Label</label>
-    <input type="text"
-           id="bh-badge"
-           class="form-control @error('form.badge') is-invalid @enderror"
-           wire:model="form.badge"
-           placeholder="e.g. Open Today">
-    @error('form.badge') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
-<div class="col-lg-6 mb-3">
-    <label class="form-label fw-semibold" for="bh-suggest">Suggest Visit Label</label>
-    <input type="text"
-           id="bh-suggest"
-           class="form-control @error('form.suggestLabel') is-invalid @enderror"
-           wire:model="form.suggestLabel"
-           placeholder="e.g. Best time to visit">
-    @error('form.suggestLabel') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
 {{-- Days rows --}}
 @if(isset($form['days']) && is_array($form['days']))
 <div class="col-12 mb-1">

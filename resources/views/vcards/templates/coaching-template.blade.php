@@ -96,11 +96,9 @@
       <div class="banner-top-bar">
         <button class="share-btn" onclick="openShare()">
           <i class="bi bi-share-fill"></i>
-          <span>{{ v($data, 'profile.actions.share') }}</span>
-        </button>
-        <button class="save-btn-top" onclick="saveContact()">
+          <span>Share</span>
           <i class="bi bi-person-plus-fill"></i>
-          <span>{{ v($data, 'profile.actions.saveContact', 'Save Contact') }}</span>
+          <span>Save Contact</span>
         </button>
       </div>
     </div>
@@ -150,27 +148,27 @@
       <div class="profile-action-btns">
         <button class="pab call" onclick="callInstitute()">
           <i class="bi bi-telephone-fill"></i>
-          <span>{{ v($data, 'profile.actions.call') }}</span>
+          <span>Call</span>
         </button>
         <button class="pab whatsapp" onclick="openWA()">
           <i class="bi bi-whatsapp"></i>
-          <span>{{ v($data, 'profile.actions.whatsapp') }}</span>
+          <span>WhatsApp</span>
         </button>
         <button class="pab save" onclick="saveContact()">
           <i class="bi bi-person-vcard-fill"></i>
-          <span>{{ v($data, 'profile.actions.save') }}</span>
+          <span>Save</span>
         </button>
         <button class="pab email" onclick="emailInstitute()">
           <i class="bi bi-envelope-fill"></i>
-          <span>{{ v($data, 'profile.actions.email') }}</span>
+          <span>Email</span>
         </button>
         <button class="pab direction" onclick="openMaps()">
           <i class="bi bi-geo-alt-fill"></i>
-          <span>{{ v($data, 'profile.actions.directions') }}</span>
+          <span>Directions</span>
         </button>
         <button class="pab share" onclick="openShare()">
           <i class="bi bi-share-fill"></i>
-          <span>{{ v($data, 'profile.actions.share') }}</span>
+          <span>Share</span>
         </button>
       </div>
     </div>
@@ -193,7 +191,7 @@
         <div class="sec-icon">
           <i class="bi bi-person-badge"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'director.title') }}</div>
+        <div class="sec-title">Director's Message</div>
       </div>
       <div class="sec-body">
         <div style="display:flex;gap:.9rem;align-items:flex-start;">
@@ -225,7 +223,7 @@
         <div class="sec-icon g-amber">
           <i class="bi bi-stars"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'whyChoose.title') }}</div>
+        <div class="sec-title">Why Choose Pinnacle?</div>
       </div>
       <div class="sec-body">
         <div class="why-grid">
@@ -251,7 +249,7 @@
         <div class="sec-icon g-amber">
           <i class="bi bi-mortarboard"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'courses.title') }}</div>
+        <div class="sec-title">Courses Offered</div>
         <div class="sec-subtitle">{{ v($data, 'courses.subtitle') }}</div>
       </div>
       <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
@@ -294,7 +292,7 @@
         <div class="sec-icon g-green">
           <i class="bi bi-calendar-event"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'batches.title') }}</div>
+        <div class="sec-title">Upcoming Batches</div>
       </div>
       <div class="sec-body">
         <div class="batch-list">
@@ -336,7 +334,7 @@
         <div class="sec-icon g-red">
           <i class="bi bi-play-circle"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'demo.title') }}</div>
+        <div class="sec-title">Book a Free Demo Class</div>
       </div>
       <div class="sec-body">
         <div id="demoForm">
@@ -392,7 +390,7 @@
           </div>
           <button class="bf-submit" onclick="bookDemo()">
             <i class="bi bi-play-circle"></i>
-            {{ v($data, 'demo.form.submitText') }}
+            Register for Free Demo via WhatsApp
           </button>
         </div>
 
@@ -400,7 +398,7 @@
           <div class="demo-success-icon"><i class="bi bi-check2-circle"></i></div>
           <h4>{{ v($data, 'demo.success.title') }}</h4>
           <p>{{ v($data, 'demo.success.text') }}</p>
-          <button class="reset-btn" onclick="resetDemo()">{{ v($data, 'demo.success.resetText') }}</button>
+          <button class="reset-btn" onclick="resetDemo()">Register Another</button>
         </div>
       </div>
     </div>
@@ -413,7 +411,7 @@
         <div class="sec-icon g-amber">
           <i class="bi bi-cash"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'fees.title') }}</div>
+        <div class="sec-title">Fee Structure</div>
       </div>
       <div class="sec-body">
         <div class="fees-list">
@@ -448,7 +446,7 @@
         <div class="sec-icon">
           <i class="bi bi-people"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'faculty.title') }}</div>
+        <div class="sec-title">Expert Faculty</div>
         <div class="sec-subtitle">{{ v($data, 'faculty.subtitle') }}</div>
       </div>
       <div class="sec-body" style="padding:.9rem .4rem .9rem 1.1rem;">
@@ -481,7 +479,7 @@
         <div class="sec-icon g-blue">
           <i class="bi bi-journal-bookmark"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'materials.title') }}</div>
+        <div class="sec-title">Study Materials &amp; Resources</div>
       </div>
       <div class="sec-body">
         <div class="material-list">
@@ -505,7 +503,7 @@
         <div class="sec-icon g-green">
           <i class="bi bi-laptop"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'modes.title') }}</div>
+        <div class="sec-title">Learning Modes</div>
       </div>
       <div class="sec-body">
         <div class="mode-grid">
@@ -529,7 +527,7 @@
         <div class="sec-icon g-purple">
           <i class="bi bi-question-circle"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'faq.title') }}</div>
+        <div class="sec-title">FAQs</div>
       </div>
       <div class="sec-body">
         <div class="faq-list">
@@ -555,7 +553,7 @@
         <div class="sec-icon">
           <i class="bi bi-share"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'social.title') }}</div>
+        <div class="sec-title">Follow &amp; Connect</div>
       </div>
       <div class="sec-body">
         <div class="social-list">
@@ -589,7 +587,7 @@
         <div class="sec-icon">
           <i class="bi bi-geo-alt"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'location.title') }}</div>
+        <div class="sec-title">Find Us</div>
       </div>
       <div class="sec-body">
         <div class="map-frame">
@@ -605,7 +603,7 @@
         </div>
         <button class="directions-btn" onclick="openMaps()">
           <i class="bi bi-signpost"></i>
-          {{ v($data, 'location.directionsText') }}
+          Get Directions on Google Maps
         </button>
       </div>
     </div>
@@ -618,7 +616,7 @@
         <div class="sec-icon g-blue">
           <i class="bi bi-credit-card"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'payment.title') }}</div>
+        <div class="sec-title">Payment Options</div>
       </div>
       <div class="sec-body">
         <div class="payment-list">
@@ -641,7 +639,7 @@
         <div class="sec-icon">
           <i class="bi bi-qr-code"></i>
         </div>
-        <div class="sec-title">{{ v($data, 'qr.title') }}</div>
+        <div class="sec-title">Save &amp; Share Profile</div>
       </div>
       <div class="sec-body">
         <div class="qr-inner">
@@ -652,11 +650,11 @@
           <div class="qr-actions">
             <button class="qr-btn" onclick="saveContact()">
               <i class="bi bi-person-vcard"></i>
-              {{ v($data, 'qr.saveText') }}
+              Save Contact
             </button>
             <button class="qr-btn" onclick="downloadQR()">
               <i class="bi bi-download"></i>
-              {{ v($data, 'qr.downloadText') }}
+              Download QR
             </button>
           </div>
         </div>
