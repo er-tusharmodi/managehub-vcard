@@ -1,35 +1,18 @@
-{{--
- | coaching-template/modes.blade.php
- | Learning modes: items[{name, description, gradient, iconClass}]
---}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-laptop me-1"></i>Learning Modes
-    </h6>
-</div>
-
-@php $items = $form['items'] ?? []; @endphp
-@foreach($items as $i => $mode)
-<div class="col-12 mb-2" wire:key="mode-{{ $i }}">
-    <div class="border rounded-3 p-2 bg-light">
-        <div class="row g-2">
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Mode Name</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.items.{{ $i }}.name" placeholder="Online Live">
-            </div>
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Icon Class</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.items.{{ $i }}.iconClass" placeholder="bi-camera-video">
-            </div>
-            <div class="col-12">
-                <label class="form-label small mb-1 fw-semibold">Description</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.items.{{ $i }}.description"
-                       placeholder="Live interactive sessions from home">
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
+{-- coaching-template/modes.blade.php --}
+@php
+$items = $form['items'] ?? [];
+$fields = [
+    ['key'=>'name', 'label'=>'Mode Name', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'Online Live'],
+    ['key'=>'description', 'label'=>'Description', 'type'=>'textarea', 'span'=>'col-12', 'placeholder'=>'Live interactive classes via Zoom…', 'rows'=>2],
+    ['key'=>'iconClass', 'label'=>'Icon Class', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'bi-camera-video'],
+];
+@endphp
+@include('livewire.vcards.forms._shared._list_table', [
+    'items'       => $items,
+    'addPath'     => 'items',
+    'modelBase'   => 'form.items',
+    'sectionKey'  => 'coaching-modes',
+    'itemLabel'   => 'Mode',
+    'tableFields' => ['name', 'description'],
+    'fields'      => $fields,
+])

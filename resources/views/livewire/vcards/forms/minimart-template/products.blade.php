@@ -1,61 +1,24 @@
-{{-- minimart-template/products.blade.php — [{id, name, desc, category_key, price, oldPrice, per, tag, tagColor, product_image}] --}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-package-variant me-1"></i>Products
-    </h6>
-</div>
-@if(is_array($form))
-@foreach($form as $i => $prod)
-<div class="col-12 mb-2" wire:key="mmprod-{{ $i }}">
-    <div class="border rounded-3 p-2 bg-light">
-        <div class="row g-2">
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Name</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.name" placeholder="Amul Full Cream Milk">
-            </div>
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Description</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.desc" placeholder="500ml pouch, pasteurised">
-            </div>
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Category Key</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.category_key" placeholder="dairy">
-            </div>
-            <div class="col-sm-2">
-                <label class="form-label small mb-1 fw-semibold">Price</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.price" placeholder="28">
-            </div>
-            <div class="col-sm-2">
-                <label class="form-label small mb-1 fw-semibold">Old Price</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.oldPrice" placeholder="32">
-            </div>
-            <div class="col-sm-2">
-                <label class="form-label small mb-1 fw-semibold">Per Unit</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.per" placeholder="500ml">
-            </div>
-            <div class="col-sm-3">
-                <label class="form-label small mb-1 fw-semibold">Tag</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.tag" placeholder="Fresh">
-            </div>
-            <div class="col-sm-3">
-                <label class="form-label small mb-1 fw-semibold">Tag Color</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.tagColor" placeholder="#27ae60">
-            </div>
-            <div class="col-12">
-                <label class="form-label small mb-1 fw-semibold">Product Image URL</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.product_image" placeholder="https://…">
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
-@endif
+{-- minimart-template/products.blade.php --}
+@php
+$items = $form ?? [];
+$fields = [
+    ['key'=>'product_image', 'label'=>'Photo', 'type'=>'image', 'span'=>'col-md-3'],
+    ['key'=>'name', 'label'=>'Product Name', 'type'=>'text', 'span'=>'col-md-6', 'placeholder'=>'Amul Full Cream Milk'],
+    ['key'=>'desc', 'label'=>'Description', 'type'=>'textarea', 'span'=>'col-12', 'placeholder'=>'500ml pouch, pasteurised', 'rows'=>2],
+    ['key'=>'category_key', 'label'=>'Category', 'type'=>'select', 'span'=>'col-md-4', 'options'=>$categoryOptions ?? []],
+    ['key'=>'price', 'label'=>'Price (₹)', 'type'=>'text', 'span'=>'col-md-3', 'placeholder'=>'28'],
+    ['key'=>'oldPrice', 'label'=>'Old Price', 'type'=>'text', 'span'=>'col-md-3', 'placeholder'=>'32'],
+    ['key'=>'per', 'label'=>'Per Unit', 'type'=>'text', 'span'=>'col-md-3', 'placeholder'=>'500ml'],
+    ['key'=>'tag', 'label'=>'Tag', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'Fresh'],
+    ['key'=>'tagColor', 'label'=>'Tag Color', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'#27ae60'],
+];
+@endphp
+@include('livewire.vcards.forms._shared._list_table', [
+    'items'       => $items,
+    'addPath'     => '',
+    'modelBase'   => 'form',
+    'sectionKey'  => 'mm-prods',
+    'itemLabel'   => 'Product',
+    'tableFields' => ['product_image', 'name', 'price'],
+    'fields'      => $fields,
+])

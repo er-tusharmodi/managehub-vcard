@@ -36,6 +36,26 @@ class ClientSectionEditor extends Component
         }
 
         $data = $this->loadJson();
+
+        // Bootstrap: ensure vcard data matches template defaults.
+        // Handles: (1) missing sections, (2) empty section arrays, (3) list sections where template has more items.
+        $tplBootstrap = $this->loadTemplateDefaultJson();
+        foreach ($tplBootstrap as $tplKey => $tplVal) {
+            if (!array_key_exists($tplKey, $data)) {
+                // Section completely missing from vcard data → use template default
+                $data[$tplKey] = $tplVal;
+            } elseif (is_array($tplVal) && !empty($tplVal) && is_array($data[$tplKey])) {
+                if (empty($data[$tplKey])) {
+                    // Section exists but is empty array → use template default
+                    $data[$tplKey] = $tplVal;
+                } elseif (isset($tplVal[0]) && is_array($tplVal[0]) && count($tplVal) > count($data[$tplKey])) {
+                    // List section where template has more items than vcard → merge new ones
+                    $data[$tplKey] = $this->mergeListItems($data[$tplKey], $tplVal);
+                }
+            }
+        }
+        unset($tplBootstrap, $tplKey, $tplVal);
+
         $this->categoryOptions = $this->buildCategoryOptions($data);
         
         // Load sections config if available
@@ -120,16 +140,15 @@ class ClientSectionEditor extends Component
         }
 
         $sectionData = $data[$this->section] ?? [];
-        
-        // Reindex numeric-keyed arrays to sequential format
+
+        // Re-index numeric-keyed arrays (handles both integer keys and string numeric keys from MongoDB)
         if (is_array($sectionData) && !empty($sectionData)) {
             $keys = array_keys($sectionData);
-            // If keys are numeric strings starting from 0 and sequential, convert to indexed array
-            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+            if (isset($keys[0]) && is_numeric($keys[0])) {
                 $sectionData = array_values($sectionData);
             }
         }
-        
+
         $this->form = $sectionData;
     }
 
@@ -143,7 +162,7 @@ class ClientSectionEditor extends Component
         $this->resetValidation();
         $this->validateIfRules($this->rulesForForm());
 
-        $payload = $this->applyUploads($this->form, $this->uploads);
+        $payload = $this->sanitizeArrayKeys($this->applyUploads($this->form, $this->uploads));
         $data = $this->loadJson();
         $data[$this->section] = $payload;
 
@@ -515,10 +534,26 @@ class ClientSectionEditor extends Component
         $this->dispatch('section-changed', section: $section);
 
         $data = $this->loadJson();
+
+        // Bootstrap: fill section from template default if missing, empty, or template has newer items
+        $tplDefault    = $this->loadTemplateDefaultJson();
+        $tplSectionVal = $tplDefault[$section] ?? null;
+        if (!array_key_exists($section, $data)) {
+            $data[$section] = $tplSectionVal ?? [];
+        } elseif ($tplSectionVal !== null && is_array($tplSectionVal) && !empty($tplSectionVal) && is_array($data[$section])) {
+            if (empty($data[$section])) {
+                $data[$section] = $tplSectionVal;
+            } elseif (isset($tplSectionVal[0]) && is_array($tplSectionVal[0]) && count($tplSectionVal) > count($data[$section])) {
+                $data[$section] = $this->mergeListItems($data[$section], $tplSectionVal);
+            }
+        }
+
         $sectionData = $data[$section] ?? [];
+
+        // Re-index numeric-keyed arrays (handles both integer keys and string numeric keys from MongoDB)
         if (is_array($sectionData) && !empty($sectionData)) {
             $keys = array_keys($sectionData);
-            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+            if (isset($keys[0]) && is_numeric($keys[0])) {
                 $sectionData = array_values($sectionData);
             }
         }
@@ -622,6 +657,65 @@ class ClientSectionEditor extends Component
         }
 
         return $payload;
+    }
+
+    /**
+     * Merge new items from template defaults into an existing vcard list section.
+     * Only items whose unique identifier (key/id/slug/name/title/day) is absent from the
+     * vcard list are appended — existing vcard items are never overwritten.
+     */
+    private function mergeListItems(array $existing, array $defaults): array
+    {
+        $sample  = $defaults[0] ?? [];
+        $idField = null;
+        foreach (['key', 'id', 'slug', 'name', 'title', 'day'] as $candidate) {
+            if (array_key_exists($candidate, $sample)) {
+                $idField = $candidate;
+                break;
+            }
+        }
+
+        if ($idField === null) {
+            // No reliable identifier — append items past the existing count
+            return array_merge($existing, array_slice($defaults, count($existing)));
+        }
+
+        $existingIds = array_column($existing, $idField);
+        $result      = $existing;
+        foreach ($defaults as $item) {
+            $itemId = $item[$idField] ?? null;
+            if ($itemId !== null && !in_array($itemId, $existingIds, true)) {
+                $result[] = $item;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Recursively sanitize array keys:
+     * - Mixed int+string keys → strip string-keyed entries, re-index integer ones
+     * - All-integer keys     → ensure sequential 0-based re-indexing
+     * - All-string keys      → recurse into values only
+     */
+    private function sanitizeArrayKeys(array $data): array
+    {
+        $keys    = array_keys($data);
+        $intKeys = array_filter($keys, 'is_int');
+        $strKeys = array_filter($keys, fn($k) => !is_int($k));
+
+        if (!empty($intKeys) && !empty($strKeys)) {
+            $data = array_values(array_filter($data, fn($k) => is_int($k), ARRAY_FILTER_USE_KEY));
+        } elseif (!empty($intKeys)) {
+            $data = array_values($data);
+        }
+
+        foreach ($data as $k => $v) {
+            if (is_array($v)) {
+                $data[$k] = $this->sanitizeArrayKeys($v);
+            }
+        }
+
+        return $data;
     }
 
     private function loadTemplateDefaultJson(): array

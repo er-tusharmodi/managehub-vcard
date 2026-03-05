@@ -50,6 +50,16 @@ class TemplateVisualEditor extends Component
             if ($templateKey !== 'minimart-template') {
                 $excluded[] = 'sections';
             }
+            // Template-specific hidden sections
+            $templateHide = [
+                'doctor-clinic-template'    => ['profile', 'qr', 'promo'],
+                'coaching-template'         => ['stats'],
+                'electronics-shop-template' => ['repair', 'repairServices', 'promo'],
+                'mens-salon-template'       => ['promo'],
+            ];
+            if (isset($templateHide[$templateKey])) {
+                $excluded = array_merge($excluded, $templateHide[$templateKey]);
+            }
             $allSections = array_values(array_filter(array_keys($data), fn($k) => !in_array($k, $excluded)));
 
             // Move _common to front
@@ -84,6 +94,7 @@ class TemplateVisualEditor extends Component
         $this->section = $section;
         $this->uploads = [];
         $this->newItem = [];
+        $this->dispatch('section-changed', section: $section);
         try {
             $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
             $this->loadFormForSection($section, $data);
@@ -113,14 +124,47 @@ class TemplateVisualEditor extends Component
     private function loadFormForSection(string $section, array $data): void
     {
         $sectionData = $data[$section] ?? [];
+
+        // Re-index numeric-keyed arrays (handles both integer keys and string numeric keys)
         if (is_array($sectionData) && !empty($sectionData)) {
             $keys = array_keys($sectionData);
-            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+            if (isset($keys[0]) && is_numeric($keys[0])) {
                 $sectionData = array_values($sectionData);
             }
         }
         $this->form = $sectionData;
         $this->categoryOptions = $this->buildCategoryOptions($data);
+    }
+
+    /**
+     * Recursively sanitize array keys:
+     * - Mixed int+string keys → strip string-keyed entries, re-index integer ones
+     * - All-integer keys     → ensure sequential 0-based re-indexing
+     * - All-string keys      → recurse into values only
+     * Prevents stray keys (e.g. from Livewire wire state or partial-save bugs) from
+     * corrupting list-type sections in template default.json.
+     */
+    private function sanitizeArrayKeys(array $data): array
+    {
+        $keys    = array_keys($data);
+        $intKeys = array_filter($keys, 'is_int');
+        $strKeys = array_filter($keys, fn($k) => !is_int($k));
+
+        if (!empty($intKeys) && !empty($strKeys)) {
+            // Mixed: remove string-keyed entries, re-index integer ones
+            $data = array_values(array_filter($data, fn($k) => is_int($k), ARRAY_FILTER_USE_KEY));
+        } elseif (!empty($intKeys)) {
+            // All-integer: ensure clean sequential keys
+            $data = array_values($data);
+        }
+
+        foreach ($data as $k => $v) {
+            if (is_array($v)) {
+                $data[$k] = $this->sanitizeArrayKeys($v);
+            }
+        }
+
+        return $data;
     }
 
     private function buildCategoryOptions(array $data): array
@@ -159,7 +203,7 @@ class TemplateVisualEditor extends Component
     public function save()
     {
         try {
-            $payload = $this->applyUploads($this->form, $this->uploads);
+            $payload = $this->sanitizeArrayKeys($this->applyUploads($this->form, $this->uploads));
             $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
             $data[$this->section] = $payload;
 
@@ -233,6 +277,24 @@ class TemplateVisualEditor extends Component
         } else {
             data_set($this->form, $path, $list);
         }
+    }
+
+    public function addStringAndSave(string $path, string $key)
+    {
+        $value = $this->newItem[$key] ?? '';
+        $list  = empty($path) ? $this->form : data_get($this->form, $path, []);
+        if (!is_array($list)) {
+            $list = [];
+        }
+        $list[] = $value;
+        if (empty($path)) {
+            $this->form = $list;
+        } else {
+            data_set($this->form, $path, $list);
+        }
+        $this->save();
+        $this->newItem = [];
+        $this->dispatch('notify', type: 'success', message: 'Item added successfully!');
     }
 
     public function addRowAndSave(string $path, array $columns = [])

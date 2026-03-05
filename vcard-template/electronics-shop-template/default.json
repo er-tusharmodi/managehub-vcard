@@ -208,7 +208,7 @@
             "category_key": "smartphones",
             "price": 74999,
             "oldPrice": 84999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+            "product_image": "/template-assets/electronics-shop-template/uploads/1772714560_dummyUser__1_.png",
             "tag": "HOT",
             "tagColor": "#f44336"
         },
@@ -312,7 +312,6 @@
         }
     ],
     "brands": [
-        "Samsung",
         "Apple",
         "OnePlus",
         "Xiaomi",
@@ -326,7 +325,6 @@
         "Philips"
     ],
     "gallery": [
-        "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
         "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",

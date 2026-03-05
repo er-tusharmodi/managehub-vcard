@@ -136,9 +136,12 @@
                                 @php
                                     $tabIcon  = ($iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary']);
                                     $isActive = $section === $tab;
+                                    $sectionLabelMap = [
+                                        'restaurant-cafe-template' => ['R' => 'Business Details'],
+                                    ];
                                     $tabLabel = $tab === '_common'
                                         ? 'Basic Info'
-                                        : \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab));
+                                        : ($sectionLabelMap[$templateKey][$tab] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab)));
 
                                     // Determine if this section has a toggle in _sections_config
                                     $hasToggle   = isset($sectionsConfig[$tab]);
@@ -323,4 +326,22 @@
         .tve-nav-active { background: rgba(var(--bs-primary-rgb),.08); border-left: 3px solid var(--bs-primary) !important; }
         .tve-nav-item { border-left: 3px solid transparent; }
     </style>
+
+    <script>
+    (function () {
+        window.addEventListener('section-changed', function (e) {
+            const section = e.detail.section;
+            const base = window.location.pathname.replace(/\/visual(\/[^\/]*)?$/, '');
+            history.pushState({ section: section }, '', base + '/visual/' + encodeURIComponent(section));
+        });
+        window.addEventListener('popstate', function (e) {
+            if (e.state && e.state.section) {
+                const el = document.querySelector('[wire\\:id]');
+                if (el && window.Livewire) {
+                    window.Livewire.find(el.getAttribute('wire:id')).call('selectSection', e.state.section);
+                }
+            }
+        });
+    })();
+    </script>
 </div>

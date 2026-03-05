@@ -29,6 +29,26 @@ class AdminSectionEditor extends Component
     {
         $this->vcard = $vcard;
         $data = $this->loadJson();
+
+        // Bootstrap: ensure vcard data matches template defaults.
+        // Handles: (1) missing sections, (2) empty section arrays, (3) list sections where template has more items.
+        $tplBootstrap = $this->loadTemplateDefaultJson();
+        foreach ($tplBootstrap as $tplKey => $tplVal) {
+            if (!array_key_exists($tplKey, $data)) {
+                // Section completely missing from vcard data → use template default
+                $data[$tplKey] = $tplVal;
+            } elseif (is_array($tplVal) && !empty($tplVal) && is_array($data[$tplKey])) {
+                if (empty($data[$tplKey])) {
+                    // Section exists but is empty array → use template default
+                    $data[$tplKey] = $tplVal;
+                } elseif (isset($tplVal[0]) && is_array($tplVal[0]) && count($tplVal) > count($data[$tplKey])) {
+                    // List section where template has more items than vcard → merge new ones
+                    $data[$tplKey] = $this->mergeListItems($data[$tplKey], $tplVal);
+                }
+            }
+        }
+        unset($tplBootstrap, $tplKey, $tplVal);
+
         $this->categoryOptions = $this->buildCategoryOptions($data);
         
         // Load sections config if available
@@ -90,6 +110,16 @@ class AdminSectionEditor extends Component
         if (!in_array($templateKey, ['minimart-template'], true)) {
             $hiddenSections[] = 'sections';
         }
+        // Template-specific hidden sections
+        $templateHide = [
+            'doctor-clinic-template'    => ['profile', 'qr', 'promo'],
+            'coaching-template'         => ['stats'],
+            'electronics-shop-template' => ['repair', 'repairServices', 'promo'],
+            'mens-salon-template'       => ['promo'],
+        ];
+        if (isset($templateHide[$templateKey])) {
+            $hiddenSections = array_merge($hiddenSections, $templateHide[$templateKey]);
+        }
         $allSections = array_values(array_filter(array_keys($data), function ($key) use ($hiddenSections) {
             return $key === '_common' || (!str_starts_with($key, '_') && !in_array($key, $hiddenSections));
         }));
@@ -116,23 +146,21 @@ class AdminSectionEditor extends Component
         }
 
         $sectionData = $data[$this->section] ?? [];
-        
-        // FIX: Convert associative array with numeric string keys to sequential array
+
+        // Re-index numeric-keyed arrays (handles both integer keys and string numeric keys from MongoDB)
         if (is_array($sectionData) && !empty($sectionData)) {
             $keys = array_keys($sectionData);
-            // Check if keys are numeric strings (0, 1, 2, etc.)
-            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
-                // Re-index the array to remove any gaps
+            if (isset($keys[0]) && is_numeric($keys[0])) {
                 $sectionData = array_values($sectionData);
             }
         }
-        
+
         $this->form = $sectionData;
     }
 
     public function save(): void
     {
-        $payload = $this->applyUploads($this->form, $this->uploads);
+        $payload = $this->sanitizeArrayKeys($this->applyUploads($this->form, $this->uploads));
         $data = $this->loadJson();
         $data[$this->section] = $payload;
 
@@ -552,10 +580,26 @@ class AdminSectionEditor extends Component
         $this->newItem   = [];
 
         $data = $this->loadJson();
+
+        // Bootstrap: fill section from template default if missing, empty, or template has newer items
+        $tplDefault    = $this->loadTemplateDefaultJson();
+        $tplSectionVal = $tplDefault[$section] ?? null;
+        if (!array_key_exists($section, $data)) {
+            $data[$section] = $tplSectionVal ?? [];
+        } elseif ($tplSectionVal !== null && is_array($tplSectionVal) && !empty($tplSectionVal) && is_array($data[$section])) {
+            if (empty($data[$section])) {
+                $data[$section] = $tplSectionVal;
+            } elseif (isset($tplSectionVal[0]) && is_array($tplSectionVal[0]) && count($tplSectionVal) > count($data[$section])) {
+                $data[$section] = $this->mergeListItems($data[$section], $tplSectionVal);
+            }
+        }
+
         $sectionData = $data[$section] ?? [];
+
+        // Re-index numeric-keyed arrays (handles both integer keys and string numeric keys from MongoDB)
         if (is_array($sectionData) && !empty($sectionData)) {
             $keys = array_keys($sectionData);
-            if (isset($keys[0]) && is_numeric($keys[0]) && $keys === range(0, count($keys) - 1)) {
+            if (isset($keys[0]) && is_numeric($keys[0])) {
                 $sectionData = array_values($sectionData);
             }
         }
@@ -607,6 +651,69 @@ class AdminSectionEditor extends Component
         }
         
         $this->dispatch('notify', type: 'success', message: 'JSON saved successfully!');
+    }
+
+    /**
+     * Merge new items from template defaults into an existing vcard list section.
+     * Only items whose unique identifier (key/id/slug/name/title/day) is absent from the
+     * vcard list are appended — existing vcard items are never overwritten.
+     */
+    private function mergeListItems(array $existing, array $defaults): array
+    {
+        $sample  = $defaults[0] ?? [];
+        $idField = null;
+        foreach (['key', 'id', 'slug', 'name', 'title', 'day'] as $candidate) {
+            if (array_key_exists($candidate, $sample)) {
+                $idField = $candidate;
+                break;
+            }
+        }
+
+        if ($idField === null) {
+            // No reliable identifier — append items past the existing count
+            return array_merge($existing, array_slice($defaults, count($existing)));
+        }
+
+        $existingIds = array_column($existing, $idField);
+        $result      = $existing;
+        foreach ($defaults as $item) {
+            $itemId = $item[$idField] ?? null;
+            if ($itemId !== null && !in_array($itemId, $existingIds, true)) {
+                $result[] = $item;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Recursively sanitize array keys:
+     * - Mixed int+string keys → strip string-keyed entries, re-index integer ones
+     * - All-integer keys     → ensure sequential 0-based re-indexing
+     * - All-string keys      → recurse into values only
+     * Prevents stray keys (e.g. "list" from Livewire wire state or addItem path bugs)
+     * from corrupting list-type sections.
+     */
+    private function sanitizeArrayKeys(array $data): array
+    {
+        $keys    = array_keys($data);
+        $intKeys = array_filter($keys, 'is_int');
+        $strKeys = array_filter($keys, fn($k) => !is_int($k));
+
+        if (!empty($intKeys) && !empty($strKeys)) {
+            // Mixed: remove string-keyed entries, re-index integer ones
+            $data = array_values(array_filter($data, fn($k) => is_int($k), ARRAY_FILTER_USE_KEY));
+        } elseif (!empty($intKeys)) {
+            // All-integer: ensure clean sequential keys
+            $data = array_values($data);
+        }
+
+        foreach ($data as $k => $v) {
+            if (is_array($v)) {
+                $data[$k] = $this->sanitizeArrayKeys($v);
+            }
+        }
+
+        return $data;
     }
 
     private function loadTemplateDefaultJson(): array

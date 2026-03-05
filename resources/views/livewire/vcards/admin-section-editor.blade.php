@@ -120,9 +120,12 @@
                             @php
                                 $tabIcon  = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $isActive = ($editMode !== 'code') && $section === $tab;
+                                $sectionLabelMap = [
+                                    'restaurant-cafe-template' => ['R' => 'Business Details'],
+                                ];
                                 $tabLabel = $tab === '_common'
                                     ? 'Basic Info'
-                                    : \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab));
+                                    : ($sectionLabelMap[$vcard->template_key ?? ''][$tab] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab)));
 
                                 $hasToggle  = isset($sectionsConfig[$tab]);
                                 $tabEnabled = $hasToggle ? ($sectionsConfig[$tab]['enabled'] ?? true) : null;
@@ -369,4 +372,22 @@
         .ase-nav-active-dark { background: rgba(0,0,0,.06); border-left: 3px solid #343a40 !important; }
         .ase-nav-item { border-left: 3px solid transparent; }
     </style>
+
+    <script>
+    (function () {
+        window.addEventListener('section-changed', function (e) {
+            const section = e.detail.section;
+            const base = window.location.pathname.replace(/\/data(\/[^\/]*)?$/, '');
+            history.pushState({ section: section }, '', base + '/data/' + encodeURIComponent(section));
+        });
+        window.addEventListener('popstate', function (e) {
+            if (e.state && e.state.section) {
+                const el = document.querySelector('[wire\\:id]');
+                if (el && window.Livewire) {
+                    window.Livewire.find(el.getAttribute('wire:id')).call('selectSection', e.state.section);
+                }
+            }
+        });
+    })();
+    </script>
 </div>

@@ -1,35 +1,29 @@
-{{--
- | doctor-clinic-template/specializations.blade.php
- | List of specializations: [{name, tone, icon}]
---}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-stethoscope me-1"></i>Specializations
-    </h6>
-</div>
-
-@if(is_array($form))
-@foreach($form as $i => $spec)
-<div class="col-12 mb-2" wire:key="spec-{{ $i }}">
-    <div class="border rounded-3 p-2 bg-light">
-        <div class="row g-2 align-items-center">
-            <div class="col-sm-5">
-                <label class="form-label small mb-1 fw-semibold">Specialization Name</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.name" placeholder="Cardiology">
-            </div>
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Tone / Color Class</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.tone" placeholder="blue">
-            </div>
-            <div class="col-sm-3">
-                <label class="form-label small mb-1 fw-semibold">Icon</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.icon" placeholder="❤️">
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
-@endif
+{-- doctor-clinic-template/specializations.blade.php --}
+@php
+$items = $form;
+$fields = [
+    ['key'=>'name', 'label'=>'Name', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'Cardiology'],
+    ['key'=>'tone', 'label'=>'Colour Tone', 'type'=>'select', 'span'=>'col-md-5', 'options'=>[
+        ['key'=>'#e74c3c','label'=>'Red — Cardiology / Emergency'],
+        ['key'=>'#0369a1','label'=>'Blue — Orthopaedics'],
+        ['key'=>'#0d9488','label'=>'Teal — Neurology'],
+        ['key'=>'#15803d','label'=>'Green — General Medicine'],
+        ['key'=>'#7c3aed','label'=>'Purple — Oncology'],
+        ['key'=>'#b45309','label'=>'Amber — ENT'],
+        ['key'=>'#0284c7','label'=>'Sky — Paediatrics'],
+        ['key'=>'#db2777','label'=>'Pink — Gynaecology'],
+        ['key'=>'#9333ea','label'=>'Violet — Psychiatry'],
+        ['key'=>'#64748b','label'=>'Grey — Other'],
+    ]],
+    ['key'=>'icon', 'label'=>'Icon', 'type'=>'datalist', 'span'=>'col-md-3', 'options'=>['🫀','🧠','🦴','🦷','👁️','👂','🫁','🩸','💊','🩺','🔬','🧬','💪','🤰','👶']],
+];
+@endphp
+@include('livewire.vcards.forms._shared._list_table', [
+    'items'       => $items,
+    'addPath'     => '',
+    'modelBase'   => 'form',
+    'sectionKey'  => 'dr-specs',
+    'itemLabel'   => 'Specialization',
+    'tableFields' => ['name', 'tone'],
+    'fields'      => $fields,
+])

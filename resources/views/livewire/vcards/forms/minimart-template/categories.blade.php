@@ -1,36 +1,19 @@
-{{-- minimart-template/categories.blade.php — [{key, name, query, count}] --}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-tag-multiple me-1"></i>Product Categories
-    </h6>
-</div>
-@if(is_array($form))
-@foreach($form as $i => $cat)
-<div class="col-12 mb-1" wire:key="mmcat-{{ $i }}">
-    <div class="border rounded-2 p-2 bg-white">
-        <div class="row g-2 align-items-center">
-            <div class="col-sm-2">
-                <label class="form-label small mb-1 fw-semibold">Key</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.key" placeholder="dairy">
-            </div>
-            <div class="col-sm-3">
-                <label class="form-label small mb-1 fw-semibold">Name</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.name" placeholder="Dairy & Eggs">
-            </div>
-            <div class="col-sm-5">
-                <label class="form-label small mb-1 fw-semibold">Query (search hint)</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.query" placeholder="milk eggs cheese">
-            </div>
-            <div class="col-sm-2">
-                <label class="form-label small mb-1 fw-semibold">Count</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.count" placeholder="24">
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
-@endif
+{-- minimart-template/categories.blade.php --}
+@php
+$items = $form ?? [];
+$fields = [
+    ['key'=>'key', 'label'=>'Key', 'type'=>'text', 'span'=>'col-md-3', 'placeholder'=>'dairy'],
+    ['key'=>'name', 'label'=>'Display Name', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'Dairy & Eggs'],
+    ['key'=>'count', 'label'=>'Item Count', 'type'=>'text', 'span'=>'col-md-2', 'placeholder'=>'24'],
+    ['key'=>'query', 'label'=>'Search Query', 'type'=>'text', 'span'=>'col-12', 'placeholder'=>'milk eggs cheese'],
+];
+@endphp
+@include('livewire.vcards.forms._shared._list_table', [
+    'items'       => $items,
+    'addPath'     => '',
+    'modelBase'   => 'form',
+    'sectionKey'  => 'mm-cats',
+    'itemLabel'   => 'Category',
+    'tableFields' => ['name', 'count'],
+    'fields'      => $fields,
+])

@@ -15,7 +15,7 @@
     <label class="form-label fw-semibold">Institute Logo / Profile Image</label>
     @php
         $logoVal = $form['logoImageUrl'] ?? null;
-        $logoPreview = $logoVal ? (isset($assetBaseUrl) ? rtrim($assetBaseUrl,'/').'/'.$logoVal : $logoVal) : null;
+        $logoPreview = $logoVal ? (str_starts_with($logoVal, '/') || str_starts_with($logoVal, 'http') ? $logoVal : (isset($assetBaseUrl) ? rtrim($assetBaseUrl,'/').'/'.$logoVal : $logoVal)) : null;
     @endphp
     <div class="d-flex align-items-start gap-3 flex-wrap">
         @if($logoPreview)

@@ -1,35 +1,27 @@
-{{--
- | electronics-shop-template/whyChoose.blade.php
- | Why Choose Us chips: [{text, tone, icon}]
---}}
-<div class="col-12 mb-2">
-    <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-        <i class="mdi mdi-star-circle-outline me-1"></i>Why Choose Us — Chips
-    </h6>
-</div>
-
-@if(is_array($form))
-@foreach($form as $i => $item)
-<div class="col-12 mb-2" wire:key="wc-{{ $i }}">
-    <div class="border rounded-3 p-2 bg-light">
-        <div class="row g-2 align-items-center">
-            <div class="col-sm-5">
-                <label class="form-label small mb-1 fw-semibold">Feature Text</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.text" placeholder="Authorised Service Centre">
-            </div>
-            <div class="col-sm-4">
-                <label class="form-label small mb-1 fw-semibold">Tone / Color</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.tone" placeholder="blue">
-            </div>
-            <div class="col-sm-3">
-                <label class="form-label small mb-1 fw-semibold">Icon</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.{{ $i }}.icon" placeholder="🔧">
-            </div>
-        </div>
-    </div>
-</div>
-@endforeach
-@endif
+{{-- electronics-shop-template/whyChoose.blade.php --}}
+@php
+$items = is_array($form) ? $form : [];
+$fields = [
+    ['key'=>'text',  'label'=>'Feature Text',   'type'=>'text',     'span'=>'col-12',  'placeholder'=>'100% Genuine Products'],
+    ['key'=>'tone',  'label'=>'Color Tone',      'type'=>'select',   'span'=>'col-md-4',
+     'options'=>[
+        ['key'=>'blue',   'label'=>'Blue'],
+        ['key'=>'green',  'label'=>'Green'],
+        ['key'=>'orange', 'label'=>'Orange'],
+        ['key'=>'red',    'label'=>'Red'],
+        ['key'=>'purple', 'label'=>'Purple'],
+        ['key'=>'amber',  'label'=>'Amber'],
+     ]],
+    ['key'=>'icon',  'label'=>'Icon',            'type'=>'datalist', 'span'=>'col-md-4', 'placeholder'=>'shield',
+     'options'=>['shield','truck','clock','price','chat','refresh','check','star','bolt','tools','wifi','sim','award','tag','box','headphone','phone','dollar']],
+];
+@endphp
+@include('livewire.vcards.forms._shared._list_table', [
+    'items'       => $items,
+    'addPath'     => '',
+    'modelBase'   => 'form',
+    'sectionKey'  => 'elec-whychoose',
+    'itemLabel'   => 'Feature',
+    'tableFields' => ['text', 'tone', 'icon'],
+    'fields'      => $fields,
+])

@@ -75,7 +75,7 @@
         "nextBatch": "Next Batch: 1 Aug 2025"
     },
     "profile": {
-        "logoImageUrl": "/template-assets/coaching-template/uploads/1772640687_dummyUser__1_.png",
+        "logoImageUrl": "/template-assets/coaching-template/uploads/1772706221_dummyUser__1_.png",
         "logoIconClass": "bi-mortarboard-fill",
         "estTag": "Est. 2008",
         "name": "Pinnacle Excellence Academy",
@@ -99,7 +99,7 @@
         {
             "id": "cnt-yrs",
             "label": "Yrs Active",
-            "suffix": ""
+            "suffix": "sdas"
         },
         {
             "id": "cnt-sel",
@@ -428,7 +428,16 @@
     },
     "booking": {
         "enabled": true,
-        "label": "Booking"
+        "label": "Booking",
+        "slots": [
+            {
+                "slot": "",
+                "session": "",
+                "time": "",
+                "availability": "",
+                "full": ""
+            }
+        ]
     },
     "fees": {
         "title": "Fee Structure",
