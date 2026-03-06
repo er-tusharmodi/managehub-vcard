@@ -41,10 +41,9 @@ class AdminSectionEditor extends Component
                 if (empty($data[$tplKey])) {
                     // Section exists but is empty array → use template default
                     $data[$tplKey] = $tplVal;
-                } elseif (isset($tplVal[0]) && is_array($tplVal[0]) && count($tplVal) > count($data[$tplKey])) {
-                    // List section where template has more items than vcard → merge new ones
-                    $data[$tplKey] = $this->mergeListItems($data[$tplKey], $tplVal);
                 }
+                // NOTE: Do NOT merge template items into non-empty sections.
+                // The count-comparison merge was re-adding items the user deliberately deleted.
             }
         }
         unset($tplBootstrap, $tplKey, $tplVal);
@@ -583,9 +582,9 @@ class AdminSectionEditor extends Component
         } elseif ($tplSectionVal !== null && is_array($tplSectionVal) && !empty($tplSectionVal) && is_array($data[$section])) {
             if (empty($data[$section])) {
                 $data[$section] = $tplSectionVal;
-            } elseif (isset($tplSectionVal[0]) && is_array($tplSectionVal[0]) && count($tplSectionVal) > count($data[$section])) {
-                $data[$section] = $this->mergeListItems($data[$section], $tplSectionVal);
             }
+            // NOTE: Do NOT merge template items into non-empty sections.
+            // The count-comparison merge was re-adding items the user deliberately deleted.
         }
 
         $sectionData = $data[$section] ?? [];

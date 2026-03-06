@@ -188,6 +188,107 @@
                                         $submissionMenu[] = ['vcard' => $vcard, 'types' => $types];
                                     }
                                 }
+
+                                // ── Content quick-links (list sections per vCard) ──────────────────────
+                                $hiddenContentSecs = [
+                                    'files','floatingBar','floatBar','bottomBar','footer','labels',
+                                    'toast','share','shareModal','banner','header','status','cart',
+                                    'messages','meta','assets','qr','sections',
+                                    '_sections_config','_field_config','_common',
+                                ];
+                                $contentIconMap = [
+                                    'collections'     => 'grid',
+                                    'categories'      => 'tag',
+                                    'products'        => 'shopping-bag',
+                                    'menu'            => 'list',
+                                    'services'        => 'briefcase',
+                                    'courses'         => 'book-open',
+                                    'batches'         => 'calendar',
+                                    'faculty'         => 'users',
+                                    'gallery'         => 'image',
+                                    'certifications'  => 'award',
+                                    'testimonials'    => 'message-square',
+                                    'barbers'         => 'scissors',
+                                    'brands'          => 'star',
+                                    'awards'          => 'award',
+                                    'packages'        => 'package',
+                                    'hours'           => 'clock',
+                                    'followLinks'     => 'share-2',
+                                    'purity'          => 'droplet',
+                                    'showroom'        => 'map-pin',
+                                    'specializations' => 'star',
+                                    'faq'             => 'help-circle',
+                                    'fees'            => 'credit-card',
+                                    'demo'            => 'video',
+                                    'whyChoose'       => 'thumbs-up',
+                                    'director'        => 'user-check',
+                                    'counters'        => 'bar-chart-2',
+                                    'appointment'     => 'calendar',
+                                    'booking'         => 'calendar',
+                                    'profile'         => 'user',
+                                    'doctor'          => 'activity',
+                                    'enquiryForm'     => 'mail',
+                                    'offers'          => 'percent',
+                                    'R'               => 'shopping-cart',
+                                ];
+                                $contentLabelMap = [
+                                    'collections'     => 'Collections',
+                                    'categories'      => 'Categories',
+                                    'products'        => 'Products',
+                                    'menu'            => 'Menu',
+                                    'services'        => 'Services',
+                                    'courses'         => 'Courses',
+                                    'batches'         => 'Batches',
+                                    'faculty'         => 'Faculty',
+                                    'gallery'         => 'Gallery',
+                                    'certifications'  => 'Certifications',
+                                    'testimonials'    => 'Testimonials',
+                                    'barbers'         => 'Barbers / Staff',
+                                    'brands'          => 'Brands',
+                                    'awards'          => 'Awards',
+                                    'packages'        => 'Packages',
+                                    'hours'           => 'Opening Hours',
+                                    'followLinks'     => 'Follow Links',
+                                    'purity'          => 'Purity',
+                                    'showroom'        => 'Showroom',
+                                    'specializations' => 'Specializations',
+                                    'faq'             => 'FAQs',
+                                    'fees'            => 'Fees',
+                                    'demo'            => 'Demo',
+                                    'whyChoose'       => 'Why Choose Us',
+                                    'director'        => 'Director',
+                                    'counters'        => 'Counters',
+                                    'appointment'     => 'Appointments',
+                                    'booking'         => 'Bookings',
+                                    'profile'         => 'Profile',
+                                    'doctor'          => 'Doctor Info',
+                                    'enquiryForm'     => 'Enquiry Form',
+                                    'offers'          => 'Offers',
+                                    'R'               => 'Restaurant',
+                                ];
+                                $vcardContentMenu = [];
+                                foreach ($userVcards as $vc) {
+                                    // Prefer the vCard's own stored data, fall back to template default
+                                    $vcJsonPath = public_path('storage/vcards/' . $vc->subdomain . '/data.json');
+                                    if (!is_readable($vcJsonPath) && $vc->template_key) {
+                                        $vcJsonPath = base_path('vcard-template/' . $vc->template_key . '/default.json');
+                                    }
+                                    if (!is_readable($vcJsonPath)) continue;
+                                    $vcData = json_decode(file_get_contents($vcJsonPath), true);
+                                    if (!is_array($vcData)) continue;
+
+                                    $listSecs = [];
+                                    foreach ($vcData as $sKey => $sVal) {
+                                        if (in_array($sKey, $hiddenContentSecs, true)) continue;
+                                        if (str_starts_with((string) $sKey, '_')) continue;
+                                        // Only include numerically-indexed arrays (list sections)
+                                        if (!is_array($sVal) || empty($sVal) || !isset($sVal[0])) continue;
+                                        $listSecs[] = $sKey;
+                                    }
+                                    if (!empty($listSecs)) {
+                                        $vcardContentMenu[] = ['vcard' => $vc, 'sections' => $listSecs];
+                                    }
+                                }
                             @endphp
 
                             @if (!empty($submissionMenu))
@@ -199,6 +300,29 @@
                                             <span>{{ substr($entry['vcard']->client_name, 0, 18) }}</span>
                                         </a>
                                     </li>
+                                @endforeach
+                            @endif
+
+                            @if (!empty($vcardContentMenu))
+                                <li class="menu-title">Content</li>
+                                @foreach ($vcardContentMenu as $cEntry)
+                                    @if (count($userVcards) > 1)
+                                        <li class="menu-title" style="font-size:.68rem;opacity:.65;padding-top:.3rem;">
+                                            {{ substr($cEntry['vcard']->client_name, 0, 16) }}
+                                        </li>
+                                    @endif
+                                    @foreach ($cEntry['sections'] as $sKey)
+                                        @php
+                                            $cIcon  = $contentIconMap[$sKey]  ?? 'layout';
+                                            $cLabel = $contentLabelMap[$sKey] ?? \Illuminate\Support\Str::headline($sKey);
+                                        @endphp
+                                        <li>
+                                            <a href="{{ route('vcard.editor', ['subdomain' => $cEntry['vcard']->subdomain, 'section' => $sKey]) }}" class="tp-link">
+                                                <i data-feather="{{ $cIcon }}"></i>
+                                                <span>{{ $cLabel }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                 @endforeach
                             @endif
 

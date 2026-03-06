@@ -124,8 +124,7 @@
                             </button>
                             <button type="button" class="btn btn-sm btn-outline-danger p-0 rounded-circle"
                                     style="width:28px;height:28px;" title="Delete"
-                                    wire:click.stop="removeRow('{{ $addPath }}',{{ $i }})"
-                                    wire:confirm="Delete this {{ strtolower($itemLabel) }}?">
+                                    wire:click.stop="confirmRemoveRow('{{ $addPath }}',{{ $i }})">
                                 <i class="mdi mdi-delete" style="font-size:12px;"></i>
                             </button>
                         </div>
