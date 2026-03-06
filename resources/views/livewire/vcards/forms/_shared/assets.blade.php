@@ -9,14 +9,15 @@
 
 @php
     $assetLabels = [
-        'bannerImage'  => ['Banner / Cover Image', 'Recommended: 1200×400 px, JPG/PNG'],
-        'profileImage' => ['Profile / Logo Image', 'Recommended: 500×500 px, PNG/JPG'],
-        'serviceImage' => ['Service Section Image', 'Image shown in services block'],
-        'qrCodeImage'  => ['QR Code Image', 'Auto-generated — upload only if you have a custom QR'],
-        'coverImage'   => ['Cover Image', 'Recommended: 1200×400 px'],
-        'avatarImage'  => ['Avatar / Logo', 'Recommended: 500×500 px'],
-        'logoImage'    => ['Logo Image', 'Recommended: 400×400 px, transparent PNG'],
-        'bgImage'      => ['Background Image', 'Full-width background image'],
+        'bannerImage'   => ['Banner / Cover Image', 'Recommended: 1200×400 px, JPG/PNG'],
+        'profileImage'  => ['Profile / Logo Image', 'Recommended: 500×500 px, PNG/JPG'],
+        'fallbackImage' => ['Fallback Image', 'Shown when no product image is set'],
+        'serviceImage'  => ['Service Section Image', 'Image shown in services block'],
+        'qrCodeImage'   => ['QR Code Image', 'Auto-generated — upload only if you have a custom QR'],
+        'coverImage'    => ['Cover Image', 'Recommended: 1200×400 px'],
+        'avatarImage'   => ['Avatar / Logo', 'Recommended: 500×500 px'],
+        'logoImage'     => ['Logo Image', 'Recommended: 400×400 px, transparent PNG'],
+        'bgImage'       => ['Background Image', 'Full-width background image'],
     ];
     $knownImageKeys = array_keys($assetLabels);
     $genericKeys    = array_diff(array_keys($form), $knownImageKeys);

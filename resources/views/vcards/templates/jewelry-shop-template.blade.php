@@ -163,13 +163,18 @@
                             @php
                             $price = (int) ($item["price"] ?? 0);
                             $oldPrice = (int) ($item["oldPrice"] ?? 0);
+                            $collImg = $item["product_image"] ?? "";
+                            // Strip CSS url() wrapper if stored with it (data may use url('...') format)
+                            if ($collImg && preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $collImg, $_colm)) { $collImg = $_colm[1]; }
 @endphp
                             <div class="coll-card">
                                 <div class="coll-img">
-                                    <div class="coll-img-ph" style="background:{{ $item["bg"] ?? "" }};height:100%">
-                                        <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.2">
-                                            {!! getIcon("service_star") !!}
-                                        </svg>
+                                    <div class="coll-img-ph" style="background:{{ $collImg ? 'url(\'' . e($collImg) . '\') center/cover no-repeat' : ($item['bg'] ?? '') }};height:100%">
+                                        @if(!$collImg)
+                                            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="rgba(0,0,0,0.25)" stroke-width="1.2">
+                                                {!! getIcon("service_star") !!}
+                                            </svg>
+                                        @endif
                                     </div>
                                     @if(!empty($item["tag"]))
                                         <span class="coll-badge" style="background:{{ $item["tagColor"] ?? "" }}">{{ $item["tag"] }}</span>

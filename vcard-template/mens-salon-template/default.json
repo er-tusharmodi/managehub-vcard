@@ -331,8 +331,8 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "bannerImage": "/template-assets/mens-salon-template/uploads/1772716426_dummyUser__1_.png",
+        "profileImage": "/template-assets/mens-salon-template/uploads/1772716426_PinnacleAcademy_QR.png",
         "qrCodeImage": ""
     },
     "shop": {

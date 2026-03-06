@@ -229,13 +229,20 @@
                             $price = (int) ($item["price"] ?? 0);
                             $discount = $oldPrice > 0 ? (int) round((($oldPrice - $price) / $oldPrice) * 100) : 0;
 @endphp
+                            @php
+                                $prodImg = $item["product_image"] ?? "";
+                                // Strip CSS url() wrapper if stored with it
+                                if ($prodImg && preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $prodImg, $_epm)) { $prodImg = $_epm[1]; }
+                            @endphp
                             <div class="prod-card">
                                 <div class="prod-img">
-                                    <div class="prod-img-placeholder" style="background:{{ $item["bg"] ?? "" }};height:100%">
-                                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.4">
-                                            <rect x="2" y="3" width="20" height="14" rx="2"/>
-                                            <path d="M8 21h8M12 17v4"/>
-                                        </svg>
+                                    <div class="prod-img-placeholder" style="background:{{ $prodImg ? 'url(\'' . e($prodImg) . '\') center/cover no-repeat' : ($item['bg'] ?? '') }};height:100%">
+                                        @if(!$prodImg)
+                                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.4">
+                                                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                                                <path d="M8 21h8M12 17v4"/>
+                                            </svg>
+                                        @endif
                                     </div>
                                     @if(!empty($item["tag"]))
                                         <span class="prod-tag {{ strtolower((string) $item["tag"]) }}" style="background:{{ $item["tagColor"] ?? "" }}">

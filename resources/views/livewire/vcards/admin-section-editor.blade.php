@@ -169,15 +169,21 @@
                     </div>
                 </div>
                 <div class="card-footer py-2 px-3">
-                    <a href="{{ route('admin.vcards.index') }}" class="btn btn-sm btn-outline-secondary w-100">
-                        <i class="mdi mdi-arrow-left me-1"></i>All vCards
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('admin.vcards.index') }}" class="btn btn-sm btn-outline-secondary flex-grow-1">
+                            <i class="mdi mdi-arrow-left me-1"></i>All vCards
+                        </a>
+                        <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
+                           class="btn btn-sm btn-outline-primary" title="View vCard">
+                            <i class="mdi mdi-eye-outline"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
 
         {{-- RIGHT EDIT PANEL --}}
-        <div class="col-lg-9">
+        <div class="col-lg-9 col-xxl-5">
 
             @if ($editMode === 'code')
                 {{-- CODE EDITOR --}}
@@ -364,6 +370,27 @@
             @endif
 
         </div>
+
+        {{-- LIVE PREVIEW PANEL --}}
+        <div class="col-xxl-4 d-none d-xxl-block">
+            <div class="card" style="position:sticky;top:80px;">
+                <div class="card-header bg-light py-2 px-3 d-flex align-items-center justify-content-between">
+                    <span class="fw-semibold" style="font-size:.875rem;">
+                        <i class="mdi mdi-cellphone me-1 text-primary"></i>Live Preview
+                    </span>
+                    <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
+                       class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:.75rem;">
+                        <i class="mdi mdi-open-in-new me-1"></i>Open
+                    </a>
+                </div>
+                <div class="card-body p-0" style="background:#f0f0f0;">
+                    <iframe id="vcardPreviewFrame"
+                            src="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}"
+                            style="width:100%;height:calc(100vh - 220px);min-height:500px;border:0;display:block;"
+                            loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
     </div>
 
     <style>
@@ -375,6 +402,10 @@
 
     <script>
     (function () {
+        window.addEventListener('vcard-saved', function () {
+            const frame = document.getElementById('vcardPreviewFrame');
+            if (frame) { frame.src = frame.src; }
+        });
         window.addEventListener('section-changed', function (e) {
             const section = e.detail.section;
             const base = window.location.pathname.replace(/\/data(\/[^\/]*)?$/, '');

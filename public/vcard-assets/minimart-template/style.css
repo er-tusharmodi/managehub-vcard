@@ -76,8 +76,8 @@ svg.ic-lg {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    background: url(https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/banner.webp)
-        center/cover no-repeat;
+    background: linear-gradient(135deg, #0f2744 0%, #1a7a4a 100%);
+    background-size: cover;
 }
 .banner-pattern {
     position: absolute;

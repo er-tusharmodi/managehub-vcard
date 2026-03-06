@@ -221,9 +221,14 @@
 @endphp
                         <div class="prod-card">
                             <div class="prod-img">
+                                @php
+                                $prodImg = $item["product_image"] ?? "";
+                                // Strip CSS url() wrapper if stored with it
+                                if ($prodImg && preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $prodImg, $_spm)) { $prodImg = $_spm[1]; }
+                            @endphp
                                 <div
                                     class="prod-img-placeholder"
-                                    style="background:{{ $background }};height:100%"
+                                    style="background:{{ $prodImg ? 'url(\'' . e($prodImg) . '\') center/cover no-repeat' : $background }};height:100%"
                                 ></div>
                                 @if(!empty($tag))
                                     <span

@@ -15,7 +15,12 @@
     <label class="form-label fw-semibold">Story / Chef Photo</label>
     @php
         $storyImg = $form['image'] ?? null;
-        $storyPreview = $storyImg ? (isset($assetBaseUrl) ? rtrim($assetBaseUrl,'/').'/'.$storyImg : $storyImg) : null;
+        // Only prepend $assetBaseUrl for relative paths; absolute (/...) and full URLs are used as-is.
+        $storyPreview = $storyImg
+            ? (isset($assetBaseUrl) && is_string($storyImg) && !preg_match('~^(https?:)?//|/~', $storyImg)
+                ? rtrim($assetBaseUrl, '/') . '/' . ltrim($storyImg, '/')
+                : $storyImg)
+            : null;
     @endphp
     <div class="d-flex align-items-start gap-3 flex-wrap">
         @if($storyPreview)

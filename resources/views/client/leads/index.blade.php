@@ -174,29 +174,35 @@
     </div>
 
     {{-- ─── Main Panel ────────────────────────────────────────────── --}}
-    <div class="card border-0 shadow-sm" style="border-radius:14px;overflow:hidden;">
+    <div class="row g-3 align-items-start">
 
-        {{-- Tab Navigation --}}
-        <div class="px-3 pt-2 bg-white">
-            <ul class="nav leads-tab-nav">
-                @foreach ($tabLabels as $tab => $label)
-                    @php $m = $tabMeta[$tab]; @endphp
-                    <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-1 {{ $activeTab === $tab ? 'active' : '' }}"
-                           href="{{ route('client.leads', $vcard->subdomain) }}?tab={{ $tab }}"
-                           style="{{ $activeTab === $tab ? 'color:' . $m['color'] . ';border-bottom-color:' . $m['color'] . ';' : '' }}">
-                            <i class="mdi {{ $m['icon'] }}" style="font-size:15px;"></i>
-                            <span>{{ $label }}</span>
+        {{-- Sidebar Tab Nav --}}
+        <div class="col-12 col-md-3 col-xl-2">
+            <div class="card border-0 shadow-sm" style="border-radius:14px;overflow:hidden;position:sticky;top:80px;">
+                <div class="card-body p-0">
+                    @foreach ($tabLabels as $tab => $label)
+                        @php $m = $tabMeta[$tab]; $isActive = ($activeTab === $tab); @endphp
+                        <a href="{{ route('client.leads', $vcard->subdomain) }}?tab={{ $tab }}"
+                           class="d-flex align-items-center gap-2 px-3 py-3 border-bottom text-decoration-none"
+                           style="border-left:3px solid {{ $isActive ? $m['color'] : 'transparent' }};background:{{ $isActive ? $m['color'].'0d' : 'transparent' }};color:{{ $isActive ? $m['color'] : '#6c757d' }};transition:background .15s;">
+                            <div style="width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:{{ $m['bg'] }};color:{{ $m['color'] }};">
+                                <i class="mdi {{ $m['icon'] }}"></i>
+                            </div>
+                            <span class="fw-{{ $isActive ? 'bold' : 'medium' }} flex-grow-1" style="font-size:.875rem;">{{ $label }}</span>
                             @if(($counts[$tab] ?? 0) > 0)
-                                <span class="status-pill ms-1" style="background:{{ $m['color'] }}1a;color:{{ $m['color'] }};">
+                                <span class="flex-shrink-0" style="background:{{ $m['color'] }}1a;color:{{ $m['color'] }};font-size:.65rem;padding:2px 8px;border-radius:20px;font-weight:700;">
                                     {{ $counts[$tab] > 99 ? '99+' : $counts[$tab] }}
                                 </span>
                             @endif
                         </a>
-                    </li>
-                @endforeach
-            </ul>
+                    @endforeach
+                </div>
+            </div>
         </div>
+
+        {{-- Content Area --}}
+        <div class="col-12 col-md-9 col-xl-10">
+            <div class="card border-0 shadow-sm" style="border-radius:14px;overflow:hidden;">
 
         {{-- Body --}}
         <div style="min-height:220px;">
@@ -412,7 +418,7 @@
         </div>{{-- /.body --}}
 
         <div class="px-4 py-3 d-flex align-items-center justify-content-between flex-wrap gap-2"
-             style="border-top:1px solid #f3f4f6;background:#fafafa;">
+             style="border-top:1px solid #f3f4f6;background:#fafafa;border-radius:0 0 14px 14px;">
             <small class="text-muted">
                 @if($rows->total() > 0)
                     Showing {{ $rows->firstItem() }}–{{ $rows->lastItem() }} of <strong>{{ $rows->total() }}</strong> {{ strtolower($tabLabels[$activeTab]) }}
@@ -425,7 +431,10 @@
             @endif
         </div>
 
-    </div>{{-- /.card --}}
+            </div>{{-- /.card --}}
+        </div>{{-- /.col-content --}}
+
+    </div>{{-- /.row --}}
 
 @endsection
 

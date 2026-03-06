@@ -93,7 +93,7 @@ class VcardEditorController extends Controller
 
             if ($value && $value->isValid()) {
                 $path = $value->store('vcards/' . $vcard->subdomain . '/uploads', 'public');
-                $payload[$key] = Storage::disk('public')->url($path);
+                $payload[$key] = '/storage/' . $path;
             }
         }
 

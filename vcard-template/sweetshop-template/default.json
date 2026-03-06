@@ -50,8 +50,8 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "bannerImage": "/template-assets/sweetshop-template/uploads/1772716392_dummyUser__1_.png",
+        "profileImage": "/template-assets/sweetshop-template/uploads/1772716396_PinnacleAcademy_QR.png",
         "qrCodeImage": ""
     },
     "shop": {

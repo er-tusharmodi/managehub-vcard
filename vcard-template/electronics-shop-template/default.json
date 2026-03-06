@@ -60,7 +60,7 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "/template-assets/electronics-shop-template/uploads/1772640717_dummyUser__1_.png",
+        "bannerImage": "/template-assets/electronics-shop-template/uploads/1772717556_TheBarbershop_QR.png",
         "profileImage": "/template-assets/electronics-shop-template/uploads/1772640717_PinnacleAcademy_QR.png",
         "profileAlt": "TechNova Electronics profile photo",
         "qrCodeImage": ""
@@ -220,7 +220,7 @@
             "category_key": "smartphones",
             "price": 24999,
             "oldPrice": 29999,
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+            "product_image": "/template-assets/electronics-shop-template/uploads/1772716081_TheBarbershop_QR.png",
             "tag": "SALE",
             "tagColor": "#ff6d00"
         },

@@ -183,6 +183,7 @@ class AdminSectionEditor extends Component
         $this->uploads = [];
 
         $this->dispatch('notify', type: 'success', message: 'Changes saved successfully!');
+        $this->dispatch('vcard-saved');
     }
 
     public function saveAndNotify(): void
@@ -521,16 +522,9 @@ class AdminSectionEditor extends Component
                 
                 try {
                     $path = $value->store('vcards/' . $this->vcard->subdomain . '/uploads', 'public');
-                    $newUrl = Storage::disk('public')->url($path);
-                    
-                    // Check if original value had url('...') wrapper format
-                    $originalValue = $payload[$key] ?? '';
-                    if (is_string($originalValue) && preg_match('/^url\([\'"]?.+[\'"]?\)$/i', $originalValue)) {
-                        // Preserve the url() wrapper format
-                        $payload[$key] = "url('" . $newUrl . "')";
-                    } else {
-                        $payload[$key] = $newUrl;
-                    }
+                    // Always store as a plain root-relative path.
+                    // Templates that need the CSS url() wrapper apply it at render time.
+                    $payload[$key] = '/storage/' . $path;
                 } catch (\Exception $e) {
                     \Log::error('File upload error: ' . $e->getMessage());
                 }
@@ -651,6 +645,7 @@ class AdminSectionEditor extends Component
         }
         
         $this->dispatch('notify', type: 'success', message: 'JSON saved successfully!');
+        $this->dispatch('vcard-saved');
     }
 
     /**

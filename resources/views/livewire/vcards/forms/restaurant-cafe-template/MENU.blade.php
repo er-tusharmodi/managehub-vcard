@@ -105,7 +105,7 @@
                                     <input type="file" accept="image/*"
                                            class="form-control form-control-sm p-0 border-0"
                                            style="font-size:.7rem;width:64px;"
-                                           wire:model="uploads.{{ $category }}.{{ $ii }}.product_image">
+                                           wire:model.live="uploads.{{ $category }}.{{ $ii }}.product_image">
                                 </div>
                             </div>
 

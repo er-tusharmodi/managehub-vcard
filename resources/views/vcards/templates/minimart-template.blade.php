@@ -254,10 +254,17 @@
                     <div class="products-grid" id="productsGrid">
                         @foreach(data_get($data, "products", []) as $item)
                             @php
-                            $bg = $item["bg"] ?? "";
-                            if (!$bg) {
-                                $fallback = data_get($data, "assets.fallbackImage", "");
-                                $bg = $fallback ? "url('" . e($fallback) . "')" : "";
+                            $prodImg = $item["product_image"] ?? "";
+                            // Strip CSS url() wrapper if stored with it
+                            if ($prodImg && preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $prodImg, $_mpm)) { $prodImg = $_mpm[1]; }
+                            if ($prodImg) {
+                                $bg = "url('" . e($prodImg) . "') center/cover no-repeat";
+                            } else {
+                                $bg = $item["bg"] ?? "";
+                                if (!$bg) {
+                                    $fallback = data_get($data, "assets.fallbackImage", "");
+                                    $bg = $fallback ? "url('" . e($fallback) . "')" : "";
+                                }
                             }
                             $id = (int) ($item["id"] ?? 0);
 @endphp

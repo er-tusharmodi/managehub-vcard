@@ -50,14 +50,14 @@
         }
     },
     "meta": {
-        "title": "Sona Jewellers – Fine Jewellery",
+        "title": "Sona Jewellers \u2013 Fine Jewellery",
         "description": "",
         "keywords": "",
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "bannerImage": "/template-assets/jewelry-shop-template/uploads/1772716373_dummyUser__1_.png",
+        "profileImage": "/template-assets/jewelry-shop-template/uploads/1772716379_PinnacleAcademy_QR.png",
         "qrCodeImage": ""
     },
     "shop": {
@@ -68,21 +68,21 @@
         "email": "info@sonajewellers.in",
         "website": "",
         "maps": "https://maps.google.com",
-        "addressVcard": "Shop No. 12, Laxmi Market, Gold Bazaar, Chandni Chowk, New Delhi – 110006",
+        "addressVcard": "Shop No. 12, Laxmi Market, Gold Bazaar, Chandni Chowk, New Delhi \u2013 110006",
         "vcardTitle": "Fine Jewellery & Diamond Experts",
-        "vcardNote": "Crafted for Eternity · BIS Hallmarked · GIA Certified"
+        "vcardNote": "Crafted for Eternity \u00b7 BIS Hallmarked \u00b7 GIA Certified"
     },
     "banner": {
         "brand": "SONA JEWELLERS",
         "subtitle": "Crafted for Eternity",
-        "dividerSymbol": "❖",
+        "dividerSymbol": "\u2756",
         "share": "Share",
         "saveContact": "Save Contact"
     },
     "profile": {
         "name": "Sona Jewellers",
-        "role": "✦ Fine Jewellery & Diamond Experts ✦",
-        "stars": "★★★★★",
+        "role": "\u2726 Fine Jewellery & Diamond Experts \u2726",
+        "stars": "\u2605\u2605\u2605\u2605\u2605",
         "rating": "4.9",
         "ratingCount": "(680+ reviews)",
         "bio": "Purveyors of handcrafted gold, diamond & silver jewellery since 1985. BIS Hallmarked | GIA Certified | IGI Certified. Creating heirlooms that last generations.",
@@ -264,33 +264,33 @@
             }
         ],
         "hallmark": {
-            "emoji": "🏅",
+            "emoji": "\ud83c\udfc5",
             "title": "BIS Hallmarked",
-            "separator": "—",
+            "separator": "\u2014",
             "text": "Every piece comes with an official Bureau of Indian Standards purity certificate for your peace of mind."
         }
     },
     "certifications": [
         {
-            "emoji": "🏅",
+            "emoji": "\ud83c\udfc5",
             "product_image": "#fff8e1",
             "name": "BIS Hallmark",
             "sub": "Gold purity certified"
         },
         {
-            "emoji": "💎",
+            "emoji": "\ud83d\udc8e",
             "product_image": "#e3f2fd",
             "name": "GIA Certified",
             "sub": "Natural diamonds"
         },
         {
-            "emoji": "🔬",
+            "emoji": "\ud83d\udd2c",
             "product_image": "#f3e5f5",
             "name": "IGI Certified",
             "sub": "Lab grown diamonds"
         },
         {
-            "emoji": "✅",
+            "emoji": "\u2705",
             "product_image": "#e8f5e9",
             "name": "ISO 9001",
             "sub": "Quality management"
@@ -315,12 +315,12 @@
         {
             "icon": "card",
             "name": "EMI & Easy Payments",
-            "desc": "0% interest EMI on all purchases above ₹10,000. All major cards, UPI & net banking accepted."
+            "desc": "0% interest EMI on all purchases above \u20b910,000. All major cards, UPI & net banking accepted."
         },
         {
             "icon": "arrow",
             "name": "Home Try-On Service",
-            "desc": "Try our bridal collections at your home. Available for wedding orders above ₹50,000."
+            "desc": "Try our bridal collections at your home. Available for wedding orders above \u20b950,000."
         },
         {
             "icon": "heart",
@@ -329,45 +329,45 @@
         }
     ],
     "showroom": {
-        "name": "Sona Jewellers – Main Showroom",
+        "name": "Sona Jewellers \u2013 Main Showroom",
         "line1": "Shop No. 12, Laxmi Market, Gold Bazaar,",
-        "line2": "Chandni Chowk, New Delhi – 110006",
+        "line2": "Chandni Chowk, New Delhi \u2013 110006",
         "mapLabel": "Open in Maps"
     },
     "hours": [
         {
             "day": "Monday",
-            "time": "10:00 AM – 9:00 PM",
+            "time": "10:00 AM \u2013 9:00 PM",
             "today": false
         },
         {
             "day": "Tuesday",
-            "time": "10:00 AM – 9:00 PM",
+            "time": "10:00 AM \u2013 9:00 PM",
             "today": false
         },
         {
             "day": "Wednesday",
-            "time": "10:00 AM – 9:00 PM",
+            "time": "10:00 AM \u2013 9:00 PM",
             "today": false
         },
         {
             "day": "Thursday",
-            "time": "10:00 AM – 9:00 PM",
+            "time": "10:00 AM \u2013 9:00 PM",
             "today": false
         },
         {
             "day": "Friday",
-            "time": "10:00 AM – 9:00 PM",
+            "time": "10:00 AM \u2013 9:00 PM",
             "today": true
         },
         {
             "day": "Saturday",
-            "time": "10:00 AM – 10:00 PM",
+            "time": "10:00 AM \u2013 10:00 PM",
             "today": false
         },
         {
             "day": "Sunday",
-            "time": "11:00 AM – 8:00 PM",
+            "time": "11:00 AM \u2013 8:00 PM",
             "today": false
         }
     ],
@@ -381,7 +381,7 @@
         {
             "type": "instagram",
             "name": "Instagram",
-            "value": "@sonajewellers · 48K followers",
+            "value": "@sonajewellers \u00b7 48K followers",
             "url": "https://instagram.com"
         },
         {
@@ -419,14 +419,14 @@
             "Kids Jewellery",
             "Other"
         ],
-        "budgetPlaceholder": "Approximate Budget (e.g. ₹50,000)",
+        "budgetPlaceholder": "Approximate Budget (e.g. \u20b950,000)",
         "messagePlaceholder": "Describe what you're looking for...",
-        "defaultEmail": "—",
+        "defaultEmail": "\u2014",
         "defaultCategory": "Not specified",
         "defaultBudget": "Not specified",
         "defaultMessage": "No additional message",
         "submitLabel": "Send Enquiry via WhatsApp",
-        "successIcon": "💎",
+        "successIcon": "\ud83d\udc8e",
         "successTitle": "Thank you for your enquiry!",
         "successText": "Our jewellery expert will reach out to you within 2 hours.",
         "successButton": "New Enquiry"
@@ -438,8 +438,8 @@
     "footer": {
         "brand": "Sona Jewellers",
         "line2": "Crafting Memories Since 1985",
-        "line3": "❖ ❖ ❖",
-        "line4": "BIS Hallmarked · GIA Certified · IGI Certified"
+        "line3": "\u2756 \u2756 \u2756",
+        "line4": "BIS Hallmarked \u00b7 GIA Certified \u00b7 IGI Certified"
     },
     "bottomBar": {
         "call": "Call",
@@ -451,10 +451,10 @@
         "empty": "Your wishlist is empty.<br />Tap <b>Enquire</b> on any item to add it!",
         "totalLabel": "Estimated Total",
         "sendLabel": "Send Wishlist via WhatsApp",
-        "waHeader": "💎 *Jewellery Enquiry – {{shopName}}*",
+        "waHeader": "\ud83d\udc8e *Jewellery Enquiry \u2013 {{shopName}}*",
         "waItemsLabel": "*Items of Interest:*",
-        "waLine": "✦ {{name}} ({{metal}}) x{{qty}} = ₹{{total}}",
-        "waTotal": "💰 *Estimated Total: ₹{{total}}*",
+        "waLine": "\u2726 {{name}} ({{metal}}) x{{qty}} = \u20b9{{total}}",
+        "waTotal": "\ud83d\udcb0 *Estimated Total: \u20b9{{total}}*",
         "waFooter": "Please share availability & exact pricing. Thank you!"
     },
     "shareModal": {
@@ -465,15 +465,15 @@
     },
     "messages": {
         "namePhoneRequired": "Name & phone number are required",
-        "enquiryTemplate": "💎 *New Enquiry – {{shopName}}*\n\n👤 *Name:* {{name}}\n📞 *Phone:* {{phone}}\n📧 *Email:* {{email}}\n\n🏷️ *Category:* {{category}}\n💰 *Budget:* {{budget}}\n📝 *Message:* {{message}}\n\nPlease assist this customer!",
-        "contactSaved": "Contact saved to your phone! 💎",
+        "enquiryTemplate": "\ud83d\udc8e *New Enquiry \u2013 {{shopName}}*\n\n\ud83d\udc64 *Name:* {{name}}\n\ud83d\udcde *Phone:* {{phone}}\n\ud83d\udce7 *Email:* {{email}}\n\n\ud83c\udff7\ufe0f *Category:* {{category}}\n\ud83d\udcb0 *Budget:* {{budget}}\n\ud83d\udcdd *Message:* {{message}}\n\nPlease assist this customer!",
+        "contactSaved": "Contact saved to your phone! \ud83d\udc8e",
         "qrNotReady": "QR not ready yet",
         "qrDownloaded": "QR Code downloaded!",
         "waGreeting": "Hello! I would like to know more about your jewellery collections.",
         "enquireTemplateQuick": "Hello! I am interested in: *{{item}}*. Could you please share the availability and current price? Thank you!",
         "enquireOpening": "Opening WhatsApp for enquiry!",
-        "shareTemplate": "✨ Check out {{shopName}} – {{tagline}}! {{website}}",
-        "linkCopied": "Link copied to clipboard! ✓"
+        "shareTemplate": "\u2728 Check out {{shopName}} \u2013 {{tagline}}! {{website}}",
+        "linkCopied": "Link copied to clipboard! \u2713"
     },
     "files": {
         "vcard": "SonaJewellers.vcf",

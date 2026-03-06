@@ -84,7 +84,12 @@
                         @endphp
                         <td>
                             @if($tfType === 'image' && !empty($cellVal))
-                                @php $iSrc=$cellVal; if(isset($assetBaseUrl)&&!preg_match('~^(https?:)?//|data:|/~',$iSrc)){$iSrc=rtrim($assetBaseUrl,'/').'/'.$iSrc;} @endphp
+                                @php
+                                    $iSrc = $cellVal;
+                                    // Strip CSS url() wrapper if present
+                                    if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $iSrc, $_m)) { $iSrc = $_m[1]; }
+                                    if (isset($assetBaseUrl) && !preg_match('~^(https?:)?//|data:|/~', $iSrc)) { $iSrc = rtrim($assetBaseUrl, '/') . '/' . $iSrc; }
+                                @endphp
                                 <img src="{{ $iSrc }}" style="width:44px;height:44px;object-fit:cover;border-radius:6px;border:1px solid #e2e8f0;" alt="">
                             @elseif($tfType === 'toggle')
                                 <span class="badge {{ $cellVal ? 'bg-success-subtle text-success':'bg-secondary-subtle text-secondary' }}">{{ $cellVal?'On':'Off' }}</span>
@@ -165,11 +170,25 @@
                         <label class="form-label small fw-semibold mb-1">{{ $fLbl }}</label>
                         @if($fType==='image')
                             @if(!empty($curVal))
-                                @php $iSrc2=$curVal; if(isset($assetBaseUrl)&&!preg_match('~^(https?:)?//|data:|/~',$iSrc2)){$iSrc2=rtrim($assetBaseUrl,'/').'/'.$iSrc2;} @endphp
+                                @php
+                                    $iSrc2 = $curVal;
+                                    // Strip CSS url() wrapper if present
+                                    if (preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $iSrc2, $_m2)) { $iSrc2 = $_m2[1]; }
+                                    if (isset($assetBaseUrl) && !preg_match('~^(https?:)?//|data:|/~', $iSrc2)) { $iSrc2 = rtrim($assetBaseUrl, '/') . '/' . $iSrc2; }
+                                @endphp
                                 <div class="mb-1"><img src="{{ $iSrc2 }}" style="max-height:80px;border-radius:6px;border:1px solid #e2e8f0;" alt=""></div>
                             @endif
                             <div wire:loading wire:target="{{ $fUpload }}" class="text-muted small mb-1"><i class="mdi mdi-loading mdi-spin me-1"></i>Uploading…</div>
-                            <input type="file" class="form-control form-control-sm" wire:model="{{ $fUpload }}" accept="image/*">
+                            @php
+                                $_upKey = last(explode('.', $fUpload));
+                                $_upReady = $addPath
+                                    ? (isset($uploads[$addPath][$i][$_upKey]))
+                                    : (isset($uploads[$i][$_upKey]));
+                            @endphp
+                            @if($_upReady)
+                                <div class="text-success small mb-1"><i class="mdi mdi-check-circle me-1"></i>Image selected — click Save Changes</div>
+                            @endif
+                            <input type="file" class="form-control form-control-sm" wire:model.live="{{ $fUpload }}" accept="image/*">
                         @elseif($fType==='textarea')
                             <textarea class="form-control form-control-sm" rows="{{ $fRows }}" wire:model="{{ $fModel }}" placeholder="{{ $fPh }}"></textarea>
                         @elseif($fType==='toggle')
@@ -238,7 +257,7 @@
                         <label class="form-label small fw-semibold mb-1">{{ $fLbl }}</label>
                         @if($fType==='image')
                             <div wire:loading wire:target="{{ $niUpload }}" class="text-muted small mb-1"><i class="mdi mdi-loading mdi-spin me-1"></i>Uploading…</div>
-                            <input type="file" class="form-control form-control-sm" wire:model="{{ $niUpload }}" accept="image/*">
+                            <input type="file" class="form-control form-control-sm" wire:model.live="{{ $niUpload }}" accept="image/*">
                         @elseif($fType==='textarea')
                             <textarea class="form-control form-control-sm" rows="{{ $fRows }}" wire:model="{{ $niModel }}" placeholder="{{ $fPh }}"></textarea>
                         @elseif($fType==='toggle')

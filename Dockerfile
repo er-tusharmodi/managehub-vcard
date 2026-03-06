@@ -85,6 +85,7 @@ server {
     server_name _;
     root /var/www/html/public;
     index index.php index.html;
+    disable_symlinks off;
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }

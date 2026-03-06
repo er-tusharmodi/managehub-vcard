@@ -52,8 +52,8 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
-        "profileImage": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg",
+        "bannerImage": "/template-assets/minimart-template/uploads/1772716441_dummyUser__1_.png",
+        "profileImage": "/template-assets/minimart-template/uploads/1772716441_TheBarbershop_QR.png",
         "qrCodeImage": ""
     },
     "shop": {

@@ -53,10 +53,82 @@
         ];
     @endphp
 
+    @php
+        $sectionLabels = [
+            '_common'     => 'Basic Info',
+            'assets'      => 'Images & Photos',
+            'banner'      => 'Cover Image',
+            'meta'        => 'SEO & Meta Tags',
+            'floatingBar' => 'Quick Action Bar',
+            'whyChoose'   => 'Why Choose Us',
+            'qr'          => 'QR Code',
+            'shop'        => 'Shop Settings',
+            'payments'    => 'Payment Options',
+            'payment'     => 'Payment Options',
+            'hours'       => 'Opening Hours',
+            'location'    => 'Address & Map',
+            'social'      => 'Social Links',
+            'footer'      => 'Footer Info',
+            'hero'        => 'Hero Section',
+            'follow'      => 'Follow Us',
+            'contact'     => 'Contact Info',
+        ];
+    @endphp
+
+    {{-- MOBILE TOP BAR --}}
+    <div class="d-flex d-lg-none align-items-center justify-content-between mb-3 gap-2">
+        <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#cseSectionDrawer">
+            <i class="mdi mdi-menu me-1"></i>Sections
+        </button>
+        <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+            <i class="mdi mdi-eye-outline me-1"></i>View vCard
+        </a>
+    </div>
+
+    {{-- MOBILE SECTION NAV OFFCANVAS --}}
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="cseSectionDrawer" style="max-width:280px;">
+        <div class="offcanvas-header bg-primary text-white py-3">
+            <h6 class="offcanvas-title mb-0">
+                <i class="mdi mdi-layers me-2"></i>{{ $vcard->name ?? $vcard->subdomain }}
+            </h6>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body p-0" style="overflow-y:auto;">
+            @foreach ($sections as $tab)
+                @php
+                    $mobIcon    = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
+                    $mobActive  = $section === $tab;
+                    $mobLabel   = $sectionLabels[$tab] ?? ($tab === '_common' ? 'Basic Info' : \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab)));
+                    $mobEnabled = isset($sectionsConfig[$tab]) ? ($sectionsConfig[$tab]['enabled'] ?? true) : null;
+                @endphp
+                <div wire:key="mob-nav-{{ $tab }}"
+                     class="d-flex align-items-center gap-2 px-3 py-2 border-bottom
+                            {{ $mobActive ? 'bg-primary bg-opacity-10' : '' }}
+                            {{ $mobEnabled === false ? 'opacity-50' : '' }}"
+                     wire:click="selectSection('{{ $tab }}')"
+                     data-bs-dismiss="offcanvas"
+                     style="cursor:pointer;min-height:44px;{{ $mobActive ? 'border-left:3px solid var(--bs-primary)!important;' : '' }}">
+                    <span class="avatar-xs">
+                        <span class="avatar-title rounded-circle font-size-14
+                                     {{ $mobActive ? 'bg-primary text-white' : 'bg-soft-'.$mobIcon['color'].' text-'.$mobIcon['color'] }}">
+                            <i class="mdi {{ $mobIcon['icon'] }}"></i>
+                        </span>
+                    </span>
+                    <span class="fw-medium {{ $mobActive ? 'text-primary' : '' }}" style="font-size:.875rem;">{{ $mobLabel }}</span>
+                    @if($mobEnabled !== null)
+                        <span class="ms-auto badge {{ $mobEnabled ? 'bg-success' : 'bg-secondary' }}" style="font-size:.65rem;">
+                            {{ $mobEnabled ? 'On' : 'Off' }}
+                        </span>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+    </div>
+
     <div class="row g-3">
 
         {{-- LEFT SIDEBAR --}}
-        <div class="col-lg-3">
+        <div class="col-lg-3 d-none d-lg-block">
             <div class="card" style="position:sticky;top:80px;">
                 <div class="card-header bg-primary text-white py-3">
                     <div class="d-flex align-items-center gap-2">
@@ -74,9 +146,10 @@
                             @php
                                 $tabIcon  = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $isActive = $section === $tab;
-                                $tabLabel = $tab === '_common'
-                                    ? 'Basic Info'
-                                    : \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab));
+                                $tabLabel = $sectionLabels[$tab]
+                                    ?? ($tab === '_common'
+                                        ? 'Basic Info'
+                                        : \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab)));
 
                                 $hasToggle  = isset($sectionsConfig[$tab]);
                                 $tabEnabled = $hasToggle ? ($sectionsConfig[$tab]['enabled'] ?? true) : null;
@@ -119,11 +192,17 @@
 
                     </div>
                 </div>
+                <div class="card-footer py-2 px-3">
+                    <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
+                       class="btn btn-sm btn-outline-primary w-100">
+                        <i class="mdi mdi-eye-outline me-1"></i>View My vCard
+                    </a>
+                </div>
             </div>
         </div>
 
         {{-- RIGHT EDIT PANEL --}}
-        <div class="col-lg-9">
+        <div class="col-12 col-lg-9">
 
             @if ($subscriptionBlocked)
                 {{-- SUBSCRIPTION BLOCKED --}}
@@ -252,6 +331,10 @@
                                         <i class="mdi mdi-loading mdi-spin me-1"></i>Saving...
                                     </span>
                                 </button>
+                                <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
+                                   class="btn btn-outline-secondary">
+                                    <i class="mdi mdi-eye-outline me-1"></i>View vCard
+                                </a>
                                 @if (!empty($uploads))
                                     <div class="alert alert-warning mb-0 py-2 px-3 d-inline-flex align-items-center">
                                         <i class="mdi mdi-information-outline me-2"></i>
@@ -277,6 +360,8 @@
     (function () {
         window.addEventListener('section-changed', function (e) {
             const section = e.detail.section;
+            // Guard: ignore any value that looks like a file path or url() CSS function
+            if (!section || section.startsWith('url(') || section.startsWith('/') || section.includes('/storage/')) return;
             const base = window.location.pathname.replace(/\/edit(\/[^\/]*)?$/, '');
             history.pushState({ section: section }, '', base + '/edit/' + encodeURIComponent(section));
         });
