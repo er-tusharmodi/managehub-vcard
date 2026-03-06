@@ -49,6 +49,7 @@
     $isUrl = $fieldType === 'url' || (is_string($key) && preg_match('/(url|link|website|maps|facebook|instagram|youtube|twitter)/i', $key) && !$isImageKey);
     $isPhone = $fieldType === 'tel' || (is_string($key) && preg_match('/(phone|mobile|whatsapp|tel)/i', $key));
     $isNumber = $fieldType === 'number' || (is_string($key) && preg_match('/(price|old_price|oldprice|amount|qty|quantity|total)/i', $key));
+    $isColor  = $fieldType === 'color' || (!$isImageKey && is_string($key) && preg_match('/(color|colour)/i', $key));
     $isDate = $fieldType === 'date';
     $isTime = $fieldType === 'time';
     $isDateTime = $fieldType === 'datetime';
@@ -759,6 +760,27 @@
                 </small>
             @endif
         @else
+            @if($isColor)
+            <div class="d-flex gap-2 align-items-center">
+                <input type="color" class="form-control form-control-color p-1 border"
+                       wire:model="form.{{ $wirePath }}"
+                       style="width:44px;height:38px;cursor:pointer;flex-shrink:0;" title="Pick color">
+                <input type="text"
+                       id="{{ $uniqueId }}"
+                       class="form-control @error('form.' . $wirePath) is-invalid @enderror"
+                       wire:model="form.{{ $wirePath }}"
+                       placeholder="{{ $placeholder ?: '#000000' }}">
+            </div>
+            @elseif($isNumber && is_string($key) && preg_match('/(price|amount)/i', $key))
+            <div class="input-group">
+                <span class="input-group-text">&#8377;</span>
+                <input type="text"
+                       id="{{ $uniqueId }}"
+                       class="form-control @error('form.' . $wirePath) is-invalid @enderror"
+                       wire:model="form.{{ $wirePath }}"
+                       placeholder="{{ $placeholder }}">
+            </div>
+            @else
             <input type="{{ $isNumber ? 'number' : ($isUrl ? 'url' : ($isPhone ? 'tel' : 'text')) }}" 
                    id="{{ $uniqueId }}"
                    class="form-control @error('form.' . $wirePath) is-invalid @enderror" 
@@ -767,6 +789,7 @@
                    {{ $isNumber ? 'step=0.01' : '' }}
                    {{ $maxLength && !$isNumber ? "maxlength={$maxLength}" : '' }}
                    {{ $isRequired ? 'required' : '' }}>
+            @endif
             @error('form.' . $wirePath)
                 <div class="invalid-feedback d-block">
                     <i class="mdi mdi-alert-circle-outline"></i> {{ $message }}

@@ -202,6 +202,12 @@
                             </select>
                         @elseif($fType==='number')
                             <input type="number" class="form-control form-control-sm" wire:model="{{ $fModel }}" placeholder="{{ $fPh }}">
+                        @elseif($fType==='color')
+                            <div class="d-flex gap-2 align-items-center">
+                                <input type="color" class="form-control form-control-color p-1 border" wire:model="{{ $fModel }}"
+                                       style="width:44px;height:34px;cursor:pointer;flex-shrink:0;" title="Pick color">
+                                <input type="text" class="form-control form-control-sm" wire:model="{{ $fModel }}" placeholder="{{ $fPh ?: '#000000' }}">
+                            </div>
                         @elseif($fType==='datalist')
                             @php $dlId = $editId.'-'.$fKey.'-dl'; @endphp
                             <input type="text" class="form-control form-control-sm" wire:model="{{ $fModel }}" placeholder="{{ $fPh }}" list="{{ $dlId }}">
@@ -271,6 +277,12 @@
                             </select>
                         @elseif($fType==='number')
                             <input type="number" class="form-control form-control-sm" wire:model="{{ $niModel }}" placeholder="{{ $fPh }}">
+                        @elseif($fType==='color')
+                            <div class="d-flex gap-2 align-items-center">
+                                <input type="color" class="form-control form-control-color p-1 border" wire:model="{{ $niModel }}"
+                                       style="width:44px;height:34px;cursor:pointer;flex-shrink:0;" title="Pick color">
+                                <input type="text" class="form-control form-control-sm" wire:model="{{ $niModel }}" placeholder="{{ $fPh ?: '#000000' }}">
+                            </div>
                         @elseif($fType==='datalist')
                             @php $dlId2 = $addModalId.'-'.$fKey.'-dl'; @endphp
                             <input type="text" class="form-control form-control-sm" wire:model="{{ $niModel }}" placeholder="{{ $fPh }}" list="{{ $dlId2 }}">

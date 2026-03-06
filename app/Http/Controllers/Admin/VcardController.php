@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Vcard;
 use App\Services\VcardTemplateService;
 use App\Services\QrCodeService;
+use App\Repositories\Contracts\VcardContentRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -422,8 +423,11 @@ class VcardController extends Controller
         $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
         $this->setWebsiteUrl($data, $vcardUrl);
         
-        // Save updated data
+        // Save updated data to disk
         $this->storeJson($vcard, $data);
+
+        // Sync to content repository (MongoDB/SQL) so the public vcard page sees the QR immediately
+        app(VcardContentRepository::class)->save($vcard, $data);
     }
     
     /**

@@ -151,10 +151,13 @@
                                     {{-- Price + Tag + T&C --}}
                                     <div class="col-sm-3">
                                         <label class="form-label small mb-0 fw-semibold">Price</label>
-                                        <input type="text"
-                                               class="form-control form-control-sm"
-                                               wire:model="form.{{ $category }}.{{ $ii }}.price"
-                                               placeholder="₹299">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">&#8377;</span>
+                                            <input type="text"
+                                                   class="form-control form-control-sm"
+                                                   wire:model="form.{{ $category }}.{{ $ii }}.price"
+                                                   placeholder="299">
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <label class="form-label small mb-0 fw-semibold">Tag / Badge</label>
