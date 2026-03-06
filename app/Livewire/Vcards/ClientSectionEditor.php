@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Url;
 
 class ClientSectionEditor extends Component
 {
@@ -25,6 +26,10 @@ class ClientSectionEditor extends Component
     public bool $subscriptionBlocked = false;
     public string $subscriptionMessage = 'Your subscription is inactive. Please contact support.';
     public array $categoryOptions = [];
+
+    /** When true (opened via ?solo=1 sidebar link) the inner section nav is hidden. */
+    #[Url]
+    public bool $solo = false;
 
     public function mount(string $subdomain, ?string $section = null): void
     {

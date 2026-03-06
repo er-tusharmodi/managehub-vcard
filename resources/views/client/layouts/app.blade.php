@@ -297,7 +297,7 @@
                                     <li>
                                         <a href="{{ route('client.leads', $entry['vcard']->subdomain) }}" class="tp-link">
                                             <i data-feather="inbox"></i>
-                                            <span>{{ substr($entry['vcard']->client_name, 0, 18) }}</span>
+                                            <span>Leads</span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -317,7 +317,7 @@
                                             $cLabel = $contentLabelMap[$sKey] ?? \Illuminate\Support\Str::headline($sKey);
                                         @endphp
                                         <li>
-                                            <a href="{{ route('vcard.editor', ['subdomain' => $cEntry['vcard']->subdomain, 'section' => $sKey]) }}" class="tp-link">
+                                            <a href="{{ route('vcard.editor', ['subdomain' => $cEntry['vcard']->subdomain, 'section' => $sKey]) . '?solo=1' }}" class="tp-link">
                                                 <i data-feather="{{ $cIcon }}"></i>
                                                 <span>{{ $cLabel }}</span>
                                             </a>

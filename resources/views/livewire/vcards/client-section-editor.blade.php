@@ -76,6 +76,7 @@
     @endphp
 
     {{-- MOBILE TOP BAR --}}
+    @if(!$solo)
     <div class="d-flex d-lg-none align-items-center justify-content-between mb-3 gap-2">
         <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#cseSectionDrawer">
             <i class="mdi mdi-menu me-1"></i>Sections
@@ -84,8 +85,10 @@
             <i class="mdi mdi-eye-outline me-1"></i>View vCard
         </a>
     </div>
+    @endif
 
     {{-- MOBILE SECTION NAV OFFCANVAS --}}
+    @if(!$solo)
     <div class="offcanvas offcanvas-start" tabindex="-1" id="cseSectionDrawer" style="max-width:280px;">
         <div class="offcanvas-header bg-primary text-white py-3">
             <h6 class="offcanvas-title mb-0">
@@ -124,10 +127,12 @@
             @endforeach
         </div>
     </div>
+    @endif
 
     <div class="row g-3">
 
         {{-- LEFT SIDEBAR --}}
+        @if(!$solo)
         <div class="col-lg-3 d-none d-lg-block">
             <div class="card" style="position:sticky;top:80px;">
                 <div class="card-header bg-primary text-white py-3">
@@ -200,9 +205,10 @@
                 </div>
             </div>
         </div>
+        @endif
 
         {{-- RIGHT EDIT PANEL --}}
-        <div class="col-12 col-lg-9">
+        <div class="{{ $solo ? 'col-12' : 'col-12 col-lg-9' }}">
 
             @if ($subscriptionBlocked)
                 {{-- SUBSCRIPTION BLOCKED --}}
