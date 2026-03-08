@@ -67,7 +67,8 @@
                 'qr'              => ['icon' => 'mdi-qrcode',                 'color' => 'dark'],
                 'contact'         => ['icon' => 'mdi-email-outline',          'color' => 'primary'],
                 'follow'          => ['icon' => 'mdi-account-plus-outline',   'color' => 'info'],
-                'menu'            => ['icon' => 'mdi-food',                   'color' => 'warning'],
+                'menu'            => ['icon' => 'mdi-silverware-fork-knife',  'color' => 'success'],
+                'MENU'            => ['icon' => 'mdi-silverware-fork-knife',  'color' => 'success'],
                 'brands'          => ['icon' => 'mdi-star-box-outline',       'color' => 'secondary'],
                 'collections'     => ['icon' => 'mdi-diamond-outline',        'color' => 'info'],
                 'showroom'        => ['icon' => 'mdi-store-outline',          'color' => 'secondary'],
@@ -91,7 +92,8 @@
                 'contact'         => ['icon' => 'mdi-email-outline',          'color' => 'primary'],
                 'contactSave'     => ['icon' => 'mdi-account-plus',           'color' => 'primary'],
                 'story'           => ['icon' => 'mdi-book-open-outline',      'color' => 'secondary'],
-                'menu'            => ['icon' => 'mdi-food',                   'color' => 'warning'],
+                'menu'            => ['icon' => 'mdi-silverware-fork-knife',  'color' => 'success'],
+                'MENU'            => ['icon' => 'mdi-silverware-fork-knife',  'color' => 'success'],
                 'reserve'         => ['icon' => 'mdi-calendar-check',         'color' => 'success'],
                 'appointment'     => ['icon' => 'mdi-calendar-check',         'color' => 'success'],
                 'booking'         => ['icon' => 'mdi-calendar',               'color' => 'success'],
@@ -137,7 +139,7 @@
                                     $tabIcon  = ($iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary']);
                                     $isActive = $section === $tab;
                                     $sectionLabelMap = [
-                                        'restaurant-cafe-template' => ['R' => 'Business Details'],
+                                        'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
                                     ];
                                     $tabLabel = $tab === '_common'
                                         ? 'Basic Info'
@@ -156,7 +158,7 @@
                                     <div class="flex-shrink-0">
                                         <span class="avatar-xs">
                                             <span class="avatar-title rounded-circle font-size-14
-                                                         {{ $isActive ? 'bg-primary text-white' : 'bg-soft-'.$tabIcon['color'].' text-'.$tabIcon['color'] }}">
+                                                         {{ $isActive ? 'bg-primary text-white' : 'text-'.$tabIcon['color'] }}">
                                                 <i class="mdi {{ $tabIcon['icon'] }}"></i>
                                             </span>
                                         </span>
@@ -204,7 +206,7 @@
                                 $activeIcon = $iconMap[$section] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $activeLabel = $section === '_common'
                                     ? 'Basic Info'
-                                    : \Illuminate\Support\Str::headline(str_replace('_', ' ', $section));
+                                    : (['MENU' => 'Menu'][$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section)));
                             @endphp
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title rounded-circle bg-soft-{{ $activeIcon['color'] }} text-{{ $activeIcon['color'] }} font-size-20">

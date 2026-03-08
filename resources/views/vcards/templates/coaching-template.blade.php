@@ -58,6 +58,9 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+    @if(!empty($vcard->head_script))
+    {!! $vcard->head_script !!}
+    @endif
   </head>
   <body>
 
@@ -218,6 +221,7 @@
     <!-- ══════════════════════════════════════════════════
          6. WHY CHOOSE US
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'whyChoose'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-amber">
@@ -240,10 +244,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          7. COURSES OFFERED
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'courses'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-amber">
@@ -283,10 +289,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          8. UPCOMING BATCHES
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'batches'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-green">
@@ -325,16 +333,18 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          9. FREE DEMO REGISTRATION
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'demo'))
     <div class="sec" id="demoSection">
       <div class="sec-header">
         <div class="sec-icon g-red">
           <i class="bi bi-play-circle"></i>
         </div>
-        <div class="sec-title">Book a Free Demo Class</div>
+        <div class="sec-title" id="demoSectionTitle">{{ v($data, 'demo.title') }}</div>
       </div>
       <div class="sec-body">
         <div id="demoForm">
@@ -350,16 +360,7 @@
             {{ v($data, 'demo.slotTitle') }}
           </div>
           <div class="demo-slots" id="demoSlotGrid">
-            @foreach(a($data, 'demo.slots') as $slot)
-              @continue(!is_array($slot))
-              <div class="demo-slot{{ !empty($slot['selected']) ? ' selected' : '' }}" onclick="selectDemo(this)" data-slot="{{ $slot['slot'] ?? '' }}">
-                <div class="demo-slot-check"><i class="bi bi-check2"></i></div>
-                <div class="demo-slot-day">{{ $slot['day'] ?? '' }}</div>
-                <div class="demo-slot-time">{{ $slot['time'] ?? '' }}</div>
-                <div class="demo-slot-topic">📖 {{ $slot['topic'] ?? '' }}</div>
-                <div class="demo-slot-mode">🏛 {{ $slot['mode'] ?? '' }}</div>
-              </div>
-            @endforeach
+            {{-- slots rendered dynamically by renderDemoSlots() in script.js --}}
           </div>
 
           <div class="bf-row">
@@ -402,10 +403,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          10. FEE STRUCTURE
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'fees'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-amber">
@@ -437,10 +440,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          11. EXPERT FACULTY
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'faculty'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon">
@@ -470,10 +475,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          12. STUDY MATERIALS
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'materials'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-blue">
@@ -494,10 +501,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          15. LEARNING MODES
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'modes'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-green">
@@ -518,10 +527,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          16. FAQ & SCHOLARSHIP
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'faq'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-purple">
@@ -544,10 +555,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          16. SOCIAL MEDIA
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'socialLinks'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon">
@@ -578,10 +591,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          17. LOCATION & MAP
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'location'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon">
@@ -607,10 +622,12 @@
         </button>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          21. PAYMENT OPTIONS
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'payments'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon g-blue">
@@ -630,10 +647,12 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          22. QR CODE
     ══════════════════════════════════════════════════ -->
+    @if(vcard_section_enabled($data, 'qr'))
     <div class="sec">
       <div class="sec-header">
         <div class="sec-icon">
@@ -660,22 +679,20 @@
         </div>
       </div>
     </div>
+    @endif
 
     <!-- ══════════════════════════════════════════════════
          FOOTER
     ══════════════════════════════════════════════════ -->
     <div class="site-footer">
-      {{ v($data, 'footer.line1') }}<br/>
-      <strong>{{ v($data, 'shop.name') }}</strong> · {{ v($data, 'footer.line2') }}<br/>
-      <span style="font-size:.65rem;color:#aaa;">{{ v($data, 'footer.line3') }}</span>
-      <div class="footer-links">
-        @foreach(a($data, 'footer.links') as $link)
-          @continue(!is_array($link))
-          <span onclick="enquireWA('{{ $link['enquiryText'] ?? '' }}')">{{ $link['label'] ?? '' }}</span>
-        @endforeach
-      </div>
-      <div style="font-size:.63rem;color:#bbb;margin-top:.5rem;">
-        {{ v($data, 'footer.copyright') }}
+      <span>{{ v($data, 'footer.line1') }}</span><br />
+      <strong style="color:var(--indigo)">{{ v($data, 'footer.line2') }}</strong><br />
+      <span>{{ v($data, 'footer.line3') }}</span>
+      @if(v($data, 'footer.line4'))
+        <br /><span style="font-size:.65rem;color:#aaa;">{{ v($data, 'footer.line4') }}</span>
+      @endif
+      <div style="font-size:.63rem;color:#aaa;margin-top:.55rem;">
+        Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="color:var(--indigo);text-decoration:none;font-weight:600;">{{ config('app.name') }}</a>
       </div>
     </div>
 
@@ -740,7 +757,11 @@
     <script>
       window.__ACTION_DATA__ = {!! $actionDataJson !!};
       window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
+      window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
     </script>
     <script src="{{ $assetBase }}script.js"></script>
+    @if(!empty($vcard->footer_script))
+    {!! $vcard->footer_script !!}
+    @endif
   </body>
 </html>

@@ -12,22 +12,6 @@
             "enabled": true,
             "label": "Social Links"
         },
-        "services": {
-            "enabled": true,
-            "label": "Services"
-        },
-        "products": {
-            "enabled": true,
-            "label": "Products"
-        },
-        "gallery": {
-            "enabled": true,
-            "label": "Gallery"
-        },
-        "hours": {
-            "enabled": true,
-            "label": "Business Hours"
-        },
         "payments": {
             "enabled": true,
             "label": "Payment Methods"
@@ -36,13 +20,45 @@
             "enabled": true,
             "label": "QR Code"
         },
-        "contact": {
+        "demo": {
             "enabled": true,
-            "label": "Contact Form"
+            "label": "Free Demo Registration"
+        },
+        "whyChoose": {
+            "enabled": true,
+            "label": "Why Choose Us"
+        },
+        "courses": {
+            "enabled": true,
+            "label": "Courses Offered"
+        },
+        "batches": {
+            "enabled": true,
+            "label": "Upcoming Batches"
+        },
+        "fees": {
+            "enabled": true,
+            "label": "Fee Structure"
+        },
+        "faculty": {
+            "enabled": true,
+            "label": "Expert Faculty"
+        },
+        "materials": {
+            "enabled": true,
+            "label": "Study Materials"
+        },
+        "modes": {
+            "enabled": true,
+            "label": "Learning Modes"
+        },
+        "faq": {
+            "enabled": true,
+            "label": "FAQs"
         }
     },
     "meta": {
-        "title": "Pinnacle Excellence Academy \u2013 UPSC | SSC | Banking | State PSC Coaching",
+        "title": "aa",
         "description": "17+ years \u00b7 3200+ selections \u00b7 94% success rate. Expert coaching for UPSC, SSC, Banking, State PSC & Railway. Free Demo Class available!",
         "ogTitle": "Pinnacle Excellence Academy \u2013 UPSC | SSC | Banking Coaching",
         "ogDescription": "17+ years \u00b7 3200+ selections \u00b7 94% success rate. Expert coaching for UPSC, SSC, Banking, State PSC & Railway. Free Demo Class available!",
@@ -339,33 +355,13 @@
                 "seats": "32 seats left of 80",
                 "ctaText": "Enquire & Reserve Seat via WhatsApp",
                 "enquiryText": "SSC CGL Crash Course July 2025"
-            },
-            {
-                "status": "full",
-                "name": "Banking SBI PO Pre-Batch",
-                "feeHint": "\u20b918,000",
-                "badge": "Houseful",
-                "meta": [
-                    {
-                        "iconClass": "bi-calendar-event",
-                        "text": "10 Jun 2025"
-                    },
-                    {
-                        "iconClass": "bi-clock",
-                        "text": "Mon\u2013Fri \u00b7 9\u201311 AM"
-                    }
-                ],
-                "seatsFull": "Batch Full \u2014 Join the Waitlist for next batch",
-                "ctaText": "Join Waitlist",
-                "ctaClass": "waitlist",
-                "enquiryText": "Banking SBI PO Waitlist for next batch"
             }
         ]
     },
     "demo": {
         "title": "Book a Free Demo Class",
         "promoTitle": "Experience Before You Enroll",
-        "promoText": "FREE 2-hour live class \u00b7 Expert faculty \u00b7 Q&A session \u00b7 No commitment needed",
+        "promoText": "asdasd",
         "slotTitle": "Choose Your Demo Slot",
         "slots": [
             {

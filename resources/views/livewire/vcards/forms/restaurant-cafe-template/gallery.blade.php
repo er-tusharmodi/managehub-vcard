@@ -1,4 +1,4 @@
-{-- restaurant-cafe-template/gallery.blade.php --}
+{{-- restaurant-cafe-template/gallery.blade.php --}}
 @php
 $items = $form ?? [];
 $fields = [

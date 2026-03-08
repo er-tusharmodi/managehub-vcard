@@ -1,4 +1,4 @@
-{-- jewelry-shop-template/collections.blade.php --}
+{{-- jewelry-shop-template/collections.blade.php --}}
 @php
 $items = $form;
 $fields = [

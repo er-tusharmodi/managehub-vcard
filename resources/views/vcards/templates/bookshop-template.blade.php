@@ -86,6 +86,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+    @if(!empty($vcard->head_script))
+    {!! $vcard->head_script !!}
+    @endif
   </head>
   <body>
     <div class="banner">
@@ -436,6 +439,7 @@
       <span>{{ v($data, 'footer.prefix') }}</span>
       <strong>{{ v($data, 'shop.name') }}</strong>
       <span>{{ v($data, 'footer.suffix') }}</span>
+      <div style="font-size:.63rem;color:#aaa;margin-top:.4rem;">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></div>
     </div>
 
     <div class="float-bar">
@@ -500,7 +504,11 @@
     <script>
       window.__ACTION_DATA__ = {!! $actionDataJson !!};
       window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
+      window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
     </script>
     <script src="{{ $assetBase }}script.js"></script>
+    @if(!empty($vcard->footer_script))
+    {!! $vcard->footer_script !!}
+    @endif
   </body>
 </html>

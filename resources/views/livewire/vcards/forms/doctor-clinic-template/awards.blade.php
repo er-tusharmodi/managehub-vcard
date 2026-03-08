@@ -1,4 +1,4 @@
-{-- doctor-clinic-template/awards.blade.php --}
+{{-- doctor-clinic-template/awards.blade.php --}}
 @php
 $items = $form;
 $fields = [

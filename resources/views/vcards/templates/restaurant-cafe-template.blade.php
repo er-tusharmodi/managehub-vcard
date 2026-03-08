@@ -31,11 +31,14 @@
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+        @if(!empty($vcard->head_script))
+        {!! $vcard->head_script !!}
+        @endif
     </head>
     <body>
         <main id="app-root" aria-live="polite">
             <div class="banner">
-                <div class="banner-bg" id="bannerBg"{{ $bannerImage ? " style=\"background:url('" . e($bannerImage) . "') center/cover no-repeat\"" : "" }}></div>
+                <div class="banner-bg" id="bannerBg"@if($bannerImage) style="background-image:url('{{ $bannerImage }}');background-size:cover;background-position:center;background-repeat:no-repeat;"@endif></div>
                 <div class="banner-pattern"></div>
                 <div class="banner-overlay"></div>
                 <div class="banner-top-bar">
@@ -59,8 +62,8 @@
                 </div>
                 <div class="banner-center">
                     <div class="banner-eyebrow" id="bannerEyebrow">{{ data_get($data, "banner.eyebrow") }}</div>
-                    <div class="banner-title" id="bannerTitle">{{ data_get($data, "banner.title") }}</div>
-                    <div class="banner-sub" id="bannerSub">{{ data_get($data, "banner.subtitle") }}</div>
+                    <div class="banner-title" id="bannerTitle">{{ data_get($data, "_common.name") }}</div>
+                    <div class="banner-sub" id="bannerSub">{{ data_get($data, "_common.tagline") }}</div>
                 </div>
                 <div class="rating-strip" id="ratingStrip">
                     @foreach(data_get($data, "banner.ratings", []) as $item)
@@ -128,6 +131,7 @@
                 </div>
             </div>
 
+        @if(vcard_section_enabled($data, 'story'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -163,10 +167,12 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'menu'))
             <div class="sec">
                 <div class="sec-header">
-                    <div class="sec-icon terra">
+                    <div class="sec-icon no-bg-menu">
                         <svg class="ic" viewBox="0 0 24 24">
                             <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
                             <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
@@ -189,16 +195,15 @@
                             $price = (int) ($item["price"] ?? 0);
                             $id = (int) ($item["id"] ?? 0);
                             $tagColor = $item["tc"] ?? "#3a4a2e";
-                            $bg = $item["bg"] ?? "";
-                            if (!$bg) {
-                                $fallback = data_get($data, "assets.fallbackImage", "");
-                                $bg = $fallback ? "url('" . e($fallback) . "')" : "";
+                            $imgSrc = $item["product_image"] ?? $item["bg"] ?? "";
+                            if (!$imgSrc) {
+                                $imgSrc = data_get($data, "assets.fallbackImage", "");
                             }
                             $veg = !empty($item["veg"]);
 @endphp
                             <div class="menu-card">
                                 <div class="menu-img">
-                                    <div class="menu-img-ph" style="background:{{ $bg }};height:100%;display:flex;align-items:center;justify-content:center;"></div>
+                                    <div class="menu-img-ph" style="background-image:url('{{ e($imgSrc) }}');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
                                     @if(!empty($item["tag"]))
                                         <span class="mbadge" style="background:{{ $tagColor }}">{{ $item["tag"] }}</span>
                                     @endif
@@ -226,7 +231,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'gallery'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon gold-ic">
@@ -252,7 +259,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'reserve'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon terra">
@@ -334,7 +343,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'offers'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon gold-ic">
@@ -347,9 +358,15 @@
                 <div class="sec-body">
                     <div class="offers-list" id="offersList">
                         @foreach(data_get($data, "offers", []) as $item)
-                            @php $iconKey = "offer_" . ($item["icon"] ?? ""); @endphp
+                            @php
+                                $iconVal  = $item["icon"] ?? "";
+                                $svgKeys  = ['brunch','candle','coffee','cake'];
+                                $iconHtml = in_array($iconVal, $svgKeys, true)
+                                    ? getIcon('offer_' . $iconVal)
+                                    : ($iconVal ? '<span style="font-size:1.4rem;line-height:1;">' . e($iconVal) . '</span>' : '');
+                            @endphp
                             <div class="offer-card">
-                                <div class="offer-icon" style="background:{{ $item["bg"] ?? "#fff3e0" }}">{!! getIcon($iconKey) !!}</div>
+                                <div class="offer-icon" style="background:{{ $item['bg'] ?? '#fff3e0' }}">{!! $iconHtml !!}</div>
                                 <div>
                                     <div class="offer-title">{{ $item["title"] ?? "" }}</div>
                                     <div class="offer-desc">{{ $item["desc"] ?? "" }}</div>
@@ -360,7 +377,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'hours'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -392,7 +411,9 @@
                     <div class="kitchen-note" id="kitchenNote">{{ data_get($data, "hours.kitchenNote") }}</div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'location'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon terra">
@@ -438,7 +459,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'follow'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -480,7 +503,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'payments'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -513,9 +538,15 @@
                             }
                             $iconKey = "payment_" . $iconName;
 @endphp
-                            <div class="pay-item">
-                                <div class="pay-icon">
-                                    <span style="display:flex;color:{{ $item["stroke"] ?? "#1565c0" }}">{!! getIcon($iconKey) !!}</span>
+                            @php
+                                $payClr = $item['stroke'] ?? '#1565c0';
+                                $prgb = \Illuminate\Support\Str::startsWith($payClr, '#') && strlen($payClr) === 7
+                                    ? 'rgba(' . hexdec(substr($payClr,1,2)) . ',' . hexdec(substr($payClr,3,2)) . ',' . hexdec(substr($payClr,5,2)) . ',0.12)'
+                                    : 'rgba(21,101,192,0.12)';
+                            @endphp
+                            <div class="pay-item" style="--pay-clr:{{ $payClr }}">
+                                <div class="pay-icon" style="background:{{ $prgb }};color:{{ $payClr }}">
+                                    {!! getIcon($iconKey) !!}
                                 </div>
                                 <div>
                                     <div class="pay-name">{{ $item["name"] ?? "" }}</div>
@@ -526,7 +557,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'qr'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon gold-ic">
@@ -564,10 +597,11 @@
                     </div>
                 </div>
             </div>
+        @endif
 
             <div class="vcard-footer">
                 <p id="footerLine1">{{ data_get($data, "footer.year") }} <strong>{{ data_get($data, "footer.brand") }}</strong> {{ data_get($data, "footer.rights") }}</p>
-                <p id="footerLine2" style="margin-top: 0.3rem; font-size: 0.68rem">{{ data_get($data, "footer.poweredBy") }} <strong>{{ data_get($data, "footer.poweredBrand") }}</strong></p>
+                <p id="footerLine2" style="margin-top: 0.3rem; font-size: 0.68rem">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></p>
             </div>
 
             <div class="float-bar">
@@ -638,32 +672,32 @@
                     </div>
                     <div class="bf-row">
                         <div class="bf-grp">
-                            <label class="bf-lbl" id="r2LabelName">{{ data_get($data, "reserveModal.labels.name") }}</label>
-                            <input class="bf-inp" type="text" id="rName2" placeholder="{{ data_get($data, "reserveModal.placeholders.name") }}" />
+                            <label class="bf-lbl" id="r2LabelName">{{ data_get($data, "reservation.labels.name", data_get($data, "reserveModal.labels.name")) }}</label>
+                            <input class="bf-inp" type="text" id="rName2" placeholder="{{ data_get($data, 'reservation.placeholders.name', data_get($data, 'reserveModal.placeholders.name')) }}" />
                         </div>
                         <div class="bf-grp">
-                            <label class="bf-lbl" id="r2LabelPhone">{{ data_get($data, "reserveModal.labels.phone") }}</label>
-                            <input class="bf-inp" type="tel" id="rPhone2" placeholder="{{ data_get($data, "reserveModal.placeholders.phone") }}" />
+                            <label class="bf-lbl" id="r2LabelPhone">{{ data_get($data, "reservation.labels.phone", data_get($data, "reserveModal.labels.phone")) }}</label>
+                            <input class="bf-inp" type="tel" id="rPhone2" placeholder="{{ data_get($data, 'reservation.placeholders.phone', data_get($data, 'reserveModal.placeholders.phone')) }}" />
                         </div>
                     </div>
                     <div class="bf-row">
                         <div class="bf-grp">
-                            <label class="bf-lbl" id="r2LabelDate">{{ data_get($data, "reserveModal.labels.date") }}</label>
+                            <label class="bf-lbl" id="r2LabelDate">{{ data_get($data, "reservation.labels.date", data_get($data, "reserveModal.labels.date")) }}</label>
                             <input class="bf-inp" type="date" id="rDate2" />
                         </div>
                         <div class="bf-grp">
-                            <label class="bf-lbl" id="r2LabelTime">{{ data_get($data, "reserveModal.labels.time") }}</label>
+                            <label class="bf-lbl" id="r2LabelTime">{{ data_get($data, "reservation.labels.time", data_get($data, "reserveModal.labels.time")) }}</label>
                             <select class="bf-inp" id="rTime2">
-                                @foreach(data_get($data, "reserveModal.times", []) as $option)
+                                @foreach(data_get($data, "reservation.times", data_get($data, "reserveModal.times", [])) as $option)
                                     <option value="{{ $option["value"] ?? $option["label"] ?? "" }}"{{ !empty($option["selected"]) ? " selected=\"selected\"" : "" }}>{{ $option["label"] ?? $option["value"] ?? "" }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="bf-grp">
-                        <label class="bf-lbl" id="r2LabelGuests">{{ data_get($data, "reserveModal.labels.guests") }}</label>
+                        <label class="bf-lbl" id="r2LabelGuests">{{ data_get($data, "reservation.labels.guests", data_get($data, "reserveModal.labels.guests")) }}</label>
                         <select class="bf-inp" id="rGuests2">
-                            @foreach(data_get($data, "reserveModal.guests", []) as $option)
+                            @foreach(data_get($data, "reservation.guests", data_get($data, "reserveModal.guests", [])) as $option)
                                 <option value="{{ $option["value"] ?? $option["label"] ?? "" }}"{{ !empty($option["selected"]) ? " selected=\"selected\"" : "" }}>{{ $option["label"] ?? $option["value"] ?? "" }}</option>
                             @endforeach
                         </select>
@@ -757,7 +791,11 @@
         <script>
             window.__APP__ = {!! vcard_js_str($data) !!};
             window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
+            window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
+        @if(!empty($vcard->footer_script))
+        {!! $vcard->footer_script !!}
+        @endif
     </body>
 </html>

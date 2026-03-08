@@ -226,7 +226,7 @@ const genQR = () => {
     el.innerHTML = "";
 
     new QRCode(el, {
-        text: getWebsite(),
+        text: window.__APP_URL__ || window.location.href,
         width: 165,
         height: 165,
         colorDark: "#0f1d3a",
@@ -335,6 +335,34 @@ const showToast = (message) => {
     setTimeout(() => toast.classList.remove("show"), 2800);
 };
 
+const escHtml = (str) =>
+    String(str || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+const renderDemoSlots = () => {
+    const grid = document.getElementById("demoSlotGrid");
+    if (!grid) return;
+    const slots = state.data?.demo?.slots;
+    if (!Array.isArray(slots) || slots.length === 0) return;
+
+    grid.innerHTML = slots
+        .filter((s) => s && typeof s === "object")
+        .map((slot) => {
+            const selected = slot.selected ? " selected" : "";
+            return `<div class="demo-slot${selected}" onclick="selectDemo(this)" data-slot="${escHtml(slot.slot)}">
+  <div class="demo-slot-check"><i class="bi bi-check2"></i></div>
+  <div class="demo-slot-day">${escHtml(slot.day)}</div>
+  <div class="demo-slot-time">${escHtml(slot.time)}</div>
+  <div class="demo-slot-topic">📖 ${escHtml(slot.topic)}</div>
+  <div class="demo-slot-mode">🏛 ${escHtml(slot.mode)}</div>
+</div>`;
+        })
+        .join("");
+};
+
 window.addEventListener("load", () => {
     if (!state.data) return;
 
@@ -342,6 +370,8 @@ window.addEventListener("load", () => {
     animateCounter("cnt-yrs", Number(counters.years || 0), "", 1400);
     animateCounter("cnt-sel", Number(counters.selections || 0), "+", 1800);
     animateCounter("cnt-rate", Number(counters.successRate || 0), "%", 1600);
+
+    renderDemoSlots();
 
     const defaultSlot =
         state.data.demo?.slots?.find((slot) => slot.selected) ||

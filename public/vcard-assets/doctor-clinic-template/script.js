@@ -418,6 +418,7 @@ const fillStaticContent = () => {
     setText("sec-title-social", pick("sections.social"));
     setText("sec-title-payments", pick("sections.payments"));
     setText("sec-title-contact-save", pick("sections.contactSave"));
+    setText("contact-title", pick("sections.contact"));
 
     setText("label-name", pick("appointment.form.nameLabel"));
     setText("label-phone", pick("appointment.form.phoneLabel"));
@@ -446,10 +447,22 @@ const fillStaticContent = () => {
     setText("hours-today", pick("hours.todayLabel"));
     setText("hours-suggest-link", pick("hours.suggestLink"));
 
-    setText("location-clinic-name", pick("location.clinicName"));
-    setText("location-line1", pick("location.line1"));
-    setText("location-line2", pick("location.line2"));
-    setText("location-map-label", pick("location.mapLabel"));
+    setText("location-clinic-name", pick("doctor.clinicName"));
+    setText("location-address", pick("doctor.address"));
+    setText("location-map-label", pick("location.mapLabel", "Get Directions"));
+
+    setText("contact-label-name", APP.contactForm?.labels?.name);
+    setText("contact-label-mobile", APP.contactForm?.labels?.mobile);
+    setText("contact-label-email", APP.contactForm?.labels?.email);
+    setText("contact-label-message", APP.contactForm?.labels?.message);
+    setAttr("cName", "placeholder", APP.contactForm?.placeholders?.name);
+    setAttr("cPhone", "placeholder", APP.contactForm?.placeholders?.mobile);
+    setAttr("cEmail", "placeholder", APP.contactForm?.placeholders?.email);
+    setAttr("cMsg", "placeholder", APP.contactForm?.placeholders?.message);
+    setText("contact-submit-label", APP.contactForm?.submitLabel);
+    setText("contact-success-title", APP.contactForm?.successTitle);
+    setText("contact-success-desc", APP.contactForm?.successDescription);
+    setText("contact-success-btn-label", APP.contactForm?.successButtonLabel);
 
     setText("qr-note", pick("qr.note"));
     setText("qr-save-label", pick("qr.saveLabel"));
@@ -555,6 +568,47 @@ function resetAppt() {
     });
 }
 
+function submitContact() {
+    const name = $id("cName")?.value.trim();
+    const phone = $id("cPhone")?.value.trim();
+    const email = $id("cEmail")?.value.trim();
+    const note = $id("cMsg")?.value.trim();
+
+    if (!name || !phone) {
+        showToast(
+            pick("messages.namePhoneRequired", "Please enter name and phone"),
+        );
+        return;
+    }
+
+    const message = `✉️ *Message – ${DOC.clinicName || DOC.name}*\n👤 ${name}\n📞 ${phone}\n📧 ${email || "—"}\n💬 ${note || "No message"}`;
+
+    sendSubmission("contact", {
+        source_template: "doctor-clinic-template",
+        name,
+        phone,
+        email,
+        message: note,
+    });
+
+    window.open(
+        `https://wa.me/${DOC.whatsapp}?text=${encodeURIComponent(message)}`,
+        "_blank",
+    );
+
+    $id("contactForm").style.display = "none";
+    $id("contactSuccess").style.display = "block";
+}
+
+function resetContact() {
+    $id("contactForm").style.display = "block";
+    $id("contactSuccess").style.display = "none";
+    ["cName", "cPhone", "cEmail", "cMsg"].forEach((id) => {
+        const field = $id(id);
+        if (field) field.value = "";
+    });
+}
+
 function callClinic() {
     window.location.href = `tel:${DOC.phone}`;
 }
@@ -608,7 +662,7 @@ function genQR() {
 
     target.innerHTML = "";
     new QRCode(target, {
-        text: DOC.website,
+        text: window.__APP_URL__ || window.location.href,
         width: 165,
         height: 165,
         colorDark: "#0f2d4a",
@@ -740,6 +794,7 @@ function boot() {
     APP = window.__APP__ || {};
     DOC = APP.doctor || {};
     DOC.website = DOC.website || window.location.href;
+    renderAll();
 }
 
 "loading" === document.readyState

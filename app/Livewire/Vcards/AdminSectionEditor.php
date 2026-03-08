@@ -25,6 +25,11 @@ class AdminSectionEditor extends Component
     public string $editMode = 'visual'; // 'visual' or 'code'
     public string $jsonContent = '';
 
+    // Menu item modal state (used by restaurant-cafe-template/MENU.blade.php)
+    public string $editingCategory = '';
+    public ?int $editingIndex = null;
+    public array $editingItem = [];
+
     public function mount(Vcard $vcard, ?string $section = null): void
     {
         $this->vcard = $vcard;
@@ -111,10 +116,11 @@ class AdminSectionEditor extends Component
         }
         // Template-specific hidden sections
         $templateHide = [
-            'doctor-clinic-template'    => ['profile', 'qr', 'promo'],
-            'coaching-template'         => ['stats'],
+            'doctor-clinic-template'    => ['profile', 'qr', 'promo', 'doctor', 'location', 'contactForm'],
+            'coaching-template'         => ['stats', 'shop', 'booking', 'location', 'qr'],
             'electronics-shop-template' => ['repair', 'repairServices', 'promo'],
             'mens-salon-template'       => ['promo'],
+            'sweetshop-template'        => ['shop', 'profile', 'location', 'contactForm'],
         ];
         if (isset($templateHide[$templateKey])) {
             $hiddenSections = array_merge($hiddenSections, $templateHide[$templateKey]);
@@ -488,6 +494,78 @@ class AdminSectionEditor extends Component
         $this->removeRow($path, $index);
         $this->save();
         $this->dispatch('notify', type: 'success', message: 'Item deleted successfully!');
+    }
+
+    public function openMenuItemModal(string $category, ?int $index = null): void
+    {
+        $this->editingCategory = $category;
+        $this->editingIndex    = $index;
+        if ($index !== null) {
+            $this->editingItem = $this->form[$category][$index] ?? [];
+        } else {
+            $this->editingItem = array_fill_keys(['id','name','icon','desc','price','op','tag','tc','product_image','veg'], '');
+            $this->editingItem['veg'] = false;
+        }
+        $this->dispatch('open-menu-item-modal', wireId: $this->getId());
+    }
+
+    public function saveMenuItemModal(): void
+    {
+        $category = $this->editingCategory;
+        if (empty($category)) {
+            $this->dispatch('notify', type: 'warning', message: 'No category selected.');
+            return;
+        }
+
+        $list = $this->form[$category] ?? [];
+        if (!is_array($list)) { $list = []; }
+        $index = $this->editingIndex ?? count($list);
+
+        $list[$index] = $this->editingItem;
+        $this->form[$category] = $list;
+
+        if (!empty($this->uploads['menuItemEdit']['product_image'])) {
+            if (!isset($this->uploads[$category])) { $this->uploads[$category] = []; }
+            if (!isset($this->uploads[$category][$index])) { $this->uploads[$category][$index] = []; }
+            $this->uploads[$category][$index]['product_image'] = $this->uploads['menuItemEdit']['product_image'];
+            unset($this->uploads['menuItemEdit']);
+        }
+
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem     = [];
+        $this->editingCategory = '';
+        $this->editingIndex    = null;
+        $this->dispatch('hide-menu-item-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added to ' . $category . '!');
+    }
+
+    public function addMenuCategory(): void
+    {
+        $name = trim($this->newItem['newCategoryName'] ?? '');
+        if (empty($name)) {
+            $this->dispatch('notify', type: 'warning', message: 'Please enter a category name.');
+            return;
+        }
+        if (array_key_exists($name, (array) $this->form)) {
+            $this->dispatch('notify', type: 'warning', message: "Category '{$name}' already exists.");
+            return;
+        }
+        $this->form[$name] = [];
+        $this->save();
+        $this->newItem = [];
+        $this->dispatch('hide-category-modal');
+        $this->dispatch('notify', type: 'success', message: "Category '{$name}' added!");
+    }
+
+    public function deleteMenuCategory(string $category): void
+    {
+        if (!array_key_exists($category, (array) $this->form)) {
+            return;
+        }
+        unset($this->form[$category]);
+        $this->save();
+        $this->dispatch('notify', type: 'success', message: "Category '{$category}' deleted.");
     }
 
     private function loadJson(): array

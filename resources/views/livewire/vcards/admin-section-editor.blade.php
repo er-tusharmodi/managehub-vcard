@@ -1,4 +1,5 @@
 <div>
+    @section('content-wrapper-class', 'container-fluid')
     @section('title', 'vCard Content Editor')
 
     <div class="row">
@@ -64,7 +65,8 @@
             'qr'              => ['icon' => 'mdi-qrcode',                 'color' => 'dark'],
             'contact'         => ['icon' => 'mdi-email-outline',          'color' => 'primary'],
             'follow'          => ['icon' => 'mdi-account-plus-outline',   'color' => 'info'],
-            'menu'            => ['icon' => 'mdi-food',                   'color' => 'warning'],
+            'menu'            => ['icon' => 'mdi-silverware-fork-knife',  'color' => 'success'],
+            'MENU'            => ['icon' => 'mdi-silverware-fork-knife',  'color' => 'success'],
             'brands'          => ['icon' => 'mdi-star-box-outline',       'color' => 'secondary'],
             'collections'     => ['icon' => 'mdi-diamond-outline',        'color' => 'info'],
             'showroom'        => ['icon' => 'mdi-store-outline',          'color' => 'secondary'],
@@ -121,7 +123,7 @@
                                 $tabIcon  = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $isActive = ($editMode !== 'code') && $section === $tab;
                                 $sectionLabelMap = [
-                                    'restaurant-cafe-template' => ['R' => 'Business Details'],
+                                    'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
                                 ];
                                 $tabLabel = $tab === '_common'
                                     ? 'Basic Info'
@@ -139,7 +141,7 @@
                                 <div class="flex-shrink-0">
                                     <span class="avatar-xs">
                                         <span class="avatar-title rounded-circle font-size-14
-                                                     {{ $isActive ? 'bg-primary text-white' : 'bg-soft-'.$tabIcon['color'].' text-'.$tabIcon['color'] }}">
+                                                     {{ $isActive ? 'bg-primary text-white' : 'text-'.$tabIcon['color'] }}">
                                             <i class="mdi {{ $tabIcon['icon'] }}"></i>
                                         </span>
                                     </span>
@@ -239,7 +241,7 @@
                     $activeIcon  = $iconMap[$section] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                     $activeLabel = $section === '_common'
                         ? 'Basic Info'
-                        : \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? ''));
+                        : (['MENU' => 'Menu'][$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')));
                     $isFormList  = is_array($form) && !empty($form) && array_values($form) === $form;
                     $itemLabel   = \Illuminate\Support\Str::singular($activeLabel);
                 @endphp

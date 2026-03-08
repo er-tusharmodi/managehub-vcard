@@ -235,7 +235,7 @@ const renderOffers = () => {
             .map(
                 (item) => `
                     <div class="offer-card">
-                        <div class="offer-icon" style="background:${item.bg || "#fff3e0"}">${OFFER_ICONS[item.icon] || ""}</div>
+                        <div class="offer-icon" style="background:${item.bg || "#fff3e0"}">${OFFER_ICONS[item.icon] || (item.icon ? `<span style="font-size:1.5rem;line-height:1;display:flex;align-items:center;justify-content:center;width:100%;height:100%">${item.icon}</span>` : "")}</div>
                         <div>
                             <div class="offer-title">${item.title || ""}</div>
                             <div class="offer-desc">${item.desc || ""}</div>
@@ -351,37 +351,46 @@ const renderPayments = () => {
     setHTML(
         "payGrid",
         (APP.payments || [])
-            .map(
-                (item) => `
-                    <div class="pay-item">
-                        <div class="pay-icon">
-                            <span style="display:flex;color:${item.stroke || "#1565c0"}">${PAYMENT_ICONS[item.icon] || ""}</span>
+            .map((item) => {
+                const c = item.stroke || "#1565c0";
+                const iconBg = /^#[0-9a-f]{6}$/i.test(c)
+                    ? `rgba(${parseInt(c.slice(1, 3), 16)},${parseInt(c.slice(3, 5), 16)},${parseInt(c.slice(5, 7), 16)},0.12)`
+                    : "rgba(21,101,192,0.12)";
+                return `
+                    <div class="pay-item" style="--pay-clr:${c}">
+                        <div class="pay-icon" style="background:${iconBg};color:${c}">
+                            ${PAYMENT_ICONS[item.icon] || ""}
                         </div>
                         <div>
                             <div class="pay-name">${item.name || ""}</div>
                             <div class="pay-sub">${item.sub || ""}</div>
                         </div>
-                    </div>`,
-            )
+                    </div>`;
+            })
             .join(""),
     );
 };
 
 const renderTabs = () => {
     const tabs = Object.keys(MENU || {});
+    const allTab = `<button class="mtab${"__all__" === activeTab ? " active" : ""}" onclick="switchTab('__all__')">All</button>`;
     setHTML(
         "menuTabs",
-        tabs
-            .map(
-                (tab) =>
-                    `<button class="mtab${tab === activeTab ? " active" : ""}" onclick="switchTab('${sq(tab)}')">${tab}</button>`,
-            )
-            .join(""),
+        allTab +
+            tabs
+                .map(
+                    (tab) =>
+                        `<button class="mtab${tab === activeTab ? " active" : ""}" onclick="switchTab('${sq(tab)}')">${tab}</button>`,
+                )
+                .join(""),
     );
 };
 
 const renderItems = () => {
-    const items = MENU[activeTab] || [];
+    const items =
+        activeTab === "__all__"
+            ? Object.values(MENU || {}).flat()
+            : MENU[activeTab] || [];
     setHTML(
         "menuGrid",
         items
@@ -390,7 +399,7 @@ const renderItems = () => {
                 return `
                     <div class="menu-card">
                         <div class="menu-img">
-                            <div class="menu-img-ph" style="background:${item.bg || `url('${pick("assets.fallbackImage")}')`};height:100%;display:flex;align-items:center;justify-content:center;"></div>
+                            <div class="menu-img-ph" style="background-image:url('${item.product_image || pick("assets.fallbackImage")}');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
                             ${item.tag ? `<span class="mbadge" style="background:${item.tc || "#3a4a2e"}">${item.tag}</span>` : ""}
                             <div class="diet ${item.veg ? "veg-d" : "nonveg-d"}">${item.veg ? "V" : "N"}</div>
                         </div>
@@ -466,14 +475,18 @@ function openCart() {
         })
         .join("");
 
-    body.innerHTML = `${rows}<div class="cart-total"><span>${pick("cart.totalLabel")}</span><span class="cart-total-amt">&#8377;${total}</span></div><textarea class="cart-note-input" id="cartNote" placeholder="${pick("cart.notePlaceholder")}"></textarea><button class="cart-order-btn" onclick="sendCartWA()"><svg class="ic" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>${pick("cart.orderButton")}</button>`;
+    body.innerHTML = `${rows}<div class="cart-total"><span>${pick("cart.totalLabel")}</span><span class="cart-total-amt">&#8377;${total}</span></div><input class="cart-note-input" id="cartName" type="text" placeholder="${pick("cart.namePlaceholder") || "Your name"}" style="margin-bottom:0.45rem;"><textarea class="cart-note-input" id="cartNote" placeholder="${pick("cart.notePlaceholder")}"></textarea><button class="cart-order-btn" onclick="sendCartWA()"><svg class="ic" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>${pick("cart.orderButton")}</button>`;
     $id("cartOverlay")?.classList.add("show");
 }
 
 async function sendCartWA() {
     const items = Object.values(cart);
+    const name = $id("cartName")?.value.trim() || "";
     let total = 0;
     let message = `Meal Order - ${R.name}\n\n`;
+    if (name) {
+        message += `Name: ${name}\n\n`;
+    }
     const orderItems = [];
     items.forEach((item) => {
         const amount = item.price * item.qty;
@@ -496,7 +509,7 @@ async function sendCartWA() {
     await sendSubmission("order", {
         source_template: pick("meta.title") || "restaurant-cafe-template",
         shop_name: R.name || "",
-        name: "",
+        name: name,
         phone: "",
         email: "",
         message: note || "Meal order",
@@ -674,7 +687,7 @@ function genQR() {
     }
     box.innerHTML = "";
     new QRCode(box, {
-        text: R.website,
+        text: window.__APP_URL__ || window.location.href,
         width: 165,
         height: 165,
         colorDark: "#3a4a2e",
@@ -768,12 +781,15 @@ const renderStatic = () => {
     setText("statusLabel", pick("banner.statusLabel"));
     setText("bannerShareLabel", pick("banner.shareLabel"));
     setText("bannerEyebrow", pick("banner.eyebrow"));
-    setText("bannerTitle", pick("banner.title"));
-    setText("bannerSub", pick("banner.subtitle"));
+    setText("bannerTitle", R.name);
+    setText("bannerSub", R.tagline);
 
     const bg = $id("bannerBg");
     if (bg && pick("assets.bannerImage")) {
-        bg.style.background = `url(${pick("assets.bannerImage")}) center/cover no-repeat`;
+        bg.style.backgroundImage = `url(${pick("assets.bannerImage")})`;
+        bg.style.backgroundSize = "cover";
+        bg.style.backgroundPosition = "center";
+        bg.style.backgroundRepeat = "no-repeat";
     }
 
     setText("actionCallLabel", pick("profile.actions.call"));
@@ -796,7 +812,7 @@ const renderStatic = () => {
     setText("secQrTitle", pick("sections.qr"));
 
     setAttr("storyImage", "src", pick("story.image"));
-    setAttr("storyImage", "alt", pick("R.name"));
+    setAttr("storyImage", "alt", pick("_common.name"));
     setText("storyP1", pick("story.paragraph1"));
     setText("storyP2", pick("story.paragraph2"));
     setText("chefName", pick("story.chefName"));
@@ -845,15 +861,46 @@ const renderStatic = () => {
 
     setText("cartTitle", pick("cart.title"));
 
-    setText("reserveModalTitle", pick("reserveModal.title"));
-    setText("r2LabelName", pick("reserveModal.labels.name"));
-    setText("r2LabelPhone", pick("reserveModal.labels.phone"));
-    setText("r2LabelDate", pick("reserveModal.labels.date"));
-    setText("r2LabelTime", pick("reserveModal.labels.time"));
-    setText("r2LabelGuests", pick("reserveModal.labels.guests"));
-    setText("r2ConfirmLabel", pick("reserveModal.confirmLabel"));
-    setAttr("rName2", "placeholder", pick("reserveModal.placeholders.name"));
-    setAttr("rPhone2", "placeholder", pick("reserveModal.placeholders.phone"));
+    setText(
+        "reserveModalTitle",
+        pick("reservation.title") || pick("reserveModal.title"),
+    );
+    setText(
+        "r2LabelName",
+        pick("reservation.labels.name") || pick("reserveModal.labels.name"),
+    );
+    setText(
+        "r2LabelPhone",
+        pick("reservation.labels.phone") || pick("reserveModal.labels.phone"),
+    );
+    setText(
+        "r2LabelDate",
+        pick("reservation.labels.date") || pick("reserveModal.labels.date"),
+    );
+    setText(
+        "r2LabelTime",
+        pick("reservation.labels.time") || pick("reserveModal.labels.time"),
+    );
+    setText(
+        "r2LabelGuests",
+        pick("reservation.labels.guests") || pick("reserveModal.labels.guests"),
+    );
+    setText(
+        "r2ConfirmLabel",
+        pick("reservation.confirmLabel") || pick("reserveModal.confirmLabel"),
+    );
+    setAttr(
+        "rName2",
+        "placeholder",
+        pick("reservation.placeholders.name") ||
+            pick("reserveModal.placeholders.name"),
+    );
+    setAttr(
+        "rPhone2",
+        "placeholder",
+        pick("reservation.placeholders.phone") ||
+            pick("reserveModal.placeholders.phone"),
+    );
 
     setText("shareTitle", pick("share.title"));
     setText("shareWaLabel", pick("share.whatsapp"));
@@ -864,11 +911,11 @@ const renderStatic = () => {
 };
 
 const renderAll = () => {
-    R = { ...(APP.R || {}) };
+    R = { ...(APP._common || {}) };
     R.website = R.website || window.location.href;
-    MENU = APP.MENU || {};
+    MENU = APP.MENU || APP.menu || {};
     cart = {};
-    activeTab = Object.keys(MENU)[0] || "Starters";
+    activeTab = Object.keys(MENU).length ? "__all__" : "";
 
     renderStatic();
     renderRatingStrip();
@@ -885,8 +932,14 @@ const renderAll = () => {
     setHTML("rTime", optionMarkup(APP.reservation?.times || []));
     setHTML("rGuests", optionMarkup(APP.reservation?.guests || []));
     setHTML("rOccasion", optionMarkup(APP.reservation?.occasions || []));
-    setHTML("rTime2", optionMarkup(APP.reserveModal?.times || []));
-    setHTML("rGuests2", optionMarkup(APP.reserveModal?.guests || []));
+    setHTML(
+        "rTime2",
+        optionMarkup(APP.reservation?.times || APP.reserveModal?.times || []),
+    );
+    setHTML(
+        "rGuests2",
+        optionMarkup(APP.reservation?.guests || APP.reserveModal?.guests || []),
+    );
 
     renderTabs();
     renderItems();
@@ -908,8 +961,7 @@ const renderAll = () => {
 
 const boot = () => {
     APP = window.__APP__ || {};
-    R = APP.restaurant || {};
-    MENU = APP.menu || {};
+    renderAll();
 };
 
 document.readyState === "loading"

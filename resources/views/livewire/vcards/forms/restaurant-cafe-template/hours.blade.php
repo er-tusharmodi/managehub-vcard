@@ -64,8 +64,7 @@
                         <button type="button"
                                 class="btn btn-sm btn-outline-danger p-0 rounded-circle"
                                 style="width:26px;height:26px;"
-                                wire:click="removeRowWithConfirm({{ $ri }}, 'rows')"
-                                wire:confirm="Remove this hours row?">
+                                x-on:click="showConfirmToast('Remove this hours row?', () => $wire.removeRowWithConfirm({{ $ri }}, 'rows'))">
                             <i class="mdi mdi-delete" style="font-size:11px;"></i>
                         </button>
                     </td>

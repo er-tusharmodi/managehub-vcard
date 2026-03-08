@@ -1,4 +1,4 @@
-{-- coaching-template/courses.blade.php --}
+{{-- coaching-template/courses.blade.php --}}
 @php
 $items = $form['items'] ?? [];
 $fields = [

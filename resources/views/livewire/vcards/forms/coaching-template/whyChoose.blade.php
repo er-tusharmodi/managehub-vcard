@@ -1,4 +1,4 @@
-{-- coaching-template/whyChoose.blade.php --}
+{{-- coaching-template/whyChoose.blade.php --}}
 @php
 $items = $form['items'] ?? [];
 $fields = [

@@ -26,6 +26,9 @@
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+        @if(!empty($vcard->head_script))
+        {!! $vcard->head_script !!}
+        @endif
     </head>
     <body>
         <main id="app-root" aria-live="polite" style="min-height:100vh">
@@ -788,10 +791,15 @@
                 <span id="social_youtube"><svg class="ic" viewBox="0 0 24 24" stroke-width="2">{!! getIcon("social_youtube") !!}</svg></span>
             </div>
         </main>
+        <div style="text-align:center;padding:1.2rem 1rem;font-size:0.7rem;color:#94a3b8;">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></div>
         <script>
             window.__APP__ = {!! vcard_js_str($data) !!};
             window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
+            window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
+        @if(!empty($vcard->footer_script))
+        {!! $vcard->footer_script !!}
+        @endif
     </body>
 </html>

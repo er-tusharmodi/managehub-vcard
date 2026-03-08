@@ -49,7 +49,7 @@
     <body data-menu-color="light" data-sidebar="default">
         <div id="app-layout">
             <div class="topbar-custom">
-                <div class="container-xxl">
+                <div class="container-fluid">
                     <div class="d-flex justify-content-between">
                         <ul class="list-unstyled topnav-menu mb-0 d-flex align-items-center">
                             <li>
@@ -173,7 +173,7 @@
 
             <div class="content-page position-relative">
                 <div class="content">
-                    <div class="container-xxl">
+                    <div class="@yield('content-wrapper-class', 'container-fluid')">
                         @yield('content')
                     </div>
                 </div>

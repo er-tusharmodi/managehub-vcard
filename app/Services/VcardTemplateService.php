@@ -14,12 +14,15 @@ class VcardTemplateService
             return [];
         }
 
+        // Pre-fetch all display_names from DB for efficiency
+        $dbNames = \App\Models\Template::pluck('display_name', 'template_key');
+
         $templates = [];
 
         foreach (File::directories($root) as $dir) {
             $key = basename($dir);
             $defaultPath = $dir . DIRECTORY_SEPARATOR . 'default.json';
-            $title = $key; // Use folder name directly
+            $title = $dbNames->get($key) ?: $key; // Use DB display_name, fallback to folder key
 
             $templates[] = [
                 'key' => $key,
@@ -75,21 +78,24 @@ class VcardTemplateService
     }
 
     /**
-     * Delete a template folder
+     * Delete a template folder and its database record
      */
     public function deleteTemplate(string $templateKey): bool
     {
         $path = $this->templatePath($templateKey);
-        
-        if (!$path || !File::isDirectory($path)) {
-            return false;
-        }
 
         if (!$this->canDelete($templateKey)) {
             throw new \Exception("Cannot delete template. vCards are using this template.");
         }
 
-        File::deleteDirectory($path);
+        // Delete filesystem directory if it exists
+        if ($path && File::isDirectory($path)) {
+            File::deleteDirectory($path);
+        }
+
+        // Delete database record so it no longer appears on the frontend
+        \App\Models\Template::where('template_key', $templateKey)->delete();
+
         return true;
     }
 

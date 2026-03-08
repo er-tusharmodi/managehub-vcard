@@ -1,4 +1,4 @@
-{-- minimart-template/products.blade.php --}
+{{-- minimart-template/products.blade.php --}}
 @php
 $items = $form ?? [];
 $fields = [

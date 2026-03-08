@@ -2,6 +2,9 @@ const $id = (id) => document.getElementById(id);
 const $$ = (selector, root = document) =>
     Array.from(root.querySelectorAll(selector));
 
+const sq = (value = "") =>
+    String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+
 const iconTpl = (id, fallbackId) => {
     const primary = $id(id)?.innerHTML || "";
     if (primary) {
@@ -13,6 +16,8 @@ const iconTpl = (id, fallbackId) => {
 let APP = {};
 let SHOP = {};
 let PRODUCTS = [];
+let CATEGORIES = [];
+let activeProdTab = "__all__";
 let cart = {};
 
 const SOCIAL_ICON_MAP = {
@@ -276,39 +281,64 @@ const renderServices = () => {
         .join("");
 };
 
+const renderProdTabs = () => {
+    const allBtn = `<button class="ptab${activeProdTab === "__all__" ? " active" : ""}" onclick="switchProdTab('__all__')">All</button>`;
+    const tabBtns = CATEGORIES.map(
+        (c) =>
+            `<button class="ptab${activeProdTab === c.key ? " active" : ""}" onclick="switchProdTab('${sq(c.key)}')">${c.label}</button>`,
+    ).join("");
+    setHTML("prodTabs", allBtn + tabBtns);
+};
+
 function renderProducts() {
-    $id("productsGrid").innerHTML = PRODUCTS.map(
-        (item) => `
+    const items =
+        activeProdTab === "__all__"
+            ? PRODUCTS
+            : PRODUCTS.filter(
+                  (item) => (item.category_key || "") === activeProdTab,
+              );
+    setHTML(
+        "productsGrid",
+        items
+            .map((item) => {
+                let imgSrc = item.product_image || "";
+                const m = imgSrc.match(/url\(['"]?(.*?)['"]?\)/i);
+                if (m) imgSrc = m[1];
+                const bg = imgSrc
+                    ? `url('${imgSrc}') center/cover no-repeat`
+                    : item.bg || "";
+                return `
         <div class="prod-card">
             <div class="prod-img">
-                <div class="prod-img-placeholder" style="background:${item.bg};height:100%"></div>
-                ${
-                    item.tag
-                        ? `<span class="prod-tag" style="background:${item.tagColor};color:#fff">${item.tag}</span>`
-                        : ""
-                }
+                <div class="prod-img-placeholder" style="background:${bg};height:100%"></div>
+                ${item.tag ? `<span class="prod-tag" style="background:${item.tagColor || "#c8952a"};color:#fff">${item.tag}</span>` : ""}
             </div>
             <div class="prod-body">
-                <div class="prod-name">${item.name}</div>
-                <div class="prod-desc">${item.desc}</div>
+                <div class="prod-name">${item.name || ""}</div>
+                <div class="prod-desc">${item.desc || ""}</div>
                 <div class="prod-footer">
                     <div>
-                        <span class="prod-price">₹${item.price}</span>
-                        ${item.oldPrice ? `<span class="prod-old">₹${item.oldPrice}</span>` : ""}
+                        <span class="prod-price">&#8377;${item.price || ""}</span>
+                        ${item.oldPrice ? `<span class="prod-old">&#8377;${item.oldPrice}</span>` : ""}
+                        ${item.per ? `<span class="prod-per">${item.per}</span>` : ""}
                     </div>
                     <div class="qty-ctrl">
-                        <button class="qty-btn" onclick="changeQty(${item.id},-1)">
-                            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        </button>
+                        <button class="qty-btn" onclick="changeQty(${item.id},-1)"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
                         <span class="qty-num" id="qty-${item.id}">${cart[item.id] || 0}</span>
-                        <button class="qty-btn" onclick="changeQty(${item.id},1)">
-                            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                        </button>
+                        <button class="qty-btn" onclick="changeQty(${item.id},1)"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
                     </div>
                 </div>
             </div>
-        </div>`,
-    ).join("");
+        </div>`;
+            })
+            .join(""),
+    );
+}
+
+function switchProdTab(tab) {
+    activeProdTab = tab;
+    renderProdTabs();
+    renderProducts();
 }
 
 const renderGallery = () => {
@@ -414,7 +444,11 @@ function openCart() {
             })
             .join("");
 
-        html += `<div class="cart-total"><span>${APP.cart?.totalLabel || "Total"}</span><span class="cart-total-amt">₹${total}</span></div>`;
+        html += `<div class="cart-total"><span>${APP.cart?.totalLabel || "Total"}</span><span class="cart-total-amt">&#8377;${total}</span></div>`;
+        html += `<div class="cart-fields">
+            <input id="cartName" type="text" class="cart-field-input" placeholder="Your name" autocomplete="name">
+            <textarea id="cartNote" class="cart-field-input" rows="2" placeholder="Order note / special instructions"></textarea>
+        </div>`;
         html += `<button class="cart-order-btn" onclick="sendCartWA()">
             <svg class="ic" viewBox="0 0 24 24" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
             ${APP.cart?.orderButton || ""}
@@ -446,15 +480,21 @@ async function sendCartWA() {
         });
     });
 
-    message += `\n💰 *${APP.cart?.totalLabel || "Total"}: ₹${total}*\n\n${APP.messages?.cartConfirm || ""}`;
+    const customerName = ($id("cartName")?.value || "").trim();
+    const customerNote = ($id("cartNote")?.value || "").trim();
+
+    message += `\n💰 *${APP.cart?.totalLabel || "Total"}: ₹${total}*`;
+    if (customerName) message += `\n👤 *Name:* ${customerName}`;
+    if (customerNote) message += `\n📝 *Note:* ${customerNote}`;
+    message += `\n\n${APP.messages?.cartConfirm || ""}`;
 
     await sendSubmission("order", {
         source_template: APP.meta?.title || "sweetshop-template",
         shop_name: SHOP.name || "",
-        name: "",
+        name: customerName,
         phone: "",
         email: "",
-        message: "Cart order",
+        message: customerNote || "Cart order",
         items: orderItems,
         total: total,
     });
@@ -482,7 +522,7 @@ function genQR() {
     qrNode.innerHTML = "";
 
     new QRCode(qrNode, {
-        text: SHOP.website,
+        text: window.__APP_URL__ || window.location.href,
         width: 165,
         height: 165,
         colorDark: "#2e1503",
@@ -651,7 +691,17 @@ const bootstrap = () => {
         ...(APP.shop || {}),
         website: APP.shop?.website || window.location.href,
     };
+    CATEGORIES = APP.categories || [];
     PRODUCTS = APP.products || [];
+    hydrateStaticText();
+    bindSocialLinks();
+    renderServices();
+    renderGallery();
+    renderHours();
+    renderPaymentMethods();
+    renderProdTabs();
+    renderProducts();
+    genQR();
 };
 
 window.addEventListener("DOMContentLoaded", bootstrap);

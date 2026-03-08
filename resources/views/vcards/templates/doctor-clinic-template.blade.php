@@ -34,6 +34,9 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+        @if(!empty($vcard->head_script))
+        {!! $vcard->head_script !!}
+        @endif
     </head>
     <body>
         <main id="app-root" aria-live="polite" style="min-height:100vh">
@@ -195,6 +198,7 @@
             </div>
             @endif
 
+        @if(vcard_section_enabled($data, 'conditions'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg></div>
@@ -219,7 +223,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'fees'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23" /><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg></div>
@@ -243,7 +249,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'hours'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg></div>
@@ -269,7 +277,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'awards'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6" /><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11" /></svg></div>
@@ -286,7 +296,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'location'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg></div>
@@ -296,9 +308,8 @@
                     <a class="address-link" href="#" onclick="return (openMaps(), !1);">
                         <div class="addr-icon-wrap"><svg class="ic" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg></div>
                         <div class="addr-text">
-                            <strong id="location-clinic-name">{{ data_get($data, 'location.clinicName') }}</strong>
-                            <span id="location-line1">{{ data_get($data, 'location.line1') }}</span><br />
-                            <span id="location-line2">{{ data_get($data, 'location.line2') }}</span>
+                            <strong id="location-clinic-name">{{ data_get($data, 'doctor.clinicName') }}</strong>
+                            <span id="location-address" style="white-space:pre-line">{{ data_get($data, 'doctor.address') }}</span>
                             <span class="map-btn">
                                 <svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11" /></svg>
                                 <span id="location-map-label">Get Directions</span>
@@ -307,7 +318,9 @@
                     </a>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'social'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" /><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" /></svg></div>
@@ -331,7 +344,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'payments'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg></div>
@@ -355,7 +370,52 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+            @if(vcard_section_enabled($data, 'contact'))
+            <div class="sec">
+                <div class="sec-header">
+                    <div class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg></div>
+                    <div class="sec-title" id="contact-title">{{ data_get($data, 'sections.contact', 'Contact Us') }}</div>
+                </div>
+                <div class="sec-body">
+                    <div id="contactForm">
+                        <div class="bf-row">
+                            <div class="bf-group">
+                                <label class="bf-label" id="contact-label-name">{{ data_get($data, 'contactForm.labels.name', 'Your Name') }}</label>
+                                <input class="bf-input" id="cName" placeholder="{{ data_get($data, 'contactForm.placeholders.name', 'Full name') }}" />
+                            </div>
+                            <div class="bf-group">
+                                <label class="bf-label" id="contact-label-mobile">{{ data_get($data, 'contactForm.labels.mobile', 'Phone Number') }}</label>
+                                <input class="bf-input" id="cPhone" type="tel" placeholder="{{ data_get($data, 'contactForm.placeholders.mobile', '+91 XXXXX XXXXX') }}" />
+                            </div>
+                        </div>
+                        <div class="bf-group">
+                            <label class="bf-label" id="contact-label-email">{{ data_get($data, 'contactForm.labels.email', 'Email (optional)') }}</label>
+                            <input class="bf-input" id="cEmail" placeholder="{{ data_get($data, 'contactForm.placeholders.email', 'yourmail@example.com') }}" />
+                        </div>
+                        <div class="bf-group">
+                            <label class="bf-label" id="contact-label-message">{{ data_get($data, 'contactForm.labels.message', 'Your Message') }}</label>
+                            <textarea class="bf-input" id="cMsg" placeholder="{{ data_get($data, 'contactForm.placeholders.message', 'How can we help you?') }}"></textarea>
+                        </div>
+                        <button class="bf-submit" onclick="submitContact()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="16" height="16"><line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" /></svg>
+                            <span id="contact-submit-label">{{ data_get($data, 'contactForm.submitLabel', 'Send via WhatsApp') }}</span>
+                        </button>
+                    </div>
+                    <div id="contactSuccess" style="display:none;text-align:center;padding:1.8rem 1rem;">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#2e7d32" stroke-width="2" width="48" height="48" style="margin-bottom:0.8rem"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" /></svg>
+                        <div id="contact-success-title" style="font-size:0.98rem;font-weight:700;color:var(--text);margin-bottom:0.4rem;">{{ data_get($data, 'contactForm.successTitle', 'Message Sent!') }}</div>
+                        <div id="contact-success-desc" style="font-size:0.8rem;color:var(--muted);margin-bottom:1rem;">{{ data_get($data, 'contactForm.successDescription', "We'll get back to you shortly.") }}</div>
+                        <button class="bf-submit" onclick="resetContact()">
+                            <span id="contact-success-btn-label">{{ data_get($data, 'contactForm.successButtonLabel', 'Send Another') }}</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+        @if(vcard_section_enabled($data, 'contactSave'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="3" height="3" /><rect x="18" y="14" width="3" height="3" /><rect x="14" y="18" width="3" height="3" /><rect x="18" y="18" width="3" height="3" /></svg></div>
@@ -378,12 +438,14 @@
                     </div>
                 </div>
             </div>
+        @endif
 
             <div style="text-align:center;padding:1.4rem 1rem 1rem;font-size:0.72rem;color:var(--muted);">
                 <span id="footer-line1">{{ data_get($data, 'footer.line1') }}</span><br />
                 <strong style="color:var(--teal)" id="footer-line2">{{ data_get($data, 'footer.line2') }}</strong><br />
                 <span id="footer-line3">{{ data_get($data, 'footer.line3') }}</span><br />
-                <span style="font-size:0.65rem;color:#aaa" id="footer-line4">{{ data_get($data, 'footer.line4') }}</span>
+                <span style="font-size:0.65rem;color:#aaa" id="footer-line4">{{ data_get($data, 'footer.line4') }}</span><br />
+                <span style="font-size:0.63rem;color:#bbb;margin-top:0.35rem;display:inline-block;">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></span>
             </div>
 
             <div class="float-bar">
@@ -465,7 +527,11 @@
         <script>
             window.__APP__ = {!! vcard_js_str($data) !!};
             window.__VCARD_SUBDOMAIN__ = {!! vcard_js_str($subdomain) !!};
+            window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
+        @if(!empty($vcard->footer_script))
+        {!! $vcard->footer_script !!}
+        @endif
     </body>
 </html>

@@ -110,6 +110,7 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::get('/vcards/{vcard}/share', [AdminVcardController::class, 'shareVcard'])->name('vcards.share');
     Route::post('/vcards/{vcard}/regenerate-password', [AdminVcardController::class, 'regeneratePassword'])->name('vcards.regeneratePassword');
     Route::post('/vcards/{vcard}/send-credentials', [AdminVcardController::class, 'sendCredentialsToClient'])->name('vcards.sendCredentials');
+    Route::post('/vcards/{vcard}/regenerate-qr', [AdminVcardController::class, 'regenerateQr'])->name('vcards.regenerateQr');
     
     // Template Management Routes
     Route::get('/templates', [App\Http\Controllers\Admin\TemplateController::class, 'index'])->name('templates.index');

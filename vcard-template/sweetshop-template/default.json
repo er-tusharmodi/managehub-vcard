@@ -5,7 +5,7 @@
             "label": "SEO & Business"
         },
         "location": {
-            "enabled": true,
+            "enabled": false,
             "label": "Location"
         },
         "socialLinks": {
@@ -42,7 +42,7 @@
         }
     },
     "meta": {
-        "title": "Ambay Sweets",
+        "title": "aaaaaa",
         "bannerAlt": "Cover",
         "profileAlt": "Ambay Sweet",
         "description": "",
@@ -55,8 +55,8 @@
         "qrCodeImage": ""
     },
     "shop": {
-        "name": "Ambay Sweet",
-        "tagline": "Premium Indian Sweets & Mithai",
+        "name": "Ambay Sweetfsdfsdf",
+        "tagline": "Premium Indian Sweets & Mithaiasda",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
         "email": "mithas@gmail.com",
@@ -69,7 +69,7 @@
         "saveContactLabel": "Save Contact"
     },
     "profile": {
-        "name": "Ambay Sweet",
+        "name": "Ambay Sweetfsdfsdf",
         "role": "Premium Indian Sweets & Mithai",
         "bio": "Handcrafted sweets made with 100% pure desi ghee & fresh milk. Serving happiness since 1995 for weddings, festivals & every sweet occasion.",
         "actions": {
@@ -242,13 +242,8 @@
             "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
-        },
-        {
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
-        },
-        {
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1772966851_slide2.png",
+            "caption": ""
         }
     ],
     "businessHours": {
@@ -486,102 +481,59 @@
             "name": {
                 "label": "Business Name",
                 "type": "text",
-                "sync": [
-                    "shop.name",
-                    "meta.title",
-                    "profile.name"
-                ]
+                "sync": ["shop.name", "meta.title", "profile.name"]
             },
             "tagline": {
                 "label": "Tagline / Subtitle",
                 "type": "text",
-                "sync": [
-                    "shop.tagline"
-                ]
+                "sync": ["shop.tagline", "profile.role"]
+            },
+            "description": {
+                "label": "About / Description",
+                "type": "textarea",
+                "sync": ["profile.bio"]
             },
             "phone": {
                 "label": "Phone Number",
                 "type": "tel",
-                "sync": [
-                    "shop.phone"
-                ]
+                "sync": ["shop.phone"]
             },
             "whatsapp": {
                 "label": "WhatsApp Number",
                 "type": "tel",
-                "sync": [
-                    "shop.whatsapp"
-                ]
+                "sync": ["shop.whatsapp"]
             },
             "email": {
                 "label": "Email Address",
                 "type": "email",
-                "sync": [
-                    "shop.email"
-                ]
+                "sync": ["shop.email"]
             },
             "address": {
                 "label": "Full Address",
                 "type": "textarea",
-                "sync": [
-                    "shop.address"
-                ]
+                "sync": ["shop.address"]
             },
             "maps": {
                 "label": "Google Maps URL",
                 "type": "url",
-                "sync": [
-                    "shop.maps"
-                ]
+                "sync": ["shop.maps"]
             },
             "website": {
                 "label": "Website URL",
                 "type": "url",
-                "sync": [
-                    "shop.website"
-                ]
-            },
-            "social": {
-                "label": "Social Media Links",
-                "type": "list",
-                "columns": [
-                    "name",
-                    "url"
-                ],
-                "help": "Add your social media profiles (name & link)"
+                "sync": ["shop.website"]
             }
         }
     },
     "_common": {
-        "name": "Ambay Sweet",
-        "tagline": "Premium Indian Sweets & Mithai",
+        "name": "Ambay Sweetfsdfsdf",
+        "tagline": "Premium Indian Sweets & Mithaiasda",
+        "description": "Handcrafted sweets made with 100% pure desi ghee & fresh milk. Serving happiness since 1995 for weddings, festivals & every sweet occasion.",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
         "email": "mithas@gmail.com",
         "address": "123 Sweet Lane, Dadar, Mumbai \u2013 400014",
         "maps": "https://maps.google.com/?q=Dadar+Mumbai",
-        "website": "https://ambaysweets.com",
-        "social": [
-            {
-                "name": "Facebook",
-                "url": ""
-            },
-            {
-                "name": "Instagram",
-                "url": ""
-            },
-            {
-                "name": "YouTube",
-                "url": ""
-            },
-            {
-                "name": "WhatsApp",
-                "url": ""
-            },
-            {
-                "name": "Twitter / X",
-                "url": ""
-            }
-        ]
+        "website": "https://ambaysweets.com"
     }
 }

@@ -1,4 +1,4 @@
-{-- mens-salon-template/barbers.blade.php --}
+{{-- mens-salon-template/barbers.blade.php --}}
 @php
 $items = $form ?? [];
 $fields = [

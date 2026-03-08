@@ -210,92 +210,54 @@
             "name": {
                 "label": "Business Name",
                 "type": "text",
-                "sync": [
-                    "R.name",
-                    "meta.title",
-                    "location.name"
-                ]
+                "sync": ["meta.title", "location.name"]
             },
             "tagline": {
                 "label": "Tagline / Subtitle",
-                "type": "text",
-                "sync": [
-                    "R.tagline"
-                ]
+                "type": "text"
             },
             "phone": {
                 "label": "Phone Number",
-                "type": "tel",
-                "sync": [
-                    "R.phone"
-                ]
+                "type": "tel"
             },
             "whatsapp": {
                 "label": "WhatsApp Number",
-                "type": "tel",
-                "sync": [
-                    "R.whatsapp"
-                ]
+                "type": "tel"
             },
             "email": {
                 "label": "Email Address",
-                "type": "email",
-                "sync": [
-                    "R.email"
-                ]
+                "type": "email"
             },
             "address": {
                 "label": "Full Address",
-                "type": "textarea",
-                "sync": [
-                    "R.address"
-                ]
+                "type": "textarea"
             },
             "maps": {
                 "label": "Google Maps URL",
-                "type": "url",
-                "sync": [
-                    "R.maps"
-                ]
+                "type": "url"
             },
             "website": {
                 "label": "Website URL",
-                "type": "url",
-                "sync": [
-                    "R.website"
-                ]
+                "type": "url"
             },
             "social": {
                 "label": "Social Media Links",
                 "type": "list",
-                "columns": [
-                    "name",
-                    "url"
-                ],
+                "columns": ["name", "url"],
                 "help": "Add your social media profiles (name & link)"
             }
         }
     },
     "meta": {
-        "title": "La Piazza - Restaurant & Cafe",
+        "title": "La Piazza",
         "description": "",
         "keywords": "",
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_dummyUser__1_.png",
+        "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1772959868_slide1.png",
         "profileImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_TheBarbershop_QR.png",
         "qrCodeImage": ""
-    },
-    "R": {
-        "name": "La Piazza Restaurant & Cafe",
-        "tagline": "Authentic Italian Food & Artisan Coffee",
-        "phone": "+911123456789",
-        "whatsapp": "911123456789",
-        "email": "hello@lapiazza.in",
-        "address": "12 Connaught Place, Block B, New Delhi 110001",
-        "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhi",
-        "website": "https://lapiazza.in"
     },
     "MENU": {
         "Starters": [
@@ -303,88 +265,33 @@
                 "id": 1,
                 "name": "Bruschetta Classica",
                 "icon": "bread",
-                "desc": "Grilled sourdough, San Marzano tomato, fresh basil, garlic-infused olive oil.",
+                "desc": "",
                 "price": 299,
                 "tag": "Chef Pick",
                 "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1772956781_fevicon.png",
                 "veg": true
             },
             {
                 "id": 2,
                 "name": "Arancini al Forno",
                 "icon": "arancini",
-                "desc": "Crispy baked risotto balls, smoked mozzarella centre, house marinara dip.",
+                "desc": "",
                 "price": 349,
                 "op": 399,
                 "tag": "Popular",
                 "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1772959745_service5.png",
                 "veg": true
             },
             {
                 "id": 3,
                 "name": "Calamari Fritti",
                 "icon": "squid",
-                "desc": "Golden fried squid rings, lemon-herb aioli, fresh rocket garnish.",
+                "desc": "",
                 "price": 449,
                 "tag": "",
                 "tc": "",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 4,
-                "name": "Caprese Salad",
-                "icon": "salad",
-                "desc": "Buffalo mozzarella, heirloom tomatoes, fresh basil, aged balsamic reduction.",
-                "price": 379,
-                "tag": "Healthy",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 5,
-                "name": "Mushroom Crostini",
-                "icon": "mushroom",
-                "desc": "Wild mushroom ragu, whipped ricotta, fresh thyme on charred ciabatta.",
-                "price": 329,
-                "tag": "New",
-                "tc": "#6a1b9a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 6,
-                "name": "Minestrone Soup",
-                "icon": "soup",
-                "desc": "Slow-cooked Italian vegetable soup with cannellini beans and parmesan crisp.",
-                "price": 249,
-                "tag": "",
-                "tc": "",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 7,
-                "name": "Prawn Cocktail",
-                "icon": "prawn",
-                "desc": "Chilled tiger prawns, Marie Rose sauce, crisp iceberg lettuce, lemon wedge.",
-                "price": 499,
-                "tag": "Bestseller",
-                "tc": "#1565c0",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 8,
-                "name": "Antipasto Board",
-                "icon": "board",
-                "desc": "Cured meats, olives, marinated veggies, grissini and focaccia. For 2.",
-                "price": 699,
-                "tag": "For 2",
-                "tc": "#b8962e",
                 "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": false
             }
@@ -752,97 +659,6 @@
                 "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
                 "veg": true
             }
-        ],
-        "Drinks": [
-            {
-                "id": 41,
-                "name": "Flat White",
-                "icon": "coffee",
-                "desc": "Double ristretto shot, micro-foamed whole milk. Our barista signature cup.",
-                "price": 199,
-                "tag": "Signature",
-                "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 42,
-                "name": "Cold Brew Coffee",
-                "icon": "coldbrew",
-                "desc": "18-hour steeped single-origin Ethiopian Arabica, served over pure ice.",
-                "price": 229,
-                "tag": "",
-                "tc": "",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 43,
-                "name": "Aperol Spritz",
-                "icon": "spritz",
-                "desc": "Aperol, chilled prosecco, splash of soda water, fresh orange slice.",
-                "price": 499,
-                "tag": "Bestseller",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 44,
-                "name": "Limoncello Fizz",
-                "icon": "lemon",
-                "desc": "House-made limoncello, elderflower cordial, sparkling water, mint.",
-                "price": 349,
-                "tag": "Refreshing",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 45,
-                "name": "Sangria Rossa",
-                "icon": "wine",
-                "desc": "Italian red wine, brandy, fresh peach, orange, cinnamon, chilled.",
-                "price": 449,
-                "op": 499,
-                "tag": "Happy Hrs",
-                "tc": "#880e4f",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 46,
-                "name": "Negroni",
-                "icon": "cocktail",
-                "desc": "Campari, sweet vermouth, London dry gin, stirred over ice, orange peel.",
-                "price": 549,
-                "tag": "Classic",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 47,
-                "name": "Virgin Mojito",
-                "icon": "mojito",
-                "desc": "Fresh lime, mint leaves, sugar syrup, soda. Cool, zesty, non-alcoholic.",
-                "price": 179,
-                "tag": "No Alcohol",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 48,
-                "name": "Sparkling Lemonade",
-                "icon": "soda",
-                "desc": "House-pressed lemon juice, honey, fresh rosemary sprig, sparkling water.",
-                "price": 159,
-                "tag": "",
-                "tc": "",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            }
         ]
     },
     "banner": {
@@ -898,10 +714,10 @@
     },
     "story": {
         "image": "/template-assets/restaurant-cafe-template/uploads/1772716669_dummyUser__1_.png",
-        "paragraph1": "Born from a passion for authentic Neapolitan cooking, La Piazza brings the soul of Southern Italy to your city. Every dish is crafted with imported ingredients and recipes passed down through generations.",
-        "paragraph2": "Our wood-fired oven burns at 485\u00b0C \u2014 the secret behind our crispy, airy crusts that guests travel across the city for.",
-        "chefName": "Marco Rosetti",
-        "chefRole": "Head Chef & Founder",
+        "paragraph1": "Born from a passion for authentic Neapolitan cooking, La Piazza brings the soul of Southern Italy to your city. Every dish is crafted with imported ingredients and recipes passed down through generations.s",
+        "paragraph2": "Our wood-fired oven burns at 485\u00b0C \u2014 the secret behind our crispy, airy crusts that guests travel across the city for.s",
+        "chefName": "Marco Rosettis",
+        "chefRole": "Head Chef & Founders",
         "highlights": [
             {
                 "icon": "oven",
@@ -920,7 +736,7 @@
     "gallery": [
         {
             "caption": "Signature Latte",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1772953670_fevicon.png"
         },
         {
             "caption": "Margherita Pizza",
@@ -939,8 +755,8 @@
             "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
         },
         {
-            "caption": "Caprese Salad",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1772959843_alide1.png",
+            "caption": ""
         }
     ],
     "reservation": {
@@ -1064,32 +880,28 @@
     },
     "offers": [
         {
-            "icon": "brunch",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1772708542_dummyUser__1_.png",
-            "title": "Weekend Brunch",
-            "desc": "Sat & Sun \u00b7 10 AM \u2013 3 PM. Buffet with live counter, pancakes, eggs & artisan coffee.",
-            "tag": "\u20b9599 per person"
+            "icon": "\ud83d\udd25",
+            "title": "Buy 1 Get 1 Free",
+            "desc": "Order any main course and get the second one absolutely free. Valid on dine-in only.",
+            "tag": "Today Only"
         },
         {
-            "icon": "candle",
-            "product_image": "#fce4ec",
-            "title": "Candlelight Dinner",
-            "desc": "Private table, 4-course meal, complimentary wine. Book 48 hrs in advance.",
-            "tag": "\u20b92,999 for 2"
+            "icon": "\ud83c\udf89",
+            "title": "Weekend Special Combo",
+            "desc": "Starter + Main Course + Dessert + Soft Drink at just Rs.499. Every Saturday and Sunday.",
+            "tag": "Sat-Sun"
         },
         {
-            "icon": "coffee",
-            "product_image": "#e8f5e9",
-            "title": "Caf\u00e9 Happy Hours",
-            "desc": "Mon\u2013Fri \u00b7 3 PM \u2013 6 PM. Buy 1 Get 1 on all hot & cold beverages.",
-            "tag": "BOGO Offer"
+            "icon": "\ud83c\udf55",
+            "title": "Family Feast Rs.999",
+            "desc": "2 large pizzas + garlic bread + 4 cold drinks. Perfect for a family of 4.",
+            "tag": "Family Pack"
         },
         {
-            "icon": "cake",
-            "product_image": "#e8eaf6",
-            "title": "Birthday Celebration",
-            "desc": "Free dessert platter & table decoration for the birthday person. Just mention while booking!",
-            "tag": "Complimentary"
+            "icon": "\u2b50",
+            "title": "Happy Hours",
+            "desc": "Flat 20% off on all beverages and starters between 3 PM to 6 PM on weekdays.",
+            "tag": "3-6 PM"
         }
     ],
     "hours": {
@@ -1127,7 +939,7 @@
         ]
     },
     "location": {
-        "name": "La Piazza Restaurant & Caf\u00e9",
+        "name": "La Piazza Restaurant & Cafes",
         "address": "12, Connaught Place, Block B, New Delhi \u2013 110001",
         "mapLabel": "Get Directions",
         "transport": [
@@ -1235,6 +1047,7 @@
         "emptyLine1": "Nothing added yet!",
         "emptyLine2": "Browse our menu above.",
         "totalLabel": "Total",
+        "namePlaceholder": "Your name",
         "notePlaceholder": "Special instructions \u2014 less spice, no onion, packing...",
         "orderButton": "Order via WhatsApp"
     },
@@ -1327,14 +1140,14 @@
         "qr": "lapiazza_qr.png"
     },
     "_common": {
-        "name": "La Piazza Restaurant & Cafe",
-        "tagline": "Authentic Italian Food & Artisan Coffee",
-        "phone": "+911123456789",
-        "whatsapp": "911123456789",
-        "email": "hello@lapiazza.in",
-        "address": "12 Connaught Place, Block B, New Delhi 110001",
-        "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhi",
-        "website": "https://lapiazza.in",
+        "name": "La Piazza Restaurant & Cafes",
+        "tagline": "Authentic Italian Food & Artisan Coffees",
+        "phone": "+911123456780",
+        "whatsapp": "911123456780",
+        "email": "hello@lapiazza.inn",
+        "address": "12 Connaught Place, Block B, New Delhi 110001n",
+        "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhin",
+        "website": "https://lapiazza.inn",
         "social": [
             {
                 "name": "Facebook",

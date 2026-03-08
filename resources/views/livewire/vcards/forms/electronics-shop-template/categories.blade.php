@@ -1,4 +1,4 @@
-{-- electronics-shop-template/categories.blade.php --}
+{{-- electronics-shop-template/categories.blade.php --}}
 @php
 $items = $form;
 $fields = [

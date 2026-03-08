@@ -177,6 +177,13 @@
                                                     <i class="mdi mdi-file-document-outline"></i>
                                                 </a>
                                             @endif
+                                            <button type="button" class="btn btn-sm btn-outline-secondary qr-view-btn"
+                                                data-vcard-id="{{ $vcard->id }}"
+                                                data-qr-url="{{ $vcard->qr_code_path ? Storage::url($vcard->qr_code_path) : '' }}"
+                                                data-regen-url="{{ route('admin.vcards.regenerateQr', $vcard->id) }}"
+                                                data-bs-toggle="tooltip" title="View / Download QR">
+                                                <i class="mdi mdi-qrcode"></i>
+                                            </button>
                                             <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $vcard->id }}" data-bs-toggle="tooltip" title="Delete vCard">
                                                 <i class="mdi mdi-trash-can-outline"></i>
                                             </button>
@@ -336,6 +343,32 @@
                 </table>
             @endif
         </div>
+
+    {{-- ── Single shared QR Modal (outside the foreach loop) ── --}}
+    <div class="modal fade" id="qrModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h6 class="modal-title"><i class="mdi mdi-qrcode me-2"></i>QR Code</h6>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div id="qrModalImgWrap">
+                        <img id="qrModalImg" src="" alt="QR Code" class="img-fluid rounded" style="max-width:220px;">
+                    </div>
+                    <p id="qrModalNoQr" class="text-muted small mt-2 d-none">QR not generated yet.<br>Click <strong>Generate QR</strong> below.</p>
+                </div>
+                <div class="modal-footer flex-wrap gap-2 justify-content-center">
+                    <a id="qrDownloadBtn" href="#" download="qr_code.png" class="btn btn-sm btn-outline-secondary d-none">
+                        <i class="mdi mdi-download me-1"></i>Download
+                    </a>
+                    <button type="button" id="qrRegenBtn" class="btn btn-sm btn-primary">
+                        <i class="mdi mdi-refresh me-1"></i>Generate QR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
         @if (!$vcards->isEmpty())
             <div class="card-footer bg-white border-top d-flex justify-content-between align-items-center flex-wrap gap-2 px-4 py-3">
@@ -750,5 +783,74 @@
             document.body.appendChild(form);
             form.submit();
         }
+
+        // ── QR View / Generate ──────────────────────────────────────
+        let _qrRegenUrl = '';
+
+        document.querySelectorAll('.qr-view-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const qrUrl   = this.getAttribute('data-qr-url');
+                _qrRegenUrl   = this.getAttribute('data-regen-url');
+
+                const img     = document.getElementById('qrModalImg');
+                const noQrMsg = document.getElementById('qrModalNoQr');
+                const dlBtn   = document.getElementById('qrDownloadBtn');
+                const wrap    = document.getElementById('qrModalImgWrap');
+
+                if (qrUrl) {
+                    img.src = qrUrl;
+                    img.classList.remove('d-none');
+                    wrap.classList.remove('d-none');
+                    noQrMsg.classList.add('d-none');
+                    dlBtn.href = qrUrl;
+                    dlBtn.classList.remove('d-none');
+                } else {
+                    img.src = '';
+                    img.classList.add('d-none');
+                    wrap.classList.add('d-none');
+                    noQrMsg.classList.remove('d-none');
+                    dlBtn.classList.add('d-none');
+                }
+
+                new bootstrap.Modal(document.getElementById('qrModal')).show();
+            });
+        });
+
+        document.getElementById('qrRegenBtn').addEventListener('click', function () {
+            const btn = this;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="mdi mdi-loading mdi-spin me-1"></i>Generating…';
+
+            fetch(_qrRegenUrl, {
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' },
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    const img   = document.getElementById('qrModalImg');
+                    const dlBtn = document.getElementById('qrDownloadBtn');
+                    const wrap  = document.getElementById('qrModalImgWrap');
+                    img.src     = data.qr_url + '?t=' + Date.now();
+                    img.classList.remove('d-none');
+                    wrap.classList.remove('d-none');
+                    document.getElementById('qrModalNoQr').classList.add('d-none');
+                    dlBtn.href  = data.qr_url;
+                    dlBtn.classList.remove('d-none');
+                    btn.innerHTML = '<i class="mdi mdi-check me-1"></i>Done!';
+                } else {
+                    btn.innerHTML = '<i class="mdi mdi-alert me-1"></i>' + (data.message || 'Error');
+                }
+            })
+            .catch(() => {
+                btn.innerHTML = '<i class="mdi mdi-alert me-1"></i>Failed';
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    btn.disabled  = false;
+                    btn.innerHTML = '<i class="mdi mdi-refresh me-1"></i>Generate QR';
+                }, 2500);
+            });
+        });
     </script>
 @endsection

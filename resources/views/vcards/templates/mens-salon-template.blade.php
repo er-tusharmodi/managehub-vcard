@@ -46,6 +46,9 @@
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+        @if(!empty($vcard->head_script))
+        {!! $vcard->head_script !!}
+        @endif
     </head>
     <body>
         <main id="app-root" aria-live="polite" style="min-height:100vh">
@@ -174,6 +177,7 @@
                 </div>
             </div>
 
+        @if(vcard_section_enabled($data, 'services'))
             <div class="sec" style="margin-top:0.55rem">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -207,7 +211,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'packages'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -262,7 +268,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'booking'))
             <div class="sec" id="bookingSection">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -361,7 +369,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'barbers'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -395,7 +405,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'products'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -434,7 +446,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'hours'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -463,7 +477,9 @@
                     </table>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'location'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -499,7 +515,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'social'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -543,7 +561,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'payments'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -589,7 +609,9 @@
                     </div>
                 </div>
             </div>
+        @endif
 
+        @if(vcard_section_enabled($data, 'qr'))
             <div class="sec">
                 <div class="sec-header">
                     <div class="sec-icon">
@@ -630,10 +652,11 @@
                     </div>
                 </div>
             </div>
+        @endif
 
             <div class="vcard-footer">
                 <p><span id="footer-line1">{{ data_get($data, "footer.line1") }}</span><strong id="footer-brand">{{ data_get($data, "footer.brand") }}</strong><span id="footer-line2">{{ data_get($data, "footer.line2") }}</span></p>
-                <p style="margin-top:0.28rem;font-size:0.66rem;"><span id="footer-line3">{{ data_get($data, "footer.line3") }}</span><strong style="color:var(--gold)" id="footer-powered">{{ data_get($data, "footer.powered") }}</strong></p>
+                <p style="margin-top:0.28rem;font-size:0.66rem;">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></p>
             </div>
 
             <div class="float-bar">
@@ -767,7 +790,11 @@
         <script>
             window.__APP__ = {!! vcard_js_str($data) !!};
             window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
+            window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
+        @if(!empty($vcard->footer_script))
+        {!! $vcard->footer_script !!}
+        @endif
     </body>
 </html>

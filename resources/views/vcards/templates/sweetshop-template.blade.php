@@ -40,6 +40,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
+        @if(!empty($vcard->head_script))
+        {!! $vcard->head_script !!}
+        @endif
     </head>
     <body>
         <div class="banner">
@@ -211,6 +214,7 @@
                 <div class="sec-title" id="products-title">Our Products</div>
             </div>
             <div class="sec-body">
+                <div class="prod-tabs" id="prodTabs"></div>
                 <div class="products-grid" id="productsGrid">
                     @foreach($data["products"] ?? [] as $item)
                         @php
@@ -516,8 +520,7 @@
                 id="footer-powered"
                 style="margin-top: 0.3rem; font-size: 0.68rem"
             >
-                {{ data_get($data, "footer.poweredBy") }}
-                <strong>{{ data_get($data, "footer.poweredBrand") }}</strong>
+                Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;font-weight:600;">{{ config('app.name') }}</a>
             </p>
         </div>
 
@@ -650,7 +653,11 @@
         <script>
             window.APP_DATA = {!! vcard_js_str($data) !!};
             window.__VCARD_SUBDOMAIN__ = {!! json_encode($subdomain) !!};
+            window.__APP_URL__ = {!! json_encode('https://' . $vcard->subdomain . '.' . config('vcard.base_domain')) !!};
         </script>
         <script src="{{ $assetBase }}script.js"></script>
+        @if(!empty($vcard->footer_script))
+        {!! $vcard->footer_script !!}
+        @endif
     </body>
 </html>

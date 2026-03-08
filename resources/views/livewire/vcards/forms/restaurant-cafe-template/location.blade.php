@@ -60,8 +60,7 @@
                 <button type="button"
                         class="btn btn-sm btn-outline-danger p-0 rounded-circle"
                         style="width:28px;height:28px;"
-                        wire:click="removeRowWithConfirm({{ $ti }}, 'transport')"
-                        wire:confirm="Remove this transport option?">
+                        x-on:click="showConfirmToast('Remove this transport option?', () => $wire.removeRowWithConfirm({{ $ti }}, 'transport'))">
                     <i class="mdi mdi-delete" style="font-size:12px;"></i>
                 </button>
             </div>

@@ -1,4 +1,4 @@
-{-- doctor-clinic-template/fees.blade.php --}
+{{-- doctor-clinic-template/fees.blade.php --}}
 @php
 $items = $form['items'] ?? [];
 $fields = [

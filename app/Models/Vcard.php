@@ -29,6 +29,8 @@ class Vcard extends Model
         'subscription_started_at',
         'subscription_expires_at',
         'created_by',
+        'head_script',
+        'footer_script',
     ];
 
     protected $casts = [

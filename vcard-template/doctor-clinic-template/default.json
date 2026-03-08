@@ -43,6 +43,10 @@
         "contactSave": {
             "enabled": true,
             "label": "Save Contact"
+        },
+        "contact": {
+            "enabled": true,
+            "label": "Contact Form"
         }
     },
     "_field_config": {
@@ -109,7 +113,7 @@
             "address": {
                 "type": "textarea",
                 "label": "Clinic Address",
-                "placeholder": "Shop No. 4, Raj Complex, Andheri West, Mumbai – 400058",
+                "placeholder": "Shop No. 4, Raj Complex, Andheri West, Mumbai \u2013 400058",
                 "help": "Complete address with landmarks",
                 "rows": 3,
                 "maxLength": 300,
@@ -259,6 +263,34 @@
             }
         },
         "_common": {
+            "name": {
+                "label": "Doctor Name",
+                "type": "text",
+                "sync": [
+                    "doctor.name"
+                ]
+            },
+            "role": {
+                "label": "Specialization",
+                "type": "text",
+                "sync": [
+                    "doctor.role"
+                ]
+            },
+            "qualification": {
+                "label": "Qualifications",
+                "type": "textarea",
+                "sync": [
+                    "doctor.qualification"
+                ]
+            },
+            "regNumber": {
+                "label": "Registration Number",
+                "type": "text",
+                "sync": [
+                    "doctor.regNumber"
+                ]
+            },
             "clinicName": {
                 "label": "Clinic / Business Name",
                 "type": "text",
@@ -308,20 +340,11 @@
                 "sync": [
                     "doctor.website"
                 ]
-            },
-            "social": {
-                "label": "Social Media Links",
-                "type": "list",
-                "columns": [
-                    "name",
-                    "url"
-                ],
-                "help": "Add your social media profiles (name & link)"
             }
         }
     },
     "meta": {
-        "title": "Sharma Family Clinic",
+        "title": "Sharma Family Clinicsss",
         "description": "",
         "keywords": "",
         "og_image": ""
@@ -329,22 +352,21 @@
     "assets": {
         "bannerImage": "/template-assets/doctor-clinic-template/uploads/1772639731_dummyUser__1_.png",
         "profileImage": "/template-assets/doctor-clinic-template/uploads/1772640600_TheBarbershop_QR.png",
-        "serviceImage": "/template-assets/doctor-clinic-template/uploads/1772640596_TheBarbershop_QR.png",
         "qrCodeImage": ""
     },
     "doctor": {
-        "name": "Dr. Anil Sharma",
-        "role": "Family & General Physician",
-        "qualification": "MBBS · MD (Internal Medicine) · 18 Years Experience",
+        "name": "The Barbershopss",
+        "role": "Family & General Physiciansss",
+        "qualification": "MBBS \u00b7 MD (Internal Medicine) \u00b7 18 Years Experiencesss",
         "regTag": "Reg. No. MH-12345",
-        "regNumber": "MH-12345",
-        "clinicName": "Sharma Family Clinic",
+        "regNumber": "MH-12345sss",
+        "clinicName": "Sharma Family Clinicsss",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
-        "email": "dr.anilsharma@gmail.com",
-        "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai – 400058",
+        "email": "dr.anilsharma@gmail.coms",
+        "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai \u2013 400058s",
         "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
-        "website": "https://practo.com/dr-anil-sharma",
+        "website": "https://practo.com/dr-anil-sharmas",
         "vcardTitle": "Family & General Physician",
         "vcardOrg": "Sharma Family Clinic",
         "vcardNote": "MBBS MD Internal Medicine | Reg. MH-12345"
@@ -377,21 +399,22 @@
         "location": "Clinic Location",
         "social": "Connect Online",
         "payments": "Payment Modes",
-        "contactSave": "Save Doctor's Contact"
+        "contactSave": "Save Doctor's Contact",
+        "contact": "Contact Us"
     },
     "labels": {
         "enquire": "Enquire"
     },
     "specializations": [
         {
-            "name": "General Medicine",
-            "tone": "chip-teal",
-            "icon": "pulse"
-        },
-        {
             "name": "Cardiac Care",
             "tone": "chip-blue",
             "icon": "heart"
+        },
+        {
+            "name": "General Medicine",
+            "tone": "chip-teal",
+            "icon": "pulse"
         },
         {
             "name": "Diabetes Mgmt",
@@ -420,34 +443,34 @@
         }
     ],
     "appointment": {
-        "defaultSlot": "Morning: 9–11 AM",
+        "defaultSlot": "Morning: 9\u201311 AM",
         "slots": [
             {
-                "slot": "Morning: 9–11 AM",
+                "slot": "Morning: 9\u201311 AM",
                 "session": "Morning",
-                "time": "9:00 – 11:00 AM",
+                "time": "9:00 \u2013 11:00 AM",
                 "availability": "4 slots left",
                 "selected": true,
                 "full": true
             },
             {
-                "slot": "Evening: 6–8 PM",
+                "slot": "Evening: 6\u20138 PM",
                 "session": "Evening",
-                "time": "6:00 – 8:00 PM",
+                "time": "6:00 \u2013 8:00 PM",
                 "availability": "7 slots left",
                 "full": true
             },
             {
                 "slot": "noon",
                 "session": "Noon",
-                "time": "1:00 – 2:00 PM",
+                "time": "1:00 \u2013 2:00 PM",
                 "fullLabel": "Fully booked",
                 "full": true
             },
             {
-                "slot": "Saturday: 10 AM–1 PM",
+                "slot": "Saturday: 10 AM\u20131 PM",
                 "session": "Saturday",
-                "time": "10 AM – 1 PM",
+                "time": "10 AM \u2013 1 PM",
                 "availability": "Walk-in"
             },
             {
@@ -481,7 +504,7 @@
                 }
             ],
             "complaintLabel": "Chief Complaint (optional)",
-            "complaintPlaceholder": "e.g. fever, cough, checkup…",
+            "complaintPlaceholder": "e.g. fever, cough, checkup\u2026",
             "submitLabel": "Confirm Appointment via WhatsApp",
             "defaultAge": "Not specified",
             "defaultComplaint": "General consultation"
@@ -496,7 +519,8 @@
         {
             "name": "Fever & Infections",
             "desc": "Viral, bacterial, typhoid, malaria.",
-            "query": "Fever & Infections"
+            "query": "Fever & Infections",
+            "image": "/template-assets/doctor-clinic-template/uploads/1772968123_service5.png"
         },
         {
             "name": "Diabetes & BP",
@@ -519,8 +543,8 @@
             {
                 "name": "New Patient",
                 "note": "First consultation",
-                "amount": "₹400",
-                "oldAmount": "₹500",
+                "amount": "\u20b9400",
+                "oldAmount": "\u20b9500",
                 "icon": "patient",
                 "bg": "#e0f2fe",
                 "color": "#0369a1"
@@ -528,15 +552,15 @@
             {
                 "name": "Follow-up Visit",
                 "note": "Within 15 days",
-                "amount": "₹200",
+                "amount": "\u20b9200",
                 "icon": "home",
                 "bg": "#f0fdf4",
                 "color": "#15803d"
             },
             {
                 "name": "Video Consultation",
-                "note": "Online · 15 min",
-                "amount": "₹350",
+                "note": "Online \u00b7 15 min",
+                "amount": "\u20b9350",
                 "icon": "video",
                 "bg": "#fce7f3",
                 "color": "#9d174d"
@@ -544,7 +568,7 @@
             {
                 "name": "Annual Health Package",
                 "note": "Unlimited visits + basic tests",
-                "amount": "₹2,999",
+                "amount": "\u20b92,999",
                 "icon": "clock",
                 "bg": "#fffbeb",
                 "color": "#d97706"
@@ -560,24 +584,24 @@
         "insuranceNote": "Insurance accepted: Medi-Assist, Star Health, ESIC & more"
     },
     "hours": {
-        "todayLabel": "Today: Saturday — Open till 1:00 PM",
+        "todayLabel": "Today: Saturday \u2014 Open till 1:00 PM",
         "rows": [
             {
-                "day": "Monday – Friday",
+                "day": "Monday \u2013 Friday",
                 "session": "Morning",
-                "time": "9:00 – 11:30 AM",
+                "time": "9:00 \u2013 11:30 AM",
                 "rowClass": "open-row"
             },
             {
-                "day": "Monday – Friday",
+                "day": "Monday \u2013 Friday",
                 "session": "Evening",
-                "time": "6:00 – 8:30 PM",
+                "time": "6:00 \u2013 8:30 PM",
                 "rowClass": "open-row"
             },
             {
                 "day": "Saturday",
                 "session": "Morning",
-                "time": "10:00 AM – 1:00 PM",
+                "time": "10:00 AM \u2013 1:00 PM",
                 "rowClass": "open-row"
             },
             {
@@ -592,13 +616,13 @@
     "awards": [
         {
             "icon": "medal",
-            "name": "Best GP – Times Health Awards 2023",
+            "name": "Best GP \u2013 Times Health Awards 2023",
             "desc": "Recognized among Top 10 General Physicians in Maharashtra"
         },
         {
             "icon": "medal",
             "name": "ACLS & BLS Certified",
-            "desc": "Advanced Cardiac Life Support — AHA Certified"
+            "desc": "Advanced Cardiac Life Support \u2014 AHA Certified"
         },
         {
             "icon": "medal",
@@ -614,7 +638,7 @@
     "location": {
         "clinicName": "Sharma Family Clinic",
         "line1": "Shop No. 4, Raj Complex, Opposite HDFC Bank,",
-        "line2": "Andheri West, Mumbai – 400058",
+        "line2": "Andheri West, Mumbai \u2013 400058",
         "mapLabel": "Get Directions"
     },
     "social": [
@@ -657,13 +681,13 @@
             "icon": "card",
             "stroke": "#7c3aed",
             "name": "Debit / Credit Card",
-            "detail": "All major cards · No extra charge"
+            "detail": "All major cards \u00b7 No extra charge"
         },
         {
             "icon": "shield",
             "stroke": "#15803d",
             "name": "Health Insurance",
-            "detail": "Medi-Assist · Star · ESIC · CGHS"
+            "detail": "Medi-Assist \u00b7 Star \u00b7 ESIC \u00b7 CGHS"
         }
     ],
     "qr": {
@@ -674,7 +698,7 @@
     "footer": {
         "line1": "This is a verified digital clinic card",
         "line2": "Dr. Anil Sharma",
-        "line3": "MBBS, MD · Reg. MH-12345",
+        "line3": "MBBS, MD \u00b7 Reg. MH-12345",
         "line4": "For medical emergencies call 112"
     },
     "floatBar": {
@@ -687,7 +711,7 @@
         "title": "Share Doctor's Profile",
         "whatsappLabel": "WhatsApp",
         "copyLabel": "Copy Link",
-        "moreLabel": "More…",
+        "moreLabel": "More\u2026",
         "facebookLabel": "Facebook",
         "cancelLabel": "Cancel"
     },
@@ -703,47 +727,46 @@
         "namePhoneRequired": "Name and phone are required",
         "waGreeting": "Hi Dr. Anil Sharma, I would like to book an appointment.",
         "quickEnquiryTemplate": "Hi! I need a consultation for: *{{topic}}*. Please guide me.",
-        "appointmentTemplate": "🏥 *Appointment Request – {{doctorName}}*\n\n👤 Patient: {{name}}\n📞 Phone: {{phone}}\n🎂 Age: {{age}}\n📋 Visit Type: {{visitType}}\n⏰ Preferred Slot: {{slot}}\n💬 Complaint: {{complaint}}\n\nPlease confirm my appointment. Thank you!",
+        "appointmentTemplate": "\ud83c\udfe5 *Appointment Request \u2013 {{doctorName}}*\n\n\ud83d\udc64 Patient: {{name}}\n\ud83d\udcde Phone: {{phone}}\n\ud83c\udf82 Age: {{age}}\n\ud83d\udccb Visit Type: {{visitType}}\n\u23f0 Preferred Slot: {{slot}}\n\ud83d\udcac Complaint: {{complaint}}\n\nPlease confirm my appointment. Thank you!",
         "contactSaved": "Contact saved to your phone!",
         "qrNotReady": "QR not ready",
         "qrDownloaded": "QR Code downloaded!",
         "linkCopied": "Link copied!",
-        "shareTemplate": "Consult {{doctorName}} – Family Physician: {{website}}"
+        "shareTemplate": "Consult {{doctorName}} \u2013 Family Physician: {{website}}"
     },
     "files": {
         "vcard": "DrAnilSharma.vcf",
         "qr": "DrAnilSharma_QR.png"
     },
     "_common": {
-        "clinicName": "Sharma Family Clinic",
+        "clinicName": "Sharma Family Clinicsss",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
-        "email": "dr.anilsharma@gmail.com",
-        "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai – 400058",
+        "email": "dr.anilsharma@gmail.coms",
+        "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai \u2013 400058s",
         "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
-        "website": "https://practo.com/dr-anil-sharma",
-        "social": [
-            {
-                "name": "Instagram",
-                "url": ""
-            },
-            {
-                "name": "YouTube",
-                "url": ""
-            },
-            {
-                "name": "Facebook",
-                "url": ""
-            },
-            {
-                "name": "WhatsApp",
-                "url": ""
-            },
-            {
-                "name": "Twitter / X",
-                "url": ""
-            }
-        ],
-        "name": "The Barbershopss"
+        "website": "https://practo.com/dr-anil-sharmas",
+        "name": "The Barbershopss",
+        "role": "Family & General Physiciansss",
+        "qualification": "MBBS \u00b7 MD (Internal Medicine) \u00b7 18 Years Experiencesss",
+        "regNumber": "MH-12345sss"
+    },
+    "contactForm": {
+        "labels": {
+            "name": "Your Name",
+            "mobile": "Phone Number",
+            "email": "Email (optional)",
+            "message": "Your Message"
+        },
+        "placeholders": {
+            "name": "Full name",
+            "mobile": "+91 XXXXX XXXXX",
+            "email": "yourmail@example.com",
+            "message": "How can we help you?"
+        },
+        "submitLabel": "Send via WhatsApp",
+        "successTitle": "Message Sent!",
+        "successDescription": "We'll get back to you shortly on WhatsApp.",
+        "successButtonLabel": "Send Another"
     }
 }

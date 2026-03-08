@@ -1,4 +1,4 @@
-{-- sweetshop-template/categories.blade.php --}
+{{-- sweetshop-template/categories.blade.php --}}
 @php
 $items = $form ?? [];
 $fields = [

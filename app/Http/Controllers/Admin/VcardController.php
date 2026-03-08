@@ -68,6 +68,8 @@ class VcardController extends Controller
             'subscription_status' => ['required', 'in:active,inactive'],
             'subscription_expires_at' => ['nullable', 'date', 'after_or_equal:today'],
             'send_credentials' => ['nullable', 'boolean'],
+            'head_script' => ['nullable', 'string'],
+            'footer_script' => ['nullable', 'string'],
         ], [
             'subdomain.unique' => 'This subdomain is already taken. Please choose a different one.',
             'subdomain.regex' => 'Subdomain can only contain lowercase letters, numbers, and hyphens.',
@@ -121,6 +123,8 @@ class VcardController extends Controller
             'subscription_started_at' => $validated['subscription_status'] === 'active' ? now() : null,
             'subscription_expires_at' => $validated['subscription_expires_at'] ?? null,
             'created_by' => Auth::id(),
+            'head_script' => $validated['head_script'] ?? null,
+            'footer_script' => $validated['footer_script'] ?? null,
         ]);
 
         $this->publishTemplateAssets($vcard, $templates);
@@ -183,6 +187,8 @@ class VcardController extends Controller
             'client_address' => ['nullable', 'string', 'max:255'],
             'subscription_status' => ['required', 'in:active,inactive'],
             'subscription_expires_at' => ['nullable', 'date'],
+            'head_script' => ['nullable', 'string'],
+            'footer_script' => ['nullable', 'string'],
         ]);
 
         $subscriptionStatus = $validated['subscription_status'];
@@ -205,6 +211,8 @@ class VcardController extends Controller
             'subscription_status' => $subscriptionStatus,
             'subscription_started_at' => $subscriptionStartedAt,
             'subscription_expires_at' => $expiresAt,
+            'head_script' => $validated['head_script'] ?? null,
+            'footer_script' => $validated['footer_script'] ?? null,
         ]);
 
         // Update the user details as well
@@ -377,6 +385,24 @@ class VcardController extends Controller
         ]);
     }
 
+    public function regenerateQr(Vcard $vcard)
+    {
+        try {
+            $qrCodeService = app(QrCodeService::class);
+            $qrCodeService->generateVcardQr($vcard);
+            $this->updateDataJsonWithQrCode($vcard, $qrCodeService);
+
+            return response()->json([
+                'success' => true,
+                'qr_url'  => Storage::url($vcard->fresh()->qr_code_path),
+                'message' => 'QR code regenerated successfully.',
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('QR regeneration failed for ' . $vcard->subdomain . ': ' . $e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Failed: ' . $e->getMessage()], 500);
+        }
+    }
+
     public function sendCredentialsToClient(Request $request, Vcard $vcard)
     {
         try {
@@ -408,21 +434,25 @@ class VcardController extends Controller
     private function updateDataJsonWithQrCode(Vcard $vcard, QrCodeService $qrCodeService): void
     {
         $data = $this->loadJson($vcard);
-        
+
         // Get QR code URL
         $qrCodeUrl = $qrCodeService->getQrCodeUrl($vcard);
-        
-        // Add QR code URL to assets section
+
+        // Store in assets.qrCodeImage (used by most templates)
         if (!isset($data['assets'])) {
             $data['assets'] = [];
         }
-        
         $data['assets']['qrCodeImage'] = $qrCodeUrl;
-        
+
+        // Store in shop.qrFileName (used by coaching & bookshop templates)
+        if (isset($data['shop'])) {
+            $data['shop']['qrFileName'] = $qrCodeUrl;
+        }
+
         // Ensure website URL is set correctly
         $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
         $this->setWebsiteUrl($data, $vcardUrl);
-        
+
         // Save updated data to disk
         $this->storeJson($vcard, $data);
 

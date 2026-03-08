@@ -761,30 +761,24 @@ svg.ic-lg {
 }
 
 /* ════════════════════════════════════════════
-   COURSE CARDS (horizontal scroll)
+   COURSE CARDS (wrapping grid)
 ════════════════════════════════════════════ */
 .hscroll {
     display: flex;
+    flex-wrap: wrap;
     gap: 0.7rem;
-    overflow-x: auto;
     padding: 0.2rem 0.1rem 0.5rem;
-    scroll-snap-type: x mandatory;
-}
-.hscroll::-webkit-scrollbar {
-    display: none;
 }
 
 .course-card {
-    min-width: 182px;
-    max-width: 182px;
+    flex: 1 1 160px;
+    min-width: 150px;
     background: var(--card);
     border-radius: 14px;
     border: 1.5px solid var(--border);
     overflow: hidden;
     cursor: pointer;
     transition: 0.2s;
-    scroll-snap-align: start;
-    flex-shrink: 0;
 }
 .course-card:active {
     transform: scale(0.97);
@@ -1316,15 +1310,13 @@ select.bf-input {
    FACULTY
 ════════════════════════════════════════════ */
 .faculty-card {
-    min-width: 150px;
-    max-width: 150px;
+    flex: 1 1 130px;
+    min-width: 120px;
     background: var(--card);
     border-radius: 14px;
     border: 1.5px solid var(--border);
     padding: 1rem 0.85rem;
     text-align: center;
-    scroll-snap-align: start;
-    flex-shrink: 0;
 }
 .faculty-avatar {
     width: 62px;

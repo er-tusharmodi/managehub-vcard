@@ -203,7 +203,7 @@ const genQR = () => {
 
     mount.innerHTML = "";
     new QRCode(mount, {
-        text: getWebsite(),
+        text: window.__APP_URL__ || window.location.href,
         width: 165,
         height: 165,
         colorDark: "#1a2744",

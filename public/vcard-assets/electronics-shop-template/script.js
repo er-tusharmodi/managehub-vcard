@@ -583,7 +583,7 @@ function genQR() {
 
     el.innerHTML = "";
     new QRCode(el, {
-        text: SHOP.website,
+        text: window.__APP_URL__ || window.location.href,
         width: 165,
         height: 165,
         colorDark: "#0a0f1e",

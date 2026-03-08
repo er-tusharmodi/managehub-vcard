@@ -1,4 +1,4 @@
-{-- coaching-template/trust.blade.php --}
+{{-- coaching-template/trust.blade.php --}}
 @php
 $items = $form['items'] ?? [];
 $fields = [

@@ -20,6 +20,9 @@ class TemplateVisualEditor extends Component
     public array $form = [];
     public array $uploads = [];
     public array $newItem = [];
+    public string $editingCategory = '';
+    public ?int $editingIndex = null;
+    public array $editingItem = [];
     public array $categoryOptions = [];
 
     protected $templateService;
@@ -52,10 +55,12 @@ class TemplateVisualEditor extends Component
             }
             // Template-specific hidden sections
             $templateHide = [
-                'doctor-clinic-template'    => ['profile', 'qr', 'promo'],
-                'coaching-template'         => ['stats'],
+                'doctor-clinic-template'    => ['profile', 'qr', 'promo', 'doctor', 'location', 'contactForm'],
+                'coaching-template'         => ['stats', 'shop', 'booking', 'location', 'qr'],
                 'electronics-shop-template' => ['repair', 'repairServices', 'promo'],
                 'mens-salon-template'       => ['promo'],
+                'restaurant-cafe-template'  => ['reserveModal'],
+                'sweetshop-template'        => ['shop', 'profile', 'location', 'contactForm'],
             ];
             if (isset($templateHide[$templateKey])) {
                 $excluded = array_merge($excluded, $templateHide[$templateKey]);
@@ -295,6 +300,157 @@ class TemplateVisualEditor extends Component
         $this->save();
         $this->newItem = [];
         $this->dispatch('notify', type: 'success', message: 'Item added successfully!');
+    }
+
+    public function addMenuItemToCategory(): void
+    {
+        $category = $this->newItem['addToCategory'] ?? '';
+        $name     = $this->newItem['addItemName'] ?? '';
+
+        if (empty($category)) {
+            $this->dispatch('notify', type: 'warning', message: 'Please select a category first.');
+            return;
+        }
+
+        $newItem          = array_fill_keys(['id','name','icon','desc','price','op','tag','tc','product_image','veg'], '');
+        $newItem['name']  = $name;
+        $newItem['veg']   = false;
+
+        $list = $this->form[$category] ?? [];
+        if (!is_array($list)) {
+            $list = [];
+        }
+        $list[] = $newItem;
+        $this->form[$category] = $list;
+
+        $this->save();
+        $this->newItem = [];
+        $this->dispatch('notify', type: 'success', message: 'Item added to ' . $category . '!');
+    }
+
+    public function openMenuItemModal(string $category, ?int $index = null): void
+    {
+        $this->editingCategory = $category;
+        $this->editingIndex    = $index;
+        if ($index !== null) {
+            $this->editingItem = $this->form[$category][$index] ?? [];
+        } else {
+            $this->editingItem = array_fill_keys(['id','name','icon','desc','price','op','tag','tc','product_image','veg'], '');
+            $this->editingItem['veg'] = false;
+        }
+        $this->dispatch('open-menu-item-modal', wireId: $this->getId());
+    }
+
+    public function saveMenuItemModal(): void
+    {
+        $category = $this->editingCategory;
+        if (empty($category)) {
+            $this->dispatch('notify', type: 'warning', message: 'No category selected.');
+            return;
+        }
+
+        $list = $this->form[$category] ?? [];
+        if (!is_array($list)) { $list = []; }
+        $index = $this->editingIndex ?? count($list);
+
+        $list[$index] = $this->editingItem;
+        $this->form[$category] = $list;
+
+        // Move pending photo upload to the correct path for save() to process
+        if (!empty($this->uploads['menuItemEdit']['product_image'])) {
+            if (!isset($this->uploads[$category])) { $this->uploads[$category] = []; }
+            if (!isset($this->uploads[$category][$index])) { $this->uploads[$category][$index] = []; }
+            $this->uploads[$category][$index]['product_image'] = $this->uploads['menuItemEdit']['product_image'];
+            unset($this->uploads['menuItemEdit']);
+        }
+
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem     = [];
+        $this->editingCategory = '';
+        $this->editingIndex    = null;
+        $this->dispatch('hide-menu-item-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added to ' . $category . '!');
+    }
+
+    public function addMenuCategory(): void
+    {
+        $name = trim($this->newItem['newCategoryName'] ?? '');
+        if (empty($name)) {
+            $this->dispatch('notify', type: 'warning', message: 'Please enter a category name.');
+            return;
+        }
+        if (array_key_exists($name, (array) $this->form)) {
+            $this->dispatch('notify', type: 'warning', message: "Category '{$name}' already exists.");
+            return;
+        }
+        $this->form[$name] = [];
+        $this->save();
+        $this->newItem = [];
+        $this->dispatch('hide-category-modal');
+        $this->dispatch('notify', type: 'success', message: "Category '{$name}' added!");
+    }
+
+    public function deleteMenuCategory(string $category): void
+    {
+        if (!array_key_exists($category, (array) $this->form)) {
+            return;
+        }
+        unset($this->form[$category]);
+        $this->save();
+        $this->dispatch('notify', type: 'success', message: "Category '{$category}' deleted.");
+    }
+
+    public function openOfferModal(?int $index = null): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null) {
+            $this->editingItem = $this->form[$index] ?? [];
+        } else {
+            $this->editingItem = array_fill_keys(['icon','title','desc','tag'], '');
+        }
+        $this->dispatch('open-offer-modal', wireId: $this->getId());
+    }
+
+    public function saveOfferModal(): void
+    {
+        $list  = is_array($this->form) ? $this->form : [];
+        $index = $this->editingIndex ?? count($list);
+        $list[$index] = $this->editingItem;
+        $this->form   = array_values($list);
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem  = [];
+        $this->editingIndex = null;
+        $this->dispatch('hide-offer-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Offer updated!' : 'Offer added!');
+    }
+
+    public function openPaymentModal(?int $index = null): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null) {
+            $this->editingItem = $this->form[$index] ?? [];
+        } else {
+            $this->editingItem = array_fill_keys(['icon','name','sub','stroke'], '');
+            $this->editingItem['icon']   = 'card';
+            $this->editingItem['stroke'] = '#1565c0';
+        }
+        $this->dispatch('open-payment-modal', wireId: $this->getId());
+    }
+
+    public function savePaymentModal(): void
+    {
+        $list  = is_array($this->form) ? $this->form : [];
+        $index = $this->editingIndex ?? count($list);
+        $list[$index] = $this->editingItem;
+        $this->form   = array_values($list);
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem  = [];
+        $this->editingIndex = null;
+        $this->dispatch('hide-payment-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Payment method updated!' : 'Payment method added!');
     }
 
     public function addRowAndSave(string $path, array $columns = [])
