@@ -100,6 +100,8 @@
         <button class="share-btn" onclick="openShare()">
           <i class="bi bi-share-fill"></i>
           <span>Share</span>
+        </button>
+        <button class="share-btn" onclick="saveContact()">
           <i class="bi bi-person-plus-fill"></i>
           <span>Save Contact</span>
         </button>
