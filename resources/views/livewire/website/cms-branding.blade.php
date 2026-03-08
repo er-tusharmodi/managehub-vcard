@@ -28,12 +28,12 @@
             </div>
             <div class="col-md-4">
                 <div class="form-group mb-3">
-                    <label for="footer_logo_file" class="form-label">Footer Logo File</label>
+                    <label for="footer_logo_file" class="form-label">Light Logo File <small class="text-muted">(dark background / frontend website)</small></label>
                     <input wire:model="footer_logo_file" type="file" id="footer_logo_file" class="form-control" accept="image/png,image/jpeg,image/svg+xml">
                     @error('footer_logo_file') <span class="text-danger small">{{ $message }}</span> @enderror
                     @if ($footer_logo_url)
                         <div class="mt-2">
-                            <img src="{{ $footer_logo_url }}" alt="Footer logo preview" style="max-height: 48px;">
+                            <img src="{{ $footer_logo_url }}" alt="Light logo preview" style="max-height: 48px;">
                         </div>
                     @endif
                 </div>

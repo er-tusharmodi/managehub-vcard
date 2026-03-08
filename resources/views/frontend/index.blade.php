@@ -201,7 +201,7 @@
 <header class="site-nav">
     <div class="nav-inner">
         <a href="/" class="nav-logo">
-            <img src="{{ \App\Helpers\BrandingHelper::getLogoUrl() }}" alt="{{ $settings['site_name'] ?? 'ManageHub' }}">
+            <img src="{{ \App\Helpers\BrandingHelper::getFooterLogoUrl() }}" alt="{{ $settings['site_name'] ?? 'ManageHub' }}">
         </a>
         <nav class="nav-links">
             <a href="#features">Features</a>
