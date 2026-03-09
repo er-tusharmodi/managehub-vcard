@@ -127,20 +127,4 @@
     </small>
 </div>
 
-{{-- ── Social Media List ─────────────────────────────────────────────── --}}
-@if(isset($form['social']) && is_array($form['social']))
-    <div class="col-12 mb-2 mt-2">
-        <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
-            <i class="mdi mdi-share-variant-outline me-1"></i>Social Media Links
-        </h6>
-    </div>
-    <div class="col-12">
-        @include('livewire.vcards.partials.field', [
-            'key'             => 'social',
-            'value'           => $form['social'],
-            'wirePath'        => 'social',
-            'categoryOptions' => [],
-            'label'           => 'Social Media Links',
-        ])
-    </div>
-@endif
+

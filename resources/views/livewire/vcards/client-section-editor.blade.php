@@ -49,7 +49,15 @@
             'collections'     => ['icon' => 'mdi-diamond-outline',        'color' => 'info'],
             'showroom'        => ['icon' => 'mdi-store-outline',          'color' => 'secondary'],
             'director'        => ['icon' => 'mdi-account-star',           'color' => 'warning'],
-            'R'               => ['icon' => 'mdi-store',                  'color' => 'success'],
+            'trust'           => ['icon' => 'mdi-shield-check-outline',   'color' => 'success'],
+            'materials'       => ['icon' => 'mdi-bookshelf',               'color' => 'primary'],
+            'modes'           => ['icon' => 'mdi-school-outline',          'color' => 'info'],
+            'socialLinks'     => ['icon' => 'mdi-share-variant',           'color' => 'info'],
+            'businessHours'   => ['icon' => 'mdi-clock-outline',           'color' => 'warning'],
+            'paymentMethods'  => ['icon' => 'mdi-credit-card',             'color' => 'primary'],
+            'categories'      => ['icon' => 'mdi-tag-outline',             'color' => 'secondary'],
+            'conditions'      => ['icon' => 'mdi-medical-bag',             'color' => 'danger'],
+            'R'               => ['icon' => 'mdi-store',                   'color' => 'success'],
         ];
     @endphp
 
@@ -72,6 +80,15 @@
             'hero'        => 'Hero Section',
             'follow'      => 'Follow Us',
             'contact'     => 'Contact Info',
+            'trust'       => 'Trust & Credentials',
+            'materials'   => 'Study Materials',
+            'modes'       => 'Learning Modes',
+            'messages'    => 'Messages',
+            'socialLinks'    => 'Social Links',
+            'businessHours'  => 'Business Hours',
+            'paymentMethods' => 'Payment Methods',
+            'categories'     => 'Categories',
+            'conditions'     => 'Conditions Treated',
         ];
     @endphp
 
@@ -113,7 +130,7 @@
                      style="cursor:pointer;min-height:44px;{{ $mobActive ? 'border-left:3px solid var(--bs-primary)!important;' : '' }}">
                     <span class="avatar-xs">
                         <span class="avatar-title rounded-circle font-size-14
-                                     {{ $mobActive ? 'bg-primary text-white' : 'bg-soft-'.$mobIcon['color'].' text-'.$mobIcon['color'] }}">
+                                     {{ $mobActive ? 'bg-primary text-white' : 'text-'.$mobIcon['color'] }}">
                             <i class="mdi {{ $mobIcon['icon'] }}"></i>
                         </span>
                     </span>
@@ -145,13 +162,17 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <div class="cse-nav" style="max-height:calc(100vh - 260px);overflow-y:auto;">
+                    <div class="ase-nav" style="max-height:calc(100vh - 300px);overflow-y:auto;">
 
                         @foreach ($sections as $tab)
                             @php
                                 $tabIcon  = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $isActive = $section === $tab;
+                                $sectionLabelMap = [
+                                    'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
+                                ];
                                 $tabLabel = $sectionLabels[$tab]
+                                    ?? ($sectionLabelMap[$vcard->template_key ?? ''][$tab] ?? null)
                                     ?? ($tab === '_common'
                                         ? 'Basic Info'
                                         : \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab)));
@@ -160,15 +181,15 @@
                                 $tabEnabled = $hasToggle ? ($sectionsConfig[$tab]['enabled'] ?? true) : null;
                             @endphp
                             <div wire:key="nav-{{ $tab }}"
-                                 class="cse-nav-item d-flex align-items-center gap-2 px-3 py-2 border-bottom
-                                        {{ $isActive ? 'cse-nav-active' : '' }}
+                                 class="ase-nav-item d-flex align-items-center gap-2 px-3 py-2 border-bottom
+                                        {{ $isActive ? 'ase-nav-active' : '' }}
                                         {{ $hasToggle && !$tabEnabled ? 'opacity-50' : '' }}"
                                  wire:click="selectSection('{{ $tab }}')"
                                  style="cursor:pointer;min-height:48px;transition:background .15s;">
                                 <div class="flex-shrink-0">
                                     <span class="avatar-xs">
                                         <span class="avatar-title rounded-circle font-size-14
-                                                     {{ $isActive ? 'bg-primary text-white' : 'bg-soft-'.$tabIcon['color'].' text-'.$tabIcon['color'] }}">
+                                                     {{ $isActive ? 'bg-primary text-white' : 'text-'.$tabIcon['color'] }}">
                                             <i class="mdi {{ $tabIcon['icon'] }}"></i>
                                         </span>
                                     </span>
@@ -198,17 +219,22 @@
                     </div>
                 </div>
                 <div class="card-footer py-2 px-3">
-                    <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
-                       class="btn btn-sm btn-outline-primary w-100">
-                        <i class="mdi mdi-eye-outline me-1"></i>View My vCard
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-secondary flex-grow-1">
+                            <i class="mdi mdi-arrow-left me-1"></i>My vCards
+                        </a>
+                        <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
+                           class="btn btn-sm btn-outline-primary" title="View vCard">
+                            <i class="mdi mdi-eye-outline"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
         @endif
 
         {{-- RIGHT EDIT PANEL --}}
-        <div class="{{ $solo ? 'col-12' : 'col-12 col-lg-9' }}">
+        <div class="{{ $solo ? 'col-12' : 'col-lg-9' }}">
 
             @if ($subscriptionBlocked)
                 {{-- SUBSCRIPTION BLOCKED --}}
@@ -228,9 +254,12 @@
                 {{-- VISUAL EDITOR --}}
                 @php
                     $activeIcon  = $iconMap[$section] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
+                    $sectionLabelMapActive = [
+                        'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
+                    ];
                     $activeLabel = $section === '_common'
                         ? 'Basic Info'
-                        : \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? ''));
+                        : ($sectionLabelMapActive[$vcard->template_key ?? ''][$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')));
                     $isFormList  = is_array($form) && !empty($form) && array_values($form) === $form;
                     $itemLabel   = \Illuminate\Support\Str::singular($activeLabel);
                 @endphp
@@ -337,10 +366,6 @@
                                         <i class="mdi mdi-loading mdi-spin me-1"></i>Saving...
                                     </span>
                                 </button>
-                                <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
-                                   class="btn btn-outline-secondary">
-                                    <i class="mdi mdi-eye-outline me-1"></i>View vCard
-                                </a>
                                 @if (!empty($uploads))
                                     <div class="alert alert-warning mb-0 py-2 px-3 d-inline-flex align-items-center">
                                         <i class="mdi mdi-information-outline me-2"></i>
@@ -354,12 +379,14 @@
             @endif
 
         </div>
+
     </div>
 
     <style>
-        .cse-nav-item:hover:not(.cse-nav-active) { background: rgba(0,0,0,.04); }
-        .cse-nav-active { background: rgba(var(--bs-primary-rgb),.08); border-left: 3px solid var(--bs-primary) !important; }
-        .cse-nav-item { border-left: 3px solid transparent; }
+        .ase-nav-item:hover:not(.ase-nav-active):not(.ase-nav-active-dark) { background: rgba(0,0,0,.04); }
+        .ase-nav-active { background: rgba(var(--bs-primary-rgb),.08); border-left: 3px solid var(--bs-primary) !important; }
+        .ase-nav-active-dark { background: rgba(0,0,0,.06); border-left: 3px solid #343a40 !important; }
+        .ase-nav-item { border-left: 3px solid transparent; }
     </style>
 
     <script>

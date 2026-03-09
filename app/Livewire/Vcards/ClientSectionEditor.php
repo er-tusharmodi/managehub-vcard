@@ -22,6 +22,9 @@ class ClientSectionEditor extends Component
     public array $form = [];
     public array $uploads = [];
     public array $newItem = [];
+    public array $editingItem = [];
+    public ?int $editingIndex = null;
+    public ?string $editingCategory = null;
     public bool $showIndex = false;
     public bool $subscriptionBlocked = false;
     public string $subscriptionMessage = 'Your subscription is inactive. Please contact support.';
@@ -30,6 +33,9 @@ class ClientSectionEditor extends Component
     /** When true (opened via ?solo=1 sidebar link) the inner section nav is hidden. */
     #[Url]
     public bool $solo = false;
+
+    public string $editMode = 'visual'; // 'visual' or 'code'
+    public string $jsonContent = '';
 
     public function mount(string $subdomain, ?string $section = null): void
     {
@@ -119,6 +125,10 @@ class ClientSectionEditor extends Component
         if (!in_array($templateKey2, ['minimart-template'], true)) {
             $hiddenSections[] = 'sections';
         }
+        // Template-specific hidden sections
+        if ($templateKey2 === 'doctor-clinic-template') {
+            $hiddenSections[] = 'promo';
+        }
         $allSections = array_values(array_filter(array_keys($data), function ($key) use ($hiddenSections) {
             return $key === '_common' || (!str_starts_with($key, '_') && !in_array($key, $hiddenSections));
         }));
@@ -127,6 +137,36 @@ class ClientSectionEditor extends Component
             array_splice($allSections, $commonIdx, 1);
             array_unshift($allSections, '_common');
         }
+
+        // Coaching template: show only the allowed sections in a fixed order
+        if ($templateKey2 === 'coaching-template') {
+            $coachingAllowed = [
+                '_common', 'meta', 'profile', 'counters', 'trust', 'director',
+                'whyChoose', 'courses', 'batches', 'demo', 'fees', 'faculty',
+                'materials', 'modes', 'faq', 'social', 'payment', 'messages',
+            ];
+            $allSections = array_values(array_filter($coachingAllowed, fn($s) => array_key_exists($s, $data)));
+        }
+
+        // Sweetshop template: show only the allowed sections in a fixed order
+        if ($templateKey2 === 'sweetshop-template') {
+            $sweetshopAllowed = [
+                '_common', 'meta', 'assets', 'socialLinks', 'services',
+                'categories', 'products', 'gallery', 'businessHours',
+                'qr', 'paymentMethods', 'messages',
+            ];
+            $allSections = array_values(array_filter($sweetshopAllowed, fn($s) => array_key_exists($s, $data)));
+        }
+
+        // Doctor-clinic template: show only the allowed sections in a fixed order
+        if ($templateKey2 === 'doctor-clinic-template') {
+            $doctorAllowed = [
+                '_common', 'meta', 'assets', 'specializations', 'appointment',
+                'conditions', 'fees', 'hours', 'awards', 'social', 'payments', 'messages',
+            ];
+            $allSections = array_values(array_filter($doctorAllowed, fn($s) => array_key_exists($s, $data)));
+        }
+
         $this->sections = $allSections;
 
         if ($section === null) {
@@ -189,6 +229,7 @@ class ClientSectionEditor extends Component
         $this->uploads = [];
 
         $this->dispatch('notify', type: 'success', message: 'Changes saved successfully!');
+        $this->dispatch('vcard-saved');
     }
 
     public function saveAndNotify(): void
@@ -523,6 +564,127 @@ class ClientSectionEditor extends Component
         $this->dispatch('notify', type: 'success', message: 'Item deleted successfully!');
     }
 
+    public function openOfferModal(?int $index = null): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null && isset($this->form[$index])) {
+            $this->editingItem = $this->form[$index];
+        } else {
+            $this->editingItem = ['icon' => '🏷️', 'title' => '', 'tag' => '', 'desc' => ''];
+        }
+        $this->dispatch('open-offer-modal', wireId: $this->getId());
+    }
+
+    public function saveOfferModal(): void
+    {
+        if ($this->editingIndex !== null) {
+            $this->form[$this->editingIndex] = $this->editingItem;
+        } else {
+            $this->form[] = $this->editingItem;
+        }
+        $this->save();
+        $this->editingItem = [];
+        $this->editingIndex = null;
+        $this->dispatch('notify', type: 'success', message: 'Offer saved successfully!');
+    }
+
+    public function openMenuItemModal(string $category, ?int $index = null): void
+    {
+        $this->editingCategory = $category;
+        $this->editingIndex    = $index;
+        if ($index !== null && isset($this->form[$category][$index])) {
+            $this->editingItem = $this->form[$category][$index];
+        } else {
+            $this->editingItem = [
+                'id'            => '',
+                'name'          => '',
+                'icon'          => '',
+                'desc'          => '',
+                'price'         => '',
+                'op'            => '',
+                'tag'           => '',
+                'tc'            => '',
+                'product_image' => '',
+                'veg'           => false,
+            ];
+        }
+        $this->dispatch('open-menu-item-modal', wireId: $this->getId());
+    }
+
+    public function saveMenuItemModal(): void
+    {
+        $cat = $this->editingCategory;
+        if (!$cat) {
+            return;
+        }
+        if (!isset($this->form[$cat]) || !is_array($this->form[$cat])) {
+            $this->form[$cat] = [];
+        }
+        if ($this->editingIndex !== null) {
+            $this->form[$cat][$this->editingIndex] = $this->editingItem;
+        } else {
+            $this->form[$cat][] = $this->editingItem;
+        }
+        $this->save();
+        $this->editingItem     = [];
+        $this->editingIndex    = null;
+        $this->editingCategory = null;
+        $this->dispatch('notify', type: 'success', message: 'Menu item saved successfully!');
+    }
+
+    public function deleteMenuCategory(string $category): void
+    {
+        if (isset($this->form[$category])) {
+            unset($this->form[$category]);
+            $this->save();
+            $this->dispatch('notify', type: 'success', message: "Category '{$category}' deleted.");
+        }
+    }
+
+    public function switchToCodeEditor(): void
+    {
+        $data = $this->loadJson();
+        $this->jsonContent = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        $this->editMode = 'code';
+        $this->showIndex = false;
+        $this->dispatch('notify', type: 'info', message: 'Switched to code editor mode');
+    }
+
+    public function switchToVisualEditor(): void
+    {
+        $this->editMode = 'visual';
+        $data = $this->loadJson();
+        if (isset($data['_sections_config']) && is_array($data['_sections_config'])) {
+            $this->sectionsConfig = $data['_sections_config'];
+        }
+        if (!$this->section || !in_array($this->section, $this->sections, true)) {
+            $default = in_array('_common', $this->sections, true) ? '_common' : ($this->sections[0] ?? null);
+            if ($default) {
+                $this->selectSection($default);
+            }
+        }
+        $this->dispatch('notify', type: 'info', message: 'Switched to visual editor mode');
+    }
+
+    public function saveCodeEditor(): void
+    {
+        $decoded = json_decode($this->jsonContent, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $this->dispatch('notify', type: 'error', message: 'Invalid JSON: ' . json_last_error_msg());
+            return;
+        }
+        if (!is_array($decoded)) {
+            $this->dispatch('notify', type: 'error', message: 'JSON must be an object/array');
+            return;
+        }
+        $this->storeJson($decoded);
+        if (isset($decoded['_sections_config']) && is_array($decoded['_sections_config'])) {
+            $this->sectionsConfig = $decoded['_sections_config'];
+        }
+        $this->dispatch('notify', type: 'success', message: 'JSON saved successfully!');
+        $this->dispatch('vcard-saved');
+    }
+
     public function selectSection(string $section): void
     {
         if ($this->subscriptionBlocked) {
@@ -532,6 +694,7 @@ class ClientSectionEditor extends Component
         if (!in_array($section, $this->sections, true)) {
             return;
         }
+        $this->editMode = 'visual';
         $this->section  = $section;
         $this->uploads  = [];
         $this->newItem  = [];

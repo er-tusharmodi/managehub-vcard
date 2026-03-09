@@ -95,7 +95,7 @@
                                     <option value="" disabled selected>Select template</option>
                                     @foreach ($templates as $template)
                                         <option value="{{ $template['key'] }}" @if(old('template_key') === $template['key']) selected @endif>
-                                            {{ $template['title'] }}
+                                            {{ $template['title'] }}{{ empty($template['is_visible']) ? ' (Inactive)' : '' }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -117,10 +117,10 @@
                             <div class="col-md-6">
                                 <label class="form-label">Send client credentials</label>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="send_credentials" name="send_credentials" value="1" @if(old('send_credentials')) checked @endif>
+                                    <input class="form-check-input" type="checkbox" id="send_credentials" name="send_credentials" value="1" @if(old('send_credentials', '1')) checked @endif>
                                     <label class="form-check-label" for="send_credentials">Email username and password</label>
                                 </div>
-                                <div class="small text-muted mt-1">Disabled by default. Enable to send credentials after create.</div>
+                                <div class="small text-muted mt-1">Enabled by default. Uncheck to skip sending credentials.</div>
                             </div>
                         </div>
                     </div>

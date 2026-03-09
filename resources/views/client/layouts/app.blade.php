@@ -143,7 +143,7 @@
                                 <li>
                                     <a href="{{ route('vcard.editor', $vcard->subdomain) }}" class="tp-link">
                                         <i data-feather="edit-2"></i>
-                                        <span>{{ substr($vcard->client_name, 0, 15) }}</span>
+                                        <span>{{ substr($vcard->subdomain, 0, 15) }}</span>
                                         @if($vcard->status !== 'active')
                                             <span class="badge bg-warning-light text-warning float-end" style="font-size: 10px;">Draft</span>
                                         @endif
@@ -221,6 +221,7 @@
                                     'fees'            => 'credit-card',
                                     'demo'            => 'video',
                                     'whyChoose'       => 'thumbs-up',
+                                    'materials'       => 'book',
                                     'director'        => 'user-check',
                                     'counters'        => 'bar-chart-2',
                                     'appointment'     => 'calendar',
@@ -230,6 +231,9 @@
                                     'enquiryForm'     => 'mail',
                                     'offers'          => 'percent',
                                     'R'               => 'shopping-cart',
+                                    'MENU'            => 'list',
+                                    'story'           => 'book-open',
+                                    'reservation'     => 'calendar',
                                 ];
                                 $contentLabelMap = [
                                     'collections'     => 'Collections',
@@ -256,6 +260,7 @@
                                     'fees'            => 'Fees',
                                     'demo'            => 'Demo',
                                     'whyChoose'       => 'Why Choose Us',
+                                    'materials'       => 'Study Materials',
                                     'director'        => 'Director',
                                     'counters'        => 'Counters',
                                     'appointment'     => 'Appointments',
@@ -265,7 +270,14 @@
                                     'enquiryForm'     => 'Enquiry Form',
                                     'offers'          => 'Offers',
                                     'R'               => 'Restaurant',
+                                    'MENU'            => 'Menu',
+                                    'story'           => 'Our Story',
+                                    'reservation'     => 'Reservations',
                                 ];
+                                // Sections that are always shown if present in the vCard data,
+                                // regardless of their data structure (e.g. associative arrays, strings).
+                                $alwaysShowSecs = ['MENU', 'story', 'reservation', 'appointment', 'batches', 'demo', 'fees', 'materials'];
+
                                 $vcardContentMenu = [];
                                 foreach ($userVcards as $vc) {
                                     // Prefer the vCard's own stored data, fall back to template default
@@ -281,6 +293,11 @@
                                     foreach ($vcData as $sKey => $sVal) {
                                         if (in_array($sKey, $hiddenContentSecs, true)) continue;
                                         if (str_starts_with((string) $sKey, '_')) continue;
+                                        // Always show explicitly listed sections if they exist in data
+                                        if (in_array($sKey, $alwaysShowSecs, true)) {
+                                            $listSecs[] = $sKey;
+                                            continue;
+                                        }
                                         // Only include numerically-indexed arrays (list sections)
                                         if (!is_array($sVal) || empty($sVal) || !isset($sVal[0])) continue;
                                         $listSecs[] = $sKey;
@@ -297,7 +314,7 @@
                                     <li>
                                         <a href="{{ route('client.leads', $entry['vcard']->subdomain) }}" class="tp-link">
                                             <i data-feather="inbox"></i>
-                                            <span>Leads</span>
+                                            <span>{{ $entry['vcard']->subdomain }} Leads</span>
                                         </a>
                                     </li>
                                 @endforeach
@@ -308,7 +325,7 @@
                                 @foreach ($vcardContentMenu as $cEntry)
                                     @if (count($userVcards) > 1)
                                         <li class="menu-title" style="font-size:.68rem;opacity:.65;padding-top:.3rem;">
-                                            {{ substr($cEntry['vcard']->client_name, 0, 16) }}
+                                            {{ substr($cEntry['vcard']->subdomain, 0, 16) }}
                                         </li>
                                     @endif
                                     @foreach ($cEntry['sections'] as $sKey)

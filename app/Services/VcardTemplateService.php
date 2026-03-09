@@ -14,22 +14,28 @@ class VcardTemplateService
             return [];
         }
 
-        // Pre-fetch all display_names from DB for efficiency
-        $dbNames = \App\Models\Template::pluck('display_name', 'template_key');
+        // Pre-fetch all DB metadata for efficiency
+        $dbRecords = \App\Models\Template::all()->keyBy('template_key');
 
         $templates = [];
 
         foreach (File::directories($root) as $dir) {
             $key = basename($dir);
             $defaultPath = $dir . DIRECTORY_SEPARATOR . 'default.json';
-            $title = $dbNames->get($key) ?: $key; // Use DB display_name, fallback to folder key
+            $db = $dbRecords->get($key);
+            $title = $db?->display_name ?: $key;
 
             $templates[] = [
-                'key' => $key,
-                'title' => $title,
-                'default_path' => $defaultPath,
+                'key'           => $key,
+                'title'         => $title,
+                'default_path'  => $defaultPath,
+                'display_order' => $db?->display_order ?? 9999,
+                'is_visible'    => $db ? (bool) $db->is_visible : true,
             ];
         }
+
+        // Sort by display_order ascending (same order as template management page)
+        usort($templates, fn($a, $b) => $a['display_order'] <=> $b['display_order']);
 
         return $templates;
     }
