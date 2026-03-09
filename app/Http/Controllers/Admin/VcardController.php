@@ -80,6 +80,15 @@ class VcardController extends Controller
             return back()->withErrors(['template_key' => 'Template not found.'])->withInput();
         }
 
+        // One email = one vCard: reject if this email already has a vCard
+        $existingUser = User::where('email', $validated['client_email'])->first();
+        if ($existingUser && Vcard::where('user_id', $existingUser->id)->exists()) {
+            $existing = Vcard::where('user_id', $existingUser->id)->first();
+            return back()
+                ->withErrors(['client_email' => 'This email already has a vCard (' . $existing->subdomain . '). Each email can only have one vCard.'])
+                ->withInput();
+        }
+
         $password = Str::random(12);
         $username = UsernameGenerator::generateFromSubdomain($validated['subdomain']);
         
