@@ -9,6 +9,11 @@
 
         <div class="mb-4">
             <h5 class="mb-3">Product Links</h5>
+            <div class="form-group mb-3">
+                <label class="form-label">Column Heading</label>
+                <input type="text" wire:model="product_heading" class="form-control" placeholder="Product">
+                @error('product_heading') <span class="text-danger small">{{ $message }}</span> @enderror
+            </div>
             @foreach ($product_links as $index => $link)
                 <div class="row mb-2">
                     <div class="col-md-5">
@@ -29,6 +34,11 @@
 
         <div class="mb-4">
             <h5 class="mb-3">Resources Links</h5>
+            <div class="form-group mb-3">
+                <label class="form-label">Column Heading</label>
+                <input type="text" wire:model="resources_heading" class="form-control" placeholder="Resources">
+                @error('resources_heading') <span class="text-danger small">{{ $message }}</span> @enderror
+            </div>
             @foreach ($resources_links as $index => $link)
                 <div class="row mb-2">
                     <div class="col-md-5">
@@ -53,7 +63,7 @@
                 <span wire:loading.remove>Save Footer</span>
                 <span wire:loading>Saving...</span>
             </button>
-            <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
+            <a href="{{ route('admin.website-cms', $pageSlug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
     </div>

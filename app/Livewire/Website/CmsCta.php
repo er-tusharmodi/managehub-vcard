@@ -14,6 +14,7 @@ class CmsCta extends Component
 
     public ?WebsitePage $page = null;
     #[Locked] public string $pageSlug = '';
+    public $badge = '';
     public $title = '';
     public $subtitle = '';
     public $primary_label = '';
@@ -31,6 +32,7 @@ class CmsCta extends Component
     public function loadSettings()
     {
         $cta = $this->page->data['cta_section'] ?? [];
+        $this->badge = $cta['badge'] ?? '';
         $this->title = $cta['title'] ?? '';
         $this->subtitle = $cta['subtitle'] ?? '';
         $this->primary_label = $cta['primary_label'] ?? '';
@@ -44,6 +46,7 @@ class CmsCta extends Component
         $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
         
         $validated = $this->validateWithToast([
+            'badge' => ['nullable', 'string'],
             'title' => ['required', 'string'],
             'subtitle' => ['required', 'string'],
             'primary_label' => ['required', 'string'],

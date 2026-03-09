@@ -98,7 +98,7 @@
                 <span wire:loading.remove>Save Categories</span>
                 <span wire:loading>Saving...</span>
             </button>
-            <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
+            <a href="{{ route('admin.website-cms', $pageSlug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
     </div>

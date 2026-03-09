@@ -15,6 +15,7 @@ class CmsHowItWorks extends Component
     public ?WebsitePage $page = null;
     #[Locked] public string $pageSlug = '';
     public $steps = [];
+    public $badge = '';
     public $title = '';
     public $subtitle = '';
     public $highlight = '';
@@ -30,6 +31,7 @@ class CmsHowItWorks extends Component
     {
         $howitworks = $this->page->data['how_it_works'] ?? [];
         $this->steps = $howitworks['steps'] ?? [];
+        $this->badge = $howitworks['badge'] ?? '';
         $this->title = $howitworks['title'] ?? '';
         $this->subtitle = $howitworks['subtitle'] ?? '';
         $this->highlight = $howitworks['highlight'] ?? '';
@@ -75,6 +77,7 @@ class CmsHowItWorks extends Component
         $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
         
         $validated = $this->validateWithToast([
+            'badge' => ['nullable', 'string'],
             'title' => ['required', 'string'],
             'subtitle' => ['required', 'string'],
             'highlight' => ['required', 'string'],
@@ -89,6 +92,7 @@ class CmsHowItWorks extends Component
         $data = $this->page->data ?? [];
         $data['how_it_works'] = [
             'steps' => $validated['steps'],
+            'badge' => $validated['badge'] ?? '',
             'title' => $validated['title'],
             'subtitle' => $validated['subtitle'],
             'highlight' => $validated['highlight'],

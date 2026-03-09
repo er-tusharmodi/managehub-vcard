@@ -15,6 +15,7 @@ class CmsHero extends Component
 
     public ?WebsitePage $page = null;
     #[Locked] public string $pageSlug = '';
+    public $hero_tag = '';
     public $hero_title = '';
     public $hero_title_highlight = '';
     public $hero_subtitle = '';
@@ -31,6 +32,7 @@ class CmsHero extends Component
 
     public function loadSettings()
     {
+        $this->hero_tag = $this->page->data['hero_tag'] ?? '';
         $this->hero_title = $this->page->data['hero_title'] ?? '';
         $this->hero_title_highlight = $this->page->data['hero_title_highlight'] ?? '';
         $this->hero_subtitle = $this->page->data['hero_subtitle'] ?? '';
@@ -63,6 +65,7 @@ class CmsHero extends Component
         $this->page = WebsitePage::where('slug', $this->pageSlug)->firstOrFail();
         
         $validated = $this->validateWithToast([
+            'hero_tag' => ['nullable', 'string'],
             'hero_title' => ['required', 'string'],
             'hero_title_highlight' => ['required', 'string'],
             'hero_subtitle' => ['required', 'string'],
@@ -78,6 +81,7 @@ class CmsHero extends Component
         }
 
         $data = $this->page->data ?? [];
+        $data['hero_tag'] = $validated['hero_tag'] ?? '';
         $data['hero_title'] = $validated['hero_title'];
         $data['hero_title_highlight'] = $validated['hero_title_highlight'];
         $data['hero_subtitle'] = $validated['hero_subtitle'];

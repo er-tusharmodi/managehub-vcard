@@ -4,6 +4,16 @@
         <div class="row mb-3">
             <div class="col-md-12">
                 <div class="form-group">
+                    <label for="badge" class="form-label">Badge Text</label>
+                    <input wire:model="badge" type="text" id="badge" class="form-control" placeholder="Get Started Today">
+                    @error('badge') <span class="text-danger small">{{ $message }}</span> @enderror
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="form-group">
                     <label for="title" class="form-label">CTA Title</label>
                     <input wire:model="title" type="text" id="title" class="form-control" placeholder="Ready to Elevate Your Digital Presence?">
                     @error('title') <span class="text-danger small">{{ $message }}</span> @enderror
@@ -57,7 +67,7 @@
                 <span wire:loading.remove>Save CTA Section</span>
                 <span wire:loading>Saving...</span>
             </button>
-            <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
+            <a href="{{ route('admin.website-cms', $pageSlug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
     </div>

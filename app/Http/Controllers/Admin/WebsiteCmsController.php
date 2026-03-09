@@ -101,6 +101,41 @@ class WebsiteCmsController extends Controller
         return view('admin.website-cms.footer', ['page' => $page]);
     }
 
+    public function showFeatures(?WebsitePage $page = null): View
+    {
+        $page = $this->resolvePage($page);
+
+        return view('admin.website-cms.features', ['page' => $page]);
+    }
+
+    public function showScripts(?WebsitePage $page = null): View
+    {
+        $page = $this->resolvePage($page);
+
+        return view('admin.website-cms.scripts', ['page' => $page]);
+    }
+
+    public function showSitemapRobots(?WebsitePage $page = null): View
+    {
+        $page = $this->resolvePage($page);
+
+        return view('admin.website-cms.sitemap-robots', ['page' => $page]);
+    }
+
+    public function showStats(?WebsitePage $page = null): View
+    {
+        $page = $this->resolvePage($page);
+
+        return view('admin.website-cms.stats', ['page' => $page]);
+    }
+
+    public function showNavigation(?WebsitePage $page = null): View
+    {
+        $page = $this->resolvePage($page);
+
+        return view('admin.website-cms.navigation', ['page' => $page]);
+    }
+
     public function update(Request $request, WebsitePage $page): RedirectResponse
     {
         $validated = $request->validate([

@@ -1,6 +1,13 @@
 <div class="card">
     <div class="card-body">
     <form wire:submit="save">
+        <div class="form-group mb-3">
+            <label for="hero_tag" class="form-label">Hero Tag / Badge Text</label>
+            <input wire:model="hero_tag" type="text" id="hero_tag" class="form-control" placeholder="Digital Business Cards — Reimagined">
+            <small class="text-muted">Small badge text shown above the hero title.</small>
+            @error('hero_tag') <span class="text-danger small">{{ $message }}</span> @enderror
+        </div>
+
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-group">
@@ -65,7 +72,7 @@
                 <span wire:loading.remove>Save Hero Section</span>
                 <span wire:loading>Saving...</span>
             </button>
-            <a href="{{ route('admin.website-cms', $page->slug) }}" class="btn btn-secondary ms-2">Back</a>
+            <a href="{{ route('admin.website-cms', $pageSlug) }}" class="btn btn-secondary ms-2">Back</a>
         </div>
     </form>
     </div>

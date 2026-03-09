@@ -137,6 +137,71 @@
                 </div>
             </div>
         </div>
+
+        <!-- Features Section -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.features', $page) }}'">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-star fs-1 text-success"></i>
+                    </div>
+                    <h5 class="card-title">Features Section</h5>
+                    <p class="card-text text-muted">Feature highlights grid</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts & SEO -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.scripts', $page) }}'">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-code fs-1 text-info"></i>
+                    </div>
+                    <h5 class="card-title">Scripts & SEO</h5>
+                    <p class="card-text text-muted">Inject head &amp; footer scripts</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sitemap & Robots.txt -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.sitemap-robots', $page) }}'">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-sitemap fs-1 text-secondary"></i>
+                    </div>
+                    <h5 class="card-title">Sitemap &amp; Robots.txt</h5>
+                    <p class="card-text text-muted">Manage sitemap and robots</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.stats', $page) }}'">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-chart-bar fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="card-title">Stats Bar</h5>
+                    <p class="card-text text-muted">Numbers & labels below hero</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 hover-shadow cursor-pointer" onclick="window.location.href='{{ route('admin.website-cms.navigation', $page) }}'">
+                <div class="card-body text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-bars fs-1 text-success"></i>
+                    </div>
+                    <h5 class="card-title">Navigation</h5>
+                    <p class="card-text text-muted">Manage nav bar links</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <style>

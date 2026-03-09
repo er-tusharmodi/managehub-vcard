@@ -86,6 +86,16 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
         ->name('website-cms.cta');
     Route::get('/website-cms/{page:slug}/footer', [WebsiteCmsController::class, 'showFooter'])
         ->name('website-cms.footer');
+    Route::get('/website-cms/{page:slug}/features', [WebsiteCmsController::class, 'showFeatures'])
+        ->name('website-cms.features');
+    Route::get('/website-cms/{page:slug}/scripts', [WebsiteCmsController::class, 'showScripts'])
+        ->name('website-cms.scripts');
+    Route::get('/website-cms/{page:slug}/sitemap-robots', [WebsiteCmsController::class, 'showSitemapRobots'])
+        ->name('website-cms.sitemap-robots');
+    Route::get('/website-cms/{page:slug}/stats', [WebsiteCmsController::class, 'showStats'])
+        ->name('website-cms.stats');
+    Route::get('/website-cms/{page:slug}/navigation', [WebsiteCmsController::class, 'showNavigation'])
+        ->name('website-cms.navigation');
 
     Route::get('/profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [AdminProfileController::class, 'update'])->name('profile.update');

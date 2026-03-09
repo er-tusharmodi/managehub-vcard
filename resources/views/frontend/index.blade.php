@@ -14,11 +14,25 @@
     $how            = $data['how_it_works'] ?? [];
     $howSteps       = $how['steps'] ?? [];
     $cta            = $data['cta_section'] ?? [];
+    $features       = $data['features'] ?? [];
+    $featureItems   = $features['items'] ?? null;
     $footerLinks    = $data['footer_links'] ?? [];
     $productLinks   = $footerLinks['product'] ?? [];
     $resourceLinks  = $footerLinks['resources'] ?? [];
     $socialLinks    = $data['social_links'] ?? [];
     $heroTemplates  = collect($templates ?? [])->take(4)->values()->all();
+    $navLinks       = $data['nav_links'] ?? [
+        ['label' => 'Features',     'url' => '#features'],
+        ['label' => 'Categories',   'url' => '#categories'],
+        ['label' => 'How It Works', 'url' => '#how-it-works'],
+        ['label' => 'Contact',      'url' => '#contact'],
+    ];
+    $stats          = $data['stats']['items'] ?? [
+        ['number' => '9',   'suffix' => '+',      'label' => 'Templates'],
+        ['number' => '100', 'suffix' => '%',       'label' => 'Customizable'],
+        ['number' => '1',   'suffix' => '-Click',  'label' => 'Contact Save'],
+        ['number' => '24',  'suffix' => '/7',      'label' => 'Online Presence'],
+    ];
     $metaTitle      = $page->meta_title ?: ($settings['seo_title'] ?? 'ManageHub — Smart vCards, Seamlessly Shared');
     $metaDescription = $page->meta_description ?: ($settings['seo_description'] ?? 'Smart vCards for Modern Businesses');
 @endphp
@@ -194,6 +208,9 @@
         @media(max-width:768px){ .nav-links,.nav-cta{display:none} .hamburger{display:flex} .hero-mockups{display:none} .stats-inner{grid-template-columns:1fr 1fr} .stat-item+.stat-item{border-left:none} .stat-item:nth-child(2n+1){border-right:1px solid var(--border)} }
         @media(max-width:560px){ .hero h1{font-size:2.2rem} .footer-grid{grid-template-columns:1fr} .section-title{font-size:1.85rem} .templates-grid{grid-template-columns:1fr} }
     </style>
+@if(!empty($data['scripts']['head_script']))
+{!! $data['scripts']['head_script'] !!}
+@endif
 </head>
 <body>
 
@@ -204,10 +221,9 @@
             <img src="{{ \App\Helpers\BrandingHelper::getFooterLogoUrl() }}" alt="{{ $settings['site_name'] ?? 'ManageHub' }}">
         </a>
         <nav class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#categories">Categories</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#contact">Contact</a>
+            @foreach($navLinks as $navLink)
+            <a href="{{ $navLink['url'] }}">{{ $navLink['label'] }}</a>
+            @endforeach
         </nav>
         <a href="{{ $headerCta['url'] ?? '#' }}" class="btn-primary nav-cta" style="padding:.6rem 1.25rem;font-size:.88rem;">
             {{ $headerCta['label'] ?? 'Get Started' }}
@@ -217,10 +233,9 @@
         </button>
     </div>
     <nav class="mobile-menu" id="mobileMenu">
-        <a href="#features">Features</a>
-        <a href="#categories">Categories</a>
-        <a href="#how-it-works">How It Works</a>
-        <a href="#contact">Contact</a>
+        @foreach($navLinks as $navLink)
+        <a href="{{ $navLink['url'] }}">{{ $navLink['label'] }}</a>
+        @endforeach
         <a href="{{ $headerCta['url'] ?? '#' }}" style="color:var(--primary);font-weight:600;">{{ $headerCta['label'] ?? 'Get Started' }}</a>
     </nav>
 </header>
@@ -235,7 +250,7 @@
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-orb hero-orb-3"></div>
     <div class="hero-content reveal">
-        <div class="hero-tag"><span class="spark"></span>Digital Business Cards &mdash; Reimagined</div>
+        <div class="hero-tag"><span class="spark"></span>{{ $data['hero_tag'] ?? 'Digital Business Cards &mdash; Reimagined' }}</div>
         <h1>
             {{ $data['hero_title'] ?? 'vCards,' }}
             <span class="gradient-text">{{ $data['hero_title_highlight'] ?? 'Reimagined' }}</span>.
@@ -270,10 +285,10 @@
 <!-- STATS BAR -->
 <div class="stats-bar">
     <div class="stats-inner">
-        <div class="stat-item reveal"><div class="stat-num" data-target="9" data-suffix="+">0+</div><div class="stat-label">Templates</div></div>
-        <div class="stat-item reveal delay-1"><div class="stat-num" data-target="100" data-suffix="%">0%</div><div class="stat-label">Customizable</div></div>
-        <div class="stat-item reveal delay-2"><div class="stat-num" data-target="1" data-suffix="-Click">0</div><div class="stat-label">Contact Save</div></div>
-        <div class="stat-item reveal delay-3"><div class="stat-num" data-target="24" data-suffix="/7">0</div><div class="stat-label">Online Presence</div></div>
+        @foreach($stats as $i => $stat)
+        @php $delayClass = $i > 0 ? 'delay-' . min(5, $i) : ''; @endphp
+        <div class="stat-item reveal {{ $delayClass }}"><div class="stat-num" data-target="{{ $stat['number'] }}" data-suffix="{{ $stat['suffix'] ?? '' }}">0{{ $stat['suffix'] ?? '' }}</div><div class="stat-label">{{ $stat['label'] }}</div></div>
+        @endforeach
     </div>
 </div>
 
@@ -351,12 +366,12 @@
 <section id="features" class="features-section">
     <div class="container">
         <div class="section-head">
-            <div class="section-badge reveal"><span class="dot"></span>Why Choose Us</div>
-            <h2 class="section-title reveal delay-1">Everything You Need in a <span class="gradient-text">Digital vCard</span></h2>
-            <p class="section-subtitle reveal delay-2">Ditch the paper. Make every connection count with rich, interactive digital business cards.</p>
+            <div class="section-badge reveal"><span class="dot"></span>{{ $features['badge'] ?? 'Why Choose Us' }}</div>
+            <h2 class="section-title reveal delay-1">{{ $features['title'] ?? 'Everything You Need in a' }} <span class="gradient-text">{{ $features['title_highlight'] ?? 'Digital vCard' }}</span></h2>
+            <p class="section-subtitle reveal delay-2">{{ $features['subtitle'] ?? 'Ditch the paper. Make every connection count with rich, interactive digital business cards.' }}</p>
         </div>
         @php
-            $featuresList = [
+            $defaultFeatures = [
                 ['icon'=>'fas fa-qrcode',     'title'=>'Instant QR Sharing',       'desc'=>'Generate a unique QR code for your vCard. Anyone can scan and save your contact in seconds, no app required.'],
                 ['icon'=>'fas fa-paint-brush', 'title'=>'Fully Customizable',       'desc'=>'Choose from professionally designed templates and tweak colors, fonts, content, and sections to match your brand.'],
                 ['icon'=>'fas fa-mobile-alt',  'title'=>'Mobile-First Design',      'desc'=>'Every template looks stunning on all devices. Your clients get the best experience whether on phone, tablet, or desktop.'],
@@ -364,6 +379,7 @@
                 ['icon'=>'fas fa-chart-line',  'title'=>'Analytics and Insights',   'desc'=>'Track how many people viewed your card, which device they used, and where they came from, all in real time.'],
                 ['icon'=>'fas fa-sync-alt',    'title'=>'Always Up-to-Date',        'desc'=>'Update your number, address, or offers anytime. Everyone who has your link always sees the latest version.'],
             ];
+            $featuresList = !empty($featureItems) ? $featureItems : $defaultFeatures;
         @endphp
         <div class="features-grid">
             @foreach($featuresList as $i => $feat)
@@ -385,7 +401,7 @@
 <section id="how-it-works" class="how-section">
     <div class="container">
         <div class="section-head">
-            <div class="section-badge reveal"><span class="dot"></span>Process</div>
+            <div class="section-badge reveal"><span class="dot"></span>{{ $how['badge'] ?? 'Process' }}</div>
             <h2 class="section-title reveal delay-1">
                 {{ $how['title'] ?? 'How It' }}<span class="gradient-text">{{ $how['highlight'] ?? ' Works' }}</span>{{ $how['suffix'] ?? '' }}
             </h2>
@@ -410,7 +426,7 @@
 <section class="cta-section">
     <div class="cta-glow"></div>
     <div class="cta-inner">
-        <div class="section-badge reveal" style="margin:0 auto 1.25rem;"><span class="dot"></span>Get Started Today</div>
+        <div class="section-badge reveal" style="margin:0 auto 1.25rem;"><span class="dot"></span>{{ $cta['badge'] ?? 'Get Started Today' }}</div>
         <h2 class="reveal delay-1">{{ $cta['title'] ?? 'Ready to Go Digital?' }}</h2>
         <p class="reveal delay-2">{{ $cta['subtitle'] ?? 'Join hundreds of businesses already sharing smarter with ManageHub digital vCards.' }}</p>
         <div class="cta-btns reveal delay-3">
@@ -450,11 +466,11 @@
             </div>
         </div>
         <div class="footer-col">
-            <h4>Product</h4>
+            <h4>{{ $footerLinks['product_heading'] ?? 'Product' }}</h4>
             <ul>@foreach($productLinks as $link)<li><a href="{{ $link['url'] ?? '#' }}">{{ $link['label'] ?? '' }}</a></li>@endforeach</ul>
         </div>
         <div class="footer-col">
-            <h4>Resources</h4>
+            <h4>{{ $footerLinks['resources_heading'] ?? 'Resources' }}</h4>
             <ul>@foreach($resourceLinks as $link)<li><a href="{{ $link['url'] ?? '#' }}">{{ $link['label'] ?? '' }}</a></li>@endforeach</ul>
         </div>
         <div class="footer-col">
@@ -482,5 +498,8 @@
     var sb=document.querySelector('.stats-bar'); if(sb) so.observe(sb);
 })();
 </script>
+@if(!empty($data['scripts']['footer_script']))
+{!! $data['scripts']['footer_script'] !!}
+@endif
 </body>
 </html>

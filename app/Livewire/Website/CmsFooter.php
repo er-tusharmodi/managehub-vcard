@@ -15,6 +15,8 @@ class CmsFooter extends Component
     public ?WebsitePage $page = null;
     #[Locked] public string $pageSlug = '';
     public $footer_about = '';
+    public $product_heading = 'Product';
+    public $resources_heading = 'Resources';
     public $product_links = [];
     public $resources_links = [];
 
@@ -29,6 +31,8 @@ class CmsFooter extends Component
     {
         $this->footer_about = $this->page->data['footer_about'] ?? '';
         $footer_links = $this->page->data['footer_links'] ?? [];
+        $this->product_heading = $footer_links['product_heading'] ?? 'Product';
+        $this->resources_heading = $footer_links['resources_heading'] ?? 'Resources';
         $this->product_links = $footer_links['product'] ?? [];
         $this->resources_links = $footer_links['resources'] ?? [];
     }
@@ -91,6 +95,8 @@ class CmsFooter extends Component
         
         $validated = $this->validateWithToast([
             'footer_about' => ['required', 'string'],
+            'product_heading' => ['nullable', 'string'],
+            'resources_heading' => ['nullable', 'string'],
             'product_links' => ['required', 'array'],
             'product_links.*.label' => ['required', 'string'],
             'product_links.*.url' => ['required', 'url'],
@@ -102,6 +108,8 @@ class CmsFooter extends Component
         $data = $this->page->data ?? [];
         $data['footer_about'] = $validated['footer_about'];
         $data['footer_links'] = [
+            'product_heading' => $validated['product_heading'] ?? 'Product',
+            'resources_heading' => $validated['resources_heading'] ?? 'Resources',
             'product' => $validated['product_links'],
             'resources' => $validated['resources_links'],
         ];
