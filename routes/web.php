@@ -136,6 +136,9 @@ Route::middleware(['admin.auth', 'role:admin'])->prefix('admin')->name('admin.')
     Route::patch('/templates/{templateKey}/display-name', [App\Http\Controllers\Admin\TemplateController::class, 'updateDisplayName'])->name('templates.updateDisplayName');
     Route::patch('/templates/{templateKey}/category', [App\Http\Controllers\Admin\TemplateController::class, 'updateCategory'])->name('templates.updateCategory');
     Route::post('/templates/sync', [App\Http\Controllers\Admin\TemplateController::class, 'syncFilesystem'])->name('templates.sync');
+
+    // Custom Pages Routes
+    Route::resource('custom-pages', App\Http\Controllers\Admin\CustomPageController::class)->except(['show']);
 });
 
 // Public Template Routes (no auth required)

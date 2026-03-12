@@ -160,6 +160,13 @@
                             </li>
 
                             <li>
+                                <a href="{{ route('admin.custom-pages.index') }}" class="tp-link">
+                                    <i data-feather="globe"></i>
+                                    <span> Custom Pages </span>
+                                </a>
+                            </li>
+
+                            <li>
                                 <a href="{{ route('admin.clients.index') }}" class="tp-link">
                                     <i data-feather="users"></i>
                                     <span> Clients </span>

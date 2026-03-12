@@ -26,7 +26,20 @@ class VcardPublicController extends Controller
             }
         }
 
-        $vcard = Vcard::where('subdomain', $subdomain)->firstOrFail();
+        $vcard = Vcard::where('subdomain', $subdomain)->first();
+
+        if (!$vcard) {
+            $customPage = \App\Models\CustomPage::where('subdomain', $subdomain)
+                ->where('status', 'active')
+                ->first();
+
+            if ($customPage) {
+                return response($customPage->html_content ?? '', 200)
+                    ->header('Content-Type', 'text/html; charset=utf-8');
+            }
+
+            abort(404);
+        }
 
         if (!$vcard->isSubscriptionActive()) {
             if ($request->routeIs('vcard.public')) {
