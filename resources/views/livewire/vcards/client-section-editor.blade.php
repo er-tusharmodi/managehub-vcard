@@ -69,7 +69,7 @@
             'meta'        => 'SEO & Meta Tags',
             'floatingBar' => 'Quick Action Bar',
             'whyChoose'   => 'Why Choose Us',
-            'qr'          => 'QR Code',
+            'qr'          => 'QR Code Text',
             'shop'        => 'Shop Settings',
             'payments'    => 'Payment Options',
             'payment'     => 'Payment Options',
@@ -259,7 +259,7 @@
                     ];
                     $activeLabel = $section === '_common'
                         ? 'Basic Info'
-                        : ($sectionLabelMapActive[$vcard->template_key ?? ''][$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')));
+                        : ($sectionLabelMapActive[$vcard->template_key ?? ''][$section] ?? $sectionLabels[$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')));
                     $isFormList  = is_array($form) && !empty($form) && array_values($form) === $form;
                     $itemLabel   = \Illuminate\Support\Str::singular($activeLabel);
                 @endphp
@@ -406,6 +406,56 @@
                 }
             }
         });
+    })();
+
+    // ── Sortable drag-to-reorder for list tables ──────────────────────
+    (function () {
+        function initSortables() {
+            document.querySelectorAll('tbody[data-sort-path]').forEach(function (tbody) {
+                if (tbody.__sortableInited) { return; }
+                tbody.__sortableInited = true;
+                var path = tbody.getAttribute('data-sort-path') || '';
+                var wireEl = tbody.closest('[wire\\:id]');
+                if (!wireEl) { return; }
+                new Sortable(tbody, {
+                    handle: '.drag-handle',
+                    animation: 150,
+                    ghostClass: 'sortable-ghost',
+                    chosenClass: 'sortable-chosen',
+                    dragClass: 'sortable-drag',
+                    onEnd: function (evt) {
+                        if (evt.oldIndex === evt.newIndex) { return; }
+                        var comp = window.Livewire.find(wireEl.getAttribute('wire:id'));
+                        if (comp) {
+                            comp.call('reorderRow', path, evt.oldIndex, evt.newIndex);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Load SortableJS on demand then init
+        function loadSortableAndInit() {
+            if (window.Sortable) {
+                initSortables();
+                return;
+            }
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js';
+            script.onload = initSortables;
+            document.head.appendChild(script);
+        }
+
+        document.addEventListener('livewire:initialized', loadSortableAndInit);
+        document.addEventListener('livewire:navigated', function () {
+            setTimeout(loadSortableAndInit, 100);
+        });
+        // Re-init after every Livewire DOM update
+        if (window.Livewire) {
+            document.addEventListener('livewire:update', function () {
+                setTimeout(initSortables, 200);
+            });
+        }
     })();
     </script>
 </div>

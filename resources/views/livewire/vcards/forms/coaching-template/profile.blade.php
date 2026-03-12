@@ -35,17 +35,31 @@
     </div>
 </div>
 
-{{-- Logo Icon Class --}}
-<div class="col-lg-4 mb-3">
-    <label class="form-label fw-semibold" for="profile-iconClass">Logo Icon Class
-        <small class="fw-normal text-muted">(Bootstrap icon fallback)</small>
+{{-- Cover / Banner Image --}}
+<div class="col-12 mb-3">
+    <label class="form-label fw-semibold">Cover / Banner Image
+        <small class="fw-normal text-muted">(replaces the animated banner background)</small>
     </label>
-    <input type="text"
-           id="profile-iconClass"
-           class="form-control @error('form.logoIconClass') is-invalid @enderror"
-           wire:model="form.logoIconClass"
-           placeholder="bi-mortarboard-fill">
-    @error('form.logoIconClass') <div class="invalid-feedback">{{ $message }}</div> @enderror
+    @php
+        $coverVal = $form['coverImageUrl'] ?? null;
+        $coverPreview = $coverVal ? (str_starts_with($coverVal, '/') || str_starts_with($coverVal, 'http') ? $coverVal : (isset($assetBaseUrl) ? rtrim($assetBaseUrl,'/').'/'.$coverVal : $coverVal)) : null;
+    @endphp
+    <div class="d-flex align-items-start gap-3 flex-wrap">
+        @if($coverPreview)
+            <img src="{{ $coverPreview }}" class="rounded border" style="height:56px;width:120px;object-fit:cover;background:#f8f8f8;" alt="Cover preview">
+        @endif
+        <div class="flex-grow-1">
+            <div wire:loading wire:target="uploads.coverImageUrl" class="mb-1">
+                <span class="spinner-border spinner-border-sm text-primary"></span>
+                <small class="text-primary ms-1">Uploading…</small>
+            </div>
+            <input type="file"
+                   class="form-control @error('uploads.coverImageUrl') is-invalid @enderror"
+                   wire:model.live="uploads.coverImageUrl"
+                   accept="image/*">
+            @error('uploads.coverImageUrl') <div class="invalid-feedback">{{ $message }}</div> @enderror
+        </div>
+    </div>
 </div>
 
 {{-- Est Tag --}}

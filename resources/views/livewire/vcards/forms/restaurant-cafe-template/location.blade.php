@@ -36,25 +36,36 @@
     @foreach(($form['transport'] ?? []) as $ti => $tr)
     <div class="border rounded-2 p-2 mb-2 bg-light" wire:key="rc-trans-{{ $ti }}">
         <div class="row g-2 align-items-center">
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <label class="form-label small mb-0 fw-semibold">Icon</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.transport.{{ $ti }}.icon" placeholder="🚇">
+                <select class="form-select form-select-sm"
+                        wire:model="form.transport.{{ $ti }}.icon">
+                    <option value="metro">🚇 Metro</option>
+                    <option value="parking">🅿️ Parking</option>
+                    <option value="taxi">🚕 Taxi / Cab</option>
+                    <option value="delivery">🛵 Delivery</option>
+                </select>
             </div>
             <div class="col-sm-3">
                 <label class="form-label small mb-0 fw-semibold">Label</label>
                 <input type="text" class="form-control form-control-sm"
                        wire:model="form.transport.{{ $ti }}.label" placeholder="Metro">
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <label class="form-label small mb-0 fw-semibold">Description / Value</label>
                 <input type="text" class="form-control form-control-sm"
                        wire:model="form.transport.{{ $ti }}.value" placeholder="Indiranagar Metro – Exit 2">
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <label class="form-label small mb-0 fw-semibold">Stroke Color</label>
-                <input type="text" class="form-control form-control-sm"
-                       wire:model="form.transport.{{ $ti }}.stroke" placeholder="#e74c3c">
+                <div class="input-group input-group-sm">
+                    <input type="color" class="form-control form-control-color p-0"
+                           style="max-width:32px;cursor:pointer;"
+                           wire:model.lazy="form.transport.{{ $ti }}.stroke">
+                    <input type="text" class="form-control font-monospace"
+                           wire:model.blur="form.transport.{{ $ti }}.stroke"
+                           placeholder="#1565c0">
+                </div>
             </div>
             <div class="col-sm-1 d-flex align-items-end">
                 <button type="button"

@@ -16,20 +16,12 @@
     @error('form.name') <div class="invalid-feedback">{{ $message }}</div> @enderror
 </div>
 
-<div class="col-lg-6 mb-3">
+<div class="col-lg-4 mb-3">
     <label class="form-label fw-semibold" for="dir-role">Role / Designation</label>
     <input type="text" id="dir-role"
            class="form-control @error('form.role') is-invalid @enderror"
            wire:model="form.role" placeholder="Founder & Director">
     @error('form.role') <div class="invalid-feedback">{{ $message }}</div> @enderror
-</div>
-
-<div class="col-lg-4 mb-3">
-    <label class="form-label fw-semibold" for="dir-initials">Initials (avatar fallback)</label>
-    <input type="text" id="dir-initials" maxlength="3"
-           class="form-control @error('form.initials') is-invalid @enderror"
-           wire:model="form.initials" placeholder="RS">
-    @error('form.initials') <div class="invalid-feedback">{{ $message }}</div> @enderror
 </div>
 
 <div class="col-12 mb-3">
@@ -44,13 +36,22 @@
 @php $badges = $form['badges'] ?? []; @endphp
 @if(!empty($badges))
 <div class="col-12 mb-1">
-    <label class="form-label fw-semibold text-muted small text-uppercase">Credential Badges (icon only)</label>
+    <label class="form-label fw-semibold text-muted small text-uppercase">Credential Badges</label>
 </div>
 @foreach($badges as $bi => $badge)
-<div class="col-lg-4 mb-2" wire:key="dirbadge-{{ $bi }}">
-    <input type="text" class="form-control form-control-sm"
-           wire:model="form.badges.{{ $bi }}.iconClass"
-           placeholder="bi-trophy-fill">
+<div class="col-lg-6 mb-2" wire:key="dirbadge-{{ $bi }}">
+    <div class="row g-2">
+        <div class="col-7">
+            <input type="text" class="form-control form-control-sm"
+                   wire:model="form.badges.{{ $bi }}.label"
+                   placeholder="IRS Retd.">
+        </div>
+        <div class="col-5">
+            <input type="text" class="form-control form-control-sm"
+                   wire:model="form.badges.{{ $bi }}.iconClass"
+                   placeholder="bi-trophy-fill">
+        </div>
+    </div>
 </div>
 @endforeach
 @endif

@@ -2,8 +2,7 @@
 @php
 $items = $form ?? [];
 $fields = [
-    ['key'=>'key', 'label'=>'Key', 'type'=>'text', 'span'=>'col-md-4', 'placeholder'=>'barfi'],
-    ['key'=>'label', 'label'=>'Label', 'type'=>'text', 'span'=>'col-md-6', 'placeholder'=>'Barfi'],
+    ['key'=>'label', 'label'=>'Label', 'type'=>'text', 'span'=>'col-12', 'placeholder'=>'Barfi'],
 ];
 @endphp
 @include('livewire.vcards.forms._shared._list_table', [

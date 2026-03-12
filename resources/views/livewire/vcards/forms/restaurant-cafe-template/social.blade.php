@@ -40,9 +40,27 @@
 @forelse($socialRows as $si => $row)
 @if(!is_array($row)) @continue @endif
 @php
-    $platform   = $socialPlatforms[$row['type'] ?? ''] ?? null;
+    $platform    = $socialPlatforms[$row['type'] ?? ''] ?? null;
     $headerColor = $platform ? $platform['color'] : '#6c757d';
     $actionType  = $row['action'] ?? 'url';
+    $mdiIconMap  = [
+        'whatsapp'  => 'mdi-whatsapp',
+        'instagram' => 'mdi-instagram',
+        'facebook'  => 'mdi-facebook',
+        'youtube'   => 'mdi-youtube',
+        'twitter'   => 'mdi-twitter',
+        'linkedin'  => 'mdi-linkedin',
+        'telegram'  => 'mdi-telegram',
+        'tiktok'    => 'mdi-music-note',
+        'pinterest' => 'mdi-pinterest',
+        'snapchat'  => 'mdi-snapchat',
+        'threads'   => 'mdi-at',
+        'website'   => 'mdi-web',
+        'email'     => 'mdi-email',
+        'phone'     => 'mdi-phone',
+        'google'    => 'mdi-google',
+    ];
+    $socialIconClass = 'mdi ' . ($mdiIconMap[$row['type'] ?? ''] ?? 'mdi-link-variant');
 @endphp
 
 <div class="col-12 mb-2" wire:key="rcsoc-{{ $si }}">
@@ -52,6 +70,7 @@
         <div class="d-flex align-items-center justify-content-between px-3 py-2"
              style="background:{{ $headerColor }}1a; border-bottom:2px solid {{ $headerColor }};">
             <div class="d-flex align-items-center gap-2">
+                <i class="{{ $socialIconClass }}" style="font-size:1.1rem;color:{{ $headerColor }};"></i>
                 <span class="fw-semibold" style="color:{{ $headerColor }};font-size:.8rem;">
                     {{ $platform ? $platform['label'] : ($row['type'] ?? 'Link') }}
                 </span>
@@ -62,7 +81,7 @@
             <button type="button"
                     class="btn btn-sm p-0 rounded-circle d-flex align-items-center justify-content-center"
                     style="width:26px;height:26px;background:{{ $headerColor }}33;border:none;"
-                    x-on:click="showConfirmToast('Delete this social link?', () => $wire.removeRow('', {{ $si }}))">
+                    x-on:click="showConfirmToast('Delete this social link?', () => $wire.removeRowWithConfirm({{ $si }}, ''))">
                 <i class="mdi mdi-close" style="font-size:13px;color:{{ $headerColor }};"></i>
             </button>
         </div>

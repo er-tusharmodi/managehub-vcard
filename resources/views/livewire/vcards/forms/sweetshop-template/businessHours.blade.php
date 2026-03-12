@@ -18,11 +18,6 @@
     <input type="text" class="form-control form-control-sm"
            wire:model="form.badge" placeholder="Open Now">
 </div>
-<div class="col-md-7">
-    <label class="form-label small mb-1 fw-semibold">Suggest Hours Label</label>
-    <input type="text" class="form-control form-control-sm"
-           wire:model="form.suggestLabel" placeholder="Suggest new hours">
-</div>
 
 <div class="col-12 mt-2">
     @if(!empty($form['days'] ?? []))

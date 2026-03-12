@@ -68,8 +68,8 @@
          1. BANNER
     ══════════════════════════════════════════════════ -->
     <div class="banner">
-      <div class="banner-bg">
-        <div class="banner-pattern"></div>
+      <div class="banner-bg" @if(!empty(v($data, 'profile.coverImageUrl'))) style="background-image:url('{{ v($data, 'profile.coverImageUrl') }}');background-size:cover;background-position:center;" @endif>
+        <div class="banner-pattern" @if(!empty(v($data, 'profile.coverImageUrl'))) style="opacity:.35;" @endif></div>
         <div class="banner-shapes">
           <div class="bshape" style="width:90px;height:90px;top:-20px;left:-20px;animation-delay:0s;"></div>
           <div class="bshape" style="width:60px;height:60px;top:30px;right:10px;animation-delay:1.5s;"></div>

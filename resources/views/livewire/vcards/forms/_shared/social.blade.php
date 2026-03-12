@@ -109,8 +109,7 @@
                     <button type="button"
                             class="btn btn-sm btn-outline-danger p-0 rounded-circle"
                             style="width:28px;height:28px;"
-                            wire:click="removeRow('',{{ $si }})"
-                            wire:confirm="Delete this social link?">
+                            x-on:click="showConfirmToast('Delete this social link?', () => $wire.removeRowWithConfirm({{ $si }}, ''))">
                         <i class="mdi mdi-delete" style="font-size:12px;"></i>
                     </button>
                 </div>

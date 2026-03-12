@@ -210,6 +210,17 @@ class ClientSectionEditor extends Component
         $data = $this->loadJson();
         $data[$this->section] = $payload;
 
+        // Auto-generate category key from label/name when the categories section is saved
+        if ($this->section === 'categories') {
+            foreach ($payload as &$item) {
+                if (is_array($item) && empty($item['key'])) {
+                    $item['key'] = \Illuminate\Support\Str::slug($item['label'] ?? $item['name'] ?? '');
+                }
+            }
+            unset($item);
+            $data[$this->section] = $payload;
+        }
+
         // Sync _common fields to their mapped paths in other sections
         if ($this->section === '_common') {
             $fieldConfigs = $data['_field_config']['_common'] ?? [];
@@ -227,6 +238,11 @@ class ClientSectionEditor extends Component
         $this->storeJson($data);
         $this->form = $payload;
         $this->uploads = [];
+
+        // Rebuild categoryOptions live so product dropdowns reflect new categories without page reload
+        if (in_array($this->section, ['categories', 'profile', 'R'], true)) {
+            $this->categoryOptions = $this->buildCategoryOptions($data);
+        }
 
         $this->dispatch('notify', type: 'success', message: 'Changes saved successfully!');
         $this->dispatch('vcard-saved');
@@ -545,6 +561,30 @@ class ClientSectionEditor extends Component
         $this->save();
     }
 
+    public function reorderRow(string $path, int $from, int $to): void
+    {
+        if ($from === $to) {
+            return;
+        }
+        if (empty($path)) {
+            $list = $this->form;
+        } else {
+            $list = data_get($this->form, $path, []);
+        }
+        if (!is_array($list) || !isset($list[$from]) || !isset($list[$to])) {
+            return;
+        }
+        $item = array_splice($list, $from, 1);
+        array_splice($list, $to, 0, $item);
+        $list = array_values($list);
+        if (empty($path)) {
+            $this->form = $list;
+        } else {
+            data_set($this->form, $path, $list);
+        }
+        $this->save();
+    }
+
     public function confirmRemoveRow(string $path, int $index): void
     {
         $this->dispatch(
@@ -588,6 +628,30 @@ class ClientSectionEditor extends Component
         $this->dispatch('notify', type: 'success', message: 'Offer saved successfully!');
     }
 
+    public function openPaymentModal(?int $index = null): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null && isset($this->form[$index])) {
+            $this->editingItem = $this->form[$index];
+        } else {
+            $this->editingItem = ['icon' => 'card', 'name' => '', 'sub' => '', 'stroke' => '#1565c0'];
+        }
+        $this->dispatch('open-payment-modal', wireId: $this->getId());
+    }
+
+    public function savePaymentModal(): void
+    {
+        if ($this->editingIndex !== null) {
+            $this->form[$this->editingIndex] = $this->editingItem;
+        } else {
+            $this->form[] = $this->editingItem;
+        }
+        $this->save();
+        $this->editingItem = [];
+        $this->editingIndex = null;
+        $this->dispatch('notify', type: 'success', message: 'Payment method saved!');
+    }
+
     public function openMenuItemModal(string $category, ?int $index = null): void
     {
         $this->editingCategory = $category;
@@ -613,23 +677,29 @@ class ClientSectionEditor extends Component
 
     public function saveMenuItemModal(): void
     {
-        $cat = $this->editingCategory;
-        if (!$cat) {
+        $category = $this->editingCategory;
+        if (empty($category)) {
+            $this->dispatch('notify', type: 'warning', message: 'No category selected.');
             return;
         }
-        if (!isset($this->form[$cat]) || !is_array($this->form[$cat])) {
-            $this->form[$cat] = [];
+        $list = $this->form[$category] ?? [];
+        if (!is_array($list)) { $list = []; }
+        $index = $this->editingIndex ?? count($list);
+        $list[$index] = $this->editingItem;
+        $this->form[$category] = $list;
+        if (!empty($this->uploads['menuItemEdit']['product_image'])) {
+            if (!isset($this->uploads[$category])) { $this->uploads[$category] = []; }
+            if (!isset($this->uploads[$category][$index])) { $this->uploads[$category][$index] = []; }
+            $this->uploads[$category][$index]['product_image'] = $this->uploads['menuItemEdit']['product_image'];
+            unset($this->uploads['menuItemEdit']);
         }
-        if ($this->editingIndex !== null) {
-            $this->form[$cat][$this->editingIndex] = $this->editingItem;
-        } else {
-            $this->form[$cat][] = $this->editingItem;
-        }
+        $wasEdit = $this->editingIndex !== null;
         $this->save();
         $this->editingItem     = [];
         $this->editingIndex    = null;
         $this->editingCategory = null;
-        $this->dispatch('notify', type: 'success', message: 'Menu item saved successfully!');
+        $this->dispatch('hide-menu-item-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added to ' . $category . '!');
     }
 
     public function deleteMenuCategory(string $category): void
@@ -639,6 +709,37 @@ class ClientSectionEditor extends Component
             $this->save();
             $this->dispatch('notify', type: 'success', message: "Category '{$category}' deleted.");
         }
+    }
+
+    public function addMenuCategory(): void
+    {
+        $name = trim($this->newItem['newCategoryName'] ?? '');
+        if ($name === '') {
+            return;
+        }
+        if (!isset($this->form[$name])) {
+            $this->form[$name] = [];
+        }
+        $this->newItem['newCategoryName'] = '';
+        $this->save();
+        $this->dispatch('hide-category-modal');
+        $this->dispatch('notify', type: 'success', message: "Category '{$name}' created.");
+    }
+
+    public function addStringAndSave(string $path, string $newItemKey): void
+    {
+        $value = trim($this->newItem[$newItemKey] ?? '');
+        if ($value === '') {
+            return;
+        }
+        $list = data_get($this->form, $path, []);
+        if (!is_array($list)) {
+            $list = [];
+        }
+        $list[] = $value;
+        data_set($this->form, $path, $list);
+        $this->newItem[$newItemKey] = '';
+        $this->save();
     }
 
     public function switchToCodeEditor(): void
@@ -806,7 +907,7 @@ class ClientSectionEditor extends Component
                 }
                 
                 try {
-                    $path = $value->store('vcards/' . $this->vcard->subdomain . '/uploads', 'public');
+                    $path = $this->storeUploadedImage($value, 'vcards/' . $this->vcard->subdomain . '/uploads');
                     // Always store as a plain root-relative path.
                     // Templates that need the CSS url() wrapper apply it at render time.
                     $payload[$key] = '/storage/' . $path;
@@ -817,6 +918,57 @@ class ClientSectionEditor extends Component
         }
 
         return $payload;
+    }
+
+    /**
+     * Store an uploaded image, resizing and compressing it to max 1920px / JPEG 75% if oversized.
+     * Falls back to the standard Livewire store() on any GD failure.
+     */
+    private function storeUploadedImage($file, string $directory): string
+    {
+        $realPath  = $file->getRealPath();
+        $imageInfo = @getimagesize($realPath);
+
+        if (!$imageInfo) {
+            return $file->store($directory, 'public');
+        }
+
+        [$origWidth, $origHeight, $imageType] = $imageInfo;
+        $fileSize = filesize($realPath);
+        $maxDim   = 1920;
+
+        if ($fileSize <= 400 * 1024 && $origWidth <= $maxDim && $origHeight <= $maxDim) {
+            return $file->store($directory, 'public');
+        }
+
+        $src = match ($imageType) {
+            IMAGETYPE_JPEG => @imagecreatefromjpeg($realPath),
+            IMAGETYPE_PNG  => @imagecreatefrompng($realPath),
+            IMAGETYPE_WEBP => @imagecreatefromwebp($realPath),
+            IMAGETYPE_GIF  => @imagecreatefromgif($realPath),
+            default        => null,
+        };
+
+        if (!$src) {
+            return $file->store($directory, 'public');
+        }
+
+        $scale  = min($maxDim / $origWidth, $maxDim / $origHeight, 1.0);
+        $newW   = (int) round($origWidth * $scale);
+        $newH   = (int) round($origHeight * $scale);
+        $dst    = imagecreatetruecolor($newW, $newH);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newW, $newH, $origWidth, $origHeight);
+        imagedestroy($src);
+
+        $tmpFile = tempnam(sys_get_temp_dir(), 'vcimg_') . '.jpg';
+        imagejpeg($dst, $tmpFile, 75);
+        imagedestroy($dst);
+
+        $storedPath = $directory . '/' . uniqid('img_', true) . '.jpg';
+        \Storage::disk('public')->put($storedPath, file_get_contents($tmpFile));
+        @unlink($tmpFile);
+
+        return $storedPath;
     }
 
     /**

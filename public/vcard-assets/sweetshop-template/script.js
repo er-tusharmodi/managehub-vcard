@@ -183,7 +183,6 @@ const hydrateStaticText = () => {
     setText("gallery-title", APP.sections?.galleryTitle);
     setText("hours-title", APP.sections?.hoursTitle);
     setText("hours-badge-label", APP.businessHours?.badge);
-    setText("suggest-hours-label", APP.businessHours?.suggestLabel);
 
     setText("qr-title", APP.sections?.qrTitle);
     setText("qr-description", APP.qr?.description);

@@ -68,7 +68,7 @@
             <button type="button"
                     class="btn btn-sm p-0 rounded-circle d-flex align-items-center justify-content-center"
                     style="width:26px;height:26px;background:{{ $color }}33;border:none;"
-                    x-on:click="showConfirmToast('Delete this social link?', () => $wire.removeRow('items', {{ $si }}))">
+                    x-on:click="showConfirmToast('Delete this social link?', () => $wire.removeRowWithConfirm({{ $si }}, 'items'))">
                 <i class="mdi mdi-close" style="font-size:13px;color:{{ $color }};"></i>
             </button>
         </div>

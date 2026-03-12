@@ -39,13 +39,13 @@
     <div class="border rounded-3 p-3" style="background:#f8fafc;">
         <div class="row g-2 align-items-end">
             <div class="col-sm-3">
-                <label class="form-label small fw-semibold mb-1">Slot Label</label>
+                <label class="form-label small fw-semibold mb-1">Slot Name <small class="text-muted fw-normal">(shown on card)</small></label>
                 <input type="text" class="form-control form-control-sm"
                        wire:model="form.slots.{{ $si }}.slot"
                        placeholder="Morning: 9–11 AM">
             </div>
             <div class="col-sm-2">
-                <label class="form-label small fw-semibold mb-1">Session</label>
+                <label class="form-label small fw-semibold mb-1">Session Type</label>
                 <select class="form-select form-select-sm" wire:model="form.slots.{{ $si }}.session">
                     <option value="">— Session —</option>
                     <option>Morning</option>
@@ -77,8 +77,7 @@
                 <button type="button"
                         class="btn btn-sm btn-outline-danger p-0 rounded-circle ms-auto"
                         style="width:28px;height:28px;flex-shrink:0;"
-                        wire:click="removeRow('slots',{{ $si }})"
-                        wire:confirm="Delete this slot?">
+                        x-on:click="showConfirmToast('Delete this slot?', () => $wire.removeRowWithConfirm({{ $si }}, 'slots'))">
                     <i class="mdi mdi-delete" style="font-size:12px;"></i>
                 </button>
             </div>

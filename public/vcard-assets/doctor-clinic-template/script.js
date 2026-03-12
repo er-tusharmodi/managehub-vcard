@@ -174,7 +174,7 @@ const renderSlots = () => {
                 if (slot.full) {
                     return `
                         <div class="slot-card full" data-slot="${slot.slot || ""}">
-                            <div class="slot-session">${slot.session || ""}</div>
+                            <div class="slot-session">${slot.slot || slot.session || ""}</div>
                             <div class="slot-time">${slot.time || ""}</div>
                             <div class="slot-full">${slot.fullLabel || ""}</div>
                         </div>`;
@@ -186,7 +186,7 @@ const renderSlots = () => {
                         <div class="slot-check">
                             <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
                         </div>
-                        <div class="slot-session">${slot.session || ""}</div>
+                        <div class="slot-session">${slot.slot || slot.session || ""}</div>
                         <div class="slot-time">${slot.time || ""}</div>
                         <div class="slot-avail">${SLOT_AVAIL_ICON()}${slot.availability || ""}</div>
                     </div>`;

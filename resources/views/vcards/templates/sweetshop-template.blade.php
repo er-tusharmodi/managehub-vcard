@@ -326,10 +326,6 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="suggest-link" onclick="emailShop()">
-                    {!! getIcon("info", "ic-sm", "currentColor") !!}
-                    <span id="suggest-hours-label">Suggest new hours</span>
-                </div>
             </div>
         </div>
         @endif

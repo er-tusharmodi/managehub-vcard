@@ -2,10 +2,9 @@
 @php
 $items = $form;
 $fields = [
-    ['key'=>'key', 'label'=>'Key', 'type'=>'text', 'span'=>'col-md-3', 'placeholder'=>'mobiles'],
-    ['key'=>'name', 'label'=>'Display Name', 'type'=>'text', 'span'=>'col-md-5', 'placeholder'=>'Mobile Phones'],
+    ['key'=>'name', 'label'=>'Display Name', 'type'=>'text', 'span'=>'col-md-6', 'placeholder'=>'Mobile Phones'],
     ['key'=>'count', 'label'=>'Item Count', 'type'=>'text', 'span'=>'col-md-2', 'placeholder'=>'48'],
-    ['key'=>'query', 'label'=>'Search Query', 'type'=>'text', 'span'=>'col-md-6', 'placeholder'=>'mobile phone smartphone'],
+    ['key'=>'query', 'label'=>'Search Query', 'type'=>'text', 'span'=>'col-md-8', 'placeholder'=>'mobile phone smartphone'],
 ];
 @endphp
 @include('livewire.vcards.forms._shared._list_table', [

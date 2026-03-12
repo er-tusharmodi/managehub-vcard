@@ -71,11 +71,11 @@
                     <th class="text-center small fw-semibold text-muted" style="width:136px;">Actions</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody data-sort-path="{{ $addPath }}">
             @foreach($items as $i => $row)
                 @php $editId = 'lt-edit-'.$sectionKey.'-'.$i; @endphp
                 <tr wire:key="lt-{{ $sectionKey }}-{{ $i }}">
-                    <td class="text-center text-muted" style="cursor:grab;"><i class="mdi mdi-drag-vertical"></i></td>
+                    <td class="drag-handle text-center text-muted" style="cursor:grab;"><i class="mdi mdi-drag-vertical"></i></td>
                     @foreach($tableFields as $tf)
                         @php
                             $tfDef   = collect($fields)->firstWhere('key',$tf);
@@ -124,7 +124,7 @@
                             </button>
                             <button type="button" class="btn btn-sm btn-outline-danger p-0 rounded-circle"
                                     style="width:28px;height:28px;" title="Delete"
-                                    wire:click.stop="confirmRemoveRow('{{ $addPath }}',{{ $i }})">
+                                    x-on:click.stop="showConfirmToast('Delete this item?', () => $wire.removeRowWithConfirm({{ $i }}, '{{ $addPath }}'))">
                                 <i class="mdi mdi-delete" style="font-size:12px;"></i>
                             </button>
                         </div>
