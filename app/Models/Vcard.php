@@ -21,6 +21,7 @@ class Vcard extends Model
         'client_email',
         'client_phone',
         'client_address',
+        'data_content',
         'data_path',
         'template_path',
         'qr_code_path',
@@ -34,6 +35,7 @@ class Vcard extends Model
     ];
 
     protected $casts = [
+        'data_content' => 'array',
         'domain_verified_at' => 'datetime',
         'subscription_started_at' => 'datetime',
         'subscription_expires_at' => 'datetime',

@@ -166,10 +166,6 @@ class VcardController extends Controller
             Storage::disk('public')->deleteDirectory($vcard->template_path);
         }
         
-        if ($vcard->data_path) {
-            Storage::disk('public')->delete($vcard->data_path);
-        }
-
         $storageRoot = config('vcard.storage_root');
         Storage::disk('public')->deleteDirectory($storageRoot . '/' . $vcard->subdomain);
 
@@ -281,46 +277,18 @@ class VcardController extends Controller
         $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
         $this->setWebsiteUrl($defaultData, $vcardUrl);
 
-        $dataJson = json_encode($defaultData, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-        $storageRoot = config('vcard.storage_root');
-        $dataPath = $storageRoot . '/' . $vcard->subdomain . '/data.json';
-        Storage::disk('public')->put($dataPath, $dataJson);
-
-        $vcard->update([
-            'data_path' => $dataPath,
-        ]);
-
-        // Seed vCard content into MongoDB via repository so Blade templates read from DB
+        // Save vCard content into MongoDB via repository
         app(\App\Repositories\Contracts\VcardContentRepository::class)->save($vcard, $defaultData);
     }
 
     private function loadJson(Vcard $vcard): array
     {
-        if (!$vcard->data_path || !Storage::disk('public')->exists($vcard->data_path)) {
-            return [];
-        }
-
-        $raw = Storage::disk('public')->get($vcard->data_path);
-        $data = json_decode($raw, true);
-
-        return is_array($data) ? $data : [];
+        return app(VcardContentRepository::class)->load($vcard);
     }
 
     private function storeJson(Vcard $vcard, array $payload): void
     {
-        $json = json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-        $storageRoot = config('vcard.storage_root');
-
-        $dataPath = $vcard->data_path ?: $storageRoot . '/' . $vcard->subdomain . '/data.json';
-        Storage::disk('public')->put($dataPath, $json);
-
-        $templateDefault = $storageRoot . '/' . $vcard->subdomain . '/template/default.json';
-        Storage::disk('public')->put($templateDefault, $json);
-
-        $vcard->update([
-            'data_path' => $dataPath,
-        ]);
+        app(VcardContentRepository::class)->save($vcard, $payload);
     }
 
     private function applyUploads(Vcard $vcard, array $payload, array $uploads): array
@@ -462,10 +430,7 @@ class VcardController extends Controller
         $vcardUrl = 'https://' . $vcard->subdomain . '.' . config('vcard.base_domain');
         $this->setWebsiteUrl($data, $vcardUrl);
 
-        // Save updated data to disk
-        $this->storeJson($vcard, $data);
-
-        // Sync to content repository (MongoDB/SQL) so the public vcard page sees the QR immediately
+        // Save updated data to repository (MongoDB)
         app(VcardContentRepository::class)->save($vcard, $data);
     }
     

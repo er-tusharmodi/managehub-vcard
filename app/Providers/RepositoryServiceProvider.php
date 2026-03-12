@@ -28,7 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
             $mode = (string) config('app.vcard_storage_mode', 'file_only');
 
             return match ($mode) {
-                'mongo_only', 'mongo_preferred' => $app->make(MongoVcardContentRepository::class),
+                'mongo_only', 'mongo_preferred' => new MongoVcardContentRepository(),
                 'dual_write' => $app->make(DualWriteVcardContentRepository::class),
                 default => $app->make(SqlVcardContentRepository::class),
             };

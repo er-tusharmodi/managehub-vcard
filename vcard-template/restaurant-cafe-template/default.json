@@ -210,7 +210,10 @@
             "name": {
                 "label": "Business Name",
                 "type": "text",
-                "sync": ["meta.title", "location.name"]
+                "sync": [
+                    "meta.title",
+                    "location.name"
+                ]
             },
             "tagline": {
                 "label": "Tagline / Subtitle",
@@ -243,7 +246,10 @@
             "social": {
                 "label": "Social Media Links",
                 "type": "list",
-                "columns": ["name", "url"],
+                "columns": [
+                    "name",
+                    "url"
+                ],
                 "help": "Add your social media profiles (name & link)"
             }
         }
@@ -257,7 +263,7 @@
     "assets": {
         "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1772959868_slide1.png",
         "profileImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_TheBarbershop_QR.png",
-        "qrCodeImage": ""
+        "qrCodeImage": "/template-assets/restaurant-cafe-template/uploads/1773322878_TheBarbershop_QR.png"
     },
     "MENU": {
         "Starters": [
@@ -269,7 +275,7 @@
                 "price": 299,
                 "tag": "Chef Pick",
                 "tc": "#3a4a2e",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1772956781_fevicon.png",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322199_download.png",
                 "veg": true
             },
             {
@@ -281,237 +287,11 @@
                 "op": 399,
                 "tag": "Popular",
                 "tc": "#c2562a",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1772959745_service5.png",
-                "veg": true
-            },
-            {
-                "id": 3,
-                "name": "Calamari Fritti",
-                "icon": "squid",
-                "desc": "",
-                "price": 449,
-                "tag": "",
-                "tc": "",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            }
-        ],
-        "Pizza": [
-            {
-                "id": 9,
-                "name": "Margherita",
-                "icon": "pizza",
-                "desc": "San Marzano tomato, fior di latte mozzarella, fresh basil, olive oil.",
-                "price": 549,
-                "tag": "Classic",
-                "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 10,
-                "name": "Diavola",
-                "icon": "chilli",
-                "desc": "Spicy Calabrian salami, nduja paste, chilli flakes, smoked mozzarella.",
-                "price": 699,
-                "tag": "Spicy",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 11,
-                "name": "Quattro Formaggi",
-                "icon": "cheese",
-                "desc": "Mozzarella, gorgonzola, provolone, parmesan blend, truffle oil, walnuts.",
-                "price": 749,
-                "tag": "Premium",
-                "tc": "#b8962e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 12,
-                "name": "Veg Primavera",
-                "icon": "veggies",
-                "desc": "Courgette, peppers, red onion, cherry tomato, basil pesto, mozzarella.",
-                "price": 599,
-                "tag": "Vegan",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 13,
-                "name": "Prosciutto Rucola",
-                "icon": "steak",
-                "desc": "Parma ham, fresh rocket, shaved parmesan, fig chutney, olive oil base.",
-                "price": 799,
-                "tag": "Bestseller",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 14,
-                "name": "Pollo BBQ",
-                "icon": "chicken",
-                "desc": "Smoky BBQ base, grilled chicken strips, red onion, jalapenos, mozzarella.",
-                "price": 749,
-                "op": 849,
-                "tag": "Hot Deal",
-                "tc": "#e65100",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 15,
-                "name": "Tartufo Bianco",
-                "icon": "pizza",
-                "desc": "White truffle cream, mixed mushrooms, mozzarella, fresh parsley.",
-                "price": 899,
-                "tag": "Luxury",
-                "tc": "#b8962e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 16,
-                "name": "Salmone Pizza",
-                "icon": "fish",
-                "desc": "Smoked salmon, cream cheese, capers, red onion, fresh dill on white base.",
-                "price": 849,
-                "tag": "Signature",
-                "tc": "#1565c0",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            }
-        ],
-        "Pasta": [
-            {
-                "id": 17,
-                "name": "Spaghetti Carbonara",
-                "icon": "pasta",
-                "desc": "Guanciale, free-range egg yolk, aged pecorino romano, cracked black pepper.",
-                "price": 599,
-                "tag": "Chef Fav",
-                "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 18,
-                "name": "Penne Arrabiata",
-                "icon": "tomato",
-                "desc": "Fiery San Marzano tomato, garlic, fresh red chilli, torn basil. Vegan.",
-                "price": 449,
-                "tag": "Vegan",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 19,
-                "name": "Truffle Tagliatelle",
-                "icon": "mushroom",
-                "desc": "Fresh egg tagliatelle, black truffle shavings, brown butter, parmigiano.",
-                "price": 849,
-                "tag": "Luxury",
-                "tc": "#b8962e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 20,
-                "name": "Pesto Primavera",
-                "icon": "herbs",
-                "desc": "Trofie pasta, homemade Genovese pesto, French beans, cherry tomato.",
-                "price": 499,
-                "tag": "Veg",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 21,
-                "name": "Seafood Linguine",
-                "icon": "prawn",
-                "desc": "Tiger prawns, baby clams, squid rings in white wine tomato broth.",
-                "price": 899,
-                "tag": "Must Try",
-                "tc": "#1565c0",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 22,
-                "name": "Lasagne al Forno",
-                "icon": "lasagne",
-                "desc": "Classic layers of bolognese, bechamel sauce, oven-baked mozzarella.",
-                "price": 699,
-                "op": 749,
-                "tag": "Popular",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 23,
-                "name": "Mushroom Risotto",
-                "icon": "risotto",
-                "desc": "Arborio rice, wild porcini mushrooms, white wine, mascarpone, parmesan.",
-                "price": 649,
-                "tag": "Vegetarian",
-                "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 24,
-                "name": "Gnocchi Pomodoro",
-                "icon": "gnocchi",
-                "desc": "House-made potato gnocchi, slow-roasted tomato sugo, torn basil, burrata.",
-                "price": 579,
-                "tag": "New",
-                "tc": "#6a1b9a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322204_download.png",
                 "veg": true
             }
         ],
         "Mains": [
-            {
-                "id": 25,
-                "name": "Chicken Cacciatora",
-                "icon": "chicken",
-                "desc": "Free-range chicken braised with olives, capers, rosemary, white wine.",
-                "price": 749,
-                "tag": "Chef Special",
-                "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 26,
-                "name": "Sea Bass Limone",
-                "emoji": "\ud83d\udc1f",
-                "desc": "Pan-seared sea bass fillet, lemon caper butter, asparagus, crushed potatoes.",
-                "price": 999,
-                "tag": "Premium",
-                "tc": "#b8962e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
-            {
-                "id": 27,
-                "name": "Rack of Lamb",
-                "icon": "lamb",
-                "desc": "Herb-crusted rack of lamb, mint jus, roasted root vegetables, creamy polenta.",
-                "price": 1199,
-                "tag": "Signature",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
-            },
             {
                 "id": 28,
                 "name": "Grilled Salmon",
@@ -521,7 +301,7 @@
                 "op": 1049,
                 "tag": "Hot Deal",
                 "tc": "#e65100",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322194_download.png",
                 "veg": false
             },
             {
@@ -532,19 +312,8 @@
                 "price": 549,
                 "tag": "Veg",
                 "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322174_download.png",
                 "veg": true
-            },
-            {
-                "id": 30,
-                "name": "Grilled Sirloin",
-                "icon": "steak",
-                "desc": "Grilled 200g sirloin steak, truffle butter, crispy fries, house green salad.",
-                "price": 1299,
-                "tag": "Indulge",
-                "tc": "#b8962e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": false
             },
             {
                 "id": 31,
@@ -554,7 +323,7 @@
                 "price": 1099,
                 "tag": "Must Try",
                 "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322181_download.png",
                 "veg": false
             },
             {
@@ -565,7 +334,7 @@
                 "price": 649,
                 "tag": "Comfort",
                 "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322187_download.png",
                 "veg": false
             }
         ],
@@ -579,7 +348,7 @@
                 "op": 379,
                 "tag": "Bestseller",
                 "tc": "#b8962e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322210_download.png",
                 "veg": true
             },
             {
@@ -590,51 +359,7 @@
                 "price": 279,
                 "tag": "",
                 "tc": "",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 35,
-                "name": "Cannoli Siciliani",
-                "icon": "cannoli",
-                "desc": "Crispy pastry shells, sweet sheep ricotta, candied orange, pistachios.",
-                "price": 299,
-                "tag": "Popular",
-                "tc": "#c2562a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 36,
-                "name": "Chocolate Fondant",
-                "icon": "choc",
-                "desc": "Warm molten dark chocolate fondant, Madagascan vanilla gelato, cocoa dust.",
-                "price": 349,
-                "tag": "Must Try",
-                "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 37,
-                "name": "Gelato 3 Scoops",
-                "icon": "gelato",
-                "desc": "House-churned gelato: Pistachio, Stracciatella and Salted Caramel.",
-                "price": 249,
-                "tag": "Kids Love",
-                "tc": "#6a1b9a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
-                "veg": true
-            },
-            {
-                "id": 38,
-                "name": "Affogato al Caffe",
-                "icon": "coffee",
-                "desc": "Two scoops fior di latte gelato, double ristretto poured tableside.",
-                "price": 219,
-                "tag": "Cafe Fav",
-                "tc": "#3a4a2e",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322215_download.png",
                 "veg": true
             },
             {
@@ -645,7 +370,7 @@
                 "price": 319,
                 "tag": "New",
                 "tc": "#6a1b9a",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322221_download.png",
                 "veg": true
             },
             {
@@ -656,7 +381,7 @@
                 "price": 299,
                 "tag": "Regional",
                 "tc": "#2e7d32",
-                "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')",
+                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322225_download.png",
                 "veg": true
             }
         ]
@@ -688,8 +413,7 @@
             "Caf\u00e9",
             "Pizza",
             "Vegan Options",
-            "Bar & Drinks",
-            "Desserts"
+            "Bar & Drinks"
         ],
         "actions": {
             "call": "Call Us",

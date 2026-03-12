@@ -280,13 +280,8 @@
 
                                 $vcardContentMenu = [];
                                 foreach ($userVcards as $vc) {
-                                    // Prefer the vCard's own stored data, fall back to template default
-                                    $vcJsonPath = public_path('storage/vcards/' . $vc->subdomain . '/data.json');
-                                    if (!is_readable($vcJsonPath) && $vc->template_key) {
-                                        $vcJsonPath = base_path('vcard-template/' . $vc->template_key . '/default.json');
-                                    }
-                                    if (!is_readable($vcJsonPath)) continue;
-                                    $vcData = json_decode(file_get_contents($vcJsonPath), true);
+                                    // Load vCard data from DB repository
+                                    $vcData = app(\App\Repositories\Contracts\VcardContentRepository::class)->load($vc);
                                     if (!is_array($vcData)) continue;
 
                                     $listSecs = [];

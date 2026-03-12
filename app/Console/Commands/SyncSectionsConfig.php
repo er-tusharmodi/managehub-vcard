@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Vcard;
-use Illuminate\Support\Facades\Storage;
+use App\Repositories\Contracts\VcardContentRepository;
 
 class SyncSectionsConfig extends Command
 {
@@ -20,7 +20,12 @@ class SyncSectionsConfig extends Command
      *
      * @var string
      */
-    protected $description = 'Sync and merge _sections_config and _field_config from templates to existing vCard data.json files';
+    protected $description = 'Sync and merge _sections_config and _field_config from templates to existing vCard data in the database';
+
+    public function __construct(private readonly VcardContentRepository $contentRepository)
+    {
+        parent::__construct();
+    }
 
     /**
      * Execute the console command.
@@ -45,36 +50,24 @@ class SyncSectionsConfig extends Command
         $bar->start();
 
         foreach ($vcards as $vcard) {
-            $dataJsonPath = 'vcards/' . $vcard->subdomain . '/data.json';
-            
-            // Check if data.json exists
-            if (!Storage::disk('public')->exists($dataJsonPath)) {
-                $this->newLine();
-                $this->warn("⚠ Skipped: {$vcard->subdomain} - data.json not found");
-                $skipped++;
-                $bar->advance();
-                continue;
-            }
-
             try {
-                // Load vCard's data.json
-                $dataJsonContent = Storage::disk('public')->get($dataJsonPath);
-                $data = json_decode($dataJsonContent, true);
+                // Load vCard's data from the repository (DB)
+                $data = $this->contentRepository->load($vcard);
 
-                if (json_last_error() !== JSON_ERROR_NONE) {
+                if (empty($data)) {
                     $this->newLine();
-                    $this->error("✗ Error: {$vcard->subdomain} - Invalid JSON");
-                    $errors++;
+                    $this->warn("⚠ Skipped: {$vcard->subdomain} - no data found");
+                    $skipped++;
                     $bar->advance();
                     continue;
                 }
 
                 // Load template's default.json to merge _sections_config and _field_config
-                $templatePath = base_path('vcard-template/' . $vcard->template_name . '/default.json');
+                $templatePath = base_path('vcard-template/' . $vcard->template_key . '/default.json');
                 
                 if (!file_exists($templatePath)) {
                     $this->newLine();
-                    $this->warn("⚠ Skipped: {$vcard->subdomain} - Template not found: {$vcard->template_name}");
+                    $this->warn("⚠ Skipped: {$vcard->subdomain} - Template not found: {$vcard->template_key}");
                     $skipped++;
                     $bar->advance();
                     continue;
@@ -110,11 +103,8 @@ class SyncSectionsConfig extends Command
                     );
                 }
 
-                // Save updated data.json
-                Storage::disk('public')->put(
-                    $dataJsonPath,
-                    json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)
-                );
+                // Save updated data to the repository (DB)
+                $this->contentRepository->save($vcard, $data);
 
                 $updated++;
                 
@@ -148,3 +138,4 @@ class SyncSectionsConfig extends Command
         return Command::SUCCESS;
     }
 }
+
