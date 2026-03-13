@@ -90,7 +90,6 @@
                     </td>
                     <td>
                         <span class="fw-semibold d-block">
-                            @if($item['icon'] ?? '') {{ $item['icon'] }} @endif
                             {{ $item['name'] ?? '—' }}
                         </span>
                         <span class="text-muted" style="font-size:.72rem;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">
@@ -239,13 +238,13 @@ window.rcMenuDefault = @json($rcMenuDefault);
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
 {{-- ADD / EDIT ITEM MODAL                                                  --}}
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
-<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true" wire:ignore data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0 shadow">
             <div class="modal-header py-3" style="background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-bottom:2px solid #bbf7d0;">
                 <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" style="color:#15803d;">
                     <i class="mdi mdi-silverware-fork-knife"></i>
-                    {{ $editingIndex !== null ? 'Edit Item' : 'Add Item' }}
+                    <span x-data x-text="$wire.editingIndex !== null ? 'Edit Item' : 'Add Item'">{{ $editingIndex !== null ? 'Edit Item' : 'Add Item' }}</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -255,13 +254,11 @@ window.rcMenuDefault = @json($rcMenuDefault);
                     {{-- Photo --}}
                     <div class="col-12 col-md-4">
                         <label class="form-label small fw-semibold mb-1">Item Photo</label>
-                        @php $editPImg = $editingItem['product_image'] ?? ''; @endphp
-                        @if($editPImg)
-                            <div class="mb-2">
-                                <img src="{{ $editPImg }}" alt="" class="rounded border"
-                                     style="max-height:130px;max-width:100%;object-fit:cover;">
-                            </div>
-                        @endif
+                        <div class="mb-2" x-data x-show="$wire.editingItem && $wire.editingItem.product_image">
+                            <img x-bind:src="($wire.editingItem || {}).product_image || ''"
+                                 alt="" class="rounded border"
+                                 style="max-height:130px;max-width:100%;object-fit:cover;">
+                        </div>
                         <input type="file" class="form-control form-control-sm"
                                accept="image/*" wire:model.live="uploads.itemEdit.product_image">
                         <div wire:loading wire:target="uploads.itemEdit.product_image" class="mt-1">
@@ -272,24 +269,11 @@ window.rcMenuDefault = @json($rcMenuDefault);
 
                     <div class="col-12 col-md-8">
                         <div class="row g-2">
-                            {{-- Name + Icon --}}
-                            <div class="col-8">
+                        <div class="col-12">
                                 <label class="form-label small fw-semibold mb-1">Item Name</label>
                                 <input type="text" class="form-control form-control-sm"
                                        wire:model="editingItem.name"
                                        placeholder="e.g. Paneer Tikka">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label small fw-semibold mb-1">Emoji / Icon</label>
-                                <input type="text" class="form-control form-control-sm"
-                                       wire:model="editingItem.icon"
-                                       list="rc-icon-datalist"
-                                       placeholder="🍕">
-                                <datalist id="rc-icon-datalist">
-                                    @foreach(['🍕','🍔','🌮','🌯','🍜','🍣','🍱','🥗','🍛','🥘','🍲','🥩','🍗','🥓','🍤','🥪','🥙','🧆','🧇','🥞','🍳','🥚','🍰','🎂','🧁','🍩','🍪','🍫','☕','🍵','🧃','🥤','🍺','🍷','🍸','🍹','🥂','🧋','🌽','🥦','🥕','🧅','🧄','🫕'] as $__em)
-                                    <option value="{{ $__em }}">{{ $__em }}</option>
-                                    @endforeach
-                                </datalist>
                             </div>
                             {{-- Description --}}
                             <div class="col-12">

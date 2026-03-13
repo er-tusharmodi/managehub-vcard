@@ -514,7 +514,7 @@
         <div class="vcard-footer">
             <p id="footer-copy">
                 {{ data_get($data, "footer.copyright") }}
-                <strong>{{ data_get($data, "footer.brand") }}</strong>
+                <strong>{{ data_get($data, 'footer.brand') ?: data_get($data, '_common.name') }}</strong>
                 ·
                 {{ data_get($data, "footer.rights") }}
             </p>

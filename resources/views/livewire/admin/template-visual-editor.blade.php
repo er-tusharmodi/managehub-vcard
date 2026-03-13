@@ -290,7 +290,7 @@
                                 @endforeach
                             </div>
                         @else
-                        <form wire:submit.prevent="save" novalidate>
+                        <form wire:submit.prevent="save" novalidate wire:key="section-form-{{ $section }}">
                             <div class="row">
                                 @if (empty($form))
                                     <div class="col-12">

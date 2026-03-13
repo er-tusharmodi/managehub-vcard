@@ -129,20 +129,64 @@ const TRANSPORT_ICONS = {
 
 const SOCIAL_ICONS = {
     instagram: {
-        cls: "ic-ig",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="1.8"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5z"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+        bg: "#fce4ec",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#e1306c" stroke-width="1.8" fill="none"><path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5z"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
     },
     whatsapp: {
-        cls: "ic-wa",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
+        bg: "#e0f7e9",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#128c7e" stroke-width="1.8" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>`,
     },
     youtube: {
-        cls: "ic-yt",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff" stroke="none"/></svg>`,
+        bg: "#ffebee",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#cc0000" stroke-width="1.8" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff" stroke="none"/></svg>`,
     },
     facebook: {
-        cls: "ic-fb",
-        svg: `<svg class="ic" viewBox="0 0 24 24" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+        bg: "#e8f0fe",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#1877f2" stroke-width="1.8" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>`,
+    },
+    twitter: {
+        bg: "#e8f4ff",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#1da1f2" stroke-width="1.8" fill="none"><path d="M4 4l16 16M20 4L4 20"/></svg>`,
+    },
+    linkedin: {
+        bg: "#e8f1fb",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#0a66c2" stroke-width="1.8" fill="none"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>`,
+    },
+    telegram: {
+        bg: "#e7f5fc",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#26a5e4" stroke-width="1.8" fill="none"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
+    },
+    tiktok: {
+        bg: "#f0f0f0",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#010101" stroke-width="1.8" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>`,
+    },
+    pinterest: {
+        bg: "#fce8e8",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#bd081c" stroke-width="1.8" fill="none"><path d="M8 3h8a6 6 0 0 1 0 12H8zm0 9v10"/></svg>`,
+    },
+    snapchat: {
+        bg: "#fffde7",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#f4a000" stroke-width="1.8" fill="none"><path d="M12 3C8.7 3 6 5.7 6 9v5l-2 3c.8.2 1.6.5 2.2 1.1.4.4.5.8.5 1.2 0 .4 1 .7 2.3.7h6c1.3 0 2.3-.3 2.3-.7 0-.4.1-.8.5-1.2.6-.6 1.4-.9 2.2-1.1L18 14V9c0-3.3-2.7-6-6-6z"/></svg>`,
+    },
+    threads: {
+        bg: "#f0f0f0",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#010101" stroke-width="1.8" fill="none"><path d="M12 22c5.5 0 10-4.5 10-10S17.5 2 12 2 2 6.5 2 12c0 3.3 1.6 6.2 4 8m4-8a4 4 0 1 1 0-8 4 4 0 0 1 0 8m0 0v8"/></svg>`,
+    },
+    website: {
+        bg: "#ede9fe",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#6366f1" stroke-width="1.8" fill="none"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+    },
+    email: {
+        bg: "#fce8e6",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#ea4335" stroke-width="1.8" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22 6 12 13 2 6"/></svg>`,
+    },
+    phone: {
+        bg: "#e8f5e9",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#16a34a" stroke-width="1.8" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+    },
+    google: {
+        bg: "#e8f0fe",
+        svg: `<svg class="ic" viewBox="0 0 24 24" stroke="#4285f4" stroke-width="1.8" fill="none"><path d="M21 12H12m9 0a9 9 0 1 1-4.5-7.8"/></svg>`,
     },
 };
 
@@ -199,6 +243,16 @@ const renderCuisineTags = () => {
     );
 };
 
+const resolveHighlightIcon = (icon) => {
+    if (!icon) return "";
+    // FontAwesome class (e.g. "fa-utensils") → render <i> tag
+    if (icon.startsWith("fa-")) {
+        return `<i class="fa-solid ${icon}" style="font-size:1.3rem;"></i>`;
+    }
+    // Legacy named SVG icons
+    return HIGHLIGHT_ICONS[icon] || "";
+};
+
 const renderHighlights = () => {
     setHTML(
         "highlightsRow",
@@ -206,7 +260,7 @@ const renderHighlights = () => {
             .map(
                 (item) => `
                     <div class="hl-box">
-                        <div class="hl-em">${HIGHLIGHT_ICONS[item.icon] || ""}</div>
+                        <div class="hl-em">${resolveHighlightIcon(item.icon)}</div>
                         <div class="hl-lbl">${item.label || ""}</div>
                     </div>`,
             )
@@ -320,6 +374,12 @@ const socialAction = (item) => {
     if (item.action === "url" && item.url) {
         return `window.open('${sq(item.url)}','_blank')`;
     }
+    if (item.action === "call" && item.url) {
+        return `window.location.href='tel:${sq(item.url)}'`;
+    }
+    if (item.action === "email" && item.url) {
+        return `window.location.href='mailto:${sq(item.url)}'`;
+    }
     return "";
 };
 
@@ -332,7 +392,7 @@ const renderSocial = () => {
                 const click = socialAction(item);
                 return `
                     <div class="soc-item"${click ? ` onclick="${click}"` : ""}>
-                        <div class="s-ico ${icon.cls || ""}">${icon.svg || ""}</div>
+                        <div class="s-ico" style="background:${icon.bg || "#f5f5f5"}">${icon.svg || ""}</div>
                         <div>
                             <div class="s-name">${item.name || ""}</div>
                             <div class="s-val">${item.value || ""}</div>
@@ -878,7 +938,7 @@ const renderStatic = () => {
 
     setHTML(
         "footerLine1",
-        `${pick("footer.year")} <strong>${pick("footer.brand")}</strong> ${pick("footer.rights")}`.trim(),
+        `${pick("footer.year")} <strong>${pick("footer.brand") || pick("_common.name") || pick("meta.title")}</strong> ${pick("footer.rights")}`.trim(),
     );
     setHTML(
         "footerLine2",

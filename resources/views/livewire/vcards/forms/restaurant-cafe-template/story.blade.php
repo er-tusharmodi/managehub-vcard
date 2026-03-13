@@ -87,7 +87,7 @@
 @if(isset($form['highlights']) && is_array($form['highlights']))
 <div class="col-12 mb-1">
     <label class="form-label fw-semibold text-muted">Highlights</label>
-    <small class="d-block text-muted mb-2">Choose an icon and enter a label for each USP badge.</small>
+    <small class="d-block text-muted mb-2">Choose a professional food icon and enter a label for each USP badge.</small>
 </div>
 @foreach($form['highlights'] as $hi => $highlight)
     <div class="col-12">
@@ -97,34 +97,61 @@
                     <label class="form-label small mb-1">Icon</label>
                     <select class="form-select form-select-sm"
                             wire:model.live="form.highlights.{{ $hi }}.icon">
-                        <option value="oven">🔥 Wood-Fired Oven</option>
-                        <option value="fresh">🌿 Fresh Ingredients</option>
-                        <option value="wine">🍷 Wine / Drinks</option>
-                        <option value="star">⭐ Star / Quality</option>
-                        <option value="chef">👨‍🍳 Chef / Expertise</option>
-                        <option value="spice">🌶️ Spices / Flavour</option>
-                        <option value="organic">🥦 Organic</option>
-                        <option value="delivery">🛵 Delivery</option>
-                        <option value="award">🏆 Award / Recognition</option>
-                        <option value="time">⏱️ Quick Service</option>
-                        <option value="veg">🥗 Vegetarian</option>
-                        <option value="music">🎵 Live Music / Ambiance</option>
-                        <option value="outdoor">🌳 Outdoor Seating</option>
-                        <option value="family">👨‍👩‍👧 Family Friendly</option>
-                        <option value="wifi">📶 Free WiFi</option>
-                        <option value="parking">🅿️ Parking Available</option>
-                        <option value="ac">❄️ Air Conditioned</option>
-                        <option value="rooftop">🏙️ Rooftop / View</option>
-                        <option value="cake">🎂 Custom Cakes</option>
-                        <option value="coffee">☕ Artisan Coffee</option>
+                        {{-- Food & Drink --}}
+                        <optgroup label="Food &amp; Drink">
+                            <option value="fa-utensils">Utensils</option>
+                            <option value="fa-burger">Burger</option>
+                            <option value="fa-pizza-slice">Pizza</option>
+                            <option value="fa-drumstick-bite">Chicken / Drumstick</option>
+                            <option value="fa-fish">Fish / Seafood</option>
+                            <option value="fa-carrot">Vegetarian / Salad</option>
+                            <option value="fa-seedling">Organic / Fresh</option>
+                            <option value="fa-pepper-hot">Spicy / Chilli</option>
+                            <option value="fa-bread-slice">Bread / Bakery</option>
+                            <option value="fa-cake-candles">Dessert / Cake</option>
+                            <option value="fa-ice-cream">Ice Cream</option>
+                            <option value="fa-egg">Eggs / Breakfast</option>
+                            <option value="fa-lemon">Lemon / Citrus</option>
+                            <option value="fa-apple-whole">Fruit</option>
+                        </optgroup>
+                        {{-- Beverages --}}
+                        <optgroup label="Beverages">
+                            <option value="fa-mug-hot">Coffee / Hot Drinks</option>
+                            <option value="fa-wine-glass">Wine / Spirits</option>
+                            <option value="fa-beer-mug-empty">Beer / Drinks</option>
+                            <option value="fa-martini-glass">Cocktails</option>
+                            <option value="fa-bottle-water">Water / Beverages</option>
+                        </optgroup>
+                        {{-- Service & Experience --}}
+                        <optgroup label="Service &amp; Experience">
+                            <option value="fa-fire-burner">Wood-Fired / Grill</option>
+                            <option value="fa-hat-chef">Chef / Expertise</option>
+                            <option value="fa-star">Quality / 5-Star</option>
+                            <option value="fa-award">Award / Recognition</option>
+                            <option value="fa-trophy">Best Restaurant</option>
+                            <option value="fa-clock">Quick Service</option>
+                            <option value="fa-motorcycle">Delivery</option>
+                            <option value="fa-table">Seating / Dine-in</option>
+                            <option value="fa-wifi">Free WiFi</option>
+                            <option value="fa-snowflake">Air Conditioned</option>
+                            <option value="fa-car">Parking</option>
+                            <option value="fa-people-group">Family Friendly</option>
+                            <option value="fa-music">Live Music</option>
+                            <option value="fa-tree">Outdoor Seating</option>
+                        </optgroup>
                     </select>
+                    {{-- Live preview of the selected icon --}}
+                    <div class="mt-1 text-muted" style="font-size:.75rem;">
+                        <i class="fa-solid {{ $highlight['icon'] ?? 'fa-utensils' }} me-1"></i>
+                        <span style="font-size:.68rem;">Preview</span>
+                    </div>
                 </div>
                 <div class="col-sm-6">
                     <label class="form-label small mb-1">Label</label>
                     <input type="text"
                            class="form-control form-control-sm"
                            wire:model="form.highlights.{{ $hi }}.label"
-                           placeholder="Wood-Fired Oven">
+                           placeholder="e.g. Wood-Fired Oven">
                 </div>
                 <div class="col-sm-2 d-flex align-items-end">
                     <button type="button"

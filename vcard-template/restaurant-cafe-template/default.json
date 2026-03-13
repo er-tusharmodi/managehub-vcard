@@ -449,7 +449,7 @@
         "chefRole": "Head Chef & Founders",
         "highlights": [
             {
-                "icon": "oven",
+                "icon": "outdoor",
                 "label": "Wood-Fired Oven"
             },
             {
@@ -616,12 +616,6 @@
             "title": "Happy Hours",
             "desc": "Flat 20% off on all beverages and starters between 3 PM to 6 PM on weekdays.",
             "tag": "3-6 PM"
-        },
-        {
-            "icon": "",
-            "title": "asdasd",
-            "desc": "asdasd",
-            "tag": "asdasd"
         }
     ],
     "hours": {
@@ -691,14 +685,14 @@
     },
     "social": [
         {
-            "type": "website",
-            "name": "Website",
+            "type": "phone",
+            "name": "Phone",
             "value": "+91 98765 43210 \u00b7 Quick response",
             "action": "url"
         },
         {
-            "type": "email",
-            "name": "Email",
+            "type": "pinterest",
+            "name": "Pinterest",
             "value": "asdasd",
             "action": "email",
             "url": "adasd"

@@ -48,7 +48,7 @@ class TemplateVisualEditor extends Component
             $excluded = [
                 '_field_config', 'files', '_sections_config',
                 'floatingBar', 'floatBar', 'bottomBar', 'cart',
-                'footer', 'labels', 'toast', 'share', 'shareModal',
+                'labels', 'toast', 'share', 'shareModal',
                 'banner', 'header', 'status',
             ];
             // 'sections' key is heading texts in most templates (not minimart)

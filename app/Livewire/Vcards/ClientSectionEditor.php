@@ -119,7 +119,7 @@ class ClientSectionEditor extends Component
         }
         $hiddenSections = [
             'files', 'floatingBar', 'floatBar', 'bottomBar',
-            'footer', 'labels', 'toast', 'share', 'shareModal',
+            'labels', 'toast', 'share', 'shareModal',
             'banner', 'header', 'status', 'cart',
             'messages', // static WA/modal message templates — admin-only
         ];

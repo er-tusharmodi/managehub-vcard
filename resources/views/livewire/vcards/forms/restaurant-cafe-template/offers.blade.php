@@ -82,7 +82,7 @@
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
 {{-- OFFER MODAL (Add / Edit)                                               --}}
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
-<div class="modal fade" id="offerModal" tabindex="-1" aria-labelledby="offerModalLabel" aria-hidden="true">
+<div class="modal fade" id="offerModal" tabindex="-1" aria-labelledby="offerModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" style="max-width:520px;">
         <div class="modal-content border-0 shadow">
             <div class="modal-header py-3"
@@ -103,7 +103,7 @@
                         <label class="form-label small fw-semibold mb-1">Icon / Emoji</label>
                         <div x-data="{
                             open: false,
-                            val: @entangle('editingItem.icon').live,
+                            val: {{ json_encode($editingItem['icon'] ?? '') }},
                             svgIcons: ['brunch','candle','coffee','cake'],
                             svgLabels: {'brunch':'Brunch','candle':'Candle Dinner','coffee':'Coffee','cake':'Cake'},
                             emojis: [
@@ -116,7 +116,7 @@
                                 {e:'🧋',l:'Bubble Tea'},{e:'💯',l:'100%'},{e:'🌟',l:'Star'},{e:'✨',l:'Sparkle'},
                                 {e:'🤑',l:'Money'},{e:'👨‍🍳',l:'Chef'},{e:'🍽️',l:'Dining'},{e:'🎊',l:'Confetti'}
                             ],
-                            pick(v){ this.val = v; this.open = false; }
+                            pick(v){ this.val = v; this.open = false; $wire.set('editingItem.icon', v, false); }
                         }" class="position-relative" @click.outside="open=false">
 
                             {{-- Trigger button --}}
@@ -237,7 +237,9 @@
         window.__offerSaveItem = function () {
             var comp = window.__offerWireComp;
             if (!comp) { console.error('Offer Livewire component not found'); return; }
-            hideInstant('offerModal');
+            // Call saveOfferModal first — PHP saves and dispatches 'hide-offer-modal'
+            // which then triggers hideInstant. This ensures Alpine @@entangle data is
+            // fully synced before the modal is destroyed.
             comp.$call('saveOfferModal');
         };
 

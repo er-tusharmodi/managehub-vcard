@@ -50,7 +50,7 @@
                 <div class="col-sm-3 col-lg-2">
                     <label class="form-label small fw-semibold mb-1">Platform</label>
                     <select class="form-select form-select-sm"
-                            wire:model="form.{{ $si }}.type"
+                            wire:model.live="form.{{ $si }}.type"
                             x-on:change="
                                 const map = {{ json_encode($socialPlatforms) }};
                                 const name = map[$event.target.value];

@@ -49,11 +49,22 @@
         ? array_values(array_filter($menuItems, fn($i) => ($i['category_key'] ?? '') === $activeTab))
         : $menuItems;
 
-    $socialIconClasses = [
-        "instagram" => "ic-ig",
-        "whatsapp" => "ic-wa",
-        "youtube" => "ic-yt",
-        "facebook" => "ic-fb",
+    $socialColors = [
+        "instagram" => "#fce4ec",
+        "whatsapp"  => "#e0f7e9",
+        "youtube"   => "#ffebee",
+        "facebook"  => "#e8f0fe",
+        "twitter"   => "#e8f4ff",
+        "linkedin"  => "#e8f1fb",
+        "telegram"  => "#e7f5fc",
+        "tiktok"    => "#f0f0f0",
+        "pinterest" => "#fce8e8",
+        "snapchat"  => "#fffde7",
+        "threads"   => "#f0f0f0",
+        "website"   => "#ede9fe",
+        "email"     => "#fce8e6",
+        "phone"     => "#e8f5e9",
+        "google"    => "#e8f0fe",
     ];
 @endphp
 <!doctype html>
@@ -74,6 +85,7 @@
         <link rel="icon" type="image/x-icon" href="{{ $storyImage }}">
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
         @if(!empty($vcard->head_script))
         {!! $vcard->head_script !!}
@@ -519,16 +531,20 @@
                             @php
                             $type = $item["type"] ?? "instagram";
                             $iconKey = "social_" . $type;
-                            $iconClass = $socialIconClasses[$type] ?? $socialIconClasses["instagram"];
+                            $iconBg = $socialColors[$type] ?? "#f5f5f5";
                             $action = "";
                             if (($item["action"] ?? "") === "wa") {
                                 $action = "openWA()";
                             } elseif (($item["action"] ?? "") === "url" && !empty($item["url"])) {
                                 $action = "window.open(" . js_str($item["url"]) . ", '_blank')";
+                            } elseif (($item["action"] ?? "") === "call" && !empty($item["url"])) {
+                                $action = "window.location.href='tel:" . addslashes((string) $item["url"]) . "'";
+                            } elseif (($item["action"] ?? "") === "email" && !empty($item["url"])) {
+                                $action = "window.location.href='mailto:" . addslashes((string) $item["url"]) . "'";
                             }
 @endphp
                             <div class="soc-item"{{ $action ? " onclick=\"" . e($action) . "\"" : "" }}>
-                                <div class="s-ico {{ $iconClass }}">{!! getIcon($iconKey) !!}</div>
+                                <div class="s-ico" style="background:{{ $iconBg }}">{!! getIcon($iconKey) !!}</div>
                                 <div>
                                     <div class="s-name">{{ $item["name"] ?? "" }}</div>
                                     <div class="s-val">{{ $item["value"] ?? "" }}</div>
@@ -640,7 +656,7 @@
         @endif
 
             <div class="vcard-footer">
-                <p id="footerLine1">{{ data_get($data, "footer.year") }} <strong>{{ data_get($data, "footer.brand") }}</strong> {{ data_get($data, "footer.rights") }}</p>
+                <p id="footerLine1">{{ data_get($data, "footer.year") }} <strong>{{ data_get($data, 'footer.brand') ?: (data_get($data, '_common.name') ?: data_get($data, 'meta.title')) }}</strong> {{ data_get($data, "footer.rights") }}</p>
                 <p id="footerLine2" style="margin-top: 0.3rem; font-size: 0.68rem">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></p>
             </div>
 

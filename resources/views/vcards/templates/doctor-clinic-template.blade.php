@@ -442,7 +442,7 @@
 
             <div style="text-align:center;padding:1.4rem 1rem 1rem;font-size:0.72rem;color:var(--muted);">
                 <span id="footer-line1">{{ data_get($data, 'footer.line1') }}</span><br />
-                <strong style="color:var(--teal)" id="footer-line2">{{ data_get($data, 'footer.line2') }}</strong><br />
+                <strong style="color:var(--teal)" id="footer-line2">{{ data_get($data, 'footer.line2') ?: data_get($data, '_common.name') }}</strong><br />
                 <span id="footer-line3">{{ data_get($data, 'footer.line3') }}</span><br />
                 <span style="font-size:0.65rem;color:#aaa" id="footer-line4">{{ data_get($data, 'footer.line4') }}</span><br />
                 <span style="font-size:0.63rem;color:#bbb;margin-top:0.35rem;display:inline-block;">Powered by <a href="{{ config('app.url') }}" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:none;font-weight:600;">{{ config('app.name') }}</a></span>

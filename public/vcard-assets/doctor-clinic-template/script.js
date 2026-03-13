@@ -469,7 +469,7 @@ const fillStaticContent = () => {
     setText("qr-download-label", pick("qr.downloadLabel"));
 
     setText("footer-line1", pick("footer.line1"));
-    setText("footer-line2", pick("footer.line2"));
+    setText("footer-line2", pick("footer.line2") || pick("_common.name"));
     setText("footer-line3", pick("footer.line3"));
     setText("footer-line4", pick("footer.line4"));
 

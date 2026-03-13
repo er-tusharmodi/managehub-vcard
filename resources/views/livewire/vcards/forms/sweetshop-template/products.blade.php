@@ -227,13 +227,13 @@ window.ssProdDefault = @json($defaultProd);
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
 {{-- ADD / EDIT MODAL                                                       --}}
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
-<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true" wire:ignore data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0 shadow">
             <div class="modal-header py-3" style="background:linear-gradient(90deg,#eff6ff,#dbeafe);border-bottom:2px solid #bfdbfe;">
                 <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" style="color:#1e40af;">
                     <i class="mdi mdi-candy-outline"></i>
-                    {{ $editingIndex !== null ? 'Edit Product' : 'Add Product' }}
+                    <span x-data x-text="$wire.editingIndex !== null ? 'Edit Product' : 'Add Product'">{{ $editingIndex !== null ? 'Edit Product' : 'Add Product' }}</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -243,13 +243,11 @@ window.ssProdDefault = @json($defaultProd);
                     {{-- Product Photo --}}
                     <div class="col-12 col-md-4">
                         <label class="form-label small fw-semibold mb-1">Product Photo</label>
-                        @php $editPImg = $editingItem['product_image'] ?? ''; @endphp
-                        @if($editPImg)
-                            <div class="mb-2">
-                                <img src="{{ $editPImg }}" alt="" class="rounded border"
-                                     style="max-height:130px;max-width:100%;object-fit:cover;">
-                            </div>
-                        @endif
+                        <div class="mb-2" x-data x-show="$wire.editingItem && $wire.editingItem.product_image">
+                            <img x-bind:src="($wire.editingItem || {}).product_image || ''"
+                                 alt="" class="rounded border"
+                                 style="max-height:130px;max-width:100%;object-fit:cover;">
+                        </div>
                         <input type="file" class="form-control form-control-sm"
                                accept="image/*" wire:model.live="uploads.itemEdit.product_image">
                         <div wire:loading wire:target="uploads.itemEdit.product_image" class="mt-1">

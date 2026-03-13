@@ -110,7 +110,7 @@ class AdminSectionEditor extends Component
         // _common is the exception — it's shown first as "Basic Info"
         $hiddenSections = [
             'files', 'floatingBar', 'floatBar', 'bottomBar',
-            'footer', 'labels', 'toast', 'share', 'shareModal',
+            'labels', 'toast', 'share', 'shareModal',
             'banner', 'header', 'status', 'cart',
         ];
         // For templates where 'sections' key is just heading texts, hide it from sidebar
@@ -667,6 +667,28 @@ class AdminSectionEditor extends Component
         $this->newItem = [];
         $this->dispatch('hide-category-modal');
         $this->dispatch('notify', type: 'success', message: "Category '{$name}' added!");
+    }
+
+    public function openOfferModal(?int $index = null): void
+    {
+        $default = ['icon' => '🏷️', 'title' => '', 'desc' => '', 'tag' => ''];
+        $this->editingIndex = $index;
+        $this->editingItem  = $index !== null ? ($this->form[$index] ?? $default) : $default;
+        $this->dispatch('open-offer-modal', wireId: $this->getId());
+    }
+
+    public function saveOfferModal(): void
+    {
+        $list  = is_array($this->form) ? $this->form : [];
+        $index = $this->editingIndex ?? count($list);
+        $list[$index]  = $this->editingItem;
+        $this->form    = array_values($list);
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem  = [];
+        $this->editingIndex = null;
+        $this->dispatch('hide-offer-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Offer updated!' : 'Offer added!');
     }
 
     public function openPaymentModal(?int $index = null): void

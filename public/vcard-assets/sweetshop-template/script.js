@@ -209,7 +209,7 @@ const hydrateStaticText = () => {
 
     setHTML(
         "footer-copy",
-        `${APP.footer?.copyright || ""} <strong>${APP.footer?.brand || ""}</strong> · ${APP.footer?.rights || ""}`,
+        `${APP.footer?.copyright || ""} <strong>${APP.footer?.brand || APP._common?.name || ""}</strong> · ${APP.footer?.rights || ""}`,
     );
     setHTML(
         "footer-powered",
