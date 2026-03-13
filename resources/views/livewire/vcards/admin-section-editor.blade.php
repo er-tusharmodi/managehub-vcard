@@ -72,6 +72,7 @@
             'showroom'        => ['icon' => 'mdi-store-outline',          'color' => 'secondary'],
             'director'        => ['icon' => 'mdi-account-star',           'color' => 'warning'],
             'R'               => ['icon' => 'mdi-store',                  'color' => 'success'],
+            '_settings'       => ['icon' => 'mdi-tune-vertical',          'color' => 'secondary'],
         ];
     @endphp
 
@@ -92,28 +93,6 @@
                 <div class="card-body p-0">
                     <div class="ase-nav" style="max-height:calc(100vh - 300px);overflow-y:auto;">
 
-                        {{-- Code Editor nav item --}}
-                        <div wire:key="nav-code-editor"
-                             class="ase-nav-item d-flex align-items-center gap-2 px-3 py-2 border-bottom
-                                    {{ $editMode === 'code' ? 'ase-nav-active-dark' : '' }}"
-                             wire:click="switchToCodeEditor"
-                             style="cursor:pointer;min-height:48px;transition:background .15s;">
-                            <div class="flex-shrink-0">
-                                <span class="avatar-xs">
-                                    <span class="avatar-title rounded-circle font-size-14
-                                                 {{ $editMode === 'code' ? 'bg-dark text-white' : 'bg-soft-dark text-dark' }}">
-                                        <i class="mdi mdi-code-braces"></i>
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="flex-grow-1 overflow-hidden">
-                                <p class="mb-0 fw-medium text-truncate {{ $editMode === 'code' ? 'text-dark' : '' }}" style="font-size:.875rem;">
-                                    Code Editor
-                                </p>
-                                <small class="text-muted" style="font-size:.72rem;">Raw JSON data</small>
-                            </div>
-                        </div>
-
                         <div class="px-3 pt-2 pb-1">
                             <small class="text-uppercase text-muted fw-semibold" style="font-size:.68rem;letter-spacing:.06em;">Sections</small>
                         </div>
@@ -123,7 +102,7 @@
                                 $tabIcon  = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $isActive = ($editMode !== 'code') && $section === $tab;
                                 $sectionLabelMap = [
-                                    'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
+                                    'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu', 'profile' => 'Profile Categories', 'qr' => 'QR Text'],
                                 ];
                                 $tabLabel = $tab === '_common'
                                     ? 'Basic Info'
@@ -156,15 +135,6 @@
                                         </small>
                                     @endif
                                 </div>
-                                @if($hasToggle)
-                                    <div class="flex-shrink-0" wire:click.stop="toggleSection('{{ $tab }}')">
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox"
-                                                   style="width:34px;height:18px;cursor:pointer;pointer-events:none;"
-                                                   @checked($tabEnabled)>
-                                        </div>
-                                    </div>
-                                @endif
                             </div>
                         @endforeach
 
@@ -185,63 +155,17 @@
         </div>
 
         {{-- RIGHT EDIT PANEL --}}
-        <div class="col-lg-9 col-xxl-5">
+        <div class="col-lg-9 col-xxl-9">
 
-            @if ($editMode === 'code')
-                {{-- CODE EDITOR --}}
-                <div class="card">
-                    <div class="card-header bg-light">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="avatar-sm flex-shrink-0">
-                                <span class="avatar-title rounded-circle bg-dark text-white font-size-20">
-                                    <i class="mdi mdi-code-braces"></i>
-                                </span>
-                            </div>
-                            <div class="flex-grow-1">
-                                <h5 class="mb-0">Code Editor</h5>
-                                <small class="text-muted">Edit complete vCard JSON data</small>
-                            </div>
-                            <button wire:click="switchToVisualEditor" class="btn btn-sm btn-outline-primary">
-                                <i class="mdi mdi-eye me-1"></i>Switch to Visual Editor
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body p-0">
-                        <div class="alert alert-warning m-3 mb-0 border-0">
-                            <i class="mdi mdi-alert-outline me-2"></i>
-                            <strong>Caution:</strong> You are editing raw JSON. Invalid JSON will not be saved. Changes affect the entire vCard data structure.
-                        </div>
-                        <textarea
-                            wire:model="jsonContent"
-                            class="form-control font-monospace"
-                            style="min-height:600px;border:none;border-radius:0;font-size:13px;line-height:1.6;tab-size:4;"
-                            spellcheck="false"
-                        ></textarea>
-                    </div>
-                    <div class="card-footer bg-white border-top py-3">
-                        <div class="d-flex gap-2">
-                            <button wire:click="saveCodeEditor" class="btn btn-success px-4">
-                                <span wire:loading.remove wire:target="saveCodeEditor">
-                                    <i class="mdi mdi-content-save me-1"></i>Save JSON
-                                </span>
-                                <span wire:loading wire:target="saveCodeEditor">
-                                    <i class="mdi mdi-loading mdi-spin me-1"></i>Saving...
-                                </span>
-                            </button>
-                            <button wire:click="switchToVisualEditor" type="button" class="btn btn-light px-4">
-                                <i class="mdi mdi-close me-1"></i>Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-            @else
-                {{-- VISUAL EDITOR --}}
-                @php
+            {{-- VISUAL EDITOR --}}
+            @php
                     $activeIcon  = $iconMap[$section] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
-                    $activeLabel = $section === '_common'
-                        ? 'Basic Info'
-                        : (['MENU' => 'Menu'][$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')));
+                    $activeLabel = match($section) {
+                        '_common'   => 'Basic Info',
+                        '_settings' => 'Section Visibility',
+                        'MENU'      => 'Menu',
+                        default     => \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')),
+                    };
                     $isFormList  = is_array($form) && !empty($form) && array_values($form) === $form;
                     $itemLabel   = \Illuminate\Support\Str::singular($activeLabel);
                 @endphp
@@ -274,15 +198,6 @@
                                     <i class="mdi mdi-plus me-1"></i>Add {{ $itemLabel }}
                                 </button>
                             @endif
-                            @if(isset($sectionsConfig[$section]))
-                                @php $secEnabled = $sectionsConfig[$section]['enabled'] ?? true; @endphp
-                                <div wire:click="toggleSection('{{ $section }}')" style="cursor:pointer;">
-                                    <span class="badge rounded-pill {{ $secEnabled ? 'bg-success' : 'bg-secondary' }} px-3 py-2">
-                                        <i class="mdi {{ $secEnabled ? 'mdi-toggle-switch' : 'mdi-toggle-switch-off' }} me-1"></i>
-                                        {{ $secEnabled ? 'Section Enabled' : 'Section Disabled' }}
-                                    </span>
-                                </div>
-                            @endif
                         </div>
                     </div>
 
@@ -312,12 +227,52 @@
                         @if(isset($sectionsConfig[$section]) && !($sectionsConfig[$section]['enabled'] ?? true))
                             <div class="alert alert-warning mb-3">
                                 <i class="mdi mdi-eye-off-outline me-2"></i>
-                                <strong>This section is currently disabled.</strong>
-                                It will not be visible on the vCard. Toggle it on using the switch above or in the sidebar.
+                                <strong>This section is currently hidden.</strong>
+                                Enable it in the <a href="#" wire:click.prevent="selectSection('_settings')" class="alert-link">Section Visibility</a> tab.
                             </div>
                         @endif
 
-                        <form wire:submit.prevent="save" novalidate>
+                        @if($section === '_settings')
+                            {{-- ── SECTION VISIBILITY PANEL ─────────────────────────── --}}
+                            <p class="text-muted mb-3" style="font-size:.85rem;">Toggle sections on or off to show or hide them on your vCard.</p>
+                            <div class="row g-2">
+                                @foreach($sectionsConfig as $sKey => $sCfg)
+                                    @php
+                                        $sEnabled = $sCfg['enabled'] ?? true;
+                                        $sLabel   = $sCfg['label'] ?? \Illuminate\Support\Str::headline($sKey);
+                                        $sIcon    = $iconMap[$sKey] ?? ['icon' => 'mdi-layers', 'color' => 'secondary'];
+                                    @endphp
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center justify-content-between p-3 border rounded
+                                                    {{ $sEnabled ? 'border-success-subtle bg-success-subtle' : 'border-secondary-subtle bg-light' }}"
+                                             style="transition:.15s;">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <span class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title rounded-circle font-size-16
+                                                                 {{ $sEnabled ? 'bg-success text-white' : 'bg-secondary-subtle text-secondary' }}">
+                                                        <i class="mdi {{ $sIcon['icon'] }}"></i>
+                                                    </span>
+                                                </span>
+                                                <div>
+                                                    <p class="mb-0 fw-semibold" style="font-size:.9rem;">{{ $sLabel }}</p>
+                                                    <small class="{{ $sEnabled ? 'text-success' : 'text-muted' }}">
+                                                        {{ $sEnabled ? 'Visible on vCard' : 'Hidden from vCard' }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div wire:click="toggleSection('{{ $sKey }}')" style="cursor:pointer;">
+                                                <div class="form-check form-switch mb-0">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           style="width:44px;height:22px;cursor:pointer;pointer-events:none;"
+                                                           @checked($sEnabled)>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <form wire:submit.prevent="save" novalidate wire:key="section-form-{{ $section }}">
                             <div class="row">
                                 @if (empty($form))
                                     <div class="col-12">
@@ -366,33 +321,13 @@
                                     </div>
                                 @endif
                             </div>
-                        </form>
+                            </form>
+                        @endif
                     </div>
                 </div>
-            @endif
 
         </div>
 
-        {{-- LIVE PREVIEW PANEL --}}
-        <div class="col-xxl-4 d-none d-xxl-block">
-            <div class="card" style="position:sticky;top:80px;">
-                <div class="card-header bg-light py-2 px-3 d-flex align-items-center justify-content-between">
-                    <span class="fw-semibold" style="font-size:.875rem;">
-                        <i class="mdi mdi-cellphone me-1 text-primary"></i>Live Preview
-                    </span>
-                    <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
-                       class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:.75rem;">
-                        <i class="mdi mdi-open-in-new me-1"></i>Open
-                    </a>
-                </div>
-                <div class="card-body p-0" style="background:#f0f0f0;">
-                    <iframe id="vcardPreviewFrame"
-                            src="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}"
-                            style="width:100%;height:calc(100vh - 220px);min-height:500px;border:0;display:block;"
-                            loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
     </div>
 
     <style>
@@ -404,10 +339,6 @@
 
     <script>
     (function () {
-        window.addEventListener('vcard-saved', function () {
-            const frame = document.getElementById('vcardPreviewFrame');
-            if (frame) { frame.src = frame.src; }
-        });
         window.addEventListener('section-changed', function (e) {
             const section = e.detail.section;
             const base = window.location.pathname.replace(/\/data(\/[^\/]*)?$/, '');
@@ -422,5 +353,79 @@
             }
         });
     })();
+
+    // ── Sortable drag-to-reorder for gallery grids ──────────────────────
+    (function () {
+        function initSortables() {
+            if (!window.Sortable) { return; }
+            document.querySelectorAll('[data-sort-path]').forEach(function (container) {
+                if (container.__sortableInited) { return; }
+                container.__sortableInited = true;
+                var path = container.getAttribute('data-sort-path') || '';
+                var wireEl = container.closest('[wire\\:id]');
+                if (!wireEl) { return; }
+                new Sortable(container, {
+                    handle: '.drag-handle',
+                    animation: 150,
+                    ghostClass: 'sortable-ghost',
+                    chosenClass: 'sortable-chosen',
+                    onEnd: function (evt) {
+                        if (evt.oldIndex === evt.newIndex) { return; }
+                        // Re-index data-row-index on children so event delegation stays correct
+                        Array.from(container.children).forEach(function(el, idx) {
+                            if ('rowIndex' in el.dataset) el.dataset.rowIndex = idx;
+                        });
+                        var comp = window.Livewire.find(wireEl.getAttribute('wire:id'));
+                        if (comp) {
+                            comp.call('reorderRow', path, evt.oldIndex, evt.newIndex);
+                        }
+                    }
+                });
+            });
+        }
+        function loadSortableAndInit() {
+            if (window.Sortable) { initSortables(); return; }
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js';
+            script.onload = initSortables;
+            document.head.appendChild(script);
+        }
+        // Run once immediately at page load
+        loadSortableAndInit();
+        // Re-run whenever Sortable containers appear/reappear in the DOM
+        // (MutationObserver is immune to Livewire version differences)
+        if (!window.__vcardSortableListenerAdded) {
+            window.__vcardSortableListenerAdded = true;
+            var _mo = new MutationObserver(function () {
+                loadSortableAndInit();
+            });
+            _mo.observe(document.body, { childList: true, subtree: true });
+        }
+    })();
+
+    // Generic item modal (sweetshop services / products — ss-item-modal)
+    // Track open state so we can re-open after Livewire re-renders (e.g. image upload)
+    window._ssItemModalOpen = window._ssItemModalOpen || false;
+    window.addEventListener('open-item-modal', function (e) {
+        var el = document.getElementById('ss-item-modal');
+        if (!el) return;
+        window._ssItemModalOpen = true;
+        bootstrap.Modal.getOrCreateInstance(el).show();
+    });
+    window.addEventListener('hide-item-modal', function () {
+        var el = document.getElementById('ss-item-modal');
+        if (!el) return;
+        window._ssItemModalOpen = false;
+        bootstrap.Modal.getOrCreateInstance(el).hide();
+    });
+    document.addEventListener('hidden.bs.modal', function(e) {
+        if (e.target && e.target.id === 'ss-item-modal') window._ssItemModalOpen = false;
+    });
+    document.addEventListener('livewire:updated', function() {
+        if (window._ssItemModalOpen) {
+            var el = document.getElementById('ss-item-modal');
+            if (el) bootstrap.Modal.getOrCreateInstance(el).show();
+        }
+    });
     </script>
 </div>

@@ -12,9 +12,7 @@
            wire:model="form.name" placeholder="La Cucina Italiana">
 </div>
 <div class="col-12">
-    <label class="form-label small mb-1 fw-semibold">Full Address</label>
-    <textarea class="form-control form-control-sm" rows="2"
-              wire:model="form.address" placeholder="12, MG Road, Indiranagar, Bangalore — 560038"></textarea>
+    <small class="text-muted"><i class="mdi mdi-information-outline me-1"></i>Full address is managed in <strong>Basic Details</strong>.</small>
 </div>
 
 {{-- ══════════════════════════════════════════════════════════════════════════ --}}

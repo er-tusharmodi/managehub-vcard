@@ -87,28 +87,60 @@
 @if(isset($form['highlights']) && is_array($form['highlights']))
 <div class="col-12 mb-1">
     <label class="form-label fw-semibold text-muted">Highlights</label>
-    <small class="d-block text-muted mb-2">Icon identifier + label for each USP badge.</small>
+    <small class="d-block text-muted mb-2">Choose an icon and enter a label for each USP badge.</small>
 </div>
 @foreach($form['highlights'] as $hi => $highlight)
     <div class="col-12">
         <div class="border rounded p-2 mb-2 bg-light">
-            <div class="row g-2">
+            <div class="row g-2 align-items-end">
                 <div class="col-sm-4">
-                    <label class="form-label small mb-1">Icon Key</label>
-                    <input type="text"
-                           class="form-control form-control-sm"
-                           wire:model="form.highlights.{{ $hi }}.icon"
-                           placeholder="oven / fresh / wine">
+                    <label class="form-label small mb-1">Icon</label>
+                    <select class="form-select form-select-sm"
+                            wire:model.live="form.highlights.{{ $hi }}.icon">
+                        <option value="oven">🔥 Wood-Fired Oven</option>
+                        <option value="fresh">🌿 Fresh Ingredients</option>
+                        <option value="wine">🍷 Wine / Drinks</option>
+                        <option value="star">⭐ Star / Quality</option>
+                        <option value="chef">👨‍🍳 Chef / Expertise</option>
+                        <option value="spice">🌶️ Spices / Flavour</option>
+                        <option value="organic">🥦 Organic</option>
+                        <option value="delivery">🛵 Delivery</option>
+                        <option value="award">🏆 Award / Recognition</option>
+                        <option value="time">⏱️ Quick Service</option>
+                        <option value="veg">🥗 Vegetarian</option>
+                        <option value="music">🎵 Live Music / Ambiance</option>
+                        <option value="outdoor">🌳 Outdoor Seating</option>
+                        <option value="family">👨‍👩‍👧 Family Friendly</option>
+                        <option value="wifi">📶 Free WiFi</option>
+                        <option value="parking">🅿️ Parking Available</option>
+                        <option value="ac">❄️ Air Conditioned</option>
+                        <option value="rooftop">🏙️ Rooftop / View</option>
+                        <option value="cake">🎂 Custom Cakes</option>
+                        <option value="coffee">☕ Artisan Coffee</option>
+                    </select>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                     <label class="form-label small mb-1">Label</label>
                     <input type="text"
                            class="form-control form-control-sm"
                            wire:model="form.highlights.{{ $hi }}.label"
                            placeholder="Wood-Fired Oven">
                 </div>
+                <div class="col-sm-2 d-flex align-items-end">
+                    <button type="button"
+                            class="btn btn-outline-danger btn-sm w-100"
+                            x-on:click="showConfirmToast('Remove this highlight?', () => $wire.removeRowWithConfirm({{ $hi }}, 'highlights'))">
+                        <i class="mdi mdi-delete"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 @endforeach
+<div class="col-12 mt-1">
+    <button type="button" class="btn btn-sm btn-outline-warning"
+            wire:click="addRowAndSave('highlights', ['icon', 'label'])">
+        <i class="mdi mdi-plus me-1"></i>Add Highlight
+    </button>
+</div>
 @endif

@@ -1,256 +1,251 @@
-{{--
- | restaurant-cafe-template/MENU.blade.php
- | Professional menu editor: accordion per category, Quick Add with category selector.
- | MENU shape: { "Starters": [{id,name,icon,desc,price,op,tag,tc,product_image,veg}], ... }
- | Categories are driven by profile.cuisineTags (reflected as MENU keys).
---}}
+{{-- restaurant-cafe-template/MENU.blade.php --}}
+{{-- Items: [{id, name, icon, desc, category_key, price, op, tag, tc, product_image, veg}] --}}
 @php
-    $menuCategories = array_filter((array)$form, 'is_array');
-    $totalItems     = array_sum(array_map('count', $menuCategories));
-    $catKeys        = array_keys($menuCategories);
+    $items  = is_array($form) ? array_values($form) : [];
+    // Normalize categoryOptions — AdminSectionEditor returns [['key'=>...,'label'=>...]]
+    // TemplateVisualEditor returns ['key' => 'label'] flat map. Handle both.
+    $catMap = [];
+    foreach ($categoryOptions ?? [] as $ck => $cv) {
+        if (is_array($cv)) {
+            $catMap[$cv['key'] ?? $cv['value'] ?? $ck] = $cv['label'] ?? $cv['key'] ?? $ck;
+        } else {
+            $catMap[$ck] = $cv;
+        }
+    }
 @endphp
 
-<div class="col-12 mb-3">
-    <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+{{-- ── Header ── --}}
+<div class="col-12 mb-2">
+    <div class="d-flex align-items-center justify-content-between">
         <div>
-            <h6 class="fw-semibold text-muted text-uppercase mb-1" style="font-size:.72rem;letter-spacing:.07em;">
+            <h6 class="fw-semibold text-muted text-uppercase mb-0" style="font-size:.72rem;letter-spacing:.07em;">
                 <i class="mdi mdi-silverware-fork-knife me-1"></i>Menu
+                <span class="badge bg-success-subtle text-success-emphasis ms-1">{{ count($items) }}</span>
             </h6>
-            <small class="text-muted">
-                <span class="badge bg-secondary-subtle text-secondary me-1">{{ count($menuCategories) }}</span> categories &middot;
-                <span class="badge bg-secondary-subtle text-secondary me-1">{{ $totalItems }}</span> items total.
-            </small>
+            <small class="text-muted">Drag <i class="mdi mdi-drag-vertical"></i> to reorder rows.</small>
         </div>
-        <button type="button" class="btn btn-outline-success btn-sm px-3"
-                data-bs-toggle="modal" data-bs-target="#addMenuCategoryModal">
-            <i class="mdi mdi-shape-square-plus me-1"></i>Add Category
+        @php $rcMenuDefault = ['id'=>'','name'=>'','icon'=>'','desc'=>'','category_key'=>'','price'=>'','op'=>'','tag'=>'','tc'=>'','product_image'=>'','veg'=>false]; @endphp
+        <button type="button" class="btn btn-success btn-sm px-3"
+                wire:click="openItemModal(null, {{ json_encode($rcMenuDefault) }})">
+            <i class="mdi mdi-plus me-1"></i>Add Item
         </button>
     </div>
 </div>
 
-@if(empty($menuCategories))
-<div class="col-12">
-    <div class="rounded-3 p-4 text-center" style="border:2px dashed #cbd5e1;background:#f8fafc;">
-        <i class="mdi mdi-food-off text-muted" style="font-size:2.5rem;"></i>
-        <p class="text-muted mt-2 mb-1 fw-semibold">No menu categories yet.</p>
-        <small class="text-muted">Go to the <strong>Profile</strong> section and add category tags first, then come back here to add items.</small>
+{{-- ── Category filter tabs ── --}}
+@if(count($catMap) > 0)
+<div class="col-12 mb-1">
+    <div class="d-flex flex-wrap gap-1" id="rc-menu-cat-tabs">
+        <button type="button" class="btn btn-sm btn-success rc-menu-tab-btn" data-cat="all">
+            All
+            <span class="badge bg-white text-success ms-1" style="font-size:.65rem;">{{ count($items) }}</span>
+        </button>
+        @foreach($catMap as $catKey => $catLabel)
+        @php $catCount = count(array_filter($items, fn($p) => ($p['category_key'] ?? '') === $catKey)); @endphp
+        <button type="button" class="btn btn-sm btn-outline-success rc-menu-tab-btn" data-cat="{{ $catKey }}">
+            {{ $catLabel }}
+            @if($catCount > 0)<span class="badge bg-success-subtle text-success ms-1" style="font-size:.65rem;">{{ $catCount }}</span>@endif
+        </button>
+        @endforeach
     </div>
 </div>
-@else
-
-{{-- ── Category accordions ─────────────────────────────────────────────── --}}
-@foreach($menuCategories as $category => $items)
-@php $catSlug = 'mc-' . preg_replace('/[^a-z0-9]/i', '-', strtolower($category)); @endphp
-
-<div class="col-12 mb-3">
-<div class="card border shadow-sm overflow-hidden" style="border-radius:.75rem;">
-
-    {{-- Category header --}}
-    <div class="card-header d-flex align-items-center justify-content-between py-2 px-3"
-         style="background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-bottom:1px solid #bbf7d0;cursor:pointer;"
-         data-bs-toggle="collapse" data-bs-target="#{{ $catSlug }}">
-        <div class="d-flex align-items-center gap-2">
-            <i class="mdi mdi-food text-success"></i>
-            <span class="fw-semibold text-success-emphasis">{{ $category }}</span>
-            <span class="badge bg-success-subtle text-success-emphasis" style="font-size:.7rem;">
-                {{ count($items) }} item{{ count($items) === 1 ? '' : 's' }}
-            </span>
-        </div>
-        <div class="d-flex align-items-center gap-2"
-             x-data="{ cat: @js($category), catLabel: @js($category . ' (' . count($items) . ' item(s))') }"
-             onclick="event.stopPropagation();">
-            <button type="button"
-                    class="btn btn-success btn-sm px-3"
-                    wire:click.stop="openMenuItemModal('{{ $category }}')">
-                <i class="mdi mdi-plus me-1"></i>Add Item
-            </button>
-            <button type="button"
-                    class="btn btn-sm btn-outline-danger p-0 rounded-circle"
-                    style="width:26px;height:26px;line-height:1;"
-                    x-on:click.stop="showConfirmToast('Delete this category?', () => $wire.deleteMenuCategory(cat), catLabel)">
-                <i class="mdi mdi-delete-outline" style="font-size:12px;"></i>
-            </button>
-            <i class="mdi mdi-chevron-down text-muted ms-1"></i>
-        </div>
-    </div>
-
-    {{-- Items collapsible --}}
-    <div id="{{ $catSlug }}" class="collapse show">
-        <div class="table-responsive">
-            <table class="table table-sm table-hover align-middle mb-0" style="font-size:.82rem;">
-                <thead>
-                    <tr style="background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-bottom:2px solid #bbf7d0;">
-                        <th class="px-2 py-2 text-muted fw-semibold" style="width:28px;font-size:.68rem;">#</th>
-                        <th class="py-2 text-muted fw-semibold" style="width:56px;font-size:.68rem;">Photo</th>
-                        <th class="py-2 text-muted fw-semibold" style="min-width:140px;font-size:.68rem;">Name</th>
-                        <th class="py-2 text-muted fw-semibold" style="font-size:.68rem;">Description</th>
-                        <th class="py-2 text-muted fw-semibold" style="width:110px;font-size:.68rem;">Price</th>
-                        <th class="py-2 text-muted fw-semibold" style="width:90px;font-size:.68rem;">Tag</th>
-                        <th class="py-2 text-muted fw-semibold text-center" style="width:40px;font-size:.68rem;">Veg</th>
-                        <th style="width:68px;"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse($items as $ii => $item)
-                    <tr wire:key="mi-{{ $category }}-{{ $ii }}" class="border-bottom">
-
-                        {{-- # --}}
-                        <td class="px-2 text-muted fw-semibold" style="font-size:.7rem;">{{ $ii + 1 }}</td>
-
-                        {{-- Photo --}}
-                        <td class="py-1">
-                            @php
-                                $ir = $item['product_image'] ?? null;
-                                $im = []; $is = null;
-                                if ($ir && preg_match("/url\(['\"]?(.+?)['\"]?\)/i", $ir, $im)) { $is = $im[1]; }
-                                elseif ($ir && (str_starts_with($ir,'http') || str_starts_with($ir,'/'))) { $is = $ir; }
-                            @endphp
-                            @if($is)
-                                <img src="{{ $is }}" class="rounded-2 border"
-                                     style="width:44px;height:44px;object-fit:cover;" alt="">
-                            @else
-                                <div class="rounded-2 border d-flex align-items-center justify-content-center"
-                                     style="width:44px;height:44px;background:#f1f5f9;">
-                                    <i class="mdi mdi-food text-muted" style="font-size:.9rem;"></i>
-                                </div>
-                            @endif
-                        </td>
-
-                        {{-- Name / Icon --}}
-                        <td class="py-1 fw-semibold" style="font-size:.83rem;">
-                            {{ $item['icon'] ?? '' }} {{ $item['name'] ?: '—' }}
-                        </td>
-
-                        {{-- Description --}}
-                        <td class="py-1 text-muted" style="font-size:.78rem;">
-                            {{ \Str::limit($item['desc'] ?? '', 60) ?: '—' }}
-                        </td>
-
-                        {{-- Price --}}
-                        <td class="py-1">
-                            @if(!empty($item['price']))
-                                <span class="fw-semibold text-success-emphasis">₹{{ $item['price'] }}</span>
-                            @endif
-                            @if(!empty($item['op']))
-                                <span class="text-muted d-block" style="font-size:.72rem;text-decoration:line-through;">₹{{ $item['op'] }}</span>
-                            @endif
-                            @if(empty($item['price']) && empty($item['op']))<span class="text-muted">—</span>@endif
-                        </td>
-
-                        {{-- Tag --}}
-                        <td class="py-1">
-                            @if(!empty($item['tag']))
-                                <span class="badge bg-warning-subtle text-warning-emphasis" style="font-size:.65rem;">{{ $item['tag'] }}</span>
-                            @else
-                                <span class="text-muted">—</span>
-                            @endif
-                        </td>
-
-                        {{-- Veg --}}
-                        <td class="py-1 text-center">
-                            @if($item['veg'] ?? false)
-                                <span class="badge bg-success-subtle text-success-emphasis" style="font-size:.65rem;">
-                                    <i class="mdi mdi-leaf"></i>
-                                </span>
-                            @else
-                                <span class="text-muted">—</span>
-                            @endif
-                        </td>
-
-                        {{-- Actions --}}
-                        <td class="py-1 text-center" style="white-space:nowrap;">
-                            <button type="button"
-                                    class="btn btn-sm btn-outline-primary p-0 rounded-circle me-1"
-                                    style="width:26px;height:26px;line-height:1;"
-                                    wire:click="openMenuItemModal('{{ $category }}', {{ $ii }})">
-                                <i class="mdi mdi-pencil-outline" style="font-size:12px;"></i>
-                            </button>
-                            <button type="button"
-                                    class="btn btn-sm btn-outline-danger p-0 rounded-circle"
-                                    style="width:26px;height:26px;line-height:1;"
-                                    x-on:click="showConfirmToast('Remove this menu item?', () => $wire.removeRowWithConfirm({{ $ii }}, '{{ $category }}'), '{{ $item['name'] ?? 'this item' }}')">
-                                <i class="mdi mdi-delete" style="font-size:12px;"></i>
-                            </button>
-                        </td>
-
-                    </tr>
-                    @empty
-                    <tr>
-                        <td colspan="8" class="py-3 text-center" style="border:none;">
-                            <div class="rounded-3 p-3 d-inline-block" style="border:2px dashed #bbf7d0;background:#f0fdf4;">
-                                <p class="text-muted small mb-2">No items in <strong>{{ $category }}</strong> yet.</p>
-                                <button type="button" class="btn btn-sm btn-success"
-                                        wire:click="openMenuItemModal('{{ $category }}')">
-                                    <i class="mdi mdi-plus me-1"></i>Add First Item
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>{{-- /collapse --}}
-</div>{{-- /card --}}
-</div>{{-- /col-12 --}}
-@endforeach
-
 @endif
 
-{{-- ══════════════════════════════════════════════════════════════════════ --}}
-{{-- ADD CATEGORY MODAL                                                      --}}
-{{-- ══════════════════════════════════════════════════════════════════════ --}}
-<div class="modal fade" id="addMenuCategoryModal" tabindex="-1" aria-labelledby="addMenuCategoryModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header py-3"
-                 style="background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-bottom:2px solid #bbf7d0;">
-                <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" id="addMenuCategoryModalLabel" style="font-size:.95rem;">
-                    <i class="mdi mdi-shape-square-plus text-success"></i>New Category
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body p-4">
-                <label class="form-label small fw-semibold mb-1">Category Name</label>
-                <input type="text" class="form-control"
-                       wire:model="newItem.newCategoryName"
-                       placeholder="e.g. Starters, Desserts, Drinks…"
-                       wire:keydown.enter.prevent="addMenuCategory">
-                <small class="text-muted mt-1 d-block">Creates a new empty category tab in the menu.</small>
-            </div>
-            <div class="modal-footer border-top py-2">
-                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
-                    <i class="mdi mdi-close me-1"></i>Cancel
-                </button>
-                <button type="button" class="btn btn-success btn-sm px-4"
-                        wire:click="addMenuCategory"
-                        wire:loading.attr="disabled">
-                    <span wire:loading wire:target="addMenuCategory">
-                        <span class="spinner-border spinner-border-sm me-1"></span>
-                    </span>
-                    <i class="mdi mdi-check me-1" wire:loading.remove wire:target="addMenuCategory"></i>
-                    Create
-                </button>
-            </div>
-        </div>
+{{-- ── Table ── --}}
+<div class="col-12">
+@if(count($items) > 0)
+    <div class="table-responsive rounded border">
+        <table class="table table-hover table-sm mb-0 align-middle" style="font-size:.8rem;">
+            <thead class="table-light">
+                <tr>
+                    <th style="width:28px;"></th>
+                    <th style="width:40px;">#</th>
+                    <th style="width:52px;">Photo</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th style="width:70px;">Veg</th>
+                    <th>Tag</th>
+                    <th style="width:80px;"></th>
+                </tr>
+            </thead>
+            <tbody data-sort-path="">
+                @foreach($items as $pi => $item)
+                <tr class="rc-menu-row" data-cat="{{ $item['category_key'] ?? '' }}" data-row-index="{{ $pi }}">
+                    <td>
+                        <span class="drag-handle d-flex align-items-center justify-content-center text-muted" style="cursor:grab;width:22px;height:22px;">
+                            <i class="mdi mdi-drag-vertical" style="font-size:14px;"></i>
+                        </span>
+                    </td>
+                    <td class="text-muted">{{ $pi + 1 }}</td>
+                    <td>
+                        @php $pImg = $item['product_image'] ?? ''; @endphp
+                        @if($pImg)
+                            <img src="{{ $pImg }}" alt="" class="rounded" style="width:40px;height:40px;object-fit:cover;">
+                        @else
+                            <div class="rounded bg-light d-flex align-items-center justify-content-center text-muted" style="width:40px;height:40px;">
+                                <i class="mdi mdi-food text-muted" style="font-size:16px;"></i>
+                            </div>
+                        @endif
+                    </td>
+                    <td>
+                        <span class="fw-semibold d-block">
+                            @if($item['icon'] ?? '') {{ $item['icon'] }} @endif
+                            {{ $item['name'] ?? '—' }}
+                        </span>
+                        <span class="text-muted" style="font-size:.72rem;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">
+                            {{ $item['desc'] ?? '' }}
+                        </span>
+                    </td>
+                    <td class="text-muted">
+                        {{ $catMap[$item['category_key'] ?? ''] ?? ($item['category_key'] ?? '—') }}
+                    </td>
+                    <td>
+                        @if($item['price'] ?? '')
+                            <span class="fw-semibold text-success-emphasis">₹{{ $item['price'] }}</span>
+                            @if($item['op'] ?? '') <span class="text-muted d-block" style="font-size:.7rem;text-decoration:line-through;">₹{{ $item['op'] }}</span> @endif
+                            @if($item['tc'] ?? '') <span class="text-muted" style="font-size:.7rem;">{{ $item['tc'] }}</span> @endif
+                        @else —
+                        @endif
+                    </td>
+                    <td class="text-center">
+                        @if($item['veg'] ?? false)
+                            <span class="badge bg-success-subtle text-success-emphasis" style="font-size:.65rem;"><i class="mdi mdi-leaf"></i> Veg</span>
+                        @else
+                            <span class="text-muted">—</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if($item['tag'] ?? '')
+                            <span class="badge bg-warning-subtle text-warning-emphasis rounded-pill" style="font-size:.65rem;">{{ $item['tag'] }}</span>
+                        @endif
+                    </td>
+                    <td>
+                        <div class="d-flex gap-1">
+                            <button type="button" class="btn btn-sm btn-outline-success px-1 rc-edit-btn" title="Edit">
+                                <i class="mdi mdi-pencil-outline"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-outline-danger px-1 rc-delete-btn" title="Delete">
+                                <i class="mdi mdi-delete"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
+@else
+    <div class="text-center py-5 rounded-3" style="border:2px dashed #bbf7d0;background:#f0fdf4;">
+        <i class="mdi mdi-silverware-fork-knife d-block" style="font-size:2.5rem;opacity:.35;color:#16a34a;"></i>
+        <p class="text-muted mt-2 mb-2 small fw-semibold">No menu items yet.</p>
+        <button type="button" class="btn btn-sm btn-success"
+                wire:click="openItemModal(null, {{ json_encode($rcMenuDefault) }})">
+            <i class="mdi mdi-plus me-1"></i>Add First Item
+        </button>
+    </div>
+@endif
 </div>
 
+<script>
+// Updated on every render so the default item is always current.
+window.rcMenuDefault = @json($rcMenuDefault);
+
+(function () {
+    function getCatFromUrl() {
+        return new URLSearchParams(window.location.search).get('cat') || 'all';
+    }
+
+    // Persist active cat across re-renders; on first load read from URL.
+    window._rcMenuActiveCat = window._rcMenuActiveCat || getCatFromUrl();
+
+    // Re-defined on every render so it is always current.
+    window.rcMenuFilterApply = function(cat) {
+        window._rcMenuActiveCat = cat;
+
+        // Sync URL query param without page reload
+        var url = new URL(window.location.href);
+        if (cat === 'all') { url.searchParams.delete('cat'); } else { url.searchParams.set('cat', cat); }
+        history.replaceState({ cat: cat }, '', url.toString());
+
+        var tabs = document.getElementById('rc-menu-cat-tabs');
+        if (tabs) {
+            tabs.querySelectorAll('.rc-menu-tab-btn').forEach(function(b) {
+                var isSel = b.dataset.cat === cat;
+                b.classList.toggle('btn-success', isSel);
+                b.classList.toggle('btn-outline-success', !isSel);
+            });
+        }
+        document.querySelectorAll('tr.rc-menu-row').forEach(function(tr) {
+            tr.style.display = (cat === 'all' || tr.getAttribute('data-cat') === cat) ? '' : 'none';
+        });
+    };
+
+    if (!window._rcMenuListeners) {
+        window._rcMenuListeners = true;
+
+        // Tab click + edit/delete row delegation
+        document.addEventListener('click', function(e) {
+            var btn = e.target.closest('.rc-menu-tab-btn');
+            if (btn) { window.rcMenuFilterApply(btn.dataset.cat || 'all'); return; }
+
+            var editBtn   = e.target.closest('.rc-edit-btn');
+            var deleteBtn = e.target.closest('.rc-delete-btn');
+            if (!editBtn && !deleteBtn) return;
+            var row = (editBtn || deleteBtn).closest('tr.rc-menu-row');
+            if (!row) return;
+            var idx = parseInt(row.dataset.rowIndex);
+            var wireEl = row.closest('[wire\\:id]');
+            if (!wireEl) return;
+            var comp = window.Livewire.find(wireEl.getAttribute('wire:id'));
+            if (!comp) return;
+            var def = window.rcMenuDefault || {};
+            if (editBtn) {
+                comp.call('openItemModal', idx, def);
+            } else {
+                showConfirmToast('Delete this menu item?', function() {
+                    comp.call('removeRowWithConfirm', idx, '');
+                });
+            }
+        });
+
+        // Re-apply filter after every Livewire re-render
+        document.addEventListener('livewire:updated', function() {
+            var cat = window._rcMenuActiveCat || 'all';
+            if (cat === 'all') return;
+            var tabs = document.getElementById('rc-menu-cat-tabs');
+            if (!tabs) return;
+            var activeBtn = tabs.querySelector('[data-cat="' + cat + '"]');
+            if (!activeBtn) {
+                // Category was deleted — reset
+                window._rcMenuActiveCat = 'all';
+                var url = new URL(window.location.href);
+                url.searchParams.delete('cat');
+                history.replaceState({ cat: 'all' }, '', url.toString());
+                return;
+            }
+            window.rcMenuFilterApply(cat);
+        });
+
+        // Apply on initial/refresh load if ?cat= is already set
+        document.addEventListener('livewire:initialized', function() {
+            var cat = getCatFromUrl();
+            if (cat !== 'all') window.rcMenuFilterApply(cat);
+        });
+    }
+})();
+</script>
+
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
-{{-- MENU ITEM MODAL (Add / Edit)                                            --}}
+{{-- ADD / EDIT ITEM MODAL                                                  --}}
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
-<div class="modal fade" id="menuItemModal" tabindex="-1" aria-labelledby="menuItemModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content border-0 shadow">
-            <div class="modal-header py-3"
-                 style="background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-bottom:2px solid #bbf7d0;">
-                <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" id="menuItemModalLabel">
-                    <i class="mdi mdi-silverware-fork-knife text-success"></i>
-                    @if($editingIndex !== null)
-                        Edit Item @if($editingCategory) &mdash; <span class="text-success-emphasis">{{ $editingCategory }}</span>@endif
-                    @else
-                        Add Item @if($editingCategory) to <span class="text-success-emphasis">{{ $editingCategory }}</span>@endif
-                    @endif
+            <div class="modal-header py-3" style="background:linear-gradient(90deg,#f0fdf4,#dcfce7);border-bottom:2px solid #bbf7d0;">
+                <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" style="color:#15803d;">
+                    <i class="mdi mdi-silverware-fork-knife"></i>
+                    {{ $editingIndex !== null ? 'Edit Item' : 'Add Item' }}
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -258,92 +253,84 @@
                 <div class="row g-3">
 
                     {{-- Photo --}}
-                    <div class="col-12">
-                        <label class="form-label small fw-semibold mb-1">Photo</label>
-                        <div class="d-flex align-items-center gap-3">
-                            @php
-                                $mIr = $editingItem['product_image'] ?? null;
-                                $mIm = []; $mIs = null;
-                                if ($mIr && preg_match("/url\(['\"]?(.+?)['\"]?\)/i", $mIr, $mIm)) { $mIs = $mIm[1]; }
-                                elseif ($mIr && (str_starts_with($mIr,'http') || str_starts_with($mIr,'/'))) { $mIs = $mIr; }
-                            @endphp
-                            @if($mIs)
-                                <img src="{{ $mIs }}" id="menuItemPhotoPreview" class="rounded-3 border"
-                                     style="width:72px;height:72px;object-fit:cover;" alt="">
-                            @else
-                                <div id="menuItemPhotoPreview" class="rounded-3 border d-flex align-items-center justify-content-center"
-                                     style="width:72px;height:72px;background:#f1f5f9;">
-                                    <i class="mdi mdi-food text-muted fs-3"></i>
-                                </div>
-                            @endif
-                            {{-- No wire:model — upload is handled manually on Save to prevent re-render inside modal --}}
-                            <input type="file" accept="image/*" class="form-control form-control-sm"
-                                   id="menuItemFileInput"
-                                   onchange="var f=this.files[0];if(!f)return;window.__menuItemFile=f;var url=URL.createObjectURL(f);var p=document.getElementById('menuItemPhotoPreview');var img=document.createElement('img');img.src=url;img.id='menuItemPhotoPreview';img.className='rounded-3 border';img.style.cssText='width:72px;height:72px;object-fit:cover;';p.replaceWith(img);">
+                    <div class="col-12 col-md-4">
+                        <label class="form-label small fw-semibold mb-1">Item Photo</label>
+                        @php $editPImg = $editingItem['product_image'] ?? ''; @endphp
+                        @if($editPImg)
+                            <div class="mb-2">
+                                <img src="{{ $editPImg }}" alt="" class="rounded border"
+                                     style="max-height:130px;max-width:100%;object-fit:cover;">
+                            </div>
+                        @endif
+                        <input type="file" class="form-control form-control-sm"
+                               accept="image/*" wire:model.live="uploads.itemEdit.product_image">
+                        <div wire:loading wire:target="uploads.itemEdit.product_image" class="mt-1">
+                            <small class="text-success"><i class="mdi mdi-loading mdi-spin me-1"></i>Uploading…</small>
+                        </div>
+                        <small class="text-muted">JPG / PNG / WebP</small>
+                    </div>
+
+                    <div class="col-12 col-md-8">
+                        <div class="row g-2">
+                            {{-- Name + Icon --}}
+                            <div class="col-8">
+                                <label class="form-label small fw-semibold mb-1">Item Name</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       wire:model="editingItem.name"
+                                       placeholder="e.g. Paneer Tikka">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label small fw-semibold mb-1">Emoji / Icon</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       wire:model="editingItem.icon"
+                                       list="rc-icon-datalist"
+                                       placeholder="🍕">
+                                <datalist id="rc-icon-datalist">
+                                    @foreach(['🍕','🍔','🌮','🌯','🍜','🍣','🍱','🥗','🍛','🥘','🍲','🥩','🍗','🥓','🍤','🥪','🥙','🧆','🧇','🥞','🍳','🥚','🍰','🎂','🧁','🍩','🍪','🍫','☕','🍵','🧃','🥤','🍺','🍷','🍸','🍹','🥂','🧋','🌽','🥦','🥕','🧅','🧄','🫕'] as $__em)
+                                    <option value="{{ $__em }}">{{ $__em }}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
+                            {{-- Description --}}
+                            <div class="col-12">
+                                <label class="form-label small fw-semibold mb-1">Description</label>
+                                <textarea class="form-control form-control-sm" rows="2"
+                                          wire:model="editingItem.desc"
+                                          placeholder="Short description of the dish…"></textarea>
+                            </div>
+                            {{-- Category --}}
+                            <div class="col-12">
+                                <label class="form-label small fw-semibold mb-1">Category</label>
+                                <select class="form-select form-select-sm" wire:model="editingItem.category_key">
+                                    <option value="">— Select category —</option>
+                                    @foreach($catMap as $catKey => $catLabel)
+                                        <option value="{{ $catKey }}">{{ $catLabel }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    {{-- Name + Icon + Veg --}}
-                    <div class="col-sm-6">
-                        <label class="form-label small fw-semibold mb-1">Item Name</label>
-                        <input type="text" class="form-control"
-                               wire:model="editingItem.name"
-                               placeholder="e.g. Margherita Pizza">
-                    </div>
-                    <div class="col-sm-4">
-                        <label class="form-label small fw-semibold mb-1">Emoji / Icon</label>
-                        <input type="text" class="form-control"
-                               wire:model="editingItem.icon"
-                               list="menu-icon-datalist"
-                               placeholder="🍕">
-                        <datalist id="menu-icon-datalist">
-                            @foreach(['🍕','🍔','🌮','🌯','🍜','🍣','🍱','🥗','🍛','🥘','🍲','🥩','🍗','🥓','🍤','🥪','🥙','🧆','🧇','🥞','🍳','🥚','🍰','🎂','🧁','🍩','🍪','🍫','🍭','🍮','☕','🍵','🧃','🥤','🍺','🍷','🍸','🍹','🥂','🧋','🎉','🎁','🏷️','⭐','🔥','💫','🌟','✨','🍽️','🥦','🥕','🧅','🧄','🫕','🫙'] as $__em)
-                            <option value="{{ $__em }}">{{ $__em }}</option>
-                            @endforeach
-                        </datalist>
-                    </div>
-                    <div class="col-sm-2 d-flex align-items-end pb-1">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch"
-                                   id="modalVegToggle" wire:model="editingItem.veg">
-                            <label class="form-check-label fw-semibold text-success small"
-                                   for="modalVegToggle">Veg</label>
-                        </div>
-                    </div>
-
-                    {{-- Description --}}
-                    <div class="col-12">
-                        <label class="form-label small fw-semibold mb-1">Description</label>
-                        <textarea class="form-control" rows="2"
-                                  wire:model="editingItem.desc"
-                                  placeholder="Short description of the dish…"></textarea>
-                    </div>
-
-                    {{-- Price / MRP / Tag / T&C --}}
-                    <div class="col-sm-3">
+                    {{-- Price / MRP --}}
+                    <div class="col-6 col-md-3">
                         <label class="form-label small fw-semibold mb-1">Price (₹)</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-success-subtle text-success-emphasis border-success-subtle">₹</span>
-                            <input type="text" class="form-control border-success-subtle"
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text bg-success-subtle border-success-subtle text-success-emphasis">₹</span>
+                            <input type="text" class="form-control form-control-sm border-success-subtle"
                                    wire:model="editingItem.price" placeholder="299">
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <label class="form-label small fw-semibold mb-1">Original Price (MRP)</label>
-                        <div class="input-group">
+                    <div class="col-6 col-md-3">
+                        <label class="form-label small fw-semibold mb-1">Original / MRP (₹)</label>
+                        <div class="input-group input-group-sm">
                             <span class="input-group-text">₹</span>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control form-control-sm"
                                    wire:model="editingItem.op" placeholder="399">
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <label class="form-label small fw-semibold mb-1">Badge / Tag</label>
-                        <input type="text" class="form-control"
-                               wire:model="editingItem.tag" placeholder="Bestseller">
-                    </div>
-                    <div class="col-sm-3">
+                    <div class="col-6 col-md-3">
                         <label class="form-label small fw-semibold mb-1">Small Print</label>
-                        <select class="form-select" wire:model="editingItem.tc">
+                        <select class="form-select form-select-sm" wire:model="editingItem.tc">
                             <option value="">— none —</option>
                             <option>per serving</option>
                             <option>per piece</option>
@@ -352,87 +339,40 @@
                             <option>per glass</option>
                             <option>per portion</option>
                             <option>per kg</option>
-                            <option>per 100g</option>
-                            <option>per litre</option>
                             <option>onwards</option>
                         </select>
+                    </div>
+                    <div class="col-6 col-md-3 d-flex align-items-end pb-1">
+                        <div class="form-check form-switch ms-1">
+                            <input class="form-check-input" type="checkbox" role="switch"
+                                   id="rcVegToggle" wire:model="editingItem.veg">
+                            <label class="form-check-label fw-semibold text-success small"
+                                   for="rcVegToggle">Veg</label>
+                        </div>
+                    </div>
+
+                    {{-- Tag --}}
+                    <div class="col-12 col-md-6">
+                        <label class="form-label small fw-semibold mb-1">Badge / Tag</label>
+                        <input type="text" class="form-control form-control-sm"
+                               wire:model="editingItem.tag" placeholder="Bestseller, Chef's Special…">
                     </div>
 
                 </div>
             </div>
-            <div class="modal-footer border-top py-2">
-                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">
-                    <i class="mdi mdi-close me-1"></i>Cancel
-                </button>
+            <div class="modal-footer py-2">
+                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success btn-sm px-4"
-                        onclick="window.__menuSaveItem()"
+                        wire:click="saveItemModal()"
                         wire:loading.attr="disabled">
-                    <span wire:loading wire:target="saveMenuItemModal">
-                        <span class="spinner-border spinner-border-sm me-1"></span>
+                    <span wire:loading.remove wire:target="saveItemModal">
+                        <i class="mdi mdi-content-save me-1"></i>Save
                     </span>
-                    <i class="mdi mdi-content-save-outline me-1" wire:loading.remove wire:target="saveMenuItemModal"></i>
-                    Save Item
+                    <span wire:loading wire:target="saveItemModal">
+                        <i class="mdi mdi-loading mdi-spin me-1"></i>Saving…
+                    </span>
                 </button>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    (function () {
-        if (window.__menuModalListenerRegistered) { return; }
-        window.__menuModalListenerRegistered = true;
-
-        function cleanBackdrops() {
-            document.querySelectorAll('.modal-backdrop').forEach(function (el) { el.remove(); });
-            document.body.classList.remove('modal-open');
-            document.body.style.removeProperty('overflow');
-            document.body.style.removeProperty('padding-right');
-        }
-
-        // Instantly hide a modal without Bootstrap's fade transition,
-        // then clean backdrops — must finish before Livewire morphs the DOM.
-        function hideInstant(id) {
-            var el = document.getElementById(id);
-            if (el) {
-                el.classList.remove('show');
-                el.style.display = 'none';
-                el.setAttribute('aria-hidden', 'true');
-                el.removeAttribute('aria-modal');
-                el.removeAttribute('role');
-                var inst = bootstrap.Modal.getInstance(el);
-                if (inst) { inst.dispose(); }
-            }
-            cleanBackdrops();
-        }
-
-        window.__menuSaveItem = function () {
-            var comp = window.__menuWireComp;
-            if (!comp) { console.error('Menu Livewire component not found'); return; }
-            var file = window.__menuItemFile;
-            if (file) {
-                comp.$upload(
-                    'uploads.menuItemEdit.product_image',
-                    file,
-                    function () { window.__menuItemFile = null; comp.$call('saveMenuItemModal'); },
-                    function (err) { console.error('Upload failed', err); }
-                );
-            } else {
-                comp.$call('saveMenuItemModal');
-            }
-        };
-
-        document.addEventListener('open-menu-item-modal', function (e) {
-            var wireId = e.detail && e.detail.wireId ? e.detail.wireId : null;
-            window.__menuWireComp = wireId ? Livewire.find(wireId) : null;
-            window.__menuItemFile = null;
-            var fi = document.getElementById('menuItemFileInput');
-            if (fi) { fi.value = ''; }
-            cleanBackdrops();
-            bootstrap.Modal.getOrCreateInstance(document.getElementById('menuItemModal')).show();
-        });
-
-        document.addEventListener('hide-menu-item-modal',  function () { hideInstant('menuItemModal'); });
-        document.addEventListener('hide-category-modal',   function () { hideInstant('addMenuCategoryModal'); });
-    })();
-</script>

@@ -24,6 +24,7 @@
             <table class="table table-sm table-hover align-middle mb-0" style="font-size:.83rem;">
                 <thead>
                     <tr style="background:linear-gradient(90deg,#fffbeb,#fef3c7);border-bottom:2px solid #fde68a;">
+                        <th style="width:28px;"></th>
                         <th class="px-2 py-2 text-muted fw-semibold" style="width:28px;font-size:.68rem;">#</th>
                         <th class="py-2 text-muted fw-semibold" style="width:44px;font-size:.68rem;">Icon</th>
                         <th class="py-2 text-muted fw-semibold" style="min-width:160px;font-size:.68rem;">Title</th>
@@ -32,9 +33,10 @@
                         <th style="width:68px;"></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody data-sort-path="">
                     @forelse(($form ?? []) as $oi => $offer)
                     <tr wire:key="offer-row-{{ $oi }}" class="border-bottom">
+                        <td class="drag-handle text-center text-muted ps-2" style="cursor:grab;width:28px;"><i class="mdi mdi-drag-vertical"></i></td>
                         <td class="px-2 text-muted fw-semibold" style="font-size:.7rem;">{{ $oi + 1 }}</td>
                         <td class="py-1 text-center" style="font-size:1.3rem;">{{ $offer['icon'] ?? '🏷️' }}</td>
                         <td class="py-1 fw-semibold">{{ $offer['title'] ?: '—' }}</td>

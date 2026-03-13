@@ -58,18 +58,20 @@
             'categories'      => ['icon' => 'mdi-tag-outline',             'color' => 'secondary'],
             'conditions'      => ['icon' => 'mdi-medical-bag',             'color' => 'danger'],
             'R'               => ['icon' => 'mdi-store',                   'color' => 'success'],
+            '_settings'       => ['icon' => 'mdi-tune-vertical',           'color' => 'secondary'],
         ];
     @endphp
 
     @php
         $sectionLabels = [
             '_common'     => 'Basic Info',
+            '_settings'   => 'Section Visibility',
             'assets'      => 'Images & Photos',
             'banner'      => 'Cover Image',
             'meta'        => 'SEO & Meta Tags',
             'floatingBar' => 'Quick Action Bar',
             'whyChoose'   => 'Why Choose Us',
-            'qr'          => 'QR Code Text',
+            'qr'          => 'QR Text',
             'shop'        => 'Shop Settings',
             'payments'    => 'Payment Options',
             'payment'     => 'Payment Options',
@@ -135,10 +137,8 @@
                         </span>
                     </span>
                     <span class="fw-medium {{ $mobActive ? 'text-primary' : '' }}" style="font-size:.875rem;">{{ $mobLabel }}</span>
-                    @if($mobEnabled !== null)
-                        <span class="ms-auto badge {{ $mobEnabled ? 'bg-success' : 'bg-secondary' }}" style="font-size:.65rem;">
-                            {{ $mobEnabled ? 'On' : 'Off' }}
-                        </span>
+                    @if($mobEnabled === false)
+                        <span class="ms-auto badge bg-secondary" style="font-size:.65rem;">Off</span>
                     @endif
                 </div>
             @endforeach
@@ -169,7 +169,7 @@
                                 $tabIcon  = $iconMap[$tab] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                                 $isActive = $section === $tab;
                                 $sectionLabelMap = [
-                                    'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
+                                    'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu', 'profile' => 'Profile Categories'],
                                 ];
                                 $tabLabel = $sectionLabels[$tab]
                                     ?? ($sectionLabelMap[$vcard->template_key ?? ''][$tab] ?? null)
@@ -204,15 +204,6 @@
                                         </small>
                                     @endif
                                 </div>
-                                @if($hasToggle)
-                                    <div class="flex-shrink-0" wire:click.stop="toggleSection('{{ $tab }}')">
-                                        <div class="form-check form-switch mb-0">
-                                            <input class="form-check-input" type="checkbox"
-                                                   style="width:34px;height:18px;cursor:pointer;pointer-events:none;"
-                                                   @checked($tabEnabled)>
-                                        </div>
-                                    </div>
-                                @endif
                             </div>
                         @endforeach
 
@@ -255,11 +246,13 @@
                 @php
                     $activeIcon  = $iconMap[$section] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
                     $sectionLabelMapActive = [
-                        'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
+                        'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu', 'profile' => 'Profile Categories'],
                     ];
-                    $activeLabel = $section === '_common'
-                        ? 'Basic Info'
-                        : ($sectionLabelMapActive[$vcard->template_key ?? ''][$section] ?? $sectionLabels[$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')));
+                    $activeLabel = match($section) {
+                        '_common'   => 'Basic Info',
+                        '_settings' => 'Section Visibility',
+                        default     => ($sectionLabelMapActive[$vcard->template_key ?? ''][$section] ?? $sectionLabels[$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? ''))),
+                    };
                     $isFormList  = is_array($form) && !empty($form) && array_values($form) === $form;
                     $itemLabel   = \Illuminate\Support\Str::singular($activeLabel);
                 @endphp
@@ -280,15 +273,6 @@
                                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">
                                     <i class="mdi mdi-plus me-1"></i>Add {{ $itemLabel }}
                                 </button>
-                            @endif
-                            @if(isset($sectionsConfig[$section]))
-                                @php $secEnabled = $sectionsConfig[$section]['enabled'] ?? true; @endphp
-                                <div wire:click="toggleSection('{{ $section }}')" style="cursor:pointer;">
-                                    <span class="badge rounded-pill {{ $secEnabled ? 'bg-success' : 'bg-secondary' }} px-3 py-2">
-                                        <i class="mdi {{ $secEnabled ? 'mdi-toggle-switch' : 'mdi-toggle-switch-off' }} me-1"></i>
-                                        {{ $secEnabled ? 'Section Enabled' : 'Section Disabled' }}
-                                    </span>
-                                </div>
                             @endif
                         </div>
                     </div>
@@ -319,12 +303,52 @@
                         @if(isset($sectionsConfig[$section]) && !($sectionsConfig[$section]['enabled'] ?? true))
                             <div class="alert alert-warning mb-3">
                                 <i class="mdi mdi-eye-off-outline me-2"></i>
-                                <strong>This section is currently disabled.</strong>
-                                It will not be visible on your vCard. Toggle it on using the switch above or in the sidebar.
+                                <strong>This section is currently hidden.</strong>
+                                Enable it in the <a href="#" wire:click.prevent="selectSection('_settings')" class="alert-link">Section Visibility</a> tab.
                             </div>
                         @endif
 
-                        <form wire:submit.prevent="save" novalidate>
+                        @if($section === '_settings')
+                            {{-- ── SECTION VISIBILITY PANEL ─────────────────────────── --}}
+                            <p class="text-muted mb-3" style="font-size:.85rem;">Toggle sections on or off to show or hide them on your vCard.</p>
+                            <div class="row g-2">
+                                @foreach($sectionsConfig as $sKey => $sCfg)
+                                    @php
+                                        $sEnabled = $sCfg['enabled'] ?? true;
+                                        $sLabel   = $sCfg['label'] ?? \Illuminate\Support\Str::headline($sKey);
+                                        $sIcon    = $iconMap[$sKey] ?? ['icon' => 'mdi-layers', 'color' => 'secondary'];
+                                    @endphp
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center justify-content-between p-3 border rounded
+                                                    {{ $sEnabled ? 'border-success-subtle bg-success-subtle' : 'border-secondary-subtle bg-light' }}"
+                                             style="transition:.15s;">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <span class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title rounded-circle font-size-16
+                                                                 {{ $sEnabled ? 'bg-success text-white' : 'bg-secondary-subtle text-secondary' }}">
+                                                        <i class="mdi {{ $sIcon['icon'] }}"></i>
+                                                    </span>
+                                                </span>
+                                                <div>
+                                                    <p class="mb-0 fw-semibold" style="font-size:.9rem;">{{ $sLabel }}</p>
+                                                    <small class="{{ $sEnabled ? 'text-success' : 'text-muted' }}">
+                                                        {{ $sEnabled ? 'Visible on vCard' : 'Hidden from vCard' }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div wire:click="toggleSection('{{ $sKey }}')" style="cursor:pointer;">
+                                                <div class="form-check form-switch mb-0">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           style="width:44px;height:22px;cursor:pointer;pointer-events:none;"
+                                                           @checked($sEnabled)>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <form wire:submit.prevent="save" novalidate>
                             <div class="row">
                                 @if (empty($form))
                                     <div class="col-12">
@@ -373,7 +397,8 @@
                                     </div>
                                 @endif
                             </div>
-                        </form>
+                            </form>
+                        @endif
                     </div>
                 </div>
             @endif
@@ -408,16 +433,17 @@
         });
     })();
 
-    // ── Sortable drag-to-reorder for list tables ──────────────────────
+    // ── Sortable drag-to-reorder for list tables and grids ──────────────────────
     (function () {
         function initSortables() {
-            document.querySelectorAll('tbody[data-sort-path]').forEach(function (tbody) {
-                if (tbody.__sortableInited) { return; }
-                tbody.__sortableInited = true;
-                var path = tbody.getAttribute('data-sort-path') || '';
-                var wireEl = tbody.closest('[wire\\:id]');
+            if (!window.Sortable) { return; }
+            document.querySelectorAll('[data-sort-path]').forEach(function (container) {
+                if (container.__sortableInited) { return; }
+                container.__sortableInited = true;
+                var path = container.getAttribute('data-sort-path') || '';
+                var wireEl = container.closest('[wire\\:id]');
                 if (!wireEl) { return; }
-                new Sortable(tbody, {
+                new Sortable(container, {
                     handle: '.drag-handle',
                     animation: 150,
                     ghostClass: 'sortable-ghost',
@@ -436,26 +462,51 @@
 
         // Load SortableJS on demand then init
         function loadSortableAndInit() {
-            if (window.Sortable) {
-                initSortables();
-                return;
-            }
+            if (window.Sortable) { initSortables(); return; }
             var script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js';
             script.onload = initSortables;
             document.head.appendChild(script);
         }
 
-        document.addEventListener('livewire:initialized', loadSortableAndInit);
-        document.addEventListener('livewire:navigated', function () {
-            setTimeout(loadSortableAndInit, 100);
-        });
-        // Re-init after every Livewire DOM update
-        if (window.Livewire) {
-            document.addEventListener('livewire:update', function () {
-                setTimeout(initSortables, 200);
+        // Run once immediately at page load
+        loadSortableAndInit();
+        // Re-run whenever Sortable containers appear/reappear in the DOM
+        // (MutationObserver is immune to Livewire version differences)
+        if (!window.__vcardSortableListenerAdded) {
+            window.__vcardSortableListenerAdded = true;
+            var _mo = new MutationObserver(function () {
+                loadSortableAndInit();
             });
+            _mo.observe(document.body, { childList: true, subtree: true });
         }
+    })();
+
+    // ── Generic item modal (ss-item-modal — used by restaurant MENU, sweetshop products, etc.) ──
+    (function () {
+        window._ssItemModalOpen = window._ssItemModalOpen || false;
+        window.addEventListener('open-item-modal', function (e) {
+            var el = document.getElementById('ss-item-modal');
+            if (!el) return;
+            window._ssItemModalOpen = true;
+            bootstrap.Modal.getOrCreateInstance(el).show();
+        });
+        window.addEventListener('hide-item-modal', function () {
+            var el = document.getElementById('ss-item-modal');
+            if (!el) return;
+            window._ssItemModalOpen = false;
+            var inst = bootstrap.Modal.getInstance(el);
+            if (inst) inst.hide();
+        });
+        document.addEventListener('hidden.bs.modal', function (e) {
+            if (e.target && e.target.id === 'ss-item-modal') window._ssItemModalOpen = false;
+        });
+        document.addEventListener('livewire:updated', function () {
+            if (window._ssItemModalOpen) {
+                var el = document.getElementById('ss-item-modal');
+                if (el) bootstrap.Modal.getOrCreateInstance(el).show();
+            }
+        });
     })();
     </script>
 </div>

@@ -42,7 +42,7 @@
         }
     },
     "meta": {
-        "title": "aaaaaa",
+        "title": "aaa",
         "bannerAlt": "Cover",
         "profileAlt": "Ambay Sweet",
         "description": "",
@@ -51,27 +51,27 @@
     },
     "assets": {
         "bannerImage": "/template-assets/sweetshop-template/uploads/1772716392_dummyUser__1_.png",
-        "profileImage": "/template-assets/sweetshop-template/uploads/1772716396_PinnacleAcademy_QR.png",
-        "qrCodeImage": ""
+        "profileImage": "/template-assets/sweetshop-template/uploads/1773387136_fevicon.png",
+        "qrCodeImage": "/template-assets/sweetshop-template/uploads/1773387107_fevicon.png"
     },
     "shop": {
-        "name": "Ambay Sweetfsdfsdf",
-        "tagline": "Premium Indian Sweets & Mithaiasda",
+        "name": "aaa",
+        "tagline": "aaa",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
-        "email": "mithas@gmail.com",
-        "address": "123 Sweet Lane, Dadar, Mumbai \u2013 400014",
-        "maps": "https://maps.google.com/?q=Dadar+Mumbai",
-        "website": "https://ambaysweets.com"
+        "email": "example@example.com",
+        "address": "asdsd",
+        "maps": "https://maps.google.com/?q=Dadar+Mumbaii",
+        "website": "https://example.com"
     },
     "header": {
         "shareLabel": "Share",
         "saveContactLabel": "Save Contact"
     },
     "profile": {
-        "name": "Ambay Sweetfsdfsdf",
-        "role": "Premium Indian Sweets & Mithai",
-        "bio": "Handcrafted sweets made with 100% pure desi ghee & fresh milk. Serving happiness since 1995 for weddings, festivals & every sweet occasion.",
+        "name": "aaa",
+        "role": "aaa",
+        "bio": "aaa",
         "actions": {
             "call": "Call",
             "whatsapp": "WhatsApp",
@@ -127,7 +127,7 @@
         {
             "name": "Wedding & Event Orders",
             "description": "Custom bulk sweet packages for weddings & celebrations.",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773387207_service5.png"
         },
         {
             "name": "Corporate Gift Boxes",
@@ -165,17 +165,6 @@
     ],
     "products": [
         {
-            "id": 1,
-            "name": "Kaju Katli",
-            "desc": "Premium cashew sweet, pure desi ghee.",
-            "category_key": "dry-fruit",
-            "price": 800,
-            "per": "/kg",
-            "tag": "Best Seller",
-            "tagColor": "#c8952a",
-            "product_image": "/template-assets/sweetshop-template/uploads/1772708705_dummyUser__1_.png"
-        },
-        {
             "id": 2,
             "name": "Gulab Jamun",
             "desc": "Soft syrupy milk balls in rose syrup.",
@@ -197,6 +186,17 @@
             "tag": "Premium",
             "tagColor": "#1565c0",
             "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')"
+        },
+        {
+            "id": 1,
+            "name": "Kaju Katli",
+            "desc": "Premium cashew sweet, pure desi ghee.",
+            "category_key": "dry-fruit",
+            "price": 800,
+            "per": "/kg",
+            "tag": "Best Seller",
+            "tagColor": "#c8952a",
+            "product_image": "/template-assets/sweetshop-template/uploads/1772708705_dummyUser__1_.png"
         },
         {
             "id": 4,
@@ -481,59 +481,80 @@
             "name": {
                 "label": "Business Name",
                 "type": "text",
-                "sync": ["shop.name", "meta.title", "profile.name"]
+                "sync": [
+                    "shop.name",
+                    "meta.title",
+                    "profile.name"
+                ]
             },
             "tagline": {
                 "label": "Tagline / Subtitle",
                 "type": "text",
-                "sync": ["shop.tagline", "profile.role"]
+                "sync": [
+                    "shop.tagline",
+                    "profile.role"
+                ]
             },
             "description": {
                 "label": "About / Description",
                 "type": "textarea",
-                "sync": ["profile.bio"]
+                "sync": [
+                    "profile.bio"
+                ]
             },
             "phone": {
                 "label": "Phone Number",
                 "type": "tel",
-                "sync": ["shop.phone"]
+                "sync": [
+                    "shop.phone"
+                ]
             },
             "whatsapp": {
                 "label": "WhatsApp Number",
                 "type": "tel",
-                "sync": ["shop.whatsapp"]
+                "sync": [
+                    "shop.whatsapp"
+                ]
             },
             "email": {
                 "label": "Email Address",
                 "type": "email",
-                "sync": ["shop.email"]
+                "sync": [
+                    "shop.email"
+                ]
             },
             "address": {
                 "label": "Full Address",
                 "type": "textarea",
-                "sync": ["shop.address"]
+                "sync": [
+                    "shop.address"
+                ]
             },
             "maps": {
                 "label": "Google Maps URL",
                 "type": "url",
-                "sync": ["shop.maps"]
+                "sync": [
+                    "shop.maps"
+                ]
             },
             "website": {
                 "label": "Website URL",
                 "type": "url",
-                "sync": ["shop.website"]
+                "sync": [
+                    "shop.website"
+                ]
             }
         }
     },
     "_common": {
-        "name": "Ambay Sweetfsdfsdf",
-        "tagline": "Premium Indian Sweets & Mithaiasda",
-        "description": "Handcrafted sweets made with 100% pure desi ghee & fresh milk. Serving happiness since 1995 for weddings, festivals & every sweet occasion.",
+        "name": "aaa",
+        "tagline": "aaa",
+        "description": "aaa",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
-        "email": "mithas@gmail.com",
-        "address": "123 Sweet Lane, Dadar, Mumbai \u2013 400014",
-        "maps": "https://maps.google.com/?q=Dadar+Mumbai",
-        "website": "https://ambaysweets.com"
+        "email": "example@example.com",
+        "address": "asdsd",
+        "maps": "https://maps.google.com/?q=Dadar+Mumbaii",
+        "website": "https://example.com"
     }
 }

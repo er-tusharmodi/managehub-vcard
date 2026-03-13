@@ -74,6 +74,7 @@
                 'showroom'        => ['icon' => 'mdi-store-outline',          'color' => 'secondary'],
                 'director'        => ['icon' => 'mdi-account-star',           'color' => 'warning'],
                 'R'               => ['icon' => 'mdi-store',                  'color' => 'success'],
+                '_settings'       => ['icon' => 'mdi-tune-vertical',          'color' => 'secondary'],
             ];
 
             $configIconMap = [
@@ -141,9 +142,11 @@
                                     $sectionLabelMap = [
                                         'restaurant-cafe-template' => ['R' => 'Business Details', 'MENU' => 'Menu'],
                                     ];
-                                    $tabLabel = $tab === '_common'
-                                        ? 'Basic Info'
-                                        : ($sectionLabelMap[$templateKey][$tab] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab)));
+                    $tabLabel = match($tab) {
+                                        '_common'   => 'Basic Info',
+                                        '_settings' => 'Section Visibility',
+                                        default     => ($sectionLabelMap[$templateKey][$tab] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $tab))),
+                                    };
 
                                     // Determine if this section has a toggle in _sections_config
                                     $hasToggle   = isset($sectionsConfig[$tab]);
@@ -173,15 +176,6 @@
                                             </small>
                                         @endif
                                     </div>
-                                    @if($hasToggle)
-                                        <div class="flex-shrink-0" wire:click.stop="toggleSection('{{ $tab }}')">
-                                            <div class="form-check form-switch mb-0">
-                                                <input class="form-check-input" type="checkbox"
-                                                       style="width:34px;height:18px;cursor:pointer;pointer-events:none;"
-                                                       @checked($tabEnabled)>
-                                            </div>
-                                        </div>
-                                    @endif
                                 </div>
                             @endforeach
                         </div>
@@ -204,9 +198,12 @@
                         <div class="d-flex align-items-center gap-3">
                             @php
                                 $activeIcon = $iconMap[$section] ?? ['icon' => 'mdi-layers', 'color' => 'primary'];
-                                $activeLabel = $section === '_common'
-                                    ? 'Basic Info'
-                                    : (['MENU' => 'Menu'][$section] ?? \Illuminate\Support\Str::headline(str_replace('_', ' ', $section)));
+                                $activeLabel = match($section) {
+                                    '_common'   => 'Basic Info',
+                                    '_settings' => 'Section Visibility',
+                                    'MENU'      => 'Menu',
+                                    default     => \Illuminate\Support\Str::headline(str_replace('_', ' ', $section ?? '')),
+                                };
                             @endphp
                             <div class="avatar-sm flex-shrink-0">
                                 <span class="avatar-title rounded-circle bg-soft-{{ $activeIcon['color'] }} text-{{ $activeIcon['color'] }} font-size-20">
@@ -217,15 +214,6 @@
                                 <h5 class="mb-0">{{ $activeLabel }}</h5>
                                 <small class="text-muted">Edit default template data for this section</small>
                             </div>
-                            @if(isset($sectionsConfig[$section]))
-                                @php $secEnabled = $sectionsConfig[$section]['enabled'] ?? true; @endphp
-                                <div wire:click="toggleSection('{{ $section }}')" style="cursor:pointer;">
-                                    <span class="badge rounded-pill {{ $secEnabled ? 'bg-success' : 'bg-secondary' }} px-3 py-2">
-                                        <i class="mdi {{ $secEnabled ? 'mdi-toggle-switch' : 'mdi-toggle-switch-off' }} me-1"></i>
-                                        {{ $secEnabled ? 'Section Enabled' : 'Section Disabled' }}
-                                    </span>
-                                </div>
-                            @endif
                         </div>
                     </div>
 
@@ -258,10 +246,50 @@
                             <div class="alert alert-warning mb-3">
                                 <i class="mdi mdi-eye-off-outline me-2"></i>
                                 <strong>This section is currently disabled.</strong>
-                                New vCards using this template will not show this section. Toggle it on using the switch above or in the sidebar.
+                                New vCards using this template will not show this section. Enable it in the <a href="#" wire:click.prevent="selectSection('_settings')" class="alert-link">Section Visibility</a> tab.
                             </div>
                         @endif
 
+                        @if($section === '_settings')
+                            {{-- ── SECTION VISIBILITY PANEL ─────────────────────────── --}}
+                            <p class="text-muted mb-3" style="font-size:.85rem;">Toggle sections on or off. New vCards created with this template will respect these defaults.</p>
+                            <div class="row g-2">
+                                @foreach($sectionsConfig as $sKey => $sCfg)
+                                    @php
+                                        $sEnabled = $sCfg['enabled'] ?? true;
+                                        $sLabel   = $sCfg['label'] ?? \Illuminate\Support\Str::headline($sKey);
+                                        $sIcon    = $iconMap[$sKey] ?? ['icon' => 'mdi-layers', 'color' => 'secondary'];
+                                    @endphp
+                                    <div class="col-12">
+                                        <div class="d-flex align-items-center justify-content-between p-3 border rounded
+                                                    {{ $sEnabled ? 'border-success-subtle bg-success-subtle' : 'border-secondary-subtle bg-light' }}"
+                                             style="transition:.15s;">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <span class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title rounded-circle font-size-16
+                                                                 {{ $sEnabled ? 'bg-success text-white' : 'bg-secondary-subtle text-secondary' }}">
+                                                        <i class="mdi {{ $sIcon['icon'] }}"></i>
+                                                    </span>
+                                                </span>
+                                                <div>
+                                                    <p class="mb-0 fw-semibold" style="font-size:.9rem;">{{ $sLabel }}</p>
+                                                    <small class="{{ $sEnabled ? 'text-success' : 'text-muted' }}">
+                                                        {{ $sEnabled ? 'Enabled by default' : 'Disabled by default' }}
+                                                    </small>
+                                                </div>
+                                            </div>
+                                            <div wire:click="toggleSection('{{ $sKey }}')" style="cursor:pointer;">
+                                                <div class="form-check form-switch mb-0">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           style="width:44px;height:22px;cursor:pointer;pointer-events:none;"
+                                                           @checked($sEnabled)>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
                         <form wire:submit.prevent="save" novalidate>
                             <div class="row">
                                 @if (empty($form))
@@ -317,6 +345,7 @@
                                 @endif
                             </div>
                         </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -327,6 +356,10 @@
         .tve-nav-item:hover:not(.tve-nav-active) { background: rgba(0,0,0,.04); }
         .tve-nav-active { background: rgba(var(--bs-primary-rgb),.08); border-left: 3px solid var(--bs-primary) !important; }
         .tve-nav-item { border-left: 3px solid transparent; }
+        .border-success-subtle { border-color: rgba(var(--bs-success-rgb),.3) !important; }
+        .bg-success-subtle { background-color: rgba(var(--bs-success-rgb),.07) !important; }
+        .border-secondary-subtle { border-color: rgba(var(--bs-secondary-rgb),.2) !important; }
+        .bg-secondary-subtle { background-color: rgba(var(--bs-secondary-rgb),.07) !important; }
     </style>
 
     <script>
@@ -345,5 +378,71 @@
             }
         });
     })();
+
+    // ── Sortable drag-to-reorder for list sections ────────────────────────
+    (function () {
+        function initSortables() {
+            if (!window.Sortable) { return; }
+            document.querySelectorAll('[data-sort-path]').forEach(function (container) {
+                if (container.__sortableInited) { return; }
+                container.__sortableInited = true;
+                var path = container.getAttribute('data-sort-path') || '';
+                var wireEl = container.closest('[wire\\:id]');
+                if (!wireEl) { return; }
+                new Sortable(container, {
+                    handle: '.drag-handle',
+                    animation: 150,
+                    ghostClass: 'sortable-ghost',
+                    chosenClass: 'sortable-chosen',
+                    onEnd: function (evt) {
+                        if (evt.oldIndex === evt.newIndex) { return; }
+                        // Re-index data-row-index on children so event delegation stays correct
+                        Array.from(container.children).forEach(function(el, idx) {
+                            if ('rowIndex' in el.dataset) el.dataset.rowIndex = idx;
+                        });
+                        var comp = window.Livewire.find(wireEl.getAttribute('wire:id'));
+                        if (comp) { comp.call('reorderRow', path, evt.oldIndex, evt.newIndex); }
+                    }
+                });
+            });
+        }
+        function loadSortableAndInit() {
+            if (window.Sortable) { initSortables(); return; }
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.3/Sortable.min.js';
+            script.onload = initSortables;
+            document.head.appendChild(script);
+        }
+        loadSortableAndInit();
+        if (!window.__vcardSortableListenerAdded) {
+            window.__vcardSortableListenerAdded = true;
+            var _mo = new MutationObserver(function () { loadSortableAndInit(); });
+            _mo.observe(document.body, { childList: true, subtree: true });
+        }
+    })();
+
+    // ── Generic Item Modal (services / products / etc.) ───────────────────
+    window._ssItemModalOpen = window._ssItemModalOpen || false;
+    document.addEventListener('open-item-modal', function (e) {
+        var el = document.getElementById('ss-item-modal');
+        if (!el || !window.bootstrap) return;
+        window._ssItemModalOpen = true;
+        bootstrap.Modal.getOrCreateInstance(el).show();
+    });
+    document.addEventListener('hide-item-modal', function () {
+        var el = document.getElementById('ss-item-modal');
+        if (!el || !window.bootstrap) return;
+        window._ssItemModalOpen = false;
+        bootstrap.Modal.getOrCreateInstance(el).hide();
+    });
+    document.addEventListener('hidden.bs.modal', function(e) {
+        if (e.target && e.target.id === 'ss-item-modal') window._ssItemModalOpen = false;
+    });
+    document.addEventListener('livewire:updated', function() {
+        if (window._ssItemModalOpen) {
+            var el = document.getElementById('ss-item-modal');
+            if (el && window.bootstrap) bootstrap.Modal.getOrCreateInstance(el).show();
+        }
+    });
     </script>
 </div>

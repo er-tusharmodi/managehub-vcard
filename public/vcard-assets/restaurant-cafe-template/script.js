@@ -96,8 +96,9 @@ const sendSubmission = (type, payload) => {
 
 let APP = {};
 let R = {};
-let MENU = {};
-let activeTab = "Starters";
+let MENU = []; // flat array [{id,name,icon,desc,category_key,price,op,tag,tc,product_image,veg}]
+let CATEGORIES = []; // [{key,label}]
+let activeTab = "";
 let cart = {};
 
 const RATING_ICONS = {
@@ -372,25 +373,55 @@ const renderPayments = () => {
 };
 
 const renderTabs = () => {
-    const tabs = Object.keys(MENU || {});
-    const allTab = `<button class="mtab${"__all__" === activeTab ? " active" : ""}" onclick="switchTab('__all__')">All</button>`;
+    const cats = CATEGORIES.length ? CATEGORIES : buildCatsFromMenu();
+    const allTab = `<button class="mtab${activeTab === "__all__" ? " active" : ""}" onclick="switchTab('__all__')">All</button>`;
     setHTML(
         "menuTabs",
         allTab +
-            tabs
+            cats
                 .map(
-                    (tab) =>
-                        `<button class="mtab${tab === activeTab ? " active" : ""}" onclick="switchTab('${sq(tab)}')">${tab}</button>`,
+                    (cat) =>
+                        `<button class="mtab${cat.key === activeTab ? " active" : ""}" onclick="switchTab('${sq(cat.key)}')">${cat.label}</button>`,
                 )
                 .join(""),
     );
 };
 
+// Build category list from MENU items when no explicit categories defined (legacy fallback)
+const buildCatsFromMenu = () => {
+    if (!Array.isArray(MENU)) {
+        // Old nested format — build from keys
+        return Object.keys(MENU).map((k) => ({ key: k, label: k }));
+    }
+    const seen = new Set();
+    const cats = [];
+    MENU.forEach((item) => {
+        const k = item.category_key || "";
+        if (k && !seen.has(k)) {
+            seen.add(k);
+            cats.push({ key: k, label: k });
+        }
+    });
+    return cats;
+};
+
 const renderItems = () => {
-    const items =
-        activeTab === "__all__"
-            ? Object.values(MENU || {}).flat()
-            : MENU[activeTab] || [];
+    let items;
+    if (Array.isArray(MENU)) {
+        // New flat format
+        items =
+            activeTab === "__all__"
+                ? MENU
+                : MENU.filter(
+                      (item) => (item.category_key || "") === activeTab,
+                  );
+    } else {
+        // Old nested format (fallback for existing vcards not yet migrated)
+        items =
+            activeTab === "__all__"
+                ? Object.values(MENU).flat()
+                : MENU[activeTab] || [];
+    }
     setHTML(
         "menuGrid",
         items
@@ -404,7 +435,7 @@ const renderItems = () => {
                             <div class="diet ${item.veg ? "veg-d" : "nonveg-d"}">${item.veg ? "V" : "N"}</div>
                         </div>
                         <div class="menu-body">
-                            <div class="menu-name">${item.name || ""}</div>
+                            <div class="menu-name">${item.icon ? item.icon + " " : ""}${item.name || ""}</div>
                             <div class="menu-desc">${item.desc || ""}</div>
                             <div class="menu-footer">
                                 <div>
@@ -913,9 +944,30 @@ const renderStatic = () => {
 const renderAll = () => {
     R = { ...(APP._common || {}) };
     R.website = R.website || window.location.href;
-    MENU = APP.MENU || APP.menu || {};
+
+    // Handle both new flat format (array) and old nested format (object)
+    const rawMenu = APP.MENU || APP.menu;
+    if (Array.isArray(rawMenu)) {
+        MENU = rawMenu;
+        CATEGORIES = Array.isArray(APP.categories) ? APP.categories : [];
+    } else if (rawMenu && typeof rawMenu === "object") {
+        // Old nested format — flatten for rendering
+        MENU = Object.entries(rawMenu).flatMap(([cat, items]) =>
+            Array.isArray(items)
+                ? items.map((item) => ({ ...item, category_key: cat }))
+                : [],
+        );
+        CATEGORIES = Object.keys(rawMenu).map((k) => ({ key: k, label: k }));
+    } else {
+        MENU = [];
+        CATEGORIES = Array.isArray(APP.categories) ? APP.categories : [];
+    }
+
     cart = {};
-    activeTab = Object.keys(MENU).length ? "__all__" : "";
+    const firstCat =
+        CATEGORIES[0]?.key ||
+        (Array.isArray(MENU) ? MENU[0]?.category_key || "" : "");
+    activeTab = firstCat || "__all__";
 
     renderStatic();
     renderRatingStrip();

@@ -3,11 +3,52 @@
     $bannerImage = data_get($data, "assets.bannerImage", "");
     $storyImage = data_get($data, "story.image", data_get($data, "assets.fallbackImage", ""));
     $restaurantName = data_get($data, "R.name", "");
-    $menu = data_get($data, "MENU", []);
-    $menu = is_array($menu) ? $menu : [];
-    $menuTabs = array_keys($menu);
+
+    // Build categories map from new flat format or fall back to old nested MENU keys
+    $rawCategories = data_get($data, "categories", []);
+    if (is_array($rawCategories) && !empty($rawCategories) && isset($rawCategories[0]['key'])) {
+        // New format: [{key, label}]
+        $catMap = [];
+        foreach ($rawCategories as $cat) {
+            if (is_array($cat) && !empty($cat['key'])) {
+                $catMap[$cat['key']] = $cat['label'] ?? $cat['key'];
+            }
+        }
+    } else {
+        $catMap = [];
+    }
+
+    $rawMenu = data_get($data, "MENU", []);
+    if (is_array($rawMenu) && !empty($rawMenu) && isset($rawMenu[0])) {
+        // New flat format
+        $menuItems = array_values($rawMenu);
+        if (empty($catMap)) {
+            // Build catMap from category_keys in items if no categories section
+            foreach ($menuItems as $mi) {
+                $ck = $mi['category_key'] ?? '';
+                if ($ck && !isset($catMap[$ck])) { $catMap[$ck] = $ck; }
+            }
+        }
+    } else {
+        // Old nested format — flatten for PHP SSR initial render
+        $menuItems = [];
+        foreach ((array)$rawMenu as $catName => $catItems) {
+            if (is_array($catItems)) {
+                foreach ($catItems as $mi) {
+                    $mi['category_key'] = $catName;
+                    $menuItems[] = $mi;
+                }
+                if (!isset($catMap[$catName])) { $catMap[$catName] = $catName; }
+            }
+        }
+    }
+
+    $menuTabs  = array_keys($catMap);
     $activeTab = $menuTabs[0] ?? "";
-    $activeItems = ($activeTab && isset($menu[$activeTab]) && is_array($menu[$activeTab])) ? $menu[$activeTab] : [];
+    $activeItems = $activeTab
+        ? array_values(array_filter($menuItems, fn($i) => ($i['category_key'] ?? '') === $activeTab))
+        : $menuItems;
+
     $socialIconClasses = [
         "instagram" => "ic-ig",
         "whatsapp" => "ic-wa",
@@ -28,6 +69,9 @@
         <meta property="og:description" content="{{ data_get($data, 'meta.description', '') }}">
         @if(data_get($data, 'meta.og_image'))
         <meta property="og:image" content="{{ url(data_get($data, 'meta.og_image')) }}">
+        @endif
+        @if($storyImage)
+        <link rel="icon" type="image/x-icon" href="{{ $storyImage }}">
         @endif
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
         <link rel="stylesheet" href="{{ $assetBase }}style.css" />
@@ -61,18 +105,11 @@
                     </button>
                 </div>
                 <div class="banner-center">
-                    <div class="banner-eyebrow" id="bannerEyebrow">{{ data_get($data, "banner.eyebrow") }}</div>
+                    <div class="banner-eyebrow" id="bannerEyebrow">{{ data_get($data, '_common.eyebrow', data_get($data, 'banner.eyebrow')) }}</div>
                     <div class="banner-title" id="bannerTitle">{{ data_get($data, "_common.name") }}</div>
                     <div class="banner-sub" id="bannerSub">{{ data_get($data, "_common.tagline") }}</div>
                 </div>
-                <div class="rating-strip" id="ratingStrip">
-                    @foreach(data_get($data, "banner.ratings", []) as $item)
-                        @php $iconKey = "rating_" . ($item["icon"] ?? ""); @endphp
-                        <div class="r-stat">
-                            {!! getIcon($iconKey) !!}
-                            {{ $item["label"] ?? "" }}
-                        </div>
-                    @endforeach
+                <div class="rating-strip" id="ratingStrip" style="display:none;">
                 </div>
             </div>
 
@@ -185,8 +222,8 @@
                 </div>
                 <div class="sec-body">
                     <div class="menu-tabs" id="menuTabs">
-                        @foreach($menuTabs as $tab)
-                            <button class="mtab{{ $tab === $activeTab ? " active" : "" }}" onclick="switchTab({!! vcard_js_str($tab) !!})">{{ $tab }}</button>
+                        @foreach($catMap as $tabKey => $tabLabel)
+                            <button class="mtab{{ $tabKey === $activeTab ? " active" : "" }}" onclick="switchTab({!! vcard_js_str($tabKey) !!})">{{ $tabLabel }}</button>
                         @endforeach
                     </div>
                     <div class="menu-grid" id="menuGrid">
@@ -202,16 +239,17 @@
                             $veg = !empty($item["veg"]);
 @endphp
                             <div class="menu-card">
-                                <div class="menu-img">
-                                    <div class="menu-img-ph" style="background-image:url('{{ e($imgSrc) }}');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
-                                    @if(!empty($item["tag"]))
-                                        <span class="mbadge" style="background:{{ $tagColor }}">{{ $item["tag"] }}</span>
-                                    @endif
-                                    <div class="diet {{ $veg ? "veg-d" : "nonveg-d" }}">{{ $veg ? "V" : "N" }}</div>
-                                </div>
                                 <div class="menu-body">
-                                    <div class="menu-name">{{ $item["name"] ?? "" }}</div>
-                                    <div class="menu-desc">{{ $item["desc"] ?? "" }}</div>
+                                    <div class="menu-name-row">
+                                        <span class="diet-dot {{ $veg ? "veg-d" : "nonveg-d" }}"></span>
+                                        <span class="menu-name">{{ $item["name"] ?? "" }}</span>
+                                        @if(!empty($item["tag"]))
+                                            <span class="mbadge-inline" style="background:{{ $tagColor }}">{{ $item["tag"] }}</span>
+                                        @endif
+                                    </div>
+                                    @if(!empty($item["desc"]))
+                                        <div class="menu-desc">{{ $item["desc"] }}</div>
+                                    @endif
                                     <div class="menu-footer">
                                         <div>
                                             <span class="mprice">&#8377;{{ $price }}</span>
@@ -225,6 +263,9 @@
                                             <button class="qty-btn" onclick="chQty({{ $id }},1,{{ $price }},{!! vcard_js_str($item["name"] ?? "") !!})"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg></button>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="menu-img-sq">
+                                    <div class="menu-img-ph" style="background-image:url('{{ e($imgSrc) }}');background-size:cover;background-position:center;background-repeat:no-repeat;width:100%;height:100%;"></div>
                                 </div>
                             </div>
                         @endforeach
@@ -253,7 +294,6 @@
                                 <div class="gal-item">
                                     <img src="{{ $image }}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" />
                                 </div>
-                                <div class="gal-cap">{{ $item["caption"] ?? "" }}</div>
                             </div>
                         @endforeach
                     </div>

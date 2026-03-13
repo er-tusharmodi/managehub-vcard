@@ -27,9 +27,12 @@
 
         <div class="p-3">
             @if(is_array($form['cuisineTags'] ?? null) && count($form['cuisineTags']) > 0)
-                <div class="d-flex flex-wrap gap-2 mb-3">
+                <div class="d-flex flex-wrap gap-2 mb-3" data-sort-path="cuisineTags">
                     @foreach($form['cuisineTags'] as $cti => $tag)
                     <div class="input-group input-group-sm" style="width:auto;max-width:220px;" wire:key="rc-ctag-{{ $cti }}">
+                        <span class="input-group-text drag-handle" style="cursor:grab;background:#e5e7eb;border-color:#d1d5db;padding:0 6px;">
+                            <i class="mdi mdi-drag-vertical" style="font-size:13px;color:#6b7280;"></i>
+                        </span>
                         <span class="input-group-text bg-warning-subtle border-warning-subtle px-2">
                             <i class="mdi mdi-tag-outline text-warning-emphasis" style="font-size:13px;"></i>
                         </span>

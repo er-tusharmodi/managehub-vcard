@@ -184,7 +184,7 @@
                 <div class="sec-title" id="services-title">Our Services</div>
             </div>
             <div class="sec-body">
-                <div class="services-grid" id="services-grid">
+                <div class="services-grid" id="services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
                     @foreach($data["services"] ?? [] as $service)
                         @php $serviceImage = $service["image"] ?? $fallbackImage; @endphp
                         <div class="svc-card">
@@ -481,6 +481,7 @@
             </div>
             <div class="sec-body">
                 <div class="qr-card-inner">
+                    @php $customQrImage = $assets['qrCodeImage'] ?? ''; @endphp
                     <p
                         id="qr-description"
                         style="
@@ -489,7 +490,12 @@
                             margin-bottom: 0.2rem;
                         "
                     >{{ data_get($data, "qr.description") }}</p>
-                    <div id="vcardQR"></div>
+                    @if($customQrImage)
+                        <img src="{{ $customQrImage }}" alt="QR Code"
+                             style="max-width:200px;width:100%;border-radius:10px;display:block;margin:0.5rem auto;">
+                    @else
+                        <div id="vcardQR"></div>
+                    @endif
                     <div class="qr-actions">
                         <button class="qr-btn" onclick="downloadQR()">
                             {!! getIcon("download", "ic-sm", "currentColor") !!}

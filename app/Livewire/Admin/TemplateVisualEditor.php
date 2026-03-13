@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use Livewire\Attributes\Renderless;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Services\VcardTemplateService;
@@ -14,6 +15,7 @@ class TemplateVisualEditor extends Component
 
     public $templateKey;
     public $templateName;
+    public $galleryUploadFile = null;
     public ?string $section = null;
     public array $sections = [];
     public array $sectionsConfig = [];
@@ -75,6 +77,11 @@ class TemplateVisualEditor extends Component
             }
             $this->sections = $allSections;
 
+            // Add _settings virtual tab when sections config is available
+            if (!empty($this->sectionsConfig)) {
+                $this->sections[] = '_settings';
+            }
+
             // Load sections config (for inline toggles)
             $this->sectionsConfig = $data['_sections_config'] ?? [];
 
@@ -106,6 +113,39 @@ class TemplateVisualEditor extends Component
         } catch (\Exception $e) {
             session()->flash('error', $e->getMessage());
         }
+    }
+
+    /**
+     * Fires when a gallery image is uploaded via JS $wire.upload('galleryUploadFile', ...) API.
+     */
+    public function updatedGalleryUploadFile(): void
+    {
+        if (!$this->galleryUploadFile) { return; }
+
+        try {
+            $templatePath = $this->templateService->templatePath($this->templateKey);
+            $uploadsDir   = $templatePath . DIRECTORY_SEPARATOR . 'uploads';
+            if (!File::exists($uploadsDir)) {
+                File::makeDirectory($uploadsDir, 0755, true);
+            }
+
+            $filename     = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $this->galleryUploadFile->getClientOriginalName());
+            $fullPath     = $uploadsDir . DIRECTORY_SEPARATOR . $filename;
+            File::copy($this->galleryUploadFile->getRealPath(), $fullPath);
+
+            $absolutePath = '/template-assets/' . $this->templateKey . '/uploads/' . $filename;
+
+            $this->form   = array_values(is_array($this->form) ? $this->form : []);
+            $this->form[] = ['image' => $absolutePath];
+
+            $data                 = $this->templateService->getTemplateDefaultJson($this->templateKey);
+            $data[$this->section] = $this->form;
+            $this->templateService->updateTemplateDefaultJson($this->templateKey, $data);
+        } catch (\Exception $e) {
+            session()->flash('error', 'Failed to upload gallery image: ' . $e->getMessage());
+        }
+
+        $this->galleryUploadFile = null;
     }
 
     public function toggleSection(string $sectionKey): void
@@ -207,6 +247,7 @@ class TemplateVisualEditor extends Component
 
     public function save()
     {
+        if ($this->section === '_settings') { return; }
         try {
             $payload = $this->sanitizeArrayKeys($this->applyUploads($this->form, $this->uploads));
             $data = $this->templateService->getTemplateDefaultJson($this->templateKey);
@@ -503,6 +544,55 @@ class TemplateVisualEditor extends Component
         $this->removeRow($path, $index);
         $this->save();
         $this->dispatch('notify', type: 'success', message: 'Item removed successfully!');
+    }
+
+    #[Renderless]
+    public function reorderRow(string $path, int $from, int $to): void
+    {
+        if ($from === $to) { return; }
+        $list = empty($path) ? $this->form : data_get($this->form, $path, []);
+        if (!is_array($list) || !isset($list[$from]) || !isset($list[$to])) { return; }
+        $item = array_splice($list, $from, 1);
+        array_splice($list, $to, 0, $item);
+        $list = array_values($list);
+        if (empty($path)) {
+            $this->form = $list;
+        } else {
+            data_set($this->form, $path, $list);
+        }
+        $this->save();
+    }
+
+    public function openItemModal(?int $index = null, array $defaultItem = []): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null) {
+            $this->editingItem = $this->form[$index] ?? $defaultItem;
+        } else {
+            $this->editingItem = $defaultItem;
+        }
+        $this->dispatch('open-item-modal', wireId: $this->getId());
+    }
+
+    public function saveItemModal(): void
+    {
+        $list  = is_array($this->form) ? $this->form : [];
+        $index = $this->editingIndex ?? count($list);
+        $list[$index] = $this->editingItem;
+        $this->form   = array_values($list);
+        // Move pending uploads from 'itemEdit' slot to the correct index
+        if (!empty($this->uploads['itemEdit'])) {
+            foreach ($this->uploads['itemEdit'] as $col => $file) {
+                $this->uploads[$index][$col] = $file;
+            }
+            unset($this->uploads['itemEdit']);
+        }
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem  = [];
+        $this->editingIndex = null;
+        $this->dispatch('hide-item-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added!');
     }
 
     public function moveRow(string $path, int $index, int $direction): void

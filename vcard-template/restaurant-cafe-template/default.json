@@ -251,141 +251,147 @@
                     "url"
                 ],
                 "help": "Add your social media profiles (name & link)"
+            },
+            "eyebrow": {
+                "label": "Established / Eyebrow Text",
+                "type": "text",
+                "sync": [
+                    "banner.eyebrow"
+                ]
             }
         }
     },
     "meta": {
-        "title": "La Piazza",
-        "description": "",
+        "title": "aaaa",
+        "description": "bbbb",
         "keywords": "",
-        "og_image": ""
+        "og_image": "/template-assets/restaurant-cafe-template/uploads/1773372984_channels4_banner.jpg"
     },
     "assets": {
         "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1772959868_slide1.png",
         "profileImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_TheBarbershop_QR.png",
         "qrCodeImage": "/template-assets/restaurant-cafe-template/uploads/1773322878_TheBarbershop_QR.png"
     },
-    "MENU": {
-        "Starters": [
-            {
-                "id": 1,
-                "name": "Bruschetta Classica",
-                "icon": "bread",
-                "desc": "",
-                "price": 299,
-                "tag": "Chef Pick",
-                "tc": "#3a4a2e",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322199_download.png",
-                "veg": true
-            },
-            {
-                "id": 2,
-                "name": "Arancini al Forno",
-                "icon": "arancini",
-                "desc": "",
-                "price": 349,
-                "op": 399,
-                "tag": "Popular",
-                "tc": "#c2562a",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322204_download.png",
-                "veg": true
-            }
-        ],
-        "Mains": [
-            {
-                "id": 28,
-                "name": "Grilled Salmon",
-                "icon": "fish",
-                "desc": "Atlantic salmon fillet, salsa verde, roasted cherry tomatoes, wilted spinach.",
-                "price": 949,
-                "op": 1049,
-                "tag": "Hot Deal",
-                "tc": "#e65100",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322194_download.png",
-                "veg": false
-            },
-            {
-                "id": 29,
-                "name": "Eggplant Parmigiana",
-                "icon": "eggplant",
-                "desc": "Layered fried eggplant, San Marzano tomato, melted mozzarella, fresh basil.",
-                "price": 549,
-                "tag": "Veg",
-                "tc": "#2e7d32",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322174_download.png",
-                "veg": true
-            },
-            {
-                "id": 31,
-                "name": "Osso Buco Milanese",
-                "icon": "lamb",
-                "desc": "Slow-braised veal shank, gremolata, saffron risotto. A Milanese classic.",
-                "price": 1099,
-                "tag": "Must Try",
-                "tc": "#c2562a",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322181_download.png",
-                "veg": false
-            },
-            {
-                "id": 32,
-                "name": "Baked Meatballs",
-                "icon": "meatballs",
-                "desc": "Oven-baked beef and pork meatballs in rich tomato sugo, crusty bread.",
-                "price": 649,
-                "tag": "Comfort",
-                "tc": "#3a4a2e",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322187_download.png",
-                "veg": false
-            }
-        ],
-        "Desserts": [
-            {
-                "id": 33,
-                "name": "Tiramisu Classico",
-                "icon": "cake",
-                "desc": "Savoiardi soaked in espresso, mascarpone cream, fine unsweetened cocoa.",
-                "price": 329,
-                "op": 379,
-                "tag": "Bestseller",
-                "tc": "#b8962e",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322210_download.png",
-                "veg": true
-            },
-            {
-                "id": 34,
-                "name": "Panna Cotta",
-                "icon": "panna",
-                "desc": "Silky vanilla bean custard set cream, seasonal wild berry compote, mint.",
-                "price": 279,
-                "tag": "",
-                "tc": "",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322215_download.png",
-                "veg": true
-            },
-            {
-                "id": 39,
-                "name": "Profiteroles",
-                "icon": "profiterole",
-                "desc": "Choux pastry puffs, Chantilly cream filling, warm dark chocolate drizzle.",
-                "price": 319,
-                "tag": "New",
-                "tc": "#6a1b9a",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322221_download.png",
-                "veg": true
-            },
-            {
-                "id": 40,
-                "name": "Cassata Siciliana",
-                "icon": "cake",
-                "desc": "Ricotta-filled sponge, marzipan shell, candied fruits, pistachios.",
-                "price": 299,
-                "tag": "Regional",
-                "tc": "#2e7d32",
-                "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322225_download.png",
-                "veg": true
-            }
-        ]
-    },
+    "categories": [
+        {
+            "key": "starters",
+            "label": "Starters"
+        },
+        {
+            "key": "mains",
+            "label": "Mains"
+        },
+        {
+            "key": "desserts",
+            "label": "Desserts"
+        }
+    ],
+    "MENU": [
+        {
+            "id": 1,
+            "name": "Bruschetta Classica",
+            "icon": "\ud83c\udf5e",
+            "desc": "",
+            "category_key": "starters",
+            "price": 299,
+            "op": "",
+            "tag": "Chef Pick",
+            "tc": "#3a4a2e",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322199_download.png",
+            "veg": true
+        },
+        {
+            "id": 2,
+            "name": "Arancini al Forno",
+            "icon": "\ud83c\udf59",
+            "desc": "",
+            "category_key": "starters",
+            "price": 349,
+            "op": 399,
+            "tag": "Popular",
+            "tc": "#c2562a",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322204_download.png",
+            "veg": true
+        },
+        {
+            "id": 28,
+            "name": "Grilled Salmon",
+            "icon": "\ud83d\udc1f",
+            "desc": "Atlantic salmon fillet, salsa verde, roasted cherry tomatoes, wilted spinach.",
+            "category_key": "mains",
+            "price": 949,
+            "op": 1049,
+            "tag": "Hot Deal",
+            "tc": "#e65100",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322194_download.png",
+            "veg": false
+        },
+        {
+            "id": 29,
+            "name": "Eggplant Parmigiana",
+            "icon": "\ud83c\udf46",
+            "desc": "Layered fried eggplant, San Marzano tomato, melted mozzarella, fresh basil.",
+            "category_key": "mains",
+            "price": 549,
+            "op": "",
+            "tag": "Veg",
+            "tc": "#2e7d32",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322174_download.png",
+            "veg": true
+        },
+        {
+            "id": 31,
+            "name": "Osso Buco Milanese",
+            "icon": "\ud83c\udf56",
+            "desc": "Slow-braised veal shank, gremolata, saffron risotto. A Milanese classic.",
+            "category_key": "mains",
+            "price": 1099,
+            "op": "",
+            "tag": "Must Try",
+            "tc": "#c2562a",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322181_download.png",
+            "veg": false
+        },
+        {
+            "id": 32,
+            "name": "Baked Meatballs",
+            "icon": "\ud83c\udf5d",
+            "desc": "Oven-baked beef and pork meatballs in rich tomato sugo, crusty bread.",
+            "category_key": "mains",
+            "price": 649,
+            "op": "",
+            "tag": "Comfort",
+            "tc": "#3a4a2e",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322187_download.png",
+            "veg": false
+        },
+        {
+            "id": 39,
+            "name": "Profiteroles",
+            "icon": "\ud83c\udf69",
+            "desc": "Choux pastry puffs, Chantilly cream filling, warm dark chocolate drizzle.",
+            "category_key": "desserts",
+            "price": 319,
+            "op": "",
+            "tag": "New",
+            "tc": "#6a1b9a",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322221_download.png",
+            "veg": true
+        },
+        {
+            "id": 40,
+            "name": "Cassata Siciliana",
+            "icon": "\ud83c\udf70",
+            "desc": "Ricotta-filled sponge, marzipan shell, candied fruits, pistachios.",
+            "category_key": "desserts",
+            "price": 299,
+            "op": "",
+            "tag": "Regional",
+            "tc": "#2e7d32",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322225_download.png",
+            "veg": true
+        }
+    ],
     "banner": {
         "statusLabel": "Open Now",
         "shareLabel": "Share",
@@ -409,7 +415,6 @@
     },
     "profile": {
         "cuisineTags": [
-            "Italian",
             "Caf\u00e9",
             "Pizza",
             "Vegan Options",
@@ -459,28 +464,13 @@
     },
     "gallery": [
         {
-            "caption": "Signature Latte",
-            "image": "/template-assets/restaurant-cafe-template/uploads/1772953670_fevicon.png"
-        },
-        {
-            "caption": "Margherita Pizza",
             "image": "/template-assets/restaurant-cafe-template/uploads/1772682047_dummyUser__1_.png"
         },
         {
-            "caption": "Carbonara",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1772959843_alide1.png"
         },
         {
-            "caption": "Tiramisu",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
-        },
-        {
-            "caption": "Brunello di M.",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
-        },
-        {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1772959843_alide1.png",
-            "caption": ""
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773378169_service3.png"
         }
     ],
     "reservation": {
@@ -626,6 +616,12 @@
             "title": "Happy Hours",
             "desc": "Flat 20% off on all beverages and starters between 3 PM to 6 PM on weekdays.",
             "tag": "3-6 PM"
+        },
+        {
+            "icon": "",
+            "title": "asdasd",
+            "desc": "asdasd",
+            "tag": "asdasd"
         }
     ],
     "hours": {
@@ -663,7 +659,7 @@
         ]
     },
     "location": {
-        "name": "La Piazza Restaurant & Cafes",
+        "name": "aaaa",
         "address": "12, Connaught Place, Block B, New Delhi \u2013 110001",
         "mapLabel": "Get Directions",
         "transport": [
@@ -695,17 +691,17 @@
     },
     "social": [
         {
-            "type": "instagram",
-            "name": "@lapiazza_cafe",
-            "value": "Instagram \u00b7 18.4K followers",
-            "action": "url",
-            "url": "https://instagram.com"
+            "type": "website",
+            "name": "Website",
+            "value": "+91 98765 43210 \u00b7 Quick response",
+            "action": "url"
         },
         {
-            "type": "whatsapp",
-            "name": "WhatsApp Orders",
-            "value": "+91 98765 43210 \u00b7 Quick response",
-            "action": "wa"
+            "type": "email",
+            "name": "Email",
+            "value": "asdasd",
+            "action": "email",
+            "url": "adasd"
         },
         {
             "type": "youtube",
@@ -864,14 +860,14 @@
         "qr": "lapiazza_qr.png"
     },
     "_common": {
-        "name": "La Piazza Restaurant & Cafes",
-        "tagline": "Authentic Italian Food & Artisan Coffees",
+        "name": "aaaa",
+        "tagline": "aaaaa",
         "phone": "+911123456780",
         "whatsapp": "911123456780",
-        "email": "hello@lapiazza.inn",
+        "email": "example@example.com",
         "address": "12 Connaught Place, Block B, New Delhi 110001n",
-        "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhin",
-        "website": "https://lapiazza.inn",
+        "maps": "https://maps.google.com/?q=Connaught+Place+New+Delhi",
+        "website": "https:/example.com",
         "social": [
             {
                 "name": "Facebook",
@@ -893,6 +889,7 @@
                 "name": "Twitter / X",
                 "url": ""
             }
-        ]
+        ],
+        "eyebrow": "Est. 2018 \u00b7 Fine Dining & Caf\u00e9"
     }
 }

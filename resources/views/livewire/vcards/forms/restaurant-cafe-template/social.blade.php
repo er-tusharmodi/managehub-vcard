@@ -37,7 +37,9 @@
     </div>
 </div>
 
-@forelse($socialRows as $si => $row)
+@if(count($socialRows) > 0)
+<div class="col-12" data-sort-path="">
+@foreach($socialRows as $si => $row)
 @if(!is_array($row)) @continue @endif
 @php
     $platform    = $socialPlatforms[$row['type'] ?? ''] ?? null;
@@ -70,6 +72,7 @@
         <div class="d-flex align-items-center justify-content-between px-3 py-2"
              style="background:{{ $headerColor }}1a; border-bottom:2px solid {{ $headerColor }};">
             <div class="d-flex align-items-center gap-2">
+                <i class="mdi mdi-drag-vertical drag-handle text-muted me-1" style="font-size:1.1rem;cursor:grab;"></i>
                 <i class="{{ $socialIconClass }}" style="font-size:1.1rem;color:{{ $headerColor }};"></i>
                 <span class="fw-semibold" style="color:{{ $headerColor }};font-size:.8rem;">
                     {{ $platform ? $platform['label'] : ($row['type'] ?? 'Link') }}
@@ -150,7 +153,9 @@
         </div>
     </div>
 </div>
-@empty
+@endforeach
+</div>{{-- /data-sort-path --}}
+@else
 <div class="col-12">
     <div class="text-center py-5 rounded-3"
          style="background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:2px dashed #cbd5e1;">
@@ -162,4 +167,4 @@
         </button>
     </div>
 </div>
-@endforelse
+@endif

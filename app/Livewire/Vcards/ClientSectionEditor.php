@@ -30,6 +30,9 @@ class ClientSectionEditor extends Component
     public string $subscriptionMessage = 'Your subscription is inactive. Please contact support.';
     public array $categoryOptions = [];
 
+    // Gallery single-file upload slot (used by rc-template gallery multi-add)
+    public $galleryUploadFile = null;
+
     /** When true (opened via ?solo=1 sidebar link) the inner section nav is hidden. */
     #[Url]
     public bool $solo = false;
@@ -129,6 +132,9 @@ class ClientSectionEditor extends Component
         if ($templateKey2 === 'doctor-clinic-template') {
             $hiddenSections[] = 'promo';
         }
+        if ($templateKey2 === 'restaurant-cafe-template') {
+            $hiddenSections[] = 'qr';
+        }
         $allSections = array_values(array_filter(array_keys($data), function ($key) use ($hiddenSections) {
             return $key === '_common' || (!str_starts_with($key, '_') && !in_array($key, $hiddenSections));
         }));
@@ -167,7 +173,11 @@ class ClientSectionEditor extends Component
             $allSections = array_values(array_filter($doctorAllowed, fn($s) => array_key_exists($s, $data)));
         }
 
+        // Append virtual _settings tab whenever section visibility config exists
         $this->sections = $allSections;
+        if (!empty($this->sectionsConfig)) {
+            $this->sections[] = '_settings';
+        }
 
         if ($section === null) {
             $section = in_array('_common', $this->sections, true) ? '_common' : ($this->sections[0] ?? null);
@@ -202,6 +212,8 @@ class ClientSectionEditor extends Component
             session()->flash('error', $this->subscriptionMessage);
             return;
         }
+        // _settings is a virtual display-only tab — nothing to save
+        if ($this->section === '_settings') { return; }
 
         $this->resetValidation();
         $this->validateIfRules($this->rulesForForm());
@@ -346,6 +358,31 @@ class ClientSectionEditor extends Component
         $this->newItem = []; // Clear the form
         $this->dispatch('notify', type: 'success', message: 'Item added successfully!');
         $this->dispatch('close-modal');
+    }
+
+    /**
+     * Fires when a gallery image is uploaded via the JS $wire.upload('galleryUploadFile', ...) API.
+     * Stores the image, appends it as a new row, saves, and resets the slot.
+     */
+    public function updatedGalleryUploadFile(): void
+    {
+        if (!$this->galleryUploadFile) { return; }
+
+        $path = $this->storeUploadedImage(
+            $this->galleryUploadFile,
+            'vcards/' . $this->vcard->subdomain . '/uploads'
+        );
+        $url = \Storage::url($path);
+
+        $this->form   = array_values(is_array($this->form) ? $this->form : []);
+        $this->form[] = ['image' => $url];
+
+        $data                 = $this->loadJson();
+        $data[$this->section] = $this->form;
+        $this->storeJson($data);
+
+        $this->galleryUploadFile = null;
+        $this->dispatch('gallery-image-added');
     }
 
     private function rulesForAll(): array
@@ -652,6 +689,39 @@ class ClientSectionEditor extends Component
         $this->dispatch('notify', type: 'success', message: 'Payment method saved!');
     }
 
+    public function openItemModal(?int $index = null, array $defaultItem = []): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null) {
+            $this->editingItem = $this->form[$index] ?? $defaultItem;
+        } else {
+            $this->editingItem = $defaultItem;
+        }
+        $this->dispatch('open-item-modal', wireId: $this->getId());
+    }
+
+    public function saveItemModal(): void
+    {
+        $list  = is_array($this->form) ? $this->form : [];
+        $index = $this->editingIndex ?? count($list);
+        $list[$index] = $this->editingItem;
+        $this->form   = array_values($list);
+
+        if (!empty($this->uploads['itemEdit'])) {
+            foreach ($this->uploads['itemEdit'] as $col => $file) {
+                $this->uploads[$index][$col] = $file;
+            }
+            unset($this->uploads['itemEdit']);
+        }
+
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem  = [];
+        $this->editingIndex = null;
+        $this->dispatch('hide-item-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added!');
+    }
+
     public function openMenuItemModal(string $category, ?int $index = null): void
     {
         $this->editingCategory = $category;
@@ -934,12 +1004,7 @@ class ClientSectionEditor extends Component
         }
 
         [$origWidth, $origHeight, $imageType] = $imageInfo;
-        $fileSize = filesize($realPath);
-        $maxDim   = 1920;
-
-        if ($fileSize <= 400 * 1024 && $origWidth <= $maxDim && $origHeight <= $maxDim) {
-            return $file->store($directory, 'public');
-        }
+        $maxDim   = 1200;
 
         $src = match ($imageType) {
             IMAGETYPE_JPEG => @imagecreatefromjpeg($realPath),
