@@ -30,6 +30,9 @@
             content="width=device-width,initial-scale=1,maximum-scale=1"
         />
         <title>{{ data_get($data, "meta.title") }}</title>
+        @if($profileImage)
+        <link rel="icon" type="image/png" href="{{ $profileImage }}">
+        @endif
         <meta name="description" content="{{ data_get($data, 'meta.description', '') }}">
         <meta name="keywords" content="{{ data_get($data, 'meta.keywords', '') }}">
         <meta property="og:title" content="{{ data_get($data, 'meta.title', '') }}">
@@ -139,72 +142,6 @@
         </div>
         @endif
 
-        @if(vcard_section_enabled($data, 'socialLinks'))
-        <div class="sec">
-            <div class="sec-header">
-                <div class="sec-icon">
-                    {!! getIcon("globe", "ic", "currentColor") !!}
-                </div>
-                <div class="sec-title" id="social-title">Social Links</div>
-            </div>
-            <div class="sec-body">
-                <div class="social-list" id="social-list">
-                    @foreach($data["socialLinks"] ?? [] as $index => $item)
-                        @php
-                        $type = $item["type"] ?? "whatsapp";
-                        $iconKey = in_array($type, ["whatsapp", "facebook", "instagram", "youtube"], true)
-                            ? $type
-                            : "whatsapp";
-                        $socialClass = $socialClassMap[$iconKey] ?? "";
-@endphp
-                        <div class="social-item" data-index="{{ (string) $index }}">
-                            <div class="s-ico {{ $socialClass }}">
-                                {!! getIcon($iconKey, "ic", "currentColor") !!}
-                            </div>
-                            <div>
-                                <div class="s-name">{{ $item["name"] ?? "" }}</div>
-                                <div class="s-val">{{ $item["value"] ?? "" }}</div>
-                            </div>
-                            <div class="s-arrow">
-                                {!! getIcon("chevron-right", "ic-sm", "currentColor") !!}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        @endif
-
-        @if(vcard_section_enabled($data, 'services'))
-        <div class="sec">
-            <div class="sec-header">
-                <div class="sec-icon">
-                    {!! getIcon("services", "ic", "currentColor") !!}
-                </div>
-                <div class="sec-title" id="services-title">Our Services</div>
-            </div>
-            <div class="sec-body">
-                <div class="services-grid" id="services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;">
-                    @foreach($data["services"] ?? [] as $service)
-                        @php $serviceImage = $service["image"] ?? $fallbackImage; @endphp
-                        <div class="svc-card">
-                            <div class="svc-img">
-                                <div
-                                    class="svc-img-placeholder"
-                                    style="background:url('{{ $serviceImage }}') center/cover no-repeat"
-                                ></div>
-                            </div>
-                            <div class="svc-body">
-                                <div class="svc-name">{{ $service["name"] ?? "" }}</div>
-                                <div class="svc-desc">{{ $service["description"] ?? "" }}</div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        @endif
-
         @if(vcard_section_enabled($data, 'products'))
         <div class="sec">
             <div class="sec-header">
@@ -275,6 +212,36 @@
         </div>
         @endif
 
+        @if(vcard_section_enabled($data, 'services'))
+        <div class="sec">
+            <div class="sec-header">
+                <div class="sec-icon">
+                    {!! getIcon("services", "ic", "currentColor") !!}
+                </div>
+                <div class="sec-title" id="services-title">Our Services</div>
+            </div>
+            <div class="sec-body">
+                <div class="services-grid" id="services-grid">
+                    @foreach($data["services"] ?? [] as $service)
+                        @php $serviceImage = $service["image"] ?? $fallbackImage; @endphp
+                        <div class="svc-card">
+                            <div class="svc-img">
+                                <div
+                                    class="svc-img-placeholder"
+                                    style="background:url('{{ $serviceImage }}') center/cover no-repeat"
+                                ></div>
+                            </div>
+                            <div class="svc-body">
+                                <div class="svc-name">{{ $service["name"] ?? "" }}</div>
+                                <div class="svc-desc">{{ $service["description"] ?? "" }}</div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+        @endif
+
         @if(vcard_section_enabled($data, 'gallery'))
         <div class="sec">
             <div class="sec-header">
@@ -326,6 +293,42 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+        @endif
+
+        @if(vcard_section_enabled($data, 'socialLinks'))
+        <div class="sec">
+            <div class="sec-header">
+                <div class="sec-icon">
+                    {!! getIcon("globe", "ic", "currentColor") !!}
+                </div>
+                <div class="sec-title" id="social-title">Social Links</div>
+            </div>
+            <div class="sec-body">
+                <div class="social-list" id="social-list">
+                    @foreach($data["socialLinks"] ?? [] as $index => $item)
+                        @php
+                        $type = $item["type"] ?? "whatsapp";
+                        $iconKey = in_array($type, ["whatsapp", "facebook", "instagram", "youtube"], true)
+                            ? $type
+                            : "whatsapp";
+                        $socialClass = $socialClassMap[$iconKey] ?? "";
+@endphp
+                        <div class="social-item" data-index="{{ (string) $index }}">
+                            <div class="s-ico {{ $socialClass }}">
+                                {!! getIcon($iconKey, "ic", "currentColor") !!}
+                            </div>
+                            <div>
+                                <div class="s-name">{{ $item["name"] ?? "" }}</div>
+                                <div class="s-val">{{ $item["value"] ?? "" }}</div>
+                            </div>
+                            <div class="s-arrow">
+                                {!! getIcon("chevron-right", "ic-sm", "currentColor") !!}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
         @endif

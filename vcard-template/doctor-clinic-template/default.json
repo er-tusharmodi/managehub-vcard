@@ -344,27 +344,27 @@
         }
     },
     "meta": {
-        "title": "aaa",
+        "title": "CityCare Medical Clinic",
         "description": "",
         "keywords": "",
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "/template-assets/doctor-clinic-template/uploads/1772639731_dummyUser__1_.png",
-        "profileImage": "/template-assets/doctor-clinic-template/uploads/1772640600_TheBarbershop_QR.png",
-        "qrCodeImage": "/template-assets/doctor-clinic-template/uploads/1773409013_fevicon.png"
+        "bannerImage": "/template-assets/doctor-clinic-template/uploads/1773469179_Screenshot_2026-03-14_at_11.49.33___AM.png",
+        "profileImage": "/template-assets/doctor-clinic-template/uploads/1773469118_Screenshot_2026-03-14_at_11.48.32___AM.png",
+        "qrCodeImage": "/template-assets/doctor-clinic-template/uploads/1773469060_TheBarbershop_QR.png"
     },
     "doctor": {
-        "name": "aaa",
-        "role": "aaa",
-        "qualification": "aaa",
+        "name": "Dr. Amit Sharma",
+        "role": "General Physician",
+        "qualification": "MBBS \u2013 Bachelor of Medicine & Bachelor of Surgery",
         "regTag": "Reg. No. MH-12345",
-        "regNumber": "aaa",
-        "clinicName": "aaa",
+        "regNumber": "Reg. 345G",
+        "clinicName": "CityCare Medical Clinic",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
         "email": "example@example.com",
-        "address": "aaa",
+        "address": "45 Health Street, Sector 12, Jaipur, Rajasthan, India (302022)",
         "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
         "website": "https://example.com",
         "vcardTitle": "Family & General Physician",
@@ -505,23 +505,26 @@
         {
             "name": "Diabetes & BP",
             "desc": "Chronic disease management & monitoring.",
-            "query": "Diabetes & BP"
+            "query": "Diabetes & BP",
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469456_Screenshot_2026-03-14_at_11.54.08___AM.png"
         },
         {
             "name": "Respiratory",
             "desc": "Asthma, bronchitis, cough & allergies.",
-            "query": "Respiratory Issues"
+            "query": "Respiratory Issues",
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469495_Screenshot_2026-03-14_at_11.54.48___AM.png"
         },
         {
             "name": "Fever & Infections",
             "desc": "Viral, bacterial, typhoid, malaria.",
             "query": "Fever & Infections",
-            "image": "/template-assets/doctor-clinic-template/uploads/1772968123_service5.png"
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469536_Screenshot_2026-03-14_at_11.55.31___AM.png"
         },
         {
             "name": "Child Health",
             "desc": "Pediatric care, vaccination & growth.",
-            "query": "Child & Pediatric Care"
+            "query": "Child & Pediatric Care",
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469583_Screenshot_2026-03-14_at_11.56.17___AM.png"
         }
     ],
     "fees": {
@@ -725,17 +728,17 @@
         "qr": "DrAnilSharma_QR.png"
     },
     "_common": {
-        "clinicName": "aaa",
+        "clinicName": "CityCare Medical Clinic",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
         "email": "example@example.com",
-        "address": "aaa",
+        "address": "45 Health Street, Sector 12, Jaipur, Rajasthan, India (302022)",
         "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
         "website": "https://example.com",
-        "name": "aaa",
-        "role": "aaa",
-        "qualification": "aaa",
-        "regNumber": "aaa"
+        "name": "Dr. Amit Sharma",
+        "role": "General Physician",
+        "qualification": "MBBS \u2013 Bachelor of Medicine & Bachelor of Surgery",
+        "regNumber": "Reg. 345G"
     },
     "contactForm": {
         "labels": {

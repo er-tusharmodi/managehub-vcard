@@ -10,7 +10,7 @@
                 <i class="mdi mdi-briefcase-outline me-1"></i>Services
                 <span class="badge bg-primary-subtle text-primary-emphasis ms-1">{{ count($items) }}</span>
             </h6>
-            <small class="text-muted">Drag <i class="mdi mdi-drag-vertical"></i> to reorder · 3 cards shown per row in template.</small>
+            <small class="text-muted">Drag <i class="mdi mdi-drag-vertical"></i> to reorder · Each service shown as a row in template.</small>
         </div>
         <button type="button" class="btn btn-primary btn-sm px-3"
                 wire:click="openItemModal(null, {{ json_encode(['name'=>'','description'=>'','image'=>'']) }})">
@@ -89,13 +89,13 @@
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
 {{-- ADD / EDIT MODAL                                                       --}}
 {{-- ══════════════════════════════════════════════════════════════════════ --}}
-<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="ss-item-modal" tabindex="-1" aria-hidden="true" wire:ignore data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" style="max-width:500px;">
         <div class="modal-content border-0 shadow">
             <div class="modal-header py-3" style="background:linear-gradient(90deg,#eff6ff,#dbeafe);border-bottom:2px solid #bfdbfe;">
                 <h5 class="modal-title fw-semibold d-flex align-items-center gap-2" style="color:#1e40af;">
                     <i class="mdi mdi-briefcase-outline"></i>
-                    {{ $editingIndex !== null ? 'Edit Service' : 'Add Service' }}
+                    <span x-data x-text="$wire.editingIndex !== null ? 'Edit Service' : 'Add Service'">{{ $editingIndex !== null ? 'Edit Service' : 'Add Service' }}</span>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -105,16 +105,11 @@
                     {{-- Photo --}}
                     <div class="col-12">
                         <label class="form-label small fw-semibold mb-1">Service Photo</label>
-                        @php
-                            $editImg = $editingItem['image'] ?? '';
-                            if ($editImg && preg_match('/url\([\'"]?(.*?)[\'"]?\)/i', $editImg, $_em)) { $editImg = $_em[1]; }
-                        @endphp
-                        @if($editImg)
-                            <div class="mb-2">
-                                <img src="{{ $editImg }}" alt="" class="rounded border"
-                                     style="max-height:140px;max-width:100%;object-fit:cover;">
-                            </div>
-                        @endif
+                        <div class="mb-2" x-data x-show="$wire.editingItem && $wire.editingItem.image">
+                            <img x-bind:src="($wire.editingItem || {}).image || ''"
+                                 alt="" class="rounded border"
+                                 style="max-height:140px;max-width:100%;object-fit:cover;">
+                        </div>
                         <input type="file" class="form-control form-control-sm"
                                accept="image/*" wire:model.live="uploads.itemEdit.image">
                         <div wire:loading wire:target="uploads.itemEdit.image" class="mt-1">

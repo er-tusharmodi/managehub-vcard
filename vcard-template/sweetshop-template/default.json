@@ -42,7 +42,7 @@
         }
     },
     "meta": {
-        "title": "aaa",
+        "title": "Shree Mithai House",
         "bannerAlt": "Cover",
         "profileAlt": "Ambay Sweet",
         "description": "",
@@ -50,13 +50,13 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "/template-assets/sweetshop-template/uploads/1772716392_dummyUser__1_.png",
-        "profileImage": "/template-assets/sweetshop-template/uploads/1773387136_fevicon.png",
-        "qrCodeImage": "/template-assets/sweetshop-template/uploads/1773387107_fevicon.png"
+        "bannerImage": "/template-assets/sweetshop-template/uploads/1773466570_Screenshot_2026-03-14_at_11.04.59___AM.png",
+        "profileImage": "/template-assets/sweetshop-template/uploads/1773466570_Screenshot_2026-03-14_at_11.05.56___AM.png",
+        "qrCodeImage": "/template-assets/sweetshop-template/uploads/1773466059_TheBarbershop_QR.png"
     },
     "shop": {
-        "name": "aaa",
-        "tagline": "aaa",
+        "name": "Shree Mithai House",
+        "tagline": "Fresh Food, Amazing Taste.",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
         "email": "example@example.com",
@@ -69,9 +69,9 @@
         "saveContactLabel": "Save Contact"
     },
     "profile": {
-        "name": "aaa",
-        "role": "aaa",
-        "bio": "aaa",
+        "name": "Shree Mithai House",
+        "role": "Fresh Food, Amazing Taste.",
+        "bio": "Experience the authentic taste of traditional Indian sweets. At [Shop Name], we serve freshly prepared mithai made with high-quality ingredients and rich flavors. From classic laddoos to premium kaju sweets, every bite is made to make your celebrations sweeter.",
         "actions": {
             "call": "Call",
             "whatsapp": "WhatsApp",
@@ -127,22 +127,22 @@
         {
             "name": "Wedding & Event Orders",
             "description": "Custom bulk sweet packages for weddings & celebrations.",
-            "image": "/template-assets/sweetshop-template/uploads/1773387207_service5.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773466962_Screenshot_2026-03-14_at_11.07.21___AM.png"
         },
         {
             "name": "Corporate Gift Boxes",
             "description": "Branded sweet hampers for Diwali, Eid & client gifting.",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773467020_Screenshot_2026-03-14_at_11.13.30___AM.png"
         },
         {
             "name": "Home Delivery",
             "description": "Fresh sweets delivered same day. Order by 6 PM.",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773467074_Screenshot_2026-03-14_at_11.14.27___AM.png"
         },
         {
             "name": "Custom Orders",
             "description": "Sugar-free & premium varieties made to order.",
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773467122_Screenshot_2026-03-14_at_11.15.16___AM.png"
         }
     ],
     "categories": [
@@ -174,7 +174,7 @@
             "per": "/kg",
             "tag": "Popular",
             "tagColor": "#b5341a",
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467740_Screenshot_2026-03-14_at_11.25.29___AM.png"
         },
         {
             "id": 3,
@@ -185,7 +185,7 @@
             "per": "/kg",
             "tag": "Premium",
             "tagColor": "#1565c0",
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467815_Screenshot_2026-03-14_at_11.26.35___AM.png"
         },
         {
             "id": 1,
@@ -196,7 +196,7 @@
             "per": "/kg",
             "tag": "Best Seller",
             "tagColor": "#c8952a",
-            "product_image": "/template-assets/sweetshop-template/uploads/1772708705_dummyUser__1_.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467861_Screenshot_2026-03-14_at_11.27.33___AM.png"
         },
         {
             "id": 4,
@@ -208,7 +208,7 @@
             "per": "/kg",
             "tag": "Healthy",
             "tagColor": "#2e7d32",
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467909_Screenshot_2026-03-14_at_11.28.23___AM.png"
         },
         {
             "id": 5,
@@ -218,7 +218,7 @@
             "price": 450,
             "per": "/kg",
             "tag": "",
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467959_Screenshot_2026-03-14_at_11.29.12___AM.png"
         },
         {
             "id": 6,
@@ -228,22 +228,27 @@
             "price": 400,
             "per": "/kg",
             "tag": "",
-            "product_image": "url('https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg')"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773468008_Screenshot_2026-03-14_at_11.30.02___AM.png"
         }
     ],
     "gallery": [
         {
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.21.23___AM.png"
         },
         {
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.21.48___AM.png"
         },
         {
-            "image": "https://itportfolio-s3-bucket.s3.ap-south-1.amazonaws.com/vcard/dummy/dummy-500x500.jpg"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.22.16___AM.png"
         },
         {
-            "image": "/template-assets/sweetshop-template/uploads/1772966851_slide2.png",
-            "caption": ""
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.22.40___AM.png"
+        },
+        {
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.23.20___AM.png"
+        },
+        {
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.20.45___AM.png"
         }
     ],
     "businessHours": {
@@ -547,9 +552,9 @@
         }
     },
     "_common": {
-        "name": "aaa",
-        "tagline": "aaa",
-        "description": "aaa",
+        "name": "Shree Mithai House",
+        "tagline": "Fresh Food, Amazing Taste.",
+        "description": "Experience the authentic taste of traditional Indian sweets. At [Shop Name], we serve freshly prepared mithai made with high-quality ingredients and rich flavors. From classic laddoos to premium kaju sweets, every bite is made to make your celebrations sweeter.",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
         "email": "example@example.com",

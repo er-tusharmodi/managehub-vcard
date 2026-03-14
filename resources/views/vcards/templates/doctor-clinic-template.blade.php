@@ -46,6 +46,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <title>{{ data_get($data, 'meta.title') }}</title>
+        @if($profileImage)
+        <link rel="icon" type="image/png" href="{{ $profileImage }}">
+        @endif
         <meta name="description" content="{{ data_get($data, 'meta.description', '') }}">
         <meta name="keywords" content="{{ data_get($data, 'meta.keywords', '') }}">
         <meta property="og:title" content="{{ data_get($data, 'meta.title', '') }}">

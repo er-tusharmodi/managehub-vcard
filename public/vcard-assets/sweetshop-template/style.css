@@ -388,17 +388,21 @@ svg.ic-xl {
     stroke: red;
 }
 .services-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 0.7rem;
 }
 .svc-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid var(--border);
 }
 .svc-img {
-    height: 100px;
+    width: 90px;
+    flex-shrink: 0;
     overflow: hidden;
     position: relative;
 }
@@ -411,6 +415,8 @@ svg.ic-xl {
 }
 .svc-body {
     padding: 0.65rem 0.75rem;
+    flex: 1;
+    min-width: 0;
 }
 .svc-name {
     font-size: 0.8rem;
