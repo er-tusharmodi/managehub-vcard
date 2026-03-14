@@ -262,13 +262,13 @@
         }
     },
     "meta": {
-        "title": "aaaa",
-        "description": "bbbb",
+        "title": "La Piazza Restaurant & Caf\u00e9 ",
+        "description": "La Piazza Restaurant & Caf\u00e9",
         "keywords": "",
         "og_image": "/template-assets/restaurant-cafe-template/uploads/1773372984_channels4_banner.jpg"
     },
     "assets": {
-        "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1772959868_slide1.png",
+        "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1773463621_Screenshot_2026-03-14_at_10.16.52___AM.png",
         "profileImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_TheBarbershop_QR.png",
         "qrCodeImage": "/template-assets/restaurant-cafe-template/uploads/1773322878_TheBarbershop_QR.png"
     },
@@ -291,26 +291,26 @@
             "id": 1,
             "name": "Bruschetta Classica",
             "icon": "\ud83c\udf5e",
-            "desc": "",
+            "desc": "Choux pastry puffs, Chantilly cream filling, warm dark chocolate drizzle.",
             "category_key": "starters",
             "price": 299,
             "op": "",
             "tag": "Chef Pick",
             "tc": "#3a4a2e",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773405020_slide2.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464115_Screenshot_2026-03-14_at_10.22.40___AM.png",
             "veg": true
         },
         {
             "id": 2,
             "name": "Arancini al Forno",
             "icon": "\ud83c\udf59",
-            "desc": "",
+            "desc": "Choux pastry puffs, Chantilly cream filling, warm dark chocolate drizzle.",
             "category_key": "starters",
             "price": 349,
             "op": 399,
             "tag": "Popular",
             "tc": "#c2562a",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322204_download.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464124_Screenshot_2026-03-14_at_10.23.40___AM.png",
             "veg": true
         },
         {
@@ -318,12 +318,12 @@
             "name": "Grilled Salmon",
             "icon": "\ud83d\udc1f",
             "desc": "Atlantic salmon fillet, salsa verde, roasted cherry tomatoes, wilted spinach.",
-            "category_key": "mains",
+            "category_key": "starters",
             "price": 949,
             "op": 1049,
             "tag": "Hot Deal",
             "tc": "#e65100",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322194_download.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464195_Screenshot_2026-03-14_at_10.24.13___AM.png",
             "veg": false
         },
         {
@@ -336,7 +336,7 @@
             "op": "",
             "tag": "Veg",
             "tc": "#2e7d32",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322174_download.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464217_Screenshot_2026-03-14_at_10.24.51___AM.png",
             "veg": true
         },
         {
@@ -349,20 +349,20 @@
             "op": "",
             "tag": "Must Try",
             "tc": "#c2562a",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322181_download.png",
-            "veg": false
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465476_Screenshot_2026-03-14_at_10.27.31___AM.png",
+            "veg": true
         },
         {
             "id": 32,
             "name": "Baked Meatballs",
             "icon": "\ud83c\udf5d",
             "desc": "Oven-baked beef and pork meatballs in rich tomato sugo, crusty bread.",
-            "category_key": "mains",
+            "category_key": "starters",
             "price": 649,
             "op": "",
             "tag": "Comfort",
-            "tc": "#3a4a2e",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322187_download.png",
+            "tc": "per serving",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465485_Screenshot_2026-03-14_at_10.47.05___AM.png",
             "veg": false
         },
         {
@@ -375,7 +375,7 @@
             "op": "",
             "tag": "New",
             "tc": "#6a1b9a",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322221_download.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465490_Screenshot_2026-03-14_at_10.47.46___AM.png",
             "veg": true
         },
         {
@@ -388,7 +388,7 @@
             "op": "",
             "tag": "Regional",
             "tc": "#2e7d32",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322225_download.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465572_Screenshot_2026-03-14_at_10.49.24___AM.png",
             "veg": true
         }
     ],
@@ -442,7 +442,7 @@
         "qr": "QR Code & Save Contact"
     },
     "story": {
-        "image": "/template-assets/restaurant-cafe-template/uploads/1772716669_dummyUser__1_.png",
+        "image": "/template-assets/restaurant-cafe-template/uploads/1773463739_Screenshot_2026-03-14_at_10.18.52___AM.png",
         "paragraph1": "Born from a passion for authentic Neapolitan cooking, La Piazza brings the soul of Southern Italy to your city. Every dish is crafted with imported ingredients and recipes passed down through generations.s",
         "paragraph2": "Our wood-fired oven burns at 485\u00b0C \u2014 the secret behind our crispy, airy crusts that guests travel across the city for.s",
         "chefName": "Marco Rosettis",
@@ -464,13 +464,22 @@
     },
     "gallery": [
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1772682047_dummyUser__1_.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.50.56___AM.png"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1772959843_alide1.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.51.27___AM.png"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773378169_service3.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.51.55___AM.png"
+        },
+        {
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.52.29___AM.png"
+        },
+        {
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.53.01___AM.png"
+        },
+        {
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.53.34___AM.png"
         }
     ],
     "reservation": {
@@ -653,7 +662,7 @@
         ]
     },
     "location": {
-        "name": "aaaa",
+        "name": "La Piazza Restaurant & Caf\u00e9 ",
         "address": "12, Connaught Place, Block B, New Delhi \u2013 110001",
         "mapLabel": "Get Directions",
         "transport": [
@@ -689,13 +698,6 @@
             "name": "Phone",
             "value": "+91 98765 43210 \u00b7 Quick response",
             "action": "url"
-        },
-        {
-            "type": "pinterest",
-            "name": "Pinterest",
-            "value": "asdasd",
-            "action": "email",
-            "url": "adasd"
         },
         {
             "type": "youtube",
@@ -854,8 +856,8 @@
         "qr": "lapiazza_qr.png"
     },
     "_common": {
-        "name": "aaaa",
-        "tagline": "aaaaa",
+        "name": "La Piazza Restaurant & Caf\u00e9 ",
+        "tagline": "Every Bite, Pure Delight.",
         "phone": "+911123456780",
         "whatsapp": "911123456780",
         "email": "example@example.com",
