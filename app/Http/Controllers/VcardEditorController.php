@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vcard;
 use App\Repositories\Contracts\VcardContentRepository;
+use App\Traits\CompressesImages;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,8 @@ use Illuminate\View\View;
 
 class VcardEditorController extends Controller
 {
+    use CompressesImages;
+
     public function __construct(private readonly VcardContentRepository $contentRepository)
     {
     }
@@ -68,7 +71,7 @@ class VcardEditorController extends Controller
             }
 
             if ($value && $value->isValid()) {
-                $path = $value->store('vcards/' . $vcard->subdomain . '/uploads', 'public');
+                $path = $this->storeUploadedImage($value, 'vcards/' . $vcard->subdomain . '/uploads');
                 $payload[$key] = '/storage/' . $path;
             }
         }

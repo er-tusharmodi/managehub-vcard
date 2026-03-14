@@ -7,11 +7,12 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Services\VcardTemplateService;
 use App\Services\TemplateBackupService;
+use App\Traits\CompressesImages;
 use Illuminate\Support\Facades\File;
 
 class TemplateVisualEditor extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, CompressesImages;
 
     public $templateKey;
     public $templateName;
@@ -129,9 +130,9 @@ class TemplateVisualEditor extends Component
                 File::makeDirectory($uploadsDir, 0755, true);
             }
 
-            $filename     = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $this->galleryUploadFile->getClientOriginalName());
+            $filename     = time() . '_' . uniqid() . '.jpg';
             $fullPath     = $uploadsDir . DIRECTORY_SEPARATOR . $filename;
-            File::copy($this->galleryUploadFile->getRealPath(), $fullPath);
+            $this->compressImageToPath($this->galleryUploadFile, $fullPath);
 
             $absolutePath = '/template-assets/' . $this->templateKey . '/uploads/' . $filename;
 
@@ -682,13 +683,13 @@ class TemplateVisualEditor extends Component
                         File::makeDirectory($uploadsDir, 0755, true);
                     }
 
-                    // Generate unique filename
-                    $filename = time() . '_' . preg_replace('/[^a-zA-Z0-9._-]/', '_', $value->getClientOriginalName());
+                    // Generate unique filename — always .jpg since we compress to JPEG
+                    $filename = time() . '_' . uniqid() . '.jpg';
                     $relativePath = 'uploads/' . $filename;
                     $fullPath = $uploadsDir . DIRECTORY_SEPARATOR . $filename;
 
-                    // Move file from temp to template uploads directory
-                    File::copy($value->getRealPath(), $fullPath);
+                    // Compress and store image
+                    $this->compressImageToPath($value, $fullPath);
 
                     // Store as absolute path so previews work across all contexts
                     // without needing $assetBaseUrl to be threaded through partials.

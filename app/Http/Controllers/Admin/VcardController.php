@@ -10,6 +10,7 @@ use App\Models\Vcard;
 use App\Services\VcardTemplateService;
 use App\Services\QrCodeService;
 use App\Repositories\Contracts\VcardContentRepository;
+use App\Traits\CompressesImages;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +22,8 @@ use Illuminate\View\View;
 
 class VcardController extends Controller
 {
+    use CompressesImages;
+
     public function index(Request $request, VcardTemplateService $templates): View
     {
         $sort = $request->get('sort', 'created_at');
@@ -300,7 +303,7 @@ class VcardController extends Controller
             }
 
             if ($value && $value->isValid()) {
-                $path = $value->store('vcards/' . $vcard->subdomain . '/uploads', 'public');
+                $path = $this->storeUploadedImage($value, 'vcards/' . $vcard->subdomain . '/uploads');
                 $payload[$key] = '/storage/' . $path;
             }
         }

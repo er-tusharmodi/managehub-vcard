@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Renderless;
 use Livewire\Component;
+use App\Traits\CompressesImages;
 use Livewire\WithFileUploads;
 
 class AdminSectionEditor extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, CompressesImages;
 
     public Vcard $vcard;
     public string $section = '';
@@ -782,52 +783,6 @@ class AdminSectionEditor extends Component
         }
 
         return $payload;
-    }
-
-    /**
-     * Store an uploaded image, resizing and compressing it to max 1920px / JPEG 75% if oversized.
-     * Falls back to the standard Livewire store() on any GD failure.
-     */
-    private function storeUploadedImage($file, string $directory): string
-    {
-        $realPath  = $file->getRealPath();
-        $imageInfo = @getimagesize($realPath);
-
-        if (!$imageInfo) {
-            return $file->store($directory, 'public');
-        }
-
-        [$origWidth, $origHeight, $imageType] = $imageInfo;
-        $maxDim   = 1200;
-
-        $src = match ($imageType) {
-            IMAGETYPE_JPEG => @imagecreatefromjpeg($realPath),
-            IMAGETYPE_PNG  => @imagecreatefrompng($realPath),
-            IMAGETYPE_WEBP => @imagecreatefromwebp($realPath),
-            IMAGETYPE_GIF  => @imagecreatefromgif($realPath),
-            default        => null,
-        };
-
-        if (!$src) {
-            return $file->store($directory, 'public');
-        }
-
-        $scale  = min($maxDim / $origWidth, $maxDim / $origHeight, 1.0);
-        $newW   = (int) round($origWidth * $scale);
-        $newH   = (int) round($origHeight * $scale);
-        $dst    = imagecreatetruecolor($newW, $newH);
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newW, $newH, $origWidth, $origHeight);
-        imagedestroy($src);
-
-        $tmpFile = tempnam(sys_get_temp_dir(), 'vcimg_') . '.jpg';
-        imagejpeg($dst, $tmpFile, 75);
-        imagedestroy($dst);
-
-        $storedPath = $directory . '/' . uniqid('img_', true) . '.jpg';
-        \Storage::disk('public')->put($storedPath, file_get_contents($tmpFile));
-        @unlink($tmpFile);
-
-        return $storedPath;
     }
 
     public function toggleSection(string $section): void
