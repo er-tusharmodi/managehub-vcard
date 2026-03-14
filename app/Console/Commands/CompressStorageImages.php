@@ -8,8 +8,9 @@ use Illuminate\Support\Facades\Storage;
 class CompressStorageImages extends Command
 {
     protected $signature = 'images:compress
-                            {--disk=public : Storage disk to scan}
+                            {--disk=public : Storage disk to scan (ignored when --path is used)}
                             {--dir=        : Sub-directory within the disk (default: all)}
+                            {--path=       : Absolute filesystem path to scan instead of a Storage disk}
                             {--max-dim=1200 : Maximum width/height in pixels}
                             {--quality=75  : JPEG output quality (1-100)}
                             {--dry-run     : Preview what would be compressed without changing files}';
@@ -20,6 +21,7 @@ class CompressStorageImages extends Command
     {
         $disk    = $this->option('disk');
         $subDir  = $this->option('dir') ?: '';
+        $fsPath  = $this->option('path') ?: '';
         $maxDim  = (int) $this->option('max-dim');
         $quality = (int) $this->option('quality');
         $dryRun  = $this->option('dry-run');
@@ -29,12 +31,21 @@ class CompressStorageImages extends Command
             return self::FAILURE;
         }
 
-        $this->info('Scanning ' . ($subDir ?: 'all directories') . ' on disk [' . $disk . ']…');
-
-        $allFiles = Storage::disk($disk)->allFiles($subDir ?: '/');
-
-        $images = array_filter($allFiles, fn ($f) => preg_match('/\.(jpe?g|png|webp|gif)$/i', $f));
-        $images = array_values($images);
+        // Build list of absolute file paths
+        if ($fsPath) {
+            if (!is_dir($fsPath)) {
+                $this->error("Path does not exist: {$fsPath}");
+                return self::FAILURE;
+            }
+            $this->info("Scanning filesystem path: {$fsPath}");
+            $images = $this->scanFilesystemPath($fsPath);
+            $useStorage = false;
+        } else {
+            $this->info('Scanning ' . ($subDir ?: 'all directories') . ' on disk [' . $disk . ']…');
+            $allFiles = Storage::disk($disk)->allFiles($subDir ?: '/');
+            $images = array_values(array_filter($allFiles, fn ($f) => preg_match('/\.(jpe?g|png|webp|gif)$/i', $f)));
+            $useStorage = true;
+        }
 
         if (empty($images)) {
             $this->info('No images found.');
@@ -58,7 +69,11 @@ class CompressStorageImages extends Command
         foreach ($images as $relativePath) {
             $bar->advance();
 
-            $realPath = Storage::disk($disk)->path($relativePath);
+            // Resolve real absolute path
+            $realPath = $useStorage
+                ? Storage::disk($disk)->path($relativePath)
+                : $relativePath;
+
             $sizeBefore = filesize($realPath);
             $totalBefore += $sizeBefore;
 
@@ -103,13 +118,20 @@ class CompressStorageImages extends Command
             $totalAfter += $sizeAfter;
 
             if (!$dryRun) {
-                // Replace in-place — rename to .jpg if needed
-                $newRelativePath = preg_replace('/\.(jpe?g|png|webp|gif)$/i', '.jpg', $relativePath);
-                Storage::disk($disk)->put($newRelativePath, file_get_contents($tmpFile));
-
-                // Delete original if extension changed
-                if ($newRelativePath !== $relativePath) {
-                    Storage::disk($disk)->delete($relativePath);
+                if ($useStorage) {
+                    // Storage disk: store at relative path (renamed to .jpg)
+                    $newRelativePath = preg_replace('/\.(jpe?g|png|webp|gif)$/i', '.jpg', $relativePath);
+                    Storage::disk($disk)->put($newRelativePath, file_get_contents($tmpFile));
+                    if ($newRelativePath !== $relativePath) {
+                        Storage::disk($disk)->delete($relativePath);
+                    }
+                } else {
+                    // Filesystem path: replace in-place (rename to .jpg)
+                    $newAbsPath = preg_replace('/\.(jpe?g|png|webp|gif)$/i', '.jpg', $realPath);
+                    file_put_contents($newAbsPath, file_get_contents($tmpFile));
+                    if ($newAbsPath !== $realPath) {
+                        @unlink($realPath);
+                    }
                 }
             }
 
@@ -143,6 +165,18 @@ class CompressStorageImages extends Command
         }
 
         return self::SUCCESS;
+    }
+
+    private function scanFilesystemPath(string $dir): array
+    {
+        $results = [];
+        $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS));
+        foreach ($iterator as $file) {
+            if ($file->isFile() && preg_match('/\.(jpe?g|png|webp|gif)$/i', $file->getFilename())) {
+                $results[] = $file->getRealPath();
+            }
+        }
+        return $results;
     }
 
     private function formatBytes(int $bytes): string
