@@ -105,16 +105,16 @@
             "action": "openWA"
         },
         {
-            "type": "facebook",
-            "name": "Facebook",
-            "value": "facebook.com/mithassweets",
-            "url": "https://facebook.com/mithassweets"
-        },
-        {
             "type": "instagram",
             "name": "Instagram",
             "value": "@mithassweets",
             "url": "https://instagram.com/mithassweets"
+        },
+        {
+            "type": "facebook",
+            "name": "Facebook",
+            "value": "facebook.com/mithassweets",
+            "url": "https://facebook.com/mithassweets"
         },
         {
             "type": "youtube",

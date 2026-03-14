@@ -10,7 +10,7 @@
             </h4>
             <div class="text-muted small">
                 <i class="mdi mdi-link"></i> {{ $vcard->subdomain }}.{{ config('vcard.base_domain') }}
-                <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="ms-2">
+                <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank" class="ms-2">
                     <i class="mdi mdi-open-in-new"></i> Preview
                 </a>
             </div>

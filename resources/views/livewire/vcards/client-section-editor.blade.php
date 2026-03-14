@@ -100,7 +100,7 @@
         <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="offcanvas" data-bs-target="#cseSectionDrawer">
             <i class="mdi mdi-menu me-1"></i>Sections
         </button>
-        <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+        <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank" class="btn btn-sm btn-outline-primary">
             <i class="mdi mdi-eye-outline me-1"></i>View vCard
         </a>
     </div>
@@ -214,7 +214,7 @@
                         <a href="{{ route('dashboard') }}" class="btn btn-sm btn-outline-secondary flex-grow-1">
                             <i class="mdi mdi-arrow-left me-1"></i>My vCards
                         </a>
-                        <a href="{{ route('vcard.public.path', ['subdomain' => $vcard->subdomain]) }}" target="_blank"
+                        <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank"
                            class="btn btn-sm btn-outline-primary" title="View vCard">
                             <i class="mdi mdi-eye-outline"></i>
                         </a>
@@ -485,6 +485,7 @@
     // ── Generic item modal (ss-item-modal — used by restaurant MENU, sweetshop products, etc.) ──
     (function () {
         window._ssItemModalOpen = window._ssItemModalOpen || false;
+        window._ssItemModalWasOpen = false;
         window.addEventListener('open-item-modal', function (e) {
             var el = document.getElementById('ss-item-modal');
             if (!el) return;
@@ -501,10 +502,18 @@
         document.addEventListener('hidden.bs.modal', function (e) {
             if (e.target && e.target.id === 'ss-item-modal') window._ssItemModalOpen = false;
         });
+        document.addEventListener('livewire:updating', function () {
+            var el = document.getElementById('ss-item-modal');
+            window._ssItemModalWasOpen = !!(el && el.classList.contains('show'));
+        });
         document.addEventListener('livewire:updated', function () {
-            if (window._ssItemModalOpen) {
+            if (window._ssItemModalOpen || window._ssItemModalWasOpen) {
                 var el = document.getElementById('ss-item-modal');
-                if (el) bootstrap.Modal.getOrCreateInstance(el).show();
+                if (el) {
+                    window._ssItemModalOpen = true;
+                    window._ssItemModalWasOpen = false;
+                    bootstrap.Modal.getOrCreateInstance(el).show();
+                }
             }
         });
     })();

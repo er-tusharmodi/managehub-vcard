@@ -14,6 +14,6 @@ $fields = [
     'modelBase'   => 'form.items',
     'sectionKey'  => 'dr-fees',
     'itemLabel'   => 'Fee Item',
-    'tableFields' => ['name', 'amount'],
+    'tableFields' => ['name', 'amount', 'oldAmount', 'note'],
     'fields'      => $fields,
 ])

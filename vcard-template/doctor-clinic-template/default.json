@@ -344,7 +344,7 @@
         }
     },
     "meta": {
-        "title": "Sharma Family Clinicsss",
+        "title": "aaa",
         "description": "",
         "keywords": "",
         "og_image": ""
@@ -352,21 +352,21 @@
     "assets": {
         "bannerImage": "/template-assets/doctor-clinic-template/uploads/1772639731_dummyUser__1_.png",
         "profileImage": "/template-assets/doctor-clinic-template/uploads/1772640600_TheBarbershop_QR.png",
-        "qrCodeImage": ""
+        "qrCodeImage": "/template-assets/doctor-clinic-template/uploads/1773409013_fevicon.png"
     },
     "doctor": {
-        "name": "The Barbershopss",
-        "role": "Family & General Physiciansss",
-        "qualification": "MBBS \u00b7 MD (Internal Medicine) \u00b7 18 Years Experiencesss",
+        "name": "aaa",
+        "role": "aaa",
+        "qualification": "aaa",
         "regTag": "Reg. No. MH-12345",
-        "regNumber": "MH-12345sss",
-        "clinicName": "Sharma Family Clinicsss",
+        "regNumber": "aaa",
+        "clinicName": "aaa",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
-        "email": "dr.anilsharma@gmail.coms",
-        "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai \u2013 400058s",
+        "email": "example@example.com",
+        "address": "aaa",
         "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
-        "website": "https://practo.com/dr-anil-sharmas",
+        "website": "https://example.com",
         "vcardTitle": "Family & General Physician",
         "vcardOrg": "Sharma Family Clinic",
         "vcardNote": "MBBS MD Internal Medicine | Reg. MH-12345"
@@ -407,11 +407,6 @@
     },
     "specializations": [
         {
-            "name": "Cardiac Care",
-            "tone": "chip-blue",
-            "icon": "heart"
-        },
-        {
             "name": "General Medicine",
             "tone": "chip-teal",
             "icon": "pulse"
@@ -420,6 +415,11 @@
             "name": "Diabetes Mgmt",
             "tone": "chip-green",
             "icon": "info"
+        },
+        {
+            "name": "Cardiac Care",
+            "tone": "chip-blue",
+            "icon": "heart"
         },
         {
             "name": "Respiratory",
@@ -442,46 +442,32 @@
             "icon": "preventive"
         }
     ],
-    "appointment": {
-        "defaultSlot": "Morning: 9\u201311 AM",
-        "slots": [
+    "appointment": [
+        "Morning: 9\u201311 AM",
+        [
             {
                 "slot": "Morning: 9\u201311 AM",
                 "session": "Morning",
                 "time": "9:00 \u2013 11:00 AM",
                 "availability": "4 slots left",
                 "selected": true,
-                "full": true
+                "full": false
             },
             {
                 "slot": "Evening: 6\u20138 PM",
                 "session": "Evening",
                 "time": "6:00 \u2013 8:00 PM",
                 "availability": "7 slots left",
-                "full": true
-            },
-            {
-                "slot": "noon",
-                "session": "Noon",
-                "time": "1:00 \u2013 2:00 PM",
-                "fullLabel": "Fully booked",
-                "full": true
+                "full": false
             },
             {
                 "slot": "Saturday: 10 AM\u20131 PM",
                 "session": "Saturday",
                 "time": "10 AM \u2013 1 PM",
                 "availability": "Walk-in"
-            },
-            {
-                "slot": "",
-                "session": "",
-                "time": "",
-                "availability": "",
-                "full": ""
             }
         ],
-        "form": {
+        {
             "nameLabel": "Your Name *",
             "namePlaceholder": "Full name",
             "phoneLabel": "Phone *",
@@ -509,19 +495,13 @@
             "defaultAge": "Not specified",
             "defaultComplaint": "General consultation"
         },
-        "success": {
+        {
             "title": "Appointment Requested!",
             "text": "You'll receive a confirmation on WhatsApp shortly. Please arrive 10 mins early.",
             "buttonLabel": "Book Another"
         }
-    },
+    ],
     "conditions": [
-        {
-            "name": "Fever & Infections",
-            "desc": "Viral, bacterial, typhoid, malaria.",
-            "query": "Fever & Infections",
-            "image": "/template-assets/doctor-clinic-template/uploads/1772968123_service5.png"
-        },
         {
             "name": "Diabetes & BP",
             "desc": "Chronic disease management & monitoring.",
@@ -533,6 +513,12 @@
             "query": "Respiratory Issues"
         },
         {
+            "name": "Fever & Infections",
+            "desc": "Viral, bacterial, typhoid, malaria.",
+            "query": "Fever & Infections",
+            "image": "/template-assets/doctor-clinic-template/uploads/1772968123_service5.png"
+        },
+        {
             "name": "Child Health",
             "desc": "Pediatric care, vaccination & growth.",
             "query": "Child & Pediatric Care"
@@ -540,15 +526,6 @@
     ],
     "fees": {
         "items": [
-            {
-                "name": "New Patient",
-                "note": "First consultation",
-                "amount": "\u20b9400",
-                "oldAmount": "\u20b9500",
-                "icon": "patient",
-                "bg": "#e0f2fe",
-                "color": "#0369a1"
-            },
             {
                 "name": "Follow-up Visit",
                 "note": "Within 15 days",
@@ -564,6 +541,15 @@
                 "icon": "video",
                 "bg": "#fce7f3",
                 "color": "#9d174d"
+            },
+            {
+                "name": "New Patient",
+                "note": "First consultation",
+                "amount": "\u20b9400",
+                "oldAmount": "\u20b9500",
+                "icon": "patient",
+                "bg": "#e0f2fe",
+                "color": "#0369a1"
             },
             {
                 "name": "Annual Health Package",
@@ -583,9 +569,9 @@
         ],
         "insuranceNote": "Insurance accepted: Medi-Assist, Star Health, ESIC & more"
     },
-    "hours": {
-        "todayLabel": "Today: Saturday \u2014 Open till 1:00 PM",
-        "rows": [
+    "hours": [
+        "Today: Saturday \u2014 Open till 1:00 PM",
+        [
             {
                 "day": "Monday \u2013 Friday",
                 "session": "Morning",
@@ -611,14 +597,9 @@
                 "timeClass": "closed"
             }
         ],
-        "suggestLink": "Ask about home visits / teleconsult hours"
-    },
+        "Ask about home visits / teleconsult hours"
+    ],
     "awards": [
-        {
-            "icon": "medal",
-            "name": "Best GP \u2013 Times Health Awards 2023",
-            "desc": "Recognized among Top 10 General Physicians in Maharashtra"
-        },
         {
             "icon": "medal",
             "name": "ACLS & BLS Certified",
@@ -628,6 +609,11 @@
             "icon": "medal",
             "name": "Fellowship in Diabetology",
             "desc": "RSSDI Certified Diabetes Educator, 2018"
+        },
+        {
+            "icon": "medal",
+            "name": "Best GP \u2013 Times Health Awards 2023",
+            "desc": "Recognized among Top 10 General Physicians in Maharashtra"
         },
         {
             "icon": "medal",
@@ -643,12 +629,6 @@
     },
     "social": [
         {
-            "type": "whatsapp",
-            "name": "WhatsApp",
-            "value": "+91 98765 43210",
-            "action": "openWA"
-        },
-        {
             "type": "facebook",
             "name": "Facebook",
             "value": "fb.com/DrAnilSharmaClinic"
@@ -659,6 +639,12 @@
             "value": "Health tips & patient education"
         },
         {
+            "type": "whatsapp",
+            "name": "WhatsApp",
+            "value": "+91 98765 43210",
+            "action": "openWA"
+        },
+        {
             "type": "website",
             "name": "Practo Profile",
             "value": "practo.com/dr-anil-sharma"
@@ -666,16 +652,16 @@
     ],
     "payments": [
         {
-            "icon": "cash",
-            "stroke": "#0d9488",
-            "name": "Cash",
-            "detail": "Accepted at reception"
-        },
-        {
             "icon": "card",
             "stroke": "#0369a1",
             "name": "UPI / QR",
             "detail": "PhonePe, GPay, Paytm accepted"
+        },
+        {
+            "icon": "shield",
+            "stroke": "#15803d",
+            "name": "Health Insurance",
+            "detail": "Medi-Assist \u00b7 Star \u00b7 ESIC \u00b7 CGHS"
         },
         {
             "icon": "card",
@@ -684,10 +670,10 @@
             "detail": "All major cards \u00b7 No extra charge"
         },
         {
-            "icon": "shield",
-            "stroke": "#15803d",
-            "name": "Health Insurance",
-            "detail": "Medi-Assist \u00b7 Star \u00b7 ESIC \u00b7 CGHS"
+            "icon": "cash",
+            "stroke": "#0d9488",
+            "name": "Cash",
+            "detail": "Accepted at reception"
         }
     ],
     "qr": {
@@ -739,17 +725,17 @@
         "qr": "DrAnilSharma_QR.png"
     },
     "_common": {
-        "clinicName": "Sharma Family Clinicsss",
+        "clinicName": "aaa",
         "phone": "+919876543210",
         "whatsapp": "919876543210",
-        "email": "dr.anilsharma@gmail.coms",
-        "address": "Shop No. 4, Raj Complex, Andheri West, Mumbai \u2013 400058s",
+        "email": "example@example.com",
+        "address": "aaa",
         "maps": "https://maps.google.com/?q=Andheri+West+Mumbai",
-        "website": "https://practo.com/dr-anil-sharmas",
-        "name": "The Barbershopss",
-        "role": "Family & General Physiciansss",
-        "qualification": "MBBS \u00b7 MD (Internal Medicine) \u00b7 18 Years Experiencesss",
-        "regNumber": "MH-12345sss"
+        "website": "https://example.com",
+        "name": "aaa",
+        "role": "aaa",
+        "qualification": "aaa",
+        "regNumber": "aaa"
     },
     "contactForm": {
         "labels": {

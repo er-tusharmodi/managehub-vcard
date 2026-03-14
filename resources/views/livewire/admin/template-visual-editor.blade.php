@@ -423,6 +423,7 @@
 
     // ── Generic Item Modal (services / products / etc.) ───────────────────
     window._ssItemModalOpen = window._ssItemModalOpen || false;
+    window._ssItemModalWasOpen = false;
     document.addEventListener('open-item-modal', function (e) {
         var el = document.getElementById('ss-item-modal');
         if (!el || !window.bootstrap) return;
@@ -438,10 +439,18 @@
     document.addEventListener('hidden.bs.modal', function(e) {
         if (e.target && e.target.id === 'ss-item-modal') window._ssItemModalOpen = false;
     });
+    document.addEventListener('livewire:updating', function() {
+        var el = document.getElementById('ss-item-modal');
+        window._ssItemModalWasOpen = !!(el && el.classList.contains('show'));
+    });
     document.addEventListener('livewire:updated', function() {
-        if (window._ssItemModalOpen) {
+        if (window._ssItemModalOpen || window._ssItemModalWasOpen) {
             var el = document.getElementById('ss-item-modal');
-            if (el && window.bootstrap) bootstrap.Modal.getOrCreateInstance(el).show();
+            if (el && window.bootstrap) {
+                window._ssItemModalOpen = true;
+                window._ssItemModalWasOpen = false;
+                bootstrap.Modal.getOrCreateInstance(el).show();
+            }
         }
     });
     </script>

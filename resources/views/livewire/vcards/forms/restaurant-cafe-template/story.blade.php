@@ -83,91 +83,97 @@
     @error('form.chefRole') <div class="invalid-feedback">{{ $message }}</div> @enderror
 </div>
 
-{{-- Highlights list — delegate to generic renderer --}}
+{{-- Highlights list --}}
+@php
+$highlightIcons = [
+    'fa-utensils'       => 'Utensils',
+    'fa-burger'         => 'Burger',
+    'fa-pizza-slice'    => 'Pizza',
+    'fa-drumstick-bite' => 'Chicken',
+    'fa-fish'           => 'Seafood',
+    'fa-carrot'         => 'Veggie',
+    'fa-seedling'       => 'Organic',
+    'fa-pepper-hot'     => 'Spicy',
+    'fa-bread-slice'    => 'Bakery',
+    'fa-cake-candles'   => 'Dessert',
+    'fa-ice-cream'      => 'Ice Cream',
+    'fa-egg'            => 'Eggs',
+    'fa-lemon'          => 'Citrus',
+    'fa-apple-whole'    => 'Fruit',
+    'fa-mug-hot'        => 'Coffee',
+    'fa-wine-glass'     => 'Wine',
+    'fa-beer-mug-empty' => 'Beer',
+    'fa-martini-glass'  => 'Cocktail',
+    'fa-bottle-water'   => 'Water',
+    'fa-fire-burner'    => 'Grill',
+    'fa-hat-chef'       => 'Chef',
+    'fa-star'           => 'Quality',
+    'fa-award'          => 'Award',
+    'fa-trophy'         => 'Best',
+    'fa-clock'          => 'Quick',
+    'fa-motorcycle'     => 'Delivery',
+    'fa-table'          => 'Dine-in',
+    'fa-wifi'           => 'WiFi',
+    'fa-snowflake'      => 'AC',
+    'fa-car'            => 'Parking',
+    'fa-people-group'   => 'Family',
+    'fa-music'          => 'Music',
+    'fa-tree'           => 'Outdoor',
+];
+@endphp
 @if(isset($form['highlights']) && is_array($form['highlights']))
 <div class="col-12 mb-1">
-    <label class="form-label fw-semibold text-muted">Highlights</label>
-    <small class="d-block text-muted mb-2">Choose a professional food icon and enter a label for each USP badge.</small>
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <label class="form-label fw-semibold text-muted mb-0">Highlights</label>
+            <small class="d-block text-muted">Choose an icon and enter a label for each USP badge.</small>
+        </div>
+        <button type="button" class="btn btn-sm btn-primary px-3"
+                wire:click="addRowAndSave('highlights', ['icon', 'label'])">
+            <i class="mdi mdi-plus me-1"></i>Add
+        </button>
+    </div>
 </div>
 @foreach($form['highlights'] as $hi => $highlight)
+    @php $activeIcon = $highlight['icon'] ?? 'fa-utensils'; @endphp
     <div class="col-12">
-        <div class="border rounded p-2 mb-2 bg-light">
-            <div class="row g-2 align-items-end">
-                <div class="col-sm-4">
-                    <label class="form-label small mb-1">Icon</label>
-                    <select class="form-select form-select-sm"
-                            wire:model.live="form.highlights.{{ $hi }}.icon">
-                        {{-- Food & Drink --}}
-                        <optgroup label="Food &amp; Drink">
-                            <option value="fa-utensils">Utensils</option>
-                            <option value="fa-burger">Burger</option>
-                            <option value="fa-pizza-slice">Pizza</option>
-                            <option value="fa-drumstick-bite">Chicken / Drumstick</option>
-                            <option value="fa-fish">Fish / Seafood</option>
-                            <option value="fa-carrot">Vegetarian / Salad</option>
-                            <option value="fa-seedling">Organic / Fresh</option>
-                            <option value="fa-pepper-hot">Spicy / Chilli</option>
-                            <option value="fa-bread-slice">Bread / Bakery</option>
-                            <option value="fa-cake-candles">Dessert / Cake</option>
-                            <option value="fa-ice-cream">Ice Cream</option>
-                            <option value="fa-egg">Eggs / Breakfast</option>
-                            <option value="fa-lemon">Lemon / Citrus</option>
-                            <option value="fa-apple-whole">Fruit</option>
-                        </optgroup>
-                        {{-- Beverages --}}
-                        <optgroup label="Beverages">
-                            <option value="fa-mug-hot">Coffee / Hot Drinks</option>
-                            <option value="fa-wine-glass">Wine / Spirits</option>
-                            <option value="fa-beer-mug-empty">Beer / Drinks</option>
-                            <option value="fa-martini-glass">Cocktails</option>
-                            <option value="fa-bottle-water">Water / Beverages</option>
-                        </optgroup>
-                        {{-- Service & Experience --}}
-                        <optgroup label="Service &amp; Experience">
-                            <option value="fa-fire-burner">Wood-Fired / Grill</option>
-                            <option value="fa-hat-chef">Chef / Expertise</option>
-                            <option value="fa-star">Quality / 5-Star</option>
-                            <option value="fa-award">Award / Recognition</option>
-                            <option value="fa-trophy">Best Restaurant</option>
-                            <option value="fa-clock">Quick Service</option>
-                            <option value="fa-motorcycle">Delivery</option>
-                            <option value="fa-table">Seating / Dine-in</option>
-                            <option value="fa-wifi">Free WiFi</option>
-                            <option value="fa-snowflake">Air Conditioned</option>
-                            <option value="fa-car">Parking</option>
-                            <option value="fa-people-group">Family Friendly</option>
-                            <option value="fa-music">Live Music</option>
-                            <option value="fa-tree">Outdoor Seating</option>
-                        </optgroup>
-                    </select>
-                    {{-- Live preview of the selected icon --}}
-                    <div class="mt-1 text-muted" style="font-size:.75rem;">
-                        <i class="fa-solid {{ $highlight['icon'] ?? 'fa-utensils' }} me-1"></i>
-                        <span style="font-size:.68rem;">Preview</span>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label class="form-label small mb-1">Label</label>
-                    <input type="text"
-                           class="form-control form-control-sm"
-                           wire:model="form.highlights.{{ $hi }}.label"
-                           placeholder="e.g. Wood-Fired Oven">
-                </div>
-                <div class="col-sm-2 d-flex align-items-end">
+        <div class="rounded-3 p-3 mb-2" wire:key="rc-hl-{{ $hi }}"
+             style="background:#f8fafc;border:1px solid #e2e8f0;border-left:4px solid #d97706 !important;">
+
+            {{-- Header: label + delete --}}
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <label class="form-label small fw-semibold mb-0">Icon</label>
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger p-0 rounded-circle"
+                        style="width:28px;height:28px;flex-shrink:0;"
+                        x-on:click="showConfirmToast('Remove this highlight?', () => $wire.removeRowWithConfirm({{ $hi }}, 'highlights'))">
+                    <i class="mdi mdi-delete-outline" style="font-size:13px;"></i>
+                </button>
+            </div>
+
+            {{-- Icon tile grid --}}
+            <div class="d-flex flex-wrap gap-2 mb-3">
+                @foreach($highlightIcons as $iKey => $iLabel)
+                    @php $isActive = $activeIcon === $iKey; @endphp
                     <button type="button"
-                            class="btn btn-outline-danger btn-sm w-100"
-                            x-on:click="showConfirmToast('Remove this highlight?', () => $wire.removeRowWithConfirm({{ $hi }}, 'highlights'))">
-                        <i class="mdi mdi-delete"></i>
+                            wire:click="$set('form.highlights.{{ $hi }}.icon', '{{ $iKey }}')"
+                            title="{{ $iLabel }}"
+                            style="width:54px;height:54px;border-radius:10px;flex-direction:column;display:flex;align-items:center;justify-content:center;gap:3px;padding:4px;cursor:pointer;border:2px solid {{ $isActive ? '#d97706' : '#e2e8f0' }};background:{{ $isActive ? '#d97706' : '#fff' }};color:{{ $isActive ? '#fff' : '#d97706' }};">
+                        <i class="fa-solid {{ $iKey }}" style="font-size:18px;color:inherit;"></i>
+                        <span style="font-size:8px;line-height:1.1;font-weight:600;white-space:nowrap;overflow:hidden;max-width:48px;text-overflow:ellipsis;color:inherit;">{{ $iLabel }}</span>
                     </button>
-                </div>
+                @endforeach
+            </div>
+
+            {{-- Label input --}}
+            <div>
+                <label class="form-label small fw-semibold mb-1">Label</label>
+                <input type="text"
+                       class="form-control form-control-sm"
+                       wire:model="form.highlights.{{ $hi }}.label"
+                       placeholder="e.g. Wood-Fired Oven">
             </div>
         </div>
     </div>
 @endforeach
-<div class="col-12 mt-1">
-    <button type="button" class="btn btn-sm btn-outline-warning"
-            wire:click="addRowAndSave('highlights', ['icon', 'label'])">
-        <i class="mdi mdi-plus me-1"></i>Add Highlight
-    </button>
-</div>
 @endif

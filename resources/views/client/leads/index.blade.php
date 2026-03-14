@@ -131,7 +131,7 @@
             <p class="text-muted small mb-0 mt-1">
                 <span class="fw-medium text-dark">{{ $vcard->client_name }}</span>
                 <span class="text-muted mx-1">·</span>
-                <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="text-muted text-decoration-none">
+                <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank" class="text-muted text-decoration-none">
                     {{ $vcard->subdomain }}<i class="mdi mdi-open-in-new fs-11 ms-1"></i>
                 </a>
             </p>
@@ -219,7 +219,7 @@
                     <p class="text-muted small mb-3" style="max-width:340px;margin:0 auto 16px;">
                         When customers submit {{ strtolower($tabLabels[$activeTab]) }} through your vCard, they'll appear here.
                     </p>
-                    <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank"
+                    <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank"
                        class="btn btn-sm btn-outline-secondary rounded-pill px-3">
                         <i class="mdi mdi-open-in-new me-1"></i>View Your vCard
                     </a>

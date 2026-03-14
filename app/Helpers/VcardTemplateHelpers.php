@@ -105,6 +105,18 @@ if (!function_exists('js_str')) {
     }
 }
 
+if (!function_exists('vcard_public_url')) {
+    /**
+     * Return the public subdomain URL for a vCard.
+     * e.g. https://my-clinic.managehub.in
+     */
+    function vcard_public_url(string $subdomain): string
+    {
+        $base = config('vcard.base_domain', 'managehub.in');
+        return 'https://' . $subdomain . '.' . $base;
+    }
+}
+
 if (!function_exists('format_inr')) {
     /**
      * Format a number in Indian Rupee style (e.g. 1,00,000).

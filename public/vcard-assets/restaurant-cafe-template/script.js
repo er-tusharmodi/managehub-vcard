@@ -121,10 +121,18 @@ const OFFER_ICONS = {
 };
 
 const TRANSPORT_ICONS = {
-    metro: `<svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
-    parking: `<svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
-    taxi: `<svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>`,
-    delivery: `<svg class="ic-sm" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>`,
+    metro: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+    parking: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`,
+    taxi: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="11" rx="2"/><path d="M7 8V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><line x1="2" y1="13" x2="22" y2="13"/><circle cx="7" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/></svg>`,
+    bus: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/><path d="M7 4V2m10 2V2"/></svg>`,
+    walk: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="4" r="2"/><path d="M9 22l1.5-5L13 19l2.5-4L18 22"/><path d="M10 11l-2 4m4-7l3 4"/><path d="M10 11c0 0 1-4 2-4s3 4 3 4"/></svg>`,
+    delivery: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>`,
+    auto: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 14h14V9L13 5H2v9z"/><circle cx="6" cy="18" r="2"/><circle cx="16" cy="18" r="2"/><path d="M16 10v4m0-4h4l2 3v1h-6"/></svg>`,
+    bike: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="17" r="3"/><circle cx="19" cy="17" r="3"/><path d="M5 17l3-7h5l3 7"/><path d="M12 10l-2-6H7"/><path d="M19 14l3-2"/></svg>`,
+    car: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 11l2-5h6l2 5"/><path d="M3 13h18v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4z"/><circle cx="7" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/></svg>`,
+    train: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="14" rx="3"/><line x1="9" y1="2" x2="9" y2="8"/><line x1="15" y1="2" x2="15" y2="8"/><line x1="9" y1="16" x2="7" y2="22"/><line x1="15" y1="16" x2="17" y2="22"/><line x1="6" y1="22" x2="18" y2="22"/></svg>`,
+    rickshaw: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17V9h10l2 5v3"/><path d="M16 9V6l-3-2H11"/></svg>`,
+    flight: `<svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`,
 };
 
 const SOCIAL_ICONS = {
@@ -253,13 +261,24 @@ const resolveHighlightIcon = (icon) => {
     return HIGHLIGHT_ICONS[icon] || "";
 };
 
+const HL_COLORS = [
+    "#b45309",
+    "#047857",
+    "#b91c1c",
+    "#1d4ed8",
+    "#7c3aed",
+    "#c2410c",
+    "#0f766e",
+    "#be185d",
+];
+
 const renderHighlights = () => {
     setHTML(
         "highlightsRow",
         (APP.story?.highlights || [])
             .map(
-                (item) => `
-                    <div class="hl-box">
+                (item, i) => `
+                    <div class="hl-box" style="color:${HL_COLORS[i % HL_COLORS.length]}">
                         <div class="hl-em">${resolveHighlightIcon(item.icon)}</div>
                         <div class="hl-lbl">${item.label || ""}</div>
                     </div>`,
@@ -490,12 +509,12 @@ const renderItems = () => {
                 return `
                     <div class="menu-card">
                         <div class="menu-img">
-                            <div class="menu-img-ph" style="background-image:url('${item.product_image || pick("assets.fallbackImage")}');background-size:cover;background-position:center;background-repeat:no-repeat;"></div>
+                            <img class="menu-img-ph" src="${item.product_image || pick("assets.fallbackImage")}" alt="" style="width:100%;height:100%;display:block;">
                             ${item.tag ? `<span class="mbadge" style="background:${item.tc || "#3a4a2e"}">${item.tag}</span>` : ""}
                             <div class="diet ${item.veg ? "veg-d" : "nonveg-d"}">${item.veg ? "V" : "N"}</div>
                         </div>
                         <div class="menu-body">
-                            <div class="menu-name">${item.icon ? item.icon + " " : ""}${item.name || ""}</div>
+                            <div class="menu-name">${item.name || ""}</div>
                             <div class="menu-desc">${item.desc || ""}</div>
                             <div class="menu-footer">
                                 <div>

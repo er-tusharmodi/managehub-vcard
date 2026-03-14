@@ -34,6 +34,7 @@ if (!function_exists("getIcon")) { function getIcon(string $name): string
 
         "pay_cash" => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
         "pay_card" => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+        "pay_upi"  => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>',
         "pay_shield" => '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
 
         "ui_arrow_right" => '<polyline points="9 18 15 12 9 6"/>',

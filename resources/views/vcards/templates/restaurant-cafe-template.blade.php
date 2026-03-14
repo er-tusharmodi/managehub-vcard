@@ -205,10 +205,11 @@
                             </div>
                         </div>
                     </div>
+                    @php $hlColors = ["#b45309","#047857","#b91c1c","#1d4ed8","#7c3aed","#c2410c","#0f766e","#be185d"]; @endphp
                     <div class="hl-row" id="highlightsRow">
-                        @foreach(data_get($data, "story.highlights", []) as $item)
+                        @foreach(data_get($data, "story.highlights", []) as $hlIdx => $item)
                             @php $iconKey = "highlight_" . ($item["icon"] ?? ""); @endphp
-                            <div class="hl-box">
+                            <div class="hl-box" style="color:{{ $hlColors[$hlIdx % count($hlColors)] }}">
                                 <div class="hl-em">{!! getIcon($iconKey) !!}</div>
                                 <div class="hl-lbl">{{ $item["label"] ?? "" }}</div>
                             </div>
@@ -277,7 +278,7 @@
                                     </div>
                                 </div>
                                 <div class="menu-img-sq">
-                                    <div class="menu-img-ph" style="background-image:url('{{ e($imgSrc) }}');background-size:cover;background-position:center;background-repeat:no-repeat;width:100%;height:100%;"></div>
+                                    <img src="{{ e($imgSrc) }}" alt="" style="width:100%;height:100%;display:block;">
                                 </div>
                             </div>
                         @endforeach
@@ -689,7 +690,7 @@
                         <circle cx="20" cy="21" r="1" />
                         <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
                     </svg>
-                    <span id="floatOrderLabel" style="font-size: 0.66rem; font-weight: 700; color: var(--terracotta)">Order</span>
+                    <span id="floatOrderLabel">Order</span>
                 </div>
             </div>
 

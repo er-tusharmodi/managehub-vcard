@@ -5,6 +5,28 @@
     $profileImage = data_get($data, 'assets.profileImage', data_get($data, 'assets.fallbackImage', ''));
     $profileAlt   = data_get($data, 'assets.profileAlt', data_get($data, 'doctor.name', ''));
     $serviceImage = data_get($data, 'assets.serviceImage', '');
+    $qrCodeImage  = data_get($data, 'assets.qrCodeImage', '');
+
+    // Normalize appointment: JSON stores as indexed array [defaultSlot, slots[], formConfig, successConfig]
+    $apptRaw = $data['appointment'] ?? [];
+    if (is_array($apptRaw) && array_key_exists(0, $apptRaw) && is_string($apptRaw[0] ?? null)) {
+        $data['appointment'] = [
+            'defaultSlot' => $apptRaw[0],
+            'slots'       => is_array($apptRaw[1] ?? null) ? $apptRaw[1] : [],
+            'form'        => is_array($apptRaw[2] ?? null) ? $apptRaw[2] : [],
+            'success'     => is_array($apptRaw[3] ?? null) ? $apptRaw[3] : [],
+        ];
+    }
+
+    // Normalize hours: JSON stores as indexed array [todayLabel, rows[], suggestLink]
+    $hoursRaw = $data['hours'] ?? [];
+    if (is_array($hoursRaw) && array_key_exists(0, $hoursRaw) && is_string($hoursRaw[0] ?? null)) {
+        $data['hours'] = [
+            'todayLabel'  => $hoursRaw[0],
+            'rows'        => is_array($hoursRaw[1] ?? null) ? $hoursRaw[1] : [],
+            'suggestLink' => $hoursRaw[2] ?? '',
+        ];
+    }
 
     $slots = data_get($data, 'appointment.slots', []);
     if (!is_array($slots)) { $slots = []; }
@@ -115,9 +137,13 @@
                 </div>
                 <div class="sec-body">
                     <div class="spec-chips" id="specializationChips">
-                        @foreach(data_get($data, 'specializations', []) as $item)
-                            @php $iconKey = 'chip_' . ($item['icon'] ?? ''); @endphp
-                            <span class="chip {{ $item['tone'] ?? '' }}">{!! getIcon($iconKey) !!} {{ $item['name'] ?? '' }}</span>
+                        @php $chipTones = ['chip-blue','chip-teal','chip-green','chip-purple','chip-red','chip-amber']; @endphp
+                    @foreach(data_get($data, 'specializations', []) as $sidx => $item)
+                            @php
+                                $iconKey  = 'chip_' . ($item['icon'] ?? '');
+                                $chipTone = !empty($item['tone']) ? $item['tone'] : $chipTones[$sidx % 6];
+                            @endphp
+                            <span class="chip {{ $chipTone }}">{!! getIcon($iconKey) !!} {{ $item['name'] ?? '' }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -424,7 +450,11 @@
                 <div class="sec-body">
                     <div class="qr-card-inner">
                         <div style="font-size:0.79rem;color:var(--muted);margin-bottom:0.3rem;" id="qr-note">{{ data_get($data, 'qr.note') }}</div>
-                        <div id="vcardQR"></div>
+                        @if($qrCodeImage)
+                            <img src="{{ $qrCodeImage }}" alt="QR Code" style="max-width:200px;width:100%;border-radius:10px;display:block;margin:0.5rem auto;">
+                        @else
+                            <div id="vcardQR"></div>
+                        @endif
                         <div class="qr-actions">
                             <button class="qr-btn" onclick="saveContact()">
                                 <svg viewBox="0 0 24 24" width="15" height="15"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>

@@ -722,6 +722,33 @@ class ClientSectionEditor extends Component
         $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added!');
     }
 
+    public function openNestedItemModal(string $path, ?int $index, array $defaultItem = []): void
+    {
+        $this->editingIndex = $index;
+        if ($index !== null) {
+            $list = data_get($this->form, $path, []);
+            $this->editingItem = $list[$index] ?? $defaultItem;
+        } else {
+            $this->editingItem = $defaultItem;
+        }
+        $this->dispatch('open-item-modal', wireId: $this->getId());
+    }
+
+    public function saveNestedItemModal(string $path): void
+    {
+        $list  = data_get($this->form, $path, []);
+        if (!is_array($list)) { $list = []; }
+        $index = $this->editingIndex ?? count($list);
+        $list[$index] = $this->editingItem;
+        data_set($this->form, $path, array_values($list));
+        $wasEdit = $this->editingIndex !== null;
+        $this->save();
+        $this->editingItem  = [];
+        $this->editingIndex = null;
+        $this->dispatch('hide-item-modal');
+        $this->dispatch('notify', type: 'success', message: $wasEdit ? 'Item updated!' : 'Item added!');
+    }
+
     public function openMenuItemModal(string $category, ?int $index = null): void
     {
         $this->editingCategory = $category;

@@ -260,7 +260,7 @@
                                         <span class="badge bg-light text-dark">{{ ucfirst($vcard->template_key) }}</span>
                                     </td>
                                     <td>
-                                        <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="text-primary text-decoration-none small" title="Visit vCard">
+                                        <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank" class="text-primary text-decoration-none small" title="Visit vCard">
                                             <i class="mdi mdi-link"></i> {{ $vcard->subdomain }}.{{ config('vcard.base_domain') }}
                                         </a>
                                     </td>
@@ -283,7 +283,7 @@
                                             <a href="{{ route('client.leads', $vcard->subdomain) }}" class="btn btn-sm btn-outline-secondary" data-bs-toggle="tooltip" title="Leads">
                                                 <i class="mdi mdi-inbox-multiple-outline"></i>
                                             </a>
-                                            <a href="{{ url('/' . $vcard->subdomain) }}" target="_blank" class="btn btn-sm btn-outline-success" data-bs-toggle="tooltip" title="View vCard">
+                                            <a href="{{ vcard_public_url($vcard->subdomain) }}" target="_blank" class="btn btn-sm btn-outline-success" data-bs-toggle="tooltip" title="View vCard">
                                                 <i class="mdi mdi-eye-outline"></i>
                                             </a>
                                         </div>

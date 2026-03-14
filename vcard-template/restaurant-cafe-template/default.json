@@ -297,7 +297,7 @@
             "op": "",
             "tag": "Chef Pick",
             "tc": "#3a4a2e",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773322199_download.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773405020_slide2.png",
             "veg": true
         },
         {
@@ -449,15 +449,15 @@
         "chefRole": "Head Chef & Founders",
         "highlights": [
             {
-                "icon": "outdoor",
+                "icon": "fa-drumstick-bite",
                 "label": "Wood-Fired Oven"
             },
             {
-                "icon": "fresh",
+                "icon": "fa-clock",
                 "label": "Farm Fresh Ingredients"
             },
             {
-                "icon": "wine",
+                "icon": "fa-drumstick-bite",
                 "label": "Curated Wine List"
             }
         ]
@@ -594,12 +594,6 @@
     },
     "offers": [
         {
-            "icon": "\ud83d\udd25",
-            "title": "Buy 1 Get 1 Free",
-            "desc": "Order any main course and get the second one absolutely free. Valid on dine-in only.",
-            "tag": "Today Only"
-        },
-        {
             "icon": "\ud83c\udf89",
             "title": "Weekend Special Combo",
             "desc": "Starter + Main Course + Dessert + Soft Drink at just Rs.499. Every Saturday and Sunday.",
@@ -610,6 +604,12 @@
             "title": "Family Feast Rs.999",
             "desc": "2 large pizzas + garlic bread + 4 cold drinks. Perfect for a family of 4.",
             "tag": "Family Pack"
+        },
+        {
+            "icon": "\ud83d\udd25",
+            "title": "Buy 1 Get 1 Free",
+            "desc": "Order any main course and get the second one absolutely free. Valid on dine-in only.",
+            "tag": "Today Only"
         },
         {
             "icon": "\u2b50",
@@ -658,7 +658,7 @@
         "mapLabel": "Get Directions",
         "transport": [
             {
-                "icon": "metro",
+                "icon": "flight",
                 "label": "Metro",
                 "value": "Rajiv Chowk \u00b7 3 min",
                 "stroke": "#1565c0"
