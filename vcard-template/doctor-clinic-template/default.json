@@ -350,9 +350,9 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "/template-assets/doctor-clinic-template/uploads/1773469179_Screenshot_2026-03-14_at_11.49.33___AM.png",
-        "profileImage": "/template-assets/doctor-clinic-template/uploads/1773469118_Screenshot_2026-03-14_at_11.48.32___AM.png",
-        "qrCodeImage": "/template-assets/doctor-clinic-template/uploads/1773469060_TheBarbershop_QR.png"
+        "bannerImage": "/template-assets/doctor-clinic-template/uploads/1773469179_Screenshot_2026-03-14_at_11.49.33___AM.jpg",
+        "profileImage": "/template-assets/doctor-clinic-template/uploads/1773469118_Screenshot_2026-03-14_at_11.48.32___AM.jpg",
+        "qrCodeImage": "/template-assets/doctor-clinic-template/uploads/1773469060_TheBarbershop_QR.jpg"
     },
     "doctor": {
         "name": "Dr. Amit Sharma",
@@ -506,25 +506,25 @@
             "name": "Diabetes & BP",
             "desc": "Chronic disease management & monitoring.",
             "query": "Diabetes & BP",
-            "image": "/template-assets/doctor-clinic-template/uploads/1773469456_Screenshot_2026-03-14_at_11.54.08___AM.png"
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469456_Screenshot_2026-03-14_at_11.54.08___AM.jpg"
         },
         {
             "name": "Respiratory",
             "desc": "Asthma, bronchitis, cough & allergies.",
             "query": "Respiratory Issues",
-            "image": "/template-assets/doctor-clinic-template/uploads/1773469495_Screenshot_2026-03-14_at_11.54.48___AM.png"
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469495_Screenshot_2026-03-14_at_11.54.48___AM.jpg"
         },
         {
             "name": "Fever & Infections",
             "desc": "Viral, bacterial, typhoid, malaria.",
             "query": "Fever & Infections",
-            "image": "/template-assets/doctor-clinic-template/uploads/1773469536_Screenshot_2026-03-14_at_11.55.31___AM.png"
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469536_Screenshot_2026-03-14_at_11.55.31___AM.jpg"
         },
         {
             "name": "Child Health",
             "desc": "Pediatric care, vaccination & growth.",
             "query": "Child & Pediatric Care",
-            "image": "/template-assets/doctor-clinic-template/uploads/1773469583_Screenshot_2026-03-14_at_11.56.17___AM.png"
+            "image": "/template-assets/doctor-clinic-template/uploads/1773469583_Screenshot_2026-03-14_at_11.56.17___AM.jpg"
         }
     ],
     "fees": {

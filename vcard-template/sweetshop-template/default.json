@@ -50,9 +50,9 @@
         "og_image": ""
     },
     "assets": {
-        "bannerImage": "/template-assets/sweetshop-template/uploads/1773466570_Screenshot_2026-03-14_at_11.04.59___AM.png",
-        "profileImage": "/template-assets/sweetshop-template/uploads/1773466570_Screenshot_2026-03-14_at_11.05.56___AM.png",
-        "qrCodeImage": "/template-assets/sweetshop-template/uploads/1773466059_TheBarbershop_QR.png"
+        "bannerImage": "/template-assets/sweetshop-template/uploads/1773466570_Screenshot_2026-03-14_at_11.04.59___AM.jpg",
+        "profileImage": "/template-assets/sweetshop-template/uploads/1773466570_Screenshot_2026-03-14_at_11.05.56___AM.jpg",
+        "qrCodeImage": "/template-assets/sweetshop-template/uploads/1773466059_TheBarbershop_QR.jpg"
     },
     "shop": {
         "name": "Shree Mithai House",
@@ -127,22 +127,22 @@
         {
             "name": "Wedding & Event Orders",
             "description": "Custom bulk sweet packages for weddings & celebrations.",
-            "image": "/template-assets/sweetshop-template/uploads/1773466962_Screenshot_2026-03-14_at_11.07.21___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773466962_Screenshot_2026-03-14_at_11.07.21___AM.jpg"
         },
         {
             "name": "Corporate Gift Boxes",
             "description": "Branded sweet hampers for Diwali, Eid & client gifting.",
-            "image": "/template-assets/sweetshop-template/uploads/1773467020_Screenshot_2026-03-14_at_11.13.30___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467020_Screenshot_2026-03-14_at_11.13.30___AM.jpg"
         },
         {
             "name": "Home Delivery",
             "description": "Fresh sweets delivered same day. Order by 6 PM.",
-            "image": "/template-assets/sweetshop-template/uploads/1773467074_Screenshot_2026-03-14_at_11.14.27___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467074_Screenshot_2026-03-14_at_11.14.27___AM.jpg"
         },
         {
             "name": "Custom Orders",
             "description": "Sugar-free & premium varieties made to order.",
-            "image": "/template-assets/sweetshop-template/uploads/1773467122_Screenshot_2026-03-14_at_11.15.16___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467122_Screenshot_2026-03-14_at_11.15.16___AM.jpg"
         }
     ],
     "categories": [
@@ -174,7 +174,7 @@
             "per": "/kg",
             "tag": "Popular",
             "tagColor": "#b5341a",
-            "product_image": "/template-assets/sweetshop-template/uploads/1773467740_Screenshot_2026-03-14_at_11.25.29___AM.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467740_Screenshot_2026-03-14_at_11.25.29___AM.jpg"
         },
         {
             "id": 3,
@@ -185,7 +185,7 @@
             "per": "/kg",
             "tag": "Premium",
             "tagColor": "#1565c0",
-            "product_image": "/template-assets/sweetshop-template/uploads/1773467815_Screenshot_2026-03-14_at_11.26.35___AM.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467815_Screenshot_2026-03-14_at_11.26.35___AM.jpg"
         },
         {
             "id": 1,
@@ -196,7 +196,7 @@
             "per": "/kg",
             "tag": "Best Seller",
             "tagColor": "#c8952a",
-            "product_image": "/template-assets/sweetshop-template/uploads/1773467861_Screenshot_2026-03-14_at_11.27.33___AM.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467861_Screenshot_2026-03-14_at_11.27.33___AM.jpg"
         },
         {
             "id": 4,
@@ -208,7 +208,7 @@
             "per": "/kg",
             "tag": "Healthy",
             "tagColor": "#2e7d32",
-            "product_image": "/template-assets/sweetshop-template/uploads/1773467909_Screenshot_2026-03-14_at_11.28.23___AM.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467909_Screenshot_2026-03-14_at_11.28.23___AM.jpg"
         },
         {
             "id": 5,
@@ -218,7 +218,7 @@
             "price": 450,
             "per": "/kg",
             "tag": "",
-            "product_image": "/template-assets/sweetshop-template/uploads/1773467959_Screenshot_2026-03-14_at_11.29.12___AM.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773467959_Screenshot_2026-03-14_at_11.29.12___AM.jpg"
         },
         {
             "id": 6,
@@ -228,27 +228,27 @@
             "price": 400,
             "per": "/kg",
             "tag": "",
-            "product_image": "/template-assets/sweetshop-template/uploads/1773468008_Screenshot_2026-03-14_at_11.30.02___AM.png"
+            "product_image": "/template-assets/sweetshop-template/uploads/1773468008_Screenshot_2026-03-14_at_11.30.02___AM.jpg"
         }
     ],
     "gallery": [
         {
-            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.21.23___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.21.23___AM.jpg"
         },
         {
-            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.21.48___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.21.48___AM.jpg"
         },
         {
-            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.22.16___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.22.16___AM.jpg"
         },
         {
-            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.22.40___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.22.40___AM.jpg"
         },
         {
-            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.23.20___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.23.20___AM.jpg"
         },
         {
-            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.20.45___AM.png"
+            "image": "/template-assets/sweetshop-template/uploads/1773467620_Screenshot_2026-03-14_at_11.20.45___AM.jpg"
         }
     ],
     "businessHours": {

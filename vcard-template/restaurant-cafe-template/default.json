@@ -268,8 +268,8 @@
         "og_image": "/template-assets/restaurant-cafe-template/uploads/1773372984_channels4_banner.jpg"
     },
     "assets": {
-        "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1773463621_Screenshot_2026-03-14_at_10.16.52___AM.png",
-        "profileImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_TheBarbershop_QR.png",
+        "bannerImage": "/template-assets/restaurant-cafe-template/uploads/1773463621_Screenshot_2026-03-14_at_10.16.52___AM.jpg",
+        "profileImage": "/template-assets/restaurant-cafe-template/uploads/1772716407_TheBarbershop_QR.jpg",
         "qrCodeImage": "/template-assets/restaurant-cafe-template/uploads/1773470628_69b503a4be6c4.jpg"
     },
     "categories": [
@@ -297,7 +297,7 @@
             "op": "",
             "tag": "Chef Pick",
             "tc": "#3a4a2e",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464115_Screenshot_2026-03-14_at_10.22.40___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464115_Screenshot_2026-03-14_at_10.22.40___AM.jpg",
             "veg": true
         },
         {
@@ -310,7 +310,7 @@
             "op": 399,
             "tag": "Popular",
             "tc": "#c2562a",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464124_Screenshot_2026-03-14_at_10.23.40___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464124_Screenshot_2026-03-14_at_10.23.40___AM.jpg",
             "veg": true
         },
         {
@@ -323,7 +323,7 @@
             "op": 1049,
             "tag": "Hot Deal",
             "tc": "#e65100",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464195_Screenshot_2026-03-14_at_10.24.13___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464195_Screenshot_2026-03-14_at_10.24.13___AM.jpg",
             "veg": false
         },
         {
@@ -336,7 +336,7 @@
             "op": "",
             "tag": "Veg",
             "tc": "#2e7d32",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464217_Screenshot_2026-03-14_at_10.24.51___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773464217_Screenshot_2026-03-14_at_10.24.51___AM.jpg",
             "veg": true
         },
         {
@@ -349,7 +349,7 @@
             "op": "",
             "tag": "Must Try",
             "tc": "#c2562a",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465476_Screenshot_2026-03-14_at_10.27.31___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465476_Screenshot_2026-03-14_at_10.27.31___AM.jpg",
             "veg": true
         },
         {
@@ -362,7 +362,7 @@
             "op": "",
             "tag": "Comfort",
             "tc": "per serving",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465485_Screenshot_2026-03-14_at_10.47.05___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465485_Screenshot_2026-03-14_at_10.47.05___AM.jpg",
             "veg": false
         },
         {
@@ -375,7 +375,7 @@
             "op": "",
             "tag": "New",
             "tc": "#6a1b9a",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465490_Screenshot_2026-03-14_at_10.47.46___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465490_Screenshot_2026-03-14_at_10.47.46___AM.jpg",
             "veg": true
         },
         {
@@ -388,7 +388,7 @@
             "op": "",
             "tag": "Regional",
             "tc": "#2e7d32",
-            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465572_Screenshot_2026-03-14_at_10.49.24___AM.png",
+            "product_image": "/template-assets/restaurant-cafe-template/uploads/1773465572_Screenshot_2026-03-14_at_10.49.24___AM.jpg",
             "veg": true
         }
     ],
@@ -442,7 +442,7 @@
         "qr": "QR Code & Save Contact"
     },
     "story": {
-        "image": "/template-assets/restaurant-cafe-template/uploads/1773463739_Screenshot_2026-03-14_at_10.18.52___AM.png",
+        "image": "/template-assets/restaurant-cafe-template/uploads/1773463739_Screenshot_2026-03-14_at_10.18.52___AM.jpg",
         "paragraph1": "Born from a passion for authentic Neapolitan cooking, La Piazza brings the soul of Southern Italy to your city. Every dish is crafted with imported ingredients and recipes passed down through generations.s",
         "paragraph2": "Our wood-fired oven burns at 485\u00b0C \u2014 the secret behind our crispy, airy crusts that guests travel across the city for.s",
         "chefName": "Marco Rosettis",
@@ -464,22 +464,22 @@
     },
     "gallery": [
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.50.56___AM.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.50.56___AM.jpg"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.51.27___AM.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.51.27___AM.jpg"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.51.55___AM.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.51.55___AM.jpg"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.52.29___AM.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.52.29___AM.jpg"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.53.01___AM.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.53.01___AM.jpg"
         },
         {
-            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.53.34___AM.png"
+            "image": "/template-assets/restaurant-cafe-template/uploads/1773465831_Screenshot_2026-03-14_at_10.53.34___AM.jpg"
         }
     ],
     "reservation": {
