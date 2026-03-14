@@ -646,11 +646,6 @@
             "name": "WhatsApp",
             "value": "+91 98765 43210",
             "action": "openWA"
-        },
-        {
-            "type": "website",
-            "name": "Practo Profile",
-            "value": "practo.com/dr-anil-sharma"
         }
     ],
     "payments": [
